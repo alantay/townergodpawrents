@@ -10,6 +10,10 @@ badge: Attention seeker
 tagline: squeaky-toy enthusiast, works only for snacks
 ---
 
+### 6:25pm
+
+Left with her daddy. Started whining and barking the moment dinner time rolled round, right on cue, like she had a clock in her head — acting like she hadn't eaten the whole day.
+
 ### 5:20pm
 
 Went out for a short walk. Everything on the ground looked like a snack to her — we made sure none of it was.

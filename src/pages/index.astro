@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Cutout from "../components/Cutout.astro";
 import { getCollection } from "astro:content";
-import { parseDiary } from "../lib/stays";
+import { parseDiary, pastGuests, todaySGT } from "../lib/stays";
 
 const entries = await getCollection("stays");
 
@@ -28,6 +28,8 @@ const stays = entries.map((e) => ({
 // it needs, so no image processing has to happen in the browser.
 const staysForClient = stays.map(({ photo, ...rest }) => rest);
 const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
+
+const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
 ---
 
 <Layout>
@@ -37,8 +39,12 @@ const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
 
   <noscript>
     <p class="mt-8 text-base leading-relaxed">
-      Enable JavaScript to see who's lepak-ing on the sofa today — or
-      <a href="/guests" class="border-b-[1.5px] border-ink">browse past guests</a>.
+      Enable JavaScript to see who's lepak-ing on the sofa today
+      {hasPastGuests && (
+        <>
+          {" "}or <a href="/guests" class="border-b-[1.5px] border-ink">browse past guests</a>
+        </>
+      )}.
     </p>
   </noscript>
 
@@ -106,6 +112,13 @@ const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
         }).format(new Date());
       }
 
+      // Preview helper: ?date=YYYY-MM-DD pretends it's another day, so we can
+      // see a stay's takeover before (or after) the dog actually turns up.
+      function previewDate() {
+        var m = /[?&]date=(\d{4}-\d{2}-\d{2})\b/.exec(location.search);
+        return m ? m[1] : null;
+      }
+
       function pickToday(stays, todayISO) {
         var live = stays
           .filter((s) => s.showLive && s.checkIn <= todayISO && todayISO <= s.checkOut)
@@ -129,10 +142,14 @@ const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
         return fmtDay(s.checkIn) + "–" + fmtDay(s.checkOut);
       }
 
+      // Lime is reserved for status badges (Here Today, tags) elsewhere on
+      // the page, so this homepage teaser skips the lime skin lib/stays.ts
+      // uses for the full diary — three lime patches on one view read as
+      // clutter rather than a signal. Cream repeats instead.
       var SKINS = [
         { bg: "#F7F2E7", fg: "#1E2019", accent: "#4C6B3C" },
         { bg: "#2F4A3B", fg: "#F7F2E7", accent: "#D8F24E" },
-        { bg: "#D8F24E", fg: "#1E2019", accent: "#4C6B14" },
+        { bg: "#F7F2E7", fg: "#1E2019", accent: "#4C6B3C" },
         { bg: "#1E2019", fg: "#F3F1E9", accent: "#D8F24E" },
       ];
       function skin(i) {
@@ -278,7 +295,7 @@ const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
 
       function entryCardsHTML(live) {
         var pair = live.length > 1;
-        var cap = pair ? 1 : 2;
+        var cap = pair ? 1 : 3;
         var raw = [];
         live.forEach((d) =>
           d.entries.slice(0, cap).forEach((e) => raw.push({ date: e.date, text: e.text, who: d.name, id: d.id }))
@@ -287,10 +304,13 @@ const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
         var cards = raw
           .map((e, i) => {
             var sk = skin(i);
+            var lone = raw.length % 2 === 1 && i === raw.length - 1 ? " [grid-column:1/-1]" : "";
             return (
               '<a href="/stays/' +
               esc(e.id) +
-              '" class="block border-[1.5px] border-ink rounded-[24px] p-[17px_19px] transition-transform duration-250" style="background:' +
+              '" class="block border-[1.5px] border-ink rounded-[24px] p-[17px_19px] transition-transform duration-250' +
+              lone +
+              '" style="background:' +
               sk.bg +
               ";color:" +
               sk.fg +
@@ -366,7 +386,8 @@ const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
       try {
         var dataEl = document.getElementById("stays-data");
         var stays = JSON.parse(dataEl.textContent);
-        var today = todaySGT();
+        var preview = previewDate();
+        var today = preview || todaySGT();
         var result = pickToday(stays, today);
 
         var appEl = document.getElementById("home-app");
@@ -384,6 +405,13 @@ const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
             photosEl.appendChild(a);
             movePhoto(d.id, a);
           });
+        }
+        if (preview) {
+          var note = document.createElement("div");
+          note.className =
+            "mb-3.5 text-xs font-semibold tracking-[0.08em] uppercase border-[1.5px] border-dashed border-ink rounded-full px-[13px] py-2 inline-block";
+          note.textContent = "Preview \u00b7 pretending it's " + fmtDay(preview);
+          appEl.prepend(note);
         }
         appEl.hidden = false;
 

@@ -32,8 +32,12 @@ const diary = parseDiary(entry.body ?? "");
     class="mt-4 relative rounded-[32px] pt-[26px] px-6 pb-[18px] overflow-hidden text-cream"
     style={`background:${bgColor}`}
   >
-    {isLive && (
-      <div class="absolute top-[18px] right-[18px] bg-lime text-ink font-semibold text-xs tracking-[0.06em] uppercase px-[13px] py-2 rounded-full">
+    {showLive && (
+      <div
+        id="here-today"
+        class="absolute top-[18px] right-[18px] bg-lime text-ink font-semibold text-xs tracking-[0.06em] uppercase px-[13px] py-2 rounded-full"
+        hidden={!isLive}
+      >
         Here today
       </div>
     )}
@@ -86,5 +90,26 @@ const diary = parseDiary(entry.body ?? "");
         );
       })}
     </div>
+  )}
+
+  {showLive && (
+    <script is:inline define:vars={{ checkInISO, checkOutISO }}>
+      // The page is built once, so the build-time "Here today" pill goes stale.
+      // Re-decide in the browser, and honour ?date=YYYY-MM-DD the same way the
+      // homepage does so an upcoming stay can be previewed before check-in.
+      (function () {
+        var m = /[?&]date=(\d{4}-\d{2}-\d{2})\b/.exec(location.search);
+        var today =
+          (m && m[1]) ||
+          new Intl.DateTimeFormat("en-CA", {
+            timeZone: "Asia/Singapore",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          }).format(new Date());
+        var el = document.getElementById("here-today");
+        if (el) el.hidden = !(checkInISO <= today && today <= checkOutISO);
+      })();
+    </script>
   )}
 </Layout>
