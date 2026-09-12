@@ -10,18 +10,22 @@ badge: Counter surfer
 tagline: walking snack alarm with excellent lungs
 ---
 
-### 2pm
+### 5:20pm
 
-Charged in like a battering ram. Humans didn't even have chance to remove her leash.
+Went out for a short walk. Everything on the ground looked like a snack to her — we made sure none of it was.
 
-### 2:45pm
+### 4:50pm
 
-Licked dragonfruit, egg and cucumber off the Kong tyre with total focus. Nothing else got a look in.
+Woke up. Barked and whined like the world owed her a play session.
 
 ### 3:50pm
 
 Finally lost the fight to stay awake. Out cold on the floor.
 
-### 4:50pm
+### 2:45pm
 
-Woke up. Bark and whine like as if the world owes us a play session.
+Licked dragonfruit, egg and cucumber off the Kong tyre with total focus. Squeaky toy, ball, nothing could pull her attention away.
+
+### 2pm
+
+Charged in like a battering ram. Humans didn't even have a chance to remove her leash.
