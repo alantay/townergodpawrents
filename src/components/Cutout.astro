@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  photo?: ImageMetadata;
+  name: string;
+  class?: string;
+}
+
+const { photo, name, class: className = "" } = Astro.props;
+---
+
+{
+  photo ? (
+    <Image
+      src={photo}
+      alt={`${name}, mid-stay`}
+      loading="eager"
+      class={`h-full w-full object-contain ${className}`}
+    />
+  ) : (
+    <div
+      class={`h-full w-full rounded-2xl border-2 border-dashed border-ink/30 bg-black/5 flex items-center justify-center text-center text-xs font-semibold px-3 text-ink/50 ${className}`}
+    >
+      photo of {name} coming soon
+    </div>
+  )
+}

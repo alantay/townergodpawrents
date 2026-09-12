@@ -1,17 +1,389 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Cutout from "../components/Cutout.astro";
+import { getCollection } from "astro:content";
+import { parseDiary } from "../lib/stays";
 
+const entries = await getCollection("stays");
+
+const stays = entries.map((e) => ({
+  id: e.id,
+  name: e.data.name,
+  breed: e.data.breed,
+  tagline: e.data.tagline ?? "",
+  badge: e.data.badge ?? "",
+  checkIn: e.data.checkIn.toISOString().slice(0, 10),
+  checkOut: e.data.checkOut.toISOString().slice(0, 10),
+  bgColor: e.data.bgColor,
+  showLive: e.data.showLive,
+  photo: e.data.photo,
+  entries: parseDiary(e.body ?? ""),
+}));
+
+// Sent to the client so it can work out who's "here today" in the
+// Asia/Singapore timezone at load time — see the inline script below.
+// Photos aren't included here; they're pre-optimized at build time into
+// the hidden #photo-bank and the client just re-parents the <img> nodes
+// it needs, so no image processing has to happen in the browser.
+const staysForClient = stays.map(({ photo, ...rest }) => rest);
+const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <Nav />
+
+  <div id="home-app" hidden></div>
+
+  <noscript>
+    <p class="mt-8 text-base leading-relaxed">
+      Enable JavaScript to see who's lepak-ing on the sofa today — or
+      <a href="/guests" class="border-b-[1.5px] border-ink">browse past guests</a>.
+    </p>
+  </noscript>
+
+  <div class="mt-10 flex gap-4 items-start flex-wrap">
+    <div class="w-[134px] h-[154px] rounded-[22px] overflow-hidden border-[1.5px] border-ink flex-none -rotate-[1.5deg] bg-cream">
+      <div class="h-full w-full rounded-2xl border-2 border-dashed border-ink/30 bg-black/5 flex items-center justify-center text-center text-xs font-semibold px-3 text-ink/50">
+        photo of Alan &amp; Weiwen
+      </div>
+    </div>
+    <div class="flex-1 min-w-[210px]">
+      <div class="font-serif text-[36px] leading-none">Alan &amp; Weiwen</div>
+      <p class="mt-[9px] text-base leading-relaxed text-pretty">
+        Two humans in Towner with a sunny corner sofa and no dog of our own. Friends and
+        neighbours drop theirs off, and we keep them fed, walked and thoroughly spoiled.
+        This page is just so you can see who's lepak-ing here today.
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-11 border-t-[1.5px] border-ink pt-[18px] flex items-baseline justify-between gap-3">
+    <div class="font-serif text-[32px] leading-none">Past guests</div>
+    <a
+      href="/guests"
+      class="font-semibold text-[13px] border-[1.5px] border-ink px-[13px] py-1.5 rounded-full transition-colors duration-200 hover:bg-lime"
+    >
+      See all
+    </a>
+  </div>
+
+  <div id="past-preview-app" hidden></div>
+
+  <div class="mt-11 border-t-[1.5px] border-ink pt-[18px] text-base">
+    Know a dog who needs a sofa? You know where to find us.
+  </div>
+  <div class="mt-2.5 text-xs tracking-[0.1em] uppercase text-label">
+    Towner &middot; No dog of our own, just everyone else's
+  </div>
+
+  <!-- Hidden bank of pre-optimized photos, one per stay. The client script
+       re-parents (moves, doesn't clone) the node it needs into whichever
+       card is showing right now. -->
+  <div id="photo-bank" class="hidden">
+    {stays.map((s) => (
+      <div id={`photo-${s.id}`} class="h-full w-full">
+        <Cutout photo={s.photo} name={s.name} />
+      </div>
+    ))}
+  </div>
+
+  <script type="application/json" id="stays-data" is:inline set:html={staysJson} />
+
+  <script is:inline>
+    (function () {
+      // ---- selection rules — MIRRORS src/lib/stays.ts, keep in sync ----
+      function todaySGT() {
+        return new Intl.DateTimeFormat("en-CA", {
+          timeZone: "Asia/Singapore",
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }).format(new Date());
+      }
+
+      function pickToday(stays, todayISO) {
+        var live = stays
+          .filter((s) => s.showLive && s.checkIn <= todayISO && todayISO <= s.checkOut)
+          .sort((a, b) => (a.checkIn < b.checkIn ? -1 : a.checkIn > b.checkIn ? 1 : 0));
+        if (live.length > 0) {
+          return { state: live.length === 1 ? "one" : "multi", live: live };
+        }
+        var past = stays
+          .filter((s) => s.checkOut < todayISO)
+          .sort((a, b) => (a.checkOut < b.checkOut ? 1 : a.checkOut > b.checkOut ? -1 : 0));
+        return { state: "vacancy", live: [], lastGuest: past[0] };
+      }
+
+      var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      function fmtDay(iso) {
+        var parts = iso.split("-").map(Number);
+        return parts[2] + " " + MONTHS[parts[1] - 1];
+      }
+      function stayLabel(s) {
+        return fmtDay(s.checkIn) + "–" + fmtDay(s.checkOut);
+      }
+
+      var SKINS = [
+        { bg: "#F7F2E7", fg: "#1E2019", accent: "#4C6B3C" },
+        { bg: "#2F4A3B", fg: "#F7F2E7", accent: "#D8F24E" },
+        { bg: "#D8F24E", fg: "#1E2019", accent: "#4C6B14" },
+        { bg: "#1E2019", fg: "#F3F1E9", accent: "#D8F24E" },
+      ];
+      function skin(i) {
+        return SKINS[i % SKINS.length];
+      }
+      function tilt(i) {
+        return i % 2 === 0 ? "-1deg" : "1deg";
+      }
+      var GROUP_WORDS = { 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six" };
+      function groupWord(n) {
+        return GROUP_WORDS[n] || String(n);
+      }
+
+      function esc(s) {
+        return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+        });
+      }
+
+      // ---- fit the giant headline to its container ----
+      // `reserve` (px) keeps the text clear of the absolutely-positioned
+      // "Here today" / "Sofa free" pill that overlaps the headline's top-right
+      // corner — otherwise a very long name could fit the container width
+      // exactly and still run visually under the pill.
+      function fitText(el, reserve) {
+        var parent = el.parentElement;
+        if (!parent) return;
+        var budget = parent.clientWidth - (reserve || 0);
+        var cs = getComputedStyle(el);
+        var max = parseFloat(cs.fontSize);
+        el.style.fontSize = max + "px";
+        if (el.scrollWidth <= budget + 1) return;
+        var lo = 14,
+          hi = max,
+          best = lo;
+        for (var i = 0; i < 18 && hi - lo > 0.5; i++) {
+          var mid = (lo + hi) / 2;
+          el.style.fontSize = mid + "px";
+          if (el.scrollWidth <= budget + 1) {
+            best = mid;
+            lo = mid;
+          } else {
+            hi = mid;
+          }
+        }
+        el.style.fontSize = best + "px";
+      }
+      window.__tgpFitHeadlines = function () {
+        document.querySelectorAll(".fit-headline").forEach((el) => {
+          var badge = document.getElementById("hero-badge");
+          var reserve = badge && badge.offsetParent ? badge.offsetWidth + 12 : 0;
+          fitText(el, reserve);
+        });
+      };
+
+      // ---- build hero + today-entries markup for the live states ----
+      function heroLiveHTML(live) {
+        var pair = live.length > 1;
+        var color = pair ? "#5F6E4F" : live[0].bgColor;
+        var name = live.map((d) => d.name).join(" & ");
+        var sub = pair
+          ? groupWord(live.length) + " dogs, one sofa, no space for humans"
+          : esc(live[0].tagline);
+        var sizeClass = pair ? "text-[clamp(42px,12.5vw,82px)]" : "text-[clamp(62px,19vw,120px)]";
+        var photoH = pair ? "250px" : "310px";
+
+        var chips = [];
+        if (!pair) {
+          chips.push({ label: stayLabel(live[0]), bg: "#F7F2E7" });
+          if (live[0].badge) chips.push({ label: live[0].badge, bg: "#D8F24E" });
+        } else {
+          live.forEach((d) => chips.push({ label: d.name + " · " + d.breed, bg: "#F7F2E7" }));
+          chips.push({ label: groupWord(live.length) + " dogs, one sofa", bg: "#D8F24E" });
+        }
+
+        var chipsHTML = chips
+          .map(
+            (c) =>
+              '<span class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink" style="background:' +
+              c.bg +
+              '">' +
+              esc(c.label) +
+              "</span>"
+          )
+          .join("");
+
+        return {
+          color: color,
+          html:
+            '<div class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:' +
+            color +
+            '">' +
+            '<div id="hero-badge" class="absolute top-[18px] right-[18px] bg-lime text-ink font-semibold text-xs tracking-[0.06em] uppercase px-[13px] py-2 rounded-full animate-wiggle">Here today</div>' +
+            '<div class="w-full"><h1 class="fit-headline ' +
+            sizeClass +
+            ' max-w-full" id="hero-name">' +
+            esc(name) +
+            "</h1></div>" +
+            '<div class="font-serif italic text-[22px] mt-2" style="color:#E9F7AE">' +
+            sub +
+            "</div>" +
+            '<div class="mt-[14px] flex gap-2 flex-wrap">' +
+            chipsHTML +
+            "</div>" +
+            '<div id="hero-photos" class="flex gap-1.5 items-end -mx-2 mt-[18px]" style="height:' +
+            photoH +
+            '"></div>' +
+            "</div>",
+          live: live,
+        };
+      }
+
+      function heroVacancyHTML(lastGuest) {
+        var html =
+          '<div class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:#5F6E4F">' +
+          '<div id="hero-badge" class="absolute top-[18px] right-[18px] bg-lime text-ink font-semibold text-xs tracking-[0.06em] uppercase px-[13px] py-2 rounded-full animate-wiggle">Sofa free</div>' +
+          '<div class="w-full"><h1 class="fit-headline text-[clamp(62px,19vw,120px)] max-w-full">Vacancy</h1></div>' +
+          '<div class="font-serif italic text-[22px] mt-2" style="color:#E9F7AE">The sofa is free. The treats are ready.</div>' +
+          '<div class="h-[265px] mx-[-8px] mt-[18px] animate-drift-slow rounded-2xl border-2 border-dashed border-cream/30 flex items-center justify-center text-cream/60 text-sm font-semibold">the sofa, unattended</div>' +
+          "</div>";
+
+        if (lastGuest) {
+          html +=
+            '<a href="/stays/' +
+            esc(lastGuest.id) +
+            '" class="mt-[18px] flex items-center gap-3.5 bg-cream border-[1.5px] border-ink rounded-[24px] p-[13px_15px] -rotate-1 transition-transform duration-250 hover:rotate-0 hover:scale-[1.02]">' +
+            '<div id="last-seen-photo" class="w-16 h-16 rounded-[17px] overflow-hidden flex-none" style="background:' +
+            lastGuest.bgColor +
+            '"></div>' +
+            '<div class="min-w-0">' +
+            '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:#4C6B3C">Last seen here</div>' +
+            '<div class="font-serif text-[27px] leading-tight">' +
+            esc(lastGuest.name) +
+            "</div>" +
+            '<div class="text-sm">' +
+            esc(lastGuest.breed) +
+            " · checked out " +
+            fmtDay(lastGuest.checkOut) +
+            "</div></div></a>";
+        }
+        return html;
+      }
+
+      function entryCardsHTML(live) {
+        var pair = live.length > 1;
+        var raw = [];
+        live.forEach((d) =>
+          d.entries.slice(0, pair ? 1 : 2).forEach((e) => raw.push({ date: e.date, text: e.text, who: d.name, id: d.id }))
+        );
+        if (raw.length === 0) return "";
+        var cards = raw
+          .map((e, i) => {
+            var sk = skin(i);
+            return (
+              '<a href="/stays/' +
+              esc(e.id) +
+              '" class="block border-[1.5px] border-ink rounded-[24px] p-[17px_19px] transition-transform duration-250" style="background:' +
+              sk.bg +
+              ";color:" +
+              sk.fg +
+              ";transform:rotate(" +
+              tilt(i) +
+              ')">' +
+              '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:' +
+              sk.accent +
+              '">' +
+              esc(e.date) +
+              " · " +
+              esc(e.who) +
+              "</div>" +
+              '<p class="mt-2 text-base leading-relaxed text-pretty">' +
+              esc(e.text) +
+              "</p></a>"
+            );
+          })
+          .join("");
+        return '<div class="mt-5 grid gap-3.5" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">' + cards + "</div>";
+      }
+
+      function pastPreviewHTML(cards) {
+        if (cards.length === 0) {
+          return '<p class="mt-3.5 text-sm text-label">No past guests yet — the sofa’s first stay is still to come.</p>';
+        }
+        var html = cards
+          .map((g, i) => {
+            return (
+              '<a href="/stays/' +
+              esc(g.id) +
+              '" class="block border-[1.5px] border-ink rounded-[22px] overflow-hidden transition-transform duration-250 hover:rotate-3 hover:scale-[1.03]" style="background:' +
+              g.bgColor +
+              '">' +
+              '<div class="h-[114px] p-[9px_9px_0]"><div id="past-photo-' +
+              i +
+              '" class="h-full w-full"></div></div>' +
+              '<div class="p-[9px_13px_13px] bg-cream border-t-[1.5px] border-ink">' +
+              '<div class="font-serif text-[22px] leading-none">' +
+              esc(g.name) +
+              "</div>" +
+              '<div class="text-[13px] text-muted">' +
+              stayLabel(g) +
+              "</div></div></a>"
+            );
+          })
+          .join("");
+        return '<div class="mt-3.5 grid gap-3" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))">' + html + "</div>";
+      }
+
+      function movePhoto(id, targetEl) {
+        var node = document.getElementById("photo-" + id);
+        if (node && targetEl) targetEl.appendChild(node);
+      }
+
+      try {
+        var dataEl = document.getElementById("stays-data");
+        var stays = JSON.parse(dataEl.textContent);
+        var today = todaySGT();
+        var result = pickToday(stays, today);
+
+        var appEl = document.getElementById("home-app");
+        if (result.state === "vacancy") {
+          appEl.innerHTML = heroVacancyHTML(result.lastGuest);
+          if (result.lastGuest) movePhoto(result.lastGuest.id, document.getElementById("last-seen-photo"));
+        } else {
+          var hero = heroLiveHTML(result.live);
+          appEl.innerHTML = hero.html + entryCardsHTML(result.live);
+          var photosEl = document.getElementById("hero-photos");
+          result.live.forEach((d) => {
+            var a = document.createElement("a");
+            a.href = "/stays/" + d.id;
+            a.className = "block flex-1 min-w-0 h-full animate-drift transition-[filter] duration-200";
+            photosEl.appendChild(a);
+            movePhoto(d.id, a);
+          });
+        }
+        appEl.hidden = false;
+
+        var liveIds = result.live.map((d) => d.id);
+        var pastGuests = stays
+          .filter((s) => s.checkOut < today && liveIds.indexOf(s.id) === -1)
+          .sort((a, b) => (a.checkOut < b.checkOut ? 1 : a.checkOut > b.checkOut ? -1 : 0))
+          .slice(0, 4);
+        var previewEl = document.getElementById("past-preview-app");
+        previewEl.innerHTML = pastPreviewHTML(pastGuests);
+        pastGuests.forEach((g, i) => movePhoto(g.id, document.getElementById("past-photo-" + i)));
+        previewEl.hidden = false;
+
+        window.__tgpFitHeadlines();
+        window.addEventListener("resize", window.__tgpFitHeadlines);
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(window.__tgpFitHeadlines);
+        }
+      } catch (err) {
+        console.error("[towner-godpawrents] homepage render failed", err);
+        document.getElementById("home-app").hidden = false;
+        document.getElementById("past-preview-app").hidden = false;
+      }
+    })();
+  </script>
+</Layout>

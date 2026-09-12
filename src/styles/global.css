@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Instrument Serif", serif;
+  --font-sans: "Archivo", Helvetica, sans-serif;
+
+  --color-paper: #efe7d8;
+  --color-ink: #1e2019;
+  --color-cream: #f7f2e7;
+  --color-lime: #d8f24e;
+  --color-lime-soft: #e9f7ae;
+  --color-muted: #4a4b41;
+  --color-label: #55564a;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+a:hover {
+  color: #4c6b3c;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.95) rotate(-1.5deg);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-3deg);
+  }
+}
+
+.animate-pop {
+  animation: pop 500ms cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+.animate-drift {
+  animation: drift 6s ease-in-out infinite;
+}
+
+.animate-drift-slow {
+  animation: drift 7s ease-in-out infinite;
+}
+
+.animate-wiggle {
+  animation: wiggle 4.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pop,
+  .animate-drift,
+  .animate-drift-slow,
+  .animate-wiggle {
+    animation: none;
+  }
+}
+
+/* Giant headline: CSS clamp() sets a viewport-fluid ceiling; the fitText()
+   script (progressive enhancement) shrinks further if the actual text
+   (a long name, or two names together) would still overflow its box. */
+.fit-headline {
+  display: inline-block;
+  font-family: var(--font-serif);
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  max-width: 100%;
+}
