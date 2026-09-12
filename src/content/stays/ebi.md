@@ -6,8 +6,8 @@ checkIn: 2026-09-12
 checkOut: 2026-09-12
 bgColor: "#A34A2E"
 showLive: true
-badge: Counter surfer
-tagline: walking snack alarm with excellent lungs
+badge: Attention seeker
+tagline: squeaky-toy enthusiast, works only for snacks
 ---
 
 ### 5:20pm

@@ -81,7 +81,8 @@ export function fmtDay(iso: string): string {
   return `${d} ${M[m - 1]}`;
 }
 
-export function stayLabel(s: StayData): string {
+export function stayLabel(s: Pick<StayData, "checkIn" | "checkOut">): string {
+  if (s.checkIn === s.checkOut) return fmtDay(s.checkIn);
   return `${fmtDay(s.checkIn)} – ${fmtDay(s.checkOut)}`;
 }
 

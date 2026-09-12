@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
 import Cutout from "../../components/Cutout.astro";
-import { parseDiary, fmtDay, skin, tilt, todaySGT } from "../../lib/stays";
+import { parseDiary, stayLabel, skin, tilt, todaySGT } from "../../lib/stays";
 
 export async function getStaticPaths() {
   const entries = await getCollection("stays");
@@ -51,7 +51,7 @@ const diary = parseDiary(entry.body ?? "");
     <div class="mt-[14px] flex gap-2 flex-wrap">
       <span class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink bg-cream">{breed}</span>
       <span class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink bg-cream">
-        {fmtDay(checkInISO)} – {fmtDay(checkOutISO)}
+        {stayLabel({ checkIn: checkInISO, checkOut: checkOutISO })}
       </span>
       {badge && (
         <span class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink bg-lime">{badge}</span>

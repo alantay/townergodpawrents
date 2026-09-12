@@ -125,6 +125,7 @@ const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
         return parts[2] + " " + MONTHS[parts[1] - 1];
       }
       function stayLabel(s) {
+        if (s.checkIn === s.checkOut) return fmtDay(s.checkIn);
         return fmtDay(s.checkIn) + "–" + fmtDay(s.checkOut);
       }
 
