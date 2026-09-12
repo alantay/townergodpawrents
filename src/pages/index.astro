@@ -33,7 +33,7 @@ const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
 <Layout>
   <Nav />
 
-  <div id="home-app" hidden></div>
+  <div id="home-app" class="mt-8" hidden></div>
 
   <noscript>
     <p class="mt-8 text-base leading-relaxed">
@@ -44,9 +44,11 @@ const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
 
   <div class="mt-10 flex gap-4 items-start flex-wrap">
     <div class="w-[134px] h-[154px] rounded-[22px] overflow-hidden border-[1.5px] border-ink flex-none -rotate-[1.5deg] bg-cream">
-      <div class="h-full w-full rounded-2xl border-2 border-dashed border-ink/30 bg-black/5 flex items-center justify-center text-center text-xs font-semibold px-3 text-ink/50">
-        photo of Alan &amp; Weiwen
-      </div>
+      <img
+        src="/images/alan-weiwen-portrait.png"
+        alt="Alan and Weiwen smiling together"
+        class="h-full w-full object-cover"
+      />
     </div>
     <div class="flex-1 min-w-[210px]">
       <div class="font-serif text-[36px] leading-none">Alan &amp; Weiwen</div>
@@ -58,17 +60,19 @@ const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
     </div>
   </div>
 
-  <div class="mt-11 border-t-[1.5px] border-ink pt-[18px] flex items-baseline justify-between gap-3">
-    <div class="font-serif text-[32px] leading-none">Past guests</div>
-    <a
-      href="/guests"
-      class="font-semibold text-[13px] border-[1.5px] border-ink px-[13px] py-1.5 rounded-full transition-colors duration-200 hover:bg-lime"
-    >
-      See all
-    </a>
-  </div>
+  <section id="past-guests-section" hidden>
+    <div class="mt-11 border-t-[1.5px] border-ink pt-[18px] flex items-baseline justify-between gap-3">
+      <div class="font-serif text-[32px] leading-none">Past guests</div>
+      <a
+        href="/guests"
+        class="font-semibold text-[13px] border-[1.5px] border-ink px-[13px] py-1.5 rounded-full transition-colors duration-200 hover:bg-lime"
+      >
+        See all
+      </a>
+    </div>
 
-  <div id="past-preview-app" hidden></div>
+    <div id="past-preview-app"></div>
+  </section>
 
   <div class="mt-11 border-t-[1.5px] border-ink pt-[18px] text-base">
     Know a dog who needs a sofa? You know where to find us.
@@ -308,9 +312,6 @@ const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
       }
 
       function pastPreviewHTML(cards) {
-        if (cards.length === 0) {
-          return '<p class="mt-3.5 text-sm text-label">No past guests yet — the sofa’s first stay is still to come.</p>';
-        }
         var html = cards
           .map((g, i) => {
             return (
@@ -370,9 +371,11 @@ const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
           .sort((a, b) => (a.checkOut < b.checkOut ? 1 : a.checkOut > b.checkOut ? -1 : 0))
           .slice(0, 4);
         var previewEl = document.getElementById("past-preview-app");
-        previewEl.innerHTML = pastPreviewHTML(pastGuests);
-        pastGuests.forEach((g, i) => movePhoto(g.id, document.getElementById("past-photo-" + i)));
-        previewEl.hidden = false;
+        if (pastGuests.length > 0) {
+          previewEl.innerHTML = pastPreviewHTML(pastGuests);
+          pastGuests.forEach((g, i) => movePhoto(g.id, document.getElementById("past-photo-" + i)));
+          document.getElementById("past-guests-section").hidden = false;
+        }
 
         window.__tgpFitHeadlines();
         window.addEventListener("resize", window.__tgpFitHeadlines);
@@ -382,7 +385,6 @@ const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
       } catch (err) {
         console.error("[towner-godpawrents] homepage render failed", err);
         document.getElementById("home-app").hidden = false;
-        document.getElementById("past-preview-app").hidden = false;
       }
     })();
   </script>
