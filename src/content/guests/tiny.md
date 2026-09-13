@@ -13,6 +13,12 @@ stays:
 
 ## 13 Sep
 
+### 11:05am
+
+Squeezed under Weiwen's desk for a chill. It is a very tight fit, but apparently still her favourite spot. Every time she wriggles in, the whole desk shakes.
+
+![Tiny curled under Weiwen's desk](./tiny-under-desk.jpg)
+
 ### 9:50am
 
 The fetch queen is here! Went straight for the squeaky avocado toast, dropped it at our feet.
