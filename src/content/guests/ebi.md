@@ -1,7 +1,7 @@
 ---
 name: Ebi
 breed: Pomsky
-photo: ./ebi-collage.png
+photo: ./ebi/ebi-collage.png
 bgColor: "#A34A2E"
 showLive: true
 badge: Attention seeker

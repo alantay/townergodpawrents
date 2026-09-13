@@ -1,7 +1,7 @@
 ---
 name: Tiny
 breed: Border Collie
-photo: ./tiny-collage.png
+photo: ./tiny/tiny-collage.png
 bgColor: "#39617E"
 showLive: true
 badge: Obsessive ball fetcher
@@ -17,7 +17,7 @@ stays:
 
 Squeezed under Weiwen's desk for a chill. It is a very tight fit, but apparently still her favourite spot. Every time she wriggles in, the whole desk shakes.
 
-![Tiny curled under Weiwen's desk](./tiny-under-desk.jpg)
+![Tiny curled under Weiwen's desk](./tiny/tiny-under-desk.jpg)
 
 ### 9:50am
 
