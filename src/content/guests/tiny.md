@@ -13,6 +13,16 @@ stays:
 
 ## 13 Sep
 
+### 1:15pm
+
+Finished her lunch, then immediately started eyeing mine.
+
+### 11:45am
+
+Followed Alan into the kitchen while he prepped food, then settled down to stay close. Super good girl, no play demands, just nearby.
+
+![Tiny stretched out nearby](./tiny/tiny-by-entry.png)
+
 ### 11:05am
 
 Squeezed under Weiwen's desk for a chill. It is a very tight fit, but apparently still her favourite spot. Every time she wriggles in, the whole desk shakes.
