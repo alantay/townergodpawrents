@@ -7,9 +7,17 @@
 // version inlined in src/pages/index.astro. Keep the two in sync if the
 // selection rules ever change; search for "MIRRORS src/lib/stays.ts".
 
+export interface DiaryPhoto {
+  /** Path exactly as written in the markdown, e.g. "./ebi-3-50pm.jpg". */
+  src: string;
+  /** Alt text from the markdown; empty when the author left it blank. */
+  alt: string;
+}
+
 export interface DiaryEntry {
   date: string; // e.g. "11 Sep"
   text: string;
+  photo?: DiaryPhoto;
 }
 
 export interface StayData {
@@ -97,9 +105,29 @@ export const SKINS = [
 export const skin = (i: number) => SKINS[i % SKINS.length];
 export const tilt = (i: number) => (i % 2 === 0 ? "-1deg" : "1deg");
 
+// A diary photo leans against its card's tilt, so it reads as a print laid
+// into the page rather than a block laid out by a grid.
+export const printTilt = (i: number) => (i % 2 === 0 ? "1.5deg" : "-1.5deg");
+
+/**
+ * Display width for a diary print, in CSS pixels, including its 7px mat.
+ * The photo is never cropped — a tall portrait just goes narrower instead of
+ * towering, so the height cap is what keeps the page scannable.
+ */
+export const PRINT_MAX_HEIGHT = 420;
+export const PRINT_MAT = 7;
+export function printWidth(w: number, h: number): number {
+  return Math.round(PRINT_MAX_HEIGHT * (w / h)) + PRINT_MAT * 2;
+}
+
+// A markdown image inside an entry. The first one becomes that entry's print;
+// extras are dropped rather than left to render as stray text.
+const IMAGE_RE = /!\[([^\]]*)\]\(\s*([^)\s]+)(?:\s+"[^"]*")?\s*\)/g;
+
 /**
  * Parses a stay's markdown body into dated diary entries.
  * Convention: `### DD Mon` heading followed by a paragraph, newest first.
+ * An optional `![alt](./photo.jpg)` anywhere in the entry becomes its photo.
  */
 export function parseDiary(body: string): DiaryEntry[] {
   const entries: DiaryEntry[] = [];
@@ -109,11 +137,18 @@ export function parseDiary(body: string): DiaryEntry[] {
     const date = matches[i][1].trim();
     const start = matches[i].index! + matches[i][0].length;
     const end = i + 1 < matches.length ? matches[i + 1].index! : body.length;
-    const text = body
-      .slice(start, end)
+    const raw = body.slice(start, end);
+
+    const [first] = [...raw.matchAll(IMAGE_RE)];
+    const photo = first ? { src: first[2], alt: first[1].trim() } : undefined;
+
+    const text = raw
+      .replace(IMAGE_RE, " ")
       .trim()
       .replace(/\s+/g, " ");
-    if (text) entries.push({ date, text });
+
+    // A photo on its own is a valid entry — some moments don't need words.
+    if (text || photo) entries.push({ date, text, photo });
   }
   return entries;
 }

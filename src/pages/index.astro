@@ -23,10 +23,15 @@ const stays = entries.map((e) => ({
 
 // Sent to the client so it can work out who's "here today" in the
 // Asia/Singapore timezone at load time — see the inline script below.
-// Photos aren't included here; they're pre-optimized at build time into
-// the hidden #photo-bank and the client just re-parents the <img> nodes
-// it needs, so no image processing has to happen in the browser.
-const staysForClient = stays.map(({ photo, ...rest }) => rest);
+// Photos aren't included here; the cutouts are pre-optimized at build time
+// into the hidden #photo-bank and the client just re-parents the <img> nodes
+// it needs, so no image processing has to happen in the browser. Diary
+// photos are dropped too: they only ever show on the full diary page, and a
+// text-only entry is all the teaser cards need.
+const staysForClient = stays.map(({ photo, entries: diary, ...rest }) => ({
+  ...rest,
+  entries: diary.map(({ photo: _photo, ...e }) => e),
+}));
 const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
 
 const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
@@ -298,7 +303,12 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
         var cap = pair ? 1 : 3;
         var raw = [];
         live.forEach((d) =>
-          d.entries.slice(0, cap).forEach((e) => raw.push({ date: e.date, text: e.text, who: d.name, id: d.id }))
+          // Photo-only entries are skipped here — the teaser is text, and a
+          // wordless card would just be a timestamp floating on a colour.
+          d.entries
+            .filter((e) => e.text)
+            .slice(0, cap)
+            .forEach((e) => raw.push({ date: e.date, text: e.text, who: d.name, id: d.id }))
         );
         if (raw.length === 0) return "";
         var cards = raw
