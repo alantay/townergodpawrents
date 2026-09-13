@@ -1,7 +1,7 @@
 ---
 name: Ebi
 breed: Pomsky
-photo: ./ebi.png
+photo: ./ebi-collage.png
 checkIn: 2026-09-12
 checkOut: 2026-09-12
 bgColor: "#A34A2E"
