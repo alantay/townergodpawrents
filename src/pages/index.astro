@@ -28,8 +28,11 @@ const stays = entries.map((e) => ({
 // it needs, so no image processing has to happen in the browser. Diary
 // photos are dropped too: they only ever show on the full diary page, and a
 // text-only entry is all the teaser cards need.
+// photoCount survives instead of the photos themselves: the teaser never
+// shows a diary photo, but it does need to say how many are waiting.
 const staysForClient = stays.map(({ photo, entries: diary, ...rest }) => ({
   ...rest,
+  photoCount: diary.filter((e) => e.photo).length,
   entries: diary.map(({ photo: _photo, ...e }) => e),
 }));
 const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
@@ -344,18 +347,39 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
         // full diary page worth linking to.
         var shown = {};
         raw.forEach((e) => (shown[e.id] = (shown[e.id] || 0) + 1));
-        var more = live.filter((d) => d.entries.length > (shown[d.id] || 0));
+
+        // What the link offers depends on what's actually left over: writing
+        // the teaser didn't fit, photos it never shows, or both. Returns ""
+        // when the teaser has already shown the whole day.
+        function moreLabel(d) {
+          var unread = d.entries.filter((e) => e.text).length > (shown[d.id] || 0);
+          var whose = pair ? esc(d.name) + "&rsquo;s " : "the ";
+          var n = d.photoCount || 0;
+          if (unread) {
+            return (
+              (pair ? "Read " + esc(d.name) + "&rsquo;s full day" : "Read the full day") +
+              (n ? " &middot; " + n + (n === 1 ? " photo" : " photos") : "")
+            );
+          }
+          if (n === 1) return "See " + whose + "photo";
+          if (n > 1) return "See " + whose + n + " photos";
+          return "";
+        }
+
+        var more = live
+          .map((d) => ({ id: d.id, label: moreLabel(d) }))
+          .filter((m) => m.label);
         var moreHTML = more.length
           ? '<div class="' +
             (raw.length ? "mt-3.5" : "mt-5") +
             ' flex gap-4 flex-wrap">' +
             more
               .map(
-                (d) =>
+                (m) =>
                   '<a href="/stays/' +
-                  esc(d.id) +
+                  esc(m.id) +
                   '" class="text-sm font-semibold text-label transition-colors duration-200 hover:text-ink">' +
-                  (pair ? "Read " + esc(d.name) + "&rsquo;s full day" : "Read the full day") +
+                  m.label +
                   "</a>"
               )
               .join("") +
