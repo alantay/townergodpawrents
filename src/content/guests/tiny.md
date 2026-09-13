@@ -37,7 +37,7 @@ After finishing her lunch, Tiny immediately started eyeing ours.
 
 ### 11:45am
 
-Tiny followed Alan into the kitchen while he prepped food, then settled down to stay close to us. No play demands, just nearby.
+Tiny followed Alan into the kitchen while he prepped food, then settled down to stay close to him. No play demands, just nearby.
 
 ![Tiny stretched out nearby](./tiny/tiny-by-entry.png)
 
