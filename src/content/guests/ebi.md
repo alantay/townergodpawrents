@@ -2,13 +2,16 @@
 name: Ebi
 breed: Pomsky
 photo: ./ebi-collage.png
-checkIn: 2026-09-12
-checkOut: 2026-09-12
 bgColor: "#A34A2E"
 showLive: true
 badge: Attention seeker
 tagline: squeaky-toy enthusiast, works only for snacks
+stays:
+  - checkIn: 2026-09-12
+    checkOut: 2026-09-12
 ---
+
+## 12 Sep
 
 ### 6:25pm
 

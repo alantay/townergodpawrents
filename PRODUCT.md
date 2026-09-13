@@ -20,9 +20,10 @@ Not a pet-sitting service — a personal log of an informal, no-money hobby amon
 
 ## Operating Context
 
-- Each dog's stay is a content entry (`src/content/stays/*.md`) with frontmatter (name, breed, photo, check-in/out dates, bgColor, badge, tagline, showLive) and a markdown diary body of timestamped entries through the day.
-- The homepage picks "today's" stay client-side in the Asia/Singapore timezone, showing either the live guest(s), a "Vacancy" state with the last guest, or a past-guests list.
-- Each stay also gets its own full diary page at `/stays/[id]`.
+- Each dog is a guest, one content entry (`src/content/guests/*.md`), with frontmatter (name, breed, photo, bgColor, badge, tagline, showLive) plus a `stays` list of check-in/check-out ranges — a dog who comes back gains a stay, not a file. See `CONTEXT.md` and `docs/adr/0002-guest-has-many-stays.md`.
+- The diary body is `## 13 Sep` day dividers with `### 9:50am` entries under them, newest first. The year is never written; it comes from whichever stay contains the day.
+- The homepage picks "today's" guest client-side in the Asia/Singapore timezone, showing either the live guest(s), a "Vacancy" state with the last guest, or a past-guests list. It scopes to today, not to the whole stay.
+- Each guest gets a page at `/guests/[id]` holding their whole history, and `/guests` lists everyone who's stayed.
 
 ## Capabilities and Constraints
 

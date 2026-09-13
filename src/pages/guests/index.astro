@@ -1,0 +1,71 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Cutout from "../../components/Cutout.astro";
+import { stayLabel, staysNewestFirst, latestStay, dateStr } from "../../lib/guests";
+
+const entries = await getCollection("guests");
+
+// Everyone who's ever stayed, most recently departed first. A dog appears
+// once however many times they've been — the date is their last visit.
+const guests = entries
+  .map((e) => ({
+    id: e.id,
+    name: e.data.name,
+    breed: e.data.breed,
+    bgColor: e.data.bgColor,
+    photo: e.data.photo,
+    stays: staysNewestFirst(
+      e.data.stays.map((s) => ({ checkIn: dateStr(s.checkIn), checkOut: dateStr(s.checkOut) })),
+    ),
+  }))
+  .sort((a, b) => latestStay(b).checkOut.localeCompare(latestStay(a).checkOut));
+---
+
+<Layout title="Past guests · The Towner Godpawrents">
+  <Nav />
+
+  <a href="/" class="mt-8 inline-block text-sm font-semibold text-label transition-colors duration-200 hover:text-ink">
+    ← Back to today
+  </a>
+
+  <div class="mt-4">
+    <h1 class="font-serif text-[clamp(40px,11vw,72px)] leading-[0.9] tracking-[-0.02em]">
+      Everyone who's stayed
+    </h1>
+    <p class="mt-3 text-base leading-relaxed text-pretty max-w-[52ch]">
+      Every dog who's had a turn on the sofa, newest first. Some of them keep coming back.
+    </p>
+  </div>
+
+  {guests.length === 0 ? (
+    <p class="mt-8 text-sm text-label">No one's stayed yet. The sofa is very patient.</p>
+  ) : (
+    <div
+      class="mt-8 grid gap-3.5"
+      style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))"
+    >
+      {guests.map((g) => (
+        <a
+          href={`/guests/${g.id}`}
+          class="block border-[1.5px] border-ink rounded-[22px] overflow-hidden transition-transform duration-250 hover:rotate-3 hover:scale-[1.03]"
+          style={`background:${g.bgColor}`}
+        >
+          <div class="h-[132px] p-[9px_9px_0]">
+            <Cutout photo={g.photo} name={g.name} />
+          </div>
+          <div class="p-[9px_13px_13px] bg-cream border-t-[1.5px] border-ink">
+            <div class="font-serif text-[22px] leading-none">{g.name}</div>
+            <div class="text-[13px] text-muted">{g.breed}</div>
+            <div class="text-[13px] text-muted">{stayLabel(latestStay(g))}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+  )}
+
+  <div class="mt-11 border-t-[1.5px] border-ink pt-[18px] text-xs tracking-[0.1em] uppercase text-label">
+    Towner &middot; No dog of our own, just everyone else's
+  </div>
+</Layout>

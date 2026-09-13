@@ -3,41 +3,55 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Cutout from "../components/Cutout.astro";
 import { getCollection } from "astro:content";
-import { parseDiary, pastGuests, todaySGT } from "../lib/stays";
+import {
+  parseDiary,
+  pastGuests,
+  staysNewestFirst,
+  warnOnOverlaps,
+  dateStr,
+  todaySGT,
+} from "../lib/guests";
 
-const entries = await getCollection("stays");
+const entries = await getCollection("guests");
 
-const stays = entries.map((e) => ({
-  id: e.id,
-  name: e.data.name,
-  breed: e.data.breed,
-  tagline: e.data.tagline ?? "",
-  badge: e.data.badge ?? "",
-  checkIn: e.data.checkIn.toISOString().slice(0, 10),
-  checkOut: e.data.checkOut.toISOString().slice(0, 10),
-  bgColor: e.data.bgColor,
-  showLive: e.data.showLive,
-  photo: e.data.photo,
-  entries: parseDiary(e.body ?? ""),
-}));
+const guests = entries.map((e) => {
+  const stays = staysNewestFirst(
+    e.data.stays.map((s) => ({ checkIn: dateStr(s.checkIn), checkOut: dateStr(s.checkOut) })),
+  );
+  warnOnOverlaps(e.id, stays);
+  return {
+    id: e.id,
+    name: e.data.name,
+    breed: e.data.breed,
+    tagline: e.data.tagline ?? "",
+    badge: e.data.badge ?? "",
+    bgColor: e.data.bgColor,
+    showLive: e.data.showLive,
+    photo: e.data.photo,
+    stays,
+    days: parseDiary(e.body ?? "", stays, e.id),
+  };
+});
 
 // Sent to the client so it can work out who's "here today" in the
 // Asia/Singapore timezone at load time — see the inline script below.
-// Photos aren't included here; the cutouts are pre-optimized at build time
-// into the hidden #photo-bank and the client just re-parents the <img> nodes
-// it needs, so no image processing has to happen in the browser. Diary
-// photos are dropped too: they only ever show on the full diary page, and a
-// text-only entry is all the teaser cards need.
-// photoCount survives instead of the photos themselves: the teaser never
-// shows a diary photo, but it does need to say how many are waiting.
-const staysForClient = stays.map(({ photo, entries: diary, ...rest }) => ({
+// Cut-outs aren't included here; they're pre-optimized at build time into the
+// hidden #photo-bank and the client just re-parents the <img> nodes it needs,
+// so no image processing has to happen in the browser. Diary prints are
+// dropped too: they only ever show on the guest's page, and a text-only entry
+// is all the teaser cards need. A per-day photoCount survives instead — the
+// teaser never shows a print, but it does need to say how many are waiting.
+const guestsForClient = guests.map(({ photo, days, ...rest }) => ({
   ...rest,
-  photoCount: diary.filter((e) => e.photo).length,
-  entries: diary.map(({ photo: _photo, ...e }) => e),
+  days: days.map((d) => ({
+    iso: d.iso,
+    photoCount: d.entries.filter((e) => e.photo).length,
+    entries: d.entries.map(({ photo: _photo, ...e }) => e),
+  })),
 }));
-const staysJson = JSON.stringify(staysForClient).replace(/</g, "\\u003c");
+const guestsJson = JSON.stringify(guestsForClient).replace(/</g, "\\u003c");
 
-const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
+const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
 ---
 
 <Layout>
@@ -95,22 +109,22 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
     Towner &middot; No dog of our own, just everyone else's
   </div>
 
-  <!-- Hidden bank of pre-optimized photos, one per stay. The client script
+  <!-- Hidden bank of pre-optimized cut-outs, one per guest. The client script
        re-parents (moves, doesn't clone) the node it needs into whichever
        card is showing right now. -->
   <div id="photo-bank" class="hidden">
-    {stays.map((s) => (
-      <div id={`photo-${s.id}`} class="h-full w-full">
-        <Cutout photo={s.photo} name={s.name} />
+    {guests.map((g) => (
+      <div id={`photo-${g.id}`} class="h-full w-full">
+        <Cutout photo={g.photo} name={g.name} />
       </div>
     ))}
   </div>
 
-  <script type="application/json" id="stays-data" is:inline set:html={staysJson} />
+  <script type="application/json" id="guests-data" is:inline set:html={guestsJson} />
 
   <script is:inline>
     (function () {
-      // ---- selection rules — MIRRORS src/lib/stays.ts, keep in sync ----
+      // ---- selection rules — MIRRORS src/lib/guests.ts, keep in sync ----
       function todaySGT() {
         return new Intl.DateTimeFormat("en-CA", {
           timeZone: "Asia/Singapore",
@@ -121,22 +135,43 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
       }
 
       // Preview helper: ?date=YYYY-MM-DD pretends it's another day, so we can
-      // see a stay's takeover before (or after) the dog actually turns up.
+      // see a takeover before (or after) the dog actually turns up.
       function previewDate() {
         var m = /[?&]date=(\d{4}-\d{2}-\d{2})\b/.exec(location.search);
         return m ? m[1] : null;
       }
 
-      function pickToday(stays, todayISO) {
-        var live = stays
-          .filter((s) => s.showLive && s.checkIn <= todayISO && todayISO <= s.checkOut)
-          .sort((a, b) => (a.checkIn < b.checkIn ? -1 : a.checkIn > b.checkIn ? 1 : 0));
+      function stayOn(g, todayISO) {
+        return g.stays.filter((s) => s.checkIn <= todayISO && todayISO <= s.checkOut)[0];
+      }
+      // Stays arrive newest first, so the most recent one is simply the first.
+      function latestStay(g) {
+        return g.stays[0];
+      }
+      // What the guest did on a given day — the homepage only ever cares
+      // about today, however long the stay runs.
+      function dayOn(g, todayISO) {
+        return g.days.filter((d) => d.iso === todayISO)[0] || { entries: [], photoCount: 0 };
+      }
+
+      function pickToday(guests, todayISO) {
+        var live = guests
+          .filter((g) => g.showLive && stayOn(g, todayISO))
+          .sort((a, b) => {
+            var x = stayOn(a, todayISO).checkIn,
+              y = stayOn(b, todayISO).checkIn;
+            return x < y ? -1 : x > y ? 1 : 0;
+          });
         if (live.length > 0) {
           return { state: live.length === 1 ? "one" : "multi", live: live };
         }
-        var past = stays
-          .filter((s) => s.checkOut < todayISO)
-          .sort((a, b) => (a.checkOut < b.checkOut ? 1 : a.checkOut > b.checkOut ? -1 : 0));
+        var past = guests
+          .filter((g) => latestStay(g).checkOut < todayISO)
+          .sort((a, b) => {
+            var x = latestStay(a).checkOut,
+              y = latestStay(b).checkOut;
+            return x < y ? 1 : x > y ? -1 : 0;
+          });
         return { state: "vacancy", live: [], lastGuest: past[0] };
       }
 
@@ -151,7 +186,7 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
       }
 
       // Lime is reserved for status badges (Here Today, tags) elsewhere on
-      // the page, so this homepage teaser skips the lime skin lib/stays.ts
+      // the page, so this homepage teaser skips the lime skin lib/guests.ts
       // uses for the full diary — three lime patches on one view read as
       // clutter rather than a signal. Cream repeats instead.
       var SKINS = [
@@ -214,7 +249,7 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
       };
 
       // ---- build hero + today-entries markup for the live states ----
-      function heroLiveHTML(live) {
+      function heroLiveHTML(live, today) {
         var pair = live.length > 1;
         var color = pair ? "#5F6E4F" : live[0].bgColor;
         var name = live.map((d) => d.name).join(" & ");
@@ -226,7 +261,7 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
 
         var chips = [];
         if (!pair) {
-          chips.push({ label: stayLabel(live[0]), bg: "#F7F2E7" });
+          chips.push({ label: stayLabel(stayOn(live[0], today)), bg: "#F7F2E7" });
           if (live[0].badge) chips.push({ label: live[0].badge, bg: "#D8F24E" });
         } else {
           live.forEach((d) => chips.push({ label: d.name + " · " + d.breed, bg: "#F7F2E7" }));
@@ -281,7 +316,7 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
 
         if (lastGuest) {
           html +=
-            '<a href="/stays/' +
+            '<a href="/guests/' +
             esc(lastGuest.id) +
             '" class="mt-[18px] flex items-center gap-3.5 bg-cream border-[1.5px] border-ink rounded-[24px] p-[13px_15px] -rotate-1 transition-transform duration-250 hover:rotate-0 hover:scale-[1.02]">' +
             '<div id="last-seen-photo" class="w-16 h-16 rounded-[17px] overflow-hidden flex-none" style="background:' +
@@ -295,30 +330,33 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
             '<div class="text-sm">' +
             esc(lastGuest.breed) +
             " · checked out " +
-            fmtDay(lastGuest.checkOut) +
+            fmtDay(latestStay(lastGuest).checkOut) +
             "</div></div></a>";
         }
         return html;
       }
 
-      function entryCardsHTML(live) {
+      // Everything here is scoped to TODAY, not to the whole stay: on day six
+      // of a ten-day visit the page still answers "what happened today", and
+      // every label below stays literally true.
+      function entryCardsHTML(live, today) {
         var pair = live.length > 1;
         var cap = pair ? 1 : 3;
         var raw = [];
         live.forEach((d) =>
           // Photo-only entries are skipped here — the teaser is text, and a
           // wordless card would just be a timestamp floating on a colour.
-          d.entries
-            .filter((e) => e.text)
+          dayOn(d, today)
+            .entries.filter((e) => e.text)
             .slice(0, cap)
-            .forEach((e) => raw.push({ date: e.date, text: e.text, who: d.name, id: d.id }))
+            .forEach((e) => raw.push({ time: e.time, text: e.text, who: d.name, id: d.id }))
         );
         var cards = raw
           .map((e, i) => {
             var sk = skin(i);
             var lone = raw.length % 2 === 1 && i === raw.length - 1 ? " [grid-column:1/-1]" : "";
             return (
-              '<a href="/stays/' +
+              '<a href="/guests/' +
               esc(e.id) +
               '" class="block border-[1.5px] border-ink rounded-[24px] p-[17px_19px] transition-transform duration-250' +
               lone +
@@ -332,7 +370,7 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
               '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:' +
               sk.accent +
               '">' +
-              esc(e.date) +
+              esc(e.time) +
               " · " +
               esc(e.who) +
               "</div>" +
@@ -344,7 +382,7 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
           .join("");
         // Count against what the teaser actually shows, not the cap: a day
         // that so far is only photos shows no cards at all, and still has a
-        // full diary page worth linking to.
+        // diary page worth linking to.
         var shown = {};
         raw.forEach((e) => (shown[e.id] = (shown[e.id] || 0) + 1));
 
@@ -352,9 +390,10 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
         // the teaser didn't fit, photos it never shows, or both. Returns ""
         // when the teaser has already shown the whole day.
         function moreLabel(d) {
-          var unread = d.entries.filter((e) => e.text).length > (shown[d.id] || 0);
+          var day = dayOn(d, today);
+          var unread = day.entries.filter((e) => e.text).length > (shown[d.id] || 0);
           var whose = pair ? esc(d.name) + "&rsquo;s " : "the ";
-          var n = d.photoCount || 0;
+          var n = day.photoCount || 0;
           if (unread) {
             return (
               (pair ? "Read " + esc(d.name) + "&rsquo;s full day" : "Read the full day") +
@@ -376,7 +415,7 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
             more
               .map(
                 (m) =>
-                  '<a href="/stays/' +
+                  '<a href="/guests/' +
                   esc(m.id) +
                   '" class="text-sm font-semibold text-label transition-colors duration-200 hover:text-ink">' +
                   m.label +
@@ -397,7 +436,7 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
         var html = cards
           .map((g, i) => {
             return (
-              '<a href="/stays/' +
+              '<a href="/guests/' +
               esc(g.id) +
               '" class="block border-[1.5px] border-ink rounded-[22px] overflow-hidden transition-transform duration-250 hover:rotate-3 hover:scale-[1.03]" style="background:' +
               g.bgColor +
@@ -410,7 +449,7 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
               esc(g.name) +
               "</div>" +
               '<div class="text-[13px] text-muted">' +
-              stayLabel(g) +
+              stayLabel(latestStay(g)) +
               "</div></div></a>"
             );
           })
@@ -424,23 +463,23 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
       }
 
       try {
-        var dataEl = document.getElementById("stays-data");
-        var stays = JSON.parse(dataEl.textContent);
+        var dataEl = document.getElementById("guests-data");
+        var guests = JSON.parse(dataEl.textContent);
         var preview = previewDate();
         var today = preview || todaySGT();
-        var result = pickToday(stays, today);
+        var result = pickToday(guests, today);
 
         var appEl = document.getElementById("home-app");
         if (result.state === "vacancy") {
           appEl.innerHTML = heroVacancyHTML(result.lastGuest);
           if (result.lastGuest) movePhoto(result.lastGuest.id, document.getElementById("last-seen-photo"));
         } else {
-          var hero = heroLiveHTML(result.live);
-          appEl.innerHTML = hero.html + entryCardsHTML(result.live);
+          var hero = heroLiveHTML(result.live, today);
+          appEl.innerHTML = hero.html + entryCardsHTML(result.live, today);
           var photosEl = document.getElementById("hero-photos");
           result.live.forEach((d) => {
             var a = document.createElement("a");
-            a.href = "/stays/" + d.id;
+            a.href = "/guests/" + d.id;
             a.className = "block flex-1 min-w-0 h-full animate-drift transition-[filter] duration-200";
             photosEl.appendChild(a);
             movePhoto(d.id, a);
@@ -450,20 +489,24 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
           var note = document.createElement("div");
           note.className =
             "mb-3.5 text-xs font-semibold tracking-[0.08em] uppercase border-[1.5px] border-dashed border-ink rounded-full px-[13px] py-2 inline-block";
-          note.textContent = "Preview \u00b7 pretending it's " + fmtDay(preview);
+          note.textContent = "Preview · pretending it's " + fmtDay(preview);
           appEl.prepend(note);
         }
         appEl.hidden = false;
 
         var liveIds = result.live.map((d) => d.id);
-        var pastGuests = stays
-          .filter((s) => s.checkOut < today && liveIds.indexOf(s.id) === -1)
-          .sort((a, b) => (a.checkOut < b.checkOut ? 1 : a.checkOut > b.checkOut ? -1 : 0))
+        var past = guests
+          .filter((g) => latestStay(g).checkOut < today && liveIds.indexOf(g.id) === -1)
+          .sort((a, b) => {
+            var x = latestStay(a).checkOut,
+              y = latestStay(b).checkOut;
+            return x < y ? 1 : x > y ? -1 : 0;
+          })
           .slice(0, 4);
         var previewEl = document.getElementById("past-preview-app");
-        if (pastGuests.length > 0) {
-          previewEl.innerHTML = pastPreviewHTML(pastGuests);
-          pastGuests.forEach((g, i) => movePhoto(g.id, document.getElementById("past-photo-" + i)));
+        if (past.length > 0) {
+          previewEl.innerHTML = pastPreviewHTML(past);
+          past.forEach((g, i) => movePhoto(g.id, document.getElementById("past-photo-" + i)));
           document.getElementById("past-guests-section").hidden = false;
         }
 

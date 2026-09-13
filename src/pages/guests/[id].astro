@@ -5,29 +5,42 @@ import type { ImageMetadata } from "astro";
 import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
 import Cutout from "../../components/Cutout.astro";
-import { parseDiary, stayLabel, skin, tilt, printTilt, printWidth, todaySGT } from "../../lib/stays";
+import {
+  parseDiary,
+  stayLabel,
+  staysNewestFirst,
+  stayOn,
+  latestStay,
+  warnOnOverlaps,
+  dateStr,
+  skin,
+  tilt,
+  printTilt,
+  printWidth,
+  todaySGT,
+} from "../../lib/guests";
 
 // Diary photos are referenced from inside the markdown body, which parseDiary
 // reads as raw text — so they never pass through Astro's markdown image
 // pipeline. Globbing the folder here gets them optimized anyway.
 const diaryImages = import.meta.glob<{ default: ImageMetadata }>(
-  "../../content/stays/**/*.{jpeg,jpg,png,webp,avif}",
+  "../../content/guests/**/*.{jpeg,jpg,png,webp,avif}",
   { eager: true },
 );
 
-function resolveDiaryPhoto(src: string, stayId: string, date: string): ImageMetadata {
+function resolveDiaryPhoto(src: string, guestId: string, when: string): ImageMetadata {
   const file = src.split("/").pop()!;
   const key = Object.keys(diaryImages).find((k) => k.endsWith(`/${file}`));
   if (!key) {
     throw new Error(
-      `[stays] ${stayId}, ${date}: no image "${file}" in src/content/stays/ (written as "${src}")`,
+      `[guests] ${guestId}, ${when}: no image "${file}" in src/content/guests/ (written as "${src}")`,
     );
   }
   return diaryImages[key].default;
 }
 
 export async function getStaticPaths() {
-  const entries = await getCollection("stays");
+  const entries = await getCollection("guests");
   return entries.map((entry) => ({
     params: { id: entry.id },
     props: { entry },
@@ -35,11 +48,24 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { name, breed, tagline, badge, checkIn, checkOut, bgColor, showLive, photo } = entry.data;
-const checkInISO = checkIn.toISOString().slice(0, 10);
-const checkOutISO = checkOut.toISOString().slice(0, 10);
-const isLive = showLive && checkInISO <= todaySGT() && todaySGT() <= checkOutISO;
-const diary = parseDiary(entry.body ?? "");
+const { name, breed, tagline, badge, bgColor, showLive, photo } = entry.data;
+
+const stays = staysNewestFirst(
+  entry.data.stays.map((s) => ({ checkIn: dateStr(s.checkIn), checkOut: dateStr(s.checkOut) })),
+);
+warnOnOverlaps(entry.id, stays);
+
+const today = todaySGT();
+const here = stayOn({ stays }, today);
+const isLive = showLive && here !== undefined;
+// The chip shows the visit that's happening, or the last one that did.
+const shownStay = here ?? latestStay({ stays });
+
+const days = parseDiary(entry.body ?? "", stays, entry.id);
+
+// The palette rotates through the whole diary rather than restarting each
+// day, so a long stay doesn't come out striped.
+let skinIndex = 0;
 ---
 
 <Layout title={`${name} · The Towner Godpawrents`}>
@@ -76,7 +102,7 @@ const diary = parseDiary(entry.body ?? "");
     <div class="mt-[14px] flex gap-2 flex-wrap">
       <span class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink bg-cream">{breed}</span>
       <span class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink bg-cream">
-        {stayLabel({ checkIn: checkInISO, checkOut: checkOutISO })}
+        {stayLabel(shownStay)}
       </span>
       {badge && (
         <span class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink bg-lime">{badge}</span>
@@ -92,51 +118,63 @@ const diary = parseDiary(entry.body ?? "");
     <div class="font-serif text-[32px] leading-none">The full diary</div>
   </div>
 
-  {diary.length === 0 ? (
+  {days.length === 0 ? (
     <p class="mt-3.5 text-sm text-label">No diary entries yet — check back once the visit gets going.</p>
   ) : (
-    <div class="mt-5 grid gap-3.5">
-      {diary.map((e, i) => {
-        const sk = skin(i);
-        const img = e.photo ? resolveDiaryPhoto(e.photo.src, entry.id, e.date) : undefined;
-        return (
-          <div
-            class="border-[1.5px] border-ink rounded-[24px] p-[17px_19px]"
-            style={`background:${sk.bg};color:${sk.fg};transform:rotate(${tilt(i)})`}
-          >
-            <div class="font-semibold text-xs tracking-[0.08em] uppercase" style={`color:${sk.accent}`}>
-              {e.date}
-            </div>
+    days.map((day) => (
+      <section class="mt-7 first:mt-5">
+        <div class="flex items-baseline gap-3">
+          <div class="font-serif text-[22px] leading-none flex-none">{day.label}</div>
+          <div class="h-px flex-1 bg-ink/20"></div>
+        </div>
 
-            {img && (
-              /* Cream mat + ink hairline on every skin: it disappears into the
-                 cream cards and reads as a print border on the dark ones. */
+        <div class="mt-3.5 grid gap-3.5">
+          {day.entries.map((e) => {
+            const i = skinIndex++;
+            const sk = skin(i);
+            const img = e.photo
+              ? resolveDiaryPhoto(e.photo.src, entry.id, `${day.label} ${e.time}`)
+              : undefined;
+            return (
               <div
-                class="mt-[15px] mx-auto bg-cream border-[1.5px] border-ink rounded-[16px] p-[7px]"
-                style={`width:min(100%,${printWidth(img.width, img.height)}px);transform:rotate(${printTilt(i)})`}
+                class="border-[1.5px] border-ink rounded-[24px] p-[17px_19px]"
+                style={`background:${sk.bg};color:${sk.fg};transform:rotate(${tilt(i)})`}
               >
-                <Image
-                  src={img}
-                  alt={e.photo!.alt || `${name}, ${e.date}`}
-                  width={Math.min(img.width, 1160)}
-                  loading="lazy"
-                  decoding="async"
-                  class="block h-auto w-full rounded-[10px]"
-                />
-              </div>
-            )}
+                <div class="font-semibold text-xs tracking-[0.08em] uppercase" style={`color:${sk.accent}`}>
+                  {e.time}
+                </div>
 
-            {e.text && (
-              <p class={`${img ? "mt-4" : "mt-2"} text-base leading-relaxed text-pretty`}>{e.text}</p>
-            )}
-          </div>
-        );
-      })}
-    </div>
+                {img && (
+                  /* Cream mat + ink hairline on every skin: it disappears into the
+                     cream cards and reads as a print border on the dark ones. */
+                  <div
+                    class="mt-[15px] mx-auto bg-cream border-[1.5px] border-ink rounded-[16px] p-[7px]"
+                    style={`width:min(100%,${printWidth(img.width, img.height)}px);transform:rotate(${printTilt(i)})`}
+                  >
+                    <Image
+                      src={img}
+                      alt={e.photo!.alt || `${name}, ${day.label} ${e.time}`}
+                      width={Math.min(img.width, 1160)}
+                      loading="lazy"
+                      decoding="async"
+                      class="block h-auto w-full rounded-[10px]"
+                    />
+                  </div>
+                )}
+
+                {e.text && (
+                  <p class={`${img ? "mt-4" : "mt-2"} text-base leading-relaxed text-pretty`}>{e.text}</p>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    ))
   )}
 
   {showLive && (
-    <script is:inline define:vars={{ checkInISO, checkOutISO }}>
+    <script is:inline define:vars={{ stays }}>
       // The page is built once, so the build-time "Here today" pill goes stale.
       // Re-decide in the browser, and honour ?date=YYYY-MM-DD the same way the
       // homepage does so an upcoming stay can be previewed before check-in.
@@ -151,7 +189,7 @@ const diary = parseDiary(entry.body ?? "");
             day: "2-digit",
           }).format(new Date());
         var el = document.getElementById("here-today");
-        if (el) el.hidden = !(checkInISO <= today && today <= checkOutISO);
+        if (el) el.hidden = !stays.some((s) => s.checkIn <= today && today <= s.checkOut);
       })();
     </script>
   )}
