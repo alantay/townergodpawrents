@@ -7,5 +7,5 @@ checkOut: 2026-09-23
 bgColor: "#2D4B63"
 showLive: true
 badge: Obsessive ball fetcher
-tagline: fetches for work, fetches for fun, fetches for life
+tagline: loves rolling on her back, gets loud when the food is slow
 ---
