@@ -71,7 +71,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
   </noscript>
 
   <div class="mt-10 flex gap-4 items-start flex-wrap">
-    <div class="w-[134px] h-[154px] rounded-[22px] overflow-hidden border-[1.5px] border-ink flex-none -rotate-[1.5deg] bg-cream">
+    <div class="w-[134px] h-[154px] rounded-[22px] overflow-hidden flex-none -rotate-[1.5deg] bg-cream">
       <img
         src="/images/alan-weiwen-portrait.png"
         alt="Alan and Weiwen smiling together"
@@ -351,28 +351,21 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             .slice(0, cap)
             .forEach((e) => raw.push({ time: e.time, text: e.text, who: d.name, id: d.id }))
         );
-        var cards = raw
+        // The home teaser is one diary page rather than a grid of individual
+        // notes. Space and a quiet divider separate moments, so the page does
+        // not repeat the same card outline for every update.
+        var entries = raw
           .map((e, i) => {
-            var sk = skin(i);
-            var lone = raw.length % 2 === 1 && i === raw.length - 1 ? " [grid-column:1/-1]" : "";
+            var byline = pair ? " · " + esc(e.who) : "";
             return (
               '<a href="/guests/' +
               esc(e.id) +
-              '" class="block border-[1.5px] border-ink rounded-[24px] p-[17px_19px] transition-transform duration-250' +
-              lone +
-              '" style="background:' +
-              sk.bg +
-              ";color:" +
-              sk.fg +
-              ";transform:rotate(" +
-              tilt(i) +
-              ')">' +
-              '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:' +
-              sk.accent +
+              '" class="block py-[17px] transition-colors duration-200 hover:text-label' +
+              (i ? " border-t border-ink/20" : "") +
               '">' +
+              '<div class="font-semibold text-xs tracking-[0.08em] uppercase text-label">' +
               esc(e.time) +
-              " · " +
-              esc(e.who) +
+              byline +
               "</div>" +
               '<p class="mt-2 text-base leading-relaxed text-pretty">' +
               esc(e.text) +
@@ -425,9 +418,10 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             "</div>"
           : "";
         var cardsHTML = raw.length
-          ? '<div class="mt-5 grid gap-3.5" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">' +
-            cards +
-            "</div>"
+          ? '<section class="mt-5 overflow-hidden rounded-[24px] bg-cream px-5 py-1.5">' +
+            '<div class="pt-[15px] font-serif text-[28px] leading-none">Today\'s notes</div>' +
+            entries +
+            "</section>"
           : "";
         return cardsHTML + moreHTML;
       }
@@ -438,13 +432,13 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             return (
               '<a href="/guests/' +
               esc(g.id) +
-              '" class="block border-[1.5px] border-ink rounded-[22px] overflow-hidden transition-transform duration-250 hover:rotate-3 hover:scale-[1.03]" style="background:' +
+              '" class="block rounded-[22px] overflow-hidden transition-transform duration-250 hover:rotate-3 hover:scale-[1.03]" style="background:' +
               g.bgColor +
               '">' +
               '<div class="h-[114px] p-[9px_9px_0]"><div id="past-photo-' +
               i +
               '" class="h-full w-full"></div></div>' +
-              '<div class="p-[9px_13px_13px] bg-cream border-t-[1.5px] border-ink">' +
+              '<div class="p-[9px_13px_13px] bg-cream">' +
               '<div class="font-serif text-[22px] leading-none">' +
               esc(g.name) +
               "</div>" +

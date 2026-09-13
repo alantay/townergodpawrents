@@ -49,13 +49,13 @@ const guests = entries
       {guests.map((g) => (
         <a
           href={`/guests/${g.id}`}
-          class="block border-[1.5px] border-ink rounded-[22px] overflow-hidden transition-transform duration-250 hover:rotate-3 hover:scale-[1.03]"
+          class="block rounded-[22px] overflow-hidden transition-transform duration-250 hover:rotate-3 hover:scale-[1.03]"
           style={`background:${g.bgColor}`}
         >
           <div class="h-[132px] p-[9px_9px_0]">
             <Cutout photo={g.photo} name={g.name} />
           </div>
-          <div class="p-[9px_13px_13px] bg-cream border-t-[1.5px] border-ink">
+          <div class="p-[9px_13px_13px] bg-cream">
             <div class="font-serif text-[22px] leading-none">{g.name}</div>
             <div class="text-[13px] text-muted">{g.breed}</div>
             <div class="text-[13px] text-muted">{stayLabel(latestStay(g))}</div>
