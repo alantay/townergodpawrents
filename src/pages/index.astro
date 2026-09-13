@@ -310,7 +310,6 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
             .slice(0, cap)
             .forEach((e) => raw.push({ date: e.date, text: e.text, who: d.name, id: d.id }))
         );
-        if (raw.length === 0) return "";
         var cards = raw
           .map((e, i) => {
             var sk = skin(i);
@@ -340,9 +339,16 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
             );
           })
           .join("");
-        var more = live.filter((d) => d.entries.length > cap);
+        // Count against what the teaser actually shows, not the cap: a day
+        // that so far is only photos shows no cards at all, and still has a
+        // full diary page worth linking to.
+        var shown = {};
+        raw.forEach((e) => (shown[e.id] = (shown[e.id] || 0) + 1));
+        var more = live.filter((d) => d.entries.length > (shown[d.id] || 0));
         var moreHTML = more.length
-          ? '<div class="mt-3.5 flex gap-4 flex-wrap">' +
+          ? '<div class="' +
+            (raw.length ? "mt-3.5" : "mt-5") +
+            ' flex gap-4 flex-wrap">' +
             more
               .map(
                 (d) =>
@@ -355,12 +361,12 @@ const hasPastGuests = pastGuests(stays, todaySGT()).length > 0;
               .join("") +
             "</div>"
           : "";
-        return (
-          '<div class="mt-5 grid gap-3.5" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">' +
-          cards +
-          "</div>" +
-          moreHTML
-        );
+        var cardsHTML = raw.length
+          ? '<div class="mt-5 grid gap-3.5" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">' +
+            cards +
+            "</div>"
+          : "";
+        return cardsHTML + moreHTML;
       }
 
       function pastPreviewHTML(cards) {
