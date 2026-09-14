@@ -318,7 +318,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           html +=
             '<a href="/guests/' +
             esc(lastGuest.id) +
-            '" class="mt-[18px] flex items-center gap-3.5 bg-cream card-keyline card-lift rounded-[24px] p-[13px_15px] -rotate-1 transition-transform duration-250 hover:rotate-0 hover:scale-[1.02]">' +
+            '" class="mt-[18px] flex items-center gap-3.5 bg-cream card-keyline rounded-[24px] p-[13px_15px] -rotate-1 transition-transform duration-250 hover:rotate-0 hover:scale-[1.02]">' +
             '<div id="last-seen-photo" class="w-16 h-16 rounded-[17px] overflow-hidden flex-none" style="background:' +
             lastGuest.bgColor +
             '"></div>' +
@@ -359,7 +359,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             return (
               '<a href="/guests/' +
               esc(e.id) +
-              '" class="block card-keyline card-lift' +
+              '" class="block card-keyline' +
               (darkSkin ? " card-keyline--dark" : "") +
               ' rounded-[24px] p-[17px_19px] transition-transform duration-250' +
               lone +
