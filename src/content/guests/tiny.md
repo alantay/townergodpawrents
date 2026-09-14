@@ -13,6 +13,12 @@ stays:
 
 ## 14 Sep
 
+### 2pm
+
+Tiny napping on the lap while the human tries to work.
+
+![Tiny napping on lap](./tiny/tiny-lap-nap.png)
+
 ### 8:10am
 
 Negotiation begins.
