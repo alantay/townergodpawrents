@@ -13,6 +13,12 @@ stays:
 
 ## 14 Sep
 
+### 8:10am
+
+Negotiation begins.
+
+![Tiny negotiating from Alan's lap](./tiny/tiny-negotiation.png)
+
 ### 8am
 
 Tiny eyeing Alan and Weiwen's breakfast.
