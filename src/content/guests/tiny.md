@@ -15,7 +15,7 @@ stays:
 
 ### 5:30pm
 
-Tiny starts getting active around Weiwen, puts her head on her arm, paces around, restless. She knows it's time for the dog run.
+Tiny gets restless around Weiwen, resting her head on her arm and pacing. She knows it's almost time for the run.
 
 ### 2pm
 
