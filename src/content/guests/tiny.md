@@ -27,6 +27,12 @@ Tiny napping on the lap while the human tries to work.
 
 Just came back after leaving Tiny alone at home for 4 hours. House still intact. That's a good girl.
 
+### 10:15am
+
+Alan teaching Tiny the "place" command. Tiny just looking photogenic here.
+
+![Tiny sitting on her bed](./tiny/tiny-place-command.jpg)
+
 ### 8:10am
 
 Negotiation begins.
