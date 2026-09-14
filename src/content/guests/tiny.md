@@ -13,6 +13,10 @@ stays:
 
 ## 14 Sep
 
+### 5:30pm
+
+Tiny starts getting active around Weiwen, puts her head on her arm, paces around, restless. She knows it's time for the dog run.
+
 ### 2pm
 
 Tiny napping on the lap while the human tries to work.
