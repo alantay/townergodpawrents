@@ -351,21 +351,28 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             .slice(0, cap)
             .forEach((e) => raw.push({ time: e.time, text: e.text, who: d.name, id: d.id }))
         );
-        // The home teaser is one diary page rather than a grid of individual
-        // notes. Space and a quiet divider separate moments, so the page does
-        // not repeat the same card outline for every update.
-        var entries = raw
+        var cards = raw
           .map((e, i) => {
-            var byline = pair ? " · " + esc(e.who) : "";
+            var sk = skin(i);
+            var lone = raw.length % 2 === 1 && i === raw.length - 1 ? " [grid-column:1/-1]" : "";
             return (
               '<a href="/guests/' +
               esc(e.id) +
-              '" class="block py-[17px] transition-colors duration-200 hover:text-label' +
-              (i ? " border-t border-ink/20" : "") +
+              '" class="block border-[1.5px] border-ink rounded-[24px] p-[17px_19px] transition-transform duration-250' +
+              lone +
+              '" style="background:' +
+              sk.bg +
+              ";color:" +
+              sk.fg +
+              ";transform:rotate(" +
+              tilt(i) +
+              ')">' +
+              '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:' +
+              sk.accent +
               '">' +
-              '<div class="font-semibold text-xs tracking-[0.08em] uppercase text-label">' +
               esc(e.time) +
-              byline +
+              " · " +
+              esc(e.who) +
               "</div>" +
               '<p class="mt-2 text-base leading-relaxed text-pretty">' +
               esc(e.text) +
@@ -418,10 +425,9 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             "</div>"
           : "";
         var cardsHTML = raw.length
-          ? '<section class="mt-5 overflow-hidden rounded-[24px] bg-cream px-5 py-1.5">' +
-            '<div class="pt-[15px] font-serif text-[28px] leading-none">Today\'s notes</div>' +
-            entries +
-            "</section>"
+          ? '<div class="mt-5 grid gap-3.5" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">' +
+            cards +
+            "</div>"
           : "";
         return cardsHTML + moreHTML;
       }
