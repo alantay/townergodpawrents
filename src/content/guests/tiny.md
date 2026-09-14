@@ -11,6 +11,14 @@ stays:
     checkOut: 2026-09-23
 ---
 
+## 14 Sep
+
+### 8am
+
+Tiny eyeing Alan and Weiwen's breakfast.
+
+![Tiny eyeing breakfast](./tiny/tiny-eyeing-breakfast.png)
+
 ## 13 Sep
 
 ### 6pm
