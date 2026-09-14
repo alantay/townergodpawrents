@@ -19,6 +19,10 @@ Tiny napping on the lap while the human tries to work.
 
 ![Tiny napping on lap](./tiny/tiny-lap-nap.png)
 
+### 1:30pm
+
+Just came back after leaving Tiny alone at home for 4 hours. House still intact. That's a good girl.
+
 ### 8:10am
 
 Negotiation begins.
