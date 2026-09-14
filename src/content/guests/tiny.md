@@ -27,7 +27,7 @@ Tiny eyeing Alan and Weiwen's breakfast.
 
 ### 6:30am
 
-Weiwen brought Tiny for a run. In reality, Tiny brought her for a run. She howled the whole way. Burdensome.
+Weiwen brought Tiny for a run. In reality, Tiny brought her for a run. She howled halfway through. Hopefully no neighbours were woken. Burdensome.
 
 ## 13 Sep
 
