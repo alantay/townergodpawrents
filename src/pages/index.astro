@@ -3,6 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Cutout from "../components/Cutout.astro";
 import { getCollection } from "astro:content";
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import {
   parseDiary,
   pastGuests,
@@ -11,6 +13,27 @@ import {
   dateStr,
   todaySGT,
 } from "../lib/guests";
+
+// Diary photos are referenced from inside the markdown body, so they never
+// pass through Astro's markdown image pipeline on their own — glob the
+// folder to optimize them anyway. Mirrors the same helper in
+// src/pages/guests/[id].astro; the homepage teaser needs the same photos
+// pre-resolved to plain URLs, since the card markup is built client-side.
+const diaryImages = import.meta.glob<{ default: ImageMetadata }>(
+  "../content/guests/**/*.{jpeg,jpg,png,webp,avif}",
+  { eager: true },
+);
+
+function resolveDiaryPhoto(src: string, guestId: string, when: string): ImageMetadata {
+  const file = src.split("/").pop()!;
+  const key = Object.keys(diaryImages).find((k) => k.endsWith(`/${file}`));
+  if (!key) {
+    throw new Error(
+      `[home] ${guestId}, ${when}: no image "${file}" in src/content/guests/ (written as "${src}")`,
+    );
+  }
+  return diaryImages[key].default;
+}
 
 const entries = await getCollection("guests");
 
@@ -37,18 +60,36 @@ const guests = entries.map((e) => {
 // Asia/Singapore timezone at load time — see the inline script below.
 // Cut-outs aren't included here; they're pre-optimized at build time into the
 // hidden #photo-bank and the client just re-parents the <img> nodes it needs,
-// so no image processing has to happen in the browser. Diary prints are
-// dropped too: they only ever show on the guest's page, and a text-only entry
-// is all the teaser cards need. A per-day photoCount survives instead — the
-// teaser never shows a print, but it does need to say how many are waiting.
-const guestsForClient = guests.map(({ photo, days, ...rest }) => ({
-  ...rest,
-  days: days.map((d) => ({
-    iso: d.iso,
-    photoCount: d.entries.filter((e) => e.photo).length,
-    entries: d.entries.map(({ photo: _photo, ...e }) => e),
+// so no image processing has to happen in the browser. Diary prints ARE
+// included now (as plain resolved URLs, since the client builds the card
+// markup itself) — the teaser shows today's whole day, photos and all.
+const guestsForClient = await Promise.all(
+  guests.map(async ({ photo, days, ...rest }) => ({
+    ...rest,
+    days: await Promise.all(
+      days.map(async (d) => ({
+        iso: d.iso,
+        entries: await Promise.all(
+          d.entries.map(async (e) => {
+            if (!e.photo) return { time: e.time, text: e.text };
+            const meta = resolveDiaryPhoto(e.photo.src, rest.id, `${d.label} ${e.time}`);
+            const img = await getImage({ src: meta, width: Math.min(meta.width, 1160) });
+            return {
+              time: e.time,
+              text: e.text,
+              photo: {
+                src: img.src,
+                width: img.attributes.width,
+                height: img.attributes.height,
+                alt: e.photo.alt,
+              },
+            };
+          }),
+        ),
+      })),
+    ),
   })),
-}));
+);
 const guestsJson = JSON.stringify(guestsForClient).replace(/</g, "\\u003c");
 
 const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
@@ -151,7 +192,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       // What the guest did on a given day — the homepage only ever cares
       // about today, however long the stay runs.
       function dayOn(g, todayISO) {
-        return g.days.filter((d) => d.iso === todayISO)[0] || { entries: [], photoCount: 0 };
+        return g.days.filter((d) => d.iso === todayISO)[0] || { entries: [] };
       }
 
       function pickToday(guests, todayISO) {
@@ -185,14 +226,14 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         return fmtDay(s.checkIn) + "–" + fmtDay(s.checkOut);
       }
 
-      // Lime is reserved for status badges (Here Today, tags) elsewhere on
-      // the page, so this homepage teaser skips the lime skin lib/guests.ts
-      // uses for the full diary — three lime patches on one view read as
-      // clutter rather than a signal. Cream repeats instead.
+      // A full lime card would fight the "Here today" badge, so this
+      // rotation shades lime down into an olive instead of swapping in an
+      // unrelated hue — still the full diary's whacky 4-colour, tilted-card
+      // energy, but built entirely from tones already in the palette.
       var SKINS = [
         { bg: "#F7F2E7", fg: "#1E2019", accent: "#4C6B3C" },
         { bg: "#2F4A3B", fg: "#F7F2E7", accent: "#D8F24E" },
-        { bg: "#F7F2E7", fg: "#1E2019", accent: "#4C6B3C" },
+        { bg: "#8E9E39", fg: "#1E2019", accent: "#2F4A3B" },
         { bg: "#1E2019", fg: "#F3F1E9", accent: "#D8F24E" },
       ];
       function skin(i) {
@@ -200,6 +241,14 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       }
       function tilt(i) {
         return i % 2 === 0 ? "-1deg" : "1deg";
+      }
+      var PRINT_MAX_HEIGHT = 420;
+      var PRINT_MAT = 7;
+      function printWidth(w, h) {
+        return Math.round(PRINT_MAX_HEIGHT * (w / h)) + PRINT_MAT * 2;
+      }
+      function printTilt(i) {
+        return i % 2 === 0 ? "1.5deg" : "-1.5deg";
       }
       var GROUP_WORDS = { 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six" };
       function groupWord(n) {
@@ -338,32 +387,54 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
 
       // Everything here is scoped to TODAY, not to the whole stay: on day six
       // of a ten-day visit the page still answers "what happened today", and
-      // every label below stays literally true.
+      // every label below stays literally true. Every entry from today shows
+      // — no cap — stacked single column so a tall photo card never sits
+      // next to a short text-only one and leaves ragged whitespace.
       function entryCardsHTML(live, today) {
         var pair = live.length > 1;
-        var cap = pair ? 1 : 3;
         var raw = [];
         live.forEach((d) =>
-          // Photo-only entries are skipped here — the teaser is text, and a
-          // wordless card would just be a timestamp floating on a colour.
-          dayOn(d, today)
-            .entries.filter((e) => e.text)
-            .slice(0, cap)
-            .forEach((e) => raw.push({ time: e.time, text: e.text, who: d.name, id: d.id }))
+          dayOn(d, today).entries.forEach((e) =>
+            raw.push({ time: e.time, text: e.text, photo: e.photo, who: d.name, id: d.id })
+          )
         );
         var cards = raw
           .map((e, i) => {
             var sk = skin(i);
             var darkSkin = sk.bg === "#2F4A3B" || sk.bg === "#1E2019";
-            var lone = raw.length % 2 === 1 && i === raw.length - 1 ? " [grid-column:1/-1]" : "";
+            var photoHTML = "";
+            if (e.photo) {
+              var w = printWidth(e.photo.width, e.photo.height);
+              photoHTML =
+                '<div class="mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px]" style="width:min(100%,' +
+                w +
+                "px);transform:rotate(" +
+                printTilt(i) +
+                ')">' +
+                '<img src="' +
+                esc(e.photo.src) +
+                '" alt="' +
+                esc(e.photo.alt || e.who + ", " + e.time) +
+                '" width="' +
+                e.photo.width +
+                '" height="' +
+                e.photo.height +
+                '" loading="lazy" decoding="async" class="block h-auto w-full rounded-[10px]">' +
+                "</div>";
+            }
+            var textHTML = e.text
+              ? '<p class="' +
+                (e.photo ? "mt-4" : "mt-2") +
+                ' text-base leading-relaxed text-pretty">' +
+                esc(e.text) +
+                "</p>"
+              : "";
             return (
               '<a href="/guests/' +
               esc(e.id) +
               '" class="block card-keyline' +
               (darkSkin ? " card-keyline--dark" : "") +
-              ' rounded-[24px] p-[17px_19px] transition-transform duration-250' +
-              lone +
-              '" style="background:' +
+              ' rounded-[24px] p-[17px_19px] transition-transform duration-250" style="background:' +
               sk.bg +
               ";color:" +
               sk.fg +
@@ -377,39 +448,25 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               " · " +
               esc(e.who) +
               "</div>" +
-              '<p class="mt-2 text-base leading-relaxed text-pretty">' +
-              esc(e.text) +
-              "</p></a>"
+              photoHTML +
+              textHTML +
+              "</a>"
             );
           })
           .join("");
-        // Count against what the teaser actually shows, not the cap: a day
-        // that so far is only photos shows no cards at all, and still has a
-        // diary page worth linking to.
-        var shown = {};
-        raw.forEach((e) => (shown[e.id] = (shown[e.id] || 0) + 1));
 
-        // What the link offers depends on what's actually left over: writing
-        // the teaser didn't fit, photos it never shows, or both. Returns ""
-        // when the teaser has already shown the whole day.
-        function moreLabel(d) {
-          var day = dayOn(d, today);
-          var unread = day.entries.filter((e) => e.text).length > (shown[d.id] || 0);
-          var whose = pair ? esc(d.name) + "&rsquo;s " : "the ";
-          var n = day.photoCount || 0;
-          if (unread) {
-            return (
-              (pair ? "Read " + esc(d.name) + "&rsquo;s full day" : "Read the full day") +
-              (n ? " &middot; " + n + (n === 1 ? " photo" : " photos") : "")
-            );
-          }
-          if (n === 1) return "See " + whose + "photo";
-          if (n > 1) return "See " + whose + n + " photos";
-          return "";
+        // The teaser always shows the whole of today now, so the only thing
+        // worth linking to from here is an earlier day of the same stay —
+        // otherwise a guest six days in with nothing written yet today gets
+        // no way back to what came before.
+        function earlierLabel(d) {
+          var hasEarlier = d.days.some((day) => day.iso < today && day.entries.length > 0);
+          if (!hasEarlier) return "";
+          return pair ? "Read " + esc(d.name) + "&rsquo;s earlier days" : "Read earlier days";
         }
 
         var more = live
-          .map((d) => ({ id: d.id, label: moreLabel(d) }))
+          .map((d) => ({ id: d.id, label: earlierLabel(d) }))
           .filter((m) => m.label);
         var moreHTML = more.length
           ? '<div class="' +
@@ -427,11 +484,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               .join("") +
             "</div>"
           : "";
-        var cardsHTML = raw.length
-          ? '<div class="mt-5 grid gap-3.5" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">' +
-            cards +
-            "</div>"
-          : "";
+        var cardsHTML = raw.length ? '<div class="mt-5 grid gap-3.5">' + cards + "</div>" : "";
         return cardsHTML + moreHTML;
       }
 
