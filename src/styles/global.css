@@ -11,6 +11,10 @@
   --color-lime-soft: #e9f7ae;
   --color-muted: #4a4b41;
   --color-label: #55564a;
+  --color-card-line: #40372d;
+  --color-line: #a99b7f;
+  --color-line-soft: #e4dabd;
+  --color-line-soft-dark: #445a3b;
 }
 
 html,
@@ -27,6 +31,25 @@ a {
 
 a:hover {
   color: #4c6b3c;
+}
+
+/* The small cards share a near-invisible paper-toned edge — a hairline, not
+   a ruled line — so the frame stays present without competing with the
+   copy. The dark diary skins get a matching low-contrast moss tone. */
+.card-keyline {
+  border: 1px solid var(--color-line-soft);
+}
+
+.card-keyline--dark {
+  border-color: var(--color-line-soft-dark);
+}
+
+/* Lifts a card off the paper with shadow instead of a hard line — used on
+   the actual diary/entry cards, not the nested photo-mat border. */
+.card-lift {
+  box-shadow:
+    0 1px 2px rgba(64, 55, 45, 0.05),
+    0 10px 22px -14px rgba(64, 55, 45, 0.32);
 }
 
 @keyframes pop {

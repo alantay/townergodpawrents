@@ -64,7 +64,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       Enable JavaScript to see who's lepak-ing on the sofa today
       {hasPastGuests && (
         <>
-          {" "}or <a href="/guests" class="border-b-[1.5px] border-ink">browse past guests</a>
+          {" "}or <a href="/guests" class="border-b-[1.5px] border-line">browse past guests</a>
         </>
       )}.
     </p>
@@ -89,11 +89,11 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
   </div>
 
   <section id="past-guests-section" hidden>
-    <div class="mt-11 border-t-[1.5px] border-ink pt-[18px] flex items-baseline justify-between gap-3">
+    <div class="mt-11 border-t-[1.5px] border-line pt-[18px] flex items-baseline justify-between gap-3">
       <div class="font-serif text-[32px] leading-none">Past guests</div>
       <a
         href="/guests"
-        class="font-semibold text-[13px] border-[1.5px] border-ink px-[13px] py-1.5 rounded-full transition-colors duration-200 hover:bg-lime"
+        class="font-semibold text-[13px] border-[1.5px] border-line px-[13px] py-1.5 rounded-full transition-colors duration-200 hover:bg-lime"
       >
         See all
       </a>
@@ -102,7 +102,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
     <div id="past-preview-app"></div>
   </section>
 
-  <div class="mt-11 border-t-[1.5px] border-ink pt-[18px] text-base">
+  <div class="mt-11 border-t-[1.5px] border-line pt-[18px] text-base">
     Know a dog who needs a sofa? You know where to find us.
   </div>
   <div class="mt-2.5 text-xs tracking-[0.1em] uppercase text-label">
@@ -318,7 +318,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           html +=
             '<a href="/guests/' +
             esc(lastGuest.id) +
-            '" class="mt-[18px] flex items-center gap-3.5 bg-cream border-[1.5px] border-ink rounded-[24px] p-[13px_15px] -rotate-1 transition-transform duration-250 hover:rotate-0 hover:scale-[1.02]">' +
+            '" class="mt-[18px] flex items-center gap-3.5 bg-cream card-keyline card-lift rounded-[24px] p-[13px_15px] -rotate-1 transition-transform duration-250 hover:rotate-0 hover:scale-[1.02]">' +
             '<div id="last-seen-photo" class="w-16 h-16 rounded-[17px] overflow-hidden flex-none" style="background:' +
             lastGuest.bgColor +
             '"></div>' +
@@ -354,11 +354,14 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var cards = raw
           .map((e, i) => {
             var sk = skin(i);
+            var darkSkin = sk.bg === "#2F4A3B" || sk.bg === "#1E2019";
             var lone = raw.length % 2 === 1 && i === raw.length - 1 ? " [grid-column:1/-1]" : "";
             return (
               '<a href="/guests/' +
               esc(e.id) +
-              '" class="block border-[1.5px] border-ink rounded-[24px] p-[17px_19px] transition-transform duration-250' +
+              '" class="block card-keyline card-lift' +
+              (darkSkin ? " card-keyline--dark" : "") +
+              ' rounded-[24px] p-[17px_19px] transition-transform duration-250' +
               lone +
               '" style="background:' +
               sk.bg +
@@ -488,7 +491,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         if (preview) {
           var note = document.createElement("div");
           note.className =
-            "mb-3.5 text-xs font-semibold tracking-[0.08em] uppercase border-[1.5px] border-dashed border-ink rounded-full px-[13px] py-2 inline-block";
+            "mb-3.5 text-xs font-semibold tracking-[0.08em] uppercase border-[1.5px] border-dashed border-line rounded-full px-[13px] py-2 inline-block";
           note.textContent = "Preview · pretending it's " + fmtDay(preview);
           appEl.prepend(note);
         }
