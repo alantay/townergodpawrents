@@ -13,6 +13,10 @@ stays:
 
 ## 15 Sep
 
+### 10:50am
+
+She pooped. And she played bow and barked at me after she pooped. Leaving me confused what she wants.
+
 ### 9am
 
 Couldn't find Tiny. She camouflaged with the gate.
