@@ -244,15 +244,29 @@ export function warnOnOverlaps(guestId: string, stays: Stay[]): void {
 
 // ---- presentation ----
 
-// Rotating card palette + tilt, matching the design system.
-export const SKINS = [
-  { bg: "#F7F2E7", fg: "#1E2019", accent: "#4C6B3C" },
-  { bg: "#2F4A3B", fg: "#F7F2E7", accent: "#D8F24E" },
-  { bg: "#D8F24E", fg: "#1E2019", accent: "#4C6B14" },
-  { bg: "#1E2019", fg: "#F3F1E9", accent: "#D8F24E" },
-] as const;
+/** Mixes two six-digit hex colours. Kept here so every diary can borrow a
+ * whisper of its guest's hero colour without turning into a rainbow feed. */
+function mixHex(a: string, b: string, amount: number): string {
+  const channels = (hex: string) => hex.replace("#", "").match(/.{2}/g)!.map((v) => parseInt(v, 16));
+  const [ar, ag, ab] = channels(a);
+  const [br, bg, bb] = channels(b);
+  const mix = (x: number, y: number) => Math.round(x + (y - x) * amount).toString(16).padStart(2, "0");
+  return `#${mix(ar, br)}${mix(ag, bg)}${mix(ab, bb)}`;
+}
 
-export const skin = (i: number) => SKINS[i % SKINS.length];
+/** Each diary cycles through the guest's own avatar colour, from a pale wash
+ * to deep evening shades. It keeps the scrapbook energy without borrowing
+ * another dog's colour or the site's live-status lime. */
+export function diarySkin(base: string, i: number) {
+  const skins = [
+    { bg: mixHex(base, "#F7F2E7", 0.72), fg: "#1E2019", accent: mixHex(base, "#1E2019", 0.35) },
+    { bg: base, fg: "#F7F2E7", accent: mixHex(base, "#F7F2E7", 0.55) },
+    { bg: mixHex(base, "#1E2019", 0.38), fg: "#F7F2E7", accent: mixHex(base, "#F7F2E7", 0.7) },
+    { bg: mixHex(base, "#1E2019", 0.72), fg: "#F3F1E9", accent: mixHex(base, "#F7F2E7", 0.7) },
+  ];
+  return skins[i % skins.length];
+}
+
 export const tilt = (i: number) => (i % 2 === 0 ? "-1deg" : "1deg");
 
 // A diary photo leans against its card's tilt, so it reads as a print laid

@@ -122,9 +122,9 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
     <div class="flex-1 min-w-[210px]">
       <div class="font-serif text-[36px] leading-none">Alan &amp; Weiwen</div>
       <p class="mt-[9px] text-base leading-relaxed text-pretty">
-        Two humans in Towner with a sunny corner sofa and no dog of our own. Friends and
-        neighbours drop theirs off, and we keep them fed, walked and thoroughly spoiled.
-        This page is just so you can see who's lepak-ing here today.
+      Two humans in Towner with a sunny corner sofa and no dog of our own. Friends and
+        neighbours leave their dogs with us for a bit, and this tiny page keeps tabs on
+        who's lepak-ing here today.
       </p>
     </div>
   </div>
@@ -143,12 +143,12 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
     <div id="past-preview-app"></div>
   </section>
 
-  <div class="mt-11 border-t-[1.5px] border-line pt-[18px] text-base">
-    Know a dog who needs a sofa? You know where to find us.
-  </div>
-  <div class="mt-2.5 text-xs tracking-[0.1em] uppercase text-label">
+  <footer class="mt-12 border-t-[1.5px] border-line pt-[18px]">
+    <div class="font-serif italic text-[21px] leading-none">No dog of our own, just everyone else's.</div>
+    <div class="mt-2.5 text-xs tracking-[0.1em] uppercase text-label">
     Towner &middot; No dog of our own, just everyone else's
-  </div>
+    </div>
+  </footer>
 
   <!-- Hidden bank of pre-optimized cut-outs, one per guest. The client script
        re-parents (moves, doesn't clone) the node it needs into whichever

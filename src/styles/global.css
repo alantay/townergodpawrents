@@ -21,6 +21,31 @@ body {
   margin: 0;
   background: var(--color-paper);
   -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+.page-shell {
+  position: relative;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 20;
+  left: 1rem;
+  top: 1rem;
+  transform: translateY(-160%);
+  padding: 0.65rem 0.9rem;
+  border-radius: 0.5rem;
+  background: var(--color-lime);
+  color: var(--color-ink);
+  font-weight: 600;
+  transition: transform 180ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
 }
 
 a {
@@ -32,6 +57,11 @@ a:hover {
   color: #4c6b3c;
 }
 
+a:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
 /* The small cards share an inked-paper edge, same weight as the site's
    other keylines but in a warmer, lower-contrast tone. The dark diary
    skins use a matching low-contrast moss tone. */
@@ -41,6 +71,84 @@ a:hover {
 
 .card-keyline--dark {
   border-color: var(--color-card-line-dark);
+}
+
+.dog-card {
+  box-shadow: 0 10px 20px rgb(92 76 41 / 0.1);
+}
+
+.dog-card:hover {
+  box-shadow: 0 16px 26px rgb(70 92 56 / 0.17);
+}
+
+.archive-date,
+.diary-stay {
+  font-variant-numeric: tabular-nums;
+}
+
+.archive-count {
+  width: fit-content;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.guest-cutout {
+  position: relative;
+  z-index: 1;
+}
+
+.diary-timeline {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.diary-timeline::before {
+  content: "";
+  position: absolute;
+  top: 1.05rem;
+  bottom: 1.25rem;
+  left: 0.24rem;
+  width: 1px;
+  background: var(--color-line);
+}
+
+.diary-day-heading {
+  position: relative;
+}
+
+.diary-day-heading::before {
+  content: "";
+  position: absolute;
+  left: -1.12rem;
+  top: 0.3rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 2px solid var(--color-paper);
+  border-radius: 999px;
+  background: var(--color-ink);
+}
+
+.diary-entry {
+  position: relative;
+  transform: rotate(var(--entry-tilt));
+  box-shadow: 0 9px 17px rgb(92 76 41 / 0.08);
+}
+
+.diary-dot {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+}
+
+.diary-print {
+  box-shadow: 0 7px 14px rgb(53 48 35 / 0.16);
+}
+
+@media (min-width: 640px) {
+  .diary-entry:nth-child(even) {
+    margin-left: 1.5rem;
+  }
 }
 
 @keyframes pop {
@@ -91,6 +199,13 @@ a:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
   .animate-pop,
   .animate-drift,
   .animate-drift-slow,

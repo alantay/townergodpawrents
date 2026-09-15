@@ -13,7 +13,7 @@ import {
   latestStay,
   warnOnOverlaps,
   dateStr,
-  skin,
+  diarySkin,
   tilt,
   printTilt,
   printWidth,
@@ -62,6 +62,7 @@ const isLive = showLive && here !== undefined;
 const shownStay = here ?? latestStay({ stays });
 
 const days = parseDiary(entry.body ?? "", stays, entry.id);
+const entryCount = days.reduce((total, day) => total + day.entries.length, 0);
 
 // The palette rotates through the whole diary rather than restarting each
 // day, so a long stay doesn't come out striped.
@@ -75,8 +76,8 @@ let skinIndex = 0;
     ← Back to today
   </a>
 
-  <div
-    class="mt-4 relative rounded-[32px] pt-[26px] px-6 pb-[18px] overflow-hidden text-cream"
+  <header
+    class="guest-hero mt-4 relative rounded-[32px] pt-[26px] px-6 pb-[18px] overflow-hidden text-cream"
     style={`background:${bgColor}`}
   >
     {showLive && (
@@ -109,69 +110,78 @@ let skinIndex = 0;
       )}
     </div>
 
-    <div class="-mx-2 mt-[18px]" style="height:280px">
+    <div class="guest-cutout -mx-2 mt-[18px]" style="height:280px">
       <Cutout photo={photo} name={name} />
     </div>
-  </div>
+  </header>
 
-  <div class="mt-11 border-t-[1.5px] border-line pt-[18px]">
-    <div class="font-serif text-[32px] leading-none">The full diary</div>
+  <div class="mt-12 border-t-[1.5px] border-line pt-[18px] flex items-end justify-between gap-4">
+    <div>
+      <div class="font-serif text-[32px] leading-none">The full diary</div>
+      {entryCount > 0 && <p class="mt-1.5 text-sm text-label">{entryCount} little moment{entryCount === 1 ? "" : "s"}, kept for the record.</p>}
+    </div>
+    <div class="diary-stay text-right text-[11px] font-semibold tracking-[0.08em] uppercase text-label">
+      Latest stay<br />{stayLabel(shownStay)}
+    </div>
   </div>
 
   {days.length === 0 ? (
     <p class="mt-3.5 text-sm text-label">No diary entries yet — check back once the visit gets going.</p>
   ) : (
-    days.map((day) => (
-      <section class="mt-7 first:mt-5">
-        <div class="flex items-baseline gap-3">
-          <div class="font-serif text-[22px] leading-none flex-none">{day.label}</div>
-          <div class="h-px flex-1 bg-ink/20"></div>
-        </div>
+    <div class="diary-timeline">
+      {days.map((day) => (
+        <section class="diary-day mt-8 first:mt-5">
+          <div class="diary-day-heading flex items-baseline gap-3">
+            <div class="diary-date font-serif text-[24px] leading-none flex-none">{day.label}</div>
+            <div class="h-px flex-1 bg-ink/20"></div>
+          </div>
 
-        <div class="mt-3.5 grid gap-3.5">
-          {day.entries.map((e) => {
-            const i = skinIndex++;
-            const sk = skin(i);
-            const darkSkin = sk.bg === "#2F4A3B" || sk.bg === "#1E2019";
-            const img = e.photo
-              ? resolveDiaryPhoto(e.photo.src, entry.id, `${day.label} ${e.time}`)
-              : undefined;
-            return (
-              <div
-                class:list={{ "card-keyline": true, "card-keyline--dark": darkSkin, "rounded-[24px]": true, "p-[17px_19px]": true }}
-                style={`background:${sk.bg};color:${sk.fg};transform:rotate(${tilt(i)})`}
-              >
-                <div class="font-semibold text-xs tracking-[0.08em] uppercase" style={`color:${sk.accent}`}>
-                  {e.time}
-                </div>
-
-                {img && (
-                  /* Cream mat + ink hairline on every skin: it disappears into the
-                     cream cards and reads as a print border on the dark ones. */
-                  <div
-                    class="mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px]"
-                    style={`width:min(100%,${printWidth(img.width, img.height)}px);transform:rotate(${printTilt(i)})`}
-                  >
-                    <Image
-                      src={img}
-                      alt={e.photo!.alt || `${name}, ${day.label} ${e.time}`}
-                      width={Math.min(img.width, 1160)}
-                      loading="lazy"
-                      decoding="async"
-                      class="block h-auto w-full rounded-[10px]"
-                    />
+          <div class="mt-4 grid gap-5">
+            {day.entries.map((e) => {
+              const i = skinIndex++;
+              const sk = diarySkin(bgColor, i);
+              const darkSkin = i % 4 > 1;
+              const img = e.photo
+                ? resolveDiaryPhoto(e.photo.src, entry.id, `${day.label} ${e.time}`)
+                : undefined;
+              return (
+                <article
+                  class:list={{ "diary-entry": true, "card-keyline": true, "card-keyline--dark": darkSkin, "rounded-[24px]": true, "p-[18px_19px_20px]": true }}
+                  style={`background:${sk.bg};color:${sk.fg};--entry-tilt:${tilt(i)}`}
+                >
+                  <div class="flex items-center gap-2">
+                    <span class="diary-dot" style={`background:${sk.accent}`}></span>
+                    <div class="font-semibold text-xs tracking-[0.08em] uppercase" style={`color:${sk.accent}`}>
+                      {e.time}
+                    </div>
                   </div>
-                )}
 
-                {e.text && (
-                  <p class={`${img ? "mt-4" : "mt-2"} text-base leading-relaxed text-pretty`}>{e.text}</p>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
-    ))
+                  {img && (
+                    <div
+                      class="diary-print mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px]"
+                      style={`width:min(100%,${printWidth(img.width, img.height)}px);transform:rotate(${printTilt(i)})`}
+                    >
+                      <Image
+                        src={img}
+                        alt={e.photo!.alt || `${name}, ${day.label} ${e.time}`}
+                        width={Math.min(img.width, 1160)}
+                        loading="lazy"
+                        decoding="async"
+                        class="block h-auto w-full rounded-[10px]"
+                      />
+                    </div>
+                  )}
+
+                  {e.text && (
+                    <p class={`${img ? "mt-4" : "mt-2"} text-base leading-relaxed text-pretty max-w-[58ch]`}>{e.text}</p>
+                  )}
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+    </div>
   )}
 
   {showLive && (
@@ -194,4 +204,7 @@ let skinIndex = 0;
       })();
     </script>
   )}
+  <footer class="mt-12 border-t-[1.5px] border-line pt-[18px] text-xs tracking-[0.1em] uppercase text-label">
+    Towner &middot; No dog of our own, just everyone else's
+  </footer>
 </Layout>
