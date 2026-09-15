@@ -144,7 +144,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
   </section>
 
   <footer class="entrance entrance-delay-3 mt-12 border-t-[1.5px] border-line pt-[18px]">
-    <div class="font-serif italic text-[21px] leading-none">No dog of our own, just everyone else's.</div>
+    <div class="font-serif italic text-[21px] leading-none">Know a dog who needs a sofa? You know where to find us.</div>
     <div class="mt-2.5 text-xs tracking-[0.1em] uppercase text-label">
     Towner &middot; No dog of our own, just everyone else's
     </div>
@@ -451,13 +451,13 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               esc(e.id) +
               '" class="block card-keyline' +
               (darkSkin ? " card-keyline--dark" : "") +
-              ' rounded-[24px] p-[17px_19px] transition-transform duration-250" style="background:' +
+              ' diary-entry-card rounded-[24px] p-[17px_19px]" style="background:' +
               sk.bg +
               ";color:" +
               sk.fg +
-              ";transform:rotate(" +
+              ";--card-tilt:" +
               tilt(i) +
-              ')">' +
+              '">' +
               '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:' +
               sk.accent +
               '">' +
@@ -594,7 +594,13 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         }
       } catch (err) {
         console.error("[towner-godpawrents] homepage render failed", err);
-        document.getElementById("home-app").hidden = false;
+        var appEl = document.getElementById("home-app");
+        appEl.innerHTML =
+          '<div role="status" class="rounded-[24px] bg-cream card-keyline p-5 text-base leading-relaxed">' +
+          "Couldn't load today's diary just now. " +
+          '<a href="/guests" class="font-semibold border-b-[1.5px] border-line hover:border-ink">Browse past guests</a>.' +
+          "</div>";
+        appEl.hidden = false;
       }
     })();
   </script>
