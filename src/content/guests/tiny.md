@@ -11,6 +11,12 @@ stays:
     checkOut: 2026-09-23
 ---
 
+## 15 Sep
+
+### 7:30am
+
+Back from an hour-long walk. Tiny didn't poop. Maybe she needs a run to get things moving.
+
 ## 14 Sep
 
 ### 10:15pm
