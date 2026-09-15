@@ -13,6 +13,12 @@ stays:
 
 ## 15 Sep
 
+### 10:30pm
+
+One of Tiny's many manja moments ❤️
+
+![Tiny sprawled belly-up on the sofa](./tiny/tiny-manja-moment.jpg)
+
 ### 9:15pm
 
 Tiny came to watch Alan's climbing session, then pulled Weiwen straight back to the wall when they tried to leave.
