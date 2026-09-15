@@ -13,6 +13,10 @@ stays:
 
 ## 15 Sep
 
+### 9am
+
+Couldn't find Tiny. She camouflaged with the gate.
+
 ### 7:30am
 
 Back from an hour-long walk. Tiny didn't poop. Maybe she needs a run to get things moving.
