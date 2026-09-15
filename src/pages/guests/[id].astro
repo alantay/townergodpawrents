@@ -72,12 +72,12 @@ let skinIndex = 0;
 <Layout title={`${name} · The Towner Godpawrents`}>
   <Nav />
 
-  <a href="/" class="mt-8 inline-block text-sm font-semibold text-label transition-colors duration-200 hover:text-ink">
+  <a href="/" class="entrance entrance-delay-1 mt-8 inline-block text-sm font-semibold text-label transition-colors duration-200 hover:text-ink">
     ← Back to today
   </a>
 
   <header
-    class="guest-hero mt-4 relative rounded-[32px] pt-[26px] px-6 pb-[18px] overflow-hidden text-cream"
+    class="guest-hero entrance-hero entrance-delay-1 mt-4 relative rounded-[32px] pt-[26px] px-6 pb-[18px] overflow-hidden text-cream"
     style={`background:${bgColor}`}
   >
     {showLive && (
@@ -115,7 +115,7 @@ let skinIndex = 0;
     </div>
   </header>
 
-  <div class="mt-12 border-t-[1.5px] border-line pt-[18px] flex items-end justify-between gap-4">
+  <div class="entrance entrance-delay-2 mt-12 border-t-[1.5px] border-line pt-[18px] flex items-end justify-between gap-4">
     <div>
       <div class="font-serif text-[32px] leading-none">The full diary</div>
       {entryCount > 0 && <p class="mt-1.5 text-sm text-label">{entryCount} little moment{entryCount === 1 ? "" : "s"}, kept for the record.</p>}
@@ -145,10 +145,11 @@ let skinIndex = 0;
                 ? resolveDiaryPhoto(e.photo.src, entry.id, `${day.label} ${e.time}`)
                 : undefined;
               return (
-                <article
-                  class:list={{ "diary-entry": true, "card-keyline": true, "card-keyline--dark": darkSkin, "rounded-[24px]": true, "p-[18px_19px_20px]": true }}
-                  style={`background:${sk.bg};color:${sk.fg};--entry-tilt:${tilt(i)}`}
-                >
+                <div class="reveal-card">
+                  <article
+                    class:list={{ "diary-entry": true, "card-keyline": true, "card-keyline--dark": darkSkin, "rounded-[24px]": true, "p-[18px_19px_20px]": true }}
+                    style={`background:${sk.bg};color:${sk.fg};--entry-tilt:${tilt(i)}`}
+                  >
                   <div class="flex items-center gap-2">
                     <span class="diary-dot" style={`background:${sk.accent}`}></span>
                     <div class="font-semibold text-xs tracking-[0.08em] uppercase" style={`color:${sk.accent}`}>
@@ -175,7 +176,8 @@ let skinIndex = 0;
                   {e.text && (
                     <p class={`${img ? "mt-4" : "mt-2"} text-base leading-relaxed text-pretty max-w-[58ch]`}>{e.text}</p>
                   )}
-                </article>
+                  </article>
+                </div>
               );
             })}
           </div>
@@ -204,7 +206,7 @@ let skinIndex = 0;
       })();
     </script>
   )}
-  <footer class="mt-12 border-t-[1.5px] border-line pt-[18px] text-xs tracking-[0.1em] uppercase text-label">
+  <footer class="entrance entrance-delay-3 mt-12 border-t-[1.5px] border-line pt-[18px] text-xs tracking-[0.1em] uppercase text-label">
     Towner &middot; No dog of our own, just everyone else's
   </footer>
 </Layout>

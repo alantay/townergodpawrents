@@ -13,6 +13,12 @@ stays:
 
 ## 15 Sep
 
+### 5:35pm
+
+Tiny's way of saying it's time for dog run. No more working for human.
+
+![Tiny waiting by the laptop to go for her dog run](./tiny/tiny-time-for-dog-run.png)
+
 ### 3:15pm
 
 Cow spotted grazing in the HDB garden. No wait, that's Tiny.

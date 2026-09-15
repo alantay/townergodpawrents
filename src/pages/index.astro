@@ -111,7 +111,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
     </p>
   </noscript>
 
-  <div class="mt-10 flex gap-4 items-start flex-wrap">
+  <div class="entrance entrance-delay-2 mt-10 flex gap-4 items-start flex-wrap">
     <div class="w-[134px] h-[154px] rounded-[22px] overflow-hidden flex-none -rotate-[1.5deg] bg-cream card-keyline">
       <img
         src="/images/alan-weiwen-portrait.png"
@@ -143,7 +143,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
     <div id="past-preview-app"></div>
   </section>
 
-  <footer class="mt-12 border-t-[1.5px] border-line pt-[18px]">
+  <footer class="entrance entrance-delay-3 mt-12 border-t-[1.5px] border-line pt-[18px]">
     <div class="font-serif italic text-[21px] leading-none">No dog of our own, just everyone else's.</div>
     <div class="mt-2.5 text-xs tracking-[0.1em] uppercase text-label">
     Towner &middot; No dog of our own, just everyone else's
@@ -582,7 +582,9 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         if (past.length > 0) {
           previewEl.innerHTML = pastPreviewHTML(past);
           past.forEach((g, i) => movePhoto(g.id, document.getElementById("past-photo-" + i)));
-          document.getElementById("past-guests-section").hidden = false;
+          var pastSection = document.getElementById("past-guests-section");
+          pastSection.classList.add("entrance", "entrance-delay-3");
+          pastSection.hidden = false;
         }
 
         window.__tgpFitHeadlines();

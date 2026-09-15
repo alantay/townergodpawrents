@@ -162,6 +162,56 @@ a:focus-visible {
   }
 }
 
+/* A short, paper-card entrance gives each page a sense of being put down on
+   the kitchen table. It is deliberately one-shot: the content stays still
+   once it has arrived. */
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes arrive-hero {
+  from {
+    opacity: 0;
+    transform: translateY(12px) rotate(-0.75deg) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0) scale(1);
+  }
+}
+
+.entrance {
+  animation: arrive 520ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.entrance-hero {
+  animation: arrive-hero 620ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.entrance-delay-1 { animation-delay: 90ms; }
+.entrance-delay-2 { animation-delay: 180ms; }
+.entrance-delay-3 { animation-delay: 270ms; }
+
+.js .reveal-card {
+  opacity: 0;
+  transform: translateY(18px) scale(0.985);
+  transition:
+    opacity 520ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js .reveal-card.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
 @keyframes drift {
   0%,
   100% {
@@ -209,8 +259,14 @@ a:focus-visible {
   .animate-pop,
   .animate-drift,
   .animate-drift-slow,
-  .animate-wiggle {
+  .animate-wiggle,
+  .entrance,
+  .entrance-hero,
+  .reveal-card {
     animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 

@@ -27,11 +27,11 @@ const returningGuests = guests.filter((g) => g.stays.length > 1).length;
 <Layout title="Past guests · The Towner Godpawrents">
   <Nav />
 
-  <a href="/" class="mt-8 inline-block text-sm font-semibold text-label transition-colors duration-200 hover:text-ink">
+  <a href="/" class="entrance entrance-delay-1 mt-8 inline-block text-sm font-semibold text-label transition-colors duration-200 hover:text-ink">
     ← Back to today
   </a>
 
-  <header class="mt-4">
+  <header class="entrance entrance-delay-1 mt-4">
     <h1 class="font-serif text-[clamp(40px,11vw,72px)] leading-[0.9] tracking-[-0.02em]">
       Everyone who's stayed
     </h1>
@@ -54,30 +54,34 @@ const returningGuests = guests.filter((g) => g.stays.length > 1).length;
       style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))"
     >
       {guests.map((g, index) => (
-        <a
-          href={`/guests/${g.id}`}
+        <div
           class:list={[
-            "dog-card block rounded-[22px] overflow-hidden transition-all duration-250 hover:rotate-[1.5deg] hover:-translate-y-1 hover:scale-[1.02] active:scale-[0.99]",
+            "reveal-card",
             { "sm:col-span-2": index === 0 && guests.length > 2 },
           ]}
-          style={`background:${g.bgColor}`}
         >
-          <div class:list={["p-[9px_9px_0]", { "h-[178px]": index === 0 && guests.length > 2, "h-[132px]": !(index === 0 && guests.length > 2) }]}>
-            <Cutout photo={g.photo} name={g.name} />
-          </div>
-          <div class="p-[11px_13px_14px] bg-cream">
-            <div class="font-serif text-[22px] leading-none">{g.name}</div>
-            <div class="mt-1 flex items-baseline justify-between gap-2 text-[13px] text-muted">
-              <span>{g.breed}</span>
-              <span class="archive-date">{stayLabel(latestStay(g))}</span>
+          <a
+            href={`/guests/${g.id}`}
+            class="dog-card block rounded-[22px] overflow-hidden transition-all duration-250 hover:rotate-[1.5deg] hover:-translate-y-1 hover:scale-[1.02] active:scale-[0.99]"
+            style={`background:${g.bgColor}`}
+          >
+            <div class:list={["p-[9px_9px_0]", { "h-[178px]": index === 0 && guests.length > 2, "h-[132px]": !(index === 0 && guests.length > 2) }]}>
+              <Cutout photo={g.photo} name={g.name} />
             </div>
-          </div>
-        </a>
+            <div class="p-[11px_13px_14px] bg-cream">
+              <div class="font-serif text-[22px] leading-none">{g.name}</div>
+              <div class="mt-1 flex items-baseline justify-between gap-2 text-[13px] text-muted">
+                <span>{g.breed}</span>
+                <span class="archive-date">{stayLabel(latestStay(g))}</span>
+              </div>
+            </div>
+          </a>
+        </div>
       ))}
     </div>
   )}
 
-  <footer class="mt-12 border-t-[1.5px] border-line pt-[18px] text-xs tracking-[0.1em] uppercase text-label">
+  <footer class="entrance entrance-delay-3 mt-12 border-t-[1.5px] border-line pt-[18px] text-xs tracking-[0.1em] uppercase text-label">
     Towner &middot; No dog of our own, just everyone else's
   </footer>
 </Layout>
