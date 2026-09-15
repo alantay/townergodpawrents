@@ -226,18 +226,35 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         return fmtDay(s.checkIn) + "–" + fmtDay(s.checkOut);
       }
 
-      // A full lime card would fight the "Here today" badge, so this
-      // rotation shades lime down into an olive instead of swapping in an
-      // unrelated hue — still the full diary's whacky 4-colour, tilted-card
-      // energy, but built entirely from tones already in the palette.
-      var SKINS = [
-        { bg: "#F7F2E7", fg: "#1E2019", accent: "#4C6B3C" },
-        { bg: "#2F4A3B", fg: "#F7F2E7", accent: "#D8F24E" },
-        { bg: "#8E9E39", fg: "#1E2019", accent: "#2F4A3B" },
-        { bg: "#1E2019", fg: "#F3F1E9", accent: "#D8F24E" },
-      ];
-      function skin(i) {
-        return SKINS[i % SKINS.length];
+      // Each guest's cards stay inside their own hero colour, cycling light
+      // to dark, rather than jumping hue card to card — ties the diary back
+      // to whoever it's about instead of using a shared whacky rotation.
+      function mix(a, b, t) {
+        a = a.replace("#", "");
+        b = b.replace("#", "");
+        var ar = parseInt(a.substr(0, 2), 16), ag = parseInt(a.substr(2, 2), 16), ab = parseInt(a.substr(4, 2), 16);
+        var br = parseInt(b.substr(0, 2), 16), bg = parseInt(b.substr(2, 2), 16), bb = parseInt(b.substr(4, 2), 16);
+        var r = Math.round(ar + (br - ar) * t), g = Math.round(ag + (bg - ag) * t), bl = Math.round(ab + (bb - ab) * t);
+        return "#" + [r, g, bl].map((v) => v.toString(16).padStart(2, "0")).join("");
+      }
+      function luma(hex) {
+        hex = hex.replace("#", "");
+        var r = parseInt(hex.substr(0, 2), 16), g = parseInt(hex.substr(2, 2), 16), b = parseInt(hex.substr(4, 2), 16);
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+      }
+      function guestSkins(base) {
+        return [
+          { bg: mix(base, "#F7F2E7", 0.72), fg: "#1E2019", accent: mix(base, "#1E2019", 0.35) },
+          { bg: base, fg: "#F7F2E7", accent: mix(base, "#F7F2E7", 0.55) },
+          { bg: mix(base, "#1E2019", 0.38), fg: "#F7F2E7", accent: mix(base, "#F7F2E7", 0.7) },
+          { bg: mix(base, "#1E2019", 0.72), fg: "#F3F1E9", accent: mix(base, "#F7F2E7", 0.7) },
+        ];
+      }
+      var skinIdxByGuest = {};
+      function skin(bgColor, id) {
+        skinIdxByGuest[id] = skinIdxByGuest[id] || 0;
+        var i = skinIdxByGuest[id]++;
+        return guestSkins(bgColor)[i % 4];
       }
       function tilt(i) {
         return i % 2 === 0 ? "-1deg" : "1deg";
@@ -395,13 +412,13 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var raw = [];
         live.forEach((d) =>
           dayOn(d, today).entries.forEach((e) =>
-            raw.push({ time: e.time, text: e.text, photo: e.photo, who: d.name, id: d.id })
+            raw.push({ time: e.time, text: e.text, photo: e.photo, who: d.name, id: d.id, bgColor: d.bgColor })
           )
         );
         var cards = raw
           .map((e, i) => {
-            var sk = skin(i);
-            var darkSkin = sk.bg === "#2F4A3B" || sk.bg === "#1E2019";
+            var sk = skin(e.bgColor, e.id);
+            var darkSkin = luma(sk.bg) < 110;
             var photoHTML = "";
             if (e.photo) {
               var w = printWidth(e.photo.width, e.photo.height);
