@@ -13,6 +13,12 @@ stays:
 
 ## 15 Sep
 
+### 9:15pm
+
+Tiny came to watch Alan's climbing session, then pulled Weiwen straight back to the wall when they tried to leave.
+
+![Tiny watching Alan climb at the bouldering gym](./tiny/tiny-climbing-wall.jpg)
+
 ### 5:35pm
 
 Tiny's way of saying it's time for dog run. No more working for human.
