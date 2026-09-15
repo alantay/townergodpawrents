@@ -13,6 +13,12 @@ stays:
 
 ## 15 Sep
 
+### 3:15pm
+
+Cow spotted grazing in the HDB garden. No wait, that's Tiny.
+
+![Tiny grazing in the HDB garden in her blue raincoat](./tiny/tiny-hdb-garden-grazing.png)
+
 ### 10:50am
 
 Tiny finally pooped, then gave Weiwen a play bow and barked at her. No idea what she was trying to say.
