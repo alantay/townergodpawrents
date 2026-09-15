@@ -15,7 +15,7 @@ stays:
 
 ### 10:50am
 
-Weiwen watched Tiny finally poop, then get play bowed and barked at for her trouble. No idea what Tiny was trying to say.
+Tiny finally pooped, then gave Weiwen a play bow and barked at her. No idea what she was trying to say.
 
 ### 9am
 
