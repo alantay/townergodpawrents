@@ -609,6 +609,15 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
         var node = document.getElementById("photo-" + id);
         if (node && targetEl) targetEl.appendChild(node);
       }
+      // For a dog shown twice on one page (the vacancy "Last seen here" card
+      // and the past guests strip), the second spot gets a copy.
+      function copyPhoto(id, targetEl) {
+        var node = document.getElementById("photo-" + id);
+        if (!node || !targetEl) return;
+        var copy = node.cloneNode(true);
+        copy.removeAttribute("id");
+        targetEl.appendChild(copy);
+      }
 
       try {
         var dataEl = document.getElementById("guests-data");
@@ -621,7 +630,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
         if (result.state === "vacancy") {
           appEl.innerHTML = heroVacancyHTML(result.lastGuest);
           movePhoto("sofa", document.getElementById("vacancy-photo"));
-          if (result.lastGuest) movePhoto(result.lastGuest.id, document.getElementById("last-seen-photo"));
+          if (result.lastGuest) copyPhoto(result.lastGuest.id, document.getElementById("last-seen-photo"));
         } else {
           var hero = heroLiveHTML(result.live, today);
           appEl.innerHTML = hero.html + entryCardsHTML(result.live, today);
