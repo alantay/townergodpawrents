@@ -11,6 +11,12 @@ stays:
     checkOut: 2026-09-23
 ---
 
+## 16 Sep
+
+### 8:25am
+
+Alan and Weiwen headed to work, leaving Tiny to guard the house until lunchtime. Alan will pop back to have lunch with her.
+
 ## 15 Sep
 
 ### 10:30pm
