@@ -2,6 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Cutout from "../components/Cutout.astro";
+import { Image } from "astro:assets";
+import sofaCutout from "../assets/sofa-cutout.png";
 import { getCollection } from "astro:content";
 import { getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
@@ -193,6 +195,9 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
         <Cutout photo={g.photo} name={g.name} />
       </div>
     ))}
+    <div id="photo-sofa" class="h-full w-full">
+      <Image src={sofaCutout} alt="Our sofa, no dog on it" width={1000} class="h-full w-full object-contain" />
+    </div>
   </div>
 
   <script type="application/json" id="guests-data" is:inline set:html={guestsJson} />
@@ -411,7 +416,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
           '<div id="hero-badge" class="absolute top-[18px] right-[18px] bg-lime text-ink font-semibold text-xs tracking-[0.06em] uppercase px-[13px] py-2 rounded-full animate-wiggle">Sofa free</div>' +
           '<div class="w-full"><h1 class="fit-headline text-[clamp(62px,19vw,120px)] max-w-full">Vacancy</h1></div>' +
           '<div class="font-serif italic text-[22px] mt-2" style="color:#E9F7AE">The sofa is free. The treats are ready.</div>' +
-          '<div class="h-[265px] mx-[-8px] mt-[18px] animate-drift-slow rounded-2xl border-2 border-dashed border-cream/30 flex items-center justify-center text-cream/60 text-sm font-semibold">the sofa, unattended</div>' +
+          '<div id="vacancy-photo" class="h-[265px] mx-[-8px] mt-[18px] animate-drift-slow"></div>' +
           "</div>";
 
         if (lastGuest) {
@@ -615,6 +620,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
         var appEl = document.getElementById("home-app");
         if (result.state === "vacancy") {
           appEl.innerHTML = heroVacancyHTML(result.lastGuest);
+          movePhoto("sofa", document.getElementById("vacancy-photo"));
           if (result.lastGuest) movePhoto(result.lastGuest.id, document.getElementById("last-seen-photo"));
         } else {
           var hero = heroLiveHTML(result.live, today);
