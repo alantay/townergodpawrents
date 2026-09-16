@@ -13,11 +13,6 @@ Personal, playful, warm. A light sprinkle of Singlish, the way you'd talk to a n
 - **Diary entry** (a moment, a photo): follow `docs/agents/add-entry.md`. That covers polishing Alan's words with him, `scripts/prep-photo.sh`, filing under the right day, then build and push.
 - **New dog or stay**: follow `docs/agents/new-stay.md`.
 
-## Posting
-
-- **Diary entry** (a moment, a photo): follow `docs/agents/add-entry.md`. That covers polishing Alan's words with him, `scripts/prep-photo.sh`, filing under the right day, then build and push.
-- **New dog or stay**: follow `docs/agents/new-stay.md`.
-
 ## Agent skills
 
 ### Issue tracker
@@ -27,10 +22,6 @@ Issues live as GitHub Issues in `alantay/townergodpawrents`, via the `gh` CLI. S
 ### Domain docs
 
 Single-context layout (`CONTEXT.md` + `docs/adr/` at the repo root, once they exist). See `docs/agents/domain.md`.
-
-## Development
-
-[...keep the existing Astro boilerplate from here down...]
 
 ## Development
 
