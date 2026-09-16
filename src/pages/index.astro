@@ -501,8 +501,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
               sk.accent +
               '">' +
               esc(e.time) +
-              " · " +
-              esc(e.who) +
+              (pair ? " · " + esc(e.who) : "") +
               (isNew(e.id, e.key) ? ' <span class="new-tag ml-1 align-[1px]">New</span>' : "") +
               "</div>" +
               photoHTML +
