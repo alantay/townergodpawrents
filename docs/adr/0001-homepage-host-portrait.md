@@ -10,4 +10,4 @@ The host card is only 134 by 154 pixels at its intended display size. A close, f
 
 ## Consequences
 
-The page uses `public/images/alan-weiwen-portrait.png`. The original source photos stay outside the project and are not published.
+The page uses `public/images/alan-weiwen-portrait.jpg`. The original source photos stay outside the project and are not published.

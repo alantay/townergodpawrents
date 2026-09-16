@@ -1,43 +1,32 @@
-# Astro Starter Kit: Minimal
+# The Towner Godpawrents
+
+Who's on Alan and Weiwen's sofa today, and a diary of their day. Live at https://townergodpawrents.vercel.app. Push to `main` and Vercel deploys.
+
+## Posting
+
+Easiest: tell Claude or Codex the moment and give it the photo. It follows `docs/agents/add-entry.md`, which covers polishing the wording with you, shrinking the photo, filing the entry and pushing.
+
+By hand:
 
 ```sh
-npm create astro@latest -- --template minimal
+scripts/prep-photo.sh tiny ~/Downloads/IMG_1234.HEIC lap-nap   # → ./tiny/tiny-lap-nap.jpg
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Then in `src/content/guests/tiny.md`, newest first:
 
-## 🚀 Project Structure
+```md
+## 16 Sep
 
-Inside of your Astro project, you'll see the following folders and files:
+### 2pm
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+Tiny napping on the lap while the human tries to work.
+
+![Tiny napping on lap](./tiny/tiny-lap-nap.jpg)
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+`npm run build` catches days outside a stay and missing photos. New dog or new stay: `docs/agents/new-stay.md`. Words used here (guest, stay, entry, print): `CONTEXT.md`.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Handy
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `npm run dev`: local site at localhost:4321
+- `/?date=2026-09-20`: preview the homepage as if it were another day

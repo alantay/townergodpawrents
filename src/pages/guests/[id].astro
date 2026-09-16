@@ -69,7 +69,11 @@ const entryCount = days.reduce((total, day) => total + day.entries.length, 0);
 let skinIndex = 0;
 ---
 
-<Layout title={`${name} · The Towner Godpawrents`}>
+<Layout
+  title={`${name} · The Towner Godpawrents`}
+  description={tagline ? `${name} the ${breed}: ${tagline}.` : `${name} the ${breed}, and the diary of their stay in Towner.`}
+  ogImage={`/og/${entry.id}.jpg`}
+>
   <Nav />
 
   <a href="/" class="entrance entrance-delay-1 mt-8 inline-block text-sm font-semibold text-label transition-colors duration-200 hover:text-ink">
@@ -105,6 +109,9 @@ let skinIndex = 0;
       <span class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink bg-cream">
         {stayLabel(shownStay)}
       </span>
+      {showLive && (
+        <span id="stay-day" class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink bg-cream" hidden></span>
+      )}
       {badge && (
         <span class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink bg-lime">{badge}</span>
       )}
@@ -128,9 +135,18 @@ let skinIndex = 0;
   {days.length === 0 ? (
     <p class="mt-3.5 text-sm text-label">No diary entries yet — check back once the visit gets going.</p>
   ) : (
+    <>
+    {days.length > 1 && (
+      <nav class="day-strip" aria-label="Jump to a day">
+        {days.map((day) => (
+          <a href={`#day-${day.iso}`} class="day-chip">{day.label}</a>
+        ))}
+      </nav>
+    )}
+
     <div class="diary-timeline">
       {days.map((day) => (
-        <section class="diary-day mt-8 first:mt-5">
+        <section id={`day-${day.iso}`} class="diary-day mt-8 first:mt-5">
           <div class="diary-day-heading flex items-baseline gap-3">
             <div class="diary-date font-serif text-[24px] leading-none flex-none">{day.label}</div>
             <div class="h-px flex-1 bg-ink/20"></div>
@@ -155,11 +171,14 @@ let skinIndex = 0;
                     <div class="font-semibold text-xs tracking-[0.08em] uppercase" style={`color:${sk.accent}`}>
                       {e.time}
                     </div>
+                    <span class="new-tag" data-entry-key={`${day.iso} ${e.time}`} hidden>New</span>
                   </div>
 
                   {img && (
-                    <div
-                      class="diary-print mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px]"
+                    <button
+                      type="button"
+                      aria-label="Enlarge photo"
+                      class="diary-print block mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px] cursor-zoom-in"
                       style={`width:min(100%,${printWidth(img.width, img.height)}px);transform:rotate(${printTilt(i)})`}
                     >
                       <Image
@@ -170,7 +189,7 @@ let skinIndex = 0;
                         decoding="async"
                         class="block h-auto w-full rounded-[10px]"
                       />
-                    </div>
+                    </button>
                   )}
 
                   {e.text && (
@@ -184,7 +203,52 @@ let skinIndex = 0;
         </section>
       ))}
     </div>
+    </>
   )}
+
+  <dialog id="print-viewer" class="print-viewer" aria-label="Photo">
+    <form method="dialog">
+      <button class="print-viewer-close" aria-label="Close">×</button>
+    </form>
+    <img alt="" />
+  </dialog>
+
+  <script is:inline define:vars={{ guestId: entry.id }}>
+    (function () {
+      // Tap a print to see it big. The <img> already loaded at up to 1160px,
+      // which is plenty for a phone screen, so the viewer just borrows it.
+      var viewer = document.getElementById("print-viewer");
+      var big = viewer.querySelector("img");
+      document.querySelectorAll("button.diary-print").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var img = btn.querySelector("img");
+          big.src = img.currentSrc || img.src;
+          big.alt = img.alt;
+          viewer.showModal();
+        });
+      });
+      // A tap on the dim backdrop closes it too, not just the ×.
+      viewer.addEventListener("click", function (e) {
+        if (e.target === viewer || e.target === big) viewer.close();
+      });
+
+      // "New since you last looked": owners check in a few times a day, so
+      // flag entries that weren't on the page last time. The first visit
+      // flags nothing; everything is new, which is the same as nothing.
+      var tags = document.querySelectorAll("[data-entry-key]");
+      var keys = [].map.call(tags, function (t) { return t.getAttribute("data-entry-key"); });
+      var store = "tgp-seen-" + guestId;
+      try {
+        var seen = JSON.parse(localStorage.getItem(store) || "null");
+        if (seen) {
+          tags.forEach(function (t) {
+            if (seen.indexOf(t.getAttribute("data-entry-key")) === -1) t.hidden = false;
+          });
+        }
+        localStorage.setItem(store, JSON.stringify(seen ? seen.concat(keys.filter(function (k) { return seen.indexOf(k) === -1; })) : keys));
+      } catch (e) {}
+    })();
+  </script>
 
   {showLive && (
     <script is:inline define:vars={{ stays }}>
@@ -201,8 +265,20 @@ let skinIndex = 0;
             month: "2-digit",
             day: "2-digit",
           }).format(new Date());
+        var stay = stays.filter((s) => s.checkIn <= today && today <= s.checkOut)[0];
         var el = document.getElementById("here-today");
-        if (el) el.hidden = !stays.some((s) => s.checkIn <= today && today <= s.checkOut);
+        if (el) el.hidden = !stay;
+
+        // "Day 4 of 11" while they're here. Dates are plain YYYY-MM-DD, so
+        // parsing both as UTC midnight keeps the subtraction whole days.
+        var dayEl = document.getElementById("stay-day");
+        if (dayEl && stay && stay.checkIn !== stay.checkOut) {
+          var ms = 86400000;
+          var n = (Date.parse(today) - Date.parse(stay.checkIn)) / ms + 1;
+          var of = (Date.parse(stay.checkOut) - Date.parse(stay.checkIn)) / ms + 1;
+          dayEl.textContent = n === of ? "Last day" : "Day " + n + " of " + of;
+          dayEl.hidden = false;
+        }
       })();
     </script>
   )}

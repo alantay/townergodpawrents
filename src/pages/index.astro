@@ -12,6 +12,7 @@ import {
   warnOnOverlaps,
   dateStr,
   todaySGT,
+  pickToday,
 } from "../lib/guests";
 
 // Diary photos are referenced from inside the markdown body, so they never
@@ -93,9 +94,16 @@ const guestsForClient = await Promise.all(
 const guestsJson = JSON.stringify(guestsForClient).replace(/</g, "\\u003c");
 
 const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
+
+// Link previews can't run the client script, so they get whoever was live when
+// the site was built. Diary posts rebuild it most days of a stay anyway.
+const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).live[0];
 ---
 
-<Layout>
+<Layout
+  ogImage={liveAtBuild ? `/og/${liveAtBuild.id}.jpg` : undefined}
+  description={liveAtBuild ? `${liveAtBuild.name} is lepak-ing on the sofa today. Here's the diary.` : undefined}
+>
   <Nav />
 
   <div id="home-app" class="mt-8" hidden></div>
@@ -114,7 +122,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
   <div class="entrance entrance-delay-2 mt-10 flex gap-4 items-start flex-wrap">
     <div class="w-[134px] h-[154px] rounded-[22px] overflow-hidden flex-none -rotate-[1.5deg] bg-cream card-keyline">
       <img
-        src="/images/alan-weiwen-portrait.png"
+        src="/images/alan-weiwen-portrait.jpg"
         alt="Alan and Weiwen smiling together"
         class="h-full w-full object-cover"
       />
@@ -412,7 +420,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var raw = [];
         live.forEach((d) =>
           dayOn(d, today).entries.forEach((e) =>
-            raw.push({ time: e.time, text: e.text, photo: e.photo, who: d.name, id: d.id, bgColor: d.bgColor })
+            raw.push({ time: e.time, text: e.text, photo: e.photo, who: d.name, id: d.id, bgColor: d.bgColor, key: today + " " + e.time })
           )
         );
         var cards = raw
@@ -464,6 +472,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               esc(e.time) +
               " · " +
               esc(e.who) +
+              (isNew(e.id, e.key) ? ' <span class="new-tag ml-1 align-[1px]">New</span>' : "") +
               "</div>" +
               photoHTML +
               textHTML +
@@ -532,6 +541,39 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         return '<div class="mt-3.5 grid gap-3" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))">' + html + "</div>";
       }
 
+      // "New since you last looked" — shares its memory with the guest page
+      // (src/pages/guests/[id].astro), keyed by guest, so an entry seen in
+      // either place isn't flagged again in the other.
+      var seenByGuest = {};
+      function seenKeys(id) {
+        if (!(id in seenByGuest)) {
+          try {
+            seenByGuest[id] = JSON.parse(localStorage.getItem("tgp-seen-" + id) || "null");
+          } catch (e) {
+            seenByGuest[id] = null;
+          }
+        }
+        return seenByGuest[id];
+      }
+      function isNew(id, key) {
+        var seen = seenKeys(id);
+        return !!seen && seen.indexOf(key) === -1;
+      }
+      function markSeen(g) {
+        var seen = seenKeys(g.id) || [];
+        g.days.forEach((d) =>
+          d.entries.forEach((e) => {
+            var key = d.iso + " " + e.time;
+            // First visit ever: everything counts as seen. After that, only
+            // what's on this page (today) — earlier days stay for the diary.
+            if ((!seenKeys(g.id) || d.iso === today) && seen.indexOf(key) === -1) seen.push(key);
+          })
+        );
+        try {
+          localStorage.setItem("tgp-seen-" + g.id, JSON.stringify(seen));
+        } catch (e) {}
+      }
+
       function movePhoto(id, targetEl) {
         var node = document.getElementById("photo-" + id);
         if (node && targetEl) targetEl.appendChild(node);
@@ -559,6 +601,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             photosEl.appendChild(a);
             movePhoto(d.id, a);
           });
+          result.live.forEach(markSeen);
         }
         if (preview) {
           var note = document.createElement("div");

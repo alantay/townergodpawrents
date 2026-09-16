@@ -35,12 +35,12 @@ Not a pet-sitting service — a personal log of an informal, no-money hobby amon
 
 - Tagline: "No dog of our own, just everyone else's."
 - Tone: personal, playful, warm, with a light sprinkle of Singlish ("lepak on the sofa", "10/10 would host again lah") — light enough that overseas friends still follow.
-- Names: Alan & Weiwen (hosts); dogs are named individually per stay (e.g. Ebi, Mochi).
+- Names: Alan & Weiwen (hosts); each dog is a guest with its own name and page (e.g. Ebi, Tiny).
 
 ## Evidence on Hand
 
-- Real stay content and diary entries for dogs already hosted (e.g. Ebi the Pomsky, Mochi), under `src/content/stays/`.
-- A hand-cut host portrait of Alan and Weiwen (`public/images/alan-weiwen-portrait.png`) and per-dog cutout photos.
+- Real guests and diary entries for dogs already hosted (Ebi the Pomsky, Tiny the Border Collie), under `src/content/guests/`.
+- A hand-cut host portrait of Alan and Weiwen (`public/images/alan-weiwen-portrait.jpg`) and per-dog cutout photos.
 - No testimonials, pricing, or service claims exist or should be invented — this is not that kind of site.
 
 ## Product Principles
