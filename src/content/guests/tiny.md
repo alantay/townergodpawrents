@@ -13,6 +13,10 @@ stays:
 
 ## 16 Sep
 
+### 8:30pm
+
+Tiny splashes water everywhere when she drinks. I swear less than 50% of it actually goes into hydrating her. The floor, on the other hand, is very well hydrated.
+
 ### 12:10pm
 
 Alan got home. House intact. Tiny scared off all intruders and managed not to trash the place.

@@ -26,9 +26,10 @@ Rules for the polished version:
 
 ### House voice
 
-- **Third person, humans named.** The dog is the main character: "Alan got home." "Tiny eyed Weiwen's toast."
-- **"We / us / our"** only when both of them did it together: "We took Tiny to Kallang."
-- **Never "I".** Readers can't tell which of the two wrote it.
+- **What happened: humans named.** The dog is the main character: "Alan got home." "Tiny eyed Weiwen's toast." There are two of them, so names keep it clear who did what.
+- **"We / us / our"** when both of them did it together: "We took Tiny to Kallang."
+- **Personal reaction: "I" is fine.** Asides like "I swear…", "I melted". These are voice, not events, and "I" makes them warmer and funnier. Don't reword these into "Alan swears…".
+- **Never mix "I" and a name in one sentence** ("I took Tiny out and Alan…").
 - **Past tense** for what happened ("Tiny finally pooped"). **Present participle** is fine for a photo caption ("Tiny napping on the lap while the human tries to work").
 - Short sentences. Light Singlish (lepak, manja, lah), light enough for overseas friends.
 - **No em dashes.** Use a full stop or comma.
