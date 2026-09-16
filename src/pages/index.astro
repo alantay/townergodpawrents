@@ -95,6 +95,26 @@ const guestsJson = JSON.stringify(guestsForClient).replace(/</g, "\\u003c");
 
 const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
 
+// Footer sign-off, picked at random on each visit. Nobody finds this page
+// except through a friend or neighbour, so none of these invite people in.
+const footerLines = [
+  "Know a dog who needs a sofa? You know where to find us.",
+  "No bookings, no website form. Just neighbours and friends, one dog at a time.",
+  "Word of mouth only. Mostly the dogs' mouths.",
+  "Sofa's been furrier than usual lately.",
+  "Found us through a friend of a friend's dog? That's the only way in.",
+  "Heard about us from a dog? Makes sense.",
+  "Passed along by neighbours, one wagging tail at a time.",
+  "The sofa has seen things.",
+  "Fur on the sofa, never the same colour twice.",
+  "Our sofa has more regulars than most kopitiams.",
+  "Rated 5 paws by guests. Humans not consulted.",
+  "Management reserves the right to be licked.",
+  "The treats are ready. The humans are negotiable.",
+  "Borrowed dogs, real love.",
+  "Every dog goes home. The fur stays.",
+];
+
 // Link previews can't run the client script, so they get whoever was live when
 // the site was built. Diary posts rebuild it most days of a stay anyway.
 const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).live[0];
@@ -152,7 +172,13 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
   </section>
 
   <footer class="entrance entrance-delay-3 mt-12 border-t-[1.5px] border-line pt-[18px]">
-    <div class="font-serif italic text-[21px] leading-none">Know a dog who needs a sofa? You know where to find us.</div>
+    <div id="footer-line" class="font-serif italic text-[21px] leading-tight">{footerLines[0]}</div>
+    <script is:inline define:vars={{ footerLines }}>
+      // A different line each visit. Runs before the footer's entrance
+      // animation starts, so nobody sees the swap.
+      document.getElementById("footer-line").textContent =
+        footerLines[Math.floor(Math.random() * footerLines.length)];
+    </script>
     <div class="mt-2.5 text-xs tracking-[0.1em] uppercase text-label">
     Towner &middot; No dog of our own, just everyone else's
     </div>
