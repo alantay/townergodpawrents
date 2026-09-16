@@ -8,6 +8,16 @@ A personal, just-for-fun website. Alan and his wife Weiwen look after neighbours
 
 Personal, playful, warm. A light sprinkle of Singlish, the way you'd talk to a neighbour ("lepak on the sofa", "10/10 would host again lah"), light enough that overseas friends still follow. Tagline: "No dog of our own, just everyone else's."
 
+## Posting
+
+- **Diary entry** (a moment, a photo): follow `docs/agents/add-entry.md`. That covers polishing Alan's words with him, `scripts/prep-photo.sh`, filing under the right day, then build and push.
+- **New dog or stay**: follow `docs/agents/new-stay.md`.
+
+## Posting
+
+- **Diary entry** (a moment, a photo): follow `docs/agents/add-entry.md`. That covers polishing Alan's words with him, `scripts/prep-photo.sh`, filing under the right day, then build and push.
+- **New dog or stay**: follow `docs/agents/new-stay.md`.
+
 ## Agent skills
 
 ### Issue tracker

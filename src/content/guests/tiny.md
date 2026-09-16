@@ -25,7 +25,7 @@ Alan and Weiwen headed to work, leaving Tiny to guard the house until lunchtime.
 
 Boarding Tiny let us see her affectionate side. Licky licky, as per usual.
 
-![Tiny resting her head in a hand](./tiny/tiny-affectionate-morning.png)
+![Tiny resting her head in a hand](./tiny/tiny-affectionate-morning.jpg)
 
 ## 15 Sep
 
@@ -45,13 +45,13 @@ Tiny came to watch Alan's climbing session, then pulled Weiwen straight back to 
 
 Tiny's way of saying it's time for dog run. No more working for human.
 
-![Tiny waiting by the laptop to go for her dog run](./tiny/tiny-time-for-dog-run.png)
+![Tiny waiting by the laptop to go for her dog run](./tiny/tiny-time-for-dog-run.jpg)
 
 ### 3:15pm
 
 Cow spotted grazing in the HDB garden. No wait, that's Tiny.
 
-![Tiny grazing in the HDB garden in her blue raincoat](./tiny/tiny-hdb-garden-grazing.png)
+![Tiny grazing in the HDB garden in her blue raincoat](./tiny/tiny-hdb-garden-grazing.jpg)
 
 ### 10:50am
 
@@ -81,7 +81,7 @@ Tiny gets restless around Weiwen, resting her head on her arm and pacing. She kn
 
 Tiny napping on the lap while the human tries to work.
 
-![Tiny napping on lap](./tiny/tiny-lap-nap.png)
+![Tiny napping on lap](./tiny/tiny-lap-nap.jpg)
 
 ### 1:30pm
 
@@ -91,13 +91,13 @@ Just came back after leaving Tiny alone at home for 4 hours. House still intact.
 
 Negotiation begins.
 
-![Tiny negotiating from Alan's lap](./tiny/tiny-negotiation.png)
+![Tiny negotiating from Alan's lap](./tiny/tiny-negotiation.jpg)
 
 ### 8am
 
 Tiny eyeing Alan and Weiwen's breakfast.
 
-![Tiny eyeing breakfast](./tiny/tiny-eyeing-breakfast.png)
+![Tiny eyeing breakfast](./tiny/tiny-eyeing-breakfast.jpg)
 
 ### 6:30am
 
@@ -121,7 +121,7 @@ Weiwen woke from a nap to Tiny staring straight at her.
 
 Tiny was at the window, judging the noisy people downstairs.
 
-![Tiny by the window](./tiny/tiny-judging-downstairs.png)
+![Tiny by the window](./tiny/tiny-judging-downstairs.jpg)
 
 ### 1:15pm
 
@@ -131,7 +131,7 @@ After finishing her lunch, Tiny immediately started eyeing ours.
 
 Tiny followed Alan into the kitchen while he prepped food, then settled down to stay close to him. No play demands, just nearby.
 
-![Tiny stretched out nearby](./tiny/tiny-by-entry.png)
+![Tiny stretched out nearby](./tiny/tiny-by-entry.jpg)
 
 ### 11:05am
 
