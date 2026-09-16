@@ -13,9 +13,19 @@ stays:
 
 ## 16 Sep
 
+### 12:10pm
+
+Alan got home. House intact. Tiny scared off all intruders and managed not to trash the place.
+
 ### 8:25am
 
 Alan and Weiwen headed to work, leaving Tiny to guard the house until lunchtime. Alan will pop back to have lunch with her.
+
+### 7:10am
+
+Boarding Tiny let us see her affectionate side. Licky licky, as per usual.
+
+![Tiny resting her head in a hand](./tiny/tiny-affectionate-morning.png)
 
 ## 15 Sep
 
