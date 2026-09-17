@@ -13,6 +13,10 @@ stays:
 
 ## 17 Sep
 
+### 7am
+
+Weiwen threw the ball straight out of the carpark. Tiny was not impressed.
+
 ### 6:50am
 
 Tiny guided Alan and Weiwen to her favourite place to play ball, making them walk up 6 levels of stairs to the top of a carpark as a warm-up before the game.
