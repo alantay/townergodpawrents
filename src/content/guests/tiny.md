@@ -13,6 +13,18 @@ stays:
 
 ## 17 Sep
 
+### 6:30pm
+
+Tiny looked slightly less glam, unable to contain her excitement to see Alan.
+
+![Tiny rolling on her back in excitement while wearing her blue floral-patterned outfit](./tiny/tiny-alan-arrival-roll.jpg)
+
+### 5:45pm
+
+Tiny looked glamorous in her floral-patterned outfit.
+
+![Tiny wearing a blue floral-patterned outfit at the field](./tiny/tiny-floral-outfit.jpg)
+
 ### 1:30pm
 
 Tiny supervised Weiwen's lunch break until the job became too tiring. Zzz.
