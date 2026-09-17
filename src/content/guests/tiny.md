@@ -15,7 +15,7 @@ stays:
 
 ### 6:50am
 
-Tiny guided Alan to her favourite place to play ball, making him walk up 6 levels of stairs to the top of a carpark as a warm-up before the game.
+Tiny guided Alan and Weiwen to her favourite place to play ball, making them walk up 6 levels of stairs to the top of a carpark as a warm-up before the game.
 
 ![Tiny at the top of a carpark, ready to play ball](./tiny/tiny-carpark-stair-climb.jpg)
 
