@@ -17,11 +17,11 @@ One calendar day within a stay, written as a `## 13 Sep` divider. The year is no
 _Avoid_: Date section, day entry
 
 **Entry**:
-One timestamped moment inside a diary day, written as a `### 9:50am` heading and the words under it. May be a photo with no words.
+One timestamped moment inside a diary day, written as a `### 9:50am` heading and the words under it. May be one or two prints with no words.
 _Avoid_: Post, note, log line, update
 
 **Print**:
-The single photo attached to an entry, shown on the diary page as a tilted snapshot on a cream mat. Deliberately a different photo language from the cut-outs.
+A photo attached to an entry, shown on the diary page as a tilted snapshot on a cream mat. An entry can have up to two prints. Deliberately a different photo language from the cut-outs.
 _Avoid_: Image, snap, thumbnail
 
 **Cut-out**:

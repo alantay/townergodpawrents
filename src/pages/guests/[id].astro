@@ -157,9 +157,10 @@ let skinIndex = 0;
               const i = skinIndex++;
               const sk = diarySkin(bgColor, i);
               const darkSkin = i % 4 > 1;
-              const img = e.photo
-                ? resolveDiaryPhoto(e.photo.src, entry.id, `${day.label} ${e.time}`)
-                : undefined;
+              const prints = e.photos.map((photo) => ({
+                ...photo,
+                img: resolveDiaryPhoto(photo.src, entry.id, `${day.label} ${e.time}`),
+              }));
               return (
                 <div class="reveal-card">
                   <article
@@ -174,26 +175,30 @@ let skinIndex = 0;
                     <span class="new-tag" data-entry-key={`${day.iso} ${e.time}`} hidden>New</span>
                   </div>
 
-                  {img && (
-                    <button
-                      type="button"
-                      aria-label="Enlarge photo"
-                      class="diary-print block mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px] cursor-zoom-in"
-                      style={`width:min(100%,${printWidth(img.width, img.height)}px);transform:rotate(${printTilt(i)})`}
-                    >
-                      <Image
-                        src={img}
-                        alt={e.photo!.alt || `${name}, ${day.label} ${e.time}`}
-                        width={Math.min(img.width, 1160)}
-                        loading="lazy"
-                        decoding="async"
-                        class="block h-auto w-full rounded-[10px]"
-                      />
-                    </button>
+                  {prints.length > 0 && (
+                    <div class:list={{ "diary-prints": true, "diary-prints--pair": prints.length === 2, "mt-[15px]": true }}>
+                      {prints.map(({ img, alt }, printIndex) => (
+                        <button
+                          type="button"
+                          aria-label={prints.length === 1 ? "Enlarge photo" : `Enlarge photo ${printIndex + 1}`}
+                          class="diary-print block mx-auto bg-cream card-keyline rounded-[16px] p-[7px] cursor-zoom-in"
+                          style={`width:min(100%,${printWidth(img.width, img.height)}px);transform:rotate(${printTilt(i + printIndex)})`}
+                        >
+                          <Image
+                            src={img}
+                            alt={alt || `${name}, ${day.label} ${e.time}`}
+                            width={Math.min(img.width, 1160)}
+                            loading="lazy"
+                            decoding="async"
+                            class="block h-auto w-full rounded-[10px]"
+                          />
+                        </button>
+                      ))}
+                    </div>
                   )}
 
                   {e.text && (
-                    <p class={`${img ? "mt-4" : "mt-2"} text-base leading-relaxed text-pretty max-w-[58ch]`}>{e.text}</p>
+                    <p class={`${prints.length > 0 ? "mt-4" : "mt-2"} text-base leading-relaxed text-pretty max-w-[58ch]`}>{e.text}</p>
                   )}
                   </article>
                 </div>

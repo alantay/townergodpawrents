@@ -27,7 +27,8 @@ export interface DiaryPhoto {
 export interface DiaryEntry {
   time: string; // e.g. "9:50am"
   text: string;
-  photo?: DiaryPhoto;
+  /** Zero to two prints, in the order they appear in the markdown. */
+  photos: DiaryPhoto[];
 }
 
 /** One calendar day of a stay: a `## 13 Sep` divider and its entries. */
@@ -131,8 +132,7 @@ export function stayLabel(s: Stay): string {
 
 // ---- diary ----
 
-// A markdown image inside an entry. The first one becomes that entry's print;
-// extras are dropped rather than left to render as stray text.
+// A markdown image inside an entry. An entry can carry up to two prints.
 const IMAGE_RE = /!\[([^\]]*)\]\(\s*([^)\s]+)(?:\s+"[^"]*")?\s*\)/g;
 
 /** `## 13 Sep` day dividers and `### 9:50am` entry headings, in one pass. */
@@ -180,8 +180,8 @@ function resolveDay(label: string, stays: Stay[], guestId: string): string {
  * Parses a guest's markdown body into diary days.
  *
  * Convention: `## 13 Sep` day dividers, `### 9:50am` entries under them,
- * newest first. An optional `![alt](./photo.jpg)` anywhere in an entry
- * becomes its print. A photo on its own is a valid entry — some moments
+ * newest first. One or two `![alt](./photo.jpg)` lines anywhere in an entry
+ * become its prints. A photo on its own is a valid entry — some moments
  * don't need words.
  */
 export function parseDiary(body: string, stays: Stay[], guestId: string): DiaryDay[] {
@@ -208,11 +208,14 @@ export function parseDiary(body: string, stays: Stay[], guestId: string): DiaryD
     }
 
     const raw = body.slice(start, end);
-    const [first] = [...raw.matchAll(IMAGE_RE)];
-    const photo = first ? { src: first[2], alt: first[1].trim() } : undefined;
+    const matches = [...raw.matchAll(IMAGE_RE)];
+    if (matches.length > 2) {
+      throw new Error(`[guests] ${guestId}: entry "${title}" has ${matches.length} prints — use at most two`);
+    }
+    const photos = matches.map((match) => ({ src: match[2], alt: match[1].trim() }));
     const text = raw.replace(IMAGE_RE, " ").trim().replace(/\s+/g, " ");
 
-    if (text || photo) current.entries.push({ time: title, text, photo });
+    if (text || photos.length > 0) current.entries.push({ time: title, text, photos });
   }
 
   // Days newest first, whatever order they were written in. Entries keep the

@@ -29,6 +29,14 @@ Tiny guided Alan and Weiwen to her favourite place to play ball, making them wal
 
 ![Tiny at the top of a carpark, ready to play ball](./tiny/tiny-carpark-stair-climb.jpg)
 
+### 1:30pm
+
+Tiny supervised Weiwen's lunch break until the job became too tiring. Zzz.
+
+![Tiny dozing on the sofa beside the lunch table](./tiny/tiny-lunch-supervisor.jpg)
+
+![Tiny asleep on the sofa during Weiwen's lunch break](./tiny/tiny-lunch-nap.jpg)
+
 ## 16 Sep
 
 ### 8:30pm

@@ -74,18 +74,19 @@ const guestsForClient = await Promise.all(
         iso: d.iso,
         entries: await Promise.all(
           d.entries.map(async (e) => {
-            if (!e.photo) return { time: e.time, text: e.text };
-            const meta = resolveDiaryPhoto(e.photo.src, rest.id, `${d.label} ${e.time}`);
-            const img = await getImage({ src: meta, width: Math.min(meta.width, 1160) });
             return {
               time: e.time,
               text: e.text,
-              photo: {
-                src: img.src,
-                width: img.attributes.width,
-                height: img.attributes.height,
-                alt: e.photo.alt,
-              },
+              photos: await Promise.all(e.photos.map(async (photo) => {
+                const meta = resolveDiaryPhoto(photo.src, rest.id, `${d.label} ${e.time}`);
+                const img = await getImage({ src: meta, width: Math.min(meta.width, 1160) });
+                return {
+                  src: img.src,
+                  width: img.attributes.width,
+                  height: img.attributes.height,
+                  alt: photo.alt,
+                };
+              })),
             };
           }),
         ),
@@ -451,7 +452,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
         var raw = [];
         live.forEach((d) =>
           dayOn(d, today).entries.forEach((e) =>
-            raw.push({ time: e.time, text: e.text, photo: e.photo, who: d.name, id: d.id, bgColor: d.bgColor, key: today + " " + e.time })
+            raw.push({ time: e.time, text: e.text, photos: e.photos, who: d.name, id: d.id, bgColor: d.bgColor, key: today + " " + e.time })
           )
         );
         var cards = raw
@@ -459,28 +460,36 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
             var sk = skin(e.bgColor, e.id);
             var darkSkin = luma(sk.bg) < 110;
             var photoHTML = "";
-            if (e.photo) {
-              var w = printWidth(e.photo.width, e.photo.height);
+            if (e.photos.length) {
               photoHTML =
-                '<div class="mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px]" style="width:min(100%,' +
-                w +
-                "px);transform:rotate(" +
-                printTilt(i) +
-                ')">' +
-                '<img src="' +
-                esc(e.photo.src) +
-                '" alt="' +
-                esc(e.photo.alt || e.who + ", " + e.time) +
-                '" width="' +
-                e.photo.width +
-                '" height="' +
-                e.photo.height +
-                '" loading="lazy" decoding="async" class="block h-auto w-full rounded-[10px]">' +
+                '<div class="diary-prints' +
+                (e.photos.length === 2 ? " diary-prints--pair" : "") +
+                ' mt-[15px]">' +
+                e.photos.map(function (photo, photoIndex) {
+                  var w = printWidth(photo.width, photo.height);
+                  return (
+                    '<div class="diary-print block mx-auto bg-cream card-keyline rounded-[16px] p-[7px]" style="width:min(100%,' +
+                    w +
+                    "px);transform:rotate(" +
+                    printTilt(i + photoIndex) +
+                    ')">' +
+                    '<img src="' +
+                    esc(photo.src) +
+                    '" alt="' +
+                    esc(photo.alt || e.who + ", " + e.time) +
+                    '" width="' +
+                    photo.width +
+                    '" height="' +
+                    photo.height +
+                    '" loading="lazy" decoding="async" class="block h-auto w-full rounded-[10px]">' +
+                    "</div>"
+                  );
+                }).join("") +
                 "</div>";
             }
             var textHTML = e.text
               ? '<p class="' +
-                (e.photo ? "mt-4" : "mt-2") +
+                (e.photos.length ? "mt-4" : "mt-2") +
                 ' text-base leading-relaxed text-pretty">' +
                 esc(e.text) +
                 "</p>"
