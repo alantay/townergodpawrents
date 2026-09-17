@@ -13,6 +13,14 @@ stays:
 
 ## 17 Sep
 
+### 1:30pm
+
+Tiny supervised Weiwen's lunch break until the job became too tiring. Zzz.
+
+![Tiny dozing on the sofa beside the lunch table](./tiny/tiny-lunch-supervisor.jpg)
+
+![Tiny asleep on the sofa during Weiwen's lunch break](./tiny/tiny-lunch-nap.jpg)
+
 ### 7:05am
 
 Ball retrieved. Mission accomplished. Time to go home. Weiwen's throwing licence is under review, Tiny says.
@@ -28,14 +36,6 @@ Weiwen threw the ball straight out of the carpark. Tiny was not impressed. Time 
 Tiny guided Alan and Weiwen to her favourite place to play ball, making them walk up 6 levels of stairs to the top of a carpark as a warm-up before the game.
 
 ![Tiny at the top of a carpark, ready to play ball](./tiny/tiny-carpark-stair-climb.jpg)
-
-### 1:30pm
-
-Tiny supervised Weiwen's lunch break until the job became too tiring. Zzz.
-
-![Tiny dozing on the sofa beside the lunch table](./tiny/tiny-lunch-supervisor.jpg)
-
-![Tiny asleep on the sofa during Weiwen's lunch break](./tiny/tiny-lunch-nap.jpg)
 
 ## 16 Sep
 
