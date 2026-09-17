@@ -13,7 +13,6 @@
   --color-label: #55564a;
   --color-card-line: #cdbf9e;
   --color-card-line-dark: #5b6e50;
-  --color-print-line: #626154;
   --color-line: #a99b7f;
 }
 
@@ -154,8 +153,12 @@ a:focus-visible {
 }
 
 .diary-print {
-  border-color: var(--color-print-line);
-  box-shadow: 0 7px 14px rgb(53 48 35 / 0.16);
+  /* Keep the print edge quiet against the blue diary paper. Separation comes
+     from a cool, diffused shadow rather than another heavy coloured keyline. */
+  border-color: rgb(255 255 255 / 0.72);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.44),
+    0 6px 12px rgb(30 32 25 / 0.12);
 }
 
 .diary-prints {
