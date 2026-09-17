@@ -5,7 +5,7 @@ photo: ./tiny/tiny-collage.png
 bgColor: "#39617E"
 showLive: true
 badge: Obsessive ball fetcher
-tagline: loves rolling on her back, gets loud when the food is slow
+tagline: loves rolling on her back, gets loud when she couldn't contain her excitement
 stays:
   - checkIn: 2026-09-13
     checkOut: 2026-09-23
