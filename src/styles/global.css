@@ -13,6 +13,7 @@
   --color-label: #55564a;
   --color-card-line: #cdbf9e;
   --color-card-line-dark: #5b6e50;
+  --color-print-line: #626154;
   --color-line: #a99b7f;
 }
 
@@ -153,6 +154,7 @@ a:focus-visible {
 }
 
 .diary-print {
+  border-color: var(--color-print-line);
   box-shadow: 0 7px 14px rgb(53 48 35 / 0.16);
 }
 
