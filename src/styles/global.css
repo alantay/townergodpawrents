@@ -2,6 +2,7 @@
 
 @theme {
   --font-serif: "Instrument Serif", serif;
+  --font-script: "Caveat", cursive;
   --font-sans: "Archivo", Helvetica, sans-serif;
 
   --color-paper: #efe7d8;
