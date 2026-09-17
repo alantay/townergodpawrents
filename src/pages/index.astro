@@ -526,7 +526,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
           .filter((m) => m.label);
         var moreHTML = more.length
           ? '<div class="' +
-            (raw.length ? "mt-3.5" : "mt-5") +
+            (raw.length ? "mt-3.5" : "mt-2") +
             ' flex gap-4 flex-wrap">' +
             more
               .map(
@@ -540,7 +540,17 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
               .join("") +
             "</div>"
           : "";
-        var cardsHTML = raw.length ? '<div class="mt-5 grid gap-3.5">' + cards + "</div>" : "";
+        // Nothing written yet today: say so, or the empty space under the
+        // hero reads like the page failed to load. Mood follows SGT clock.
+        function quietLine() {
+          var hour = +new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Singapore", hour: "numeric", hourCycle: "h23" }).format(new Date());
+          var who = pair ? "The two of them" : esc(live[0].name);
+          var mood = hour < 12 ? "still waking up" : hour < 19 ? "busy lepak-ing" : "knocked out already";
+          return "No news yet today. " + who + " " + (pair ? "are " : "is ") + mood + ".";
+        }
+        var cardsHTML = raw.length
+          ? '<div class="mt-5 grid gap-3.5">' + cards + "</div>"
+          : '<p class="mt-5 text-base text-label text-pretty">' + quietLine() + "</p>";
         return cardsHTML + moreHTML;
       }
 
