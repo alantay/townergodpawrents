@@ -15,7 +15,7 @@ stays:
 
 ### 7:05am
 
-Ball retrieved. Mission accomplished. Time to go home. Tiny is now wary of Weiwen throwing the ball.
+Ball retrieved. Mission accomplished. Time to go home. Weiwen's throwing licence is under review, Tiny says.
 
 ![Tiny walking home on the lead with the blue ball in her mouth](./tiny/tiny-ball-retrieved.jpg)
 
