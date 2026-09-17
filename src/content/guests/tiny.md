@@ -13,9 +13,15 @@ stays:
 
 ## 17 Sep
 
+### 7:05am
+
+Ball retrieved. Mission accomplished. Time to go home. Tiny is now wary of Weiwen throwing the ball.
+
+![Tiny walking home on the lead with the blue ball in her mouth](./tiny/tiny-ball-retrieved.jpg)
+
 ### 7am
 
-Weiwen threw the ball straight out of the carpark. Tiny was not impressed.
+Weiwen threw the ball straight out of the carpark. Tiny was not impressed. Time to activate Tiny for a search and rescue mission.
 
 ### 6:50am
 
