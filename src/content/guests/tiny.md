@@ -13,6 +13,14 @@ stays:
 
 ## 18 Sep
 
+### 2:30pm
+
+Tiny fought valiantly with Snorlax. The winner remains unclear, but both are taking a well-earned nap.
+
+![Tiny wrestling with a Snorlax plushie on a cushion](./tiny/tiny-snorlax-battle.jpg)
+
+![Tiny lying beside Snorlax after their battle](./tiny/tiny-post-battle-nap.jpg)
+
 ### 8am
 
 We were watching Mark Wiens review a Filipino dish on YouTube. Tiny was watching outside from the window, then turned around and licked the screen. Her review: tastes like dust.
