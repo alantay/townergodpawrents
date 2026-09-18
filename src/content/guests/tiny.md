@@ -11,6 +11,12 @@ stays:
     checkOut: 2026-09-23
 ---
 
+## 18 Sep
+
+### 8am
+
+We were watching Mark Wiens on YouTube talking about a Filipino dish. Tiny was watching outside from the window, then turned around and licked the screen. Her review: tastes like dust.
+
 ## 17 Sep
 
 ### 6:30pm
