@@ -15,7 +15,7 @@ stays:
 
 ### 8am
 
-We were watching Mark Wiens on YouTube talking about a Filipino dish. Tiny was watching outside from the window, then turned around and licked the screen. Her review: tastes like dust.
+We were watching Mark Wiens review a Filipino dish on YouTube. Tiny was watching outside from the window, then turned around and licked the screen. Her review: tastes like dust.
 
 ## 17 Sep
 
