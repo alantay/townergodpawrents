@@ -176,7 +176,7 @@ let skinIndex = 0;
                   </div>
 
                   {prints.length > 0 && (
-                    <div class:list={{ "diary-prints": true, "diary-prints--pair": prints.length === 2, "mt-[15px]": true }}>
+                    <div class:list={{ "diary-prints": true, "diary-prints--pair": prints.length === 2, "diary-prints--quad": prints.length === 4, "mt-[15px]": true }}>
                       {prints.map(({ img, alt }, printIndex) => (
                         <button
                           type="button"

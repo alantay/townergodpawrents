@@ -132,7 +132,7 @@ export function stayLabel(s: Stay): string {
 
 // ---- diary ----
 
-// A markdown image inside an entry. An entry can carry up to two prints.
+// A markdown image inside an entry. An entry can carry up to four prints.
 const IMAGE_RE = /!\[([^\]]*)\]\(\s*([^)\s]+)(?:\s+"[^"]*")?\s*\)/g;
 
 /** `## 13 Sep` day dividers and `### 9:50am` entry headings, in one pass. */
@@ -180,7 +180,7 @@ function resolveDay(label: string, stays: Stay[], guestId: string): string {
  * Parses a guest's markdown body into diary days.
  *
  * Convention: `## 13 Sep` day dividers, `### 9:50am` entries under them,
- * newest first. One or two `![alt](./photo.jpg)` lines anywhere in an entry
+ * newest first. One to four `![alt](./photo.jpg)` lines anywhere in an entry
  * become its prints. A photo on its own is a valid entry — some moments
  * don't need words.
  */
@@ -209,8 +209,8 @@ export function parseDiary(body: string, stays: Stay[], guestId: string): DiaryD
 
     const raw = body.slice(start, end);
     const matches = [...raw.matchAll(IMAGE_RE)];
-    if (matches.length > 2) {
-      throw new Error(`[guests] ${guestId}: entry "${title}" has ${matches.length} prints — use at most two`);
+    if (matches.length > 4) {
+      throw new Error(`[guests] ${guestId}: entry "${title}" has ${matches.length} prints — use at most four`);
     }
     const photos = matches.map((match) => ({ src: match[2], alt: match[1].trim() }));
     const text = raw.replace(IMAGE_RE, " ").trim().replace(/\s+/g, " ");

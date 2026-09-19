@@ -7,7 +7,7 @@ Alan tells you a moment, sometimes with one or two photos. You polish the words 
 - **Guest**: the live one if only one dog is here today (check `stays` in `src/content/guests/*.md` against today in Asia/Singapore). Otherwise ask.
 - **Time**: use what he says. If he doesn't give one, use now in SGT (`TZ=Asia/Singapore date "+%-I:%M%p"`, lowercased, and drop `:00`, so `9am` and `2:45pm`).
 - **Day**: today in SGT unless he says otherwise. It must fall inside one of the guest's stays, or the build fails. If it doesn't, ask whether a stay needs extending.
-- **Photos**: optional; use up to two per entry. A photo on its own is a valid entry.
+- **Photos**: optional; use up to four per entry. A photo on its own is a valid entry.
 
 ## 2. Polish the words (in chat, before touching any file)
 
@@ -51,7 +51,7 @@ The slug is 2–4 words taken from the moment (`climbing-wall`, `lap-nap`).
 **Markdown:** in `src/content/guests/<guest>.md`:
 - Days are `## 16 Sep`, newest day at the top. If today's divider doesn't exist yet, add it above the previous newest day.
 - Entries are `### 12:10pm`, newest first within the day. Put the new one in time order.
-- Leave a blank line between the heading, the text and each image. Put at most two images under an entry.
+- Leave a blank line between the heading, the text and each image. Put at most four images under an entry.
 
 ```md
 ### 10:30pm
