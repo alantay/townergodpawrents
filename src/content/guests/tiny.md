@@ -17,6 +17,18 @@ stays:
 
 On the way back from Dog Carnival, Tiny attacked a cat hiding under a van. She came away with a few minor scratches near her eye and snout. Note to self: keep the leash tight.
 
+### 10:15am
+
+We took Tiny to Whampoa Happy Pets Day. It was a Hi and immediately followed by a Bye to every dog.
+
+![Tiny meeting a tan dog at Whampoa Happy Pets Day](./tiny/tiny-pets-day-tan-dog.jpg)
+
+![Tiny greeting a poodle at Whampoa Happy Pets Day](./tiny/tiny-pets-day-poodle.jpg)
+
+![Tiny sniffing a grey poodle at Whampoa Happy Pets Day](./tiny/tiny-pets-day-grey-poodle.jpg)
+
+![A dog riding in a wheeled trailer with an umbrella at Whampoa Happy Pets Day](./tiny/tiny-pets-day-umbrella-buggy.jpg)
+
 ### 7:20am
 
 A bigger ball for Tiny today. No one was at the carpark, but Tiny didn’t mind. More space to run freely.
