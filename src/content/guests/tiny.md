@@ -23,7 +23,7 @@ A bigger ball for Tiny today. No one was at the carpark, but Tiny didn’t mind.
 
 ### 6pm
 
-Hugo was very interested in Tiny and kept sniffing her. Tiny was a little annoyed—she just wanted to get back to her ball. “I’m working, please. No office romance.”
+Hugo was very interested in Tiny and kept sniffing her. Tiny was a little annoyed. She just wanted to get back to her ball. “I’m working, please. No office romance.”
 
 ![Hugo sniffing Tiny at the dog run while she looks towards her ball](./tiny/tiny-office-romance.jpg)
 
