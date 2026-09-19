@@ -11,6 +11,14 @@ stays:
     checkOut: 2026-09-23
 ---
 
+## 19 Sep
+
+### 7:20am
+
+A bigger ball for Tiny today. No one was at the carpark, but Tiny didn’t mind. More space to run freely.
+
+![Tiny running with a big ball at an empty carpark](./tiny/tiny-bigger-ball.jpg)
+
 ## 18 Sep
 
 ### 2:30pm
