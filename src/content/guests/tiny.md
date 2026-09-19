@@ -13,6 +13,10 @@ stays:
 
 ## 19 Sep
 
+### 11am
+
+On the way back from Dog Carnival, Tiny attacked a cat hiding under a van. She came away with a few minor scratches near her eye and snout. Note to self: keep the leash tight.
+
 ### 7:20am
 
 A bigger ball for Tiny today. No one was at the carpark, but Tiny didn’t mind. More space to run freely.
