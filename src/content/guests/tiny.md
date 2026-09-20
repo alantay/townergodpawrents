@@ -13,6 +13,12 @@ stays:
 
 ## 20 Sep
 
+### 5pm
+
+Tiny insisted Alan and Weiwen stop napping and bring her to work. There were balls to be picked up at the dog run, and she didn't trust her lazy coworkers to do it right.
+
+![Tiny looking ready for work at the dog run](./tiny/tiny-dog-run-work.jpg)
+
 ### 2pm
 
 Reinforcing Tiny's "Place" command. She still likes to take shortcuts, like just touching the bed and considering it done.
