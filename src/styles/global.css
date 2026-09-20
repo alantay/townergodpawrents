@@ -94,9 +94,11 @@ a:focus-visible {
 
 /* A CSS filter on an ancestor forces the browser to repaint any <video>
    inside through a software compositing pass, which flickers/garbles the
-   frame — so video entries keep the lift but skip the filter. */
+   frame — so video entries skip both the lift and the filter, staying
+   put on hover. */
 .diary-entry-card--video:hover,
 .diary-entry-card--video:focus-visible {
+  transform: rotate(0deg);
   filter: none;
 }
 
