@@ -127,7 +127,7 @@ let skinIndex = 0;
       <div class="font-serif text-[32px] leading-none">The full diary</div>
       {entryCount > 0 && <p class="mt-1.5 text-sm text-label">{entryCount} little moment{entryCount === 1 ? "" : "s"}, kept for the record.</p>}
     </div>
-    <div class="diary-stay text-right text-[11px] font-semibold tracking-[0.08em] uppercase text-label">
+    <div class="diary-stay hidden sm:block text-right text-[11px] font-semibold tracking-[0.08em] uppercase text-label">
       Latest stay<br />{stayLabel(shownStay)}
     </div>
   </div>
