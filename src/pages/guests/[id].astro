@@ -43,7 +43,7 @@ const diaryVideoDims = import.meta.glob<{ width: number; height: number }>(
 
 type ResolvedMedia =
   | { kind: "photo"; img: ImageMetadata; alt: string }
-  | { kind: "video"; url: string; alt: string; width: number; height: number };
+  | { kind: "video"; url: string; poster: string; alt: string; width: number; height: number };
 
 function resolveDiaryMedia(media: DiaryMedia, guestId: string, when: string): ResolvedMedia {
   const file = media.src.split("/").pop()!;
@@ -60,8 +60,21 @@ function resolveDiaryMedia(media: DiaryMedia, guestId: string, when: string): Re
         `[guests] ${guestId}, ${when}: no "${file}.json" dimensions sidecar — re-run scripts/prep-video.sh`,
       );
     }
+    const posterKey = Object.keys(diaryImages).find((k) => k.endsWith(`/${file}.jpg`));
+    if (!posterKey) {
+      throw new Error(
+        `[guests] ${guestId}, ${when}: no "${file}.jpg" poster sidecar — re-run scripts/prep-video.sh`,
+      );
+    }
     const { width, height } = diaryVideoDims[dimsKey];
-    return { kind: "video", url: diaryVideos[key], alt: media.alt, width, height };
+    return {
+      kind: "video",
+      url: diaryVideos[key],
+      poster: diaryImages[posterKey].default.src,
+      alt: media.alt,
+      width,
+      height,
+    };
   }
   const key = Object.keys(diaryImages).find((k) => k.endsWith(`/${file}`));
   if (!key) {
@@ -213,6 +226,7 @@ let skinIndex = 0;
                     >
                       <video
                         src={video.url}
+                        poster={video.poster}
                         controls
                         preload="metadata"
                         aria-label={video.alt || `${name}, ${day.label} ${e.time}`}

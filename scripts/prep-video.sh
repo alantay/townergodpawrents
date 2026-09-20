@@ -47,4 +47,11 @@ width=$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of defa
 height=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of default=noprint_wrappers=1:nokey=1 "$out")
 printf '{"width":%s,"height":%s}\n' "$width" "$height" > "$out.json"
 
+# Mobile Safari only fetches a clip's metadata, never a frame, so a
+# posterless <video> sits there as an empty grey box until it's tapped. A
+# still of the first frame, saved as a second sidecar, gives every browser
+# something to show — and means the clip itself stays undownloaded until
+# someone actually presses play.
+ffmpeg -loglevel error -i "$out" -frames:v 1 -q:v 4 "$out.jpg"
+
 echo "./$guest/$guest-$slug.mp4 (${size_kb}KB)"

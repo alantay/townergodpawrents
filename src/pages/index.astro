@@ -54,7 +54,7 @@ function resolveDiaryVideo(
   src: string,
   guestId: string,
   when: string,
-): { src: string; width: number; height: number } {
+): { src: string; poster: string; width: number; height: number } {
   const file = src.split("/").pop()!;
   const key = Object.keys(diaryVideos).find((k) => k.endsWith(`/${file}`));
   if (!key) {
@@ -68,8 +68,14 @@ function resolveDiaryVideo(
       `[home] ${guestId}, ${when}: no "${file}.json" dimensions sidecar — re-run scripts/prep-video.sh`,
     );
   }
+  const posterKey = Object.keys(diaryImages).find((k) => k.endsWith(`/${file}.jpg`));
+  if (!posterKey) {
+    throw new Error(
+      `[home] ${guestId}, ${when}: no "${file}.jpg" poster sidecar — re-run scripts/prep-video.sh`,
+    );
+  }
   const { width, height } = diaryVideoDims[dimsKey];
-  return { src: diaryVideos[key], width, height };
+  return { src: diaryVideos[key], poster: diaryImages[posterKey].default.src, width, height };
 }
 
 const entries = await getCollection("guests");
@@ -507,6 +513,8 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
                 vw +
                 'px)"><video src="' +
                 esc(video.src) +
+                '" poster="' +
+                esc(video.poster) +
                 '" controls preload="metadata" aria-label="' +
                 esc(video.alt || e.who + ", " + e.time) +
                 '" class="block h-auto w-full rounded-[10px]" style="aspect-ratio:' +

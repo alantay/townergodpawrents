@@ -53,6 +53,11 @@ scripts/prep-video.sh <guest> <path-to-video> <short-slug>
 # → ./tiny/tiny-zoomies.mp4 (12000KB)
 ```
 
+It also writes two sidecars next to the clip — `.mp4.json` (dimensions) and
+`.mp4.jpg` (a still of the first frame, used as the video's poster so phones
+show something before you press play). Leave both alone; the build errors out
+if either goes missing.
+
 The slug is 2–4 words taken from the moment (`climbing-wall`, `lap-nap`).
 
 **Markdown:** in `src/content/guests/<guest>.md`:
