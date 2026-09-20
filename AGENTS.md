@@ -19,9 +19,13 @@ Personal, playful, warm. A light sprinkle of Singlish, the way you'd talk to a n
 
 Issues live as GitHub Issues in `alantay/townergodpawrents`, via the `gh` CLI. See `docs/agents/issue-tracker.md`.
 
+### Triage labels
+
+Triage uses the canonical state labels: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, and `wontfix`. See `docs/agents/triage-labels.md`.
+
 ### Domain docs
 
-Single-context layout (`CONTEXT.md` + `docs/adr/` at the repo root, once they exist). See `docs/agents/domain.md`.
+Single-context layout (`CONTEXT.md` + `docs/adr/` at the repo root). See `docs/agents/domain.md`.
 
 ## Development
 
