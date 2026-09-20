@@ -15,7 +15,7 @@ stays:
 
 ### 5pm
 
-Tiny insisted Alan and Weiwen stop napping and bring her to work. There were balls to be picked up at the dog run, and she didn't trust her lazy coworkers to do it right.
+Tiny insisted that Alan and Weiwen stop napping and bring her to work. There are balls to be picked up at the dog run, and her lazy coworkers can't be trusted to do the job right.
 
 ![Tiny looking ready for work at the dog run](./tiny/tiny-dog-run-work.jpg)
 
