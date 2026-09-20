@@ -11,6 +11,12 @@ stays:
     checkOut: 2026-09-23
 ---
 
+## 20 Sep
+
+### 8:20am
+
+On the way home from the carpark, Tiny met Milk, so we turned back for a second round of ball play.
+
 ## 19 Sep
 
 ### 11am
