@@ -79,6 +79,13 @@ a:focus-visible {
   transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), filter 200ms ease;
 }
 
+/* Video plays upright on hover (see below), so it stays upright untilted
+   too — otherwise pressing play snaps the card straight, then it tilts
+   back the moment you move off it to watch. */
+.diary-entry-card--video {
+  transform: rotate(0deg);
+}
+
 .diary-entry-card:hover,
 .diary-entry-card:focus-visible {
   transform: rotate(0deg) translateY(-2px);
