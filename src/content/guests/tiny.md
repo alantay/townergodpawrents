@@ -13,6 +13,12 @@ stays:
 
 ## 20 Sep
 
+### 2pm
+
+Reinforcing Tiny's "Place" command. She still likes to take shortcuts, like just touching the bed and considering it done.
+
+![Tiny practising the Place command on her dog bed](./tiny/tiny-place-shortcut.mp4)
+
 ### 8:20am
 
 On the way home from the carpark, Tiny met Milk, so we turned back for a second round of ball play.
