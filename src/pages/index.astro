@@ -553,7 +553,9 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
               esc(e.id) +
               '" class="block card-keyline' +
               (darkSkin ? " card-keyline--dark" : "") +
-              ' diary-entry-card rounded-[24px] p-[17px_19px]" style="background:' +
+              ' diary-entry-card' +
+              (video ? " diary-entry-card--video" : "") +
+              ' rounded-[24px] p-[17px_19px]" style="background:' +
               sk.bg +
               ";color:" +
               sk.fg +
