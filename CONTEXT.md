@@ -17,12 +17,16 @@ One calendar day within a stay, written as a `## 13 Sep` divider. The year is no
 _Avoid_: Date section, day entry
 
 **Entry**:
-One timestamped moment inside a diary day, written as a `### 9:50am` heading and the words under it. May be one or two prints with no words.
+One timestamped moment inside a diary day, written as a `### 9:50am` heading and the words under it. May be up to four prints, or one clip, with no words.
 _Avoid_: Post, note, log line, update
 
 **Print**:
-A photo attached to an entry, shown on the diary page as a tilted snapshot on a cream mat. An entry can have up to two prints. Deliberately a different photo language from the cut-outs.
+A photo attached to an entry, shown on the diary page as a tilted snapshot on a cream mat. An entry can have up to four prints. Deliberately a different photo language from the cut-outs.
 _Avoid_: Image, snap, thumbnail
+
+**Clip**:
+A short video attached to an entry, shown on the diary page on a tilted cream mat like a print, but with native playback controls instead of a click-to-zoom (no autoplay). An entry has either prints or one clip, never both.
+_Avoid_: Video, movie, reel
 
 **Cut-out**:
 A guest's own portrait — a photo cut from its background, used in the hero and the past-guests grid. One per guest.

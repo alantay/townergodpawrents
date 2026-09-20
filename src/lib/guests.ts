@@ -16,19 +16,23 @@ export interface Stay {
   checkOut: string; // YYYY-MM-DD
 }
 
-export interface DiaryPhoto {
+export type MediaKind = "photo" | "video";
+
+export interface DiaryMedia {
   /** Path exactly as written in the markdown, e.g. "./ebi-3-50pm.jpg". */
   src: string;
   /** Alt text from the markdown; empty when the author left it blank. */
   alt: string;
+  kind: MediaKind;
 }
 
 /** One timestamped moment: a `### 9:50am` heading and what's under it. */
 export interface DiaryEntry {
   time: string; // e.g. "9:50am"
   text: string;
-  /** Zero to two prints, in the order they appear in the markdown. */
-  photos: DiaryPhoto[];
+  /** Photos (up to four) in the order they appear in the markdown, or a
+   * single video — never both, see parseDiary. */
+  media: DiaryMedia[];
 }
 
 /** One calendar day of a stay: a `## 13 Sep` divider and its entries. */
@@ -132,8 +136,16 @@ export function stayLabel(s: Stay): string {
 
 // ---- diary ----
 
-// A markdown image inside an entry. An entry can carry up to four prints.
+// A markdown image inside an entry. An entry can carry up to four prints,
+// or a single video — reuses the same `![alt](path)` syntax, and the file
+// extension decides whether it plays as a photo or a video.
 const IMAGE_RE = /!\[([^\]]*)\]\(\s*([^)\s]+)(?:\s+"[^"]*")?\s*\)/g;
+
+const VIDEO_EXT_RE = /\.mp4$/i;
+
+function mediaKind(src: string): MediaKind {
+  return VIDEO_EXT_RE.test(src) ? "video" : "photo";
+}
 
 /** `## 13 Sep` day dividers and `### 9:50am` entry headings, in one pass. */
 const HEADING_RE = /^(#{2,3})\s+(.+?)\s*$/gm;
@@ -181,7 +193,9 @@ function resolveDay(label: string, stays: Stay[], guestId: string): string {
  *
  * Convention: `## 13 Sep` day dividers, `### 9:50am` entries under them,
  * newest first. One to four `![alt](./photo.jpg)` lines anywhere in an entry
- * become its prints. A photo on its own is a valid entry — some moments
+ * become its prints; a `.mp4` line becomes a video instead, and an entry
+ * can only carry one — a photo (or photos) on its own, or a single video,
+ * never both. A photo or video on its own is a valid entry — some moments
  * don't need words.
  */
 export function parseDiary(body: string, stays: Stay[], guestId: string): DiaryDay[] {
@@ -209,13 +223,17 @@ export function parseDiary(body: string, stays: Stay[], guestId: string): DiaryD
 
     const raw = body.slice(start, end);
     const matches = [...raw.matchAll(IMAGE_RE)];
-    if (matches.length > 4) {
-      throw new Error(`[guests] ${guestId}: entry "${title}" has ${matches.length} prints — use at most four`);
+    const media = matches.map((match) => ({ src: match[2], alt: match[1].trim(), kind: mediaKind(match[2]) }));
+    const videos = media.filter((m) => m.kind === "video");
+    if (videos.length > 1 || (videos.length === 1 && media.length > 1)) {
+      throw new Error(`[guests] ${guestId}: entry "${title}" mixes a video with other media — use one photo or one video`);
     }
-    const photos = matches.map((match) => ({ src: match[2], alt: match[1].trim() }));
+    if (media.length > 4) {
+      throw new Error(`[guests] ${guestId}: entry "${title}" has ${media.length} prints — use at most four`);
+    }
     const text = raw.replace(IMAGE_RE, " ").trim().replace(/\s+/g, " ");
 
-    if (text || photos.length > 0) current.entries.push({ time: title, text, photos });
+    if (text || media.length > 0) current.entries.push({ time: title, text, media });
   }
 
   // Days newest first, whatever order they were written in. Entries keep the

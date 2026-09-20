@@ -7,7 +7,7 @@ Alan tells you a moment, sometimes with one or two photos. You polish the words 
 - **Guest**: the live one if only one dog is here today (check `stays` in `src/content/guests/*.md` against today in Asia/Singapore). Otherwise ask.
 - **Time**: use what he says. If he doesn't give one, use now in SGT (`TZ=Asia/Singapore date "+%-I:%M%p"`, lowercased, and drop `:00`, so `9am` and `2:45pm`).
 - **Day**: today in SGT unless he says otherwise. It must fall inside one of the guest's stays, or the build fails. If it doesn't, ask whether a stay needs extending.
-- **Photos**: optional; use up to four per entry. A photo on its own is a valid entry.
+- **Media**: optional; either up to four photos, or one short video, per entry. Never mix a video with a photo in the same entry. A photo or video on its own is a valid entry.
 
 ## 2. Polish the words (in chat, before touching any file)
 
@@ -46,12 +46,19 @@ scripts/prep-photo.sh <guest> <path-to-photo> <short-slug>
 # → ./tiny/tiny-manja-moment.jpg (480KB)
 ```
 
+**Videos:** put the raw clip (`.mp4` or `.mov`, straight off the phone) through the script. It transcodes and compresses automatically.
+
+```sh
+scripts/prep-video.sh <guest> <path-to-video> <short-slug>
+# → ./tiny/tiny-zoomies.mp4 (12000KB)
+```
+
 The slug is 2–4 words taken from the moment (`climbing-wall`, `lap-nap`).
 
 **Markdown:** in `src/content/guests/<guest>.md`:
 - Days are `## 16 Sep`, newest day at the top. If today's divider doesn't exist yet, add it above the previous newest day.
 - Entries are `### 12:10pm`, newest first within the day. Put the new one in time order.
-- Leave a blank line between the heading, the text and each image. Put at most four images under an entry.
+- Leave a blank line between the heading, the text and each image. Put at most four images under an entry, or a single video (same `![alt](./path)` syntax — the `.mp4` extension is what tells it apart from a photo).
 
 ```md
 ### 10:30pm

@@ -17,15 +17,21 @@ import {
   pickToday,
 } from "../lib/guests";
 
-// Diary photos are referenced from inside the markdown body, so they never
-// pass through Astro's markdown image pipeline on their own — glob the
-// folder to optimize them anyway. Mirrors the same helper in
-// src/pages/guests/[id].astro; the homepage teaser needs the same photos
+// Diary media is referenced from inside the markdown body, so it never
+// passes through Astro's markdown image pipeline on its own — glob the
+// folder to optimize photos anyway (videos aren't optimized by Astro, just
+// resolved to a built URL). Mirrors the same helper in
+// src/pages/guests/[id].astro; the homepage teaser needs the same media
 // pre-resolved to plain URLs, since the card markup is built client-side.
 const diaryImages = import.meta.glob<{ default: ImageMetadata }>(
   "../content/guests/**/*.{jpeg,jpg,png,webp,avif}",
   { eager: true },
 );
+const diaryVideos = import.meta.glob<string>("../content/guests/**/*.mp4", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
 
 function resolveDiaryPhoto(src: string, guestId: string, when: string): ImageMetadata {
   const file = src.split("/").pop()!;
@@ -36,6 +42,17 @@ function resolveDiaryPhoto(src: string, guestId: string, when: string): ImageMet
     );
   }
   return diaryImages[key].default;
+}
+
+function resolveDiaryVideo(src: string, guestId: string, when: string): string {
+  const file = src.split("/").pop()!;
+  const key = Object.keys(diaryVideos).find((k) => k.endsWith(`/${file}`));
+  if (!key) {
+    throw new Error(
+      `[home] ${guestId}, ${when}: no video "${file}" in src/content/guests/ (written as "${src}")`,
+    );
+  }
+  return diaryVideos[key];
 }
 
 const entries = await getCollection("guests");
@@ -63,9 +80,9 @@ const guests = entries.map((e) => {
 // Asia/Singapore timezone at load time — see the inline script below.
 // Cut-outs aren't included here; they're pre-optimized at build time into the
 // hidden #photo-bank and the client just re-parents the <img> nodes it needs,
-// so no image processing has to happen in the browser. Diary prints ARE
+// so no image processing has to happen in the browser. Diary media IS
 // included now (as plain resolved URLs, since the client builds the card
-// markup itself) — the teaser shows today's whole day, photos and all.
+// markup itself) — the teaser shows today's whole day, media and all.
 const guestsForClient = await Promise.all(
   guests.map(async ({ photo, days, ...rest }) => ({
     ...rest,
@@ -77,14 +94,18 @@ const guestsForClient = await Promise.all(
             return {
               time: e.time,
               text: e.text,
-              photos: await Promise.all(e.photos.map(async (photo) => {
-                const meta = resolveDiaryPhoto(photo.src, rest.id, `${d.label} ${e.time}`);
+              media: await Promise.all(e.media.map(async (m) => {
+                if (m.kind === "video") {
+                  return { kind: "video" as const, src: resolveDiaryVideo(m.src, rest.id, `${d.label} ${e.time}`), alt: m.alt };
+                }
+                const meta = resolveDiaryPhoto(m.src, rest.id, `${d.label} ${e.time}`);
                 const img = await getImage({ src: meta, width: Math.min(meta.width, 1160) });
                 return {
+                  kind: "photo" as const,
                   src: img.src,
                   width: img.attributes.width,
                   height: img.attributes.height,
-                  alt: photo.alt,
+                  alt: m.alt,
                 };
               })),
             };
@@ -452,20 +473,33 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
         var raw = [];
         live.forEach((d) =>
           dayOn(d, today).entries.forEach((e) =>
-            raw.push({ time: e.time, text: e.text, photos: e.photos, who: d.name, id: d.id, bgColor: d.bgColor, key: today + " " + e.time })
+            raw.push({ time: e.time, text: e.text, media: e.media, who: d.name, id: d.id, bgColor: d.bgColor, key: today + " " + e.time })
           )
         );
         var cards = raw
           .map((e, i) => {
             var sk = skin(e.bgColor, e.id);
             var darkSkin = luma(sk.bg) < 110;
-            var photoHTML = "";
-            if (e.photos.length) {
-              photoHTML =
+            var video = e.media.filter((m) => m.kind === "video")[0];
+            var mediaHTML = "";
+            if (video) {
+              var vw = printWidth(16, 9);
+              mediaHTML =
+                '<div class="diary-print mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px]" style="width:min(100%,' +
+                vw +
+                "px);transform:rotate(" +
+                printTilt(i) +
+                ')"><video src="' +
+                esc(video.src) +
+                '" controls preload="metadata" aria-label="' +
+                esc(video.alt || e.who + ", " + e.time) +
+                '" class="block h-auto w-full rounded-[10px]" style="aspect-ratio:16/9"></video></div>';
+            } else if (e.media.length) {
+              mediaHTML =
                 '<div class="diary-prints' +
-                (e.photos.length === 2 ? " diary-prints--pair" : "") +
+                (e.media.length === 2 ? " diary-prints--pair" : "") +
                 ' mt-[15px]">' +
-                e.photos.map(function (photo, photoIndex) {
+                e.media.map(function (photo, photoIndex) {
                   var w = printWidth(photo.width, photo.height);
                   return (
                     '<div class="diary-print block mx-auto bg-cream card-keyline rounded-[16px] p-[7px]" style="width:min(100%,' +
@@ -489,7 +523,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
             }
             var textHTML = e.text
               ? '<p class="' +
-                (e.photos.length ? "mt-4" : "mt-2") +
+                (e.media.length ? "mt-4" : "mt-2") +
                 ' text-base leading-relaxed text-pretty">' +
                 esc(e.text) +
                 "</p>"
@@ -513,7 +547,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
               (pair ? " · " + esc(e.who) : "") +
               (isNew(e.id, e.key) ? ' <span class="new-tag ml-1 align-[1px]">New</span>' : "") +
               "</div>" +
-              photoHTML +
+              mediaHTML +
               textHTML +
               "</a>"
             );

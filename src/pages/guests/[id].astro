@@ -18,25 +18,43 @@ import {
   printTilt,
   printWidth,
   todaySGT,
+  type DiaryMedia,
 } from "../../lib/guests";
 
-// Diary photos are referenced from inside the markdown body, which parseDiary
-// reads as raw text — so they never pass through Astro's markdown image
-// pipeline. Globbing the folder here gets them optimized anyway.
+// Diary media is referenced from inside the markdown body, which parseDiary
+// reads as raw text — so it never passes through Astro's markdown image
+// pipeline. Globbing the folder here gets photos optimized anyway; videos
+// aren't optimized by Astro, so they're just resolved to a built URL.
 const diaryImages = import.meta.glob<{ default: ImageMetadata }>(
   "../../content/guests/**/*.{jpeg,jpg,png,webp,avif}",
   { eager: true },
 );
+const diaryVideos = import.meta.glob<string>("../../content/guests/**/*.mp4", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
 
-function resolveDiaryPhoto(src: string, guestId: string, when: string): ImageMetadata {
-  const file = src.split("/").pop()!;
+type ResolvedMedia = { kind: "photo"; img: ImageMetadata; alt: string } | { kind: "video"; url: string; alt: string };
+
+function resolveDiaryMedia(media: DiaryMedia, guestId: string, when: string): ResolvedMedia {
+  const file = media.src.split("/").pop()!;
+  if (media.kind === "video") {
+    const key = Object.keys(diaryVideos).find((k) => k.endsWith(`/${file}`));
+    if (!key) {
+      throw new Error(
+        `[guests] ${guestId}, ${when}: no video "${file}" in src/content/guests/ (written as "${media.src}")`,
+      );
+    }
+    return { kind: "video", url: diaryVideos[key], alt: media.alt };
+  }
   const key = Object.keys(diaryImages).find((k) => k.endsWith(`/${file}`));
   if (!key) {
     throw new Error(
-      `[guests] ${guestId}, ${when}: no image "${file}" in src/content/guests/ (written as "${src}")`,
+      `[guests] ${guestId}, ${when}: no image "${file}" in src/content/guests/ (written as "${media.src}")`,
     );
   }
-  return diaryImages[key].default;
+  return { kind: "photo", img: diaryImages[key].default, alt: media.alt };
 }
 
 export async function getStaticPaths() {
@@ -157,10 +175,8 @@ let skinIndex = 0;
               const i = skinIndex++;
               const sk = diarySkin(bgColor, i);
               const darkSkin = i % 4 > 1;
-              const prints = e.photos.map((photo) => ({
-                ...photo,
-                img: resolveDiaryPhoto(photo.src, entry.id, `${day.label} ${e.time}`),
-              }));
+              const prints = e.media.map((m) => resolveDiaryMedia(m, entry.id, `${day.label} ${e.time}`));
+              const video = prints.find((p) => p.kind === "video");
               return (
                 <div class="reveal-card">
                   <article
@@ -175,19 +191,35 @@ let skinIndex = 0;
                     <span class="new-tag" data-entry-key={`${day.iso} ${e.time}`} hidden>New</span>
                   </div>
 
-                  {prints.length > 0 && (
+                  {video && (
+                    <div
+                      class="diary-print mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px]"
+                      style={`width:min(100%,${printWidth(16, 9)}px);transform:rotate(${printTilt(i)})`}
+                    >
+                      <video
+                        src={video.url}
+                        controls
+                        preload="metadata"
+                        aria-label={video.alt || `${name}, ${day.label} ${e.time}`}
+                        class="block h-auto w-full rounded-[10px]"
+                        style="aspect-ratio:16/9"
+                      />
+                    </div>
+                  )}
+
+                  {!video && prints.length > 0 && (
                     <div class:list={{ "diary-prints": true, "diary-prints--pair": prints.length === 2, "diary-prints--quad": prints.length === 4, "mt-[15px]": true }}>
-                      {prints.map(({ img, alt }, printIndex) => (
+                      {prints.map((p, printIndex) => p.kind === "photo" && (
                         <button
                           type="button"
                           aria-label={prints.length === 1 ? "Enlarge photo" : `Enlarge photo ${printIndex + 1}`}
                           class="diary-print block mx-auto bg-cream card-keyline rounded-[16px] p-[7px] cursor-zoom-in"
-                          style={`width:min(100%,${printWidth(img.width, img.height)}px);transform:rotate(${printTilt(i + printIndex)})`}
+                          style={`width:min(100%,${printWidth(p.img.width, p.img.height)}px);transform:rotate(${printTilt(i + printIndex)})`}
                         >
                           <Image
-                            src={img}
-                            alt={alt || `${name}, ${day.label} ${e.time}`}
-                            width={Math.min(img.width, 1160)}
+                            src={p.img}
+                            alt={p.alt || `${name}, ${day.label} ${e.time}`}
+                            width={Math.min(p.img.width, 1160)}
                             loading="lazy"
                             decoding="async"
                             class="block h-auto w-full rounded-[10px]"
