@@ -347,6 +347,12 @@ a:focus-visible {
   background: var(--color-lime);
 }
 
+.day-chip.active {
+  color: var(--color-ink);
+  background: var(--color-lime);
+  border-color: var(--color-lime);
+}
+
 /* Anchored days land below the sticky strip, not under it. */
 .diary-day {
   scroll-margin-top: 4rem;

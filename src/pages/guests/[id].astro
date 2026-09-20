@@ -139,7 +139,7 @@ let skinIndex = 0;
     {days.length > 1 && (
       <nav class="day-strip" aria-label="Jump to a day">
         {days.map((day) => (
-          <a href={`#day-${day.iso}`} class="day-chip">{day.label}</a>
+          <a href={`#day-${day.iso}`} class="day-chip" data-day={day.iso}>{day.label}</a>
         ))}
       </nav>
     )}
@@ -208,6 +208,46 @@ let skinIndex = 0;
         </section>
       ))}
     </div>
+
+    {days.length > 1 && (
+      <script is:inline>
+        (function () {
+          var strip = document.querySelector(".day-strip");
+          var chips = document.querySelectorAll(".day-chip");
+          var sections = document.querySelectorAll(".diary-day");
+          if (!strip || !chips.length || !sections.length) return;
+
+          var chipByDay = {};
+          chips.forEach(function (c) { chipByDay[c.dataset.day] = c; });
+
+          var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          var current = null;
+
+          function setActive(iso) {
+            chips.forEach(function (c) { c.classList.toggle("active", c.dataset.day === iso); });
+            var chip = chipByDay[iso];
+            if (!chip) return;
+            var target = chip.offsetLeft - (strip.clientWidth - chip.offsetWidth) / 2;
+            strip.scrollTo({ left: Math.max(0, target), behavior: reduceMotion ? "auto" : "smooth" });
+          }
+
+          var observer = new IntersectionObserver(
+            function (entries) {
+              var visible = entries.filter(function (e) { return e.isIntersecting; });
+              if (visible.length === 0) return;
+              visible.sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; });
+              var iso = visible[0].target.id.replace("day-", "");
+              if (iso !== current) {
+                current = iso;
+                setActive(iso);
+              }
+            },
+            { rootMargin: "-35% 0px -55% 0px", threshold: 0 },
+          );
+          sections.forEach(function (s) { observer.observe(s); });
+        })();
+      </script>
+    )}
     </>
   )}
 
