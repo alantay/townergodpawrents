@@ -333,6 +333,7 @@ a:focus-visible {
 }
 
 .day-chip {
+  position: relative;
   flex: none;
   padding: 0.3rem 0.8rem;
   border: 1.5px solid var(--color-line);
@@ -340,6 +341,15 @@ a:focus-visible {
   font-size: 13px;
   font-weight: 600;
   transition: background-color 200ms ease;
+}
+
+/* Invisible vertical hit-area padding so the compact chip meets a ~44px
+   touch target without growing its visible size. Fits inside the
+   day-strip's own padding, so it doesn't get clipped by the strip's scroll. */
+.day-chip::before {
+  content: "";
+  position: absolute;
+  inset: -6px 0;
 }
 
 .day-chip:hover {
@@ -402,8 +412,8 @@ a:focus-visible {
   position: fixed;
   top: calc(env(safe-area-inset-top, 0px) + 0.75rem);
   right: 0.75rem;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: 999px;
   background: var(--color-cream);
   color: var(--color-ink);

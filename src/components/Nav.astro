@@ -17,7 +17,7 @@ const isGuests = Astro.url.pathname === "/guests";
     href="/guests"
     aria-current={isGuests ? "page" : undefined}
     class:list={[
-      "font-sans font-semibold text-[13px] border-[1.5px] border-line px-[13px] py-1.5 rounded-full transition-all duration-200 hover:bg-lime hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-3 focus-visible:ring-offset-paper flex-none",
+      "relative font-sans font-semibold text-[13px] border-[1.5px] border-line px-[13px] py-1.5 rounded-full transition-all duration-200 hover:bg-lime hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-3 focus-visible:ring-offset-paper flex-none before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:inset-x-0",
       { "bg-lime border-ink": isGuests },
     ]}
   >
