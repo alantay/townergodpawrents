@@ -21,6 +21,7 @@ dir="$root/src/content/guests/$guest"
 out="$dir/$guest-$slug.mp4"
 
 command -v ffmpeg >/dev/null || { echo "ffmpeg not found — brew install ffmpeg" >&2; exit 1; }
+command -v ffprobe >/dev/null || { echo "ffprobe not found — brew install ffmpeg" >&2; exit 1; }
 [ -f "$root/src/content/guests/$guest.md" ] || { echo "no guest \"$guest\" in src/content/guests/" >&2; exit 1; }
 [ -f "$src" ] || { echo "no file at $src" >&2; exit 1; }
 case "$src" in
@@ -38,4 +39,12 @@ size_kb=$(du -k "$out" | cut -f1)
 if [ "$size_kb" -gt 20480 ]; then
   echo "warning: $out is ${size_kb}KB even after compression — consider trimming it" >&2
 fi
+
+# The site can't run ffprobe at Vercel build time, so the actual encoded
+# dimensions (portrait clips included) are captured here as a sidecar file
+# and read back in as plain JSON when sizing the diary card.
+width=$(ffprobe -v error -select_streams v:0 -show_entries stream=width -of default=noprint_wrappers=1:nokey=1 "$out")
+height=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of default=noprint_wrappers=1:nokey=1 "$out")
+printf '{"width":%s,"height":%s}\n' "$width" "$height" > "$out.json"
+
 echo "./$guest/$guest-$slug.mp4 (${size_kb}KB)"

@@ -34,8 +34,16 @@ const diaryVideos = import.meta.glob<string>("../../content/guests/**/*.mp4", {
   query: "?url",
   import: "default",
 });
+// ffprobe isn't available at Vercel build time, so prep-video.sh captures the
+// encoded dimensions (portrait clips included) as a sidecar JSON file.
+const diaryVideoDims = import.meta.glob<{ width: number; height: number }>(
+  "../../content/guests/**/*.mp4.json",
+  { eager: true, import: "default" },
+);
 
-type ResolvedMedia = { kind: "photo"; img: ImageMetadata; alt: string } | { kind: "video"; url: string; alt: string };
+type ResolvedMedia =
+  | { kind: "photo"; img: ImageMetadata; alt: string }
+  | { kind: "video"; url: string; alt: string; width: number; height: number };
 
 function resolveDiaryMedia(media: DiaryMedia, guestId: string, when: string): ResolvedMedia {
   const file = media.src.split("/").pop()!;
@@ -46,7 +54,14 @@ function resolveDiaryMedia(media: DiaryMedia, guestId: string, when: string): Re
         `[guests] ${guestId}, ${when}: no video "${file}" in src/content/guests/ (written as "${media.src}")`,
       );
     }
-    return { kind: "video", url: diaryVideos[key], alt: media.alt };
+    const dimsKey = Object.keys(diaryVideoDims).find((k) => k.endsWith(`/${file}.json`));
+    if (!dimsKey) {
+      throw new Error(
+        `[guests] ${guestId}, ${when}: no "${file}.json" dimensions sidecar — re-run scripts/prep-video.sh`,
+      );
+    }
+    const { width, height } = diaryVideoDims[dimsKey];
+    return { kind: "video", url: diaryVideos[key], alt: media.alt, width, height };
   }
   const key = Object.keys(diaryImages).find((k) => k.endsWith(`/${file}`));
   if (!key) {
@@ -194,7 +209,7 @@ let skinIndex = 0;
                   {video && (
                     <div
                       class="diary-print mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px]"
-                      style={`width:min(100%,${printWidth(16, 9)}px);transform:rotate(${printTilt(i)})`}
+                      style={`width:min(100%,${printWidth(video.width, video.height)}px)`}
                     >
                       <video
                         src={video.url}
@@ -202,7 +217,7 @@ let skinIndex = 0;
                         preload="metadata"
                         aria-label={video.alt || `${name}, ${day.label} ${e.time}`}
                         class="block h-auto w-full rounded-[10px]"
-                        style="aspect-ratio:16/9"
+                        style={`aspect-ratio:${video.width}/${video.height}`}
                       />
                     </div>
                   )}

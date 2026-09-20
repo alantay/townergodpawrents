@@ -32,6 +32,12 @@ const diaryVideos = import.meta.glob<string>("../content/guests/**/*.mp4", {
   query: "?url",
   import: "default",
 });
+// ffprobe isn't available at Vercel build time, so prep-video.sh captures the
+// encoded dimensions (portrait clips included) as a sidecar JSON file.
+const diaryVideoDims = import.meta.glob<{ width: number; height: number }>(
+  "../content/guests/**/*.mp4.json",
+  { eager: true, import: "default" },
+);
 
 function resolveDiaryPhoto(src: string, guestId: string, when: string): ImageMetadata {
   const file = src.split("/").pop()!;
@@ -44,7 +50,11 @@ function resolveDiaryPhoto(src: string, guestId: string, when: string): ImageMet
   return diaryImages[key].default;
 }
 
-function resolveDiaryVideo(src: string, guestId: string, when: string): string {
+function resolveDiaryVideo(
+  src: string,
+  guestId: string,
+  when: string,
+): { src: string; width: number; height: number } {
   const file = src.split("/").pop()!;
   const key = Object.keys(diaryVideos).find((k) => k.endsWith(`/${file}`));
   if (!key) {
@@ -52,7 +62,14 @@ function resolveDiaryVideo(src: string, guestId: string, when: string): string {
       `[home] ${guestId}, ${when}: no video "${file}" in src/content/guests/ (written as "${src}")`,
     );
   }
-  return diaryVideos[key];
+  const dimsKey = Object.keys(diaryVideoDims).find((k) => k.endsWith(`/${file}.json`));
+  if (!dimsKey) {
+    throw new Error(
+      `[home] ${guestId}, ${when}: no "${file}.json" dimensions sidecar — re-run scripts/prep-video.sh`,
+    );
+  }
+  const { width, height } = diaryVideoDims[dimsKey];
+  return { src: diaryVideos[key], width, height };
 }
 
 const entries = await getCollection("guests");
@@ -96,7 +113,8 @@ const guestsForClient = await Promise.all(
               text: e.text,
               media: await Promise.all(e.media.map(async (m) => {
                 if (m.kind === "video") {
-                  return { kind: "video" as const, src: resolveDiaryVideo(m.src, rest.id, `${d.label} ${e.time}`), alt: m.alt };
+                  const video = resolveDiaryVideo(m.src, rest.id, `${d.label} ${e.time}`);
+                  return { kind: "video" as const, ...video, alt: m.alt };
                 }
                 const meta = resolveDiaryPhoto(m.src, rest.id, `${d.label} ${e.time}`);
                 const img = await getImage({ src: meta, width: Math.min(meta.width, 1160) });
@@ -483,17 +501,19 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
             var video = e.media.filter((m) => m.kind === "video")[0];
             var mediaHTML = "";
             if (video) {
-              var vw = printWidth(16, 9);
+              var vw = printWidth(video.width, video.height);
               mediaHTML =
                 '<div class="diary-print mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px]" style="width:min(100%,' +
                 vw +
-                "px);transform:rotate(" +
-                printTilt(i) +
-                ')"><video src="' +
+                'px)"><video src="' +
                 esc(video.src) +
                 '" controls preload="metadata" aria-label="' +
                 esc(video.alt || e.who + ", " + e.time) +
-                '" class="block h-auto w-full rounded-[10px]" style="aspect-ratio:16/9"></video></div>';
+                '" class="block h-auto w-full rounded-[10px]" style="aspect-ratio:' +
+                video.width +
+                "/" +
+                video.height +
+                '"></video></div>';
             } else if (e.media.length) {
               mediaHTML =
                 '<div class="diary-prints' +
