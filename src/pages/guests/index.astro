@@ -70,7 +70,7 @@ const returningGuests = guests.filter((g) => g.stays.length > 1).length;
             </div>
             <div class="p-[11px_13px_14px] bg-cream">
               <div class="font-serif text-[22px] leading-none">{g.name}</div>
-              <div class="mt-1 flex items-baseline justify-between gap-2 text-[13px] text-muted">
+              <div class="mt-1 flex flex-col gap-0.5 text-[13px] text-muted">
                 <span>{g.breed}</span>
                 <span class="archive-date">{stayLabel(latestStay(g))}</span>
               </div>
