@@ -15,7 +15,7 @@ stays:
 
 ### 10pm
 
-It was a rainy day, so Tiny had to miss her shift at the dog run. Weiwen found her a work-from-home job instead: finding hidden balls around the house. After a full day on the job, Tiny looked even more tired than after a dog run.
+It was a rainy day, so Tiny had to miss her shift at the dog run. Weiwen found her a work-from-home job instead: finding hidden balls around the house. By 10pm, Tiny was completely knocked out.
 
 ![Tiny lying sleepily on her bed beside the curtains](./tiny/tiny-rainy-day-rest.jpg)
 
