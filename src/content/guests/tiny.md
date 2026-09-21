@@ -17,6 +17,8 @@ stays:
 
 Lunch was still a while away, so Tiny started early in her dreams. Nom nom nom.
 
+First up, an appetiser of cheese, followed by chunks of steak, then ice cream to finish.
+
 ![Tiny asleep, moving her mouth and licking](./tiny/tiny-nom-nom.mp4)
 
 ### 8:45am
