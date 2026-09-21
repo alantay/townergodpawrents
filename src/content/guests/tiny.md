@@ -13,6 +13,12 @@ stays:
 
 ## 21 Sep
 
+### 4:34pm
+
+Lunch was still a while away, so Tiny started early in her dreams. Nom nom nom.
+
+![Tiny asleep, moving her mouth and licking](./tiny/tiny-nom-nom.mp4)
+
 ### 8:45am
 
 Someone was feeling needy today.
