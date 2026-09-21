@@ -13,7 +13,7 @@ stays:
 
 ## 21 Sep
 
-### 4:34pm
+### 11:20am
 
 Lunch was still a while away, so Tiny started early in her dreams. Nom nom nom.
 
