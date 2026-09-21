@@ -13,6 +13,16 @@ stays:
 
 ## 21 Sep
 
+### 10pm
+
+It was a rainy day, so Tiny had to miss her shift at the dog run. Weiwen found her a work-from-home job instead: finding hidden balls around the house. After a full day on the job, Tiny looked even more tired than after a dog run.
+
+![Tiny lying sleepily on her bed beside the curtains](./tiny/tiny-rainy-day-rest.jpg)
+
+![Tiny curled behind the curtains after searching for her ball](./tiny/tiny-curtain-hideout.jpg)
+
+![Tiny sprawled belly-up between the curtains](./tiny/tiny-post-search-sprawl.jpg)
+
 ### 11:20am
 
 Lunch was still a while away, so Tiny started early in her dreams.
