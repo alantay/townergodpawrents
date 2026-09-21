@@ -11,6 +11,14 @@ stays:
     checkOut: 2026-09-23
 ---
 
+## 21 Sep
+
+### 8:45am
+
+Someone was feeling needy today.
+
+![Tiny asleep across a person's lap](./tiny/tiny-needy-morning.jpg)
+
 ## 20 Sep
 
 ### 5pm
