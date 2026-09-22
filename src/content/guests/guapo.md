@@ -7,6 +7,6 @@ showLive: true
 badge: Professional sleeper
 tagline: recall sold separately, million-dollar smile included
 stays:
-  - checkIn: 2026-12-06
-    checkOut: 2027-01-03
+  - checkIn: 2026-09-29
+    checkOut: 2026-10-13
 ---
