@@ -13,6 +13,10 @@ stays:
 
 ## 22 Sep
 
+### 8pm
+
+We got Tiny to “place”, then hid snacks around the house. Once we released her, we held out a hand for her to smell, and she went off to find the snacks. Tiny’s nose worked fantastically well. It was delightful to see her put it to work.
+
 ### 4:25pm
 
 "This is no good," Tiny says. "The smell of rain."
