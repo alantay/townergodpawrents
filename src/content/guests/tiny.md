@@ -11,6 +11,14 @@ stays:
     checkOut: 2026-09-23
 ---
 
+## 22 Sep
+
+### 9:25am
+
+Once upon a time, there was a little girl who wore a red cape with a hood and loved to play fetch. They called her Tiny Red Fetching Hood.
+
+![Tiny in a red hooded raincoat, looking unimpressed at the camera](./tiny/tiny-red-riding-hood.jpg)
+
 ## 21 Sep
 
 ### 10pm
