@@ -13,6 +13,12 @@ stays:
 
 ## 22 Sep
 
+### 4:25pm
+
+"This is no good," Tiny says. "The smell of rain."
+
+![Tiny sniffing at the window blinds, nose up toward the sky](./tiny/tiny-smell-of-rain.jpg)
+
 ### 9:25am
 
 Once upon a time, there was a little girl who wore a red cape with a hood and loved to play fetch. They called her Tiny Red Fetching Hood.
