@@ -13,6 +13,12 @@ stays:
 
 ## 22 Sep
 
+### 8:45pm
+
+Tiny was acting strangely with her new toy.
+
+![Tiny lying on the bed with her face pressed against a plush toy](./tiny/tiny-strange-new-toy.jpg)
+
 ### 8pm
 
 We got Tiny to “place”, then hid snacks around the house. Once we released her, we held out a hand for her to smell, and she went off to find the snacks. Tiny’s nose worked fantastically well. It was delightful to see her put it to work.
