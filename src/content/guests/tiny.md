@@ -13,6 +13,12 @@ stays:
 
 ## 23 Sep
 
+### 6pm
+
+Tiny worked hard with all her vigor and poise.
+
+![Tiny leaping high in mid-air, catching a green ball in her mouth](./tiny/tiny-ball-catch-jump.jpg)
+
 ### 5:50pm
 
 The last day of us taking Tiny to the dog run. After two days of missing it due to rain, she couldn't wait to get there, leading Weiwen on the leash towards it.
