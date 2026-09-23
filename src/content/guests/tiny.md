@@ -11,6 +11,16 @@ stays:
     checkOut: 2026-09-23
 ---
 
+## 23 Sep
+
+### 12:40pm
+
+Tiny now expects a game of fetch every time we come home from a walk. Refuses to go into the house.
+
+![Tiny sitting in the hallway, refusing to go into the house](./tiny/tiny-fetch-standoff.jpg)
+
+![Tiny staring down a tennis ball in the corridor](./tiny/tiny-eyes-on-the-ball.jpg)
+
 ## 22 Sep
 
 ### 8:45pm
