@@ -13,6 +13,12 @@ stays:
 
 ## 23 Sep
 
+### 5:50pm
+
+The last day of us taking Tiny to the dog run. After two days of missing it due to rain, she couldn't wait to get there, leading Weiwen on the leash towards it.
+
+![Tiny pulling Weiwen along the sidewalk on the leash, eager to reach the dog run](./tiny/tiny-eager-for-dog-run.jpg)
+
 ### 12:40pm
 
 Tiny now expects a game of fetch every time we come home from a walk. Refuses to go into the house.
