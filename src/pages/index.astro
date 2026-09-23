@@ -351,6 +351,9 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
       function printTilt(i) {
         return i % 2 === 0 ? "1.5deg" : "-1.5deg";
       }
+      function noteTilt(i) {
+        return i % 2 === 0 ? "-0.4deg" : "0.4deg";
+      }
       var GROUP_WORDS = { 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six" };
       function groupWord(n) {
         return GROUP_WORDS[n] || String(n);
@@ -521,6 +524,30 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
                 "/" +
                 video.height +
                 '"></video></div>';
+            } else if (e.media.length === 1) {
+              // A single photo carries its caption in its own print mat, like
+              // a note on a Polaroid's border, instead of a paragraph below
+              // the whole card.
+              var w = printWidth(e.media[0].width, e.media[0].height);
+              mediaHTML =
+                '<div class="diary-print mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px]" style="width:min(100%,' +
+                w +
+                "px);transform:rotate(" +
+                printTilt(i) +
+                ')">' +
+                '<img src="' +
+                esc(e.media[0].src) +
+                '" alt="' +
+                esc(e.media[0].alt || e.who + ", " + e.time) +
+                '" width="' +
+                e.media[0].width +
+                '" height="' +
+                e.media[0].height +
+                '" loading="lazy" decoding="async" class="block h-auto w-full rounded-[10px]">' +
+                (e.text
+                  ? '<p class="mt-[9px] px-1 text-center text-[13.5px] leading-snug text-pretty text-ink/70">' + esc(e.text) + "</p>"
+                  : "") +
+                "</div>";
             } else if (e.media.length) {
               mediaHTML =
                 '<div class="diary-prints' +
@@ -547,8 +574,19 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
                   );
                 }).join("") +
                 "</div>";
+              // Several prints have no single mat to write on, so the caption
+              // gets its own slip of ruled paper tucked under them.
+              if (e.text) {
+                mediaHTML +=
+                  '<div class="diary-print mt-4 bg-cream card-keyline rounded-[14px] overflow-hidden" style="transform:rotate(' +
+                  noteTilt(i) +
+                  ')"><div class="diary-note"><p class="text-[14px] text-ink text-pretty">' +
+                  esc(e.text) +
+                  "</p></div></div>";
+              }
             }
-            var textHTML = e.text
+            var manyPrints = !video && e.media.length > 1;
+            var textHTML = e.text && !(e.media.length === 1 && !video) && !manyPrints
               ? '<p class="' +
                 (e.media.length ? "mt-4" : "mt-2") +
                 ' text-base leading-relaxed text-pretty">' +

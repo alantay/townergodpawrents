@@ -294,6 +294,10 @@ export const tilt = (i: number) => (i % 2 === 0 ? "-1deg" : "1deg");
 // into the page rather than a block laid out by a grid.
 export const printTilt = (i: number) => (i % 2 === 0 ? "1.5deg" : "-1.5deg");
 
+// A caption slip leans with its card instead, and barely — a note tucked in
+// flat, not another print thrown on the pile.
+export const noteTilt = (i: number) => (i % 2 === 0 ? "-0.4deg" : "0.4deg");
+
 /**
  * Display width for a diary print, in CSS pixels, including its 7px mat.
  * The photo is never cropped — a tall portrait just goes narrower instead of

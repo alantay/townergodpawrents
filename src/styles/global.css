@@ -179,6 +179,23 @@ a:focus-visible {
     0 6px 12px rgb(30 32 25 / 0.12);
 }
 
+.diary-note {
+  /* The 26px rule spacing has to match the line-height of the text it wraps,
+     and the 13px offset its padding-top, or the words stop sitting on the
+     lines. Change one, change all three. */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0 25px,
+    rgb(30 32 25 / 0.12) 25px 26px
+  );
+  background-position: 0 13px;
+  padding: 13px 16px;
+}
+
+.diary-note p {
+  line-height: 26px;
+}
+
 .diary-prints {
   display: grid;
   gap: 0.75rem;

@@ -16,6 +16,7 @@ import {
   diarySkin,
   tilt,
   printTilt,
+  noteTilt,
   printWidth,
   todaySGT,
   type DiaryMedia,
@@ -205,6 +206,8 @@ let skinIndex = 0;
               const darkSkin = i % 4 > 1;
               const prints = e.media.map((m) => resolveDiaryMedia(m, entry.id, `${day.label} ${e.time}`));
               const video = prints.find((p) => p.kind === "video");
+              const singlePrint = !video && prints.length === 1;
+              const manyPrints = !video && prints.length > 1;
               return (
                 <div class="reveal-card">
                   <article
@@ -239,7 +242,7 @@ let skinIndex = 0;
                   {/* A single photo gets its caption written into its own print mat,
                       like a note on a Polaroid's white border, rather than as a
                       separate paragraph under the whole card. */}
-                  {!video && prints.length === 1 && prints[0].kind === "photo" && (
+                  {singlePrint && prints[0].kind === "photo" && (
                     <div
                       class="diary-print mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px]"
                       style={`width:min(100%,${printWidth(prints[0].img.width, prints[0].img.height)}px);transform:rotate(${printTilt(i)})`}
@@ -264,7 +267,7 @@ let skinIndex = 0;
                     </div>
                   )}
 
-                  {!video && !(prints.length === 1 && prints[0].kind === "photo") && prints.length > 0 && (
+                  {manyPrints && (
                     <div class:list={{ "diary-prints": true, "diary-prints--pair": prints.length === 2, "diary-prints--quad": prints.length === 4, "mt-[15px]": true }}>
                       {prints.map((p, printIndex) => p.kind === "photo" && (
                         <button
@@ -286,7 +289,20 @@ let skinIndex = 0;
                     </div>
                   )}
 
-                  {e.text && (video || !(prints.length === 1 && prints[0]?.kind === "photo")) && (
+                  {/* Several prints have no single mat to write on, so the caption
+                      gets its own slip of ruled paper tucked under them. */}
+                  {manyPrints && e.text && (
+                    <div
+                      class="diary-print mt-4 bg-cream card-keyline rounded-[14px] overflow-hidden"
+                      style={`transform:rotate(${noteTilt(i)})`}
+                    >
+                      <div class="diary-note">
+                        <p class="text-[14px] text-ink text-pretty">{e.text}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {e.text && !singlePrint && !manyPrints && (
                     <p class={`${prints.length > 0 ? "mt-4" : "mt-2"} text-base leading-relaxed text-pretty max-w-[58ch]`}>{e.text}</p>
                   )}
                   </article>
