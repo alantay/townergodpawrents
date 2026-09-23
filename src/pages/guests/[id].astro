@@ -236,13 +236,41 @@ let skinIndex = 0;
                     </div>
                   )}
 
-                  {!video && prints.length > 0 && (
+                  {/* A single photo gets its caption written into its own print mat,
+                      like a note on a Polaroid's white border, rather than as a
+                      separate paragraph under the whole card. */}
+                  {!video && prints.length === 1 && prints[0].kind === "photo" && (
+                    <div
+                      class="diary-print mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px]"
+                      style={`width:min(100%,${printWidth(prints[0].img.width, prints[0].img.height)}px);transform:rotate(${printTilt(i)})`}
+                    >
+                      <button
+                        type="button"
+                        aria-label="Enlarge photo"
+                        class="diary-print-tap block mx-auto w-full cursor-zoom-in"
+                      >
+                        <Image
+                          src={prints[0].img}
+                          alt={prints[0].alt || `${name}, ${day.label} ${e.time}`}
+                          width={Math.min(prints[0].img.width, 1160)}
+                          loading="lazy"
+                          decoding="async"
+                          class="block h-auto w-full rounded-[10px]"
+                        />
+                      </button>
+                      {e.text && (
+                        <p class="mt-[9px] px-1 text-center text-[13.5px] leading-snug text-pretty text-ink/70">{e.text}</p>
+                      )}
+                    </div>
+                  )}
+
+                  {!video && !(prints.length === 1 && prints[0].kind === "photo") && prints.length > 0 && (
                     <div class:list={{ "diary-prints": true, "diary-prints--pair": prints.length === 2, "diary-prints--quad": prints.length === 4, "mt-[15px]": true }}>
                       {prints.map((p, printIndex) => p.kind === "photo" && (
                         <button
                           type="button"
-                          aria-label={prints.length === 1 ? "Enlarge photo" : `Enlarge photo ${printIndex + 1}`}
-                          class="diary-print block mx-auto bg-cream card-keyline rounded-[16px] p-[7px] cursor-zoom-in"
+                          aria-label={`Enlarge photo ${printIndex + 1}`}
+                          class="diary-print diary-print-tap block mx-auto bg-cream card-keyline rounded-[16px] p-[7px] cursor-zoom-in"
                           style={`width:min(100%,${printWidth(p.img.width, p.img.height)}px);transform:rotate(${printTilt(i + printIndex)})`}
                         >
                           <Image
@@ -258,7 +286,7 @@ let skinIndex = 0;
                     </div>
                   )}
 
-                  {e.text && (
+                  {e.text && (video || !(prints.length === 1 && prints[0]?.kind === "photo")) && (
                     <p class={`${prints.length > 0 ? "mt-4" : "mt-2"} text-base leading-relaxed text-pretty max-w-[58ch]`}>{e.text}</p>
                   )}
                   </article>
@@ -325,7 +353,7 @@ let skinIndex = 0;
       // which is plenty for a phone screen, so the viewer just borrows it.
       var viewer = document.getElementById("print-viewer");
       var big = viewer.querySelector("img");
-      document.querySelectorAll("button.diary-print").forEach(function (btn) {
+      document.querySelectorAll("button.diary-print-tap").forEach(function (btn) {
         btn.addEventListener("click", function () {
           var img = btn.querySelector("img");
           big.src = img.currentSrc || img.src;
