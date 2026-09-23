@@ -17,6 +17,7 @@ import {
   tilt,
   printTilt,
   noteTilt,
+  fitsPrintMat,
   printWidth,
   todaySGT,
   type DiaryMedia,
@@ -208,6 +209,11 @@ let skinIndex = 0;
               const video = prints.find((p) => p.kind === "video");
               const singlePrint = !video && prints.length === 1;
               const manyPrints = !video && prints.length > 1;
+              // A caption goes on the mat only when one print can hold it in a
+              // few words. Anything longer, or spread over several prints, gets
+              // its own ruled slip underneath — never both.
+              const matCaption = singlePrint && !!e.text && fitsPrintMat(e.text);
+              const noteCaption = !video && prints.length > 0 && !!e.text && !matCaption;
               return (
                 <div class="reveal-card">
                   <article
@@ -261,7 +267,7 @@ let skinIndex = 0;
                           class="block h-auto w-full rounded-[10px]"
                         />
                       </button>
-                      {e.text && (
+                      {matCaption && (
                         <p class="mt-[9px] px-1 text-center text-[13.5px] leading-snug text-pretty text-ink/70">{e.text}</p>
                       )}
                     </div>
@@ -289,9 +295,9 @@ let skinIndex = 0;
                     </div>
                   )}
 
-                  {/* Several prints have no single mat to write on, so the caption
-                      gets its own slip of ruled paper tucked under them. */}
-                  {manyPrints && e.text && (
+                  {/* A caption with no mat to sit on gets its own slip of ruled
+                      paper tucked under the prints. */}
+                  {noteCaption && (
                     <div
                       class="diary-print mt-4 bg-cream card-keyline rounded-[14px] overflow-hidden"
                       style={`transform:rotate(${noteTilt(i)})`}
@@ -302,7 +308,7 @@ let skinIndex = 0;
                     </div>
                   )}
 
-                  {e.text && !singlePrint && !manyPrints && (
+                  {e.text && !matCaption && !noteCaption && (
                     <p class={`${prints.length > 0 ? "mt-4" : "mt-2"} text-base leading-relaxed text-pretty max-w-[58ch]`}>{e.text}</p>
                   )}
                   </article>

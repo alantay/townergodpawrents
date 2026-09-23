@@ -299,6 +299,14 @@ export const printTilt = (i: number) => (i % 2 === 0 ? "1.5deg" : "-1.5deg");
 export const noteTilt = (i: number) => (i % 2 === 0 ? "-0.4deg" : "0.4deg");
 
 /**
+ * Whether a caption is short enough to live on a single print's mat.
+ * A few words read as something scribbled on the border; a sentence or two
+ * is a paragraph wearing a photo's frame, and belongs on its own slip
+ * instead.
+ */
+export const fitsPrintMat = (text: string) => text.trim().split(/\s+/).length <= 8;
+
+/**
  * Display width for a diary print, in CSS pixels, including its 7px mat.
  * The photo is never cropped — a tall portrait just goes narrower instead of
  * towering, so the height cap is what keeps the page scannable.
