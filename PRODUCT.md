@@ -22,13 +22,17 @@ Not a pet-sitting service — a personal log of an informal, no-money hobby amon
 
 - Each dog is a guest, one content entry (`src/content/guests/*.md`), with frontmatter (name, breed, photo, bgColor, badge, tagline, showLive) plus a `stays` list of check-in/check-out ranges — a dog who comes back gains a stay, not a file. See `CONTEXT.md` and `docs/adr/0002-guest-has-many-stays.md`.
 - The diary body is `## 13 Sep` day dividers with `### 9:50am` entries under them, newest first. The year is never written; it comes from whichever stay contains the day.
+- An entry carries either up to four **prints** (photos) or exactly one **clip** (video), never both — a mix fails the build, naming the guest and entry. A moment that needs both is two entries. See `docs/adr/0003-print-clip-exclusive.md`.
+- Owners typically meet the site as a link Alan or Weiwen send into a chat, then check back on it directly during the stay. Each guest has a build-time link-preview image (`src/pages/og/[id].jpg.ts`) so a shared link shows the dog rather than a blank box.
 - The homepage picks "today's" guest client-side in the Asia/Singapore timezone, showing either the live guest(s), a "Vacancy" state with the last guest, or a past-guests list. It scopes to today, not to the whole stay.
 - Each guest gets a page at `/guests/[id]` holding their whole history, and `/guests` lists everyone who's stayed.
 
 ## Capabilities and Constraints
 
 - Astro + Tailwind, static content collections — no backend, no bookings, no payments, no forms.
+- `CONTEXT.md` is the canonical vocabulary (guest, stay, diary day, entry, print, clip, cut-out, live, vacancy, past guest), including the words to avoid. Use its terms rather than restating or renaming them.
 - `badge` is a 2-3 word description of the dog, distinct from the `tagline` (see project memory on this convention).
+- Hosting stays light and cheap: Vercel free/Hobby tier, no paid media or storage services. Photos and clips are committed to the repo, so they are compressed locally before commit — `scripts/prep-photo.sh` (sips) and `scripts/prep-video.sh` (ffmpeg, H.264 ≤1280px, CRF 28). See `docs/adr/0004-ffmpeg-video-transcode.md`. Adding a third-party service is a decision to raise, not to assume.
 - Never write marketing copy, calls to action, pricing, service descriptions, testimonials, or FAQs — if a section starts sounding like a service, it's wrong.
 
 ## Brand Commitments
@@ -39,7 +43,7 @@ Not a pet-sitting service — a personal log of an informal, no-money hobby amon
 
 ## Evidence on Hand
 
-- Real guests and diary entries for dogs already hosted (Ebi the Pomsky, Tiny the Border Collie), under `src/content/guests/`.
+- A growing roster of real guests with real diary entries, under `src/content/guests/` — Ebi the Pomsky, Tiny the Border Collie, and Guapo at the time of writing. Read the directory for the current list rather than trusting this one.
 - A hand-cut host portrait of Alan and Weiwen (`public/images/alan-weiwen-portrait.jpg`) and per-dog cutout photos.
 - No testimonials, pricing, or service claims exist or should be invented — this is not that kind of site.
 
