@@ -280,10 +280,10 @@ function mixHex(a: string, b: string, amount: number): string {
  * another dog's colour or the site's live-status lime. */
 export function diarySkin(base: string, i: number) {
   const skins = [
-    { bg: mixHex(base, "#F7F2E7", 0.72), fg: "#1E2019", accent: mixHex(base, "#1E2019", 0.35) },
-    { bg: base, fg: "#F7F2E7", accent: mixHex(base, "#F7F2E7", 0.55) },
-    { bg: mixHex(base, "#1E2019", 0.38), fg: "#F7F2E7", accent: mixHex(base, "#F7F2E7", 0.7) },
-    { bg: mixHex(base, "#1E2019", 0.72), fg: "#F3F1E9", accent: mixHex(base, "#F7F2E7", 0.7) },
+    { bg: mixHex(base, "#F7F2E7", 0.72), fg: "var(--color-ink)", accent: mixHex(base, "#1E2019", 0.35) },
+    { bg: base, fg: "var(--color-cream)", accent: mixHex(base, "#F7F2E7", 0.55) },
+    { bg: mixHex(base, "#1E2019", 0.38), fg: "var(--color-cream)", accent: mixHex(base, "#F7F2E7", 0.7) },
+    { bg: mixHex(base, "#1E2019", 0.72), fg: "var(--color-cream-bright)", accent: mixHex(base, "#F7F2E7", 0.7) },
   ];
   return skins[i % skins.length];
 }

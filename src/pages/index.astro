@@ -326,12 +326,13 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
         var r = parseInt(hex.substr(0, 2), 16), g = parseInt(hex.substr(2, 2), 16), b = parseInt(hex.substr(4, 2), 16);
         return 0.2126 * r + 0.7152 * g + 0.0722 * b;
       }
+      // ---- skin ladder — MIRRORS diarySkin() in src/lib/guests.ts, keep in sync ----
       function guestSkins(base) {
         return [
-          { bg: mix(base, "#F7F2E7", 0.72), fg: "#1E2019", accent: mix(base, "#1E2019", 0.35) },
-          { bg: base, fg: "#F7F2E7", accent: mix(base, "#F7F2E7", 0.55) },
-          { bg: mix(base, "#1E2019", 0.38), fg: "#F7F2E7", accent: mix(base, "#F7F2E7", 0.7) },
-          { bg: mix(base, "#1E2019", 0.72), fg: "#F3F1E9", accent: mix(base, "#F7F2E7", 0.7) },
+          { bg: mix(base, "#F7F2E7", 0.72), fg: "var(--color-ink)", accent: mix(base, "#1E2019", 0.35) },
+          { bg: base, fg: "var(--color-cream)", accent: mix(base, "#F7F2E7", 0.55) },
+          { bg: mix(base, "#1E2019", 0.38), fg: "var(--color-cream)", accent: mix(base, "#F7F2E7", 0.7) },
+          { bg: mix(base, "#1E2019", 0.72), fg: "var(--color-cream-bright)", accent: mix(base, "#F7F2E7", 0.7) },
         ];
       }
       var skinIdxByGuest = {};
@@ -401,7 +402,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
       // ---- build hero + today-entries markup for the live states ----
       function heroLiveHTML(live, today) {
         var pair = live.length > 1;
-        var color = pair ? "#5F6E4F" : live[0].bgColor;
+        var color = pair ? "var(--color-moss)" : live[0].bgColor;
         var name = live.map((d) => d.name).join(" & ");
         var sub = pair
           ? groupWord(live.length) + " dogs, one sofa, no space for humans"
@@ -457,7 +458,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
 
       function heroVacancyHTML(lastGuest) {
         var html =
-          '<div class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:#5F6E4F">' +
+          '<div class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:var(--color-moss)">' +
           '<div id="hero-badge" class="absolute top-[18px] right-[18px] bg-lime text-ink font-semibold text-xs tracking-[0.06em] uppercase px-[13px] py-2 rounded-full animate-wiggle">Sofa free</div>' +
           '<div class="w-full"><h1 class="fit-headline text-[clamp(62px,19vw,120px)] max-w-full">Vacancy</h1></div>' +
           '<div class="font-serif italic text-[22px] mt-2" style="color:#E9F7AE">The sofa is free. The treats are ready.</div>' +
@@ -473,7 +474,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
             lastGuest.bgColor +
             '"></div>' +
             '<div class="min-w-0">' +
-            '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:#4C6B3C">Last seen here</div>' +
+            '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:var(--color-moss-deep)">Last seen here</div>' +
             '<div class="font-serif text-[27px] leading-tight">' +
             esc(lastGuest.name) +
             "</div>" +

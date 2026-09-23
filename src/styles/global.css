@@ -8,8 +8,11 @@
   --color-paper: #efe7d8;
   --color-ink: #1e2019;
   --color-cream: #f7f2e7;
+  --color-cream-bright: #f3f1e9;
   --color-lime: #d8f24e;
   --color-lime-soft: #e9f7ae;
+  --color-moss: #5f6e4f;
+  --color-moss-deep: #4c6b3c;
   --color-muted: #4a4b41;
   --color-label: #55564a;
   --color-card-line: #cdbf9e;
@@ -55,7 +58,7 @@ a {
 }
 
 a:hover {
-  color: #4c6b3c;
+  color: var(--color-moss-deep);
 }
 
 a:focus-visible {
