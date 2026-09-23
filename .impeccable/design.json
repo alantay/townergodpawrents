@@ -1,0 +1,510 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-23T08:05:05.719Z",
+  "title": "Design System: The Towner Godpawrents",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Sunned Oat",
+        "purpose": "The page ground. Everything rests on it; never white.",
+        "canonical": "oklch(93.0% 0.022 83.3)",
+        "tonalRamp": [
+          "oklch(15% 0.022 83.3)",
+          "oklch(26% 0.022 83.3)",
+          "oklch(37% 0.022 83.3)",
+          "oklch(48% 0.022 83.3)",
+          "oklch(60% 0.022 83.3)",
+          "oklch(71% 0.022 83.3)",
+          "oklch(83% 0.022 83.3)",
+          "oklch(95% 0.022 83.3)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Wet Nose Black",
+        "purpose": "Body text, headlines, focus rings, timeline dots.",
+        "canonical": "oklch(23.9% 0.013 120.4)",
+        "tonalRamp": [
+          "oklch(15% 0.013 120.4)",
+          "oklch(26% 0.013 120.4)",
+          "oklch(37% 0.013 120.4)",
+          "oklch(48% 0.013 120.4)",
+          "oklch(60% 0.013 120.4)",
+          "oklch(71% 0.013 120.4)",
+          "oklch(83% 0.013 120.4)",
+          "oklch(95% 0.013 120.4)"
+        ]
+      },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Photo Mat",
+        "purpose": "Mounting card: print mats, caption bands, text on dark surfaces.",
+        "canonical": "oklch(96.2% 0.016 86.4)",
+        "tonalRamp": [
+          "oklch(15% 0.016 86.4)",
+          "oklch(26% 0.016 86.4)",
+          "oklch(37% 0.016 86.4)",
+          "oklch(48% 0.016 86.4)",
+          "oklch(60% 0.016 86.4)",
+          "oklch(71% 0.016 86.4)",
+          "oklch(83% 0.016 86.4)",
+          "oklch(95% 0.016 86.4)"
+        ]
+      },
+      "cream-bright": {
+        "role": "neutral",
+        "displayName": "Bleached Bone",
+        "purpose": "A half-step brighter than Photo Mat; text on the deepest diary skin only.",
+        "canonical": "oklch(95.7% 0.011 95.2)",
+        "tonalRamp": [
+          "oklch(15% 0.011 95.2)",
+          "oklch(26% 0.011 95.2)",
+          "oklch(37% 0.011 95.2)",
+          "oklch(48% 0.011 95.2)",
+          "oklch(60% 0.011 95.2)",
+          "oklch(71% 0.011 95.2)",
+          "oklch(83% 0.011 95.2)",
+          "oklch(95% 0.011 95.2)"
+        ]
+      },
+      "lime": {
+        "role": "primary",
+        "displayName": "Tennis Ball",
+        "purpose": "Live status and interaction. Rationed to what is happening now.",
+        "canonical": "oklch(91.3% 0.184 118.0)",
+        "tonalRamp": [
+          "oklch(15% 0.184 118.0)",
+          "oklch(26% 0.184 118.0)",
+          "oklch(37% 0.184 118.0)",
+          "oklch(48% 0.184 118.0)",
+          "oklch(60% 0.184 118.0)",
+          "oklch(71% 0.184 118.0)",
+          "oklch(83% 0.184 118.0)",
+          "oklch(95% 0.184 118.0)"
+        ]
+      },
+      "lime-soft": {
+        "role": "primary",
+        "displayName": "Tennis Ball Wash",
+        "purpose": "The accent at low volume: hero tagline, wordmark highlight.",
+        "canonical": "oklch(94.9% 0.095 117.1)",
+        "tonalRamp": [
+          "oklch(15% 0.095 117.1)",
+          "oklch(26% 0.095 117.1)",
+          "oklch(37% 0.095 117.1)",
+          "oklch(48% 0.095 117.1)",
+          "oklch(60% 0.095 117.1)",
+          "oklch(71% 0.095 117.1)",
+          "oklch(83% 0.095 117.1)",
+          "oklch(95% 0.095 117.1)"
+        ]
+      },
+      "moss": {
+        "role": "secondary",
+        "displayName": "Sofa Moss",
+        "purpose": "The house colour, used when no single guest owns the surface.",
+        "canonical": "oklch(51.7% 0.050 129.0)",
+        "tonalRamp": [
+          "oklch(15% 0.050 129.0)",
+          "oklch(26% 0.050 129.0)",
+          "oklch(37% 0.050 129.0)",
+          "oklch(48% 0.050 129.0)",
+          "oklch(60% 0.050 129.0)",
+          "oklch(71% 0.050 129.0)",
+          "oklch(83% 0.050 129.0)",
+          "oklch(95% 0.050 129.0)"
+        ]
+      },
+      "moss-deep": {
+        "role": "secondary",
+        "displayName": "Damp Moss",
+        "purpose": "Link hover only.",
+        "canonical": "oklch(49.1% 0.080 135.6)",
+        "tonalRamp": [
+          "oklch(15% 0.080 135.6)",
+          "oklch(26% 0.080 135.6)",
+          "oklch(37% 0.080 135.6)",
+          "oklch(48% 0.080 135.6)",
+          "oklch(60% 0.080 135.6)",
+          "oklch(71% 0.080 135.6)",
+          "oklch(83% 0.080 135.6)",
+          "oklch(95% 0.080 135.6)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Old Muzzle",
+        "purpose": "Secondary text: breed and dates on a dog card.",
+        "canonical": "oklch(40.9% 0.016 111.8)",
+        "tonalRamp": [
+          "oklch(15% 0.016 111.8)",
+          "oklch(26% 0.016 111.8)",
+          "oklch(37% 0.016 111.8)",
+          "oklch(48% 0.016 111.8)",
+          "oklch(60% 0.016 111.8)",
+          "oklch(71% 0.016 111.8)",
+          "oklch(83% 0.016 111.8)",
+          "oklch(95% 0.016 111.8)"
+        ]
+      },
+      "label": {
+        "role": "neutral",
+        "displayName": "Collar Tag",
+        "purpose": "Uppercase micro type: footer lines, counts, timestamps.",
+        "canonical": "oklch(44.8% 0.019 111.0)",
+        "tonalRamp": [
+          "oklch(15% 0.019 111.0)",
+          "oklch(26% 0.019 111.0)",
+          "oklch(37% 0.019 111.0)",
+          "oklch(48% 0.019 111.0)",
+          "oklch(60% 0.019 111.0)",
+          "oklch(71% 0.019 111.0)",
+          "oklch(83% 0.019 111.0)",
+          "oklch(95% 0.019 111.0)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Kibble Line",
+        "purpose": "The standard 1.5px keyline on paper.",
+        "canonical": "oklch(69.4% 0.043 84.5)",
+        "tonalRamp": [
+          "oklch(15% 0.043 84.5)",
+          "oklch(26% 0.043 84.5)",
+          "oklch(37% 0.043 84.5)",
+          "oklch(48% 0.043 84.5)",
+          "oklch(60% 0.043 84.5)",
+          "oklch(71% 0.043 84.5)",
+          "oklch(83% 0.043 84.5)",
+          "oklch(95% 0.043 84.5)"
+        ]
+      },
+      "card-line": {
+        "role": "neutral",
+        "displayName": "Biscuit Line",
+        "purpose": "The keyline on small light cards: print mats, host portrait.",
+        "canonical": "oklch(80.8% 0.047 87.8)",
+        "tonalRamp": [
+          "oklch(15% 0.047 87.8)",
+          "oklch(26% 0.047 87.8)",
+          "oklch(37% 0.047 87.8)",
+          "oklch(48% 0.047 87.8)",
+          "oklch(60% 0.047 87.8)",
+          "oklch(71% 0.047 87.8)",
+          "oklch(83% 0.047 87.8)",
+          "oklch(95% 0.047 87.8)"
+        ]
+      },
+      "card-line-dark": {
+        "role": "neutral",
+        "displayName": "Moss Line",
+        "purpose": "The keyline on the two dark diary skins.",
+        "canonical": "oklch(51.4% 0.051 134.3)",
+        "tonalRamp": [
+          "oklch(15% 0.051 134.3)",
+          "oklch(26% 0.051 134.3)",
+          "oklch(37% 0.051 134.3)",
+          "oklch(48% 0.051 134.3)",
+          "oklch(60% 0.051 134.3)",
+          "oklch(71% 0.051 134.3)",
+          "oklch(83% 0.051 134.3)",
+          "oklch(95% 0.051 134.3)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The live dog's name, and the word 'Vacancy'. Shrunk further by fitText() when a long or paired name would overflow."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page titles and a guest's name on their own page."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Section heads, always sitting directly under a 1.5px rule."
+      },
+      "subtitle": {
+        "displayName": "Subtitle",
+        "purpose": "The italic tagline under a name. The only italic in the system."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Diary entries and intros. Measure capped at 58ch in entries, 52ch in intros."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Chips, pills and buttons."
+      },
+      "micro": {
+        "displayName": "Micro",
+        "purpose": "Uppercase footer lines, guest counts, entry timestamps."
+      },
+      "script": {
+        "displayName": "Script",
+        "purpose": "The rotating footer line on the homepage. Nothing else."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-rest",
+        "value": "0 10px 20px rgb(92 76 41 / 0.1)",
+        "purpose": "Dog cards at rest. Warm brown, as if cast by paper in a sunny room."
+      },
+      {
+        "name": "card-lifted",
+        "value": "0 16px 26px rgb(70 92 56 / 0.17)",
+        "purpose": "A dog card on hover: deeper, and shifted greener as it rises."
+      },
+      {
+        "name": "entry-rest",
+        "value": "0 9px 17px rgb(92 76 41 / 0.08)",
+        "purpose": "Diary entries. Lighter than a dog card because entries stack densely."
+      },
+      {
+        "name": "print-mat",
+        "value": "inset 0 1px 0 rgb(255 255 255 / 0.44), 0 6px 12px rgb(30 32 25 / 0.12)",
+        "purpose": "The mounted photo: a highlight along the mat's cut edge over a tight drop. The system's only inset, and its only cool shadow, because mats sit on saturated colour rather than on paper."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-signature",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Every state change and arrival. A fast, overshoot-free settle."
+      },
+      {
+        "name": "ease-pop",
+        "value": "cubic-bezier(0.2, 0.8, 0.3, 1)",
+        "purpose": "The hero's client-side arrival, once 'today' resolves."
+      },
+      {
+        "name": "duration-state",
+        "value": "200ms",
+        "purpose": "Hover, focus and active transitions."
+      },
+      {
+        "name": "duration-entrance",
+        "value": "520ms",
+        "purpose": "Section arrivals and scroll reveals."
+      },
+      {
+        "name": "duration-entrance-hero",
+        "value": "620ms",
+        "purpose": "The hero card, which also un-tilts and scales up as it lands."
+      },
+      {
+        "name": "stagger-entrance",
+        "value": "90ms / 180ms / 270ms",
+        "purpose": "Three delay steps down a page. One-shot; content settles and stays still."
+      },
+      {
+        "name": "drift",
+        "value": "6s-7s ease-in-out infinite",
+        "purpose": "Ambient 8px float on hero cut-outs."
+      },
+      {
+        "name": "wiggle",
+        "value": "4.5s ease-in-out infinite",
+        "purpose": "Ambient +5deg/-3deg rock on the 'Here today' badge."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "print-pair",
+        "value": "480px",
+        "purpose": "Paired and quadruple print grids go to two columns."
+      },
+      {
+        "name": "sm",
+        "value": "640px",
+        "purpose": "Even diary entries indent 1.5rem; the newest guest card spans two columns; the 'Latest stay' marginal note appears."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Nav Pill",
+      "kind": "nav",
+      "refersTo": "nav-pill",
+      "description": "The single navigation control. Fills Tennis Ball on hover and rises a pixel; carries an invisible hit area so a 13px pill still meets 44px.",
+      "html": "<a class=\"ds-nav-pill\" href=\"#\">Past guests</a>",
+      "css": ".ds-nav-pill { position: relative; display: inline-block; padding: 6px 13px; border: 1.5px solid var(--color-line, #a99b7f); border-radius: 999px; background: transparent; color: var(--color-ink, #1e2019); font-family: var(--font-sans, Archivo, Helvetica, sans-serif); font-size: 13px; font-weight: 600; text-decoration: none; transition: background 200ms cubic-bezier(0.16, 1, 0.3, 1), transform 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-nav-pill::before { content: \"\"; position: absolute; inset: -6px 0; } .ds-nav-pill:hover { background: var(--color-lime, #d8f24e); transform: translateY(-1px); } .ds-nav-pill:focus-visible { outline: 2px solid var(--color-ink, #1e2019); outline-offset: 3px; } .ds-nav-pill:active { transform: translateY(0) scale(0.98); }"
+    },
+    {
+      "name": "Wordmark",
+      "kind": "nav",
+      "description": "The site's handshake and the clearest statement of the tilt rule: an italic highlight sitting at -2deg that straightens when you reach for it.",
+      "html": "<a class=\"ds-wordmark\" href=\"#\">The Towner <em class=\"ds-wordmark-mark\">Godpawrents</em></a>",
+      "css": ".ds-wordmark { display: inline-block; color: var(--color-ink, #1e2019); font-family: var(--font-serif, \"Instrument Serif\", Georgia, serif); font-size: 26px; line-height: 1.1; text-decoration: none; } .ds-wordmark-mark { display: inline-block; padding: 0 6px; border-radius: 6px; background: var(--color-lime-soft, #e9f7ae); font-style: italic; transform: rotate(-2deg); transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-wordmark:hover .ds-wordmark-mark, .ds-wordmark:focus-visible .ds-wordmark-mark { transform: rotate(0deg); } .ds-wordmark:focus-visible { outline: 2px solid var(--color-ink, #1e2019); outline-offset: 4px; }"
+    },
+    {
+      "name": "Status Badge",
+      "kind": "chip",
+      "refersTo": "status-badge",
+      "description": "'Here today' or 'Sofa free' on the hero. One of only two things on the site that move on their own.",
+      "html": "<span class=\"ds-status-badge\">Here today</span>",
+      "css": ".ds-status-badge { display: inline-block; padding: 8px 13px; border-radius: 999px; background: var(--color-lime, #d8f24e); color: var(--color-ink, #1e2019); font-family: var(--font-sans, Archivo, Helvetica, sans-serif); font-size: 13px; font-weight: 600; animation: ds-wiggle 4.5s ease-in-out infinite; } @keyframes ds-wiggle { 0%, 100% { transform: rotate(5deg); } 50% { transform: rotate(-3deg); } } @media (prefers-reduced-motion: reduce) { .ds-status-badge { animation: none; } }"
+    },
+    {
+      "name": "Fact Chip",
+      "kind": "chip",
+      "refersTo": "chip-cream",
+      "description": "Cream on the guest's colour. Carries facts: breed, stay dates, which day of the stay it is.",
+      "html": "<span class=\"ds-chip-fact\">Border Collie</span>",
+      "css": ".ds-chip-fact { display: inline-block; padding: 7px 13px; border-radius: 999px; background: var(--color-cream, #f7f2e7); color: var(--color-ink, #1e2019); font-family: var(--font-sans, Archivo, Helvetica, sans-serif); font-size: 13px; font-weight: 600; }"
+    },
+    {
+      "name": "Character Chip",
+      "kind": "chip",
+      "refersTo": "chip-lime",
+      "description": "The guest's one characterful phrase. Maximum one per hero — its rarity next to the cream chips is the point.",
+      "html": "<span class=\"ds-chip-character\">Professional sofa inspector</span>",
+      "css": ".ds-chip-character { display: inline-block; padding: 7px 13px; border-radius: 999px; background: var(--color-lime, #d8f24e); color: var(--color-ink, #1e2019); font-family: var(--font-sans, Archivo, Helvetica, sans-serif); font-size: 13px; font-weight: 600; }"
+    },
+    {
+      "name": "Day Chip",
+      "kind": "chip",
+      "refersTo": "day-chip",
+      "description": "One day of a stay in the sticky strip. Outlined at rest, filled Tennis Ball when it is the day you are reading; the active chip scrolls itself into view.",
+      "html": "<div class=\"ds-day-strip\"><a class=\"ds-day-chip\" href=\"#\">13 Sep</a><a class=\"ds-day-chip ds-day-chip--active\" href=\"#\">14 Sep</a><a class=\"ds-day-chip\" href=\"#\">15 Sep</a></div>",
+      "css": ".ds-day-strip { display: flex; gap: 0.4rem; padding: 0.5rem 0; overflow-x: auto; scrollbar-width: none; background: color-mix(in srgb, var(--color-paper, #efe7d8) 92%, transparent); backdrop-filter: blur(6px); } .ds-day-strip::-webkit-scrollbar { display: none; } .ds-day-chip { position: relative; flex: none; padding: 0.3rem 0.8rem; border: 1.5px solid var(--color-line, #a99b7f); border-radius: 999px; color: var(--color-ink, #1e2019); font-family: var(--font-sans, Archivo, Helvetica, sans-serif); font-size: 13px; font-weight: 600; text-decoration: none; white-space: nowrap; transition: background 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-day-chip::before { content: \"\"; position: absolute; inset: -6px 0; } .ds-day-chip:hover { background: var(--color-lime, #d8f24e); } .ds-day-chip:focus-visible { outline: 2px solid var(--color-ink, #1e2019); outline-offset: 3px; } .ds-day-chip--active { background: var(--color-lime, #d8f24e); border-color: var(--color-lime, #d8f24e); }"
+    },
+    {
+      "name": "Guest Card",
+      "kind": "card",
+      "refersTo": "guest-card",
+      "description": "A past guest in the archive grid. The one place the system tilts toward chaos instead of away: on hover it rotates, lifts, scales and greens, like a photo picked up off a pile. Its background is the guest's own colour, never a palette value.",
+      "html": "<a class=\"ds-guest-card\" href=\"#\" style=\"--ds-guest: #8a9a6b\"><span class=\"ds-guest-card-bed\"></span><span class=\"ds-guest-card-caption\"><span class=\"ds-guest-card-name\">Tiny</span><span class=\"ds-guest-card-meta\">Border Collie</span><span class=\"ds-guest-card-meta\">12–18 Sep 2026</span></span></a>",
+      "css": ".ds-guest-card { display: block; width: 190px; border-radius: 22px; overflow: hidden; background: var(--ds-guest, var(--color-moss, #5f6e4f)); box-shadow: 0 10px 20px rgb(92 76 41 / 0.1); text-decoration: none; transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-guest-card-bed { display: block; height: 132px; margin: 9px 9px 0; border-radius: 14px; background: rgb(255 255 255 / 0.14); } .ds-guest-card-caption { display: block; padding: 11px 13px 14px; background: var(--color-cream, #f7f2e7); } .ds-guest-card-name { display: block; color: var(--color-ink, #1e2019); font-family: var(--font-serif, \"Instrument Serif\", Georgia, serif); font-size: 22px; line-height: 1; } .ds-guest-card-meta { display: block; margin-top: 4px; color: var(--color-muted, #4a4b41); font-family: var(--font-sans, Archivo, Helvetica, sans-serif); font-size: 13px; font-variant-numeric: tabular-nums; } .ds-guest-card:hover { transform: rotate(1.5deg) translateY(-4px) scale(1.02); box-shadow: 0 16px 26px rgb(70 92 56 / 0.17); } .ds-guest-card:focus-visible { outline: 2px solid var(--color-ink, #1e2019); outline-offset: 4px; } .ds-guest-card:active { transform: scale(0.99); }"
+    },
+    {
+      "name": "Diary Entry",
+      "kind": "custom",
+      "refersTo": "diary-entry",
+      "description": "The signature component. A tilted card on a skin derived from the guest's colour — diarySkin() rotates four steps down the page so a long day reads as a stack of different papers. Entries alternate -1deg/+1deg and straighten on hover. Set --ds-skin, --ds-fg and --ds-accent from the guest; the moss defaults here stand in for a real one.",
+      "html": "<article class=\"ds-diary-entry\"><p class=\"ds-diary-time\"><span class=\"ds-diary-dot\"></span>8:45 PM</p><p class=\"ds-diary-text\">New toy lasted eleven minutes. The squeaker did not survive, but morale is high.</p></article>",
+      "css": ".ds-diary-entry { --ds-skin: var(--color-moss, #5f6e4f); --ds-fg: var(--color-cream, #f7f2e7); --ds-accent: #c6cdb9; max-width: 420px; padding: 18px 19px 20px; border: 1.5px solid var(--color-card-line-dark, #5b6e50); border-radius: 24px; background: var(--ds-skin); color: var(--ds-fg); box-shadow: 0 9px 17px rgb(92 76 41 / 0.08); transform: rotate(-1deg); transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), filter 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-diary-entry:hover { transform: rotate(0deg) translateY(-2px); filter: brightness(1.04); } .ds-diary-time { display: flex; align-items: center; gap: 7px; margin: 0; color: var(--ds-accent); font-family: var(--font-sans, Archivo, Helvetica, sans-serif); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; } .ds-diary-dot { width: 5px; height: 5px; border-radius: 999px; background: var(--ds-accent); } .ds-diary-text { max-width: 58ch; margin: 10px 0 0; font-family: var(--font-sans, Archivo, Helvetica, sans-serif); font-size: 16px; line-height: 1.625; text-wrap: pretty; }"
+    },
+    {
+      "name": "Print Mat",
+      "kind": "custom",
+      "refersTo": "print-mat",
+      "description": "A photo mounted on cream card and leaned against its entry's tilt. Width comes from the photo's real aspect ratio against a 420px height cap, so nothing is ever cropped. Click opens a full-viewport dialog.",
+      "html": "<button class=\"ds-print-mat\" type=\"button\" aria-label=\"View photo\"><span class=\"ds-print-photo\"></span></button>",
+      "css": ".ds-print-mat { display: block; padding: 7px; border: 1.5px solid var(--color-card-line, #cdbf9e); border-radius: 16px; background: var(--color-cream, #f7f2e7); box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.44), 0 6px 12px rgb(30 32 25 / 0.12); cursor: zoom-in; transform: rotate(1.5deg); transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-print-photo { display: block; width: 150px; height: 190px; border-radius: 10px; background: linear-gradient(160deg, #b9c4a4, #6f7d5c); } .ds-print-mat:hover { transform: rotate(0deg); } .ds-print-mat:focus-visible { outline: 2px solid var(--color-ink, #1e2019); outline-offset: 4px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Kitchen Table Guest Book",
+    "overview": "A guest book that never made it to a lectern. It lives on the kitchen table, where photos get taped in crooked, dates get written by hand, and somebody adds a joke in the margin. The formality of a guest book — every visitor named, dated, given a page — carried out with none of a guest book's stiffness. That tension is the whole system: rigorous record-keeping, scruffy execution.\n\nThe mood is playful, scrappy and affectionate. Warm paper under everything, one electric accent used sparingly, and a house rule that nothing sits perfectly straight until you reach for it. Personality arrives through small ambient movement — a badge that wiggles, a cut-out that drifts, a different footer line on every visit — rather than through visual noise. The site is small on purpose: one 700px column, no sidebars, no chrome, nothing to navigate.\n\nColour is the one thing the system gives away. The house palette is oat paper and olive ink; every large coloured surface on the site belongs to whichever dog is staying, drawn from that guest's own bgColor. The design frames; the dog colours.",
+    "keyCharacteristics": [
+      "Warm paper ground (#efe7d8), never white",
+      "One electric accent (#d8f24e), rationed to \"happening now\"",
+      "Serif for names, sans for sentences, handwriting once per page",
+      "Every card tilted a degree or two at rest, straightening when approached",
+      "Brown-green shadows, never grey — paper in a sunny room",
+      "Single 700px column at every screen size"
+    ],
+    "rules": [
+      {
+        "name": "The Guest Owns the Colour Rule",
+        "section": "colors",
+        "body": "Every large coloured surface — the hero, the dog card, every diary entry skin — takes its colour from that guest's bgColor, not from this palette. The palette is the house; the colour is the dog. Never hardcode a guest-surface colour."
+      },
+      {
+        "name": "The Tennis Ball Rule",
+        "section": "colors",
+        "body": "#d8f24e marks what is happening now or what to press. If an element is neither live nor interactive, it does not get the accent. Its rarity is what makes it work on a page that is otherwise entirely warm neutrals."
+      },
+      {
+        "name": "The Olive Cast Rule",
+        "section": "colors",
+        "body": "Every neutral in this system is warm and slightly green. A cool grey, a pure black, or a true white anywhere on the page will read instantly as foreign."
+      },
+      {
+        "name": "The Serif Says the Name Rule",
+        "section": "typography",
+        "body": "Instrument Serif is for names, page titles, section heads, and dates — things you point at. Archivo carries everything read as sentences. A serif paragraph is a bug."
+      },
+      {
+        "name": "The One Line of Handwriting Rule",
+        "section": "typography",
+        "body": "Caveat appears exactly once on a page, as the host's aside in the footer. It reads as a note scrawled at the bottom because it is the only one. A second instance would turn a voice into a decoration."
+      },
+      {
+        "name": "The Numbers Line Up Rule",
+        "section": "typography",
+        "body": "Any date or count that repeats down the page (.archive-date, .diary-stay) is set in font-variant-numeric: tabular-nums, so a column of stays doesn't shimmer."
+      },
+      {
+        "name": "The One Column Rule",
+        "section": "layout",
+        "body": "Never introduce a sidebar, a split view, or a second reading column. If something doesn't fit in 700px, it is cut or it goes on its own page."
+      },
+      {
+        "name": "The Rule Above the Heading Rule",
+        "section": "layout",
+        "body": "Every major section opens with a hairline across the full column, then its heading. The line is the section break; extra whitespace is not a substitute."
+      },
+      {
+        "name": "The Warm Shadow Rule",
+        "section": "elevation",
+        "body": "Shadows are rgb(92 76 41 / …) or rgb(70 92 56 / …) — brown and moss. Never grey, never pure black. The single exception is the print mat, which sits on saturated colour rather than on paper."
+      },
+      {
+        "name": "The Nothing Sits Straight Rule",
+        "section": "elevation",
+        "body": "A card, print or portrait at rest is rotated between 0.75° and 2°. Zero degrees is a state, not a default — it means the visitor is touching this."
+      },
+      {
+        "name": "The Radius Ladder Rule",
+        "section": "shapes",
+        "body": "32 → 24 → 22 → 16 → 10 → pill. A new component picks the step that matches its physical size, never an arbitrary value."
+      },
+      {
+        "name": "The Mat And The Cut-Out Rule",
+        "section": "shapes",
+        "body": "Photographs appear in exactly two forms: mounted on a cream mat with a keyline (diary prints and clips), or cut from their background with no frame at all (guest portraits). There is no third treatment."
+      },
+      {
+        "name": "The Straighten On Approach Rule",
+        "section": "components",
+        "body": "Tilted things rotate to 0deg on :hover and :focus-visible. Interaction squares the paper to you. The lone exception is a clip card, for the compositing reason above."
+      },
+      {
+        "name": "The Skins Belong To The Dog Rule",
+        "section": "components",
+        "body": "Diary skins are always computed from the guest's bgColor through diarySkin(). Never add a fixed entry background — it would break the page's identity the moment a different dog is staying."
+      },
+      {
+        "name": "The Idle Life Rule",
+        "section": "components",
+        "body": "Only two things move on their own: the status badge and the hero cut-out. Everything else is still until scrolled to or touched. A third perpetual animation would make the page restless."
+      }
+    ],
+    "dos": [
+      "Do take every large coloured surface from the guest's own bgColor, via diarySkin() for entries.",
+      "Do use the 1.5px keyline at every scale, switching its colour to match the surface (card-line on cream, card-line-dark on dark skins, line on paper).",
+      "Do tilt new cards between 0.75° and 2°, and straighten them on hover and focus.",
+      "Do give any pill under 44px an invisible ::before hit area rather than enlarging it.",
+      "Do cap measure — 58ch inside diary entries, 52ch in intros.",
+      "Do add every new animation to the prefers-reduced-motion block in the same commit.",
+      "Do size prints from their real aspect ratio against the 420px height cap; never crop a dog.",
+      "Do keep focus rings as a 2px Wet Nose Black outline at 3–4px offset."
+    ],
+    "donts": [
+      "Don't introduce a cool grey, a pure black, or a true white. Every neutral here is warm and olive-cast.",
+      "Don't use Tennis Ball (#d8f24e) on anything that is neither live nor interactive, and never as a large field.",
+      "Don't set body copy in Instrument Serif, or use Caveat more than once on a page.",
+      "Don't add a second column, a sidebar, or a desktop-specific layout. 700px, one column, everywhere.",
+      "Don't use a neutral grey drop shadow — shadows are rgb(92 76 41 / …) or rgb(70 92 56 / …).",
+      "Don't apply a CSS filter or a transform to any ancestor of a <video>; it garbles the frame.",
+      "Don't frame a cut-out or leave a print unmatted. Those are the only two photo treatments.",
+      "Don't add a third perpetual animation.",
+      "Don't hardcode a hex where a token exists. #4c6b3c (link hover), #5f6e4f (the house moss) and #f3f1e9 (dark-skin text) are currently inline and should move into @theme."
+    ]
+  }
+}
