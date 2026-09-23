@@ -13,6 +13,10 @@ stays:
 
 ## 23 Sep
 
+### 7pm
+
+Tiny was so happy to see her owners. We’d like to think Tiny went on a little vacation too, just like her owners. Swimming with plushies, camping snacks and sniffing adventures with us.
+
 ### 6pm
 
 Tiny worked hard with all her vigor and poise.
