@@ -204,8 +204,13 @@ a:focus-visible {
    layer alone — displacing the text with it would leave the writing wobbling.
    The 5px lighter border is the fibre the tear exposes; the ragged edge cuts
    through it, so it shows as an uneven pale fringe rather than a rule. */
+/* The breathing room has to sit here rather than on .diary-note: that element
+   carries the rules, and any padding-top on it shifts the gradient's origin
+   and strands a blank rule above the first line. Out here the tear has room
+   to wander without biting into the writing. */
 .diary-slip {
   position: relative;
+  padding: 18px 0 5px;
 }
 
 .diary-slip-paper {
