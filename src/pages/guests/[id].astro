@@ -213,14 +213,16 @@ let skinIndex = 0;
               // few words. Anything longer, or spread over several prints, gets
               // its own ruled slip underneath — never both.
               const matCaption = singlePrint && !!e.text && fitsPrintMat(e.text);
-              const noteCaption = !video && prints.length > 0 && !!e.text && !matCaption;
-              // Under one print the slip matches that print's width, so it reads
-              // as tucked under the photo. Under a grid there is no single print
-              // to line up with, so it spans the card instead.
+              const noteCaption = prints.length > 0 && !!e.text && !matCaption;
+              // A slip under one photo or video can extend beyond a narrow
+              // portrait print, so longer captions have room to breathe.
+              // Under a grid it spans the card.
               const noteWidth =
-                singlePrint && prints[0].kind === "photo"
-                  ? printWidth(prints[0].img.width, prints[0].img.height)
-                  : null;
+                video
+                  ? Math.min(printWidth(video.width, video.height) + 120, 500)
+                  : singlePrint && prints[0].kind === "photo"
+                    ? Math.min(printWidth(prints[0].img.width, prints[0].img.height) + 120, 500)
+                    : null;
               return (
                 <div class="reveal-card">
                   <article
@@ -306,7 +308,7 @@ let skinIndex = 0;
                       paper, torn off the pad, tucked under the prints. */}
                   {noteCaption && (
                     <div
-                      class="diary-slip mt-4 mx-auto"
+                      class={`diary-slip diary-slip--tear-${i % 3} mt-4 mx-auto`}
                       style={`${noteWidth ? `width:min(100%,${noteWidth}px);` : ""}transform:rotate(${noteTilt(i)})`}
                     >
                       <div class="diary-slip-paper" aria-hidden="true"></div>

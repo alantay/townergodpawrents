@@ -514,14 +514,13 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
             // few words. Anything longer, or spread over several prints, gets
             // its own ruled slip underneath — never both.
             var matCaption = !video && e.media.length === 1 && !!e.text && fitsPrintMat(e.text);
-            var noteCaption = !video && e.media.length > 0 && !!e.text && !matCaption;
-            // Under one print the slip matches that print's width, so it reads
-            // as tucked under the photo. Under a grid there is no single print
-            // to line up with, so it spans the card instead.
+            var noteCaption = e.media.length > 0 && !!e.text && !matCaption;
+            // Give a slip under one photo or video more room than a portrait
+            // print. Under a grid it spans the card.
             var noteWidth =
-              !video && e.media.length === 1 ? printWidth(e.media[0].width, e.media[0].height) : null;
+              e.media.length === 1 ? Math.min(printWidth(e.media[0].width, e.media[0].height) + 120, 500) : null;
             var noteHTML = noteCaption
-              ? '<div class="diary-slip mt-4 mx-auto" style="' +
+              ? '<div class="diary-slip diary-slip--tear-' + (i % 3) + ' mt-4 mx-auto" style="' +
                 (noteWidth ? "width:min(100%," + noteWidth + "px);" : "") +
                 "transform:rotate(" +
                 noteTilt(i) +
@@ -546,7 +545,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
                 video.width +
                 "/" +
                 video.height +
-                '"></video></div>';
+                '"></video></div>' + noteHTML;
             } else if (e.media.length === 1) {
               // A short caption is written into the print's own mat, like a
               // note on a Polaroid's border.

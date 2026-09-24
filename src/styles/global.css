@@ -189,7 +189,8 @@ a:focus-visible {
   background-image: repeating-linear-gradient(
     to bottom,
     transparent 0 25px,
-    rgb(30 32 25 / 0.12) 25px 26px
+    rgb(30 32 25 / 0.12) 25.35px 25.65px,
+    transparent 26px
   );
   background-position: 0 0;
   padding: 0 16px 13px;
@@ -219,7 +220,15 @@ a:focus-visible {
   background: var(--color-cream);
   background-clip: padding-box;
   border: 5px solid #fdfaf1;
-  filter: url("#torn-slip") drop-shadow(0 4px 7px rgb(30 32 25 / 0.2));
+  filter: url("#torn-slip-0") drop-shadow(0 4px 7px rgb(30 32 25 / 0.2));
+}
+
+.diary-slip--tear-1 .diary-slip-paper {
+  filter: url("#torn-slip-1") drop-shadow(0 4px 7px rgb(30 32 25 / 0.2));
+}
+
+.diary-slip--tear-2 .diary-slip-paper {
+  filter: url("#torn-slip-2") drop-shadow(0 4px 7px rgb(30 32 25 / 0.2));
 }
 
 /* Keep the writing clear of the ragged edge, which wanders up to ~13px in. */
@@ -230,8 +239,10 @@ a:focus-visible {
 
 /* No filter, no torn silhouette — the paper would land as a hard rectangle
    over the shadow. Fall back to the keyline the rest of the site uses. */
-@supports not (filter: url("#torn-slip")) {
-  .diary-slip-paper {
+@supports not (filter: url("#torn-slip-0")) {
+  .diary-slip-paper,
+  .diary-slip--tear-1 .diary-slip-paper,
+  .diary-slip--tear-2 .diary-slip-paper {
     filter: none;
     border-radius: 14px;
     border-color: rgb(255 255 255 / 0.72);
