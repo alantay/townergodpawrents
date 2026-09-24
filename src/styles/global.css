@@ -179,25 +179,14 @@ a:focus-visible {
     0 6px 12px rgb(30 32 25 / 0.12);
 }
 
-/* Ruled paper. Any cream slip carrying a written sentence gets this, so words
-   on this site always sit on lines. The 26px rule spacing has to match the
-   line-height of the text it wraps — change one, change both. There is no
-   padding-top on purpose: the gradient tiles upward from its origin as well as
-   down, so offsetting it strands a rule above the first line with nothing
-   written on it. */
+/* Keep the writing clear on the torn paper; repeated rules crowded the text
+   and left stray lines when a caption wrapped. */
 .diary-note {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0 25px,
-    rgb(30 32 25 / 0.12) 25.35px 25.65px,
-    transparent 26px
-  );
-  background-position: 0 0;
   padding: 0 16px 13px;
 }
 
 .diary-note p {
-  line-height: 26px;
+  line-height: 1.55;
 }
 
 /* A caption slip is torn from a pad, like the guest collages are torn from a
@@ -205,10 +194,7 @@ a:focus-visible {
    layer alone — displacing the text with it would leave the writing wobbling.
    The 5px lighter border is the fibre the tear exposes; the ragged edge cuts
    through it, so it shows as an uneven pale fringe rather than a rule. */
-/* The breathing room has to sit here rather than on .diary-note: that element
-   carries the rules, and any padding-top on it shifts the gradient's origin
-   and strands a blank rule above the first line. Out here the tear has room
-   to wander without biting into the writing. */
+/* Give the tear room to wander without biting into the writing. */
 .diary-slip {
   position: relative;
   padding: 18px 0 5px;
