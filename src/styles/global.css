@@ -179,14 +179,17 @@ a:focus-visible {
     0 6px 12px rgb(30 32 25 / 0.12);
 }
 
-/* Keep the writing clear on the torn paper; repeated rules crowded the text
-   and left stray lines when a caption wrapped. */
+/* The paper has breathing room around the writing. Put the ruling on the
+   paragraph itself so it ends with the final written line. */
 .diary-note {
   padding: 0 16px 13px;
 }
 
 .diary-note p {
-  line-height: 1.55;
+  line-height: 28px;
+  background-image: linear-gradient(to bottom, transparent 27px, rgb(30 32 25 / 0.18) 27px);
+  background-size: 100% 28px;
+  background-repeat: repeat-y;
 }
 
 /* A caption slip is torn from a pad, like the guest collages are torn from a
