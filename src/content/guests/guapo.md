@@ -1,7 +1,7 @@
 ---
 name: Guapo
 breed: Shiba Inu
-photo: ./guapo/guapo-collage-v2.png
+photo: ./guapo/guapo-collage-v3.png
 bgColor: "#3F6655"
 showLive: true
 badge: Professional sleeper
