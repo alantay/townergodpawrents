@@ -3,9 +3,10 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
 import Cutout from "../../components/Cutout.astro";
-import { stayLabel, staysNewestFirst, latestStay, dateStr } from "../../lib/guests";
+import { stayLabel, staysNewestFirst, latestStay, dateStr, todaySGT } from "../../lib/guests";
 
 const entries = await getCollection("guests");
+const today = todaySGT();
 
 // Everyone who's ever stayed, most recently departed first. A dog appears
 // once however many times they've been — the date is their last visit.
@@ -20,6 +21,7 @@ const guests = entries
       e.data.stays.map((s) => ({ checkIn: dateStr(s.checkIn), checkOut: dateStr(s.checkOut) })),
     ),
   }))
+  .filter((g) => latestStay(g).checkOut < today)
   .sort((a, b) => latestStay(b).checkOut.localeCompare(latestStay(a).checkOut));
 const returningGuests = guests.filter((g) => g.stays.length > 1).length;
 ---
