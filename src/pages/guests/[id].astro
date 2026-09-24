@@ -303,12 +303,13 @@ let skinIndex = 0;
                   )}
 
                   {/* A caption with no mat to sit on gets its own slip of ruled
-                      paper tucked under the prints. */}
+                      paper, torn off the pad, tucked under the prints. */}
                   {noteCaption && (
                     <div
-                      class="diary-print mt-4 mx-auto bg-cream card-keyline rounded-[14px] overflow-hidden"
+                      class="diary-slip mt-4 mx-auto"
                       style={`${noteWidth ? `width:min(100%,${noteWidth}px);` : ""}transform:rotate(${noteTilt(i)})`}
                     >
+                      <div class="diary-slip-paper" aria-hidden="true"></div>
                       <div class="diary-note">
                         <p class="text-[14px] text-ink text-pretty">{e.text}</p>
                       </div>

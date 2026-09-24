@@ -199,6 +199,43 @@ a:focus-visible {
   line-height: 26px;
 }
 
+/* A caption slip is torn from a pad, like the guest collages are torn from a
+   page. The cream is a layer of its own so the tear can be a filter on that
+   layer alone — displacing the text with it would leave the writing wobbling.
+   The 5px lighter border is the fibre the tear exposes; the ragged edge cuts
+   through it, so it shows as an uneven pale fringe rather than a rule. */
+.diary-slip {
+  position: relative;
+}
+
+.diary-slip-paper {
+  position: absolute;
+  inset: 0;
+  background: var(--color-cream);
+  background-clip: padding-box;
+  border: 5px solid #fdfaf1;
+  filter: url("#torn-slip") drop-shadow(0 4px 7px rgb(30 32 25 / 0.2));
+}
+
+/* Keep the writing clear of the ragged edge, which wanders up to ~13px in. */
+.diary-slip .diary-note {
+  position: relative;
+  margin: 0 8px;
+}
+
+/* No filter, no torn silhouette — the paper would land as a hard rectangle
+   over the shadow. Fall back to the keyline the rest of the site uses. */
+@supports not (filter: url("#torn-slip")) {
+  .diary-slip-paper {
+    filter: none;
+    border-radius: 14px;
+    border-color: rgb(255 255 255 / 0.72);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.44),
+      0 6px 12px rgb(30 32 25 / 0.12);
+  }
+}
+
 .diary-prints {
   display: grid;
   gap: 0.75rem;

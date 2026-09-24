@@ -38,6 +38,16 @@ const ogImageURL = new URL(ogImage, Astro.site ?? Astro.url);
   </head>
   <body class="min-h-screen bg-paper text-ink font-sans pb-24">
     <a class="skip-link" href="#main-content">Skip to main content</a>
+    {/* The ragged edge on a caption slip, so it is torn from a pad the same way
+        the guest collages are torn from a page. Turbulence displaces the paper
+        layer's own outline; the ruled text sits above it, untouched. One
+        filter serves every slip on the page. */}
+    <svg width="0" height="0" aria-hidden="true" focusable="false" class="absolute">
+      <filter id="torn-slip" x="-10%" y="-30%" width="120%" height="160%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.03 0.12" numOctaves="4" seed="5" result="tear" />
+        <feDisplacementMap in="SourceGraphic" in2="tear" scale="13" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
     <main id="main-content" class="page-shell mx-auto max-w-[700px] px-5">
       <slot />
     </main>
