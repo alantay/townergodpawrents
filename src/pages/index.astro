@@ -515,8 +515,15 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
             // its own ruled slip underneath — never both.
             var matCaption = !video && e.media.length === 1 && !!e.text && fitsPrintMat(e.text);
             var noteCaption = !video && e.media.length > 0 && !!e.text && !matCaption;
+            // Under one print the slip matches that print's width, so it reads
+            // as tucked under the photo. Under a grid there is no single print
+            // to line up with, so it spans the card instead.
+            var noteWidth =
+              !video && e.media.length === 1 ? printWidth(e.media[0].width, e.media[0].height) : null;
             var noteHTML = noteCaption
-              ? '<div class="diary-print mt-4 bg-cream card-keyline rounded-[14px] overflow-hidden" style="transform:rotate(' +
+              ? '<div class="diary-print mt-4 mx-auto bg-cream card-keyline rounded-[14px] overflow-hidden" style="' +
+                (noteWidth ? "width:min(100%," + noteWidth + "px);" : "") +
+                "transform:rotate(" +
                 noteTilt(i) +
                 ')"><div class="diary-note"><p class="text-[14px] text-ink text-pretty">' +
                 esc(e.text) +
@@ -806,10 +813,11 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
         console.error("[towner-godpawrents] homepage render failed", err);
         var appEl = document.getElementById("home-app");
         appEl.innerHTML =
-          '<div role="status" class="rounded-[24px] bg-cream card-keyline p-5 text-base leading-relaxed">' +
+          '<div role="status" class="rounded-[24px] bg-cream card-keyline overflow-hidden py-[13px]">' +
+          '<div class="diary-note"><p class="text-[15px] text-ink text-pretty">' +
           "Couldn't load today's diary just now. " +
           '<a href="/guests" class="font-semibold border-b-[1.5px] border-line hover:border-ink">Browse past guests</a>.' +
-          "</div>";
+          "</p></div></div>";
         appEl.hidden = false;
       }
     })();
