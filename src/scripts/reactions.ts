@@ -117,6 +117,11 @@ class EntryReactions extends HTMLElement {
       picker.hidden = true;
       picker.setAttribute("role", "group");
       picker.setAttribute("aria-label", "Leave a reaction");
+      // The strip's paper and bottom tape use ::before and ::after; this is the top tape.
+      const tape = document.createElement("span");
+      tape.className = "reaction-picker-tape";
+      tape.setAttribute("aria-hidden", "true");
+      picker.append(tape);
       toggle.setAttribute("aria-controls", picker.id);
 
       for (const emoji of EMOJI) {

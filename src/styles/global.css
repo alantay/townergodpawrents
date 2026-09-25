@@ -140,17 +140,12 @@ entry-reactions:not(.has-reactions) .reaction-toggle {
   min-height: 1.6rem;
   padding: 0.1rem;
   border-color: transparent;
-  opacity: 0.55;
+  opacity: 0.35;
 }
 entry-reactions:not(.has-reactions) .reaction-summary-icons svg { width: 1.5rem; height: auto; }
 entry-reactions:not(.has-reactions) .reaction-toggle:hover,
 entry-reactions:not(.has-reactions) .reaction-toggle:focus-visible,
 entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opacity: 1; }
-entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] {
-  border-color: #fdfaf1;
-  background: var(--color-lime);
-  color: var(--color-ink);
-}
 
 /* With reactions, the badge is just the stickers piled on the card corner,
    most-used on top, with the total on a scrap of tape. */
@@ -238,6 +233,17 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] {
   background: rgb(216 242 78 / 0.9);
   clip-path: polygon(0 12%, 8% 0, 16% 14%, 100% 0, 92% 50%, 100% 100%, 6% 88%, 0 100%);
   transform: rotate(-26deg);
+}
+.reaction-picker-tape {
+  position: absolute;
+  top: -0.3rem;
+  left: -0.75rem;
+  width: 2.6rem;
+  height: 1rem;
+  background: rgb(216 242 78 / 0.9);
+  clip-path: polygon(0 10%, 10% 0, 100% 12%, 94% 55%, 100% 100%, 12% 90%, 0 100%, 5% 45%);
+  transform: rotate(-32deg);
+  pointer-events: none;
 }
 .reaction-picker[hidden] { display: none; }
 .reaction-choice {
