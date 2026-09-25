@@ -4,7 +4,7 @@ status: accepted
 
 # Shared reactions on diary entries
 
-Implementation note (25 Sep 2026): the interactive preview now stores counts in each visitor's browser and shows them in a compact badge at the top of each card. The endpoint and Redis code below remain dormant. Shared totals, rate limiting, and the private reset command are deferred until the hosted store is enabled.
+Implementation note (25 Sep 2026): after a spell storing counts in each visitor's browser, the badge now reads and writes the shared endpoint below. The emoji set has since changed; see `src/lib/reaction-emojis.json`.
 
 The diary is currently built as static pages. Shared, permanent reaction totals need a write endpoint and durable storage, so add a small on-demand endpoint backed by a hosted store while keeping the diary pages static. Prefer a free tier with a spending cap. This adds an external service, but lets visitors see the same totals on the homepage and guest diary without rebuilding the site after every tap.
 

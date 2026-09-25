@@ -267,6 +267,24 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] {
   color: color-mix(in srgb, var(--color-ink) 72%, transparent);
 }
 
+/* A failed tap leaves a quiet pencilled note under the badge. */
+.reaction-message {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  width: max-content;
+  max-width: 12rem;
+  padding: 0.2rem 0.45rem;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-size: 0.72rem;
+  font-style: italic;
+  text-align: right;
+  box-shadow: 0 2px 5px rgb(30 32 25 / 0.18);
+  transform: rotate(-1.5deg);
+}
+.reaction-message:empty { display: none; }
+
 .diary-entry:focus-within,
 .diary-entry-card:focus-within { z-index: 4; }
 

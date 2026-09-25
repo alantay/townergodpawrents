@@ -1,9 +1,7 @@
 import EMOJI from "../lib/reaction-emojis.json";
 
 type Counts = Record<string, number>;
-type StoredCounts = Record<string, Record<string, Counts>>;
-
-const STORAGE_KEY = "towner-entry-reactions:v1";
+type GuestCounts = Record<string, Counts>;
 const ADD_ICON = '<svg viewBox="0 0 30 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="13" cy="16" r="10" stroke-dasharray="3.1 2.9"/><path d="M9.5 17.8c1.9 2 5.1 2 7 0M9.5 13.5h.1m6.9 0h.1M25 1v6m-3-3h6"/></svg>';
 const YELLOW = "#fcd13d";
 const INK = 'fill="none" stroke="#1e2019" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"';
@@ -19,42 +17,68 @@ const STICKERS: Record<string, string> = {
 };
 const sticker = (emoji: { value: string; label: string }) =>
   STICKERS[emoji.label] ? `<svg viewBox="0 0 40 40" aria-hidden="true">${STICKERS[emoji.label]}</svg>` : emoji.value;
-let memory: StoredCounts = {};
-let persistenceUnavailable = false;
+// Counts live in /api/reactions so everyone sees the same totals.
+const latest = new Map<string, GuestCounts>();
+const loads = new Map<string, Promise<void>>();
 
-function readCounts(): StoredCounts {
-  if (persistenceUnavailable) return memory;
-  try {
-    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "{}");
-    if (stored && typeof stored === "object" && !Array.isArray(stored)) {
-      memory = stored as StoredCounts;
-    }
-  } catch {
-    // Browsers can block storage; the counts still work for this page visit.
-    persistenceUnavailable = true;
-  }
-  return memory;
+function countsFor(guestId: string, entryId: string): Counts {
+  return latest.get(guestId)?.[entryId] ?? {};
 }
 
-function addReaction(guestId: string, entryId: string, emoji: string): Counts {
-  const all = readCounts();
-  const guest = all[guestId] ??= {};
-  const entry = guest[entryId] ??= {};
-  entry[emoji] = Math.max(0, Number(entry[emoji]) || 0) + 1;
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
-  } catch {
-    // Keep the visible count even when persistent storage is unavailable.
-    persistenceUnavailable = true;
-  }
-  return entry;
-}
-
-function syncWidgets() {
-  const all = readCounts();
+function syncWidgets(guestId: string) {
   document.querySelectorAll<EntryReactions>("entry-reactions").forEach((widget) => {
-    widget.show(all[widget.dataset.guest ?? ""]?.[widget.dataset.entry ?? ""] ?? {});
+    if (widget.dataset.guest === guestId) widget.show(countsFor(guestId, widget.dataset.entry ?? ""));
   });
+}
+
+function setCounts(guestId: string, entryId: string, counts: Counts) {
+  const guest = latest.get(guestId) ?? {};
+  guest[entryId] = counts;
+  latest.set(guestId, guest);
+  syncWidgets(guestId);
+}
+
+// One request per guest, shared by every widget for that guest on the page.
+function loadGuest(guestId: string) {
+  if (loads.has(guestId)) return;
+  loads.set(guestId, fetch(`/api/reactions?guest=${encodeURIComponent(guestId)}`)
+    .then((response) => {
+      if (!response.ok) throw new Error("Reactions unavailable");
+      return response.json() as Promise<GuestCounts>;
+    })
+    .then((counts) => {
+      latest.set(guestId, { ...latest.get(guestId), ...counts });
+      syncWidgets(guestId);
+    })
+    .catch(() => {
+      // The diary stays readable; the next widget to connect tries again.
+      loads.delete(guestId);
+    }));
+}
+
+function bump(guestId: string, entryId: string, emoji: string, by: number) {
+  const counts = { ...countsFor(guestId, entryId) };
+  counts[emoji] = Math.max(0, (Number(counts[emoji]) || 0) + by);
+  setCounts(guestId, entryId, counts);
+}
+
+// Show the tap straight away, then settle on the server's totals.
+async function addReaction(guestId: string, entryId: string, emoji: string) {
+  bump(guestId, entryId, emoji, 1);
+  let problem = "Reaction didn't land. Try again?";
+  try {
+    const response = await fetch("/api/reactions", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ guest: guestId, entry: entryId, emoji }),
+    });
+    if (response.ok) return setCounts(guestId, entryId, await response.json() as Counts);
+    if (response.status === 429) problem = "Steady lah, too many taps. Try again in a minute.";
+  } catch {
+    // Offline or the store is down; fall through and undo the tap.
+  }
+  bump(guestId, entryId, emoji, -1);
+  throw new Error(problem);
 }
 
 class EntryReactions extends HTMLElement {
@@ -62,6 +86,8 @@ class EntryReactions extends HTMLElement {
   private picker?: HTMLDivElement;
   private total?: HTMLElement;
   private icons?: HTMLElement;
+  private message?: HTMLElement;
+  private messageTimer?: number;
   private choiceCounts = new Map<string, HTMLElement>();
 
   connectedCallback() {
@@ -105,22 +131,29 @@ class EntryReactions extends HTMLElement {
         button.append(count);
         this.choiceCounts.set(emoji.value, count);
         button.addEventListener("click", () => {
-          addReaction(this.dataset.guest!, this.dataset.entry!, emoji.value);
-          syncWidgets();
+          this.say("");
+          addReaction(this.dataset.guest!, this.dataset.entry!, emoji.value)
+            .catch((error: Error) => this.say(error.message));
           this.close();
           toggle.focus({ preventScroll: true });
         });
         picker.append(button);
       }
 
+      const message = document.createElement("span");
+      message.className = "reaction-message";
+      message.setAttribute("role", "status");
+
       toggle.addEventListener("click", () => picker.hidden ? this.open() : this.close());
-      this.append(toggle, picker);
+      this.append(toggle, picker, message);
+      this.message = message;
       this.toggle = toggle;
       this.picker = picker;
       this.icons = icons;
       this.total = total;
     }
-    this.show(readCounts()[this.dataset.guest]?.[this.dataset.entry] ?? {});
+    this.show(countsFor(this.dataset.guest, this.dataset.entry));
+    loadGuest(this.dataset.guest);
   }
 
   disconnectedCallback() { this.close(); }
@@ -144,6 +177,13 @@ class EntryReactions extends HTMLElement {
     }
     this.total.textContent = total ? String(total) : "";
     this.toggle.setAttribute("aria-label", total ? `Add a reaction; ${total} reactions so far` : "Add a reaction");
+  }
+
+  private say(text: string) {
+    if (!this.message) return;
+    this.message.textContent = text;
+    window.clearTimeout(this.messageTimer);
+    if (text) this.messageTimer = window.setTimeout(() => this.say(""), 4000);
   }
 
   private open() {
@@ -179,6 +219,3 @@ class EntryReactions extends HTMLElement {
 }
 
 customElements.define("entry-reactions", EntryReactions);
-window.addEventListener("storage", (event) => {
-  if (event.key === STORAGE_KEY) syncWidgets();
-});
