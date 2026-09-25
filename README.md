@@ -19,12 +19,16 @@ Then in `src/content/guests/tiny.md`, newest first:
 
 ### 2pm
 
+<!-- entry-id: e053 -->
+
 Tiny napping on the lap while the human tries to work.
 
 ![Tiny napping on lap](./tiny/tiny-lap-nap.jpg)
 ```
 
 `npm run build` catches days outside a stay and missing photos. New dog or new stay: `docs/agents/new-stay.md`. Words used here (guest, stay, entry, print): `CONTEXT.md`.
+
+Shared reaction setup and the private reset command: [docs/agents/reactions.md](docs/agents/reactions.md). Each new entry needs a unique, permanent `entry-id` comment; see [the posting guide](docs/agents/add-entry.md).
 
 ## Handy
 

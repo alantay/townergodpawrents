@@ -27,7 +27,7 @@ Not a pet-sitting service — a personal log of an informal, no-money hobby amon
 
 ## Capabilities and Constraints
 
-- Astro + Tailwind, static content collections — no backend, no bookings, no payments, no forms.
+- Astro + Tailwind, static content collections — currently no backend, bookings, payments, or forms. [ADR 0005](docs/adr/0005-shared-entry-reactions.md) accepts adding a small on-demand endpoint and durable store for reactions while keeping the diary pages static.
 - `badge` is a 2-3 word description of the dog, distinct from the `tagline` (see project memory on this convention).
 - Never write marketing copy, calls to action, pricing, service descriptions, testimonials, or FAQs — if a section starts sounding like a service, it's wrong.
 

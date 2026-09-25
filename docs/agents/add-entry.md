@@ -63,10 +63,13 @@ The slug is 2–4 words taken from the moment (`climbing-wall`, `lap-nap`).
 **Markdown:** in `src/content/guests/<guest>.md`:
 - Days are `## 16 Sep`, newest day at the top. If today's divider doesn't exist yet, add it above the previous newest day.
 - Entries are `### 12:10pm`, newest first within the day. Put the new one in time order.
+- Give each entry a unique, permanent ID in a comment just after its heading: `<!-- entry-id: e053 -->`. Check the guest's existing IDs and use the next free number. Keep the ID when editing the time or words; shared reactions use it.
 - Leave a blank line between the heading, the text and each image. Put at most four images under an entry, or a single video (same `![alt](./path)` syntax — the `.mp4` extension is what tells it apart from a photo).
 
 ```md
 ### 10:30pm
+
+<!-- entry-id: e053 -->
 
 One of Tiny's many manja moments ❤️
 

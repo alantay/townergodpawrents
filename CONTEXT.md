@@ -8,6 +8,10 @@ A personal site showing which dog is on Alan and Weiwen's sofa today, and a diar
 A dog Alan and Weiwen host. One guest, one file, one page, forever — a dog that comes back is the same guest, not a new one.
 _Avoid_: Dog (fine in prose, but the modelled thing is a Guest), client, pet, boarder
 
+**Guest's human**:
+The person who looks after a guest when the guest is home, and who may read that guest's diary while the guest stays with Alan and Weiwen.
+_Avoid_: Owner (ambiguous with the site's owners), client
+
 **Stay**:
 One visit by a guest, from check-in to check-out. A guest has one or more; each is a date range.
 _Avoid_: Booking, reservation, visit, session
@@ -19,6 +23,10 @@ _Avoid_: Date section, day entry
 **Entry**:
 One timestamped moment inside a diary day, written as a `### 9:50am` heading and the words under it. May be up to four prints, or one clip, with no words.
 _Avoid_: Post, note, log line, update
+
+**Reaction**:
+One of ❤️, 😂, 🥹, or 🐾 left by a visitor on an entry. Reactions remain available after a stay ends and their totals are visible to everyone.
+_Avoid_: Like, rating, review
 
 **Print**:
 A photo attached to an entry, shown on the diary page as a tilted snapshot on a cream mat. An entry can have up to four prints. Deliberately a different photo language from the cut-outs.

@@ -87,7 +87,7 @@ a:focus-visible {
 }
 
 .diary-entry-card:hover,
-.diary-entry-card:focus-visible {
+.diary-entry-card:focus-within {
   transform: rotate(0deg) translateY(-2px);
   filter: brightness(1.04);
 }
@@ -97,10 +97,44 @@ a:focus-visible {
    frame — so video entries skip both the lift and the filter, staying
    put on hover. */
 .diary-entry-card--video:hover,
-.diary-entry-card--video:focus-visible {
+.diary-entry-card--video:focus-within {
   transform: rotate(0deg);
   filter: none;
 }
+
+entry-reactions {
+  display: block;
+  margin-top: 1rem;
+}
+
+.reaction-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.reaction-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 2.65rem;
+  min-height: 2.5rem;
+  padding: 0.25rem 0.6rem;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  background: rgb(247 242 231 / 0.85);
+  color: #1e2019;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease;
+}
+
+.reaction-button:hover { background: var(--color-lime); transform: translateY(-2px); }
+.reaction-button:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+.reaction-button:disabled { cursor: wait; opacity: 0.65; }
+.reaction-count { font-size: 0.8rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.reaction-message { display: block; font-size: 0.8rem; line-height: 1.4; }
+.reaction-message:empty { display: none; }
 
 .dog-card {
   box-shadow: 0 10px 20px rgb(92 76 41 / 0.1);

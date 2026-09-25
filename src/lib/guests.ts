@@ -28,6 +28,7 @@ export interface DiaryMedia {
 
 /** One timestamped moment: a `### 9:50am` heading and what's under it. */
 export interface DiaryEntry {
+  id: string; // stable within this guest, even if the time or words change
   time: string; // e.g. "9:50am"
   text: string;
   /** Photos (up to four) in the order they appear in the markdown, or a
@@ -151,6 +152,7 @@ function mediaKind(src: string): MediaKind {
 const HEADING_RE = /^(#{2,3})\s+(.+?)\s*$/gm;
 
 const DAY_RE = /^(\d{1,2})\s+([A-Za-z]{3,})$/;
+const ENTRY_ID_RE = /<!--\s*entry-id:\s*([a-z0-9-]+)\s*-->/g;
 
 /**
  * Turns a `## 13 Sep` divider into a full date by finding the stay that
@@ -202,6 +204,7 @@ export function parseDiary(body: string, stays: Stay[], guestId: string): DiaryD
   const heads = [...body.matchAll(HEADING_RE)];
   const days: DiaryDay[] = [];
   let current: DiaryDay | undefined;
+  const seenIds = new Set<string>();
 
   for (let i = 0; i < heads.length; i++) {
     const [full, hashes, title] = heads[i];
@@ -222,6 +225,13 @@ export function parseDiary(body: string, stays: Stay[], guestId: string): DiaryD
     }
 
     const raw = body.slice(start, end);
+    const ids = [...raw.matchAll(ENTRY_ID_RE)];
+    if (ids.length !== 1) {
+      throw new Error(`[guests] ${guestId}: entry "${title}" needs exactly one <!-- entry-id: ... -->`);
+    }
+    const id = ids[0][1];
+    if (seenIds.has(id)) throw new Error(`[guests] ${guestId}: duplicate entry ID "${id}"`);
+    seenIds.add(id);
     const matches = [...raw.matchAll(IMAGE_RE)];
     const media = matches.map((match) => ({ src: match[2], alt: match[1].trim(), kind: mediaKind(match[2]) }));
     const videos = media.filter((m) => m.kind === "video");
@@ -231,9 +241,9 @@ export function parseDiary(body: string, stays: Stay[], guestId: string): DiaryD
     if (media.length > 4) {
       throw new Error(`[guests] ${guestId}: entry "${title}" has ${media.length} prints — use at most four`);
     }
-    const text = raw.replace(IMAGE_RE, " ").trim().replace(/\s+/g, " ");
+    const text = raw.replace(IMAGE_RE, " ").replace(ENTRY_ID_RE, " ").trim().replace(/\s+/g, " ");
 
-    if (text || media.length > 0) current.entries.push({ time: title, text, media });
+    if (text || media.length > 0) current.entries.push({ id, time: title, text, media });
   }
 
   // Days newest first, whatever order they were written in. Entries keep the

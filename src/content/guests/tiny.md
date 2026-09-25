@@ -15,9 +15,13 @@ stays:
 
 ### 7pm
 
+<!-- entry-id: e001 -->
+
 Tiny was so happy to see her owners. We’d like to think Tiny went on a little vacation too, just like her owners. Swimming with plushies, camping snacks and sniffing adventures with us.
 
 ### 6pm
+
+<!-- entry-id: e002 -->
 
 Tiny worked hard with all her vigor and poise.
 
@@ -25,11 +29,15 @@ Tiny worked hard with all her vigor and poise.
 
 ### 5:50pm
 
+<!-- entry-id: e003 -->
+
 The last day of us taking Tiny to the dog run. After two days of missing it due to rain, she couldn't wait to get there, leading Weiwen on the leash towards it.
 
 ![Tiny pulling Weiwen along the sidewalk on the leash, eager to reach the dog run](./tiny/tiny-eager-for-dog-run.jpg)
 
 ### 12:40pm
+
+<!-- entry-id: e004 -->
 
 Tiny now expects a game of fetch every time we come home from a walk. Refuses to go into the house.
 
@@ -41,21 +49,29 @@ Tiny now expects a game of fetch every time we come home from a walk. Refuses to
 
 ### 8:45pm
 
+<!-- entry-id: e005 -->
+
 Tiny was acting strangely with her new toy.
 
 ![Tiny lying on the bed with her face pressed against a plush toy](./tiny/tiny-strange-new-toy.jpg)
 
 ### 8pm
 
+<!-- entry-id: e006 -->
+
 We got Tiny to “place”, then hid snacks around the house. Once we released her, we held out a hand for her to smell, and she went off to find the snacks. Tiny’s nose worked fantastically well. It was delightful to see her put it to work.
 
 ### 4:25pm
+
+<!-- entry-id: e007 -->
 
 "This is no good," Tiny says. "The smell of rain."
 
 ![Tiny sniffing at the window blinds, nose up toward the sky](./tiny/tiny-smell-of-rain.jpg)
 
 ### 9:25am
+
+<!-- entry-id: e008 -->
 
 Once upon a time, there was a little girl who wore a red cape with a hood and loved to play fetch. They called her Tiny Red Fetching Hood.
 
@@ -64,6 +80,8 @@ Once upon a time, there was a little girl who wore a red cape with a hood and lo
 ## 21 Sep
 
 ### 10pm
+
+<!-- entry-id: e009 -->
 
 It was a rainy day, so Tiny had to miss her shift at the dog run. Weiwen found her a work-from-home job instead: finding hidden balls around the house. By 10pm, Tiny was completely knocked out.
 
@@ -75,6 +93,8 @@ It was a rainy day, so Tiny had to miss her shift at the dog run. Weiwen found h
 
 ### 11:20am
 
+<!-- entry-id: e010 -->
+
 Lunch was still a while away, so Tiny started early in her dreams.
 
 First up, an appetiser of cheese, followed by chunks of steak, then ice cream to finish. Nom nom nom.
@@ -82,6 +102,8 @@ First up, an appetiser of cheese, followed by chunks of steak, then ice cream to
 ![Tiny asleep, moving her mouth and licking](./tiny/tiny-nom-nom.mp4)
 
 ### 8:45am
+
+<!-- entry-id: e011 -->
 
 Someone was feeling needy today.
 
@@ -91,11 +113,15 @@ Someone was feeling needy today.
 
 ### 5pm
 
+<!-- entry-id: e012 -->
+
 Tiny insisted that Alan and Weiwen stop napping and bring her to work. There are balls to be picked up at the dog run, and her lazy coworkers can't be trusted to do the job right.
 
 ![Tiny looking ready for work at the dog run](./tiny/tiny-dog-run-work.jpg)
 
 ### 2pm
+
+<!-- entry-id: e013 -->
 
 Reinforcing Tiny's "Place" command. She still likes to take shortcuts, like just touching the bed and considering it done.
 
@@ -103,15 +129,21 @@ Reinforcing Tiny's "Place" command. She still likes to take shortcuts, like just
 
 ### 8:20am
 
+<!-- entry-id: e014 -->
+
 On the way home from the carpark, Tiny met Milk, so we turned back for a second round of ball play.
 
 ## 19 Sep
 
 ### 11am
 
+<!-- entry-id: e015 -->
+
 On the way back from Dog Carnival, Tiny attacked a cat hiding under a van. She came away with a few minor scratches near her eye and snout. Note to self: keep the leash tight.
 
 ### 10:15am
+
+<!-- entry-id: e016 -->
 
 We took Tiny to Whampoa Happy Pets Day. It was a Hi and immediately followed by a Bye to every dog.
 
@@ -125,6 +157,8 @@ We took Tiny to Whampoa Happy Pets Day. It was a Hi and immediately followed by 
 
 ### 7:20am
 
+<!-- entry-id: e017 -->
+
 A bigger ball for Tiny today. No one was at the carpark, but Tiny didn’t mind. More space to run freely.
 
 ![Tiny running with a big ball at an empty carpark](./tiny/tiny-bigger-ball.jpg)
@@ -133,11 +167,15 @@ A bigger ball for Tiny today. No one was at the carpark, but Tiny didn’t mind.
 
 ### 6pm
 
+<!-- entry-id: e018 -->
+
 Hugo was very interested in Tiny and kept sniffing her. Tiny was a little annoyed. She just wanted to get back to her ball. “I’m working, please. No office romance.”
 
 ![Hugo sniffing Tiny at the dog run while she looks towards her ball](./tiny/tiny-office-romance.jpg)
 
 ### 2:30pm
+
+<!-- entry-id: e019 -->
 
 Tiny fought valiantly with Snorlax. The winner remains unclear, but both are taking a well-earned nap.
 
@@ -147,11 +185,15 @@ Tiny fought valiantly with Snorlax. The winner remains unclear, but both are tak
 
 ### 8am
 
+<!-- entry-id: e020 -->
+
 We were watching Mark Wiens review a Filipino dish on YouTube. Tiny was watching outside from the window, then turned around and licked the screen. Her review: tastes like dust.
 
 ## 17 Sep
 
 ### 6:30pm
+
+<!-- entry-id: e021 -->
 
 Tiny looked slightly less glam, unable to contain her excitement to see Alan.
 
@@ -159,11 +201,15 @@ Tiny looked slightly less glam, unable to contain her excitement to see Alan.
 
 ### 5:45pm
 
+<!-- entry-id: e022 -->
+
 Tiny looked glamorous in her floral-patterned outfit.
 
 ![Tiny wearing a blue floral-patterned outfit at the field](./tiny/tiny-floral-outfit.jpg)
 
 ### 1:30pm
+
+<!-- entry-id: e023 -->
 
 Tiny supervised Weiwen's lunch break until the job became too tiring. Zzz.
 
@@ -173,15 +219,21 @@ Tiny supervised Weiwen's lunch break until the job became too tiring. Zzz.
 
 ### 7:05am
 
+<!-- entry-id: e024 -->
+
 Ball retrieved. Mission accomplished. Time to go home. Weiwen's throwing licence is under review, Tiny says.
 
 ![Tiny walking home on the lead with the blue ball in her mouth](./tiny/tiny-ball-retrieved.jpg)
 
 ### 7am
 
+<!-- entry-id: e025 -->
+
 Weiwen threw the ball straight out of the carpark. Tiny was not impressed. Time to activate Tiny for a search and rescue mission.
 
 ### 6:50am
+
+<!-- entry-id: e026 -->
 
 Tiny guided Alan and Weiwen to her favourite place to play ball, making them walk up 6 levels of stairs to the top of a carpark as a warm-up before the game.
 
@@ -191,17 +243,25 @@ Tiny guided Alan and Weiwen to her favourite place to play ball, making them wal
 
 ### 8:30pm
 
+<!-- entry-id: e027 -->
+
 Tiny splashes water everywhere when she drinks. I swear less than 50% of it actually goes into hydrating her. The floor, on the other hand, is very well hydrated.
 
 ### 12:10pm
+
+<!-- entry-id: e028 -->
 
 Alan got home. House intact. Tiny scared off all intruders and managed not to trash the place.
 
 ### 8:25am
 
+<!-- entry-id: e029 -->
+
 Alan and Weiwen headed to work, leaving Tiny to guard the house until lunchtime. Alan will pop back to have lunch with her.
 
 ### 7:10am
+
+<!-- entry-id: e030 -->
 
 Boarding Tiny let us see her affectionate side. Licky licky, as per usual.
 
@@ -211,11 +271,15 @@ Boarding Tiny let us see her affectionate side. Licky licky, as per usual.
 
 ### 10:30pm
 
+<!-- entry-id: e031 -->
+
 One of Tiny's many manja moments ❤️
 
 ![Tiny sprawled belly-up on the sofa](./tiny/tiny-manja-moment.jpg)
 
 ### 9:15pm
+
+<!-- entry-id: e032 -->
 
 Tiny came to watch Alan's climbing session, then pulled Weiwen straight back to the wall when they tried to leave.
 
@@ -223,11 +287,15 @@ Tiny came to watch Alan's climbing session, then pulled Weiwen straight back to 
 
 ### 5:35pm
 
+<!-- entry-id: e033 -->
+
 Tiny's way of saying it's time for dog run. No more working for human.
 
 ![Tiny waiting by the laptop to go for her dog run](./tiny/tiny-time-for-dog-run.jpg)
 
 ### 3:15pm
+
+<!-- entry-id: e034 -->
 
 Cow spotted grazing in the HDB garden. No wait, that's Tiny.
 
@@ -235,13 +303,19 @@ Cow spotted grazing in the HDB garden. No wait, that's Tiny.
 
 ### 10:50am
 
+<!-- entry-id: e035 -->
+
 Tiny finally pooped, then gave Weiwen a play bow and barked at her. No idea what she was trying to say.
 
 ### 9am
 
+<!-- entry-id: e036 -->
+
 Couldn't find Tiny. She camouflaged with the gate.
 
 ### 7:30am
+
+<!-- entry-id: e037 -->
 
 Back from an hour-long walk. Tiny didn't poop. Maybe she needs a run to get things moving.
 
@@ -249,15 +323,21 @@ Back from an hour-long walk. Tiny didn't poop. Maybe she needs a run to get thin
 
 ### 10:15pm
 
+<!-- entry-id: e038 -->
+
 Alan teaching Tiny the "place" command. Tiny just looking photogenic here.
 
 ![Tiny sitting on her bed](./tiny/tiny-place-command.jpg)
 
 ### 5:30pm
 
+<!-- entry-id: e039 -->
+
 Tiny gets restless around Weiwen, resting her head on her arm and pacing. She knows it's almost time to visit the dog run.
 
 ### 2pm
+
+<!-- entry-id: e040 -->
 
 Tiny napping on the lap while the human tries to work.
 
@@ -265,9 +345,13 @@ Tiny napping on the lap while the human tries to work.
 
 ### 1:30pm
 
+<!-- entry-id: e041 -->
+
 Just came back after leaving Tiny alone at home for 4 hours. House still intact. That's a good girl.
 
 ### 8:10am
+
+<!-- entry-id: e042 -->
 
 Negotiation begins.
 
@@ -275,11 +359,15 @@ Negotiation begins.
 
 ### 8am
 
+<!-- entry-id: e043 -->
+
 Tiny eyeing Alan and Weiwen's breakfast.
 
 ![Tiny eyeing breakfast](./tiny/tiny-eyeing-breakfast.jpg)
 
 ### 6:30am
+
+<!-- entry-id: e044 -->
 
 Weiwen brought Tiny for a run. In reality, Tiny brought her for a run. She howled halfway through. Hopefully no neighbours were woken. Burdensome, Tiny says.
 
@@ -287,17 +375,25 @@ Weiwen brought Tiny for a run. In reality, Tiny brought her for a run. She howle
 
 ### 6pm
 
+<!-- entry-id: e045 -->
+
 We took Tiny on a long walk to Kallang. She pulled at the start, then settled down after a few corrections.
 
 ### 3:30pm
+
+<!-- entry-id: e046 -->
 
 While Alan did the week's meal prep, Tiny lepak in the service yard, hoping something would drop.
 
 ### 2:45pm
 
+<!-- entry-id: e047 -->
+
 Weiwen woke from a nap to Tiny staring straight at her.
 
 ### 2pm
+
+<!-- entry-id: e048 -->
 
 Tiny was at the window, judging the noisy people downstairs.
 
@@ -305,9 +401,13 @@ Tiny was at the window, judging the noisy people downstairs.
 
 ### 1:15pm
 
+<!-- entry-id: e049 -->
+
 After finishing her lunch, Tiny immediately started eyeing ours.
 
 ### 11:45am
+
+<!-- entry-id: e050 -->
 
 Tiny followed Alan into the kitchen while he prepped food, then settled down to stay close to him. No play demands, just nearby.
 
@@ -315,10 +415,14 @@ Tiny followed Alan into the kitchen while he prepped food, then settled down to 
 
 ### 11:05am
 
+<!-- entry-id: e051 -->
+
 Tiny squeezed under Weiwen's desk for a chill. It is a very tight fit, but apparently still her favourite spot. Every time she wriggles in, the whole desk shakes.
 
 ![Tiny curled under Weiwen's desk](./tiny/tiny-under-desk.jpg)
 
 ### 9:50am
+
+<!-- entry-id: e052 -->
 
 The fetch queen is here! Tiny went straight for the squeaky avocado toast and dropped it at our feet.

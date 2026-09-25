@@ -321,6 +321,7 @@ let skinIndex = 0;
                   {e.text && !matCaption && !noteCaption && (
                     <p class={`${prints.length > 0 ? "mt-4" : "mt-2"} text-base leading-relaxed text-pretty max-w-[58ch]`}>{e.text}</p>
                   )}
+                  <entry-reactions data-guest={entry.id} data-entry={e.id} />
                   </article>
                 </div>
               );
