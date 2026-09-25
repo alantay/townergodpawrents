@@ -310,6 +310,20 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
         return fmtDay(s.checkIn) + "–" + fmtDay(s.checkOut);
       }
 
+      function nextArrival(guests, todayISO) {
+        var todayTime = Date.parse(todayISO + "T00:00:00Z");
+        var next = null;
+        guests.forEach((g) => {
+          if (!g.showLive) return;
+          g.stays.forEach((s) => {
+            var daysAway = Math.round((Date.parse(s.checkIn + "T00:00:00Z") - todayTime) / 86400000);
+            if (daysAway < 1 || daysAway > 4) return;
+            if (!next || s.checkIn < next.stay.checkIn) next = { guest: g, stay: s, daysAway: daysAway };
+          });
+        });
+        return next;
+      }
+
       // Each guest's cards stay inside their own hero colour, cycling light
       // to dark, rather than jumping hue card to card — ties the diary back
       // to whoever it's about instead of using a shared whacky rotation.
@@ -461,7 +475,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
         };
       }
 
-      function heroVacancyHTML(lastGuest) {
+      function heroVacancyHTML(lastGuest, next) {
         var html =
           '<div class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:#5F6E4F">' +
           '<div id="hero-badge" class="absolute top-[18px] right-[18px] bg-lime text-ink font-semibold text-xs tracking-[0.06em] uppercase px-[13px] py-2 rounded-full animate-wiggle">Sofa free</div>' +
@@ -470,11 +484,34 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
           '<div id="vacancy-photo" class="h-[265px] mx-[-8px] mt-[18px] animate-drift-slow"></div>' +
           "</div>";
 
+        if (next) {
+          html +=
+            '<a href="/guests/' +
+            esc(next.guest.id) +
+            '" class="mt-[18px] flex items-center gap-3.5 bg-[#EBF5C8] card-keyline rounded-[24px] p-[13px_15px] rotate-1 transition-transform duration-250 hover:rotate-0 hover:scale-[1.02]">' +
+            '<div id="next-up-photo" class="w-16 h-16 rounded-[17px] overflow-hidden flex-none" style="background:' +
+            next.guest.bgColor +
+            '"></div>' +
+            '<div class="min-w-0">' +
+            '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:#4C6B3C">Next up · in ' +
+            next.daysAway +
+            (next.daysAway === 1 ? " day" : " days") +
+            "</div>" +
+            '<div class="font-serif text-[27px] leading-tight">' +
+            esc(next.guest.name) +
+            "</div>" +
+            '<div class="text-sm">' +
+            esc(next.guest.breed) +
+            " · arriving " +
+            fmtDay(next.stay.checkIn) +
+            "</div></div></a>";
+        }
+
         if (lastGuest) {
           html +=
             '<a href="/guests/' +
             esc(lastGuest.id) +
-            '" class="mt-[18px] flex items-center gap-3.5 bg-cream card-keyline rounded-[24px] p-[13px_15px] -rotate-1 transition-transform duration-250 hover:rotate-0 hover:scale-[1.02]">' +
+            '" class="' + (next ? "mt-3" : "mt-[18px]") + ' flex items-center gap-3.5 bg-cream card-keyline rounded-[24px] p-[13px_15px] -rotate-1 transition-transform duration-250 hover:rotate-0 hover:scale-[1.02]">' +
             '<div id="last-seen-photo" class="w-16 h-16 rounded-[17px] overflow-hidden flex-none" style="background:' +
             lastGuest.bgColor +
             '"></div>' +
@@ -761,8 +798,10 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
 
         var appEl = document.getElementById("home-app");
         if (result.state === "vacancy") {
-          appEl.innerHTML = heroVacancyHTML(result.lastGuest);
+          var next = nextArrival(guests, today);
+          appEl.innerHTML = heroVacancyHTML(result.lastGuest, next);
           movePhoto("sofa", document.getElementById("vacancy-photo"));
+          if (next) copyPhoto(next.guest.id, document.getElementById("next-up-photo"));
           if (result.lastGuest) copyPhoto(result.lastGuest.id, document.getElementById("last-seen-photo"));
         } else {
           var hero = heroLiveHTML(result.live, today);
