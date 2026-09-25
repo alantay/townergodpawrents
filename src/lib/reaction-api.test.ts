@@ -58,10 +58,10 @@ test("reaction API increments each valid tap and reads the same totals for a gue
   const api = reactionApi(new Map([["tiny", ["e001", "e002"]]]), store);
   assert.equal((await api.post(tap("tiny", "e001", "❤️"))).status, 200);
   assert.deepEqual(await (await api.post(tap("tiny", "e001", "❤️"))).json(),
-    { "❤️": 2, "😂": 0, "🥹": 0, "🐾": 0 });
+    { "❤️": 2, "😂": 0, "😍": 0, "😑": 0, "😅": 0 });
   assert.deepEqual(await (await api.get(new URL("https://example.test/api/reactions?guest=tiny"))).json(), {
-    e001: { "❤️": 2, "😂": 0, "🥹": 0, "🐾": 0 },
-    e002: { "❤️": 0, "😂": 0, "🥹": 0, "🐾": 0 },
+    e001: { "❤️": 2, "😂": 0, "😍": 0, "😑": 0, "😅": 0 },
+    e002: { "❤️": 0, "😂": 0, "😍": 0, "😑": 0, "😅": 0 },
   });
 });
 
@@ -78,10 +78,10 @@ test("reaction API rejects unknown entries and emoji before writing", async () =
 test("reaction API limits a source to 20 accepted taps per minute", async () => {
   const { store, totals } = fakeStore();
   const api = reactionApi(new Map([["tiny", ["e001"]]]), store);
-  for (let i = 0; i < 20; i++) assert.equal((await api.post(tap("tiny", "e001", "🐾"))).status, 200);
-  assert.equal((await api.post(tap("tiny", "e001", "🐾"))).status, 429);
-  assert.equal(totals.get("reactions:tiny:e001")?.["🐾"], 20);
-  assert.equal((await api.post(tap("tiny", "e001", "🐾", "192.0.2.2"))).status, 200);
+  for (let i = 0; i < 20; i++) assert.equal((await api.post(tap("tiny", "e001", "😑"))).status, 200);
+  assert.equal((await api.post(tap("tiny", "e001", "😑"))).status, 429);
+  assert.equal(totals.get("reactions:tiny:e001")?.["😑"], 20);
+  assert.equal((await api.post(tap("tiny", "e001", "😑", "192.0.2.2"))).status, 200);
 });
 
 test("reaction API reports store failure without touching diary data", async () => {

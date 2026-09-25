@@ -1,6 +1,7 @@
 [
-  { "value": "❤️", "label": "love" },
   { "value": "😂", "label": "laugh" },
-  { "value": "🥹", "label": "touched" },
-  { "value": "🐾", "label": "paws" }
+  { "value": "❤️", "label": "love" },
+  { "value": "😍", "label": "adore" },
+  { "value": "😑", "label": "unimpressed" },
+  { "value": "😅", "label": "phew" }
 ]

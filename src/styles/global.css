@@ -112,74 +112,160 @@ entry-reactions {
 }
 
 .reaction-toggle {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.35rem;
-  min-width: 2.5rem;
-  min-height: 2.5rem;
-  padding: 0.35rem;
-  border: 1px solid color-mix(in srgb, currentColor 42%, transparent);
+  gap: 0.3rem;
+  min-width: 1.9rem;
+  min-height: 1.9rem;
+  padding: 0.15rem;
+  border: 1px solid color-mix(in srgb, currentColor 24%, transparent);
   border-radius: 999px;
   background: transparent;
   color: inherit;
   cursor: pointer;
-  transition: background 150ms ease, transform 150ms ease;
+  transition: background 150ms ease, transform 150ms ease, opacity 150ms ease;
+}
+
+/* Keep a thumb-sized tap area around the small badge. */
+.reaction-toggle::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
 }
 
 entry-reactions:not(.has-reactions) .reaction-toggle {
-  position: relative;
-  min-width: 2.125rem;
-  min-height: 2.125rem;
-  padding: 0.2rem;
-}
-
-entry-reactions:not(.has-reactions) .reaction-toggle::before {
-  content: "";
-  position: absolute;
-  inset: -5px;
-}
-
-.has-reactions .reaction-toggle {
-  padding: 0.35rem 0.55rem;
+  min-width: 1.6rem;
+  min-height: 1.6rem;
+  padding: 0.1rem;
   border-color: transparent;
+  opacity: 0.55;
+}
+entry-reactions:not(.has-reactions) .reaction-summary-icons svg { width: 1.5rem; height: auto; }
+entry-reactions:not(.has-reactions) .reaction-toggle:hover,
+entry-reactions:not(.has-reactions) .reaction-toggle:focus-visible,
+entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opacity: 1; }
+entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] {
+  border-color: #fdfaf1;
   background: var(--color-lime);
   color: var(--color-ink);
 }
 
+/* With reactions, the badge is just the stickers piled on the card corner,
+   most-used on top, with the total on a scrap of tape. */
+.has-reactions .reaction-toggle {
+  gap: 0.15rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0.4rem;
+}
+
 .reaction-toggle:hover { transform: translateY(-2px); background: color-mix(in srgb, currentColor 12%, transparent); }
-.has-reactions .reaction-toggle:hover { background: var(--color-lime-soft); }
+.has-reactions .reaction-toggle:hover { background: transparent; }
 .reaction-toggle:focus-visible,
 .reaction-choice:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
-.reaction-summary-icons { display: inline-flex; align-items: center; font-size: 1.05rem; line-height: 1; }
-.reaction-summary-total { font-size: 0.78rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.reaction-summary-icons { display: inline-flex; align-items: center; font-size: 0.9rem; line-height: 1; }
+.has-reactions .reaction-summary-icons svg {
+  position: relative;
+  width: 2.1rem;
+  height: 2.1rem;
+  filter: drop-shadow(0 2px 2px rgb(30 32 25 / 0.28));
+}
+.has-reactions .reaction-summary-icons svg:nth-child(1) { z-index: 3; transform: rotate(-8deg); }
+.has-reactions .reaction-summary-icons svg:nth-child(2) { z-index: 2; transform: rotate(6deg); }
+.has-reactions .reaction-summary-icons svg:nth-child(3) { z-index: 1; transform: rotate(-4deg); }
+.has-reactions .reaction-summary-icons svg + svg { margin-left: -0.85rem; }
+.reaction-summary-more {
+  margin-left: 0.2rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  opacity: 0.7;
+}
+.reaction-summary-total {
+  padding: 0.15rem 0.45rem;
+  background: rgb(216 242 78 / 0.92);
+  color: var(--color-ink);
+  font-size: 0.75rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  clip-path: polygon(0 10%, 12% 0, 22% 8%, 100% 0, 94% 45%, 100% 100%, 10% 92%, 0 100%, 5% 50%);
+  transform: rotate(-5deg);
+}
 .reaction-summary-total:empty { display: none; }
+.reaction-summary-total[data-tape="1"] {
+  clip-path: polygon(4% 0, 100% 6%, 96% 30%, 100% 55%, 95% 100%, 0 94%, 6% 70%, 0 40%);
+  transform: rotate(4deg);
+}
+.reaction-summary-total[data-tape="2"] {
+  padding-inline: 0.55rem;
+  clip-path: polygon(0 0, 100% 0, 93% 25%, 100% 50%, 93% 75%, 100% 100%, 0 100%, 7% 75%, 0 50%, 7% 25%);
+  transform: rotate(-2deg);
+}
 
+/* The picker is a strip torn from the same pad as the diary captions, taped
+   to the card, with the reactions stuck on it like stickers. */
 .reaction-picker {
   position: absolute;
-  top: calc(100% + 0.35rem);
-  right: 0;
+  top: calc(100% + 0.3rem);
+  right: -0.4rem;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
   width: max-content;
-  padding: 0.55rem;
-  border: 1px solid var(--color-card-line);
-  border-radius: 0.9rem;
-  background: var(--color-cream);
+  padding: 0.55rem 0.8rem;
   color: var(--color-ink);
-  box-shadow: 0 10px 22px rgb(30 32 25 / 0.18);
+  transform: rotate(-1.5deg);
+}
+.reaction-picker::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-cream);
+  background-clip: padding-box;
+  border: 5px solid #fdfaf1;
+  filter: url("#torn-slip-1") drop-shadow(0 4px 7px rgb(30 32 25 / 0.22));
+}
+.reaction-picker::after {
+  content: "";
+  position: absolute;
+  right: -0.7rem;
+  bottom: -0.35rem;
+  width: 2.6rem;
+  height: 1rem;
+  background: rgb(216 242 78 / 0.9);
+  clip-path: polygon(0 12%, 8% 0, 16% 14%, 100% 0, 92% 50%, 100% 100%, 6% 88%, 0 100%);
+  transform: rotate(-26deg);
 }
 .reaction-picker[hidden] { display: none; }
-.reaction-picker-title { display: block; padding: 0.1rem 0.35rem 0.35rem; font-size: 0.75rem; font-weight: 600; }
 .reaction-choice {
-  width: 2.75rem;
-  height: 2.75rem;
+  display: grid;
+  justify-items: center;
+  gap: 0.1rem;
+  width: 2.6rem;
+  padding: 0;
   border: 0;
-  border-radius: 0.7rem;
+  border-radius: 999px;
   background: transparent;
   font-size: 1.3rem;
+  line-height: 1;
   cursor: pointer;
-  transition: background 150ms ease, transform 150ms ease;
+  transition: transform 150ms ease;
 }
-.reaction-choice:hover { background: var(--color-lime-soft); transform: translateY(-2px); }
+.reaction-choice svg {
+  width: 2.2rem;
+  height: 2.2rem;
+  filter: drop-shadow(0 2px 2px rgb(30 32 25 / 0.2));
+}
+.reaction-choice:hover { transform: scale(1.18) rotate(-6deg); }
+.reaction-choice-count {
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--color-ink) 72%, transparent);
+}
 
 .diary-entry:focus-within,
 .diary-entry-card:focus-within { z-index: 4; }
