@@ -52,6 +52,10 @@ class EntryReactions extends HTMLElement {
     this.setAttribute("aria-label", "React to this diary entry");
     const row = document.createElement("div");
     row.className = "reaction-row";
+    const intro = document.createElement("span");
+    intro.className = "reaction-intro";
+    intro.textContent = "A little reaction";
+    row.append(intro);
 
     for (const emoji of EMOJI) {
       const button = document.createElement("button");
