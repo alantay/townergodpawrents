@@ -127,6 +127,19 @@ entry-reactions {
   transition: background 150ms ease, transform 150ms ease;
 }
 
+entry-reactions:not(.has-reactions) .reaction-toggle {
+  position: relative;
+  min-width: 2.125rem;
+  min-height: 2.125rem;
+  padding: 0.2rem;
+}
+
+entry-reactions:not(.has-reactions) .reaction-toggle::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+}
+
 .has-reactions .reaction-toggle {
   padding: 0.35rem 0.55rem;
   border-color: transparent;

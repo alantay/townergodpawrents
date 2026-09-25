@@ -4,7 +4,7 @@ type Counts = Record<string, number>;
 type StoredCounts = Record<string, Record<string, Counts>>;
 
 const STORAGE_KEY = "towner-entry-reactions:v1";
-const ADD_ICON = '<svg viewBox="0 0 28 28" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="14" r="8.2"/><path d="M9 16.2c1.6 1.8 4.4 1.8 6 0M9.4 12h.1m5 0h.1M22 5v7m-3.5-3.5h7"/></svg>';
+const ADD_ICON = '<svg viewBox="0 0 33 28" width="24" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="14" r="7.3"/><path d="M7.5 16.2c1.6 1.8 4.4 1.8 6 0M8 12h.1m5 0h.1M26 7v8m-4-4h8"/></svg>';
 let memory: StoredCounts = {};
 let persistenceUnavailable = false;
 
