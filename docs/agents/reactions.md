@@ -8,7 +8,7 @@ If the store is down or not configured, the diary still renders and badges show 
 
 ## Deployment
 
-Add Upstash Redis to the Vercel project (Vercel Marketplace, free plan), or create a database at Upstash and set `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` in the Vercel project's environment variables. The Marketplace's `KV_REST_API_URL` and `KV_REST_API_TOKEN` names work too. Set the same values in a local `.env` for development. Keep the token private. Redeploy after the variables are set.
+Add Upstash Redis to the Vercel project (Vercel Marketplace, free plan), or create a database at Upstash and set `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` in the Vercel project's environment variables. The Marketplace's `KV_REST_API_URL` and `KV_REST_API_TOKEN` names work too. For local dev, run `npx vercel link` once, then `npx vercel env pull .env`; the endpoint reads them through `getSecret`. Local taps land in the same database as the live site. Keep the token private. Redeploy after the variables are set.
 
 ## Clearing a count
 

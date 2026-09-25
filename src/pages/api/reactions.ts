@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 import { Redis } from "@upstash/redis";
+import { getSecret } from "astro:env/server";
 import { dateStr, parseDiary, type Stay } from "../../lib/guests";
 import { reactionApi } from "../../lib/reaction-api";
 
@@ -8,7 +9,12 @@ export const prerender = false;
 
 let redis: Redis | undefined;
 function store(): Redis {
-  redis ??= Redis.fromEnv();
+  // getSecret reads .env in dev and the real environment on Vercel. The
+  // Vercel Marketplace names the variables KV_*; Upstash itself uses UPSTASH_*.
+  redis ??= new Redis({
+    url: getSecret("KV_REST_API_URL") ?? getSecret("UPSTASH_REDIS_REST_URL"),
+    token: getSecret("KV_REST_API_TOKEN") ?? getSecret("UPSTASH_REDIS_REST_TOKEN"),
+  });
   return redis;
 }
 
