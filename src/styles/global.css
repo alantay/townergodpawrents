@@ -75,6 +75,7 @@ a:focus-visible {
 }
 
 .diary-entry-card {
+  position: relative;
   transform: rotate(var(--card-tilt));
   transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), filter 200ms ease;
 }
@@ -103,55 +104,72 @@ a:focus-visible {
 }
 
 entry-reactions {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.7rem;
+  z-index: 3;
   display: block;
-  margin-top: 1.1rem;
-  padding-top: 0.7rem;
-  border-top: 1px solid color-mix(in srgb, currentColor 20%, transparent);
 }
 
-.reaction-row {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-}
-
-.reaction-intro {
-  margin-right: 0.45rem;
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  font-style: italic;
-  line-height: 1;
-  opacity: 0.8;
-}
-
-.reaction-button {
+.reaction-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.3rem;
-  min-width: 2.75rem;
-  min-height: 2.75rem;
-  padding: 0.3rem 0.5rem;
-  border: 1px solid transparent;
+  gap: 0.35rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0.35rem;
+  border: 1px solid color-mix(in srgb, currentColor 42%, transparent);
   border-radius: 999px;
   background: transparent;
   color: inherit;
-  font-size: 1.2rem;
   cursor: pointer;
-  transition: transform 150ms ease, background 150ms ease, border-color 150ms ease;
+  transition: background 150ms ease, transform 150ms ease;
 }
 
-.reaction-button:hover {
-  background: color-mix(in srgb, currentColor 10%, transparent);
-  border-color: color-mix(in srgb, currentColor 15%, transparent);
-  transform: translateY(-2px);
+.has-reactions .reaction-toggle {
+  padding: 0.35rem 0.55rem;
+  border-color: transparent;
+  background: var(--color-lime);
+  color: var(--color-ink);
 }
-.reaction-button:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
-.reaction-button:disabled { cursor: wait; opacity: 0.65; }
-.reaction-count { font-size: 0.75rem; font-weight: 700; font-variant-numeric: tabular-nums; }
-.reaction-message { display: block; margin-top: 0.35rem; font-size: 0.8rem; line-height: 1.4; }
-.reaction-message:empty { display: none; }
+
+.reaction-toggle:hover { transform: translateY(-2px); background: color-mix(in srgb, currentColor 12%, transparent); }
+.has-reactions .reaction-toggle:hover { background: var(--color-lime-soft); }
+.reaction-toggle:focus-visible,
+.reaction-choice:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+.reaction-summary-icons { display: inline-flex; align-items: center; font-size: 1.05rem; line-height: 1; }
+.reaction-summary-total { font-size: 0.78rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.reaction-summary-total:empty { display: none; }
+
+.reaction-picker {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  width: max-content;
+  padding: 0.55rem;
+  border: 1px solid var(--color-card-line);
+  border-radius: 0.9rem;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  box-shadow: 0 10px 22px rgb(30 32 25 / 0.18);
+}
+.reaction-picker[hidden] { display: none; }
+.reaction-picker-title { display: block; padding: 0.1rem 0.35rem 0.35rem; font-size: 0.75rem; font-weight: 600; }
+.reaction-choice {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 0.7rem;
+  background: transparent;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: background 150ms ease, transform 150ms ease;
+}
+.reaction-choice:hover { background: var(--color-lime-soft); transform: translateY(-2px); }
+
+.diary-entry:focus-within,
+.diary-entry-card:focus-within { z-index: 4; }
 
 .dog-card {
   box-shadow: 0 10px 20px rgb(92 76 41 / 0.1);

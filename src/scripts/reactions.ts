@@ -1,131 +1,156 @@
 import EMOJI from "../lib/reaction-emojis.json";
 
 type Counts = Record<string, number>;
-type GuestCounts = Record<string, Counts>;
+type StoredCounts = Record<string, Record<string, Counts>>;
 
-const loads = new Map<string, Promise<GuestCounts>>();
-const latest = new Map<string, GuestCounts>();
+const STORAGE_KEY = "towner-entry-reactions:v1";
+const ADD_ICON = '<svg viewBox="0 0 28 28" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="14" r="8.2"/><path d="M9 16.2c1.6 1.8 4.4 1.8 6 0M9.4 12h.1m5 0h.1M22 5v7m-3.5-3.5h7"/></svg>';
+let memory: StoredCounts = {};
+let persistenceUnavailable = false;
 
-function mergeCounts(guestId: string, incoming: GuestCounts): GuestCounts {
-  const current = latest.get(guestId) ?? {};
-  for (const [entryId, counts] of Object.entries(incoming)) {
-    current[entryId] = Object.fromEntries(EMOJI.map(({ value }) => [
-      value, Math.max(Number(current[entryId]?.[value] ?? 0), Number(counts[value] ?? 0)),
-    ]));
+function readCounts(): StoredCounts {
+  if (persistenceUnavailable) return memory;
+  try {
+    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "{}");
+    if (stored && typeof stored === "object" && !Array.isArray(stored)) {
+      memory = stored as StoredCounts;
+    }
+  } catch {
+    // Browsers can block storage; the counts still work for this page visit.
+    persistenceUnavailable = true;
   }
-  latest.set(guestId, current);
-  return current;
+  return memory;
 }
 
-function loadGuest(guestId: string): Promise<GuestCounts> {
-  let request = loads.get(guestId);
-  if (!request) {
-    request = fetch(`/api/reactions?guest=${encodeURIComponent(guestId)}`)
-      .then((response) => {
-        if (!response.ok) throw new Error("Reactions unavailable");
-        return response.json() as Promise<GuestCounts>;
-      })
-      .then((counts) => {
-        return mergeCounts(guestId, counts);
-      })
-      .catch((error) => {
-        loads.delete(guestId);
-        throw error;
-      });
-    loads.set(guestId, request);
+function addReaction(guestId: string, entryId: string, emoji: string): Counts {
+  const all = readCounts();
+  const guest = all[guestId] ??= {};
+  const entry = guest[entryId] ??= {};
+  entry[emoji] = Math.max(0, Number(entry[emoji]) || 0) + 1;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+  } catch {
+    // Keep the visible count even when persistent storage is unavailable.
+    persistenceUnavailable = true;
   }
-  return request;
+  return entry;
+}
+
+function syncWidgets() {
+  const all = readCounts();
+  document.querySelectorAll<EntryReactions>("entry-reactions").forEach((widget) => {
+    widget.show(all[widget.dataset.guest ?? ""]?.[widget.dataset.entry ?? ""] ?? {});
+  });
 }
 
 class EntryReactions extends HTMLElement {
-  private buttons: HTMLButtonElement[] = [];
-  private message?: HTMLElement;
-  private busy = false;
+  private toggle?: HTMLButtonElement;
+  private picker?: HTMLDivElement;
+  private total?: HTMLElement;
+  private icons?: HTMLElement;
 
   connectedCallback() {
-    if (this.buttons.length) return;
-    const guestId = this.dataset.guest;
-    const entryId = this.dataset.entry;
-    if (!guestId || !entryId) return;
+    if (!this.dataset.guest || !this.dataset.entry) return;
+    if (!this.toggle) {
+      this.setAttribute("role", "group");
+      this.setAttribute("aria-label", "Entry reactions");
+      const toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "reaction-toggle";
+      toggle.setAttribute("aria-label", "Add a reaction");
+      toggle.setAttribute("aria-expanded", "false");
 
-    this.setAttribute("role", "group");
-    this.setAttribute("aria-label", "React to this diary entry");
-    const row = document.createElement("div");
-    row.className = "reaction-row";
-    const intro = document.createElement("span");
-    intro.className = "reaction-intro";
-    intro.textContent = "A little reaction";
-    row.append(intro);
+      const icons = document.createElement("span");
+      icons.className = "reaction-summary-icons";
+      icons.setAttribute("aria-hidden", "true");
+      const total = document.createElement("span");
+      total.className = "reaction-summary-total";
+      total.setAttribute("aria-hidden", "true");
+      toggle.append(icons, total);
 
-    for (const emoji of EMOJI) {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "reaction-button";
-      button.dataset.emoji = emoji.value;
-      button.setAttribute("aria-label", `React with ${emoji.label}`);
-      const glyph = document.createElement("span");
-      glyph.setAttribute("aria-hidden", "true");
-      glyph.textContent = emoji.value;
-      const count = document.createElement("span");
-      count.className = "reaction-count";
-      count.hidden = true;
-      button.append(glyph, count);
-      button.addEventListener("click", () => this.react(emoji.value));
-      row.append(button);
-      this.buttons.push(button);
+      const picker = document.createElement("div");
+      picker.className = "reaction-picker";
+      picker.id = `reaction-picker-${this.dataset.guest}-${this.dataset.entry}`;
+      picker.hidden = true;
+      toggle.setAttribute("aria-controls", picker.id);
+      const title = document.createElement("span");
+      title.className = "reaction-picker-title";
+      title.textContent = "Leave a reaction";
+      picker.append(title);
+
+      for (const emoji of EMOJI) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "reaction-choice";
+        button.setAttribute("aria-label", `React with ${emoji.label}`);
+        button.textContent = emoji.value;
+        button.addEventListener("click", () => {
+          addReaction(this.dataset.guest!, this.dataset.entry!, emoji.value);
+          syncWidgets();
+          this.close();
+          toggle.focus({ preventScroll: true });
+        });
+        picker.append(button);
+      }
+
+      toggle.addEventListener("click", () => picker.hidden ? this.open() : this.close());
+      this.append(toggle, picker);
+      this.toggle = toggle;
+      this.picker = picker;
+      this.icons = icons;
+      this.total = total;
     }
-
-    const message = document.createElement("span");
-    message.className = "reaction-message";
-    message.setAttribute("role", "status");
-    this.message = message;
-    this.append(row, message);
-
-    const cached = latest.get(guestId);
-    if (cached) this.show(cached[entryId] ?? {});
-    else loadGuest(guestId).then((counts) => this.show(counts[entryId] ?? {})).catch(() => {});
+    this.show(readCounts()[this.dataset.guest]?.[this.dataset.entry] ?? {});
   }
+
+  disconnectedCallback() { this.close(); }
 
   show(counts: Counts) {
-    for (const button of this.buttons) {
-      const count = button.querySelector<HTMLElement>(".reaction-count")!;
-      const value = Number(counts[button.dataset.emoji!] ?? 0);
-      count.textContent = value > 0 ? String(value) : "";
-      count.hidden = value === 0;
-      const label = EMOJI.find((item) => item.value === button.dataset.emoji)!.label;
-      button.setAttribute("aria-label", `React with ${label}${value ? `, ${value} reactions` : ""}`);
-    }
+    if (!this.toggle || !this.icons || !this.total) return;
+    const active = EMOJI.map((emoji) => ({ ...emoji, count: Math.max(0, Number(counts[emoji.value]) || 0) }))
+      .filter((emoji) => emoji.count > 0)
+      .sort((a, b) => b.count - a.count);
+    const total = active.reduce((sum, emoji) => sum + emoji.count, 0);
+    this.classList.toggle("has-reactions", total > 0);
+    if (total) this.icons.textContent = active.slice(0, 3).map((emoji) => emoji.value).join("");
+    else this.icons.innerHTML = ADD_ICON;
+    this.total.textContent = total ? String(total) : "";
+    this.toggle.setAttribute("aria-label", total ? `Add a reaction; ${total} reactions so far` : "Add a reaction");
   }
 
-  private async react(emoji: string) {
-    if (this.busy) return;
-    this.busy = true;
-    this.buttons.forEach((button) => { button.disabled = true; });
-    if (this.message) this.message.textContent = "";
-    try {
-      const response = await fetch("/api/reactions", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ guest: this.dataset.guest, entry: this.dataset.entry, emoji }),
-      });
-      if (!response.ok) {
-        if (response.status === 429) throw new Error("Too many taps. Try again in a minute.");
-        throw new Error("Reaction didn't land. Try again.");
-      }
-      const counts = await response.json() as Counts;
-      const guestId = this.dataset.guest!;
-      const entryId = this.dataset.entry!;
-      const guestCounts = mergeCounts(guestId, { [entryId]: counts });
-      document.querySelectorAll<EntryReactions>("entry-reactions").forEach((widget) => {
-        if (widget.dataset.guest === guestId && widget.dataset.entry === entryId) widget.show(guestCounts[entryId]);
-      });
-    } catch (error) {
-      if (this.message) this.message.textContent = error instanceof Error ? error.message : "Reaction didn't land. Try again.";
-    } finally {
-      this.busy = false;
-      this.buttons.forEach((button) => { button.disabled = false; });
-    }
+  private open() {
+    if (!this.toggle || !this.picker) return;
+    document.querySelectorAll<EntryReactions>("entry-reactions").forEach((widget) => {
+      if (widget !== this) widget.close();
+    });
+    this.picker.hidden = false;
+    this.toggle.setAttribute("aria-expanded", "true");
+    document.addEventListener("pointerdown", this.onOutside);
+    document.addEventListener("keydown", this.onKeydown);
+    this.picker.querySelector("button")?.focus({ preventScroll: true });
   }
+
+  private close() {
+    if (!this.toggle || !this.picker) return;
+    this.picker.hidden = true;
+    this.toggle.setAttribute("aria-expanded", "false");
+    document.removeEventListener("pointerdown", this.onOutside);
+    document.removeEventListener("keydown", this.onKeydown);
+  }
+
+  private onOutside = (event: PointerEvent) => {
+    if (!this.contains(event.target as Node)) this.close();
+  };
+
+  private onKeydown = (event: KeyboardEvent) => {
+    if (event.key === "Escape") {
+      this.close();
+      this.toggle?.focus({ preventScroll: true });
+    }
+  };
 }
 
 customElements.define("entry-reactions", EntryReactions);
+window.addEventListener("storage", (event) => {
+  if (event.key === STORAGE_KEY) syncWidgets();
+});

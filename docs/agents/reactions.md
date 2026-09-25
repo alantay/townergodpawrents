@@ -1,18 +1,9 @@
-# Shared diary reactions
+# Diary reactions
 
-The public diary stays static. `/api/reactions` reads and writes reaction totals in Upstash Redis. Both pages use the same guest and entry IDs, so a tap on the homepage appears on the full diary too. Visitors can tap without an account; every accepted tap adds one. The endpoint limits each source address to 20 taps in a 60-second window starting with its first tap.
+The reaction badge on each entry opens four choices: ❤️, 😂, 🥹, and 🐾. Every tap increments that emoji's count. The badge shows up to three used emoji and the total.
 
-## Deployment
+For now, counts are stored in the visitor's `localStorage` under `towner-entry-reactions:v1`. The homepage and full guest diary read the same local data. Counts survive a refresh in that browser, but other people and devices do **not** see them. Clearing browser storage also clears the counts. No account, Redis database, or environment variables are needed for the current interaction.
 
-Create an Upstash Redis database and set `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` in the Vercel project's environment variables. Set them in a local `.env` too for development. Keep the token private. Use the provider's free tier and set a spending cap before launch. Deploy after both values are set; static diary pages still render if the reaction service is unavailable.
+The existing `/api/reactions` endpoint and Redis reset script are dormant while the browser uses local storage. [ADR 0005](../adr/0005-shared-entry-reactions.md) records the planned shared version; enable it only when permanent public totals are wanted again.
 
-## Clearing a count
-
-From the repo, with the two variables in `.env`:
-
-```sh
-node --env-file=.env scripts/reset-reactions.mjs tiny e001 '❤️' --yes
-node --env-file=.env scripts/reset-reactions.mjs tiny e001 --yes
-```
-
-The first command clears one emoji; the second clears all reactions for that entry. Check the entry ID in `src/content/guests/<guest>.md` first. The script changes only Redis counts, not diary content.
+Each entry keeps its unique `entry-id` comment in Markdown, so reactions remain attached when its time or words change.
