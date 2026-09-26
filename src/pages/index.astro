@@ -190,7 +190,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
   </noscript>
 
   <div class="entrance entrance-delay-2 mt-10 flex gap-4 items-start flex-wrap">
-    <div class="w-[134px] h-[154px] rounded-[22px] overflow-hidden flex-none -rotate-[1.5deg] bg-cream card-keyline">
+    <div class="w-[134px] h-[154px] rounded-[24px] overflow-hidden flex-none -rotate-[1.5deg] bg-cream card-keyline">
       <img
         src="/images/alan-weiwen-portrait.jpg"
         alt="Alan and Weiwen smiling together"
@@ -212,7 +212,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
       <div class="font-serif text-[32px] leading-none">Past guests</div>
       <a
         href="/guests"
-        class="font-semibold text-[13px] border-[1.5px] border-line px-[13px] py-1.5 rounded-full transition-colors duration-200 hover:bg-lime"
+        class="font-semibold text-[13px] border-[1.5px] border-line px-[13px] py-1.5 rounded-full transition-colors duration-200 hover:border-ink"
       >
         See all
       </a>
@@ -447,10 +447,10 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
         var chips = [];
         if (!pair) {
           chips.push({ label: stayLabel(stayOn(live[0], today)), bg: "#F7F2E7" });
-          if (live[0].badge) chips.push({ label: live[0].badge, bg: "#D8F24E" });
+          if (live[0].badge) chips.push({ label: live[0].badge, bg: "#F7F2E7", ring: true });
         } else {
           live.forEach((d) => chips.push({ label: d.name + " · " + d.breed, bg: "#F7F2E7" }));
-          chips.push({ label: groupWord(dogs.length) + " dogs, one sofa", bg: "#D8F24E" });
+          chips.push({ label: groupWord(dogs.length) + " dogs, one sofa", bg: "#F7F2E7", ring: true });
         }
 
         var chipsHTML = chips
@@ -458,6 +458,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
             (c) =>
               '<span class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink" style="background:' +
               c.bg +
+              (c.ring ? ";box-shadow:inset 0 0 0 1.5px #1E2019" : "") +
               '">' +
               esc(c.label) +
               "</span>"
@@ -476,7 +477,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
             ' max-w-full" id="hero-name">' +
             esc(name) +
             "</h1></div>" +
-            '<div class="font-serif italic text-[22px] mt-2" style="color:#E9F7AE">' +
+            '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">' +
             sub +
             "</div>" +
             '<div class="mt-[14px] flex gap-2 flex-wrap">' +
@@ -495,7 +496,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
           '<div class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:#5F6E4F">' +
           '<div id="hero-badge" class="absolute top-[18px] right-[18px] bg-lime text-ink font-semibold text-xs tracking-[0.06em] uppercase px-[13px] py-2 rounded-full animate-wiggle">Sofa free</div>' +
           '<div class="w-full"><h1 class="fit-headline text-[clamp(62px,19vw,120px)] max-w-full">Vacancy</h1></div>' +
-          '<div class="font-serif italic text-[22px] mt-2" style="color:#E9F7AE">The sofa is free. The treats are ready.</div>' +
+          '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">The sofa is free. The treats are ready.</div>' +
           '<div id="vacancy-photo" class="h-[265px] mx-[-8px] mt-[18px] animate-drift-slow"></div>' +
           "</div>";
 
@@ -503,12 +504,12 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
           html +=
             '<a href="/guests/' +
             esc(next.guest.id) +
-            '" class="mt-[18px] flex items-center gap-3.5 bg-[#EBF5C8] card-keyline rounded-[24px] p-[13px_15px] rotate-1 transition-transform duration-250 hover:rotate-0 hover:scale-[1.02]">' +
+            '" class="mt-[18px] flex items-center gap-3.5 bg-cream border-[1.5px] border-dashed border-card-line rounded-[24px] p-[13px_15px] rotate-1 transition-transform duration-250 hover:rotate-0 hover:scale-[1.02]">' +
             '<div id="next-up-photo" class="w-16 h-16 rounded-[17px] overflow-hidden flex-none" style="background:' +
             next.guest.bgColor +
             '"></div>' +
             '<div class="min-w-0">' +
-            '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:#4C6B3C">Next up · in ' +
+            '<div class="font-semibold text-xs tracking-[0.08em] uppercase text-moss">Next up · in ' +
             next.daysAway +
             (next.daysAway === 1 ? " day" : " days") +
             "</div>" +
@@ -531,7 +532,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
             lastGuest.bgColor +
             '"></div>' +
             '<div class="min-w-0">' +
-            '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:#4C6B3C">Last seen here</div>' +
+            '<div class="font-semibold text-xs tracking-[0.08em] uppercase text-moss">Last seen here</div>' +
             '<div class="font-serif text-[27px] leading-tight">' +
             esc(lastGuest.name) +
             "</div>" +
@@ -736,7 +737,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
             return (
               '<a href="/guests/' +
               esc(g.id) +
-              '" class="block rounded-[22px] overflow-hidden transition-transform duration-250 hover:-translate-y-0.5 card-keyline' +
+              '" class="dog-card block rounded-[24px] overflow-hidden transition-all duration-250 hover:-translate-y-0.5 card-keyline ' + (i % 2 ? "rotate-1" : "-rotate-1") +
               (luma(g.bgColor) < 110 ? " card-keyline--dark" : "") +
               '" style="background:' +
               g.bgColor +
