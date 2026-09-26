@@ -2,7 +2,7 @@
 
 ## Decision
 
-Dogs that arrive together from one home are one **guest**: one file, one page, one diary, with the dogs' names joined by " & " in `name` (`name: Hugo & Luffy`, file `hugo-and-luffy.md`). Wherever the site counts dogs rather than guests ("Three dogs, one sofa", "4 pups this month", "are" vs "is"), it splits the name with `dogNames` in `src/lib/guests.ts`. A guest with no cut-out shows a cream sticker with the dogs' initials ("M", "H&L") in its place.
+Dogs that arrive together from one home are one **guest**: one file, one page, one diary, with the dogs' names joined by " & " in `name` (`name: Hugo & Luffy`, file `hugo-and-luffy.md`). Wherever the site counts dogs rather than guests ("Three dogs, one sofa", "4 pups this month", "are" vs "is"), it splits the name with `dogNames` in `src/lib/guests.ts`.
 
 ## Context
 

@@ -100,7 +100,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                       >
                         {!seg.continued && (
                           <span class="cal-bar-avatar" style={`background:${s.bgColor}`}>
-                            {s.photo ? <Image src={s.photo} alt="" width={48} class="h-full w-full object-contain" /> : <Cutout name={s.name} />}
+                            {s.photo ? <Image src={s.photo} alt="" width={48} class="h-full w-full object-contain" /> : <Cutout name={s.name} bare />}
                           </span>
                         )}
                         <span class="cal-bar-name">
@@ -122,8 +122,8 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                       style={`--polaroid-tilt:${pi % 2 === 0 ? "-2deg" : "1.5deg"}`}
                     >
                       <span class="cal-tape cal-tape--small" aria-hidden="true" />
-                      <span class="block h-[92px] w-[92px] overflow-hidden rounded-[3px] p-1.5" style={`background:${s.bgColor}`}>
-                        <Cutout photo={s.photo} name={s.name} />
+                      <span class={`block h-[92px] w-[92px] overflow-hidden rounded-[3px] ${s.photo ? "p-1.5" : ""}`} style={`background:${s.bgColor}`}>
+                        <Cutout photo={s.photo} name={s.name} bare />
                       </span>
                       <span class="mt-1.5 block font-script text-[20px] leading-none">{s.name}</span>
                       <span class="mt-0.5 block text-[11px] text-label tabular-nums">

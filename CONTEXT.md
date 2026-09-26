@@ -37,7 +37,7 @@ A short video attached to an entry, shown on the diary page on a tilted cream ma
 _Avoid_: Video, movie, reel
 
 **Cut-out**:
-A guest's own portrait — a photo cut from its background, used in the hero and the past-guests grid. One per guest; a guest without one shows an initials sticker instead.
+A guest's own portrait — a photo cut from its background, used in the hero and the past-guests grid. One per guest; a guest without one shows an empty Polaroid per dog instead.
 _Avoid_: Avatar, headshot, profile photo
 
 **Live**:
