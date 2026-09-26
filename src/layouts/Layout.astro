@@ -53,6 +53,11 @@ const ogImageURL = new URL(ogImage, Astro.site ?? Astro.url);
         <feTurbulence type="fractalNoise" baseFrequency="0.03 0.12" numOctaves="4" seed="17" result="tear" />
         <feDisplacementMap in="SourceGraphic" in2="tear" scale="13" xChannelSelector="R" yChannelSelector="G" />
       </filter>
+      {/* A slow, small wobble for lines ruled by hand, like the calendar grid. */}
+      <filter id="pencil-rule" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.015 0.02" numOctaves="2" seed="3" result="wobble" />
+        <feDisplacementMap in="SourceGraphic" in2="wobble" scale="4" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
     </svg>
     <main id="main-content" class="page-shell mx-auto max-w-[700px] px-5">
       <slot />
