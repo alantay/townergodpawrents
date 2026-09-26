@@ -251,6 +251,9 @@ A 24px-radius card in one of the four guest-colour skins, with a 1.5px keyline (
 ### Print
 A photo on a 7px cream mat with a Kraft keyline and 16px radius; the photo inside has a 10px radius. The mat edge turns 72% white against coloured skins so it stays quiet. It leans against its card's tilt. Tapping opens a full-screen viewer on an 88% ink backdrop with a cream circular close button.
 
+### Empty Polaroid
+Stands in for a cut-out when a guest has no photo yet: one cream Polaroid per dog (88 × 107 proportions, print shadow), tilted −3° and +2.5° so a pair leans apart. The photo area is ruled in a dashed pencil line (`--color-line`) with "photo soon" in small Archivo label grey (dropped on prints under 90px wide). When the box is tall enough (200px, whatever its width, so a pair sharing the hero on a phone still gets it), the dog's name goes on the strip in Instrument Serif italic and a lime-soft italic line sits underneath: "Still waiting for them to sit still long enough." Smaller (chips, past-guest cards), just the blank prints. Where a frame is already drawn around it (the calendar polaroid and bar dot), only the dashed cream slot shows.
+
 ### Caption Slip
 A note too long for a print's mat goes on a torn cream slip. It's two layers: the torn, shadowed paper layer and the text layer, which is never distorted. The paper has a 5px Slip Fibre border that the tear cuts through. The text is 16px Archivo with 28px lines, inset 8px plus 16px from the edges so the writing clears the ragged edge.
 
