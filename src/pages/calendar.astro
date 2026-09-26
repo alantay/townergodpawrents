@@ -23,7 +23,7 @@ const stays = entries.flatMap((e) =>
 );
 
 // Built statically, so this is only the build day. The script below re-reads
-// today in Singapore time to fold away old months and circle the date.
+// today in Singapore time to pick which months show and circle the date.
 const months = calendarMonths(stays, todaySGT());
 const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
 ---
@@ -51,6 +51,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
         <section
           class="cal-month reveal-card"
           data-month={month.key}
+          data-has-stays={month.stays.length > 0 ? "" : undefined}
           style={`--sheet-tilt:${mi % 2 === 0 ? "-0.6deg" : "0.6deg"}`}
           aria-labelledby={`cal-${month.key}`}
         >
@@ -89,14 +90,11 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                     const s = seg.stay;
                     const endsHere = s.checkOut <= week.days[6].iso;
                     return (
-                      <a
-                        href={`/guests/${s.guestId}`}
+                      <span
                         class:list={["cal-bar", { "cal-bar--continued": seg.continued, "cal-bar--carries": !endsHere, "cal-bar--short": seg.span === 1 }]}
                         style={`grid-row:${seg.lane + 2};grid-column:${seg.startCol + 1} / span ${seg.span};--bar-tint:${s.tint};--bar-colour:${s.bgColor}`}
                         data-check-in={s.checkIn}
-                        aria-label={seg.continued ? undefined : `${s.name}, ${stayLabel(s)}`}
-                        aria-hidden={seg.continued ? "true" : undefined}
-                        tabindex={seg.continued ? -1 : undefined}
+                        aria-hidden="true"
                       >
                         {!seg.continued && (
                           <span class="cal-bar-avatar" style={`background:${s.bgColor}`}>
@@ -105,9 +103,8 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                         )}
                         <span class="cal-bar-name">
                           {seg.continued ? `…${s.name}` : s.name}
-                          {!seg.continued && <span class="cal-bar-booked"> (booked!)</span>}
                         </span>
-                      </a>
+                      </span>
                     );
                   })}
                 </div>
@@ -147,7 +144,8 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
 
 <script is:inline>
   // Mirrors todaySGT() in src/lib/guests.ts — the page is built once, but
-  // "today" moves. Without this script every month simply shows.
+  // "today" moves. Shows this month through the last month with a stay, no
+  // gaps. Without this script every month simply shows.
   (function () {
     var today = new Intl.DateTimeFormat("en-CA", {
       timeZone: "Asia/Singapore",
@@ -156,8 +154,12 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
       day: "2-digit",
     }).format(new Date());
     var thisMonth = today.slice(0, 7);
+    var lastMonth = thisMonth;
+    document.querySelectorAll(".cal-month[data-has-stays]").forEach(function (m) {
+      if (m.dataset.month > lastMonth) lastMonth = m.dataset.month;
+    });
     document.querySelectorAll(".cal-month").forEach(function (m) {
-      if (m.dataset.month < thisMonth) m.hidden = true;
+      if (m.dataset.month < thisMonth || m.dataset.month > lastMonth) m.hidden = true;
     });
     document.querySelectorAll('.cal-day[data-date="' + today + '"]').forEach(function (d) {
       d.classList.add("is-today");
@@ -179,9 +181,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     position: relative;
     padding: 26px 20px 24px;
     transform: rotate(var(--sheet-tilt));
-    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .cal-sheet:hover { transform: rotate(0deg); }
 
   .cal-sheet-paper {
     position: absolute;
@@ -251,6 +251,9 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
       linear-gradient(to right, transparent calc(100% - 1.25px), rgb(140 126 98 / 0.3) 0)
         0 0 / calc((100% + 2px) / 7) 100% repeat-x;
     filter: url("#pencil-rule");
+    /* Safari paints a stray black square at the sheet's corner unless the
+       filtered rules get a layer of their own. */
+    transform: translateZ(0);
   }
   .cal-week:last-child::before { background-size: 0 0, calc((100% + 2px) / 7) 100%; }
 
@@ -276,7 +279,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
 
   /* Each stay is a strip of washi tape in the dog's own colour: diagonal
      stripes, torn ends. The tape is a pseudo-element so its clip-path can't
-     cut off the link's focus ring. A strip that runs on into the next week
+     cut off the dog's photo. A strip that runs on into the next week
      keeps a straight edge there, like tape wrapping round the page. */
   .cal-bar {
     --tape: color-mix(in srgb, var(--bar-colour) 55%, var(--color-cream));
@@ -290,7 +293,6 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     padding: 0 10px 0 7px;
     color: var(--color-ink);
     transform: rotate(-0.4deg);
-    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   .cal-bar::before {
     content: "";
@@ -310,12 +312,10 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     );
     box-shadow: 0 1px 2px rgb(30 32 25 / 0.12);
   }
-  .cal-bar:hover { transform: rotate(0deg) translateY(-1px); }
-  .cal-bar:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; }
   .cal-bar--continued { --tear-l: 0px; padding-left: 8px; }
   .cal-bar--carries { --tear-r: 0px; }
 
-  /* Booked but not arrived: a dashed box in the dog's colour, not taped down
+  /* Upcoming, not arrived yet: a dashed box in the dog's colour, not taped down
      yet. The box stays open where the stay runs on into another week. */
   .cal-bar.is-upcoming::before {
     background: color-mix(in srgb, var(--bar-colour) 8%, transparent);
@@ -326,10 +326,8 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
   }
   .cal-bar--continued.is-upcoming::before { border-left: 0; }
   .cal-bar--carries.is-upcoming::before { border-right: 0; }
-  .cal-bar-booked { display: none; }
-  .cal-bar.is-upcoming .cal-bar-booked { display: inline; }
 
-  /* A one-day strip only has room for the photo; the link's label still
+  /* A one-day strip only has room for the photo; the polaroid below
      names the dog. */
   .cal-bar--short { justify-content: center; padding: 0 6px; }
   .cal-bar--short .cal-bar-name { display: none; }
@@ -360,12 +358,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     background: #fdfaf1;
     box-shadow: 0 4px 9px rgb(30 32 25 / 0.16);
     transform: rotate(var(--polaroid-tilt));
-    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .cal-polaroid:hover { transform: rotate(0deg) translateY(-2px); }
+  /* Opens the dog's diary. Nothing moves on hover; keyboards still get a ring. */
   .cal-polaroid:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 3px; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .cal-sheet, .cal-polaroid, .cal-bar { transition: none; }
-  }
 </style>

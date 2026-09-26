@@ -44,6 +44,10 @@ _Avoid_: Avatar, headshot, profile photo
 A guest whose stay contains today, in Singapore time. More than one guest can be live at once.
 _Avoid_: Active, current, checked-in
 
+**Upcoming stay**:
+A stay whose check-in is after today, in Singapore time. Shown on the calendar so neighbours know what's coming, never as a commitment.
+_Avoid_: Booking, booked, reservation, scheduled
+
 **Vacancy**:
 No guest is live today. The homepage says the sofa is free and names the last guest to leave.
 _Avoid_: Empty, idle, available

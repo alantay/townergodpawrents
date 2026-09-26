@@ -31,11 +31,22 @@ test("monthGrid stacks overlapping stays in separate lanes and reuses free ones"
   assert.equal(week.lanes, 2);
 });
 
-test("calendarMonths covers every month from the first stay to the last, and today", () => {
+test("calendarMonths runs from the first stay to a year past today, with no gaps", () => {
   const months = calendarMonths(
-    [{ guestId: "luna", checkIn: "2026-10-13", checkOut: "2026-11-02" }],
+    [{ guestId: "luna", checkIn: "2026-07-13", checkOut: "2026-08-02" }],
     "2026-09-26",
   );
-  assert.deepEqual(months.map((m) => m.key), ["2026-09", "2026-10", "2026-11"]);
-  assert.equal(months[0].stays.length, 0);
+  assert.equal(months[0].key, "2026-07");
+  assert.equal(months.at(-1)!.key, "2027-09");
+  assert.equal(months.length, 15);
+  assert.equal(months[2].stays.length, 0);
+});
+
+test("calendarMonths reaches an upcoming stay more than a year out", () => {
+  const months = calendarMonths(
+    [{ guestId: "luna", checkIn: "2027-12-20", checkOut: "2028-01-03" }],
+    "2026-09-26",
+  );
+  assert.equal(months[0].key, "2026-09");
+  assert.equal(months.at(-1)!.key, "2028-01");
 });

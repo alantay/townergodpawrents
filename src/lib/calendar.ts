@@ -97,11 +97,13 @@ export function monthGrid<S extends CalendarStay>(year: number, month: number, s
 }
 
 /**
- * Every month from the first stay to the last, plus `todayISO`'s month so
- * the page always has something to open on.
+ * Every month from the first stay to the last, and on to a year past
+ * `todayISO`. The page is built once, so the spare months keep the browser
+ * with a "this month" to open on even if nobody rebuilds for a year.
  */
 export function calendarMonths<S extends CalendarStay>(stays: S[], todayISO: string): Month<S>[] {
-  const keys = [todayISO, ...stays.flatMap((s) => [s.checkIn, s.checkOut])].map((d) => d.slice(0, 7)).sort();
+  const yearOut = `${Number(todayISO.slice(0, 4)) + 1}${todayISO.slice(4, 7)}`;
+  const keys = [todayISO, yearOut, ...stays.flatMap((s) => [s.checkIn, s.checkOut])].map((d) => d.slice(0, 7)).sort();
   let [y, m] = keys[0].split("-").map(Number);
   const end = keys[keys.length - 1];
 
