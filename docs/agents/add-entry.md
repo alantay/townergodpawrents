@@ -26,14 +26,7 @@ Rules for the polished version:
 
 ### House voice
 
-- **What happened: humans named.** The dog is the main character: "Alan got home." "Tiny eyed Weiwen's toast." There are two of them, so names keep it clear who did what.
-- **"We / us / our"** when both of them did it together: "We took Tiny to Kallang."
-- **Personal reaction: "I" is fine.** Asides like "I swear…", "I melted". These are voice, not events, and "I" makes them warmer and funnier. Don't reword these into "Alan swears…".
-- **Never mix "I" and a name in one sentence** ("I took Tiny out and Alan…").
-- **Past tense** for what happened ("Tiny finally pooped"). **Present participle** is fine for a photo caption ("Tiny napping on the lap while the human tries to work").
-- Short sentences. Light Singlish (lepak, manja, lah), light enough for overseas friends.
-- **No em dashes.** Use a full stop or comma.
-- Good humour here is deadpan understatement ("House intact."), the dog's point of view ("Burdensome, Tiny says."), or a mix-up ("Cow spotted grazing… No wait, that's Tiny."). Not puns stacked on puns, and not exclamation marks everywhere.
+Follow `docs/agents/voice.md`.
 
 If you spot a POV or tense slip in another entry **from the same day**, mention it in one line as a suggestion. Don't edit it unasked.
 

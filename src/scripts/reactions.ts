@@ -73,7 +73,7 @@ async function addReaction(guestId: string, entryId: string, emoji: string) {
       body: JSON.stringify({ guest: guestId, entry: entryId, emoji }),
     });
     if (response.ok) return setCounts(guestId, entryId, await response.json() as Counts);
-    if (response.status === 429) problem = "Steady lah, too many taps. Try again in a minute.";
+    if (response.status === 429) problem = "Easy there, too many taps. Try again in a minute.";
   } catch {
     // Offline or the store is down; fall through and undo the tap.
   }
