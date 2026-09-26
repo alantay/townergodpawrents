@@ -23,7 +23,7 @@ const stays = entries.flatMap((e) =>
 );
 
 // Built statically, so this is only the build day. The script below re-reads
-// today in Singapore time to fold away old months and circle the date.
+// today in Singapore time to pick which months show and circle the date.
 const months = calendarMonths(stays, todaySGT());
 const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
 ---
@@ -51,6 +51,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
         <section
           class="cal-month reveal-card"
           data-month={month.key}
+          data-has-stays={month.stays.length > 0 ? "" : undefined}
           style={`--sheet-tilt:${mi % 2 === 0 ? "-0.6deg" : "0.6deg"}`}
           aria-labelledby={`cal-${month.key}`}
         >
@@ -102,7 +103,6 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                         )}
                         <span class="cal-bar-name">
                           {seg.continued ? `…${s.name}` : s.name}
-                          {!seg.continued && <span class="cal-bar-booked"> (booked!)</span>}
                         </span>
                       </span>
                     );
@@ -143,7 +143,8 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
 
 <script is:inline>
   // Mirrors todaySGT() in src/lib/guests.ts — the page is built once, but
-  // "today" moves. Without this script every month simply shows.
+  // "today" moves. Shows this month through the last month with a stay, no
+  // gaps. Without this script every month simply shows.
   (function () {
     var today = new Intl.DateTimeFormat("en-CA", {
       timeZone: "Asia/Singapore",
@@ -152,8 +153,12 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
       day: "2-digit",
     }).format(new Date());
     var thisMonth = today.slice(0, 7);
+    var lastMonth = thisMonth;
+    document.querySelectorAll(".cal-month[data-has-stays]").forEach(function (m) {
+      if (m.dataset.month > lastMonth) lastMonth = m.dataset.month;
+    });
     document.querySelectorAll(".cal-month").forEach(function (m) {
-      if (m.dataset.month < thisMonth) m.hidden = true;
+      if (m.dataset.month < thisMonth || m.dataset.month > lastMonth) m.hidden = true;
     });
     document.querySelectorAll('.cal-day[data-date="' + today + '"]').forEach(function (d) {
       d.classList.add("is-today");
@@ -309,7 +314,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
   .cal-bar--continued { --tear-l: 0px; padding-left: 8px; }
   .cal-bar--carries { --tear-r: 0px; }
 
-  /* Booked but not arrived: a dashed box in the dog's colour, not taped down
+  /* Upcoming, not arrived yet: a dashed box in the dog's colour, not taped down
      yet. The box stays open where the stay runs on into another week. */
   .cal-bar.is-upcoming::before {
     background: color-mix(in srgb, var(--bar-colour) 8%, transparent);
@@ -320,8 +325,6 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
   }
   .cal-bar--continued.is-upcoming::before { border-left: 0; }
   .cal-bar--carries.is-upcoming::before { border-right: 0; }
-  .cal-bar-booked { display: none; }
-  .cal-bar.is-upcoming .cal-bar-booked { display: inline; }
 
   /* A one-day strip only has room for the photo; the polaroid below
      names the dog. */
