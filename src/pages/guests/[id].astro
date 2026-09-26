@@ -7,6 +7,7 @@ import Nav from "../../components/Nav.astro";
 import Cutout from "../../components/Cutout.astro";
 import {
   parseDiary,
+  dogNames,
   stayLabel,
   staysNewestFirst,
   stayOn,
@@ -142,12 +143,12 @@ let skinIndex = 0;
       </div>
     )}
 
-    <h1 class="font-serif text-[clamp(48px,13vw,88px)] leading-[0.88] tracking-[-0.02em] max-w-full">
+    <h1 class:list={["font-serif leading-[0.88] tracking-[-0.02em] max-w-full", dogNames(name).length > 1 ? "text-[clamp(42px,12.5vw,82px)]" : "text-[clamp(62px,19vw,120px)]"]}>
       {name}
     </h1>
 
     {tagline && (
-      <div class="font-serif italic text-[20px] mt-2 text-lime-soft">
+      <div class="font-serif italic text-[22px] mt-2 text-lime-soft">
         {tagline}
       </div>
     )}
