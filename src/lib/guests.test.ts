@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { parseDiary } from "./guests.ts";
+import { dogNames, listNames, parseDiary } from "./guests.ts";
 
 test("parseDiary keeps two prints on one entry in markdown order", () => {
   const [day] = parseDiary(
@@ -95,4 +95,15 @@ Tiny naps.
 <!-- entry-id: e001 -->
 
 Tiny wakes.`, stays, "tiny"), /duplicate entry ID/);
+});
+
+test("dogNames splits dogs from one home and leaves a single dog alone", () => {
+  assert.deepEqual(dogNames("Hugo & Luffy"), ["Hugo", "Luffy"]);
+  assert.deepEqual(dogNames("Milk"), ["Milk"]);
+});
+
+test("listNames joins dogs with commas and a final ampersand", () => {
+  assert.equal(listNames(["Luna"]), "Luna");
+  assert.equal(listNames(["Luna", "Milk"]), "Luna & Milk");
+  assert.equal(listNames(["Luna", "Hugo", "Luffy"]), "Luna, Hugo & Luffy");
 });

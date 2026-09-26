@@ -121,6 +121,21 @@ export function pastGuests(guests: GuestData[], todayISO: string): GuestData[] {
     .sort((a, b) => latestStay(b).checkOut.localeCompare(latestStay(a).checkOut));
 }
 
+// ---- dogs ----
+
+/**
+ * The dogs a guest is made of. Dogs from one home share a guest, named like
+ * "Hugo & Luffy" — see docs/adr/0006-dogs-from-one-home-share-a-guest.md.
+ */
+export function dogNames(name: string): string[] {
+  return name.split(" & ");
+}
+
+/** "Luna", "Luna & Milk", "Luna, Hugo & Luffy". */
+export function listNames(names: string[]): string {
+  return names.length > 1 ? `${names.slice(0, -1).join(", ")} & ${names[names.length - 1]}` : names[0];
+}
+
 // ---- labels ----
 
 const M = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

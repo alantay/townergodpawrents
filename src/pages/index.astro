@@ -8,6 +8,7 @@ import { getCollection } from "astro:content";
 import { getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import {
+  dogNames,
   parseDiary,
   pastGuests,
   staysNewestFirst,
@@ -88,6 +89,7 @@ const guests = entries.map((e) => {
   return {
     id: e.id,
     name: e.data.name,
+    dogs: dogNames(e.data.name),
     breed: e.data.breed,
     tagline: e.data.tagline ?? "",
     badge: e.data.badge ?? "",
@@ -170,7 +172,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
 
 <Layout
   ogImage={liveAtBuild ? `/og/${liveAtBuild.id}.jpg` : undefined}
-  description={liveAtBuild ? `${liveAtBuild.name} is on the sofa today. Here's the diary.` : undefined}
+  description={liveAtBuild ? `${liveAtBuild.name} ${liveAtBuild.dogs.length > 1 ? "are" : "is"} on the sofa today. Here's the diary.` : undefined}
 >
   <Nav />
 
@@ -377,6 +379,17 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
         return GROUP_WORDS[n] || String(n);
       }
 
+      // MIRRORS listNames in src/lib/guests.ts.
+      function listNames(names) {
+        return names.length > 1 ? names.slice(0, -1).join(", ") + " & " + names[names.length - 1] : names[0];
+      }
+
+      // Every dog on the sofa: dogs from one home share a guest, so count
+      // dogs, not guests, whenever the words say how many.
+      function dogsIn(live) {
+        return live.reduce((all, g) => all.concat(g.dogs), []);
+      }
+
       function esc(s) {
         return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
           return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
@@ -423,9 +436,10 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
       function heroLiveHTML(live, today) {
         var pair = live.length > 1;
         var color = pair ? "#5F6E4F" : live[0].bgColor;
-        var name = live.map((d) => d.name).join(" & ");
+        var dogs = dogsIn(live);
+        var name = pair ? listNames(dogs) : live[0].name;
         var sub = pair
-          ? groupWord(live.length) + " dogs, one sofa, no space for humans"
+          ? groupWord(dogs.length) + " dogs, one sofa, no space for humans"
           : esc(live[0].tagline);
         var sizeClass = pair ? "text-[clamp(42px,12.5vw,82px)]" : "text-[clamp(62px,19vw,120px)]";
         var photoH = pair ? "250px" : "310px";
@@ -436,7 +450,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
           if (live[0].badge) chips.push({ label: live[0].badge, bg: "#D8F24E" });
         } else {
           live.forEach((d) => chips.push({ label: d.name + " · " + d.breed, bg: "#F7F2E7" }));
-          chips.push({ label: groupWord(live.length) + " dogs, one sofa", bg: "#D8F24E" });
+          chips.push({ label: groupWord(dogs.length) + " dogs, one sofa", bg: "#D8F24E" });
         }
 
         var chipsHTML = chips
@@ -705,9 +719,10 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
         // hero reads like the page failed to load. Mood follows SGT clock.
         function quietLine() {
           var hour = +new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Singapore", hour: "numeric", hourCycle: "h23" }).format(new Date());
-          var who = pair ? "The two of them" : esc(live[0].name);
+          var dogs = dogsIn(live);
+          var who = pair ? "The " + groupWord(dogs.length).toLowerCase() + " of them" : esc(live[0].name);
           var mood = hour < 12 ? "still waking up" : hour < 19 ? "busy chilling" : "knocked out already";
-          return "No news yet today. " + who + " " + (pair ? "are " : "is ") + mood + ".";
+          return "No news yet today. " + who + " " + (dogs.length > 1 ? "are " : "is ") + mood + ".";
         }
         var cardsHTML = raw.length
           ? '<div class="mt-5 grid gap-3.5">' + cards + "</div>"

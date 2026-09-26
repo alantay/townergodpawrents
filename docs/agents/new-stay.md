@@ -20,7 +20,7 @@ If a stay runs longer or shorter than planned, edit its `checkOut`. Diary days o
 
 ## A new dog
 
-Create `src/content/guests/<id>.md`. The id is the dog's name in lowercase, and it becomes `/guests/<id>`.
+Create `src/content/guests/<id>.md`. The id is the dog's name in lowercase, and it becomes `/guests/<id>`. Dogs from one home share one file: `name: Hugo & Luffy`, id `hugo-and-luffy` (see `docs/adr/0006-dogs-from-one-home-share-a-guest.md`).
 
 ```yaml
 ---

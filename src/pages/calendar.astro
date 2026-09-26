@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Cutout from "../components/Cutout.astro";
-import { dateStr, diarySkin, fmtDay, stayLabel, todaySGT } from "../lib/guests";
+import { dateStr, diarySkin, dogNames, fmtDay, stayLabel, todaySGT } from "../lib/guests";
 import { calendarMonths } from "../lib/calendar";
 
 const entries = await getCollection("guests");
@@ -46,7 +46,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
 
   <div class="mt-10 flex flex-col gap-14">
     {months.map((month, mi) => {
-      const pups = new Set(month.stays.map((s) => s.guestId)).size;
+      const pups = [...new Map(month.stays.map((s) => [s.guestId, s.name])).values()].flatMap(dogNames).length;
       return (
         <section
           class="cal-month reveal-card"
@@ -100,7 +100,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                       >
                         {!seg.continued && (
                           <span class="cal-bar-avatar" style={`background:${s.bgColor}`}>
-                            {s.photo && <Image src={s.photo} alt="" width={48} class="h-full w-full object-contain" />}
+                            {s.photo ? <Image src={s.photo} alt="" width={48} class="h-full w-full object-contain" /> : <Cutout name={s.name} />}
                           </span>
                         )}
                         <span class="cal-bar-name">

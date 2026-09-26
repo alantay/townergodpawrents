@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
+import { dogNames } from "../lib/guests";
 
 interface Props {
   photo?: ImageMetadata;
@@ -9,6 +10,10 @@ interface Props {
 }
 
 const { photo, name, class: className = "" } = Astro.props;
+
+// No cut-out yet: a cream sticker with the dog's initials ("M", "H&L") stands
+// in, so every size from the calendar dot to the hero reads as deliberate.
+const initials = dogNames(name).map((n) => n[0]).join("&");
 ---
 
 {
@@ -20,10 +25,21 @@ const { photo, name, class: className = "" } = Astro.props;
       class={`h-full w-full object-contain ${className}`}
     />
   ) : (
-    <div
-      class={`h-full w-full rounded-2xl border-2 border-dashed border-ink/30 bg-black/5 flex items-center justify-center text-center text-xs font-semibold px-3 text-ink/50 ${className}`}
-    >
-      photo of {name} coming soon
-    </div>
+    <svg viewBox="0 0 100 100" role="img" aria-label={`${name}, no photo yet`} class={`h-full w-full ${className}`}>
+      <g transform="rotate(-6 50 50)">
+        <circle cx="50" cy="50" r="46" fill="#F7F2E7" />
+        <text
+          x="50"
+          y="50"
+          dy="0.35em"
+          text-anchor="middle"
+          font-size={initials.length > 1 ? 40 : 60}
+          fill="#1E2019"
+          class="font-serif"
+        >
+          {initials}
+        </text>
+      </g>
+    </svg>
   )
 }

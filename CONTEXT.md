@@ -5,7 +5,7 @@ A personal site showing which dog is on Alan and Weiwen's sofa today, and a diar
 ## Language
 
 **Guest**:
-A dog Alan and Weiwen host. One guest, one file, one page, forever — a dog that comes back is the same guest, not a new one.
+A dog Alan and Weiwen host, or dogs from one home who come together ("Hugo & Luffy") — see ADR 0006. One guest, one file, one page, forever — a dog that comes back is the same guest, not a new one.
 _Avoid_: Dog (fine in prose, but the modelled thing is a Guest), client, pet, boarder
 
 **Guest's human**:
@@ -37,7 +37,7 @@ A short video attached to an entry, shown on the diary page on a tilted cream ma
 _Avoid_: Video, movie, reel
 
 **Cut-out**:
-A guest's own portrait — a photo cut from its background, used in the hero and the past-guests grid. One per guest.
+A guest's own portrait — a photo cut from its background, used in the hero and the past-guests grid. One per guest; a guest without one shows an initials sticker instead.
 _Avoid_: Avatar, headshot, profile photo
 
 **Live**:
