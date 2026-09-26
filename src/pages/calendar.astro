@@ -87,7 +87,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                   ))}
                   {week.segments.map((seg) => {
                     const s = seg.stay;
-                    const endsHere = s.checkOut <= week.days[6].iso;
+                    const endsHere = week.days[6].iso >= s.checkOut;
                     return (
                       <a
                         href={`/guests/${s.guestId}`}

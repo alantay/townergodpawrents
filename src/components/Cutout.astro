@@ -47,7 +47,7 @@ const dogs = dogNames(name);
 
 <style>
   .undeveloped {
-    container-type: size;
+    container: undeveloped / size;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -77,6 +77,7 @@ const dogs = dogNames(name);
       inset 0 1px 0 rgb(255 255 255 / 0.44),
       0 0.25em 0.6em rgb(30 32 25 / 0.22);
     transform: rotate(-3deg);
+    container-type: inline-size;
   }
 
   .polaroid:nth-child(even) { transform: rotate(2.5deg) translateY(-0.3em); }
@@ -112,7 +113,7 @@ const dogs = dogNames(name);
     padding: 0 0.3em;
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 1.25em;
+    font-size: max(14px, 1.25em);
     line-height: 1.55;
     color: var(--color-ink);
     text-align: center;
@@ -133,10 +134,16 @@ const dogs = dogNames(name);
     text-wrap: balance;
   }
 
-  /* Room to write on the strip and add the joke; below this the strip stays blank. */
-  @container (min-height: 200px) and (min-width: 150px) {
+  /* Tall enough to write on the strip and add the joke (the hero, even when a
+     pair shares it on a phone); below this the strip stays blank. */
+  @container undeveloped (min-height: 200px) {
     .prints { --h: min(calc(100cqh - 64px), calc(84cqw / var(--n) * 1.216)); }
     .polaroid { padding-bottom: 0; }
     .soon, .caption, .waiting { display: block; }
+  }
+
+  /* A print too narrow for "photo soon" keeps just its dashed slot. */
+  @container (max-width: 90px) {
+    .soon { display: none; }
   }
 </style>

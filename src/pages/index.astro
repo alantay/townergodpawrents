@@ -172,7 +172,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
 
 <Layout
   ogImage={liveAtBuild ? `/og/${liveAtBuild.id}.jpg` : undefined}
-  description={liveAtBuild ? `${liveAtBuild.name} ${liveAtBuild.dogs.length > 1 ? "are" : "is"} on the sofa today. Here's the diary.` : undefined}
+  description={liveAtBuild ? `${liveAtBuild.name} ${dogNames(liveAtBuild.name).length > 1 ? "are" : "is"} on the sofa today. Here's the diary.` : undefined}
 >
   <Nav />
 
