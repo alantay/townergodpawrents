@@ -721,7 +721,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
             return (
               '<a href="/guests/' +
               esc(g.id) +
-              '" class="block rounded-[22px] overflow-hidden transition-transform duration-250 hover:rotate-3 hover:scale-[1.03] card-keyline' +
+              '" class="block rounded-[22px] overflow-hidden transition-transform duration-250 hover:-translate-y-0.5 card-keyline' +
               (luma(g.bgColor) < 110 ? " card-keyline--dark" : "") +
               '" style="background:' +
               g.bgColor +

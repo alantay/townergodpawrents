@@ -123,13 +123,13 @@ Every page is something Alan and Weiwen have just put down on the kitchen table:
 
 The page is one narrow column (700px) read on a phone. Each dog is the main subject. It gets a big serif name, a colour of its own and a cutout photo standing in the hero card. Everything else stays quiet: warm neutrals, one small sans for the functional bits and a single acid-lime accent that means "look here" or "this is live".
 
-Motion is one-shot and physical. Cards arrive as if set down, and hover straightens a tilted card as if you'd picked it up. Once a card has arrived it stays put, apart from a couple of slow idle drifts on the cutout and the "Here today" tag.
+Motion is one-shot and physical. Cards arrive as if set down. Hover nudges a card up without straightening it: turning something big looks wonky, so only small things (the wordmark tag, a one-line link card) straighten. Once a card has arrived it stays put, apart from a couple of slow idle drifts on the cutout and the "Here today" tag.
 
 **Key Characteristics:**
 - Warm paper ground, ink-green text, one lime accent
 - Instrument Serif for names and headings; Archivo for everything functional
 - Every dog brings its own colour; the diary derives four skins from it
-- Tilt everywhere (±1°–2°), straightened on hover
+- Tilt everywhere (±1°–2°), kept on hover; only small things straighten
 - Real paper effects: torn slips (SVG turbulence), clipped tape, prints on a cream mat
 - Soft, warm-brown shadows; no hard elevation
 
@@ -212,7 +212,7 @@ A day strip sticks to the top on long stays. It's a horizontally scrolling row o
 
 ## Elevation & Depth
 
-Depth here is paper lying on paper. Shadows are soft and warm (a brown-olive tint, never neutral grey), and they're paired with tilt, not with lift. Cards cast a low, wide shadow. Prints add a faint inset highlight on top, as if they had a glossy face. Torn slips and the reaction picker cast a drop-shadow through their torn outline, so the shadow follows the tear. Hover straightens a card and nudges it up 2px with a 4% brightness lift; that's the only "elevation change".
+Depth here is paper lying on paper. Shadows are soft and warm (a brown-olive tint, never neutral grey), and they're paired with tilt, not with lift. Cards cast a low, wide shadow. Prints add a faint inset highlight on top, as if they had a glossy face. Torn slips and the reaction picker cast a drop-shadow through their torn outline, so the shadow follows the tear. Hover nudges a card up 2px with a 4% brightness lift, keeping its tilt; that's the only "elevation change".
 
 ### Shadow Vocabulary
 - **Card rest** (`box-shadow: 0 10px 20px rgb(92 76 41 / 0.1)`): Dog cards on the index and homepage.
@@ -267,7 +267,7 @@ A sticky, horizontally scrolling row of outlined day chips on translucent paper.
 
 ### Do:
 - **Do** build new surfaces from paper objects: a card, a print on a mat, a torn slip, a scrap of tape, a sticker.
-- **Do** give every new card or print a small tilt (±0.4°–2°) and straighten it on hover with the 200ms `cubic-bezier(0.16, 1, 0.3, 1)` ease.
+- **Do** give every new card or print a small tilt (±0.4°–2°) and keep it on hover. Straighten only small things, with the 200ms `cubic-bezier(0.16, 1, 0.3, 1)` ease; a big card turning looks wonky. The calendar doesn't move on hover at all, since its sheets and polaroids are taped down. A focus ring still shows.
 - **Do** take saturated colour from the guest's `bgColor` and derive tints with `diarySkin()` instead of inventing new colours.
 - **Do** keep entrances one-shot (520–620ms, same ease, 90ms stagger), and turn every animation off under `prefers-reduced-motion`.
 - **Do** give small controls an invisible `::before` hit area rather than enlarging them.
