@@ -87,9 +87,10 @@ a:focus-visible {
   transform: rotate(0deg);
 }
 
+/* Keeps its tilt: straightening a card this big looks wonky. */
 .diary-entry-card:hover,
 .diary-entry-card:focus-within {
-  transform: rotate(0deg) translateY(-2px);
+  transform: rotate(var(--card-tilt)) translateY(-2px);
   filter: brightness(1.04);
 }
 
