@@ -54,9 +54,9 @@ typography:
     letterSpacing: "0.1em"
   script:
     fontFamily: "Caveat, cursive"
-    fontSize: "24px"
-    fontWeight: 500
-    lineHeight: 1.15
+    fontSize: "20px"
+    fontWeight: 600
+    lineHeight: 1
 rounded:
   print-photo: "10px"
   print: "16px"
@@ -186,14 +186,23 @@ Colours repeat across guests. **Sofa Green** `#5F6E4F` is reserved for the share
 - **Display** (400, clamp(48px, 13vw, 88px), 0.88, −0.02em): A dog's name in its hero. Homepage names use `fit-headline`, which stays on one line and shrinks with fitText() if a long name or two names would overflow.
 - **Headline** (400, 32px, 1): Section heads like "The full diary", plus the wordmark at 21–26px.
 - **Title** (400, 24px, 1): Diary day labels ("13 Sep") and card names (22–27px).
-- **Tagline** (italic 400, 20–22px): A dog's one-liner under its name, in Pale Lime Wash on the hero.
+- **Tagline** (italic 400, 20–22px): A dog's one-liner under its name, in Pale Lime Wash on the hero, and the rotating joke line in the homepage footer, in ink.
 - **Body** (400, 16px, 1.625, max ~52ch): Diary notes and intro copy. Slips set lines at a fixed 28px so the writing sits like ruled paper.
 - **Chip** (600, 13px): Pills, nav link and day chips.
 - **Label** (600, 11–12px, 0.06–0.1em, uppercase): Stay ranges, "Here today", NEW tags and footer meta. Dates use tabular numbers.
-- **Script** (500, 24px, 1.15): Caveat appears only once, as the rotating handwritten footer line.
+- **Script** (500–600, 18–40px, 1–1.15): Caveat, for words Alan or Weiwen have written onto the calendar: month names (40px), the pup-count note (22px), names on polaroids (20px) and on tape (18px).
 
 ### Named Rules
-**The One Scribble Rule.** Caveat is a signature, not a voice. Keep it to the footer line and the calendar's scrapbook sheets (month names, the pup-count scribble, names on the tape and polaroids), which are handwritten by design. Diary notes are set in Archivo, because they're read, not admired.
+**The Pen on Paper Rule.** Caveat is Alan or Weiwen's own handwriting, so it only goes where one of them could have picked up a pen and written on something. Before using it, check all six:
+
+1. **It's written on a paper object**: a calendar sheet, a polaroid, a strip of tape or a slip. Never directly on the page background (that's the kitchen table), and never on chrome: nav, chips, buttons or uppercase labels.
+2. **A person wrote it**: a name, a heading on a sheet, a quick aside. Not text that explains something, and nothing the site itself is saying.
+3. **It's one short line, about six words at most.** If it wraps, it's no longer a scribble.
+4. **Facts stay in Archivo.** Dates, times, stay ranges and anything that has to be exact are set in Archivo with tabular numbers. The polaroid shows how: the name is handwritten and the dates are printed underneath.
+5. **It's never the reading voice.** Diary notes, captions and intro copy are Archivo. One-liners and jokes go in Instrument Serif italic, the same voice as a dog's tagline.
+6. **It's 18px or larger, weight 500–600.** A name that runs out of room on a tape strip is cut off with "…"; that's accepted for now.
+
+The calendar is the one page that's meant to look handwritten. Everywhere else, the default is no Caveat.
 
 ## Layout
 
@@ -268,6 +277,6 @@ A sticky, horizontally scrolling row of outlined day chips on translucent paper.
 - **Don't** use lime for anything other than current/active state, badges and tape.
 - **Don't** use grey or blue-black shadows, glows or glassmorphism. Shadows are warm and low.
 - **Don't** put a transform or filter on an ancestor of a `<video>`; video entries stay level.
-- **Don't** add a fourth typeface or spread Caveat beyond the footer line.
+- **Don't** add a fourth typeface, or use Caveat anywhere the Pen on Paper Rule doesn't allow.
 - **Don't** add buttons, forms or sections that look like a service site (CTA bars, pricing cards, testimonial blocks). The only interactive pieces are navigation, day chips, prints and reactions.
 - **Don't** apply the tear filter to text; tear the paper layer only.
