@@ -89,14 +89,11 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                     const s = seg.stay;
                     const endsHere = s.checkOut <= week.days[6].iso;
                     return (
-                      <a
-                        href={`/guests/${s.guestId}`}
+                      <span
                         class:list={["cal-bar", { "cal-bar--continued": seg.continued, "cal-bar--carries": !endsHere, "cal-bar--short": seg.span === 1 }]}
                         style={`grid-row:${seg.lane + 2};grid-column:${seg.startCol + 1} / span ${seg.span};--bar-tint:${s.tint};--bar-colour:${s.bgColor}`}
                         data-check-in={s.checkIn}
-                        aria-label={seg.continued ? undefined : `${s.name}, ${stayLabel(s)}`}
-                        aria-hidden={seg.continued ? "true" : undefined}
-                        tabindex={seg.continued ? -1 : undefined}
+                        aria-hidden="true"
                       >
                         {!seg.continued && (
                           <span class="cal-bar-avatar" style={`background:${s.bgColor}`}>
@@ -107,7 +104,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                           {seg.continued ? `…${s.name}` : s.name}
                           {!seg.continued && <span class="cal-bar-booked"> (booked!)</span>}
                         </span>
-                      </a>
+                      </span>
                     );
                   })}
                 </div>
@@ -116,8 +113,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
               {month.stays.length > 0 && (
                 <div class="mt-7 flex flex-wrap gap-4">
                   {month.stays.map((s, pi) => (
-                    <a
-                      href={`/guests/${s.guestId}`}
+                    <div
                       class="cal-polaroid"
                       style={`--polaroid-tilt:${pi % 2 === 0 ? "-2deg" : "1.5deg"}`}
                     >
@@ -129,7 +125,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                       <span class="mt-0.5 block text-[11px] text-label tabular-nums">
                         {s.checkIn === s.checkOut ? fmtDay(s.checkIn) : stayLabel(s)}
                       </span>
-                    </a>
+                    </div>
                   ))}
                 </div>
               )}
@@ -179,9 +175,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     position: relative;
     padding: 26px 20px 24px;
     transform: rotate(var(--sheet-tilt));
-    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .cal-sheet:hover { transform: rotate(0deg); }
 
   .cal-sheet-paper {
     position: absolute;
@@ -251,6 +245,9 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
       linear-gradient(to right, transparent calc(100% - 1.25px), rgb(140 126 98 / 0.3) 0)
         0 0 / calc((100% + 2px) / 7) 100% repeat-x;
     filter: url("#pencil-rule");
+    /* Safari paints a stray black square at the sheet's corner unless the
+       filtered rules get a layer of their own. */
+    transform: translateZ(0);
   }
   .cal-week:last-child::before { background-size: 0 0, calc((100% + 2px) / 7) 100%; }
 
@@ -276,7 +273,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
 
   /* Each stay is a strip of washi tape in the dog's own colour: diagonal
      stripes, torn ends. The tape is a pseudo-element so its clip-path can't
-     cut off the link's focus ring. A strip that runs on into the next week
+     cut off the dog's photo. A strip that runs on into the next week
      keeps a straight edge there, like tape wrapping round the page. */
   .cal-bar {
     --tape: color-mix(in srgb, var(--bar-colour) 55%, var(--color-cream));
@@ -290,7 +287,6 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     padding: 0 10px 0 7px;
     color: var(--color-ink);
     transform: rotate(-0.4deg);
-    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   .cal-bar::before {
     content: "";
@@ -310,8 +306,6 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     );
     box-shadow: 0 1px 2px rgb(30 32 25 / 0.12);
   }
-  .cal-bar:hover { transform: rotate(0deg) translateY(-1px); }
-  .cal-bar:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; }
   .cal-bar--continued { --tear-l: 0px; padding-left: 8px; }
   .cal-bar--carries { --tear-r: 0px; }
 
@@ -329,7 +323,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
   .cal-bar-booked { display: none; }
   .cal-bar.is-upcoming .cal-bar-booked { display: inline; }
 
-  /* A one-day strip only has room for the photo; the link's label still
+  /* A one-day strip only has room for the photo; the polaroid below
      names the dog. */
   .cal-bar--short { justify-content: center; padding: 0 6px; }
   .cal-bar--short .cal-bar-name { display: none; }
@@ -360,12 +354,5 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     background: #fdfaf1;
     box-shadow: 0 4px 9px rgb(30 32 25 / 0.16);
     transform: rotate(var(--polaroid-tilt));
-    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .cal-polaroid:hover { transform: rotate(0deg) translateY(-2px); }
-  .cal-polaroid:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 3px; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .cal-sheet, .cal-polaroid, .cal-bar { transition: none; }
   }
 </style>
