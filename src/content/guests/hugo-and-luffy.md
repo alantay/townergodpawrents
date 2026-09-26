@@ -1,7 +1,7 @@
 ---
 name: Hugo & Luffy
 breed: Border Collie & Pomsky
-photo: ./hugo-and-luffy/hugo-and-luffy-cutout-v2.png
+photo: ./hugo-and-luffy/hugo-and-luffy-headshot.png
 bgColor: "#7A5C24"
 showLive: true
 stays:
