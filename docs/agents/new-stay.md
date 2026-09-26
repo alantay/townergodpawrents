@@ -2,6 +2,8 @@
 
 Read `CONTEXT.md` and `docs/adr/0002-guest-has-many-stays.md` first. One dog is one file, forever.
 
+Whenever you add a stay or change its dates, check who else is staying over those days. Dogs whose stays overlap must have different `bgColor`s (the Same-Sofa Rule in `DESIGN.md`). If they clash, pick another colour from the guest palette for the dog you're adding or changing.
+
 ## A dog that's been before
 
 Add a stay to the existing file. Don't create a new one.
@@ -25,7 +27,7 @@ Create `src/content/guests/<id>.md`. The id is the dog's name in lowercase, and 
 name: Kopi
 breed: Mini Schnauzer
 photo: ./kopi/kopi-cutout.png   # optional, transparent PNG cut-out
-bgColor: "#8E4A5C"              # hero colour from the guest palette in DESIGN.md; repeats are fine, just differ from any dog staying at the same time
+bgColor: "#8E4A5C"              # hero colour from the guest palette in DESIGN.md; repeats are fine outside overlapping stays
 showLive: true
 badge: Sock thief               # 2–3 word description of the dog
 tagline: sleeps with one eye on the treat jar   # a short character note, lowercase
