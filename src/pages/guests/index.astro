@@ -64,7 +64,7 @@ const returningGuests = guests.filter((g) => g.stays.length > 1).length;
         >
           <a
             href={`/guests/${g.id}`}
-            class="dog-card block rounded-[22px] overflow-hidden transition-all duration-250 hover:rotate-[1.5deg] hover:-translate-y-1 hover:scale-[1.02] active:scale-[0.99]"
+            class="dog-card block rounded-[22px] overflow-hidden transition-all duration-250 hover:-translate-y-0.5 active:scale-[0.99]"
             style={`background:${g.bgColor}`}
           >
             <div class:list={["p-[9px_9px_0]", { "h-[178px]": index === 0 && guests.length > 2, "h-[132px]": !(index === 0 && guests.length > 2) }]}>
