@@ -182,7 +182,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 }
 .reaction-summary-total {
   padding: 0.15rem 0.45rem;
-  background: rgb(247 226 122 / 0.75);
+  background: color-mix(in srgb, var(--color-tape) 75%, transparent);
   color: var(--color-ink);
   font-size: 0.75rem;
   font-weight: 600;
@@ -233,7 +233,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   bottom: -0.35rem;
   width: 2.6rem;
   height: 1rem;
-  background: rgb(247 226 122 / 0.9);
+  background: color-mix(in srgb, var(--color-tape) 90%, transparent);
   clip-path: polygon(0 12%, 8% 0, 16% 14%, 100% 0, 92% 50%, 100% 100%, 6% 88%, 0 100%);
   transform: rotate(-26deg);
 }
@@ -243,7 +243,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   left: -0.75rem;
   width: 2.6rem;
   height: 1rem;
-  background: rgb(247 226 122 / 0.9);
+  background: color-mix(in srgb, var(--color-tape) 90%, transparent);
   clip-path: polygon(0 10%, 10% 0, 100% 12%, 94% 55%, 100% 100%, 12% 90%, 0 100%, 5% 45%);
   transform: rotate(-32deg);
   pointer-events: none;
