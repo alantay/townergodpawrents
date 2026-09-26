@@ -24,6 +24,12 @@ const guests = entries
   .filter((g) => latestStay(g).checkOut < today)
   .sort((a, b) => latestStay(b).checkOut.localeCompare(latestStay(a).checkOut));
 const returningGuests = guests.filter((g) => g.stays.length > 1).length;
+
+// Same keyline rule as the homepage cards: darker line on dark coats.
+function luma(hex: string) {
+  const h = hex.replace("#", "");
+  return 0.2126 * parseInt(h.slice(0, 2), 16) + 0.7152 * parseInt(h.slice(2, 4), 16) + 0.0722 * parseInt(h.slice(4, 6), 16);
+}
 ---
 
 <Layout title="Past guests · The Towner Godpawrents">
@@ -64,7 +70,11 @@ const returningGuests = guests.filter((g) => g.stays.length > 1).length;
         >
           <a
             href={`/guests/${g.id}`}
-            class="dog-card block rounded-[22px] overflow-hidden transition-all duration-250 hover:-translate-y-0.5 active:scale-[0.99]"
+            class:list={[
+              "dog-card block rounded-[24px] overflow-hidden transition-all duration-250 hover:-translate-y-0.5 active:scale-[0.99] card-keyline",
+              index % 2 ? "rotate-1" : "-rotate-1",
+              { "card-keyline--dark": luma(g.bgColor) < 110 },
+            ]}
             style={`background:${g.bgColor}`}
           >
             <div class:list={["p-[9px_9px_0]", { "h-[178px]": index === 0 && guests.length > 2, "h-[132px]": !(index === 0 && guests.length > 2) }]}>

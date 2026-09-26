@@ -8,7 +8,8 @@ colors:
   slip-fibre: "#fdfaf1"
   lime: "#d8f24e"
   lime-soft: "#e9f7ae"
-  moss-link: "#4c6b3c"
+  tape: "#f7e27a"
+  moss: "#4c6b3c"
   muted: "#4a4b41"
   label: "#55564a"
   card-line: "#cdbf9e"
@@ -81,8 +82,9 @@ components:
     typography: "{typography.chip}"
     rounded: "{rounded.pill}"
     padding: "7px 13px"
-  chip-lime:
-    backgroundColor: "{colors.lime}"
+  chip-badge:
+    backgroundColor: "{colors.cream}"
+    borderColor: "{colors.ink}"
     textColor: "{colors.ink}"
     typography: "{typography.chip}"
     rounded: "{rounded.pill}"
@@ -93,7 +95,7 @@ components:
     rounded: "{rounded.pill}"
     padding: "6px 13px"
   nav-pill-hover:
-    backgroundColor: "{colors.lime}"
+    borderColor: "{colors.ink}"
     textColor: "{colors.ink}"
   day-chip-active:
     backgroundColor: "{colors.lime}"
@@ -119,14 +121,14 @@ components:
 
 **Creative North Star: "The Kitchen-Table Scrapbook"**
 
-Every page is something Alan and Weiwen have just put down on the kitchen table: a warm paper ground with a few coloured cards on it, each a little crooked, photos slipped in as prints with a cream mat, notes on slips torn from a pad, and a scrap of lime tape holding something down. Nothing is aligned the way a template would align it, and nothing is decorated for its own sake either. Each tilt, tear and bit of tape copies something real you'd find in a scrapbook.
+Every page is something Alan and Weiwen have just put down on the kitchen table: a warm paper ground with a few coloured cards on it, each a little crooked, photos slipped in as prints with a cream mat, notes on slips torn from a pad, and a scrap of post-it yellow tape holding something down. Nothing is aligned the way a template would align it, and nothing is decorated for its own sake either. Each tilt, tear and bit of tape copies something real you'd find in a scrapbook.
 
 The page is one narrow column (700px) read on a phone. Each dog is the main subject. It gets a big serif name, a colour of its own and a cutout photo standing in the hero card. Everything else stays quiet: warm neutrals, one small sans for the functional bits and a single acid-lime accent that means "look here" or "this is live".
 
 Motion is one-shot and physical. Cards arrive as if set down. Hover nudges a card up without straightening it: turning something big looks wonky, so only small things (the wordmark tag, a one-line link card) straighten. Once a card has arrived it stays put, apart from a couple of slow idle drifts on the cutout and the "Here today" tag.
 
 **Key Characteristics:**
-- Warm paper ground, ink-green text, one lime accent
+- Warm paper ground, ink-green text, one lime accent, post-it yellow tape
 - Instrument Serif for names and headings; Archivo for everything functional
 - Every dog brings its own colour; the diary derives four skins from it
 - Tilt everywhere (±1°–2°), kept on hover; only small things straighten
@@ -135,11 +137,12 @@ Motion is one-shot and physical. Cards arrive as if set down. Hover nudges a car
 
 ## Colors
 
-A sun-faded kitchen palette: oatmeal paper, deep olive-black ink and one highlighter lime, with each guest dog adding its own saturated colour.
+A sun-faded kitchen palette: oatmeal paper, deep olive-black ink one highlighter lime and a post-it yellow for tape, with each guest dog adding its own saturated colour.
 
 ### Primary
-- **Highlighter Lime** (`lime`): The single accent. It marks what's current or active: the "Here today" tag, a dog's badge, the active day chip, nav hover and the skip link. It also serves as tape. Seen through at 90% opacity, it holds the reaction picker to the card.
-- **Pale Lime Wash** (`lime-soft`): The quiet version of lime. It sits behind the italic "Godpawrents" wordmark, colours the italic tagline on a guest hero and, at 80% opacity, forms the tape scrap holding a reaction count.
+- **Highlighter Lime** (`lime`): The single accent. It marks what's current or active: the "Here today" and "Sofa free" tags, the NEW tag, the current nav page, the active day chip and the skip link. Nothing else.
+- **Pale Lime Wash** (`lime-soft`): The quiet version of lime. It colours the italic tagline on a dark guest hero and the "photo soon" line under a blank print.
+- **Post-it Yellow** (`tape`): Every piece of tape: calendar sheets and polaroids (85%), the reaction picker's corners (90%), the scrap under a reaction count (75%), and the tag behind the italic "Godpawrents" wordmark. Tape is translucent paper, so it has square corners.
 
 ### Secondary: the guest colour
 Each guest has a `bgColor` in its content frontmatter. The colour fills that dog's hero card. The diary then cycles through four skins mixed from it: a pale tint with ink text, the pure colour with cream text, a 38% ink-deepened version, and a 72% ink-deepened version.
@@ -164,13 +167,13 @@ Colours repeat across guests. **Sofa Green** `#5F6E4F` is reserved for the share
 - **Olive Ink** (`ink`): All primary text, focus outlines and timeline dots. It's the text colour on lime and cream.
 - **Cream Card** (`cream`): Card and print mats, caption slips, cream chips, and hero text on guest colours.
 - **Slip Fibre** (`slip-fibre`): The 5px paler border on a torn slip, which shows as the rough fibre edge where the paper tore.
-- **Moss Link** (`moss-link`): Hover colour for plain text links.
+- **Moss** (`moss`): Hover colour for plain text links, and the small uppercase labels on the Next up and Last seen cards.
 - **Muted Olive** (`muted`) / **Label Olive** (`label`): Secondary text, meta lines, uppercase labels and back links.
 - **Kraft Keyline** (`card-line`): The 1.5px edge on cream cards and prints. **Moss Keyline** (`card-line-dark`) is the same edge on the dark diary skins.
 - **Pencil Rule** (`line`): Section rules, nav underline, the timeline spine and outlined chips.
 
 ### Named Rules
-**The One Highlighter Rule.** Lime means "current, active, or taped down." Never use it as a background panel, heading colour or decoration beyond those roles.
+**The One Highlighter Rule.** Lime means "current or active", nothing more. Hovers use an ink border, badges are outlined cream, and tape is post-it yellow. Never use lime as a background panel, heading colour, hover fill or decoration.
 
 **The Dog Owns the Colour Rule.** Saturated colour on a page comes from the guest's `bgColor`. The system itself stays in warm neutrals, so each dog's page looks like that dog.
 
@@ -241,12 +244,15 @@ The dog's own card. It fills with the guest's `bgColor`, has a 32px radius and c
 
 ### Chips
 - **Cream chip:** cream on the hero, ink text, 13px/600, 7px 13px, pill. Used for breed, stay range and stay day.
-- **Lime chip:** the dog's badge, same shape in Highlighter Lime.
-- **Outlined chip:** 1.5px Pencil Rule, pill, no fill. It fills with lime on hover. Used for the nav "Past guests" link and day chips.
+- **Badge chip:** the dog's badge (and the "N dogs, one sofa" chip), a cream chip with a 1.5px ink outline.
+- **Outlined chip:** 1.5px Pencil Rule, pill, no fill. Its border turns ink on hover. Used for the nav links, "See all" and day chips.
 - **NEW tag:** lime pill, 11px uppercase, 0.06em tracking.
 
 ### Diary Entry Card
 A 24px-radius card in one of the four guest-colour skins, with a 1.5px keyline (Kraft on light skins, Moss on dark), 18px 19px 20px padding, the alternating tilt and the diary-entry shadow. The timestamp and note sit inside, with prints and slips below. Each entry fades and rises into place once as it scrolls into view.
+
+### Guest Card
+A past guest on /guests and the homepage: a 24px card in the dog's `bgColor` with the cutout standing in it, a cream strip below for the name (22px serif) and dates, and the 1.5px keyline (Kraft on light coats, Moss on dark). Cards alternate −1° / +1° and keep the tilt when they lift on hover. On the homepage, the Next up card is the same cream as Last seen but with a dashed Kraft keyline, like the calendar's upcoming stays: it hasn't happened yet.
 
 ### Print
 A photo on a 7px cream mat with a Kraft keyline and 16px radius; the photo inside has a 10px radius. The mat edge turns 72% white against coloured skins so it stays quiet. It leans against its card's tilt. Tapping opens a full-screen viewer on an 88% ink backdrop with a cream circular close button.
@@ -258,13 +264,13 @@ Stands in for a cut-out when a guest has no photo yet: one cream Polaroid per do
 A note too long for a print's mat goes on a torn cream slip. It's two layers: the torn, shadowed paper layer and the text layer, which is never distorted. The paper has a 5px Slip Fibre border that the tear cuts through. The text is 16px Archivo with 28px lines, inset 8px plus 16px from the edges so the writing clears the ragged edge.
 
 ### Reaction Badge and Picker
-The empty badge is a faint (35% opacity) add-reaction icon in the card's top-right corner that comes to full strength on hover or focus. Once an entry has reactions, the badge becomes up to three stickers (2.1rem) piled −8° / 6° / −4° and overlapping by 0.85rem, with the most-used on top. The total sits on a Pale Lime Wash tape scrap in one of three clip-path cuts. The picker is a torn cream strip hanging under the badge, taped at both corners with lime scraps. Its stickers scale up and tilt on hover. Errors appear as a small italic cream note under the badge.
+The empty badge is a faint (35% opacity) add-reaction icon in the card's top-right corner that comes to full strength on hover or focus. Once an entry has reactions, the badge becomes up to three stickers (2.1rem) piled −8° / 6° / −4° and overlapping by 0.85rem, with the most-used on top. The total sits on a Post-it Yellow tape scrap in one of three clip-path cuts. The picker is a torn cream strip hanging under the badge, taped at both corners with Post-it Yellow scraps. Its stickers scale up and tilt on hover. Errors appear as a small italic cream note under the badge.
 
 ### Navigation
-The wordmark sits on the left: "The Towner" in serif, then an italic "Godpawrents" on a Pale Lime Wash tag rotated −2°, which straightens on hover. On the right is the outlined "Past guests" pill; it fills with lime on hover, and lime with an ink border marks the current page. Below them is a 1.5px Pencil Rule. Focus shows a 2px ink ring offset onto paper.
+The wordmark sits on the left: "The Towner" in serif, then an italic "Godpawrents" on a Post-it Yellow tape tag rotated −2°, which straightens on hover. On the right is the outlined "Past guests" pill; its border turns ink on hover, and lime with an ink border marks the current page. Below them is a 1.5px Pencil Rule. Focus shows a 2px ink ring offset onto paper.
 
 ### Day Strip
-A sticky, horizontally scrolling row of outlined day chips on translucent paper. The active day turns lime with a lime border.
+A sticky, horizontally scrolling row of outlined day chips on translucent paper. Hover turns the border ink; the active day turns lime with a lime border.
 
 ## Do's and Don'ts
 
@@ -277,7 +283,7 @@ A sticky, horizontally scrolling row of outlined day chips on translucent paper.
 - **Do** use tabular numbers for dates, counts and stay ranges.
 
 ### Don't:
-- **Don't** use lime for anything other than current/active state, badges and tape.
+- **Don't** use lime for anything other than current/active state. Tape is post-it yellow.
 - **Don't** use grey or blue-black shadows, glows or glassmorphism. Shadows are warm and low.
 - **Don't** put a transform or filter on an ancestor of a `<video>`; video entries stay level.
 - **Don't** add a fourth typeface, or use Caveat anywhere the Pen on Paper Rule doesn't allow.
