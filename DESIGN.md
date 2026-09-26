@@ -83,12 +83,11 @@ components:
     rounded: "{rounded.pill}"
     padding: "7px 13px"
   chip-badge:
-    backgroundColor: "{colors.cream}"
-    borderColor: "{colors.ink}"
+    backgroundColor: "{colors.tape}"
     textColor: "{colors.ink}"
     typography: "{typography.chip}"
-    rounded: "{rounded.pill}"
-    padding: "7px 13px"
+    rounded: "0px"
+    padding: "7px 11px"
   nav-pill:
     textColor: "{colors.ink}"
     typography: "{typography.chip}"
@@ -142,7 +141,7 @@ A sun-faded kitchen palette: oatmeal paper, deep olive-black ink one highlighter
 ### Primary
 - **Highlighter Lime** (`lime`): The single accent. It marks what's current or active: the "Here today" and "Sofa free" tags, the NEW tag, the current nav page, the active day chip and the skip link. Nothing else.
 - **Pale Lime Wash** (`lime-soft`): The quiet version of lime. It colours the italic tagline on a dark guest hero and the "photo soon" line under a blank print.
-- **Post-it Yellow** (`tape`): Every piece of tape: calendar sheets and polaroids (85%), the reaction picker's corners (90%), the scrap under a reaction count (75%), and the tag behind the italic "Godpawrents" wordmark. Tape is translucent paper, so it has square corners.
+- **Post-it Yellow** (`tape`): Every piece of tape: calendar sheets and polaroids (85%), the reaction picker's corners (90%), the scrap under a reaction count (75%), the tag behind the italic "Godpawrents" wordmark, and the strip carrying a dog's badge. Tape is translucent paper, so it has square corners.
 
 ### Secondary: the guest colour
 Each guest has a `bgColor` in its content frontmatter. The colour fills that dog's hero card. The diary then cycles through four skins mixed from it: a pale tint with ink text, the pure colour with cream text, a 38% ink-deepened version, and a 72% ink-deepened version.
@@ -173,7 +172,7 @@ Colours repeat across guests. **Sofa Green** `#5F6E4F` is reserved for the share
 - **Pencil Rule** (`line`): Section rules, nav underline, the timeline spine and outlined chips.
 
 ### Named Rules
-**The One Highlighter Rule.** Lime means "current or active", nothing more. Hovers use an ink border, badges are outlined cream, and tape is post-it yellow. Never use lime as a background panel, heading colour, hover fill or decoration.
+**The One Highlighter Rule.** Lime means "current or active", nothing more. Hovers use an ink border, badges are tape strips, and tape is post-it yellow. Never use lime as a background panel, heading colour, hover fill or decoration.
 
 **The Dog Owns the Colour Rule.** Saturated colour on a page comes from the guest's `bgColor`. The system itself stays in warm neutrals, so each dog's page looks like that dog.
 
@@ -244,7 +243,7 @@ The dog's own card. It fills with the guest's `bgColor`, has a 32px radius and c
 
 ### Chips
 - **Cream chip:** cream on the hero, ink text, 13px/600, 7px 13px, pill. Used for breed, stay range and stay day.
-- **Badge chip:** the dog's badge (and the "N dogs, one sofa" chip), a cream chip with a 1.5px ink outline.
+- **Badge tape:** the dog's badge (and the "N dogs, one sofa" chip) is a nickname stuck on the dog, not a fact, so it's a strip of Post-it Yellow tape rather than a chip: square corners, tilted −2°, same Chip type in ink. It sits last in the row, after the cream fact chips.
 - **Outlined chip:** 1.5px Pencil Rule, pill, no fill. Its border turns ink on hover. Used for the nav links, "See all" and day chips.
 - **NEW tag:** lime pill, 11px uppercase, 0.06em tracking.
 
@@ -252,7 +251,7 @@ The dog's own card. It fills with the guest's `bgColor`, has a 32px radius and c
 A 24px-radius card in one of the four guest-colour skins, with a 1.5px keyline (Kraft on light skins, Moss on dark), 18px 19px 20px padding, the alternating tilt and the diary-entry shadow. The timestamp and note sit inside, with prints and slips below. Each entry fades and rises into place once as it scrolls into view.
 
 ### Guest Card
-A past guest on /guests and the homepage: a 24px card in the dog's `bgColor` with the cutout standing in it, a cream strip below for the name (22px serif) and dates, and the 1.5px keyline (Kraft on light coats, Moss on dark). Cards alternate −1° / +1° and keep the tilt when they lift on hover. On the homepage, the Next up card is the same cream as Last seen but with a dashed Kraft keyline, like the calendar's upcoming stays: it hasn't happened yet.
+A past guest on /guests and the homepage: a 24px card in the dog's `bgColor` with the cutout standing in it, a cream strip below for the name (22px serif) and dates, and the 1.5px keyline (Kraft on light coats, Moss on dark). Cards alternate −1° / +1° and keep the tilt when they lift on hover. On the homepage, the Next up card has no fill, just a dashed Pencil Rule outline on the paper, like the calendar's upcoming stays: the spot is marked out but the dog hasn't arrived. Last seen stays solid cream.
 
 ### Print
 A photo on a 7px cream mat with a Kraft keyline and 16px radius; the photo inside has a 10px radius. The mat edge turns 72% white against coloured skins so it stays quiet. It leans against its card's tilt. Tapping opens a full-screen viewer on an 88% ink backdrop with a cream circular close button.
