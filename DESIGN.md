@@ -193,7 +193,7 @@ Colours repeat across guests. **Sofa Green** `#5F6E4F` is reserved for the share
 - **Script** (500, 24px, 1.15): Caveat appears only once, as the rotating handwritten footer line.
 
 ### Named Rules
-**The One Scribble Rule.** Caveat is a signature, not a voice. Keep it to the footer line and the calendar's scrapbook sheets (month names, the pup-count scribble, polaroid names), which are handwritten by design. Diary notes are set in Archivo, because they're read, not admired.
+**The One Scribble Rule.** Caveat is a signature, not a voice. Keep it to the footer line and the calendar's scrapbook sheets (month names, the pup-count scribble, names on the tape and polaroids), which are handwritten by design. Diary notes are set in Archivo, because they're read, not admired.
 
 ## Layout
 

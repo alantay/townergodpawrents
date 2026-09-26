@@ -40,7 +40,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
       Who's on the sofa when
     </h1>
     <p class="mt-3 text-base leading-relaxed text-pretty max-w-[52ch]">
-      So the neighbours know why we keep saying "cannot, got dog". Dashed ones haven't arrived yet.
+      So the neighbours know why we keep saying "cannot, got dog".
     </p>
   </header>
 
@@ -91,7 +91,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                     return (
                       <a
                         href={`/guests/${s.guestId}`}
-                        class:list={["cal-bar", { "cal-bar--continued": seg.continued, "cal-bar--carries": !endsHere }]}
+                        class:list={["cal-bar", { "cal-bar--continued": seg.continued, "cal-bar--carries": !endsHere, "cal-bar--short": seg.span === 1 }]}
                         style={`grid-row:${seg.lane + 2};grid-column:${seg.startCol + 1} / span ${seg.span};--bar-tint:${s.tint};--bar-colour:${s.bgColor}`}
                         data-check-in={s.checkIn}
                         aria-label={seg.continued ? undefined : `${s.name}, ${stayLabel(s)}`}
@@ -105,7 +105,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                         )}
                         <span class="cal-bar-name">
                           {seg.continued ? `…${s.name}` : s.name}
-                          {!seg.continued && <span class="cal-bar-soon"> (soon!)</span>}
+                          {!seg.continued && <span class="cal-bar-booked"> (booked!)</span>}
                         </span>
                       </a>
                     );
@@ -170,8 +170,9 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
 </script>
 
 <style>
-  /* One month is a sheet of ruled paper, torn out and taped to the page.
-     The tear is a filter on the paper layer only, like the diary slips. */
+  /* One month is a planner sheet, torn out and taped to the page. The tear
+     is a filter on the paper layer only, like the diary slips; the grid lives
+     on the weeks so the filter can't smudge it. */
   .cal-month[hidden] { display: none; }
 
   .cal-sheet {
@@ -185,9 +186,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
   .cal-sheet-paper {
     position: absolute;
     inset: 0;
-    background:
-      repeating-linear-gradient(transparent 0 27px, rgb(169 155 127 / 0.28) 27px 28px),
-      var(--color-cream);
+    background: var(--color-cream);
     background-clip: padding-box;
     border: 5px solid #fdfaf1;
     filter: url("#torn-slip-0") drop-shadow(0 6px 10px rgb(30 32 25 / 0.18));
@@ -199,7 +198,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     .cal-sheet-paper { filter: none; border: 1.5px solid var(--color-card-line); }
   }
 
-  .cal-sheet-body { position: relative; }
+  .cal-sheet-body { position: relative; isolation: isolate; }
 
   .cal-tape {
     position: absolute;
@@ -235,11 +234,25 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     text-align: center;
   }
   .cal-week {
+    position: relative;
     row-gap: 3px;
     padding: 6px 0 8px;
-    border-bottom: 1px dashed rgb(169 155 127 / 0.5);
   }
-  .cal-week:last-child { border-bottom: 0; }
+  /* The grid is ruled by hand in pencil: a line in each gap between days and
+     one under the week, wobbled on their own layer so the dates stay crisp. */
+  .cal-week::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      linear-gradient(rgb(140 126 98 / 0.45), rgb(140 126 98 / 0.45)) left bottom / 100% 1.25px no-repeat,
+      linear-gradient(to right, transparent calc(100% - 1.25px), rgb(140 126 98 / 0.3) 0)
+        0 0 / calc((100% + 2px) / 7) 100% repeat-x;
+    filter: url("#pencil-rule");
+  }
+  .cal-week:last-child::before { background-size: 0 0, calc((100% + 2px) / 7) 100%; }
 
   .cal-day {
     grid-row: 1;
@@ -261,32 +274,65 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     transform: rotate(-8deg);
   }
 
-  /* Marker-pen bar in the dog's own colour, pale enough to read ink on. */
+  /* Each stay is a strip of washi tape in the dog's own colour: diagonal
+     stripes, torn ends. The tape is a pseudo-element so its clip-path can't
+     cut off the link's focus ring. A strip that runs on into the next week
+     keeps a straight edge there, like tape wrapping round the page. */
   .cal-bar {
+    --tape: color-mix(in srgb, var(--bar-colour) 55%, var(--color-cream));
+    --tear-l: 5px;
+    --tear-r: 5px;
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
     min-width: 0;
-    padding: 0 8px 0 3px;
-    border-radius: 999px;
-    background: var(--bar-tint);
-    border: 1.5px solid transparent;
+    padding: 0 10px 0 7px;
     color: var(--color-ink);
-    font-size: 12px;
-    font-weight: 600;
+    transform: rotate(-0.4deg);
     transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .cal-bar:hover { transform: translateY(-1px); }
-  .cal-bar:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; }
-  .cal-bar--continued { border-top-left-radius: 0; border-bottom-left-radius: 0; padding-left: 8px; }
-  .cal-bar--carries { border-top-right-radius: 0; border-bottom-right-radius: 0; }
-
-  .cal-bar.is-upcoming {
-    background: transparent;
-    border: 1.5px dashed var(--bar-colour);
+  .cal-bar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--tape) 0 7px,
+      color-mix(in srgb, var(--tape) 65%, var(--color-cream)) 7px 14px
+    );
+    opacity: 0.92;
+    clip-path: polygon(
+      var(--tear-l) 0, 100% 0,
+      calc(100% - var(--tear-r)) 25%, 100% 50%, calc(100% - var(--tear-r)) 75%, 100% 100%,
+      0 100%, var(--tear-l) 75%, 0 50%, var(--tear-l) 25%
+    );
+    box-shadow: 0 1px 2px rgb(30 32 25 / 0.12);
   }
-  .cal-bar-soon { display: none; font-weight: 500; color: var(--color-label); }
-  .cal-bar.is-upcoming .cal-bar-soon { display: inline; }
+  .cal-bar:hover { transform: rotate(0deg) translateY(-1px); }
+  .cal-bar:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; }
+  .cal-bar--continued { --tear-l: 0px; padding-left: 8px; }
+  .cal-bar--carries { --tear-r: 0px; }
+
+  /* Booked but not arrived: a dashed box in the dog's colour, not taped down
+     yet. The box stays open where the stay runs on into another week. */
+  .cal-bar.is-upcoming::before {
+    background: color-mix(in srgb, var(--bar-colour) 8%, transparent);
+    border: 1.5px dashed color-mix(in srgb, var(--bar-colour) 85%, var(--color-ink));
+    clip-path: none;
+    box-shadow: none;
+    opacity: 1;
+  }
+  .cal-bar--continued.is-upcoming::before { border-left: 0; }
+  .cal-bar--carries.is-upcoming::before { border-right: 0; }
+  .cal-bar-booked { display: none; }
+  .cal-bar.is-upcoming .cal-bar-booked { display: inline; }
+
+  /* A one-day strip only has room for the photo; the link's label still
+     names the dog. */
+  .cal-bar--short { justify-content: center; padding: 0 6px; }
+  .cal-bar--short .cal-bar-name { display: none; }
 
   .cal-bar-avatar {
     flex: none;
@@ -294,11 +340,16 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     height: 20px;
     overflow: hidden;
     border-radius: 999px;
+    box-shadow: 0 0 0 2px #fdfaf1;
   }
   .cal-bar-name {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-family: var(--font-script);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
   }
 
   .cal-polaroid {
