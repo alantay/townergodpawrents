@@ -25,7 +25,7 @@ Create `src/content/guests/<id>.md`. The id is the dog's name in lowercase, and 
 name: Kopi
 breed: Mini Schnauzer
 photo: ./kopi/kopi-cutout.png   # optional, transparent PNG cut-out
-bgColor: "#5F6E4F"              # hero colour, hex; pick one that isn't close to another guest's
+bgColor: "#8E4A5C"              # hero colour from the guest palette in DESIGN.md; repeats are fine, just differ from any dog staying at the same time
 showLive: true
 badge: Sock thief               # 2–3 word description of the dog
 tagline: sleeps with one eye on the treat jar   # a short character note, lowercase

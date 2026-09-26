@@ -1,0 +1,423 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-26T01:54:51.135Z",
+  "title": "Design System: The Towner Godpawrents",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Oatmeal Paper",
+        "canonical": "oklch(93.02% 0.022 83.264)",
+        "tonalRamp": [
+          "oklch(15% 0.022 83.264)",
+          "oklch(25% 0.022 83.264)",
+          "oklch(37% 0.022 83.264)",
+          "oklch(50% 0.022 83.264)",
+          "oklch(62% 0.022 83.264)",
+          "oklch(74% 0.022 83.264)",
+          "oklch(85% 0.022 83.264)",
+          "oklch(95% 0.022 83.264)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Olive Ink",
+        "canonical": "oklch(23.888% 0.013 120.372)",
+        "tonalRamp": [
+          "oklch(15% 0.013 120.372)",
+          "oklch(25% 0.013 120.372)",
+          "oklch(37% 0.013 120.372)",
+          "oklch(50% 0.013 120.372)",
+          "oklch(62% 0.013 120.372)",
+          "oklch(74% 0.013 120.372)",
+          "oklch(85% 0.013 120.372)",
+          "oklch(95% 0.013 120.372)"
+        ]
+      },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Cream Card",
+        "canonical": "oklch(96.203% 0.016 86.425)",
+        "tonalRamp": [
+          "oklch(15% 0.016 86.425)",
+          "oklch(25% 0.016 86.425)",
+          "oklch(37% 0.016 86.425)",
+          "oklch(50% 0.016 86.425)",
+          "oklch(62% 0.016 86.425)",
+          "oklch(74% 0.016 86.425)",
+          "oklch(85% 0.016 86.425)",
+          "oklch(95% 0.016 86.425)"
+        ]
+      },
+      "slip-fibre": {
+        "role": "neutral",
+        "displayName": "Slip Fibre",
+        "canonical": "oklch(98.495% 0.012 91.515)",
+        "tonalRamp": [
+          "oklch(15% 0.012 91.515)",
+          "oklch(25% 0.012 91.515)",
+          "oklch(37% 0.012 91.515)",
+          "oklch(50% 0.012 91.515)",
+          "oklch(62% 0.012 91.515)",
+          "oklch(74% 0.012 91.515)",
+          "oklch(85% 0.012 91.515)",
+          "oklch(95% 0.012 91.515)"
+        ]
+      },
+      "lime": {
+        "role": "primary",
+        "displayName": "Highlighter Lime",
+        "canonical": "oklch(91.307% 0.184 118.022)",
+        "tonalRamp": [
+          "oklch(15% 0.064 118.022)",
+          "oklch(25% 0.082 118.022)",
+          "oklch(37% 0.104 118.022)",
+          "oklch(50% 0.128 118.022)",
+          "oklch(62% 0.15 118.022)",
+          "oklch(74% 0.173 118.022)",
+          "oklch(85% 0.184 118.022)",
+          "oklch(95% 0.184 118.022)"
+        ]
+      },
+      "lime-soft": {
+        "role": "primary",
+        "displayName": "Pale Lime Wash",
+        "canonical": "oklch(94.857% 0.095 117.067)",
+        "tonalRamp": [
+          "oklch(15% 0.039 117.067)",
+          "oklch(25% 0.048 117.067)",
+          "oklch(37% 0.06 117.067)",
+          "oklch(50% 0.072 117.067)",
+          "oklch(62% 0.083 117.067)",
+          "oklch(74% 0.095 117.067)",
+          "oklch(85% 0.095 117.067)",
+          "oklch(95% 0.095 117.067)"
+        ]
+      },
+      "moss-link": {
+        "role": "neutral",
+        "displayName": "Moss Link",
+        "canonical": "oklch(49.112% 0.08 135.624)",
+        "tonalRamp": [
+          "oklch(15% 0.073 135.624)",
+          "oklch(25% 0.08 135.624)",
+          "oklch(37% 0.08 135.624)",
+          "oklch(50% 0.08 135.624)",
+          "oklch(62% 0.08 135.624)",
+          "oklch(74% 0.08 135.624)",
+          "oklch(85% 0.071 135.624)",
+          "oklch(95% 0.063 135.624)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Olive",
+        "canonical": "oklch(40.866% 0.016 111.753)",
+        "tonalRamp": [
+          "oklch(15% 0.016 111.753)",
+          "oklch(25% 0.016 111.753)",
+          "oklch(37% 0.016 111.753)",
+          "oklch(50% 0.016 111.753)",
+          "oklch(62% 0.016 111.753)",
+          "oklch(74% 0.016 111.753)",
+          "oklch(85% 0.016 111.753)",
+          "oklch(95% 0.016 111.753)"
+        ]
+      },
+      "label": {
+        "role": "neutral",
+        "displayName": "Label Olive",
+        "canonical": "oklch(44.847% 0.019 111.031)",
+        "tonalRamp": [
+          "oklch(15% 0.019 111.031)",
+          "oklch(25% 0.019 111.031)",
+          "oklch(37% 0.019 111.031)",
+          "oklch(50% 0.019 111.031)",
+          "oklch(62% 0.019 111.031)",
+          "oklch(74% 0.019 111.031)",
+          "oklch(85% 0.019 111.031)",
+          "oklch(95% 0.019 111.031)"
+        ]
+      },
+      "card-line": {
+        "role": "neutral",
+        "displayName": "Kraft Keyline",
+        "canonical": "oklch(80.773% 0.047 87.752)",
+        "tonalRamp": [
+          "oklch(15% 0.036 87.752)",
+          "oklch(25% 0.041 87.752)",
+          "oklch(37% 0.047 87.752)",
+          "oklch(50% 0.047 87.752)",
+          "oklch(62% 0.047 87.752)",
+          "oklch(74% 0.047 87.752)",
+          "oklch(85% 0.047 87.752)",
+          "oklch(95% 0.047 87.752)"
+        ]
+      },
+      "card-line-dark": {
+        "role": "neutral",
+        "displayName": "Moss Keyline",
+        "canonical": "oklch(51.398% 0.051 134.283)",
+        "tonalRamp": [
+          "oklch(15% 0.051 134.283)",
+          "oklch(25% 0.051 134.283)",
+          "oklch(37% 0.051 134.283)",
+          "oklch(50% 0.051 134.283)",
+          "oklch(62% 0.051 134.283)",
+          "oklch(74% 0.051 134.283)",
+          "oklch(85% 0.051 134.283)",
+          "oklch(95% 0.049 134.283)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Pencil Rule",
+        "canonical": "oklch(69.416% 0.043 84.518)",
+        "tonalRamp": [
+          "oklch(15% 0.039 84.518)",
+          "oklch(25% 0.043 84.518)",
+          "oklch(37% 0.043 84.518)",
+          "oklch(50% 0.043 84.518)",
+          "oklch(62% 0.043 84.518)",
+          "oklch(74% 0.043 84.518)",
+          "oklch(85% 0.043 84.518)",
+          "oklch(95% 0.043 84.518)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "A dog's name in its hero."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section heads and the wordmark."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Diary day labels and card names."
+      },
+      "tagline": {
+        "displayName": "Tagline",
+        "purpose": "Italic one-liner under a dog's name."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Diary notes and intro copy."
+      },
+      "chip": {
+        "displayName": "Chip",
+        "purpose": "Pills, nav link, day chips."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase meta: stay ranges, Here today, NEW."
+      },
+      "script": {
+        "displayName": "Script",
+        "purpose": "The rotating handwritten footer line only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-rest",
+        "value": "0 10px 20px rgb(92 76 41 / 0.1)",
+        "purpose": "Dog cards at rest."
+      },
+      {
+        "name": "card-hover",
+        "value": "0 16px 26px rgb(70 92 56 / 0.17)",
+        "purpose": "Dog card picked up."
+      },
+      {
+        "name": "diary-entry",
+        "value": "0 9px 17px rgb(92 76 41 / 0.08)",
+        "purpose": "Timeline entry cards."
+      },
+      {
+        "name": "print",
+        "value": "inset 0 1px 0 rgb(255 255 255 / 0.44), 0 6px 12px rgb(30 32 25 / 0.12)",
+        "purpose": "Photo prints on their mat."
+      },
+      {
+        "name": "torn-paper",
+        "value": "drop-shadow(0 4px 7px rgb(30 32 25 / 0.2))",
+        "purpose": "Filter shadow following a torn slip's edge."
+      },
+      {
+        "name": "sticker",
+        "value": "drop-shadow(0 2px 2px rgb(30 32 25 / 0.28))",
+        "purpose": "Reaction stickers."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-settle",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Entrances, reveals, card straighten on hover."
+      },
+      {
+        "name": "arrive",
+        "value": "520ms ease-settle, 90ms stagger",
+        "purpose": "One-shot page entrance."
+      },
+      {
+        "name": "arrive-hero",
+        "value": "620ms ease-settle",
+        "purpose": "Guest hero entrance with small rotate/scale."
+      },
+      {
+        "name": "drift",
+        "value": "6–7s ease-in-out infinite, 8px",
+        "purpose": "Idle float on cutout photos."
+      },
+      {
+        "name": "wiggle",
+        "value": "4.5s ease-in-out infinite, 5° to −3°",
+        "purpose": "Homepage 'Here today' tag."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "prints-2up",
+        "value": "480px"
+      },
+      {
+        "name": "entry-stagger",
+        "value": "640px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Guest Hero",
+      "kind": "card",
+      "refersTo": "guest-hero",
+      "description": "The dog's own card: guest colour, display name, lime-wash tagline, chips.",
+      "html": "<div class=\"ds-hero\"><span class=\"ds-hero-tag\">Here today</span><h1 class=\"ds-hero-name\">Tiny</h1><div class=\"ds-hero-tagline\">Herds the sofa cushions</div><div class=\"ds-hero-chips\"><span class=\"ds-chip-cream\">Border Collie</span><span class=\"ds-chip-lime\">Good boy</span></div></div>",
+      "css": ".ds-hero{position:relative;background:#3F6655;color:var(--color-cream,#f7f2e7);border-radius:32px;padding:26px 24px 24px;max-width:420px}.ds-hero-tag{position:absolute;top:18px;right:18px;background:var(--color-lime,#d8f24e);color:var(--color-ink,#1e2019);font:600 12px/1 Archivo,Helvetica,sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:8px 13px;border-radius:999px;transform:rotate(5deg)}.ds-hero-name{margin:0;font:400 72px/.88 \"Instrument Serif\",serif;letter-spacing:-.02em}.ds-hero-tagline{margin-top:8px;font:italic 400 20px/1.2 \"Instrument Serif\",serif;color:var(--color-lime-soft,#e9f7ae)}.ds-hero-chips{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}.ds-chip-cream,.ds-chip-lime{font:600 13px/1 Archivo,Helvetica,sans-serif;padding:7px 13px;border-radius:999px;color:var(--color-ink,#1e2019)}.ds-chip-cream{background:var(--color-cream,#f7f2e7)}.ds-chip-lime{background:var(--color-lime,#d8f24e)}"
+    },
+    {
+      "name": "Cream Chip",
+      "kind": "chip",
+      "refersTo": "chip-cream",
+      "description": "Breed, stay range and stay day on a guest hero.",
+      "html": "<span class=\"ds-chip-cream\">12–15 Sep</span>",
+      "css": ".ds-chip-cream{display:inline-block;background:var(--color-cream,#f7f2e7);color:var(--color-ink,#1e2019);font:600 13px/1 Archivo,Helvetica,sans-serif;padding:7px 13px;border-radius:999px}"
+    },
+    {
+      "name": "Lime Badge Chip",
+      "kind": "chip",
+      "refersTo": "chip-lime",
+      "description": "A dog's character badge.",
+      "html": "<span class=\"ds-chip-lime\">Play buddy</span>",
+      "css": ".ds-chip-lime{display:inline-block;background:var(--color-lime,#d8f24e);color:var(--color-ink,#1e2019);font:600 13px/1 Archivo,Helvetica,sans-serif;padding:7px 13px;border-radius:999px}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav-pill",
+      "description": "Wordmark with lime-wash tag, outlined pill link, pencil rule below.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-wordmark\" href=\"#\">The Towner <span class=\"ds-wordmark-tag\">Godpawrents</span></a><a class=\"ds-nav-pill\" href=\"#\">Past guests</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 0;border-bottom:1.5px solid var(--color-line,#a99b7f);background:var(--color-paper,#efe7d8)}.ds-wordmark{font:400 26px/1 \"Instrument Serif\",serif;color:var(--color-ink,#1e2019);text-decoration:none}.ds-wordmark-tag{display:inline-block;font-style:italic;padding:2px 7px;background:var(--color-lime-soft,#e9f7ae);border-radius:7px;transform:rotate(-2deg);transition:transform 200ms ease}.ds-wordmark:hover .ds-wordmark-tag{transform:rotate(0)}.ds-nav-pill{font:600 13px/1 Archivo,Helvetica,sans-serif;color:var(--color-ink,#1e2019);text-decoration:none;border:1.5px solid var(--color-line,#a99b7f);padding:6px 13px;border-radius:999px;transition:all 200ms}.ds-nav-pill:hover{background:var(--color-lime,#d8f24e);transform:translateY(-1px)}.ds-nav-pill:active{transform:scale(.98)}.ds-nav-pill:focus-visible,.ds-wordmark:focus-visible{outline:2px solid var(--color-ink,#1e2019);outline-offset:3px}"
+    },
+    {
+      "name": "Day Chip",
+      "kind": "chip",
+      "refersTo": "day-chip-active",
+      "description": "Jump-to-day chips in the sticky day strip.",
+      "html": "<div class=\"ds-strip\"><a class=\"ds-day\" href=\"#\">12 Sep</a><a class=\"ds-day ds-day-active\" href=\"#\">13 Sep</a><a class=\"ds-day\" href=\"#\">14 Sep</a></div>",
+      "css": ".ds-strip{display:flex;gap:6px;padding:10px 0;background:var(--color-paper,#efe7d8)}.ds-day{padding:4.8px 12.8px;border:1.5px solid var(--color-line,#a99b7f);border-radius:999px;font:600 13px/1.2 Archivo,Helvetica,sans-serif;color:var(--color-ink,#1e2019);text-decoration:none;transition:background-color 200ms ease}.ds-day:hover,.ds-day-active{background:var(--color-lime,#d8f24e)}.ds-day-active{border-color:var(--color-lime,#d8f24e)}.ds-day:focus-visible{outline:2px solid var(--color-ink,#1e2019);outline-offset:3px}"
+    },
+    {
+      "name": "Diary Entry Card",
+      "kind": "card",
+      "refersTo": "diary-entry",
+      "description": "A tilted guest-skinned card on the timeline; straightens on hover.",
+      "html": "<article class=\"ds-entry\"><div class=\"ds-entry-time\">9:50am</div><p class=\"ds-entry-note\">Lepak on the sofa after breakfast. 10/10 would host again lah.</p></article>",
+      "css": ".ds-entry{max-width:380px;background:#c5d0c8;color:var(--color-ink,#1e2019);border:1.5px solid var(--color-card-line,#cdbf9e);border-radius:24px;padding:18px 19px 20px;box-shadow:0 9px 17px rgb(92 76 41 / .08);transform:rotate(-1deg);transition:transform 200ms cubic-bezier(0.16, 1, 0.3, 1),filter 200ms ease}.ds-entry:hover{transform:rotate(0) translateY(-2px);filter:brightness(1.04)}.ds-entry-time{font:600 12px/1 Archivo,Helvetica,sans-serif;letter-spacing:.08em;text-transform:uppercase}.ds-entry-note{margin:9px 0 0;font:400 16px/1.625 Archivo,Helvetica,sans-serif}"
+    },
+    {
+      "name": "Print",
+      "kind": "custom",
+      "refersTo": "diary-print",
+      "description": "A photo on a cream mat, leaning against its card.",
+      "html": "<figure class=\"ds-print\"><div class=\"ds-print-photo\"></div></figure>",
+      "css": ".ds-print{margin:0;width:220px;background:var(--color-cream,#f7f2e7);border:1.5px solid rgb(255 255 255 / .72);border-radius:16px;padding:7px;box-shadow:inset 0 1px 0 rgb(255 255 255 / .44),0 6px 12px rgb(30 32 25 / .12);transform:rotate(1.5deg)}.ds-print-photo{height:160px;border-radius:10px;background:linear-gradient(135deg,#A34A2E,#755A83)}"
+    },
+    {
+      "name": "Tape Count",
+      "kind": "custom",
+      "refersTo": "reaction-summary-total",
+      "description": "The reaction total on a ragged scrap of pale lime tape.",
+      "html": "<span class=\"ds-tape\">12</span>",
+      "css": ".ds-tape{display:inline-block;padding:2.4px 7.2px;background:rgb(233 247 174 / .8);color:var(--color-ink,#1e2019);font:800 12px/1 Archivo,Helvetica,sans-serif;font-variant-numeric:tabular-nums;clip-path:polygon(0 10%,12% 0,22% 8%,100% 0,94% 45%,100% 100%,10% 92%,0 100%,5% 50%);transform:rotate(-5deg)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Kitchen-Table Scrapbook",
+    "overview": "Every page is something Alan and Weiwen have just put down on the kitchen table: a warm paper ground with a few coloured cards on it, each a little crooked, photos slipped in as prints with a cream mat, notes on slips torn from a pad, and a scrap of lime tape holding something down. Nothing is aligned the way a template would align it, and nothing is decorated for its own sake either. Each tilt, tear and bit of tape copies something real you'd find in a scrapbook.\n\nThe page is one narrow column (700px) read on a phone. Each dog is the main subject. It gets a big serif name, a colour of its own and a cutout photo standing in the hero card. Everything else stays quiet: warm neutrals, one small sans for the functional bits and a single acid-lime accent that means \"look here\" or \"this is live\".\n\nMotion is one-shot and physical. Cards arrive as if set down, and hover straightens a tilted card as if you'd picked it up. Once a card has arrived it stays put, apart from a couple of slow idle drifts on the cutout and the \"Here today\" tag.",
+    "keyCharacteristics": [
+      "Warm paper ground, ink-green text, one lime accent",
+      "Instrument Serif for names and headings; Archivo for everything functional",
+      "Every dog brings its own colour; the diary derives four skins from it",
+      "Tilt everywhere (±1°–2°), straightened on hover",
+      "Real paper effects: torn slips (SVG turbulence), clipped tape, prints on a cream mat",
+      "Soft, warm-brown shadows; no hard elevation"
+    ],
+    "rules": [
+      {
+        "name": "The One Highlighter Rule",
+        "body": "Lime means \"current, active, or taped down.\" Never use it as a background panel, heading colour or decoration beyond those roles.",
+        "section": "colors"
+      },
+      {
+        "name": "The Dog Owns the Colour Rule",
+        "body": "Saturated colour on a page comes from the guest's `bgColor`. The system itself stays in warm neutrals, so each dog's page looks like that dog.",
+        "section": "colors"
+      },
+      {
+        "name": "The Same-Sofa Rule",
+        "body": "Two dogs whose stays overlap must have different colours, because their entries sit side by side in today’s feed. Dogs staying on different dates may share a colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Scribble Rule",
+        "body": "Caveat is a signature, not a voice. Keep it to the footer line. Diary notes are set in Archivo, because they're read, not admired.",
+        "section": "typography"
+      },
+      {
+        "name": "The Paper Not Glass Rule",
+        "body": "No blur-glow shadows, no neutral-grey elevation, no floating cards. If an object wouldn't cast that shadow lying on a table, don't give it that shadow. The day strip's backdrop blur is the single exception, because it's functional.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Nothing Sits Square Rule",
+        "body": "Cards, prints, slips, tape and stickers each carry a small rotation. Only functional chrome stays level: nav, chips, day strip and buttons. Video entries are also level, because a filter or transform on an ancestor makes `<video>` flicker.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Real Tear Rule",
+        "body": "Torn edges come from the SVG filters on the paper layer only, never on the text. Where filters aren't supported, fall back to a 14px-radius keylined card rather than a hard rectangle.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "**Do** build new surfaces from paper objects: a card, a print on a mat, a torn slip, a scrap of tape, a sticker.",
+      "**Do** give every new card or print a small tilt (±0.4°–2°) and straighten it on hover with the 200ms `cubic-bezier(0.16, 1, 0.3, 1)` ease.",
+      "**Do** take saturated colour from the guest's `bgColor` and derive tints with `diarySkin()` instead of inventing new colours.",
+      "**Do** keep entrances one-shot (520–620ms, same ease, 90ms stagger), and turn every animation off under `prefers-reduced-motion`.",
+      "**Do** give small controls an invisible `::before` hit area rather than enlarging them.",
+      "**Do** use tabular numbers for dates, counts and stay ranges."
+    ],
+    "donts": [
+      "**Don't** use lime for anything other than current/active state, badges and tape.",
+      "**Don't** use grey or blue-black shadows, glows or glassmorphism. Shadows are warm and low.",
+      "**Don't** put a transform or filter on an ancestor of a `<video>`; video entries stay level.",
+      "**Don't** add a fourth typeface or spread Caveat beyond the footer line.",
+      "**Don't** add buttons, forms or sections that look like a service site (CTA bars, pricing cards, testimonial blocks). The only interactive pieces are navigation, day chips, prints and reactions.",
+      "**Don't** apply the tear filter to text; tear the paper layer only."
+    ]
+  }
+}
