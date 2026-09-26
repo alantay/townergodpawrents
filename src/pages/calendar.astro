@@ -113,7 +113,8 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
               {month.stays.length > 0 && (
                 <div class="mt-7 flex flex-wrap gap-4">
                   {month.stays.map((s, pi) => (
-                    <div
+                    <a
+                      href={`/guests/${s.guestId}`}
                       class="cal-polaroid"
                       style={`--polaroid-tilt:${pi % 2 === 0 ? "-2deg" : "1.5deg"}`}
                     >
@@ -125,7 +126,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                       <span class="mt-0.5 block text-[11px] text-label tabular-nums">
                         {s.checkIn === s.checkOut ? fmtDay(s.checkIn) : stayLabel(s)}
                       </span>
-                    </div>
+                    </a>
                   ))}
                 </div>
               )}
@@ -358,4 +359,6 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     box-shadow: 0 4px 9px rgb(30 32 25 / 0.16);
     transform: rotate(var(--polaroid-tilt));
   }
+  /* Opens the dog's diary. Nothing moves on hover; keyboards still get a ring. */
+  .cal-polaroid:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 3px; }
 </style>
