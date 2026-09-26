@@ -267,7 +267,7 @@ A sticky, horizontally scrolling row of outlined day chips on translucent paper.
 
 ### Do:
 - **Do** build new surfaces from paper objects: a card, a print on a mat, a torn slip, a scrap of tape, a sticker.
-- **Do** give every new card or print a small tilt (±0.4°–2°) and straighten it on hover with the 200ms `cubic-bezier(0.16, 1, 0.3, 1)` ease.
+- **Do** give every new card or print a small tilt (±0.4°–2°) and straighten it on hover with the 200ms `cubic-bezier(0.16, 1, 0.3, 1)` ease. The calendar is the exception: its sheets and polaroids are taped down, so they keep their tilt and don't move on hover. A focus ring still shows.
 - **Do** take saturated colour from the guest's `bgColor` and derive tints with `diarySkin()` instead of inventing new colours.
 - **Do** keep entrances one-shot (520–620ms, same ease, 90ms stagger), and turn every animation off under `prefers-reduced-motion`.
 - **Do** give small controls an invisible `::before` hit area rather than enlarging them.
