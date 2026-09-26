@@ -6,7 +6,7 @@ A personal, just-for-fun website. Alan and his wife Weiwen look after neighbours
 
 ## Tone
 
-Personal, playful, warm. A light sprinkle of Singlish, the way you'd talk to a neighbour ("lepak on the sofa", "10/10 would host again lah"), light enough that overseas friends still follow. Tagline: "No dog of our own, just everyone else's."
+Personal, playful, warm. **Never "lah" and never em dashes.** Other Singlish only sparingly. Before writing any words that appear on the site (entries, taglines, page copy, labels, errors), read `docs/agents/voice.md`. Tagline: "No dog of our own, just everyone else's."
 
 ## Posting
 

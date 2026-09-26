@@ -8,7 +8,7 @@ web
 
 ## Users
 
-Primarily the friends and neighbours whose dogs Alan and Weiwen are hosting — checking in on their own dog during a stay. Secondarily, any friend or neighbour browsing out of curiosity to see who's lepak-ing on the sofa today. Not a general public audience and not prospective customers — this is not a business.
+Primarily the friends and neighbours whose dogs Alan and Weiwen are hosting — checking in on their own dog during a stay. Secondarily, any friend or neighbour browsing out of curiosity to see who's on the sofa today. Not a general public audience and not prospective customers — this is not a business.
 
 ## Product Purpose
 
@@ -34,7 +34,7 @@ Not a pet-sitting service — a personal log of an informal, no-money hobby amon
 ## Brand Commitments
 
 - Tagline: "No dog of our own, just everyone else's."
-- Tone: personal, playful, warm, with a light sprinkle of Singlish ("lepak on the sofa", "10/10 would host again lah") — light enough that overseas friends still follow.
+- Tone: personal, playful, warm, with Singlish kept light (never "lah"). Full rules in `docs/agents/voice.md`.
 - Names: Alan & Weiwen (hosts); each dog is a guest with its own name and page (e.g. Ebi, Tiny).
 
 ## Evidence on Hand
@@ -47,7 +47,7 @@ Not a pet-sitting service — a personal log of an informal, no-money hobby amon
 
 1. Playful and personal over polished and corporate — this is a hobby page, not a product.
 2. Real dogs, real diary entries, real photos only — never fabricate guests, quotes, or stats.
-3. Singlish and warmth should read as "talking to a neighbour," legible to overseas friends too.
+3. Warmth should read as "talking to a neighbour," in plain English.
 4. If a section starts sounding like a business pitch (CTA, pricing, FAQ, testimonial), cut it.
 
 ## Accessibility & Inclusion

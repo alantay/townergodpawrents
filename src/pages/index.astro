@@ -170,7 +170,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
 
 <Layout
   ogImage={liveAtBuild ? `/og/${liveAtBuild.id}.jpg` : undefined}
-  description={liveAtBuild ? `${liveAtBuild.name} is lepak-ing on the sofa today. Here's the diary.` : undefined}
+  description={liveAtBuild ? `${liveAtBuild.name} is on the sofa today. Here's the diary.` : undefined}
 >
   <Nav />
 
@@ -178,7 +178,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
 
   <noscript>
     <p class="mt-8 text-base leading-relaxed">
-      Enable JavaScript to see who's lepak-ing on the sofa today
+      Enable JavaScript to see who's on the sofa today
       {hasPastGuests && (
         <>
           {" "}or <a href="/guests" class="border-b-[1.5px] border-line">browse past guests</a>
@@ -200,7 +200,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
       <p class="mt-[9px] text-base leading-relaxed text-pretty">
       Two humans in Towner with a sunny corner sofa and no dog of our own. Friends and
         neighbours leave their dogs with us for a bit, and this tiny page keeps tabs on
-        who's lepak-ing here today.
+        who's staying today.
       </p>
     </div>
   </div>
@@ -706,7 +706,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
         function quietLine() {
           var hour = +new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Singapore", hour: "numeric", hourCycle: "h23" }).format(new Date());
           var who = pair ? "The two of them" : esc(live[0].name);
-          var mood = hour < 12 ? "still waking up" : hour < 19 ? "busy lepak-ing" : "knocked out already";
+          var mood = hour < 12 ? "still waking up" : hour < 19 ? "busy chilling" : "knocked out already";
           return "No news yet today. " + who + " " + (pair ? "are " : "is ") + mood + ".";
         }
         var cardsHTML = raw.length
