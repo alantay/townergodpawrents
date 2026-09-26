@@ -39,7 +39,7 @@ Not a pet-sitting service — a personal log of an informal, no-money hobby amon
 
 ## Evidence on Hand
 
-- Real guests and diary entries for dogs already hosted (Ebi the Pomsky, Tiny the Border Collie), under `src/content/guests/`.
+- Real guests and diary entries for every dog hosted so far, under `src/content/guests/`.
 - A hand-cut host portrait of Alan and Weiwen (`public/images/alan-weiwen-portrait.jpg`) and per-dog cutout photos.
 - No testimonials, pricing, or service claims exist or should be invented — this is not that kind of site.
 
