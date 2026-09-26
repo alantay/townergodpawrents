@@ -1,6 +1,8 @@
 ---
-const isGuests = Astro.url.pathname === "/guests";
-const isCalendar = Astro.url.pathname === "/calendar";
+// Static builds see "/calendar/", dev sees "/calendar".
+const path = Astro.url.pathname.replace(/\/$/, "");
+const isGuests = path === "/guests";
+const isCalendar = path === "/calendar";
 ---
 
 <nav aria-label="Main navigation" class="entrance flex items-center justify-between gap-2 sm:gap-3 py-5 border-b-[1.5px] border-line">

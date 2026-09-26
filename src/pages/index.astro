@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Cutout from "../components/Cutout.astro";
 import { Image } from "astro:assets";
-import sofaCutout from "../assets/sofa-cutout-v2.png";
+import sofaCutout from "../assets/sofa-cutout-v5.png";
 import { getCollection } from "astro:content";
 import { getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
@@ -447,19 +447,18 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
         var chips = [];
         if (!pair) {
           chips.push({ label: stayLabel(stayOn(live[0], today)), bg: "#F7F2E7" });
-          if (live[0].badge) chips.push({ label: live[0].badge, bg: "#F7F2E7", ring: true });
+          if (live[0].badge) chips.push({ label: live[0].badge, tape: true });
         } else {
           live.forEach((d) => chips.push({ label: d.name + " · " + d.breed, bg: "#F7F2E7" }));
-          chips.push({ label: groupWord(dogs.length) + " dogs, one sofa", bg: "#F7F2E7", ring: true });
+          chips.push({ label: groupWord(dogs.length) + " dogs, one sofa", tape: true });
         }
 
         var chipsHTML = chips
           .map(
             (c) =>
-              '<span class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink" style="background:' +
-              c.bg +
-              (c.ring ? ";box-shadow:inset 0 0 0 1.5px #1E2019" : "") +
-              '">' +
+              (c.tape
+                ? '<span class="text-[13px] font-semibold px-[11px] py-[7px] rounded-none -rotate-2 text-ink bg-tape">'
+                : '<span class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink" style="background:' + c.bg + '">') +
               esc(c.label) +
               "</span>"
           )
@@ -504,7 +503,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
           html +=
             '<a href="/guests/' +
             esc(next.guest.id) +
-            '" class="mt-[18px] flex items-center gap-3.5 bg-cream border-[1.5px] border-dashed border-card-line rounded-[24px] p-[13px_15px] rotate-1 transition-transform duration-250 hover:rotate-0 hover:scale-[1.02]">' +
+            '" class="mt-[18px] flex items-center gap-3.5 border-[1.5px] border-dashed border-line rounded-[24px] p-[13px_15px] rotate-1 transition-transform duration-250 hover:rotate-0 hover:scale-[1.02]">' +
             '<div id="next-up-photo" class="w-16 h-16 rounded-[17px] overflow-hidden flex-none" style="background:' +
             next.guest.bgColor +
             '"></div>' +
