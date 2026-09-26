@@ -344,6 +344,10 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    /* The script's "o" and descenders draw past the text box; give them room
+       inside the clip without shifting the layout. */
+    padding: 0 3px 3px 0;
+    margin: 0 -3px -3px 0;
     font-family: var(--font-script);
     font-size: 18px;
     font-weight: 600;
