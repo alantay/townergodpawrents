@@ -109,6 +109,12 @@ a:focus-visible {
 /* Homepage entry cards: the time is the link, and it stretches over the
    whole card. Prints and video sit above it so a tap on them does their own
    thing (enlarge, play) instead of leaving the page. */
+/* Keep the card's accent colour, not the site's ink link colour. */
+.diary-entry-link,
+.diary-entry-link:hover {
+  color: inherit;
+}
+
 .diary-entry-link::after {
   content: "";
   position: absolute;
