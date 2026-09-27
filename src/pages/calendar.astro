@@ -94,6 +94,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                         class:list={["cal-bar", { "cal-bar--continued": seg.continued, "cal-bar--carries": !endsHere, "cal-bar--short": seg.span === 1 }]}
                         style={`grid-row:${seg.lane + 2};grid-column:${seg.startCol + 1} / span ${seg.span};--bar-tint:${s.tint};--bar-colour:${s.bgColor}`}
                         data-check-in={s.checkIn}
+                        data-check-out={s.checkOut}
                         aria-hidden="true"
                       >
                         {!seg.continued && (
@@ -167,6 +168,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     });
     document.querySelectorAll(".cal-bar").forEach(function (b) {
       b.classList.toggle("is-upcoming", b.dataset.checkIn > today);
+      b.classList.toggle("is-past", b.dataset.checkOut < today);
     });
   })();
 </script>
@@ -278,7 +280,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
   }
 
   /* Each stay is a strip of washi tape in the dog's own colour: diagonal
-     stripes, torn ends. The tape is a pseudo-element so its clip-path can't
+     stripes, torn ends. Only a stay that's on now keeps its stripes. The tape is a pseudo-element so its clip-path can't
      cut off the dog's photo. A strip that runs on into the next week
      keeps a straight edge there, like tape wrapping round the page. */
   .cal-bar {
@@ -314,6 +316,14 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
   }
   .cal-bar--continued { --tear-l: 0px; padding-left: 8px; }
   .cal-bar--carries { --tear-r: 0px; }
+
+  /* Gone home: the same tape, plain and a bit sun-faded, so the striped
+     strip is the dog on the sofa now. The whole stay changes at once, never
+     part of a strip. */
+  .cal-bar.is-past::before {
+    background: color-mix(in srgb, var(--tape) 70%, var(--color-cream));
+    opacity: 0.7;
+  }
 
   /* Upcoming, not arrived yet: a dashed box in the dog's colour, not taped down
      yet. The box stays open where the stay runs on into another week. */
