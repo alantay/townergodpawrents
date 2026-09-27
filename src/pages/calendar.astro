@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Cutout from "../components/Cutout.astro";
-import { dateStr, diarySkin, dogNames, fmtDay, stayLabel, todaySGT } from "../lib/guests";
+import { dateStr, diarySkin, dogNames, stayLabel, todaySGT } from "../lib/guests";
 import { calendarMonths } from "../lib/calendar";
 
 const entries = await getCollection("guests");
@@ -46,7 +46,9 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
 
   <div class="mt-10 flex flex-col gap-14">
     {months.map((month, mi) => {
-      const pups = [...new Map(month.stays.map((s) => [s.guestId, s.name])).values()].flatMap(dogNames).length;
+      // One polaroid per dog, even when they come back twice in a month.
+      const visitors = [...Map.groupBy(month.stays, (s) => s.guestId).values()];
+      const pups = visitors.flatMap((v) => dogNames(v[0].name)).length;
       return (
         <section
           class="cal-month reveal-card"
@@ -113,7 +115,9 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
 
               {month.stays.length > 0 && (
                 <div class="mt-7 flex flex-wrap gap-4">
-                  {month.stays.map((s, pi) => (
+                  {visitors.map((visits, pi) => {
+                    const s = visits[0];
+                    return (
                     <a
                       href={`/guests/${s.guestId}`}
                       class="cal-polaroid"
@@ -124,11 +128,12 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                         <Cutout photo={s.photo} name={s.name} bare />
                       </span>
                       <span class="mt-1.5 block font-script text-[20px] leading-none font-medium">{s.name}</span>
-                      <span class="mt-0.5 block text-[11px] text-label tabular-nums">
-                        {s.checkIn === s.checkOut ? fmtDay(s.checkIn) : stayLabel(s)}
-                      </span>
+                      {visits.map((v) => (
+                        <span class="mt-0.5 block text-[11px] text-label tabular-nums">{stayLabel(v)}</span>
+                      ))}
                     </a>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>
