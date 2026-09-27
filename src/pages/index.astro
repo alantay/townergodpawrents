@@ -244,6 +244,34 @@ const footerLines = [
     </div>
   </div>
 
+  <dialog id="print-viewer" class="print-viewer" aria-label="Photo">
+    <form method="dialog">
+      <button class="print-viewer-close" aria-label="Close">×</button>
+    </form>
+    <img alt="" />
+  </dialog>
+
+  <script is:inline>
+    (function () {
+      // Tap a print to see it big, same as on a dog's page. The cards are
+      // drawn after this runs, so listen on the page rather than each print.
+      var viewer = document.getElementById("print-viewer");
+      var big = viewer.querySelector("img");
+      document.addEventListener("click", function (e) {
+        var btn = e.target.closest && e.target.closest("button.diary-print-tap");
+        if (!btn) return;
+        var img = btn.querySelector("img");
+        big.src = img.currentSrc || img.src;
+        big.alt = img.alt;
+        viewer.showModal();
+      });
+      // A tap on the dim backdrop closes it too, not just the ×.
+      viewer.addEventListener("click", function (e) {
+        if (e.target === viewer || e.target === big) viewer.close();
+      });
+    })();
+  </script>
+
   <script type="application/json" id="guests-data" is:inline set:html={guestsJson} />
 
   <script is:inline>
@@ -307,6 +335,21 @@ const footerLines = [
       function stayLabel(s) {
         if (s.checkIn === s.checkOut) return fmtDay(s.checkIn);
         return fmtDay(s.checkIn) + "–" + fmtDay(s.checkOut);
+      }
+      // "Day 6 of 11", so an owner mid-stay knows where they are in it.
+      // A one-night stay has nothing to count.
+      function stayDay(s, todayISO) {
+        if (!s || s.checkIn === s.checkOut) return "";
+        var dayMs = 86400000;
+        var n = Math.round((Date.parse(todayISO) - Date.parse(s.checkIn)) / dayMs) + 1;
+        var total = Math.round((Date.parse(s.checkOut) - Date.parse(s.checkIn)) / dayMs) + 1;
+        return "Day " + n + " of " + total;
+      }
+      // Checkout day: the dog may already be home by the time anyone looks,
+      // so "Here today" would be a fib by evening.
+      function goingHome(g, todayISO) {
+        var s = stayOn(g, todayISO);
+        return !!s && s.checkOut === todayISO && s.checkIn !== todayISO;
       }
 
       function nextArrival(guests, todayISO) {
@@ -423,7 +466,9 @@ const footerLines = [
       window.__tgpFitHeadlines = function () {
         document.querySelectorAll(".fit-headline").forEach((el) => {
           var badge = document.getElementById("hero-badge");
-          var reserve = badge && badge.offsetParent ? badge.offsetWidth + 12 : 0;
+          // A headline that starts below the pill has the full width to itself.
+          var clear = el.classList.contains("fit-headline--clear");
+          var reserve = !clear && badge && badge.offsetParent ? badge.offsetWidth + 12 : 0;
           fitText(el, reserve);
         });
       };
@@ -433,19 +478,35 @@ const footerLines = [
         var pair = live.length > 1;
         var color = pair ? "#5F6E4F" : live[0].bgColor;
         var dogs = dogsIn(live);
-        var name = pair ? listNames(dogs) : live[0].name;
+        // Two or more dogs: one name per line, starting below the "Here today"
+        // pill, so each name gets the full width instead of shrinking to fit
+        // everyone on one line beside the pill.
+        var stacked = dogs.length > 1;
+        var nameHTML = stacked
+          ? dogs
+              .map((n, i) => esc(n) + (i < dogs.length - 2 ? "," : i === dogs.length - 2 ? " &amp;" : ""))
+              .join("<br>")
+          : esc(live[0].name);
         var sub = pair
           ? groupWord(dogs.length) + " dogs, one sofa, no space for humans"
           : esc(live[0].tagline);
-        var sizeClass = pair ? "text-[clamp(42px,12.5vw,82px)]" : "text-[clamp(62px,19vw,120px)]";
+        var sizeClass = stacked
+          ? "text-[clamp(56px,17vw,96px)] mt-[30px] fit-headline--clear"
+          : "text-[clamp(62px,19vw,120px)]";
         var photoH = pair ? "250px" : "310px";
+        var leaving = live.every((d) => goingHome(d, today));
 
         var chips = [];
         if (!pair) {
-          chips.push({ label: stayLabel(stayOn(live[0], today)), bg: "#F7F2E7" });
+          var stay = stayOn(live[0], today);
+          chips.push({ label: stayLabel(stay), bg: "#F7F2E7" });
+          if (stayDay(stay, today)) chips.push({ label: stayDay(stay, today), bg: "#F7F2E7" });
           if (live[0].badge) chips.push({ label: live[0].badge, tape: true });
         } else {
-          live.forEach((d) => chips.push({ label: d.name + " · " + d.breed, bg: "#F7F2E7" }));
+          live.forEach((d) => {
+            var day = goingHome(d, today) ? "going home today" : stayDay(stayOn(d, today), today).toLowerCase();
+            chips.push({ label: d.name + " · " + (day || d.breed), bg: "#F7F2E7" });
+          });
           chips.push({ label: groupWord(dogs.length) + " dogs, one sofa", tape: true });
         }
 
@@ -466,11 +527,13 @@ const footerLines = [
             '<div class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:' +
             color +
             '">' +
-            '<div id="hero-badge" class="absolute top-[18px] right-[18px] bg-lime text-ink font-semibold text-xs tracking-[0.06em] uppercase px-[13px] py-2 rounded-full animate-wiggle">Here today</div>' +
+            '<div id="hero-badge" class="absolute top-[18px] right-[18px] bg-lime text-ink font-semibold text-xs tracking-[0.06em] uppercase px-[13px] py-2 rounded-full animate-wiggle">' +
+            (leaving ? "Going home today" : "Here today") +
+            "</div>" +
             '<div class="w-full"><h1 class="fit-headline ' +
             sizeClass +
             ' max-w-full" id="hero-name">' +
-            esc(name) +
+            nameHTML +
             "</h1></div>" +
             '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">' +
             sub +
@@ -604,6 +667,7 @@ const footerLines = [
                 "px);transform:rotate(" +
                 printTilt(i) +
                 ')">' +
+                '<button type="button" aria-label="Enlarge photo" class="diary-print-tap block mx-auto w-full cursor-zoom-in">' +
                 '<img src="' +
                 esc(e.media[0].src) +
                 '" alt="' +
@@ -612,7 +676,7 @@ const footerLines = [
                 e.media[0].width +
                 '" height="' +
                 e.media[0].height +
-                '" loading="lazy" decoding="async" class="block h-auto w-full rounded-[10px]">' +
+                '" loading="lazy" decoding="async" class="block h-auto w-full rounded-[10px]"></button>' +
                 (matCaption
                   ? '<p class="mt-[9px] px-1 text-center text-[13.5px] leading-snug text-pretty text-ink/70">' + esc(e.text) + "</p>"
                   : "") +
@@ -626,7 +690,7 @@ const footerLines = [
                 e.media.map(function (photo, photoIndex) {
                   var w = printWidth(photo.width, photo.height);
                   return (
-                    '<div class="diary-print block mx-auto bg-cream card-keyline rounded-[16px] p-[7px]" style="width:min(100%,' +
+                    '<button type="button" aria-label="Enlarge photo" class="diary-print diary-print-tap block mx-auto bg-cream card-keyline rounded-[16px] p-[7px] cursor-zoom-in" style="width:min(100%,' +
                     w +
                     "px);transform:rotate(" +
                     printTilt(i + photoIndex) +
@@ -640,7 +704,7 @@ const footerLines = [
                     '" height="' +
                     photo.height +
                     '" loading="lazy" decoding="async" class="block h-auto w-full rounded-[10px]">' +
-                    "</div>"
+                    "</button>"
                   );
                 }).join("") +
                 "</div>" +
@@ -667,17 +731,22 @@ const footerLines = [
               ";--card-tilt:" +
               tilt(i) +
               '">' +
-              '<a href="/guests/' + esc(e.id) + '" class="block diary-entry-link">' +
+              // The time is the link, stretched over the card so the whole card
+              // still opens the dog's page, while prints and video sit above
+              // it and keep their own taps.
               '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:' +
               sk.accent +
+              '"><a href="/guests/' + esc(e.id) + '" class="diary-entry-link" aria-label="' +
+              esc(e.who + "'s diary, " + e.time) +
               '">' +
               esc(e.time) +
               (pair ? " · " + esc(e.who) : "") +
+              "</a>" +
               (isNew(e.id, e.key) ? ' <span class="new-tag ml-1 align-[1px]">New</span>' : "") +
               "</div>" +
               mediaHTML +
               textHTML +
-              '</a><entry-reactions data-guest="' + esc(e.id) + '" data-entry="' + esc(e.entryId) + '"></entry-reactions></div>'
+              '<entry-reactions data-guest="' + esc(e.id) + '" data-entry="' + esc(e.entryId) + '"></entry-reactions></div>'
             );
           })
           .join("");
@@ -695,16 +764,16 @@ const footerLines = [
         var more = live
           .map((d) => ({ id: d.id, label: earlierLabel(d) }))
           .filter((m) => m.label);
+        // An outlined chip, not faint text: on a quiet day it's the only way
+        // from here to the rest of the stay.
         var moreHTML = more.length
-          ? '<div class="' +
-            (raw.length ? "mt-3.5" : "mt-2") +
-            ' flex gap-4 flex-wrap">' +
+          ? '<div class="mt-4 flex gap-2.5 flex-wrap">' +
             more
               .map(
                 (m) =>
                   '<a href="/guests/' +
                   esc(m.id) +
-                  '" class="text-sm font-semibold text-label transition-colors duration-200 hover:text-ink">' +
+                  '" class="day-chip">' +
                   m.label +
                   "</a>"
               )
@@ -717,12 +786,21 @@ const footerLines = [
           var hour = +new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Singapore", hour: "numeric", hourCycle: "h23" }).format(new Date());
           var dogs = dogsIn(live);
           var who = pair ? "The " + groupWord(dogs.length).toLowerCase() + " of them" : esc(live[0].name);
-          var mood = hour < 12 ? "still waking up" : hour < 19 ? "busy chilling" : "knocked out already";
+          var leaving = live.every((d) => goingHome(d, today));
+          var mood = leaving
+            ? "making the most of the sofa"
+            : hour < 12 ? "still waking up" : hour < 19 ? "busy chilling" : "knocked out already";
           return "No news yet today. " + who + " " + (dogs.length > 1 ? "are " : "is ") + mood + ".";
         }
         var cardsHTML = raw.length
           ? '<div class="mt-5 grid gap-3.5">' + cards + "</div>"
-          : '<p class="mt-5 text-base text-label text-pretty">' + quietLine() + "</p>";
+          : // A note left on the table, torn from the same pad as the captions,
+            // so a quiet day reads as news rather than a page that didn't load.
+            '<div class="diary-slip diary-slip--tear-1 mt-5 w-[min(100%,440px)]" style="transform:rotate(-0.4deg)">' +
+            '<div class="diary-slip-paper" aria-hidden="true"></div>' +
+            '<div class="diary-note"><p class="text-base text-ink text-pretty">' +
+            quietLine() +
+            "</p></div></div>";
         return cardsHTML + moreHTML;
       }
 

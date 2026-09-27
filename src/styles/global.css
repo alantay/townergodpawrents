@@ -106,6 +106,37 @@ a:focus-visible {
   filter: none;
 }
 
+/* Homepage entry cards: the time is the link, and it stretches over the
+   whole card. Prints and video sit above it so a tap on them does their own
+   thing (enlarge, play) instead of leaving the page. */
+/* Keep the card's accent colour, not the site's ink link colour. */
+.diary-entry-link,
+.diary-entry-link:hover {
+  color: inherit;
+}
+
+.diary-entry-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.diary-entry-card:has(.diary-entry-link) .diary-print-tap,
+.diary-entry-card:has(.diary-entry-link) video {
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* The tilted mats and caption slips paint above the stretched link, so let
+   taps on them fall through to it. Only the print and video inside answer. */
+.diary-entry-card:has(.diary-entry-link) .diary-print:not(.diary-print-tap),
+.diary-entry-card:has(.diary-entry-link) .diary-prints,
+.diary-entry-card:has(.diary-entry-link) .diary-slip {
+  pointer-events: none;
+}
+
 entry-reactions {
   position: absolute;
   top: 0.55rem;
