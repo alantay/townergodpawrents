@@ -1,6 +1,7 @@
 ---
 name: Bobbi
 breed: Golden Doodle
+photo: ./bobbi/bobbi-collage.png
 bgColor: "#8E4A5C"
 showLive: true
 badge: Sheep in disguise

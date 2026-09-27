@@ -38,7 +38,7 @@ stays:
 ```
 
 - Ask Alan for the breed, dates, and his take on the dog's character. Suggest a badge and tagline in chat for him to pick, the same way as the polish step in `docs/agents/add-entry.md`. Don't invent facts about the dog. Words follow `docs/agents/voice.md`.
-- Match the existing guest portrait treatment before publishing: the dog sits inside an irregular cream torn-paper edge with a fine coloured outline, and everything outside that shape is transparent. Compare with Ebi, Guapo, and Tiny's portraits; a plain background-removed photo is unfinished.
+- For the guest portrait, follow `.agents/skills/dog-avatar/SKILL.md`. It covers the required cream torn-paper edge, fine coloured outline, transparent exterior, and existing portraits to use as style references.
 - The cut-out stays a PNG with transparency. **Don't** run it through `scripts/prep-photo.sh`. If the source file is huge, shrink it with `sips -Z 1400 <file>`.
 - The body can start empty. Entries arrive with the add-entry flow.
 
