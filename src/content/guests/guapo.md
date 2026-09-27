@@ -4,7 +4,7 @@ breed: Shiba Inu
 photo: ./guapo/guapo-collage-v5.png
 bgColor: "#3F6655"
 showLive: true
-badge: Dog in a cat's body
+badge: Cat in a dog's body
 tagline: recall sold separately, million-dollar smile included
 stays:
   - checkIn: 2026-09-29
