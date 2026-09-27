@@ -120,6 +120,15 @@ a:focus-visible {
 .diary-entry-card:has(.diary-entry-link) video {
   position: relative;
   z-index: 1;
+  pointer-events: auto;
+}
+
+/* The tilted mats and caption slips paint above the stretched link, so let
+   taps on them fall through to it. Only the print and video inside answer. */
+.diary-entry-card:has(.diary-entry-link) .diary-print:not(.diary-print-tap),
+.diary-entry-card:has(.diary-entry-link) .diary-prints,
+.diary-entry-card:has(.diary-entry-link) .diary-slip {
+  pointer-events: none;
 }
 
 entry-reactions {
