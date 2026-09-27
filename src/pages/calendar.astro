@@ -279,12 +279,14 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     transform: rotate(-8deg);
   }
 
-  /* Each stay is a strip of washi tape in the dog's own colour: diagonal
-     stripes, torn ends. Only a stay that's on now keeps its stripes. The tape is a pseudo-element so its clip-path can't
+  /* Each stay is a strip of washi tape in the dog's own colour, torn ends.
+     A stay that's on now is striped; one that's done is dotted. The tape is a pseudo-element so its clip-path can't
      cut off the dog's photo. A strip that runs on into the next week
      keeps a straight edge there, like tape wrapping round the page. */
   .cal-bar {
     --tape: color-mix(in srgb, var(--bar-colour) 55%, var(--color-cream));
+    --tape-dark: color-mix(in srgb, var(--bar-colour) 80%, var(--color-cream));
+    --tape-light: color-mix(in srgb, var(--tape) 65%, var(--color-cream));
     --tear-l: 5px;
     --tear-r: 5px;
     position: relative;
@@ -304,7 +306,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     background: repeating-linear-gradient(
       -45deg,
       var(--tape) 0 7px,
-      color-mix(in srgb, var(--tape) 65%, var(--color-cream)) 7px 14px
+      var(--tape-light) 7px 14px
     );
     opacity: 0.92;
     clip-path: polygon(
@@ -317,11 +319,11 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
   .cal-bar--continued { --tear-l: 0px; padding-left: 8px; }
   .cal-bar--carries { --tear-r: 0px; }
 
-  /* Gone home: the same tape, plain and a bit sun-faded, so the striped
-     strip is the dog on the sofa now. The whole stay changes at once, never
-     part of a strip. */
+  /* Gone home: polka dot tape, a little faded, so the striped strip is the
+     dog on the sofa now. The whole stay changes at once, never part of a
+     strip. */
   .cal-bar.is-past::before {
-    background: color-mix(in srgb, var(--tape) 70%, var(--color-cream));
+    background: radial-gradient(circle, var(--tape-dark) 0 2px, transparent 2.6px) 0 0 / 9px 9px, var(--tape);
     opacity: 0.7;
   }
 
