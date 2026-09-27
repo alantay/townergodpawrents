@@ -107,8 +107,21 @@ warnOnOverlaps(entry.id, stays);
 const today = todaySGT();
 const here = stayOn({ stays }, today);
 const isLive = showLive && here !== undefined;
-// The chip shows the visit that's happening, or the last one that did.
-const shownStay = here ?? latestStay({ stays });
+const next = [...stays].reverse().find((s) => s.checkIn > today);
+const started = stays.filter((s) => s.checkIn <= today);
+// The chip shows the visit that's happening, the one coming up, or the last
+// one that happened.
+const shownStay = here ?? next ?? latestStay({ stays: started.length ? started : stays });
+const hasArrived = started.length > 0;
+const daysAway = next ? Math.round((Date.parse(next.checkIn) - Date.parse(today)) / 86400000) : 0;
+const comingIn = (n: number) => (n === 1 ? "Coming tomorrow" : `Coming · in ${n} days`);
+const emptyLines = {
+  arrived: "No diary entries yet. Check back once the visit gets going.",
+  waiting: `Nothing written yet. ${name} ${dogNames(name).length > 1 ? "haven't" : "hasn't"} met the sofa.`,
+};
+// Labels are formatted here so the browser script below doesn't need its own
+// copy of stayLabel.
+const labelledStays = stays.map((s) => ({ ...s, label: stayLabel(s) }));
 
 const days = parseDiary(entry.body ?? "", stays, entry.id);
 const entryCount = days.reduce((total, day) => total + day.entries.length, 0);
@@ -121,7 +134,8 @@ let skinIndex = 0;
 <Layout
   title={`${name} · The Towner Godpawrents`}
   description={tagline ? `${name} the ${breed}: ${tagline}.` : `${name} the ${breed}, and the diary of their stay in Towner.`}
-  ogImage={`/og/${entry.id}.jpg`}
+  ogImage={photo ? `/og/${entry.id}.jpg` : undefined}
+  ogImageAlt={photo ? `${name} the ${breed}` : undefined}
 >
   <Nav />
 
@@ -155,7 +169,7 @@ let skinIndex = 0;
 
     <div class="mt-[14px] flex gap-2 flex-wrap">
       <span class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink bg-cream">{breed}</span>
-      <span class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink bg-cream">
+      <span id="hero-stay-dates" class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink bg-cream">
         {stayLabel(shownStay)}
       </span>
       {showLive && (
@@ -173,16 +187,18 @@ let skinIndex = 0;
 
   <div class="entrance entrance-delay-2 mt-12 border-t-[1.5px] border-line pt-[18px] flex items-end justify-between gap-4">
     <div>
-      <div class="font-serif text-[32px] leading-none">The full diary</div>
+      <h2 class="font-serif text-[32px] leading-none">The full diary</h2>
       {entryCount > 0 && <p class="mt-1.5 text-sm text-label">{entryCount} little moment{entryCount === 1 ? "" : "s"}, kept for the record.</p>}
     </div>
-    <div class="diary-stay hidden sm:block text-right text-[11px] font-semibold tracking-[0.08em] uppercase text-label">
-      Latest stay<br />{stayLabel(shownStay)}
+    <div id="diary-stay" class:list={["diary-stay text-right text-[11px] font-semibold tracking-[0.08em] uppercase text-label", !here && next ? "" : "hidden sm:block"]}>
+      <span id="diary-stay-when">{here ? "Latest stay" : next ? comingIn(daysAway) : "Latest stay"}</span><br /><span id="diary-stay-dates">{stayLabel(shownStay)}</span>
     </div>
   </div>
 
   {days.length === 0 ? (
-    <p class="mt-3.5 text-sm text-label">No diary entries yet. Check back once the visit gets going.</p>
+    <p id="diary-empty" class="mt-3.5 text-sm text-label">
+      {hasArrived ? emptyLines.arrived : emptyLines.waiting}
+    </p>
   ) : (
     <>
     {days.length > 1 && (
@@ -197,7 +213,7 @@ let skinIndex = 0;
       {days.map((day) => (
         <section id={`day-${day.iso}`} class="diary-day mt-8 first:mt-5">
           <div class="diary-day-heading flex items-baseline gap-3">
-            <div class="diary-date font-serif text-[24px] leading-none flex-none">{day.label}</div>
+            <h3 class="diary-date font-serif text-[24px] leading-none flex-none">{day.label}</h3>
             <div class="h-px flex-1 bg-ink/20"></div>
           </div>
 
@@ -418,38 +434,61 @@ let skinIndex = 0;
     })();
   </script>
 
-  {showLive && (
-    <script is:inline define:vars={{ stays }}>
-      // The page is built once, so the build-time "Here today" pill goes stale.
-      // Re-decide in the browser, and honour ?date=YYYY-MM-DD the same way the
-      // homepage does so an upcoming stay can be previewed before check-in.
-      (function () {
-        var m = /[?&]date=(\d{4}-\d{2}-\d{2})\b/.exec(location.search);
-        var today =
-          (m && m[1]) ||
-          new Intl.DateTimeFormat("en-CA", {
-            timeZone: "Asia/Singapore",
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-          }).format(new Date());
-        var stay = stays.filter((s) => s.checkIn <= today && today <= s.checkOut)[0];
+  <script is:inline define:vars={{ stays: labelledStays, showLive, emptyLines }}>
+    // The page is built once, so everything that depends on today (the "Here
+    // today" pill, the stay chip, the empty-diary line) goes stale. Re-decide
+    // it all in the browser from one "today", and honour ?date=YYYY-MM-DD the
+    // same way the homepage does so an upcoming stay can be previewed.
+    (function () {
+      var m = /[?&]date=(\d{4}-\d{2}-\d{2})\b/.exec(location.search);
+      var today =
+        (m && m[1]) ||
+        new Intl.DateTimeFormat("en-CA", {
+          timeZone: "Asia/Singapore",
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }).format(new Date());
+      var ms = 86400000;
+      // stays are newest first.
+      var here = stays.filter((s) => s.checkIn <= today && today <= s.checkOut)[0];
+      var upcoming = stays.filter((s) => s.checkIn > today);
+      var next = upcoming[upcoming.length - 1];
+      var started = stays.filter((s) => s.checkIn <= today);
+
+      if (showLive) {
         var el = document.getElementById("here-today");
-        if (el) el.hidden = !stay;
+        if (el) el.hidden = !here;
 
         // "Day 4 of 11" while they're here. Dates are plain YYYY-MM-DD, so
         // parsing both as UTC midnight keeps the subtraction whole days.
         var dayEl = document.getElementById("stay-day");
-        if (dayEl && stay && stay.checkIn !== stay.checkOut) {
-          var ms = 86400000;
-          var n = (Date.parse(today) - Date.parse(stay.checkIn)) / ms + 1;
-          var of = (Date.parse(stay.checkOut) - Date.parse(stay.checkIn)) / ms + 1;
+        if (dayEl && here && here.checkIn !== here.checkOut) {
+          var n = (Date.parse(today) - Date.parse(here.checkIn)) / ms + 1;
+          var of = (Date.parse(here.checkOut) - Date.parse(here.checkIn)) / ms + 1;
           dayEl.textContent = n === of ? "Last day" : "Day " + n + " of " + of;
           dayEl.hidden = false;
         }
-      })();
-    </script>
-  )}
+      }
+
+      // The chip: the visit that's happening, the one coming up, or the last
+      // one that happened. A countdown shows on phones too.
+      var shown = here || next || (started.length ? started : stays)[0];
+      var coming = !here && next;
+      var away = coming ? Math.round((Date.parse(next.checkIn) - Date.parse(today)) / ms) : 0;
+      document.getElementById("hero-stay-dates").textContent = shown.label;
+      document.getElementById("diary-stay-dates").textContent = shown.label;
+      document.getElementById("diary-stay-when").textContent = coming
+        ? away === 1 ? "Coming tomorrow" : "Coming · in " + away + " days"
+        : "Latest stay";
+      var chip = document.getElementById("diary-stay");
+      chip.classList.toggle("hidden", !coming);
+      chip.classList.toggle("sm:block", !coming);
+
+      var empty = document.getElementById("diary-empty");
+      if (empty) empty.textContent = started.length ? emptyLines.arrived : emptyLines.waiting;
+    })();
+  </script>
   <footer class="entrance entrance-delay-3 mt-12 border-t-[1.5px] border-line pt-[18px] text-xs tracking-[0.1em] uppercase text-label">
     Towner &middot; No dog of our own, just everyone else's
   </footer>
