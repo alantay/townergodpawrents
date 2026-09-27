@@ -7,7 +7,7 @@ showLive: true
 badge: Cat in a dog's body
 tagline: recall sold separately, million-dollar smile included
 stays:
-  - checkIn: 2026-09-29
+  - checkIn: 2026-09-30
     checkOut: 2026-10-13
   - checkIn: 2026-10-29
     checkOut: 2026-11-02
