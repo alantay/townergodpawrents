@@ -25,4 +25,5 @@ Use the imagegen skill and built-in image generation tool. A useful prompt core:
 - Save the selected PNG to `src/content/guests/<id>/<id>-collage.png`, using a versioned filename if replacing an existing asset. Keep generated alpha. Do not use `scripts/prep-photo.sh` on avatars. Shrink to at most 1400px on the longest side if needed.
 - For a request to make a site's dog avatar, connect it to the existing guest's `photo` field. Do not invent a guest or stay when details are missing; follow `docs/agents/new-stay.md` for that separate task.
 - Run the build after integrating. Commit and push when publishing is authorized by the task or posting workflow; skill creation alone does not authorize publishing.
+- Check the guest page on the local dev server after changing `photo`. The collection schema's `image()` resolves the relative frontmatter path into image metadata; a stale dev content store can leave the raw string and cause `LocalImageUsedWrongly` even when the build passes. If that happens, restart/sync Astro and verify the page again before changing the valid frontmatter syntax.
 - Report the saved asset and whether it was integrated or published.
