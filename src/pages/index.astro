@@ -15,7 +15,6 @@ import {
   warnOnOverlaps,
   dateStr,
   todaySGT,
-  pickToday,
 } from "../lib/guests";
 
 // Diary media is referenced from inside the markdown body, so it never
@@ -165,15 +164,12 @@ const footerLines = [
   "Every dog goes home. The fur stays.",
 ];
 
-// Link previews can't run the client script, so they get whoever was live when
-// the site was built. Diary posts rebuild it most days of a stay anyway.
-const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).live[0];
+// Link previews don't say who's here today: chat apps cache them for weeks,
+// so a build-time "today" goes stale in the thread. The Layout's default
+// lineup of every dog so far never does.
 ---
 
-<Layout
-  ogImage={liveAtBuild ? `/og/${liveAtBuild.id}.jpg` : undefined}
-  description={liveAtBuild ? `${liveAtBuild.name} ${dogNames(liveAtBuild.name).length > 1 ? "are" : "is"} on the sofa today. Here's the diary.` : undefined}
->
+<Layout>
   <Nav />
 
   <div id="home-app" class="mt-8" hidden></div>
@@ -198,7 +194,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
       />
     </div>
     <div class="flex-1 min-w-[210px]">
-      <div class="font-serif text-[36px] leading-none">Alan &amp; Weiwen</div>
+      <h2 class="font-serif text-[36px] leading-none">Alan &amp; Weiwen</h2>
       <p class="mt-[9px] text-base leading-relaxed text-pretty">
       Two humans in Towner with a sunny corner sofa and no dog of our own. Friends and
         neighbours leave their dogs with us for a bit, and this tiny page keeps tabs on
@@ -209,7 +205,7 @@ const liveAtBuild = pickToday(guests.map(({ photo, ...g }) => g), todaySGT()).li
 
   <section id="past-guests-section" hidden>
     <div class="mt-11 border-t-[1.5px] border-line pt-[18px] flex items-baseline justify-between gap-3">
-      <div class="font-serif text-[32px] leading-none">Past guests</div>
+      <h2 class="font-serif text-[32px] leading-none">Past guests</h2>
       <a
         href="/guests"
         class="font-semibold text-[13px] border-[1.5px] border-line px-[13px] py-1.5 rounded-full transition-colors duration-200 hover:border-ink"

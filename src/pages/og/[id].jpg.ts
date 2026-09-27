@@ -12,15 +12,16 @@ const H = 630;
 
 export const getStaticPaths = (async () => {
   const guests = await getCollection("guests");
-  return guests.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+  // A guest without a cut-out yet uses the site's own preview instead (see
+  // the guest page), rather than a blank block of colour.
+  return guests.filter((entry) => entry.data.photo).map((entry) => ({ params: { id: entry.id }, props: { entry } }));
 }) satisfies GetStaticPaths;
 
 export const GET: APIRoute = async ({ props }) => {
   const { photo, bgColor } = props.entry.data;
   const canvas = sharp({ create: { width: W, height: H, channels: 4, background: bgColor } });
 
-  // ImageMetadata only carries a (non-enumerable) fsPath at build time; a
-  // guest without a cut-out yet just gets their colour.
+  // ImageMetadata only carries a (non-enumerable) fsPath at build time.
   const fsPath = (photo as { fsPath?: string } | undefined)?.fsPath;
   const layers = fsPath
     ? [
