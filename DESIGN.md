@@ -185,7 +185,7 @@ Colours repeat across guests. **Sofa Green** `#5F6E4F` is reserved for the share
 **Character:** A tall, slightly literary serif carries the names and headings. A plain, sturdy grotesque handles the chips, labels and body text. The serif sets the mood and the sans does the practical work.
 
 ### Hierarchy
-- **Display** (400, clamp(62px, 19vw, 120px), 0.88, −0.02em): A dog's name in its hero. A pair shares the hero at clamp(42px, 12.5vw, 82px). Homepage names use `fit-headline`, which stays on one line and shrinks with fitText() if a long name or two names would overflow.
+- **Display** (400, clamp(62px, 19vw, 120px), 0.88, −0.02em): A dog's name in its hero. Two or more dogs stack one name per line at clamp(56px, 17vw, 96px), starting below the "Here today" tag so each line gets the full width. Homepage names use `fit-headline`, which keeps each line unbroken and shrinks with fitText() if a long name would overflow.
 - **Headline** (400, 32px, 1): Section heads like "The full diary", plus the wordmark at 21–26px.
 - **Title** (400, 24px, 1): Diary day labels ("13 Sep") and card names (22–27px).
 - **Tagline** (italic 400, 20–22px): A dog's one-liner under its name, in Pale Lime Wash on the hero, and the rotating joke line in the homepage footer, in ink.

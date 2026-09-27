@@ -308,6 +308,15 @@ const footerLines = [
         if (s.checkIn === s.checkOut) return fmtDay(s.checkIn);
         return fmtDay(s.checkIn) + "–" + fmtDay(s.checkOut);
       }
+      // "Day 6 of 11", so an owner mid-stay knows where they are in it.
+      // A one-night stay has nothing to count.
+      function stayDay(s, todayISO) {
+        if (!s || s.checkIn === s.checkOut) return "";
+        var dayMs = 86400000;
+        var n = Math.round((Date.parse(todayISO) - Date.parse(s.checkIn)) / dayMs) + 1;
+        var total = Math.round((Date.parse(s.checkOut) - Date.parse(s.checkIn)) / dayMs) + 1;
+        return "Day " + n + " of " + total;
+      }
 
       function nextArrival(guests, todayISO) {
         var todayTime = Date.parse(todayISO + "T00:00:00Z");
@@ -423,7 +432,9 @@ const footerLines = [
       window.__tgpFitHeadlines = function () {
         document.querySelectorAll(".fit-headline").forEach((el) => {
           var badge = document.getElementById("hero-badge");
-          var reserve = badge && badge.offsetParent ? badge.offsetWidth + 12 : 0;
+          // A headline that starts below the pill has the full width to itself.
+          var clear = el.classList.contains("fit-headline--clear");
+          var reserve = !clear && badge && badge.offsetParent ? badge.offsetWidth + 12 : 0;
           fitText(el, reserve);
         });
       };
@@ -433,19 +444,34 @@ const footerLines = [
         var pair = live.length > 1;
         var color = pair ? "#5F6E4F" : live[0].bgColor;
         var dogs = dogsIn(live);
-        var name = pair ? listNames(dogs) : live[0].name;
+        // Two or more dogs: one name per line, starting below the "Here today"
+        // pill, so each name gets the full width instead of shrinking to fit
+        // everyone on one line beside the pill.
+        var stacked = dogs.length > 1;
+        var nameHTML = stacked
+          ? dogs
+              .map((n, i) => esc(n) + (i < dogs.length - 2 ? "," : i === dogs.length - 2 ? " &amp;" : ""))
+              .join("<br>")
+          : esc(live[0].name);
         var sub = pair
           ? groupWord(dogs.length) + " dogs, one sofa, no space for humans"
           : esc(live[0].tagline);
-        var sizeClass = pair ? "text-[clamp(42px,12.5vw,82px)]" : "text-[clamp(62px,19vw,120px)]";
+        var sizeClass = stacked
+          ? "text-[clamp(56px,17vw,96px)] mt-[30px] fit-headline--clear"
+          : "text-[clamp(62px,19vw,120px)]";
         var photoH = pair ? "250px" : "310px";
 
         var chips = [];
         if (!pair) {
-          chips.push({ label: stayLabel(stayOn(live[0], today)), bg: "#F7F2E7" });
+          var stay = stayOn(live[0], today);
+          chips.push({ label: stayLabel(stay), bg: "#F7F2E7" });
+          if (stayDay(stay, today)) chips.push({ label: stayDay(stay, today), bg: "#F7F2E7" });
           if (live[0].badge) chips.push({ label: live[0].badge, tape: true });
         } else {
-          live.forEach((d) => chips.push({ label: d.name + " · " + d.breed, bg: "#F7F2E7" }));
+          live.forEach((d) => {
+            var day = stayDay(stayOn(d, today), today);
+            chips.push({ label: d.name + " · " + (day ? day.toLowerCase() : d.breed), bg: "#F7F2E7" });
+          });
           chips.push({ label: groupWord(dogs.length) + " dogs, one sofa", tape: true });
         }
 
@@ -470,7 +496,7 @@ const footerLines = [
             '<div class="w-full"><h1 class="fit-headline ' +
             sizeClass +
             ' max-w-full" id="hero-name">' +
-            esc(name) +
+            nameHTML +
             "</h1></div>" +
             '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">' +
             sub +
@@ -695,16 +721,16 @@ const footerLines = [
         var more = live
           .map((d) => ({ id: d.id, label: earlierLabel(d) }))
           .filter((m) => m.label);
+        // An outlined chip, not faint text: on a quiet day it's the only way
+        // from here to the rest of the stay.
         var moreHTML = more.length
-          ? '<div class="' +
-            (raw.length ? "mt-3.5" : "mt-2") +
-            ' flex gap-4 flex-wrap">' +
+          ? '<div class="mt-4 flex gap-2.5 flex-wrap">' +
             more
               .map(
                 (m) =>
                   '<a href="/guests/' +
                   esc(m.id) +
-                  '" class="text-sm font-semibold text-label transition-colors duration-200 hover:text-ink">' +
+                  '" class="day-chip">' +
                   m.label +
                   "</a>"
               )
@@ -722,7 +748,13 @@ const footerLines = [
         }
         var cardsHTML = raw.length
           ? '<div class="mt-5 grid gap-3.5">' + cards + "</div>"
-          : '<p class="mt-5 text-base text-label text-pretty">' + quietLine() + "</p>";
+          : // A note left on the table, torn from the same pad as the captions,
+            // so a quiet day reads as news rather than a page that didn't load.
+            '<div class="diary-slip diary-slip--tear-1 mt-5 w-[min(100%,440px)]" style="transform:rotate(-0.4deg)">' +
+            '<div class="diary-slip-paper" aria-hidden="true"></div>' +
+            '<div class="diary-note"><p class="text-base text-ink text-pretty">' +
+            quietLine() +
+            "</p></div></div>";
         return cardsHTML + moreHTML;
       }
 
