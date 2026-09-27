@@ -9,16 +9,6 @@ import { calendarMonths } from "../lib/calendar";
 
 const entries = await getCollection("guests");
 
-// Each dog gets their own washi tape pattern, handed out in order of first
-// visit so a new dog takes the next one and nobody else's changes.
-const TAPES = 6;
-const tapeOf = new Map(
-  entries
-    .map((e) => ({ id: e.id, first: e.data.stays.map((s) => dateStr(s.checkIn)).sort()[0] }))
-    .sort((a, b) => a.first.localeCompare(b.first) || a.id.localeCompare(b.id))
-    .map((e, i) => [e.id, i % TAPES]),
-);
-
 // Every stay of every dog, flattened, carrying what a bar or polaroid needs.
 const stays = entries.flatMap((e) =>
   e.data.stays.map((s) => ({
@@ -29,7 +19,6 @@ const stays = entries.flatMap((e) =>
     tint: diarySkin(e.data.bgColor, 0).bg,
     checkIn: dateStr(s.checkIn),
     checkOut: dateStr(s.checkOut),
-    tape: tapeOf.get(e.id),
   })),
 );
 
@@ -102,7 +91,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                     const endsHere = week.days[6].iso >= s.checkOut;
                     return (
                       <span
-                        class:list={["cal-bar", `cal-bar--tape-${s.tape}`, { "cal-bar--continued": seg.continued, "cal-bar--carries": !endsHere, "cal-bar--short": seg.span === 1 }]}
+                        class:list={["cal-bar", { "cal-bar--continued": seg.continued, "cal-bar--carries": !endsHere, "cal-bar--short": seg.span === 1 }]}
                         style={`grid-row:${seg.lane + 2};grid-column:${seg.startCol + 1} / span ${seg.span};--bar-tint:${s.tint};--bar-colour:${s.bgColor}`}
                         data-check-in={s.checkIn}
                         data-check-out={s.checkOut}
@@ -290,8 +279,8 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     transform: rotate(-8deg);
   }
 
-  /* Each stay is a strip of washi tape in the dog's own colour and pattern,
-     torn ends. Only a stay that's on now is at full strength. The tape is a pseudo-element so its clip-path can't
+  /* Each stay is a strip of washi tape in the dog's own colour, torn ends.
+     A stay that's on now is striped; one that's done is dotted. The tape is a pseudo-element so its clip-path can't
      cut off the dog's photo. A strip that runs on into the next week
      keeps a straight edge there, like tape wrapping round the page. */
   .cal-bar {
@@ -330,39 +319,12 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
   .cal-bar--continued { --tear-l: 0px; padding-left: 8px; }
   .cal-bar--carries { --tear-r: 0px; }
 
-  /* The rest of the drawer. Stripes above are tape 0. */
-  .cal-bar--tape-1::before {
-    background: radial-gradient(circle, var(--tape-dark) 0 2px, transparent 2.6px) 0 0 / 9px 9px, var(--tape);
-  }
-  .cal-bar--tape-2::before {
-    background:
-      linear-gradient(90deg, color-mix(in srgb, var(--tape-dark) 40%, transparent) 50%, transparent 0) 0 0 / 12px 12px,
-      linear-gradient(color-mix(in srgb, var(--tape-dark) 40%, transparent) 50%, transparent 0) 0 0 / 12px 12px,
-      var(--tape);
-  }
-  .cal-bar--tape-3::before {
-    background:
-      linear-gradient(135deg, var(--tape-light) 25%, transparent 25%) -6px 0 / 12px 12px,
-      linear-gradient(225deg, var(--tape-light) 25%, transparent 25%) -6px 0 / 12px 12px,
-      linear-gradient(315deg, var(--tape-light) 25%, transparent 25%) 0 0 / 12px 12px,
-      linear-gradient(45deg, var(--tape-light) 25%, transparent 25%) 0 0 / 12px 12px,
-      var(--tape);
-  }
-  .cal-bar--tape-4::before {
-    background: radial-gradient(circle at 50% 100%, transparent 4px, var(--tape-dark) 4.5px 5.5px, transparent 6px) 0 0 / 12px 8px, var(--tape);
-  }
-  .cal-bar--tape-5::before {
-    background:
-      radial-gradient(circle, var(--tape-dark) 0 1.5px, transparent 2px) 0 0 / 14px 12px,
-      radial-gradient(circle, var(--tape-light) 0 3px, transparent 3.5px) 7px 6px / 14px 12px,
-      var(--tape);
-  }
-
-  /* Gone home: the same tape, sun-faded, so the bright strip is the dog on
-     the sofa now. The whole stay changes at once, never part of a strip. */
+  /* Gone home: polka dot tape, a little faded, so the striped strip is the
+     dog on the sofa now. The whole stay changes at once, never part of a
+     strip. */
   .cal-bar.is-past::before {
-    opacity: 0.6;
-    filter: saturate(0.7);
+    background: radial-gradient(circle, var(--tape-dark) 0 2px, transparent 2.6px) 0 0 / 9px 9px, var(--tape);
+    opacity: 0.7;
   }
 
   /* Upcoming, not arrived yet: a dashed box in the dog's colour, not taped down
