@@ -28,6 +28,8 @@ The voice is Alan's. Personal, warm, a bit dry. Like telling a neighbour what th
 Add to this list whenever Alan reacts to a line, with the line itself as the example. These apply to new writing. Published diary entries stay as they are.
 
 - Likes: "manja" (fine as is).
+- Likes: Tyrion's "Ball keeper" badge with "loves a game of fetch, skips the returning part".
+- Prefers for Tyrion: "Keeper of the Ball" with "loves a game of fetch, skips the returning part", over the Lannister debts line.
 - Prefers "chilling" over "lepak" in new writing.
 - Dislikes: "lah" anywhere ("sofa's free lah", "Steady lah, too many taps").
 - Dislikes: "Who's been on our sofa, and what they got up to." (reads odd). Chose "A diary of whoever's on our sofa." for the site description.
