@@ -30,4 +30,5 @@ Add to this list whenever Alan reacts to a line, with the line itself as the exa
 - Likes: "manja" (fine as is).
 - Prefers "chilling" over "lepak" in new writing.
 - Dislikes: "lah" anywhere ("sofa's free lah", "Steady lah, too many taps").
+- Dislikes: "Who's been on our sofa, and what they got up to." (reads odd). Chose "A diary of whoever's on our sofa." for the site description.
 - Dislikes: "So the neighbours know why we keep turning down dinner." (forced joke). Chose "Furcast" (over "Fur forecast") / "When the sofa needs extra vacuuming, and when it doesn't." for the calendar. Heading and subline shouldn't repeat words.
