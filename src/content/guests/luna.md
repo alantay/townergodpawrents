@@ -9,4 +9,6 @@ tagline: occasionally derpy, thinks every dog is her play buddy
 stays:
   - checkIn: 2026-10-13
     checkOut: 2026-10-21
+  - checkIn: 2026-11-26
+    checkOut: 2026-12-03
 ---
