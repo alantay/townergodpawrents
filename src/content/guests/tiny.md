@@ -17,7 +17,7 @@ stays:
 
 <!-- entry-id: e001 -->
 
-Tiny was so happy to see her owners. We’d like to think Tiny went on a little vacation too, just like her owners. Swimming with plushies, camping snacks and sniffing adventures with us.
+Tiny was so happy to see her owners. We'd like to think Tiny went on a little vacation too, just like her owners. Swimming with plushies, camping snacks and sniffing adventures with us.
 
 ### 6pm
 
@@ -59,7 +59,7 @@ Tiny was acting strangely with her new toy.
 
 <!-- entry-id: e006 -->
 
-We got Tiny to “place”, then hid snacks around the house. Once we released her, we held out a hand for her to smell, and she went off to find the snacks. Tiny’s nose worked fantastically well. It was delightful to see her put it to work.
+We got Tiny to "place", then hid snacks around the house. Once we released her, we held out a hand for her to smell, and she went off to find the snacks. Tiny's nose worked fantastically well. It was delightful to see her put it to work.
 
 ### 4:25pm
 
@@ -159,7 +159,7 @@ We took Tiny to Whampoa Happy Pets Day. It was a Hi and immediately followed by 
 
 <!-- entry-id: e017 -->
 
-A bigger ball for Tiny today. No one was at the carpark, but Tiny didn’t mind. More space to run freely.
+A bigger ball for Tiny today. No one was at the carpark, but Tiny didn't mind. More space to run freely.
 
 ![Tiny running with a big ball at an empty carpark](./tiny/tiny-bigger-ball.jpg)
 
@@ -169,7 +169,7 @@ A bigger ball for Tiny today. No one was at the carpark, but Tiny didn’t mind.
 
 <!-- entry-id: e018 -->
 
-Hugo was very interested in Tiny and kept sniffing her. Tiny was a little annoyed. She just wanted to get back to her ball. “I’m working, please. No office romance.”
+Hugo was very interested in Tiny and kept sniffing her. Tiny was a little annoyed. She just wanted to get back to her ball. "I'm working, please. No office romance."
 
 ![Hugo sniffing Tiny at the dog run while she looks towards her ball](./tiny/tiny-office-romance.jpg)
 

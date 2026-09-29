@@ -116,7 +116,7 @@ const hasArrived = started.length > 0;
 const daysAway = next ? Math.round((Date.parse(next.checkIn) - Date.parse(today)) / 86400000) : 0;
 const comingIn = (n: number) => (n === 1 ? "Coming tomorrow" : `Coming · in ${n} days`);
 const emptyLines = {
-  arrived: "No diary entries yet. Check back once the visit gets going.",
+  arrived: "No diary entries yet. The visit hasn't started.",
   waiting: `Nothing written yet. ${name} ${dogNames(name).length > 1 ? "haven't" : "hasn't"} met the sofa.`,
 };
 // Labels are formatted here so the browser script below doesn't need its own
@@ -188,7 +188,7 @@ let skinIndex = 0;
   <div class="entrance entrance-delay-2 mt-12 border-t-[1.5px] border-line pt-[18px] flex items-end justify-between gap-4">
     <div>
       <h2 class="font-serif text-[32px] leading-none">The full diary</h2>
-      {entryCount > 0 && <p class="mt-1.5 text-sm text-label">{entryCount} little moment{entryCount === 1 ? "" : "s"}, kept for the record.</p>}
+      {entryCount > 0 && <p class="mt-1.5 text-sm text-label">{entryCount} {entryCount === 1 ? "entry" : "entries"}.</p>}
     </div>
     <div id="diary-stay" class:list={["diary-stay text-right text-[11px] font-semibold tracking-[0.08em] uppercase text-label", !here && next ? "" : "hidden sm:block"]}>
       <span id="diary-stay-when">{here ? "Latest stay" : next ? comingIn(daysAway) : "Latest stay"}</span><br /><span id="diary-stay-dates">{stayLabel(shownStay)}</span>
