@@ -116,7 +116,7 @@ const hasArrived = started.length > 0;
 const daysAway = next ? Math.round((Date.parse(next.checkIn) - Date.parse(today)) / 86400000) : 0;
 const comingIn = (n: number) => (n === 1 ? "Coming tomorrow" : `Coming · in ${n} days`);
 const emptyLines = {
-  arrived: "No diary entries yet. Check back once the visit gets going.",
+  arrived: "No diary entries yet. The visit is only just getting going.",
   waiting: `Nothing written yet. ${name} ${dogNames(name).length > 1 ? "haven't" : "hasn't"} met the sofa.`,
 };
 // Labels are formatted here so the browser script below doesn't need its own
