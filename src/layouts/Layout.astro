@@ -46,20 +46,33 @@ const ogImageURL = new URL(ogImage, Astro.site ?? Astro.url);
   <body class="min-h-screen bg-paper text-ink font-sans pb-24">
     <a class="skip-link" href="#main-content">Skip to main content</a>
     {/* Three cuts of the same torn edge rotate through the diary. Only the
-        paper layer is displaced; the writing and its rules stay untouched. */}
+        paper layer is displaced; the writing and its rules stay untouched.
+        A tear has two scales: the slow wander of the rip, and the fibres
+        that fray along it. Where the top layer of paper tears away from the
+        bottom one it bares a pale fringe, wide in some places and gone in
+        others, so the cream face is torn on its own slightly different line. */}
     <svg width="0" height="0" aria-hidden="true" focusable="false" class="absolute">
-      <filter id="torn-slip-0" x="-10%" y="-30%" width="120%" height="160%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.03 0.12" numOctaves="4" seed="5" result="tear" />
-        <feDisplacementMap in="SourceGraphic" in2="tear" scale="13" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-      <filter id="torn-slip-1" x="-10%" y="-30%" width="120%" height="160%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.03 0.12" numOctaves="4" seed="11" result="tear" />
-        <feDisplacementMap in="SourceGraphic" in2="tear" scale="13" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-      <filter id="torn-slip-2" x="-10%" y="-30%" width="120%" height="160%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.03 0.12" numOctaves="4" seed="17" result="tear" />
-        <feDisplacementMap in="SourceGraphic" in2="tear" scale="13" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
+      {[5, 11, 17].map((seed, i) => (
+        <filter id={`torn-slip-${i}`} x="-10%" y="-30%" width="120%" height="160%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.035 0.05" numOctaves="3" seed={seed} result="wander" />
+          <feTurbulence type="fractalNoise" baseFrequency="0.035 0.05" numOctaves="3" seed={seed + 1} result="wander-face" />
+          <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="1" seed={seed} result="fibre" />
+          <feDisplacementMap in="SourceAlpha" in2="wander" scale="16" xChannelSelector="R" yChannelSelector="G" result="rip" />
+          <feDisplacementMap in="rip" in2="fibre" scale="2" xChannelSelector="R" yChannelSelector="G" result="rip-frayed" />
+          <feFlood flood-color="#fdfaf1" />
+          <feComposite operator="in" in2="rip-frayed" result="fringe" />
+          <feMorphology in="SourceAlpha" operator="erode" radius="3" result="face-core" />
+          <feDisplacementMap in="face-core" in2="wander-face" scale="16" xChannelSelector="R" yChannelSelector="G" result="face-rip" />
+          <feDisplacementMap in="face-rip" in2="fibre" scale="1.2" xChannelSelector="G" yChannelSelector="R" result="face-frayed" />
+          <feFlood flood-color="#f7f2e7" />
+          <feComposite operator="in" in2="face-frayed" />
+          <feComposite operator="in" in2="rip-frayed" result="face" />
+          <feMerge>
+            <feMergeNode in="fringe" />
+            <feMergeNode in="face" />
+          </feMerge>
+        </filter>
+      ))}
       {/* A slow, small wobble for lines ruled by hand, like the calendar grid. */}
       <filter id="pencil-rule" x="-5%" y="-5%" width="110%" height="110%">
         <feTurbulence type="fractalNoise" baseFrequency="0.015 0.02" numOctaves="2" seed="3" result="wobble" />

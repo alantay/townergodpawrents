@@ -398,8 +398,8 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 /* A caption slip is torn from a pad, like the guest collages are torn from a
    page. The cream is a layer of its own so the tear can be a filter on that
    layer alone — displacing the text with it would leave the writing wobbling.
-   The 5px lighter border is the fibre the tear exposes; the ragged edge cuts
-   through it, so it shows as an uneven pale fringe rather than a rule. */
+   The filter paints its own paper and edge line from the layer's shape; the
+   border only matters for the no-filter fallback below. */
 /* Give the tear room to wander without biting into the writing. */
 .diary-slip {
   position: relative;
