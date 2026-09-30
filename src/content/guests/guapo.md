@@ -17,6 +17,14 @@ stays:
 
 ## 30 Sep
 
+### 9:40am
+
+<!-- entry-id: e003 -->
+
+Guapo settled down, realizing he was stuck with Alan and Weiwen, and now missing his owner.
+
+![Guapo lying low on the floor with his chin on his paws](./guapo/guapo-missing-owner.jpg)
+
 ### 9:10am
 
 <!-- entry-id: e002 -->
