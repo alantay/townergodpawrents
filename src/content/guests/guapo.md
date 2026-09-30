@@ -21,4 +21,4 @@ stays:
 
 <!-- entry-id: e001 -->
 
-Guapo has arrived. Red carpet rolled out, cameras ready.
+Guapo has arrived. Roll out the red carpet and prepare the cameras.
