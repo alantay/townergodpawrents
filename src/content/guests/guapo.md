@@ -17,6 +17,14 @@ stays:
 
 ## 30 Sep
 
+### 6:40pm
+
+<!-- entry-id: e005 -->
+
+I always love it when he looks back at me during walks. Cutest face.
+
+![Guapo on his lead, looking back over his shoulder mid-walk with his tongue out](./guapo/guapo-looking-back.jpg)
+
 ### 11:15am
 
 <!-- entry-id: e004 -->
