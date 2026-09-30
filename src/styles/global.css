@@ -79,7 +79,7 @@ a:focus-visible {
 .diary-entry-card {
   position: relative;
   transform: rotate(var(--card-tilt));
-  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), filter 200ms ease;
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Video plays upright on hover (see below), so it stays upright untilted
@@ -93,17 +93,12 @@ a:focus-visible {
 .diary-entry-card:hover,
 .diary-entry-card:focus-within {
   transform: rotate(var(--card-tilt)) translateY(-2px);
-  filter: brightness(1.04);
 }
 
-/* A CSS filter on an ancestor forces the browser to repaint any <video>
-   inside through a software compositing pass, which flickers/garbles the
-   frame — so video entries skip both the lift and the filter, staying
-   put on hover. */
+/* Video entries skip the lift, staying put on hover. */
 .diary-entry-card--video:hover,
 .diary-entry-card--video:focus-within {
   transform: rotate(0deg);
-  filter: none;
 }
 
 /* Homepage entry cards: the time is the link, and it stretches over the
