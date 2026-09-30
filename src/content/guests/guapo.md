@@ -17,6 +17,14 @@ stays:
 
 ## 30 Sep
 
+### 11:22pm
+
+<!-- entry-id: e006 -->
+
+All smiles.
+
+![Guapo in the lift on his lead, grinning up at the camera with his tail curled high](./guapo/guapo-all-smiles.jpg)
+
 ### 6:40pm
 
 <!-- entry-id: e005 -->
