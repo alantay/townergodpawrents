@@ -17,6 +17,14 @@ stays:
 
 ## 30 Sep
 
+### 11:15am
+
+<!-- entry-id: e004 -->
+
+Emotional shrimp
+
+![Guapo curled up in a grey bed in the corner, chin resting on the rim, looking sad](./guapo/guapo-emotional-shrimp.jpg)
+
 ### 9:40am
 
 <!-- entry-id: e003 -->
