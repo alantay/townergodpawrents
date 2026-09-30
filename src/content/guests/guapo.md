@@ -14,3 +14,11 @@ stays:
   - checkIn: 2026-12-06
     checkOut: 2027-01-03
 ---
+
+## 30 Sep
+
+### 9:10am
+
+<!-- entry-id: e001 -->
+
+Guapo has arrived. Red carpet rolled out, cameras ready.
