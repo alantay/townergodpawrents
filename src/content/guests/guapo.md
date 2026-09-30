@@ -21,7 +21,7 @@ stays:
 
 <!-- entry-id: e002 -->
 
-Guapo crashed in with airplane ears and all smiles, happy to see Weiwen, and bringing along some soil while he was at it.
+Guapo crashed in with airplane ears and all smiles, happy to see Weiwen, and bringing along some soil.
 
 ### 9:10am
 
