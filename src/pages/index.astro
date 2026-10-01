@@ -747,19 +747,9 @@ const footerLines = [
           })
           .join("");
 
-        // The teaser always shows the whole of today now, so the only thing
-        // worth linking to from here is an earlier day of the same stay —
-        // otherwise a guest six days in with nothing written yet today gets
-        // no way back to what came before.
-        function earlierLabel(d) {
-          var hasEarlier = d.days.some((day) => day.iso < today && day.entries.length > 0);
-          if (!hasEarlier) return "";
-          return pair ? "Read " + esc(d.name) + "&rsquo;s earlier days" : "Read earlier days";
-        }
-
-        var more = live
-          .map((d) => ({ id: d.id, label: earlierLabel(d) }))
-          .filter((m) => m.label);
+        // The way from the teaser to everything else: each live dog's whole
+        // diary, shown every day so it's findable even on day one.
+        var more = live.map((d) => ({ id: d.id, label: esc(d.name) + "&rsquo;s full diary" }));
         // An outlined chip, not faint text: on a quiet day it's the only way
         // from here to the rest of the stay.
         var moreHTML = more.length
