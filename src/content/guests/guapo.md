@@ -17,6 +17,14 @@ stays:
 
 ## 1 Oct
 
+### 11:35pm
+
+<!-- entry-id: e010 -->
+
+Extra-thick baguette, fresh out of the oven.
+
+![Guapo stretched out between the sofa and the wall](./guapo/guapo-extra-thick-baguette.jpg)
+
 ### 1:30pm
 
 <!-- entry-id: e009 -->
