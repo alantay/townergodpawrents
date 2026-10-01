@@ -15,6 +15,16 @@ stays:
     checkOut: 2027-01-03
 ---
 
+## 1 Oct
+
+### 7:40am
+
+<!-- entry-id: e007 -->
+
+Guapo playing outside.
+
+![Guapo trotting around an empty rooftop car park, tongue out and tail curled up](./guapo/guapo-playing-outside.mp4)
+
 ## 30 Sep
 
 ### 9:45pm
