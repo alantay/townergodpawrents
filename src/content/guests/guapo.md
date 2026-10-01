@@ -21,7 +21,7 @@ stays:
 
 <!-- entry-id: e007 -->
 
-When the stars and moon align, Guapo plays outside. Rare sighting, caught on camera.
+When the stars and moon align, Guapo plays outside.
 
 ![Guapo trotting around an empty rooftop car park, tongue out and tail curled up](./guapo/guapo-playing-outside.mp4)
 
