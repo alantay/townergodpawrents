@@ -21,7 +21,7 @@ stays:
 
 <!-- entry-id: e008 -->
 
-New croissant type from Towner Cafe: Soft Fur Croissant.
+New on the menu at Towner Cafe: Soft Fur Croissant.
 
 Golden brown, extra fluffy, and best left to proof in peace.
 
