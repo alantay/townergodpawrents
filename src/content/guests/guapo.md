@@ -23,6 +23,8 @@ stays:
 
 New croissant type from Towner Cafe: Soft Fur Croissant
 
+Golden brown, extra fluffy, and best left to proof in peace.
+
 ![Guapo curled up in his grey bed with his chin resting on the cushion](./guapo/guapo-soft-fur-croissant.jpg)
 
 ### 7:40am
