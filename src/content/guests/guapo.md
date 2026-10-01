@@ -17,6 +17,14 @@ stays:
 
 ## 1 Oct
 
+### 1:30pm
+
+<!-- entry-id: e009 -->
+
+Next up on the runway, Guapo. He showcased a sleek, vibrant orange martingale collar with a premium crocodile-hide leather leash… then jumped off the runway without a care in the world.
+
+![Guapo wearing an orange collar and leather leash, jumping off the runway](./guapo/guapo-runway-jump.mp4)
+
 ### 11:10am
 
 <!-- entry-id: e008 -->
