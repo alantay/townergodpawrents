@@ -30,6 +30,7 @@ Add to this list whenever Alan reacts to a line, with the line itself as the exa
 - Likes: "manja" (fine as is).
 - Likes: Tyrion's "Ball keeper" badge with "loves a game of fetch, skips the returning part".
 - Prefers for Tyrion: "Keeper of the Ball" with "loves a game of fetch, skips the returning part", over the Lannister debts line.
+- Likes: the deadpan "Rare sighting, caught on camera." twist on Guapo's playing-outside video.
 - Prefers "chilling" over "lepak" in new writing.
 - Dislikes: "lah" anywhere ("sofa's free lah", "Steady lah, too many taps").
 - Dislikes: "Who's been on our sofa, and what they got up to." (reads odd). Chose "A diary of whoever's on our sofa." for the site description.
