@@ -203,6 +203,17 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   transform: rotate(-5deg);
 }
 .reaction-summary-total:empty { display: none; }
+.reaction-summary-add { display: none; }
+.has-reactions .reaction-summary-add {
+  display: inline-flex;
+  margin-left: -0.05rem;
+  opacity: 0.45;
+  transition: opacity 150ms ease;
+}
+.has-reactions .reaction-summary-add svg { width: 0.7rem; height: 0.7rem; }
+.has-reactions .reaction-toggle:hover .reaction-summary-add,
+.has-reactions .reaction-toggle:focus-visible .reaction-summary-add,
+.has-reactions .reaction-toggle[aria-expanded="true"] .reaction-summary-add { opacity: 1; }
 .reaction-summary-total[data-tape="1"] {
   clip-path: polygon(4% 0, 100% 6%, 96% 30%, 100% 55%, 95% 100%, 0 94%, 6% 70%, 0 40%);
   transform: rotate(4deg);
