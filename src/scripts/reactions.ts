@@ -3,6 +3,8 @@ import EMOJI from "../lib/reaction-emojis.json";
 type Counts = Record<string, number>;
 type GuestCounts = Record<string, Counts>;
 const ADD_ICON = '<svg viewBox="0 0 30 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="13" cy="16" r="10" stroke-dasharray="3.1 2.9"/><path d="M9.5 17.8c1.9 2 5.1 2 7 0M9.5 13.5h.1m6.9 0h.1M25 1v6m-3-3h6"/></svg>';
+// A small inked plus beside the pile, so a reacted entry still reads as tappable.
+const MORE_ICON = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6.2 1.6 5.8 10.4M1.6 6.1l8.8-.3"/></svg>';
 const YELLOW = "#fcd13d";
 const INK = 'fill="none" stroke="#1e2019" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"';
 const FACE = (fill: string) => `<circle cx="20" cy="20" r="17" fill="${fill}" stroke="#fdfaf1" stroke-width="3"/>`;
@@ -109,7 +111,10 @@ class EntryReactions extends HTMLElement {
       // Each entry keeps the same scrap of tape, but neighbouring entries vary.
       total.dataset.tape = String([...this.dataset.entry].reduce((sum, char) => sum + char.charCodeAt(0), 0) % 3);
       total.setAttribute("aria-hidden", "true");
-      toggle.append(icons, total);
+      const add = document.createElement("span");
+      add.className = "reaction-summary-add";
+      add.innerHTML = MORE_ICON;
+      toggle.append(icons, total, add);
 
       const picker = document.createElement("div");
       picker.className = "reaction-picker";
