@@ -17,6 +17,14 @@ stays:
 
 ## 2 Oct
 
+### 11:30am
+
+<!-- entry-id: e012 -->
+
+Got to eat my snacks to maintain my perfect figure, Guapo says.
+
+![Guapo lying on the floor, chewing a treat with another one waiting by his paws](./guapo/guapo-eating-snacks.mp4)
+
 ### 8:56am
 
 <!-- entry-id: e011 -->
