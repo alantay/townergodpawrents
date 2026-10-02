@@ -17,6 +17,14 @@ stays:
 
 ## 2 Oct
 
+### 7:15pm
+
+<!-- entry-id: e014 -->
+
+Effortlessly looking cute while begging for food. Unfortunately, it seldom works.
+
+![Guapo sitting by the blinds, grinning up at the camera with his tongue out](./guapo/guapo-begging-cute.jpg)
+
 ### 11:40am
 
 <!-- entry-id: e013 -->
