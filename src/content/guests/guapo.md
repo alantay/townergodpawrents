@@ -17,6 +17,14 @@ stays:
 
 ## 2 Oct
 
+### 10pm
+
+<!-- entry-id: e015 -->
+
+Crocodile feeding session. All fingers accounted for.
+
+![Guapo on his lead at night, snapping a treat from a hand](./guapo/guapo-crocodile-feeding.mp4)
+
 ### 7:15pm
 
 <!-- entry-id: e014 -->
