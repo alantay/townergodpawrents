@@ -15,6 +15,16 @@ stays:
     checkOut: 2027-01-03
 ---
 
+## 2 Oct
+
+### 8:56am
+
+<!-- entry-id: e008 -->
+
+Croissant curling nicely in the hot oven. Ready soon.
+
+![Guapo curled up asleep in a grey fleece dog bed](./guapo/guapo-croissant-curl.jpg)
+
 ## 1 Oct
 
 ### 11:35pm
