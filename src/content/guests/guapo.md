@@ -25,6 +25,14 @@ Crocodile feeding session. All fingers accounted for.
 
 ![Guapo on his lead at night, snapping a treat from a hand](./guapo/guapo-crocodile-feeding.mp4)
 
+### 8:50pm
+
+<!-- entry-id: e016 -->
+
+Guapo getting his teeth cleaned to maintain this million-dollar smile.
+
+![Guapo sitting on the floor, chin held up, getting his teeth brushed with a blue toothbrush](./guapo/guapo-teeth-cleaning.jpg)
+
 ### 7:15pm
 
 <!-- entry-id: e014 -->
