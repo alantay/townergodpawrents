@@ -17,6 +17,14 @@ stays:
 
 ## 2 Oct
 
+### 11:40am
+
+<!-- entry-id: e013 -->
+
+Post-snack modelling session. Got to earn his keep.
+
+![Guapo lying on the floor against the wall, front paws out, posing for the camera](./guapo/guapo-modelling-session.jpg)
+
 ### 11:30am
 
 <!-- entry-id: e012 -->
