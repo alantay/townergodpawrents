@@ -207,10 +207,10 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 .has-reactions .reaction-summary-add {
   display: inline-flex;
   margin-left: -0.05rem;
-  opacity: 0.45;
+  opacity: 0.3;
   transition: opacity 150ms ease;
 }
-.has-reactions .reaction-summary-add svg { width: 0.7rem; height: 0.7rem; }
+.has-reactions .reaction-summary-add svg { width: 0.55rem; height: 0.55rem; }
 .has-reactions .reaction-toggle:hover .reaction-summary-add,
 .has-reactions .reaction-toggle:focus-visible .reaction-summary-add,
 .has-reactions .reaction-toggle[aria-expanded="true"] .reaction-summary-add { opacity: 1; }
