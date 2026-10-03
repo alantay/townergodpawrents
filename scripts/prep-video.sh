@@ -22,6 +22,7 @@ out="$dir/$guest-$slug.mp4"
 
 command -v ffmpeg >/dev/null || { echo "ffmpeg not found — brew install ffmpeg" >&2; exit 1; }
 command -v ffprobe >/dev/null || { echo "ffprobe not found — brew install ffmpeg" >&2; exit 1; }
+command -v swift >/dev/null || { echo "swift not found — xcode-select --install" >&2; exit 1; }
 [ -f "$root/src/content/guests/$guest.md" ] || { echo "no guest \"$guest\" in src/content/guests/" >&2; exit 1; }
 [ -f "$src" ] || { echo "no file at $src" >&2; exit 1; }
 case "$src" in
@@ -51,7 +52,8 @@ printf '{"width":%s,"height":%s}\n' "$width" "$height" > "$out.json"
 # posterless <video> sits there as an empty grey box until it's tapped. A
 # still of the first frame, saved as a second sidecar, gives every browser
 # something to show — and means the clip itself stays undownloaded until
-# someone actually presses play.
-ffmpeg -loglevel error -i "$out" -frames:v 1 -q:v 4 "$out.jpg"
+# someone actually presses play. See video-poster.swift for why it isn't
+# grabbed with ffmpeg.
+swift "$root/scripts/video-poster.swift" "$out" "$out.jpg"
 
 echo "./$guest/$guest-$slug.mp4 (${size_kb}KB)"
