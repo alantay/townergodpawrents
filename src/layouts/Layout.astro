@@ -147,7 +147,7 @@ const buildId: string = import.meta.env.BUILD_ID;
         function check() {
           if (document.visibilityState !== "visible" || checking) return;
           if (daySGT() !== loadedDay) return location.reload();
-          if (Date.now() - lastCheck < 30000) return;
+          if (Date.now() - lastCheck < 5 * 60 * 1000) return;
           lastCheck = Date.now();
           checking = true;
           fetch(location.pathname, { cache: "no-store" })
