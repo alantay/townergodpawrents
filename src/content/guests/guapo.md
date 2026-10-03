@@ -17,6 +17,14 @@ stays:
 
 ## 3 Oct
 
+### 4pm
+
+<!-- entry-id: e019 -->
+
+“Steady… pee… ahh, that felt good. Alright, done. Wait, I smell pee. Whose is that?” Guapo thinks.
+
+![Guapo sniffing beside the plants during a toilet break](./guapo/guapo-silly-toilet-break.mp4)
+
 ### 3:10pm
 
 <!-- entry-id: e018 -->
