@@ -17,19 +17,19 @@ stays:
 
 ## 3 Oct
 
-### 8am
-
-<!-- entry-id: e017 -->
-
-We took Guapo up to a secret hideout at the top of the multistorey carpark, where the dog owners gather. Milk, Tiny, Ebi, Liesel and co. were in session. Bum sniff exchange made. Then he went to lie down, wondering why anyone would chase each other or a ball when you cannot move a muscle and just lie there.
-
-### 3:10am
+### 3:10pm
 
 <!-- entry-id: e018 -->
 
 Someone was very happy to see Weiwen and Alan back from errands.
 
 ![Guapo approaching with his mouth open and tongue out as Weiwen and Alan return home](./guapo/guapo-happy-return.mp4)
+
+### 8am
+
+<!-- entry-id: e017 -->
+
+We took Guapo up to a secret hideout at the top of the multistorey carpark, where the dog owners gather. Milk, Tiny, Ebi, Liesel and co. were in session. Bum sniff exchange made. Then he went to lie down, wondering why anyone would chase each other or a ball when you cannot move a muscle and just lie there.
 
 ## 2 Oct
 
