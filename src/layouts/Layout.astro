@@ -18,6 +18,7 @@ const {
 } = Astro.props;
 
 const ogImageURL = new URL(ogImage, Astro.site ?? Astro.url);
+const buildId: string = import.meta.env.BUILD_ID;
 ---
 
 <html lang="en">
@@ -27,6 +28,7 @@ const ogImageURL = new URL(ogImage, Astro.site ?? Astro.url);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="build-id" content={buildId} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
@@ -123,6 +125,50 @@ const ogImageURL = new URL(ogImage, Astro.site ?? Astro.url);
             });
           });
         }).observe(document.body, { childList: true, subtree: true });
+      })();
+    </script>
+    <script is:inline>
+      // Phones keep tabs alive for days, and every page is built ahead of
+      // time, so a tab left open shows whatever was on the sofa back then.
+      // When the tab comes back into view, reload if a newer deploy is out,
+      // or if it's a new day in Singapore (the "here today" picks go stale).
+      (function () {
+        var meta = document.querySelector('meta[name="build-id"]');
+        if (!meta || !window.fetch || !window.DOMParser) return;
+        var build = meta.content;
+        var loadedDay = daySGT();
+        var lastCheck = Date.now();
+        var checking = false;
+
+        function daySGT() {
+          return new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Singapore" });
+        }
+
+        function check() {
+          if (document.visibilityState !== "visible" || checking) return;
+          if (daySGT() !== loadedDay) return location.reload();
+          if (Date.now() - lastCheck < 30000) return;
+          lastCheck = Date.now();
+          checking = true;
+          fetch(location.pathname, { cache: "no-store" })
+            .then(function (res) {
+              return res.ok ? res.text() : "";
+            })
+            .then(function (html) {
+              var doc = new DOMParser().parseFromString(html, "text/html");
+              var latest = doc.querySelector('meta[name="build-id"]');
+              if (latest && latest.content && latest.content !== build) location.reload();
+            })
+            .catch(function () {})
+            .then(function () {
+              checking = false;
+            });
+        }
+
+        document.addEventListener("visibilitychange", check);
+        window.addEventListener("pageshow", function (e) {
+          if (e.persisted) check();
+        });
       })();
     </script>
     <script>import "../scripts/reactions";</script>
