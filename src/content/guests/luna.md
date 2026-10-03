@@ -1,7 +1,7 @@
 ---
 name: Luna
 breed: Golden Retriever
-photo: ./luna/luna-paper-v2.png
+photo: ./luna/luna-collage.png
 bgColor: "#755A83"
 showLive: true
 badge: Destroyer of toys
