@@ -10,14 +10,15 @@ The site's avatars are photographic torn-paper collages. A generic illustrated p
 ## Reference and treatment
 
 - Read the dog's existing file in `src/content/guests/` for her name, photo and `bgColor`. Read `DESIGN.md` for the site's scrapbook treatment.
-- Inspect `src/content/guests/ebi/ebi-collage.png` and `src/content/guests/tiny/tiny-collage.png` before generating. Supply them as style references alongside the user's source photo, clearly distinguishing subject from style references.
+- Inspect `src/content/guests/guapo/guapo-collage-v5.png` and `src/content/guests/milk/milk-collage-v3.png` before generating. These are Alan's approved references for the paper treatment. Supply them as style references alongside the user's source photo, clearly distinguishing subject from style references.
 - Keep the actual dog's recognisable face, coat, markings, collar and expression. Prefer the provided pose; frame the dog clearly at small sizes. Retain photographic detail rather than turning the dog into a cartoon.
 - Surround the dog with a narrow, irregular cream torn-paper margin with visible fibres and a fine coloured outline derived from her `bgColor`.
+- Prefer uneven angular tears with restrained loose fibres. Add small creases, subtly lifted paper facets and layered tears, with soft cream highlights and shallow warm shadows. The edge should have the tactile folding depth of Guapo and Milk v3. Avoid fuzzy fringes, smooth scallops, thick sticker outlines and large rolled corners.
 - Everything outside the paper silhouette must have genuine alpha transparency. No rectangular backdrop or baked-in checkerboard. No invented props, text or other dogs.
 
 Use the imagegen skill and built-in image generation tool. A useful prompt core:
 
-> Create a photographic dog cutout matching the supplied site's avatar references. Preserve the subject dog's identity, expression, coat and collar. Place her on cream fibrous torn paper closely following her silhouette, with a narrow visible margin and a fine [guest bgColor] outline. Remove the source room completely. Everything outside the paper silhouette is transparent alpha. No text or extra props.
+> Create a photographic dog cutout matching the supplied site's avatar references. Preserve the subject dog's identity, expression, coat and collar. Place her on cream torn paper closely following her silhouette, with a narrow varied margin and a fine [guest bgColor] outline. Use uneven angular tears, restrained loose fibres, small creases and subtly lifted layered paper edges with soft highlights and shallow warm shadows. Remove the source background completely. Everything outside the paper silhouette is transparent alpha. No text or extra props.
 
 ## Finish
 
