@@ -21,7 +21,7 @@ stays:
 
 <!-- entry-id: e017 -->
 
-We took Guapo up to a secret hideout at the top of the multistorey carpark, where the dog owners gather. Milk, Tiny, Ebi, Liesel and others were there. Bum sniff exchange made. Then he went to lie down, wondering why anyone would chase each other or a ball when you can not move a muscle and just lie there.
+We took Guapo up to a secret hideout at the top of the multistorey carpark, where the dog owners gather. Milk, Tiny, Ebi, Liesel and co. were in session. Bum sniff exchange made. Then he went to lie down, wondering why anyone would chase each other or a ball when you cannot move a muscle and just lie there.
 
 ## 2 Oct
 
