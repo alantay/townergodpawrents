@@ -14,6 +14,7 @@ The site's avatars are photographic torn-paper collages. A generic illustrated p
 - Keep the actual dog's recognisable face, coat, markings, collar and expression. Prefer the provided pose; frame the dog clearly at small sizes. Retain photographic detail rather than turning the dog into a cartoon.
 - Surround the dog with a narrow, irregular cream torn-paper margin with visible fibres and a fine coloured outline derived from her `bgColor`.
 - Prefer uneven angular tears with restrained loose fibres. Add small creases, subtly lifted paper facets and layered tears, with soft cream highlights and shallow warm shadows. The edge should have the tactile folding depth of Guapo and Milk v3. Avoid fuzzy fringes, smooth scallops, thick sticker outlines and large rolled corners.
+- Vary crease positions, angles, lengths, lifted layers and shallow shadow strengths for each dog. Use a naturally irregular arrangement suited to that silhouette, so each avatar has its own crease pattern while sharing the same paper treatment. Keep the lighting coherent within each avatar.
 - Everything outside the paper silhouette must have genuine alpha transparency. No rectangular backdrop or baked-in checkerboard. No invented props, text or other dogs.
 
 Use the imagegen skill and built-in image generation tool. A useful prompt core:
