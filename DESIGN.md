@@ -232,7 +232,7 @@ Depth here is paper lying on paper. Shadows are soft and warm (a brown-olive tin
 Soft rectangles in stepped radii: 10px on a photo inside its print, 16px on the print mat, 24px on cards, 32px on the guest hero, and full pills for every chip and tag. Anything that's meant to be paper breaks the rectangle. Slips are torn by one of three `feTurbulence` displacement filters (`#torn-slip-0/1/2`, defined once in the layout) and rotated through the diary. Tape and reaction counts are `clip-path` polygons with ragged ends, each rotated −32° to +4°. Everything leans: cards ±1°, prints ±1.5° against their card, slips ±0.4° with their card, the picker −1.5°. Cutout dog photos have no box at all; they stand on the hero colour.
 
 ### Named Rules
-**The Nothing Sits Square Rule.** Cards, prints, slips, tape and stickers each carry a small rotation. Only functional chrome stays level: nav, chips, day strip and buttons. Video entries are also level, because a filter or transform on an ancestor makes `<video>` flicker.
+**The Nothing Sits Square Rule.** Cards, prints, slips, tape and stickers each carry a small rotation. Only functional chrome stays level: nav, chips, day strip and buttons. Video cards and their mats are also level, because a filter or transform on an ancestor makes `<video>` flicker; their caption slip leans 1.5° instead to keep the crooked feel.
 
 **The Real Tear Rule.** Torn edges come from the SVG filters on the paper layer only, never on the text. Where filters aren't supported, fall back to a 14px-radius keylined card rather than a hard rectangle.
 

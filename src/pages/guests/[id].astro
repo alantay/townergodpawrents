@@ -18,6 +18,7 @@ import {
   tilt,
   printTilt,
   noteTilt,
+  videoNoteTilt,
   fitsPrintMat,
   printWidth,
   todaySGT,
@@ -326,7 +327,7 @@ let skinIndex = 0;
                   {noteCaption && (
                     <div
                       class={`diary-slip diary-slip--tear-${i % 3} mt-4 mx-auto`}
-                      style={`${noteWidth ? `width:min(100%,${noteWidth}px);` : ""}transform:rotate(${noteTilt(i)})`}
+                      style={`${noteWidth ? `width:min(100%,${noteWidth}px);` : ""}transform:rotate(${video ? videoNoteTilt(i) : noteTilt(i)})`}
                     >
                       <div class="diary-slip-paper" aria-hidden="true"></div>
                       <div class="diary-note">
