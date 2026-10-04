@@ -148,7 +148,6 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
 // Footer sign-off, picked at random on each visit. Nobody finds this page
 // except through a friend or neighbour, so none of these invite people in.
 const footerLines = [
-  "Know a dog who needs a sofa? You know where to find us.",
   "Word of mouth only. Mostly the dogs' mouths.",
   "Sofa's been furrier than usual lately.",
   "One sofa, many dogs, very little room for humans.",
@@ -433,7 +432,7 @@ const footerLines = [
 
       // ---- fit the giant headline to its container ----
       // `reserve` (px) keeps the text clear of the absolutely-positioned
-      // "Here today" / "Sofa free" pill that overlaps the headline's top-right
+      // "Here today" / "Sofa's empty" pill that overlaps the headline's top-right
       // corner — otherwise a very long name could fit the container width
       // exactly and still run visually under the pill.
       function fitText(el, reserve) {
@@ -548,9 +547,9 @@ const footerLines = [
       function heroVacancyHTML(lastGuest, next) {
         var html =
           '<div class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:#5F6E4F">' +
-          '<div id="hero-badge" class="absolute top-[18px] right-[18px] bg-lime text-ink font-semibold text-xs tracking-[0.06em] uppercase px-[13px] py-2 rounded-full animate-wiggle">Sofa free</div>' +
-          '<div class="w-full"><h1 class="fit-headline text-[clamp(62px,19vw,120px)] max-w-full">Vacancy</h1></div>' +
-          '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">The sofa is free. The treats are ready.</div>' +
+          '<div id="hero-badge" class="absolute top-[18px] right-[18px] bg-lime text-ink font-semibold text-xs tracking-[0.06em] uppercase px-[13px] py-2 rounded-full animate-wiggle">Sofa&#39;s empty</div>' +
+          '<div class="w-full"><h1 class="fit-headline text-[clamp(62px,19vw,120px)] max-w-full">No dog today</h1></div>' +
+          '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">The vacuum gets a day off. It&#39;s weirdly quiet.</div>' +
           '<div id="vacancy-photo" class="h-[265px] mx-[-8px] mt-[18px] animate-drift-slow"></div>' +
           "</div>";
 

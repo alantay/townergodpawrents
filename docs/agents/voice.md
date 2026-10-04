@@ -35,3 +35,4 @@ Add to this list whenever Alan reacts to a line, with the line itself as the exa
 - Dislikes: "lah" anywhere ("sofa's free lah", "Steady lah, too many taps").
 - Dislikes: "Who's been on our sofa, and what they got up to." (reads odd). Chose "A diary of whoever's on our sofa." for the site description.
 - Dislikes: "So the neighbours know why we keep turning down dinner." (forced joke). Chose "Furcast" (over "Fur forecast") / "When the sofa needs extra vacuuming, and when it doesn't." for the calendar. Heading and subline shouldn't repeat words.
+- Prefers the empty-sofa hero as the hosts' side, not availability: chose "Sofa's empty" / "No dog today" / "The vacuum gets a day off. It's weirdly quiet." over "Vacancy" / "The sofa is free. The treats are ready." (read as a rooms-available sign). Headline: "Just us" read weird; "Nobody here" and "No doggo" (internet-cute, not his voice) lost to "No dog today".

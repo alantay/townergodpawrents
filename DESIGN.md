@@ -139,7 +139,7 @@ Motion is one-shot and physical. Cards arrive as if set down. Hover nudges a car
 A sun-faded kitchen palette: oatmeal paper, deep olive-black ink one highlighter lime and a post-it yellow for tape, with each guest dog adding its own saturated colour.
 
 ### Primary
-- **Highlighter Lime** (`lime`): The single accent. It marks what's current or active: the "Here today" and "Sofa free" tags, the NEW tag, the current nav page, the active day chip and the skip link. Nothing else.
+- **Highlighter Lime** (`lime`): The single accent. It marks what's current or active: the "Here today" and "Sofa's empty" tags, the NEW tag, the current nav page, the active day chip and the skip link. Nothing else.
 - **Pale Lime Wash** (`lime-soft`): The quiet version of lime. It colours the italic tagline on a dark guest hero and the "photo soon" line under a blank print.
 - **Post-it Yellow** (`tape`): Every piece of tape: calendar sheets and polaroids (85%), the reaction picker's corners (90%), the scrap under a reaction count (75%), the tag behind the italic "Godpawrents" wordmark, and the strip carrying a dog's badge. Tape is translucent paper, so it has square corners.
 
