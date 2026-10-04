@@ -21,7 +21,7 @@ stays:
 
 <!-- entry-id: e020 -->
 
-In the early hours, the fellowship set forth for a new doggo battleground. Upon the narrow street en route, Guapo met a formidable foe. A gigantic cat lay there upon the stones, claiming the street as his own. Guapo froze. Whether in awe or in fear, none can say. Alan knew this was a battle not to be fought, and escaped with Guapo, to enter the street by another gate. We pick our battles. One does not simply walk past that cat.
+In the early hours, the fellowship set forth for a new battleground, the dog run of Barkdor. Upon the narrow street en route, Guapo met a formidable foe. A gigantic cat lay there upon the stones, claiming the street as his own. Guapo froze. Whether in awe or in fear, none can say. Alan knew this was a battle not to be fought, and escaped with Guapo, to enter the street by another gate. We pick our battles. One does not simply walk past that cat.
 
 ![Guapo frozen on the pavement, staring at a white cat sitting in the middle of a narrow street lined with bicycles](./guapo/guapo-cat-standoff.mp4)
 
