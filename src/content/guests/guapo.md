@@ -17,6 +17,14 @@ stays:
 
 ## 4 Oct
 
+### 9:24pm
+
+<!-- entry-id: e024 -->
+
+Night-time playground adventure.
+
+![Guapo running down a green playground slide at night, then grinning up at the camera with his tongue out](./guapo/guapo-playground-slide.mp4)
+
 ### 2:30pm
 
 <!-- entry-id: e023 -->
