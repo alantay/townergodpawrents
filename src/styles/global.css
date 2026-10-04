@@ -415,7 +415,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 }
 
 .diary-note p {
-  line-height: 28px;
+  line-height: 24px;
 }
 
 /* A caption slip is torn from a pad, like the guest collages are torn from a
