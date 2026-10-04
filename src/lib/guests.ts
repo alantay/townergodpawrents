@@ -251,7 +251,7 @@ export function parseDiary(body: string, stays: Stay[], guestId: string): DiaryD
     const media = matches.map((match) => ({ src: match[2], alt: match[1].trim(), kind: mediaKind(match[2]) }));
     const videos = media.filter((m) => m.kind === "video");
     if (videos.length > 1 || (videos.length === 1 && media.length > 1)) {
-      throw new Error(`[guests] ${guestId}: entry "${title}" mixes a video with other media — use one photo or one video`);
+      throw new Error(`[guests] ${guestId}: entry "${title}" mixes a video with other media. Use up to four photos, or one video on its own`);
     }
     if (media.length > 4) {
       throw new Error(`[guests] ${guestId}: entry "${title}" has ${media.length} prints — use at most four`);
