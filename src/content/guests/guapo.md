@@ -17,6 +17,14 @@ stays:
 
 ## 4 Oct
 
+### 7:48am
+
+<!-- entry-id: e022 -->
+
+Harassed by a much smaller dog, Guapo didn't bully him. Not bad.
+
+![Guapo on a path at the dog run while a small white dog follows close at his heels](./guapo/guapo-small-dog-harassment.mp4)
+
 ### 6:56am
 
 <!-- entry-id: e021 -->
