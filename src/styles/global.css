@@ -393,6 +393,11 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   box-shadow: 0 9px 17px rgb(92 76 41 / 0.08);
 }
 
+/* Video stays level: a transform on an ancestor makes <video> flicker. */
+.diary-entry--video {
+  transform: none;
+}
+
 .diary-dot {
   display: inline-block;
   width: 0.4rem;
@@ -481,7 +486,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 }
 
 @media (min-width: 640px) {
-  .diary-entry:nth-child(even) {
+  .diary-entry--step {
     margin-left: 1.5rem;
   }
 }

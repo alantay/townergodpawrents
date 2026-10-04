@@ -243,7 +243,7 @@ let skinIndex = 0;
               return (
                 <div class="reveal-card" id={`entry-${e.id}`}>
                   <article
-                    class:list={{ "diary-entry": true, "card-keyline": true, "card-keyline--dark": darkSkin, "rounded-[24px]": true, "p-[18px_19px_20px]": true }}
+                    class:list={{ "diary-entry": true, "diary-entry--video": !!video, "diary-entry--step": i % 2 === 1, "card-keyline": true, "card-keyline--dark": darkSkin, "rounded-[24px]": true, "p-[18px_19px_20px]": true }}
                     style={`background:${sk.bg};color:${sk.fg};--entry-tilt:${tilt(i)}`}
                   >
                   <div class="flex items-center gap-2">
@@ -330,7 +330,7 @@ let skinIndex = 0;
                     >
                       <div class="diary-slip-paper" aria-hidden="true"></div>
                       <div class="diary-note">
-                        <p class="text-[14px] text-ink text-pretty">{e.text}</p>
+                        <p class="text-[15px] text-ink text-pretty">{e.text}</p>
                       </div>
                     </div>
                   )}
