@@ -189,7 +189,7 @@ Colours repeat across guests. **Sofa Green** `#5F6E4F` is reserved for the share
 - **Headline** (400, 32px, 1): Section heads like "The full diary", plus the wordmark at 21–26px.
 - **Title** (400, 24px, 1): Diary day labels ("13 Sep") and card names (22–27px).
 - **Tagline** (italic 400, 20–22px): A dog's one-liner under its name, in Pale Lime Wash on the hero, and the rotating joke line in the homepage footer, in ink.
-- **Body** (400, 16px, 1.625, max ~52ch): Diary notes and intro copy. Slips set lines at a fixed 28px so the writing sits like ruled paper.
+- **Body** (400, 16px, 1.625, max ~52ch): Diary notes and intro copy. Slips use 15px text on fixed 24px lines so the writing sits like ruled paper.
 - **Chip** (600, 13px): Pills, nav link and day chips.
 - **Label** (600, 11–12px, 0.06–0.1em, uppercase): Stay ranges, "Here today", NEW tags and footer meta. Dates use tabular numbers.
 - **Script** (500–600, 18–40px, 1–1.15): Caveat, for words Alan or Weiwen have written onto the calendar: month names (40px), the pup-count note (22px), names on polaroids (20px) and on tape (18px).
@@ -232,7 +232,7 @@ Depth here is paper lying on paper. Shadows are soft and warm (a brown-olive tin
 Soft rectangles in stepped radii: 10px on a photo inside its print, 16px on the print mat, 24px on cards, 32px on the guest hero, and full pills for every chip and tag. Anything that's meant to be paper breaks the rectangle. Slips are torn by one of three `feTurbulence` displacement filters (`#torn-slip-0/1/2`, defined once in the layout) and rotated through the diary. Tape and reaction counts are `clip-path` polygons with ragged ends, each rotated −32° to +4°. Everything leans: cards ±1°, prints ±1.5° against their card, slips ±0.4° with their card, the picker −1.5°. Cutout dog photos have no box at all; they stand on the hero colour.
 
 ### Named Rules
-**The Nothing Sits Square Rule.** Cards, prints, slips, tape and stickers each carry a small rotation. Only functional chrome stays level: nav, chips, day strip and buttons. Video entries are also level, because a filter or transform on an ancestor makes `<video>` flicker.
+**The Nothing Sits Square Rule.** Cards, prints, slips, tape and stickers each carry a small rotation. Only functional chrome stays level: nav, chips, day strip and buttons. Video cards and their mats are also level, because a filter or transform on an ancestor makes `<video>` flicker; their caption slip leans 1.5° instead to keep the crooked feel.
 
 **The Real Tear Rule.** Torn edges come from the SVG filters on the paper layer only, never on the text. Where filters aren't supported, fall back to a 14px-radius keylined card rather than a hard rectangle.
 
@@ -260,7 +260,7 @@ A photo on a 7px cream mat with a Kraft keyline and 16px radius; the photo insid
 Stands in for a cut-out when a guest has no photo yet: one cream Polaroid per dog (88 × 107 proportions, print shadow), tilted −3° and +2.5° so a pair leans apart. The photo area is ruled in a dashed pencil line (`--color-line`) with "photo soon" in small Archivo label grey (dropped on prints under 90px wide). When the box is tall enough (200px, whatever its width, so a pair sharing the hero on a phone still gets it), the dog's name goes on the strip in Instrument Serif italic and a lime-soft italic line sits underneath: "Still waiting for them to sit still long enough." Smaller (chips, past-guest cards), just the blank prints. Where a frame is already drawn around it (the calendar polaroid and bar dot), only the dashed cream slot shows.
 
 ### Caption Slip
-A note too long for a print's mat goes on a torn cream slip. It's two layers: the torn, shadowed paper layer and the text layer, which is never distorted. The paper has a 5px Slip Fibre border that the tear cuts through. The text is 16px Archivo with 28px lines, inset 8px plus 16px from the edges so the writing clears the ragged edge.
+A note too long for a print's mat goes on a torn cream slip. It's two layers: the torn, shadowed paper layer and the text layer, which is never distorted. The paper has a 5px Slip Fibre border that the tear cuts through. The text is 15px Archivo with 24px lines, inset 8px plus 16px from the edges so the writing clears the ragged edge.
 
 ### Reaction Badge and Picker
 The empty badge is a faint (35% opacity) add-reaction icon in the card's top-right corner that comes to full strength on hover or focus. Once an entry has reactions, the badge becomes up to three stickers (2.1rem) piled −8° / 6° / −4° and overlapping by 0.85rem, with the most-used on top. The total sits on a Post-it Yellow tape scrap in one of three clip-path cuts. The picker is a torn cream strip hanging under the badge, taped at both corners with Post-it Yellow scraps. Its stickers scale up and tilt on hover. Errors appear as a small italic cream note under the badge.

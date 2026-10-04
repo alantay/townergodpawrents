@@ -323,6 +323,10 @@ export const printTilt = (i: number) => (i % 2 === 0 ? "1.5deg" : "-1.5deg");
 // flat, not another print thrown on the pile.
 export const noteTilt = (i: number) => (i % 2 === 0 ? "-0.4deg" : "0.4deg");
 
+// A video card stays level (a tilted ancestor makes <video> flicker), so its
+// slip carries the lean the card can't.
+export const videoNoteTilt = (i: number) => (i % 2 === 0 ? "-1.5deg" : "1.5deg");
+
 /**
  * Whether a caption is short enough to live on a single print's mat.
  * A few words read as something scribbled on the border; a sentence or two
