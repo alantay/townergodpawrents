@@ -17,6 +17,14 @@ stays:
 
 ## 4 Oct
 
+### 2:30pm
+
+<!-- entry-id: e023 -->
+
+We only managed to get Guapo to play at home. He likes a fast-moving ball, preferably not a flying one.
+
+![Guapo crouched on the living room floor, pouncing on a small yellow ball among scattered toys](./guapo/guapo-playing-at-home.mp4)
+
 ### 7:48am
 
 <!-- entry-id: e022 -->
