@@ -17,6 +17,14 @@ stays:
 
 ## 4 Oct
 
+### 6:56am
+
+<!-- entry-id: e021 -->
+
+One cat to rule them all, in all his glory. Guapo, in all his cowardice.
+
+![Guapo, seen from behind, staring at a white and grey cat sitting in the middle of a narrow back lane lined with bicycles](./guapo/guapo-king-cat.jpg)
+
 ### 6:55am
 
 <!-- entry-id: e020 -->
