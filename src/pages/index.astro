@@ -727,11 +727,11 @@ const footerLines = [
               tilt(i) +
               '">' +
               // The time is the link, stretched over the card so the whole card
-              // still opens the dog's page, while prints and video sit above
-              // it and keep their own taps.
+              // opens this entry in the dog's diary, while prints and video sit
+              // above it and keep their own taps.
               '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:' +
               sk.accent +
-              '"><a href="/guests/' + esc(e.id) + '" class="diary-entry-link" aria-label="' +
+              '"><a href="/guests/' + esc(e.id) + '#entry-' + esc(e.entryId) + '" class="diary-entry-link" aria-label="' +
               esc(e.who + "'s diary, " + e.time) +
               '">' +
               esc(e.time) +

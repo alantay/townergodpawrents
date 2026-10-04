@@ -668,9 +668,10 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   border-color: var(--color-lime);
 }
 
-/* Anchored days land below the sticky strip, not under it. */
-.diary-day {
-  scroll-margin-top: 4rem;
+/* Anchored days and entries land below the sticky strip, not under it. */
+.diary-day,
+.reveal-card {
+  scroll-margin-top: 4.5rem;
 }
 
 .new-tag {
