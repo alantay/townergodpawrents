@@ -103,6 +103,18 @@ a:focus-visible {
   border-radius: inherit;
 }
 
+/* The whole card is the link, so ring the card, inside its edge in the
+   card's own label colour. Ink would vanish on the dark skins. */
+.diary-entry-link:focus-visible {
+  outline: none;
+}
+
+.diary-entry-link:focus-visible::after {
+  border-radius: 24px;
+  outline: 2px solid currentColor;
+  outline-offset: -6px;
+}
+
 .diary-entry-card:has(.diary-entry-link) .diary-print-tap,
 .diary-entry-card:has(.diary-entry-link) video {
   position: relative;
@@ -147,7 +159,7 @@ entry-reactions {
 .reaction-toggle::before {
   content: "";
   position: absolute;
-  inset: -6px;
+  inset: -10px;
 }
 
 entry-reactions:not(.has-reactions) .reaction-toggle {
@@ -155,7 +167,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle {
   min-height: 1.6rem;
   padding: 0.1rem;
   border-color: transparent;
-  opacity: 0.35;
+  opacity: 0.6;
 }
 entry-reactions:not(.has-reactions) .reaction-summary-icons svg { width: 1.5rem; height: auto; }
 entry-reactions:not(.has-reactions) .reaction-toggle:hover,

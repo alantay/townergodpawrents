@@ -306,7 +306,7 @@ function mixHex(a: string, b: string, amount: number): string {
 export function diarySkin(base: string, i: number) {
   const skins = [
     { bg: mixHex(base, "#F7F2E7", 0.72), fg: "#1E2019", accent: mixHex(base, "#1E2019", 0.35) },
-    { bg: base, fg: "#F7F2E7", accent: mixHex(base, "#F7F2E7", 0.55) },
+    { bg: base, fg: "#F7F2E7", accent: "#F7F2E7" },
     { bg: mixHex(base, "#1E2019", 0.38), fg: "#F7F2E7", accent: mixHex(base, "#F7F2E7", 0.7) },
     { bg: mixHex(base, "#1E2019", 0.72), fg: "#F3F1E9", accent: mixHex(base, "#F7F2E7", 0.7) },
   ];
