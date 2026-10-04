@@ -648,6 +648,20 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   transition: background-color 200ms ease, border-color 200ms ease;
 }
 
+/* The homepage's way into a dog's full diary. */
+.day-chip--exit {
+  padding: 0.55rem 1.1rem;
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-size: 14px;
+}
+
+.day-chip--exit:hover {
+  background: var(--color-lime);
+  color: var(--color-ink);
+}
+
 /* Invisible vertical hit-area padding so the compact chip meets a ~44px
    touch target without growing its visible size. Fits inside the
    day-strip's own padding, so it doesn't get clipped by the strip's scroll. */
