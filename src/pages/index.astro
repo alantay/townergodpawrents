@@ -749,16 +749,16 @@ const footerLines = [
         // The way from the teaser to everything else: each live dog's whole
         // diary, shown every day so it's findable even on day one.
         var more = live.map((d) => ({ id: d.id, label: esc(d.name) + "&rsquo;s full diary" }));
-        // An outlined chip, not faint text: on a quiet day it's the only way
-        // from here to the rest of the stay.
+        // A solid ink chip, the heaviest thing under the cards: on a quiet day
+        // it's the only way from here to the rest of the stay.
         var moreHTML = more.length
-          ? '<div class="mt-4 flex gap-2.5 flex-wrap">' +
+          ? '<div class="mt-5 flex gap-2.5 flex-wrap">' +
             more
               .map(
                 (m) =>
                   '<a href="/guests/' +
                   esc(m.id) +
-                  '" class="day-chip">' +
+                  '" class="day-chip day-chip--exit">' +
                   m.label +
                   "</a>"
               )
