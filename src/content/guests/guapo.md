@@ -25,6 +25,14 @@ Apparently it's tiring to sleep all day. Now resting from all that sleep.
 
 ![Guapo asleep on the floor under a chair](./guapo/guapo-resting-from-sleep.jpg)
 
+### 7pm
+
+<!-- entry-id: e028 -->
+
+Weiwen trying to get Guapo to chase her at the carpark.
+
+![Weiwen running across a rooftop carpark with Guapo trotting behind](./guapo/guapo-carpark-chase.mp4)
+
 ### 6:30pm
 
 <!-- entry-id: e026 -->
