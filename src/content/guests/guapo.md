@@ -37,7 +37,7 @@ A short jog at the carpark instead. Weiwen trying to get Guapo to chase her.
 
 <!-- entry-id: e026 -->
 
-The haze is bad today, so no dog run for Guapo. Not that he's complaining.
+The haze is bad today, so no long walk to the dog run for Guapo. Not that he's complaining.
 
 ### 7:20am
 
