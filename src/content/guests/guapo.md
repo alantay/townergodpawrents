@@ -15,6 +15,16 @@ stays:
     checkOut: 2027-01-03
 ---
 
+## 5 Oct
+
+### 7:20am
+
+<!-- entry-id: e025 -->
+
+Coming back from the morning walk.
+
+![Guapo walking along the corridor on his way home from the morning walk](./guapo/guapo-morning-walk-return.mp4)
+
 ## 4 Oct
 
 ### 9:24pm
