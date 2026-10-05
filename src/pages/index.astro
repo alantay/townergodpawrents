@@ -405,6 +405,9 @@ const footerLines = [
       function noteTilt(i) {
         return i % 2 === 0 ? "-0.4deg" : "0.4deg";
       }
+      function videoNoteTilt(i) {
+        return i % 2 === 0 ? "-1.5deg" : "1.5deg";
+      }
       function fitsPrintMat(text) {
         return text.trim().split(/\s+/).length <= 8;
       }
@@ -629,7 +632,7 @@ const footerLines = [
               ? '<div class="diary-slip diary-slip--tear-' + (i % 3) + ' mt-4 mx-auto" style="' +
                 (noteWidth ? "width:min(100%," + noteWidth + "px);" : "") +
                 "transform:rotate(" +
-                noteTilt(i) +
+                (video ? videoNoteTilt(i) : noteTilt(i)) +
                 ')"><div class="diary-slip-paper" aria-hidden="true"></div>' +
                 '<div class="diary-note"><p class="text-[14px] text-ink text-pretty">' +
                 esc(e.text) +
