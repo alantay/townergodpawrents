@@ -17,6 +17,14 @@ stays:
 
 ## 5 Oct
 
+### 8:45pm
+
+<!-- entry-id: e027 -->
+
+Apparently it's tiring to sleep all day. Now resting from all that sleep.
+
+![Guapo asleep on the floor under a chair](./guapo/guapo-resting-from-sleep.jpg)
+
 ### 6:30pm
 
 <!-- entry-id: e026 -->
