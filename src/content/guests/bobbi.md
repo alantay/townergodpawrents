@@ -8,5 +8,5 @@ badge: Sheep in disguise
 tagline: derpy by default, still working out how play works
 stays:
   - checkIn: 2026-10-08
-    checkOut: 2026-10-11
+    checkOut: 2026-10-12
 ---
