@@ -17,6 +17,12 @@ stays:
 
 ## 5 Oct
 
+### 6:30pm
+
+<!-- entry-id: e026 -->
+
+The haze is bad today, so no dog run for Guapo. Not that he's complaining.
+
 ### 7:20am
 
 <!-- entry-id: e025 -->
