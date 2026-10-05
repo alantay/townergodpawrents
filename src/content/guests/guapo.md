@@ -29,7 +29,7 @@ Apparently it's tiring to sleep all day. Now resting from all that sleep.
 
 <!-- entry-id: e028 -->
 
-Weiwen trying to get Guapo to chase her at the carpark.
+A short jog at the carpark instead. Weiwen trying to get Guapo to chase her.
 
 ![Weiwen running across a rooftop carpark with Guapo trotting behind](./guapo/guapo-carpark-chase.mp4)
 
