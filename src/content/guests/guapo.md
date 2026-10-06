@@ -25,6 +25,14 @@ Guapo being pretty chill with a new friend, Finn.
 
 ![Guapo and Finn the Pomeranian lying on the grass, both grinning at the camera](./guapo/guapo-chill-with-finn.jpg)
 
+### 6:20pm
+
+<!-- entry-id: e033 -->
+
+Alan trying to play ball with Guapo, and Guapo humouring him.
+
+![Guapo trotting beside a basketball in the open-air carpark](./guapo/guapo-humouring-alan-ball.mp4)
+
 ### 5:20pm
 
 <!-- entry-id: e031 -->
