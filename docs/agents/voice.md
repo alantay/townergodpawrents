@@ -8,6 +8,7 @@ The voice is Alan's. Personal, warm, a bit dry. Like telling a neighbour what th
 
 - **Go light on Singlish.** A word Alan already uses is fine ("manja"). **Never "lah"**, or any particle like it (leh, lor, sia): AI can't tell when it fits, so it reads fake. Don't reach for Singlish phrases to sound local.
 - **No em dashes. Ever.** Use a full stop or a comma instead. This covers en dashes used as dashes too.
+- **Ranges are the exception: use an en dash.** "13–23 Sep", "30 Sep – 13 Oct", "9–11am". Here the dash means "to", not a pause in the sentence.
 - **Not a business.** No marketing copy, calls to action, pricing, testimonials, or FAQs.
 
 ## Diary entries
