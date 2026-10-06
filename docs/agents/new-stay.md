@@ -42,4 +42,4 @@ stays:
 - The cut-out stays a PNG with transparency. **Don't** run it through `scripts/prep-photo.sh`. If the source file is huge, shrink it with `sips -Z 1400 <file>`.
 - The body can start empty. Entries arrive with the add-entry flow.
 
-Run `npm run build`, make one commit to main, and push.
+Run `npm run build`, then follow **Pushing changes** in `AGENTS.md`. For content-only guest or stay changes, make one commit to main and push; accompanying architecture changes require a PR.

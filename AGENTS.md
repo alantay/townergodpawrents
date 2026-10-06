@@ -30,6 +30,10 @@ Single-context layout (`CONTEXT.md` + `docs/adr/` at the repo root). See `docs/a
 
 ## Development
 
+### Pushing changes
+
+Plain diary entries (text and media only) may be committed and pushed directly to `main`. Any architecture change must go on a branch and through a PR, including changes to rendering, parsing, shared code, or site behaviour needed for an entry. If a change includes both an entry and architecture work, submit the whole change as a PR.
+
 When starting the dev server, use background mode:
 
 ```
