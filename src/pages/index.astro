@@ -325,11 +325,11 @@ const footerLines = [
       }
       function stayLabel(s) {
         if (s.checkIn === s.checkOut) return fmtDay(s.checkIn);
-        // Same month: "13–23 Sep", not "13 Sep–23 Sep".
+        // Same month: "13-23 Sep", not "13 Sep - 23 Sep".
         if (s.checkIn.slice(0, 7) === s.checkOut.slice(0, 7)) {
-          return Number(s.checkIn.slice(8)) + "–" + fmtDay(s.checkOut);
+          return Number(s.checkIn.slice(8)) + "-" + fmtDay(s.checkOut);
         }
-        return fmtDay(s.checkIn) + "–" + fmtDay(s.checkOut);
+        return fmtDay(s.checkIn) + " - " + fmtDay(s.checkOut);
       }
       // "Day 6 of 11", so an owner mid-stay knows where they are in it.
       // A one-night stay has nothing to count.
