@@ -17,6 +17,14 @@ stays:
 
 ## 6 Oct
 
+### 6:50pm
+
+<!-- entry-id: e032 -->
+
+Guapo being pretty chill with a new friend, Finn.
+
+![Guapo and Finn the Pomeranian lying on the grass, both grinning at the camera](./guapo/guapo-chill-with-finn.jpg)
+
 ### 5:20pm
 
 <!-- entry-id: e031 -->
