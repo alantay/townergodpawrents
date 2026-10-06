@@ -17,6 +17,14 @@ stays:
 
 ## 6 Oct
 
+### 5:20pm
+
+<!-- entry-id: e031 -->
+
+Swooning over how adorable Guapo looks when he rubs his face with his tiny paws. Cat in a dog's body, exhibit A.
+
+![Guapo curled up on a grey cushion, rubbing his face with his paw](./guapo/guapo-face-rub-paws.mp4)
+
 ### 9:13am
 
 <!-- entry-id: e030 -->
