@@ -21,7 +21,7 @@ stays:
 
 <!-- entry-id: e030 -->
 
-Sleeping photo of the day.
+SPOTD. Sleeping position of the day.
 
 ![Guapo asleep on his side beside a dark grey cushion](./guapo/guapo-sleeping-day-side.jpg)
 
