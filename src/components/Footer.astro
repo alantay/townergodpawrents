@@ -1,0 +1,24 @@
+---
+// Footer sign-off, picked at random on each visit. Nobody finds this site
+// except through a friend or neighbour, so none of these invite people in.
+const footerLines = [
+  "Word of mouth only. Mostly the dogs' mouths.",
+  "Sofa's been furrier than usual lately.",
+  "One sofa, many dogs, very little room for humans.",
+  "The vacuum is stuck with fur… again.",
+  "Every dog goes home. The fur stays.",
+];
+---
+
+<footer class="entrance entrance-delay-3 mt-12 border-t-[1.5px] border-line pt-[18px]">
+  <div id="footer-line" class="font-serif italic text-[22px] leading-[1.2]">{footerLines[0]}</div>
+  <script is:inline define:vars={{ footerLines }}>
+    // A different line each visit. Runs before the footer's entrance
+    // animation starts, so nobody sees the swap.
+    document.getElementById("footer-line").textContent =
+      footerLines[Math.floor(Math.random() * footerLines.length)];
+  </script>
+  <div class="mt-2.5 text-xs tracking-[0.1em] uppercase text-label">
+    Towner &middot; No dog of our own, just everyone else's
+  </div>
+</footer>

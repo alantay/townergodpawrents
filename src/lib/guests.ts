@@ -112,13 +112,22 @@ export function pickToday(guests: GuestData[], todayISO: string): TodayResult {
 }
 
 /**
- * Guests whose most recent stay has ended, most recently departed first.
- * A dog appears once however many times they've stayed.
+ * The newest stay that's already over, if any. Not the same as latestStay: a
+ * dog with a return visit booked would otherwise be dated from the future.
+ */
+export function lastEndedStay(g: Pick<GuestData, "stays">, todayISO: string): Stay | undefined {
+  return staysNewestFirst(g.stays).find((s) => s.checkOut < todayISO);
+}
+
+/**
+ * Guests with at least one stay behind them, most recently departed first.
+ * A dog appears once however many times they've stayed, and stays listed
+ * between visits.
  */
 export function pastGuests(guests: GuestData[], todayISO: string): GuestData[] {
   return guests
-    .filter((g) => latestStay(g).checkOut < todayISO)
-    .sort((a, b) => latestStay(b).checkOut.localeCompare(latestStay(a).checkOut));
+    .filter((g) => lastEndedStay(g, todayISO))
+    .sort((a, b) => lastEndedStay(b, todayISO)!.checkOut.localeCompare(lastEndedStay(a, todayISO)!.checkOut));
 }
 
 // ---- dogs ----

@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
 import Cutout from "../../components/Cutout.astro";
 import {
   parseDiary,
@@ -118,7 +119,7 @@ const hasArrived = started.length > 0;
 const daysAway = next ? Math.round((Date.parse(next.checkIn) - Date.parse(today)) / 86400000) : 0;
 const comingIn = (n: number) => (n === 1 ? "Coming tomorrow" : `Coming · in ${n} days`);
 const emptyLines = {
-  arrived: "No diary entries yet. Check back soon.",
+  arrived: "Nothing written yet. Busy settling in.",
   waiting: `Nothing written yet. ${name} ${dogNames(name).length > 1 ? "haven't" : "hasn't"} met the sofa.`,
 };
 // Labels are formatted here so the browser script below doesn't need its own
@@ -205,9 +206,11 @@ let skinIndex = 0;
     <>
     {days.length > 1 && (
       <nav class="day-strip" aria-label="Jump to a day">
-        {days.map((day) => (
-          <a href={`#day-${day.iso}`} class="day-chip" data-day={day.iso}>{day.label}</a>
-        ))}
+        <div class="day-strip-track">
+          {days.map((day) => (
+            <a href={`#day-${day.iso}`} class="day-chip" data-day={day.iso}>{day.label}</a>
+          ))}
+        </div>
       </nav>
     )}
 
@@ -353,7 +356,7 @@ let skinIndex = 0;
     {days.length > 1 && (
       <script is:inline>
         (function () {
-          var strip = document.querySelector(".day-strip");
+          var strip = document.querySelector(".day-strip-track");
           var chips = document.querySelectorAll(".day-chip");
           var sections = document.querySelectorAll(".diary-day");
           if (!strip || !chips.length || !sections.length) return;
@@ -364,8 +367,23 @@ let skinIndex = 0;
           var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
           var current = null;
 
+          // Fade whichever edge has more days hiding past it.
+          function updateFade() {
+            var max = strip.scrollWidth - strip.clientWidth;
+            strip.style.setProperty("--fade-l", strip.scrollLeft > 2 ? "40px" : "0px");
+            strip.style.setProperty("--fade-r", strip.scrollLeft < max - 2 ? "40px" : "0px");
+          }
+          strip.addEventListener("scroll", updateFade, { passive: true });
+          window.addEventListener("resize", updateFade);
+          updateFade();
+
           function setActive(iso) {
-            chips.forEach(function (c) { c.classList.toggle("active", c.dataset.day === iso); });
+            chips.forEach(function (c) {
+              var on = c.dataset.day === iso;
+              c.classList.toggle("active", on);
+              if (on) c.setAttribute("aria-current", "location");
+              else c.removeAttribute("aria-current");
+            });
             var chip = chipByDay[iso];
             if (!chip) return;
             var target = chip.offsetLeft - (strip.clientWidth - chip.offsetWidth) / 2;
@@ -491,7 +509,5 @@ let skinIndex = 0;
       if (empty) empty.textContent = started.length ? emptyLines.arrived : emptyLines.waiting;
     })();
   </script>
-  <footer class="entrance entrance-delay-3 mt-12 border-t-[1.5px] border-line pt-[18px] text-xs tracking-[0.1em] uppercase text-label">
-    Towner &middot; No dog of our own, just everyone else's
-  </footer>
+  <Footer />
 </Layout>

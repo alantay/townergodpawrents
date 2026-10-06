@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 import Cutout from "../components/Cutout.astro";
 import { Image } from "astro:assets";
 import sofaCutout from "../assets/sofa-cutout-v2.png";
@@ -145,16 +146,6 @@ const guestsJson = JSON.stringify(guestsForClient).replace(/</g, "\\u003c");
 
 const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
 
-// Footer sign-off, picked at random on each visit. Nobody finds this page
-// except through a friend or neighbour, so none of these invite people in.
-const footerLines = [
-  "Word of mouth only. Mostly the dogs' mouths.",
-  "Sofa's been furrier than usual lately.",
-  "One sofa, many dogs, very little room for humans.",
-  "The vacuum is stuck with fur… again.",
-  "Every dog goes home. The fur stays.",
-];
-
 // Link previews don't say who's here today: chat apps cache them for weeks,
 // so a build-time "today" goes stale in the thread. The Layout's default
 // lineup of every dog so far never does.
@@ -208,18 +199,7 @@ const footerLines = [
     <div id="past-preview-app"></div>
   </section>
 
-  <footer class="entrance entrance-delay-3 mt-12 border-t-[1.5px] border-line pt-[18px]">
-    <div id="footer-line" class="font-serif italic text-[22px] leading-[1.2]">{footerLines[0]}</div>
-    <script is:inline define:vars={{ footerLines }}>
-      // A different line each visit. Runs before the footer's entrance
-      // animation starts, so nobody sees the swap.
-      document.getElementById("footer-line").textContent =
-        footerLines[Math.floor(Math.random() * footerLines.length)];
-    </script>
-    <div class="mt-2.5 text-xs tracking-[0.1em] uppercase text-label">
-    Towner &middot; No dog of our own, just everyone else's
-    </div>
-  </footer>
+  <Footer />
 
   <!-- Hidden bank of pre-optimized cut-outs, one per guest. The client script
        re-parents (moves, doesn't clone) the node it needs into whichever
@@ -287,9 +267,19 @@ const footerLines = [
       function stayOn(g, todayISO) {
         return g.stays.filter((s) => s.checkIn <= todayISO && todayISO <= s.checkOut)[0];
       }
-      // Stays arrive newest first, so the most recent one is simply the first.
-      function latestStay(g) {
-        return g.stays[0];
+      // The newest stay that's already over. Not simply the newest stay: a
+      // dog with a return visit booked would otherwise date from the future.
+      // Stays arrive newest first.
+      function lastEndedStay(g, todayISO) {
+        return g.stays.filter((s) => s.checkOut < todayISO)[0];
+      }
+      // Guests with a stay behind them, most recently departed first. Each
+      // carries that stay as `ended`.
+      function pastGuests(guests, todayISO) {
+        return guests
+          .filter((g) => lastEndedStay(g, todayISO))
+          .map((g) => Object.assign({}, g, { ended: lastEndedStay(g, todayISO) }))
+          .sort((a, b) => (a.ended.checkOut < b.ended.checkOut ? 1 : a.ended.checkOut > b.ended.checkOut ? -1 : 0));
       }
       // What the guest did on a given day — the homepage only ever cares
       // about today, however long the stay runs.
@@ -308,14 +298,7 @@ const footerLines = [
         if (live.length > 0) {
           return { state: live.length === 1 ? "one" : "multi", live: live };
         }
-        var past = guests
-          .filter((g) => latestStay(g).checkOut < todayISO)
-          .sort((a, b) => {
-            var x = latestStay(a).checkOut,
-              y = latestStay(b).checkOut;
-            return x < y ? 1 : x > y ? -1 : 0;
-          });
-        return { state: "vacancy", live: [], lastGuest: past[0] };
+        return { state: "vacancy", live: [], lastGuest: pastGuests(guests, todayISO)[0] };
       }
 
       var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -595,7 +578,7 @@ const footerLines = [
             '<div class="text-sm">' +
             esc(lastGuest.breed) +
             " · checked out " +
-            fmtDay(latestStay(lastGuest).checkOut) +
+            fmtDay(lastGuest.ended.checkOut) +
             "</div></div></a>";
         }
         return html;
@@ -811,7 +794,7 @@ const footerLines = [
               esc(g.name) +
               "</div>" +
               '<div class="text-[13px] text-muted">' +
-              stayLabel(latestStay(g)) +
+              stayLabel(g.ended) +
               "</div></div></a>"
             );
           })
@@ -903,13 +886,8 @@ const footerLines = [
         appEl.hidden = false;
 
         var liveIds = result.live.map((d) => d.id);
-        var past = guests
-          .filter((g) => latestStay(g).checkOut < today && liveIds.indexOf(g.id) === -1)
-          .sort((a, b) => {
-            var x = latestStay(a).checkOut,
-              y = latestStay(b).checkOut;
-            return x < y ? 1 : x > y ? -1 : 0;
-          })
+        var past = pastGuests(guests, today)
+          .filter((g) => liveIds.indexOf(g.id) === -1)
           .slice(0, 4);
         var previewEl = document.getElementById("past-preview-app");
         if (past.length > 0) {
