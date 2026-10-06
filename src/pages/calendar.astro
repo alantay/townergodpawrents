@@ -102,7 +102,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                         data-check-out={s.checkOut}
                         aria-hidden="true"
                       >
-                        {!seg.continued && (
+                        {(!seg.continued || seg.span === 1) && (
                           <span class="cal-bar-avatar" style={`background:${s.bgColor}`}>
                             {s.photo ? <Image src={s.photo} alt="" width={48} class="h-full w-full object-contain" /> : <Cutout name={s.name} bare />}
                           </span>
@@ -245,6 +245,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
   }
   .cal-week {
     position: relative;
+    container-type: inline-size;
     row-gap: 3px;
     padding: 6px 0 8px;
   }
@@ -347,10 +348,14 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
   .cal-bar--continued.is-upcoming::before { border-left: 0; }
   .cal-bar--carries.is-upcoming::before { border-right: 0; }
 
-  /* A one-day strip only has room for the photo; the polaroid below
-     names the dog. */
+  /* On a phone a one-day strip only has room for the photo; the polaroid
+     below names the dog. A wider sheet has room for the name too. */
   .cal-bar--short { justify-content: center; padding: 0 6px; }
   .cal-bar--short .cal-bar-name { display: none; }
+  @container (min-width: 500px) {
+    .cal-bar--short { justify-content: flex-start; }
+    .cal-bar--short:not(.cal-bar--continued) .cal-bar-name { display: block; }
+  }
 
   .cal-bar-avatar {
     flex: none;

@@ -243,7 +243,7 @@ let skinIndex = 0;
                     ? Math.min(printWidth(prints[0].img.width, prints[0].img.height) + 120, 500)
                     : null;
               return (
-                <div class="reveal-card" id={`entry-${e.id}`}>
+                <div class="diary-card" id={`entry-${e.id}`}>
                   <article
                     class:list={{ "diary-entry": true, "diary-entry--video": !!video, "diary-entry--step": i % 2 === 1, "card-keyline": true, "card-keyline--dark": darkSkin, "rounded-[24px]": true, "p-[18px_19px_20px]": true }}
                     style={`background:${sk.bg};color:${sk.fg};--entry-tilt:${tilt(i)}`}

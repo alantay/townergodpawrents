@@ -687,8 +687,11 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   border-color: var(--color-lime);
 }
 
-/* Anchored days and entries land below the sticky strip, not under it. */
+/* Anchored days and entries land below the sticky strip, not under it.
+   Diary entries skip the scroll reveal, so a jump from the day strip
+   lands on cards that are already there. */
 .diary-day,
+.diary-card,
 .reveal-card {
   scroll-margin-top: 4.5rem;
 }
