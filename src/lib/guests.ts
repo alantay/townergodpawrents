@@ -345,3 +345,9 @@ export const PRINT_MAT = 7;
 export function printWidth(w: number, h: number): number {
   return Math.round(PRINT_MAX_HEIGHT * (w / h)) + PRINT_MAT * 2;
 }
+
+/** Diary captions allow strikethrough; all authored HTML stays escaped. */
+export function diaryTextHtml(text: string): string {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/~~([^~]+)~~/g, "<del>$1</del>");
+}

@@ -7,6 +7,7 @@ import Nav from "../../components/Nav.astro";
 import Cutout from "../../components/Cutout.astro";
 import {
   parseDiary,
+  diaryTextHtml,
   dogNames,
   stayLabel,
   staysNewestFirst,
@@ -295,7 +296,7 @@ let skinIndex = 0;
                         />
                       </button>
                       {matCaption && (
-                        <p class="mt-[9px] px-1 text-center text-[13.5px] leading-snug text-pretty text-ink/70">{e.text}</p>
+                        <p class="mt-[9px] px-1 text-center text-[13.5px] leading-snug text-pretty text-ink/70" set:html={diaryTextHtml(e.text)} />
                       )}
                     </div>
                   )}
@@ -331,13 +332,13 @@ let skinIndex = 0;
                     >
                       <div class="diary-slip-paper" aria-hidden="true"></div>
                       <div class="diary-note">
-                        <p class="text-[15px] text-ink text-pretty">{e.text}</p>
+                        <p class="text-[15px] text-ink text-pretty" set:html={diaryTextHtml(e.text)} />
                       </div>
                     </div>
                   )}
 
                   {e.text && !matCaption && !noteCaption && (
-                    <p class={`${prints.length > 0 ? "mt-4" : "mt-2"} text-base leading-relaxed text-pretty max-w-[58ch]`}>{e.text}</p>
+                    <p class={`${prints.length > 0 ? "mt-4" : "mt-2"} text-base leading-relaxed text-pretty max-w-[58ch]`} set:html={diaryTextHtml(e.text)} />
                   )}
                   <entry-reactions data-guest={entry.id} data-entry={e.id} />
                   </article>

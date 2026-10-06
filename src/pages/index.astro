@@ -635,7 +635,7 @@ const footerLines = [
                 (video ? videoNoteTilt(i) : noteTilt(i)) +
                 ')"><div class="diary-slip-paper" aria-hidden="true"></div>' +
                 '<div class="diary-note"><p class="text-[14px] text-ink text-pretty">' +
-                esc(e.text) +
+                esc(e.text).replace(/~~([^~]+)~~/g, "<del>$1</del>") +
                 "</p></div></div>"
               : "";
             var mediaHTML = "";
@@ -676,7 +676,7 @@ const footerLines = [
                 e.media[0].height +
                 '" loading="lazy" decoding="async" class="block h-auto w-full rounded-[10px]"></button>' +
                 (matCaption
-                  ? '<p class="mt-[9px] px-1 text-center text-[13.5px] leading-snug text-pretty text-ink/70">' + esc(e.text) + "</p>"
+                  ? '<p class="mt-[9px] px-1 text-center text-[13.5px] leading-snug text-pretty text-ink/70">' + esc(e.text).replace(/~~([^~]+)~~/g, "<del>$1</del>") + "</p>"
                   : "") +
                 "</div>" +
                 noteHTML;
@@ -714,7 +714,7 @@ const footerLines = [
               ? '<p class="' +
                 (e.media.length ? "mt-4" : "mt-2") +
                 ' text-base leading-relaxed text-pretty">' +
-                esc(e.text) +
+                esc(e.text).replace(/~~([^~]+)~~/g, "<del>$1</del>") +
                 "</p>"
               : "";
             return (

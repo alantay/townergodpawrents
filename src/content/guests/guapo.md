@@ -15,6 +15,16 @@ stays:
     checkOut: 2027-01-03
 ---
 
+## 6 Oct
+
+### 8:10am
+
+<!-- entry-id: e029 -->
+
+Post breakfast ~~nap~~ coma.
+
+![Guapo asleep on the floor with his chin resting on a chair leg](./guapo/guapo-breakfast-coma.jpg)
+
 ## 5 Oct
 
 ### 8:45pm

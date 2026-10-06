@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { dogNames, listNames, parseDiary } from "./guests.ts";
+import { diaryTextHtml, dogNames, listNames, parseDiary } from "./guests.ts";
 
 test("parseDiary keeps two prints on one entry in markdown order", () => {
   const [day] = parseDiary(
@@ -106,4 +106,10 @@ test("listNames joins dogs with commas and a final ampersand", () => {
   assert.equal(listNames(["Luna"]), "Luna");
   assert.equal(listNames(["Luna", "Milk"]), "Luna & Milk");
   assert.equal(listNames(["Luna", "Hugo", "Luffy"]), "Luna, Hugo & Luffy");
+});
+
+test("diary captions strike words while escaping authored HTML", () => {
+  assert.equal(diaryTextHtml("Post breakfast ~~nap~~ coma."), "Post breakfast <del>nap</del> coma.");
+  assert.equal(diaryTextHtml("<script> & ~~<b>nap</b>~~"), "&lt;script&gt; &amp; <del>&lt;b&gt;nap&lt;/b&gt;</del>");
+  assert.equal(diaryTextHtml("An unfinished ~~nap"), "An unfinished ~~nap");
 });
