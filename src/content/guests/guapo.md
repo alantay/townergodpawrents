@@ -17,6 +17,16 @@ stays:
 
 ## 6 Oct
 
+### 9:13am
+
+<!-- entry-id: e030 -->
+
+Sleeping photo of the day.
+
+![Guapo asleep on his side beside a dark grey cushion](./guapo/guapo-sleeping-day-side.jpg)
+
+![Guapo asleep on the floor beside a cushion, wearing his orange collar](./guapo/guapo-sleeping-day-collar.jpg)
+
 ### 8:10am
 
 <!-- entry-id: e029 -->
