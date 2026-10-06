@@ -77,7 +77,7 @@ One of Tiny's many manja moments ❤️
 npm run build
 ```
 
-The build fails on a day outside every stay, an entry with no day above it, or a missing image. Fix it and don't push a broken build. Then make **one commit** straight to main and push (Vercel deploys from main):
+The build fails on a day outside every stay, an entry with no day above it, or a missing image. Fix it and don't push a broken build. Follow **Pushing changes** in `AGENTS.md` before shipping. For a plain entry, make **one commit** straight to main and push (Vercel deploys from main):
 
 ```sh
 git add src/content/guests && git commit -m "Add <Guest> <time> <few-word> entry" && git push
