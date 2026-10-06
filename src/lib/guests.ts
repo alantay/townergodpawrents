@@ -147,7 +147,11 @@ export function fmtDay(iso: string): string {
 
 export function stayLabel(s: Stay): string {
   if (s.checkIn === s.checkOut) return fmtDay(s.checkIn);
-  return `${fmtDay(s.checkIn)} – ${fmtDay(s.checkOut)}`;
+  // Same month: "13-23 Sep", not "13 Sep - 23 Sep".
+  if (s.checkIn.slice(0, 7) === s.checkOut.slice(0, 7)) {
+    return `${Number(s.checkIn.slice(8))}-${fmtDay(s.checkOut)}`;
+  }
+  return `${fmtDay(s.checkIn)} - ${fmtDay(s.checkOut)}`;
 }
 
 // ---- diary ----
