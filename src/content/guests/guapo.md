@@ -17,6 +17,14 @@ stays:
 
 ## 7 Oct
 
+### 9:42pm
+
+<!-- entry-id: e036 -->
+
+Rambo: Reluctant Warrior starring Guapo
+
+![Guapo facing the camera with his orange collar across his forehead](./guapo/guapo-reluctant-warrior.jpg)
+
 ### 1:55pm
 
 <!-- entry-id: e035 -->
