@@ -480,13 +480,13 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var chips = [];
         if (!pair) {
           var stay = stayOn(live[0], today);
-          chips.push({ label: stayLabel(stay), bg: "#F7F2E7" });
-          if (stayDay(stay, today)) chips.push({ label: stayDay(stay, today), bg: "#F7F2E7" });
+          chips.push({ label: stayLabel(stay) });
+          if (stayDay(stay, today)) chips.push({ label: stayDay(stay, today) });
           if (live[0].badge) chips.push({ label: live[0].badge, tape: true });
         } else {
           live.forEach((d) => {
             var day = goingHome(d, today) ? "going home today" : stayDay(stayOn(d, today), today).toLowerCase();
-            chips.push({ label: d.name + " · " + (day || d.breed), bg: "#F7F2E7" });
+            chips.push({ label: d.name + " · " + (day || d.breed) });
           });
           chips.push({ label: groupWord(dogs.length) + " dogs, one sofa", tape: true });
         }
@@ -495,8 +495,8 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           .map(
             (c) =>
               (c.tape
-                ? '<span class="text-[13px] font-semibold px-[11px] py-[7px] rounded-none -rotate-2 text-ink bg-tape">'
-                : '<span class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink" style="background:' + c.bg + '">') +
+                ? '<span class="badge-tape">'
+                : '<span class="fact-chip">') +
               esc(c.label) +
               "</span>"
           )
@@ -508,7 +508,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             '<div class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:' +
             color +
             '">' +
-            '<div id="hero-badge" class="absolute top-[18px] right-[18px] bg-lime text-ink font-semibold text-xs tracking-[0.06em] uppercase px-[13px] py-2 rounded-full animate-wiggle">' +
+            '<div id="hero-badge" class="absolute top-[18px] right-[18px] status-tag animate-wiggle">' +
             (leaving ? "Going home today" : "Here today") +
             "</div>" +
             '<div class="w-full"><h1 class="fit-headline ' +
@@ -533,7 +533,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       function heroVacancyHTML(lastGuest, next) {
         var html =
           '<div class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:#5F6E4F">' +
-          '<div id="hero-badge" class="absolute top-[18px] right-[18px] bg-lime text-ink font-semibold text-xs tracking-[0.06em] uppercase px-[13px] py-2 rounded-full animate-wiggle">Sofa&#39;s empty</div>' +
+          '<div id="hero-badge" class="absolute top-[18px] right-[18px] status-tag animate-wiggle">Sofa&#39;s empty</div>' +
           '<div class="w-full"><h1 class="fit-headline text-[clamp(62px,19vw,120px)] max-w-full">No dog today</h1></div>' +
           '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">The vacuum gets a day off. It&#39;s weirdly quiet.</div>' +
           '<div id="vacancy-photo" class="h-[265px] mx-[-8px] mt-[18px] animate-drift-slow"></div>' +
@@ -617,7 +617,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
                 "transform:rotate(" +
                 (video ? videoNoteTilt(i) : noteTilt(i)) +
                 ')"><div class="diary-slip-paper" aria-hidden="true"></div>' +
-                '<div class="diary-note"><p class="text-[14px] text-ink text-pretty">' +
+                '<div class="diary-note"><p class="slip-caption">' +
                 esc(e.text).replace(/~~([^~]+)~~/g, "<del>$1</del>") +
                 "</p></div></div>"
               : "";
@@ -625,7 +625,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             if (video) {
               var vw = printWidth(video.width, video.height);
               mediaHTML =
-                '<div class="diary-print mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px]" style="width:min(100%,' +
+                '<div class="diary-print mt-[15px]" style="width:min(100%,' +
                 vw +
                 'px)"><video src="' +
                 esc(video.src) +
@@ -633,7 +633,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
                 esc(video.poster) +
                 '" controls preload="metadata" aria-label="' +
                 esc(video.alt || e.who + ", " + e.time) +
-                '" class="block h-auto w-full rounded-[10px]" style="aspect-ratio:' +
+                '" class="print-media" style="aspect-ratio:' +
                 video.width +
                 "/" +
                 video.height +
@@ -643,7 +643,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               // note on a Polaroid's border.
               var w = printWidth(e.media[0].width, e.media[0].height);
               mediaHTML =
-                '<div class="diary-print mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px]" style="width:min(100%,' +
+                '<div class="diary-print mt-[15px]" style="width:min(100%,' +
                 w +
                 "px);transform:rotate(" +
                 printTilt(i) +
@@ -657,21 +657,21 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
                 e.media[0].width +
                 '" height="' +
                 e.media[0].height +
-                '" loading="lazy" decoding="async" class="block h-auto w-full rounded-[10px]"></button>' +
+                '" loading="lazy" decoding="async" class="print-media"></button>' +
                 (matCaption
-                  ? '<p class="mt-[9px] px-1 text-center text-[13.5px] leading-snug text-pretty text-ink/70">' + esc(e.text).replace(/~~([^~]+)~~/g, "<del>$1</del>") + "</p>"
+                  ? '<p class="print-caption">' + esc(e.text).replace(/~~([^~]+)~~/g, "<del>$1</del>") + "</p>"
                   : "") +
                 "</div>" +
                 noteHTML;
             } else if (e.media.length) {
               mediaHTML =
                 '<div class="diary-prints' +
-                (e.media.length === 2 ? " diary-prints--pair" : "") +
+                (e.media.length === 2 ? " diary-prints--pair" : e.media.length === 4 ? " diary-prints--quad" : "") +
                 ' mt-[15px]">' +
                 e.media.map(function (photo, photoIndex) {
                   var w = printWidth(photo.width, photo.height);
                   return (
-                    '<button type="button" aria-label="Enlarge photo" class="diary-print diary-print-tap block mx-auto bg-cream card-keyline rounded-[16px] p-[7px] cursor-zoom-in" style="width:min(100%,' +
+                    '<button type="button" aria-label="Enlarge photo" class="diary-print diary-print-tap cursor-zoom-in" style="width:min(100%,' +
                     w +
                     "px);transform:rotate(" +
                     printTilt(i + photoIndex) +
@@ -684,7 +684,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
                     photo.width +
                     '" height="' +
                     photo.height +
-                    '" loading="lazy" decoding="async" class="block h-auto w-full rounded-[10px]">' +
+                    '" loading="lazy" decoding="async" class="print-media">' +
                     "</button>"
                   );
                 }).join("") +
@@ -705,7 +705,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               (darkSkin ? " card-keyline--dark" : "") +
               ' diary-entry-card' +
               (video ? " diary-entry-card--video" : "") +
-              ' rounded-[24px] p-[17px_19px]" style="background:' +
+              ' entry-surface entry-surface--compact" style="background:' +
               sk.bg +
               ";color:" +
               sk.fg +
@@ -908,7 +908,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var appEl = document.getElementById("home-app");
         appEl.innerHTML =
           '<div role="status" class="rounded-[24px] bg-cream card-keyline overflow-hidden py-[13px]">' +
-          '<div class="diary-note"><p class="text-[15px] text-ink text-pretty">' +
+          '<div class="diary-note"><p class="slip-caption">' +
           "Couldn't load today's diary just now. " +
           '<a href="/guests" class="font-semibold border-b-[1.5px] border-line hover:border-ink">Browse past guests</a>.' +
           "</p></div></div>";

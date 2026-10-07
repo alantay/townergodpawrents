@@ -1,0 +1,69 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import lookingBack from "../content/guests/guapo/guapo-looking-back.jpg";
+import resting from "../content/guests/guapo/guapo-resting-from-sleep.jpg";
+import curled from "../content/guests/guapo/guapo-croissant-curl.jpg";
+import shrimp from "../content/guests/guapo/guapo-emotional-shrimp.jpg";
+
+const prints = [
+  { image: lookingBack, alt: "Guapo looking back" },
+  { image: resting, alt: "Guapo resting" },
+  { image: curled, alt: "Guapo curled up" },
+  { image: shrimp, alt: "Guapo curled up like a shrimp" },
+];
+---
+
+<Layout title="Design reference · The Towner Godpawrents" description="The paper, prints and little labels used in our diary." noindex>
+  <Nav />
+  <header class="mt-8">
+    <h1 class="font-serif text-[48px] leading-none">The bits of our scrapbook</h1>
+    <p class="mt-3 text-sm text-label">A small design reference. These are the same styles used in the diary.</p>
+  </header>
+
+  <section class="mt-8" aria-labelledby="labels-heading">
+    <h2 id="labels-heading" class="font-serif text-[32px]">Facts, nicknames and today</h2>
+    <div class="mt-3 flex flex-wrap items-center gap-3">
+      <span class="fact-chip">13–23 Sep</span>
+      <span class="badge-tape">Keeper of the Ball</span>
+      <span class="status-tag">Here today</span>
+      <span class="status-tag status-tag--compact">Here today</span>
+      <a class="day-chip day-chip--exit" href="/guests/guapo">Guapo's diary →</a>
+    </div>
+    <p class="mt-3 text-sm text-label">Cream holds facts. Yellow tape holds nicknames. Lime marks what's current.</p>
+  </section>
+
+  <section class="mt-8" aria-labelledby="entries-heading">
+    <h2 id="entries-heading" class="font-serif text-[32px]">Today and the full diary</h2>
+    <div class="mt-4 grid gap-5 sm:grid-cols-2">
+      {[true, false].map((compact) => (
+        <article class:list={["entry-surface card-keyline bg-cream", { "entry-surface--compact": compact }]}>
+          <h3 class="text-xs font-semibold uppercase tracking-[0.08em] text-moss">{compact ? "Compact entry" : "Full entry"}</h3>
+          <div class="diary-print mt-[15px]" style="transform:rotate(-1deg)">
+            <Image src={lookingBack} width={580} alt="Guapo looking back" class="print-media" />
+            <p class="print-caption">Guapo looking back.</p>
+          </div>
+          <div class="diary-slip mt-4">
+            <div class="diary-slip-paper" aria-hidden="true"></div>
+            <div class="diary-note"><p class="slip-caption">Longer captions get their own piece of paper. The writing stays the same size on both pages.</p></div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="mt-8" aria-labelledby="prints-heading">
+    <h2 id="prints-heading" class="font-serif text-[32px]">Four prints, one moment</h2>
+    <p class="mt-2 text-sm text-label">Two columns when there's room. One column on a phone.</p>
+    <div class="entry-surface card-keyline bg-cream mt-4">
+      <div class="diary-prints diary-prints--quad">
+        {prints.map(({ image, alt }, i) => (
+          <div class="diary-print w-full" style={`transform:rotate(${i % 2 ? 1 : -1}deg)`}>
+            <Image src={image} width={580} alt={alt} class="print-media" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
