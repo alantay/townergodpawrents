@@ -17,6 +17,14 @@ stays:
 
 ## 7 Oct
 
+### 1:55pm
+
+<!-- entry-id: e035 -->
+
+Yawn
+
+![Guapo yawning while lying on a grey cushion](./guapo/guapo-cushion-yawn.jpg)
+
 ### 7:10am
 
 <!-- entry-id: e034 -->
