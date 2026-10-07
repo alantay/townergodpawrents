@@ -9,6 +9,8 @@ tagline: squeaky-toy enthusiast, works only for snacks
 stays:
   - checkIn: 2026-09-12
     checkOut: 2026-09-12
+  - checkIn: 2026-11-06
+    checkOut: 2026-11-14
 ---
 
 ## 12 Sep
