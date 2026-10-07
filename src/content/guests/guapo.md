@@ -17,6 +17,14 @@ stays:
 
 ## 7 Oct
 
+### 11:04pm
+
+<!-- entry-id: e038 -->
+
+Today’s edition of anywhere but the bed.
+
+![Guapo lying on the floor between two dog beds](./guapo/guapo-anywhere-but-bed.jpg)
+
 ### 9:42pm
 
 <!-- entry-id: e036 -->
