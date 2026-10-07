@@ -9,6 +9,8 @@ tagline: loves rolling on her back, barks at 120 decibels
 stays:
   - checkIn: 2026-09-13
     checkOut: 2026-09-23
+  - checkIn: 2026-10-14
+    checkOut: 2026-10-14
 ---
 
 ## 23 Sep
