@@ -15,6 +15,16 @@ stays:
     checkOut: 2027-01-03
 ---
 
+## 7 Oct
+
+### 7:10am
+
+<!-- entry-id: e034 -->
+
+Guapo refused to go near the dog run, only to meet an overly excited two-year-old Samoyed. He couldn't wait to go back.
+
+![Guapo facing a white Samoyed on a leash at the playground](./guapo/guapo-samoyed-encounter.jpg)
+
 ## 6 Oct
 
 ### 6:50pm
