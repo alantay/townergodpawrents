@@ -25,6 +25,14 @@ Rambo: Reluctant Warrior starring Guapo
 
 ![Guapo facing the camera with his orange collar across his forehead](./guapo/guapo-reluctant-warrior.jpg)
 
+### 6pm
+
+<!-- entry-id: e037 -->
+
+Guapo welcoming Alan home
+
+![Guapo doing zoomies as Alan arrives home](./guapo/guapo-welcoming-alan-home.mp4)
+
 ### 1:55pm
 
 <!-- entry-id: e035 -->
