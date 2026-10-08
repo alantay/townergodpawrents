@@ -21,6 +21,15 @@ Relax, Bobbi. Guapo is not going to eat you up. He eats spiders now.
 
 ![Bobbi lying on the wooden floor, tongue out, glancing off to the side](./bobbi/bobbi-not-going-to-eat-you.jpg)
 
+### 10:45pm
+
+<!-- entry-id: e059 -->
+<!-- with: guapo -->
+
+Night walk.
+
+![Bobbi and Guapo trotting side by side on their leads along a stone path at night](./bobbi/bobbi-night-walk-with-guapo.mp4)
+
 ### 10:10pm
 
 <!-- entry-id: e057 -->
