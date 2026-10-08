@@ -25,4 +25,4 @@ Bobbi looking at Guapo warily from a safe distance.
 
 <!-- entry-id: e055 -->
 
-Bobbi arrived with lots of excitement, going up on twos to greet us and getting reprimanded by the owners.
+Bobbi arrived with lots of excitement, going up on twos to greet us and getting reprimanded by the owner.
