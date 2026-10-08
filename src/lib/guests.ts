@@ -413,8 +413,11 @@ export const fitsPrintMat = (text: string) => text.trim().split(/\s+/).length <=
  */
 export const PRINT_MAX_HEIGHT = 420;
 export const PRINT_MAT = 7;
-export function printWidth(w: number, h: number): number {
-  return Math.round(PRINT_MAX_HEIGHT * (w / h)) + PRINT_MAT * 2;
+// A phone video is 9:16, narrower than a 3:4 photo at the same height, so it
+// gets a taller cap to come out as wide as a portrait print.
+export const VIDEO_MAX_HEIGHT = 560;
+export function printWidth(w: number, h: number, maxHeight = PRINT_MAX_HEIGHT): number {
+  return Math.round(maxHeight * (w / h)) + PRINT_MAT * 2;
 }
 
 /** Diary captions allow strikethrough; all authored HTML stays escaped. */

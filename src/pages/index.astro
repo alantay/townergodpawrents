@@ -393,8 +393,9 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       }
       var PRINT_MAX_HEIGHT = 420;
       var PRINT_MAT = 7;
-      function printWidth(w, h) {
-        return Math.round(PRINT_MAX_HEIGHT * (w / h)) + PRINT_MAT * 2;
+      var VIDEO_MAX_HEIGHT = 560;
+      function printWidth(w, h, maxHeight) {
+        return Math.round((maxHeight || PRINT_MAX_HEIGHT) * (w / h)) + PRINT_MAT * 2;
       }
       function printTilt(i) {
         return i % 2 === 0 ? "1.5deg" : "-1.5deg";
@@ -633,7 +634,9 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             // Give a slip under one photo or video more room than a portrait
             // print. Under a grid it spans the card.
             var noteWidth =
-              e.media.length === 1 ? Math.min(printWidth(e.media[0].width, e.media[0].height) + 120, 500) : null;
+              e.media.length === 1
+                ? Math.min(printWidth(e.media[0].width, e.media[0].height, video ? VIDEO_MAX_HEIGHT : 0) + 120, 500)
+                : null;
             var noteHTML = noteCaption
               ? '<div class="diary-slip diary-slip--tear-' + (i % 3) + ' mt-4 mx-auto" style="' +
                 (noteWidth ? "width:min(100%," + noteWidth + "px);" : "") +
@@ -646,7 +649,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               : "";
             var mediaHTML = "";
             if (video) {
-              var vw = printWidth(video.width, video.height);
+              var vw = printWidth(video.width, video.height, VIDEO_MAX_HEIGHT);
               mediaHTML =
                 '<div class="diary-print mt-[15px]" style="width:min(100%,' +
                 vw +
