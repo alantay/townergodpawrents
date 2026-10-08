@@ -474,7 +474,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var sizeClass = stacked
           ? "text-[clamp(56px,17vw,96px)] mt-[30px] fit-headline--clear"
           : "text-[clamp(62px,19vw,120px)]";
-        var photoH = pair ? "250px" : "310px";
+        var photoH = live.length === 2 ? "clamp(240px, 60vw, 320px)" : pair ? "250px" : "310px";
         var leaving = live.every((d) => goingHome(d, today));
 
         var chips = [];
@@ -522,7 +522,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             '<div class="mt-[14px] flex gap-2 flex-wrap">' +
             chipsHTML +
             "</div>" +
-            '<div id="hero-photos" class="flex gap-1.5 items-end -mx-2 mt-[18px]" style="height:' +
+            '<div id="hero-photos" class="flex gap-1.5 items-end -mx-2 mt-[18px]' + (live.length === 2 ? ' scrapbook-buddies' : '') + '" style="height:' +
             photoH +
             '"></div>' +
             "</div>",

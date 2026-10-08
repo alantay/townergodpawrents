@@ -356,6 +356,31 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   z-index: 1;
 }
 
+#hero-photos.scrapbook-buddies {
+  justify-content: center;
+  gap: 0;
+  padding-bottom: 12px;
+  margin-top: 26px;
+}
+
+.scrapbook-buddies > a {
+  flex: 0 0 60%;
+  max-width: 320px;
+  transform-origin: bottom center;
+  rotate: 3deg;
+  animation: none;
+}
+
+.scrapbook-buddies > a + a {
+  margin-left: -18%;
+  rotate: -3deg;
+}
+
+.scrapbook-buddies img {
+  object-position: bottom;
+  filter: drop-shadow(0 4px 3px rgb(30 32 25 / 0.16));
+}
+
 .diary-timeline {
   position: relative;
   padding-left: 1.1rem;
