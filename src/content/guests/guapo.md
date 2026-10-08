@@ -25,6 +25,12 @@ Guapo tried to lure Weiwen into the room but failed. Now he's just lying beside 
 
 ![Guapo lying on the floor beside Weiwen’s chair, wearing his orange collar](./guapo/guapo-beside-weiwen.jpg)
 
+### 7:15am
+
+<!-- entry-id: e040 -->
+
+Guapo got nipped in the butt by an off-leash terrier during this morning's walk. He darted away from the terrier, who was half his size.
+
 ## 7 Oct
 
 ### 11:04pm
