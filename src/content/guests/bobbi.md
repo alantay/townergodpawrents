@@ -17,7 +17,7 @@ stays:
 
 <!-- entry-id: e058 -->
 
-Relax. Guapo is not going to eat you up... I hope. He eats spiders now.
+Relax. Guapo is not going to eat you up. He eats spiders now.
 
 ![Bobbi lying on the wooden floor, tongue out, glancing off to the side](./bobbi/bobbi-not-going-to-eat-you.jpg)
 
