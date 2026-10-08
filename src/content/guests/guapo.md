@@ -15,6 +15,16 @@ stays:
     checkOut: 2027-01-03
 ---
 
+## 8 Oct
+
+### 9am
+
+<!-- entry-id: e039 -->
+
+Guapo tried to lure Weiwen into the room but failed. Now he's just lying beside her. Please keep being a good boy when Bobbi comes over later tonight, okay?
+
+![Guapo lying on the floor beside Weiwen’s chair, wearing his orange collar](./guapo/guapo-beside-weiwen.jpg)
+
 ## 7 Oct
 
 ### 11:04pm
