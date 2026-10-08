@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { crossPost, diaryTextHtml, dogNames, entryMinutes, listNames, parseDiary } from "./guests.ts";
+import { crossPost, diaryTextHtml, dogNames, entryMinutes, listNames, parseDiary, printWidth, VIDEO_MAX_HEIGHT } from "./guests.ts";
 
 test("parseDiary keeps two prints on one entry in markdown order", () => {
   const [day] = parseDiary(
@@ -154,4 +154,8 @@ test("crossPost refuses a day outside the other guest's stays", () => {
   };
   const bobbi = { id: "bobbi", stays: [{ checkIn: "2026-10-08", checkOut: "2026-10-12" }], days: [] };
   assert.throws(() => crossPost([guapo, bobbi]), /isn't in any of bobbi's stays/);
+});
+
+test("a 9:16 phone video prints as wide as a 3:4 photo", () => {
+  assert.equal(printWidth(1080, 1920, VIDEO_MAX_HEIGHT), printWidth(1200, 1600));
 });

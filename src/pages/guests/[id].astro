@@ -24,6 +24,7 @@ import {
   videoNoteTilt,
   fitsPrintMat,
   printWidth,
+  VIDEO_MAX_HEIGHT,
   todaySGT,
   type DiaryMedia,
 } from "../../lib/guests";
@@ -257,7 +258,7 @@ let skinIndex = 0;
               // Under a grid it spans the card.
               const noteWidth =
                 video
-                  ? Math.min(printWidth(video.width, video.height) + 120, 500)
+                  ? Math.min(printWidth(video.width, video.height, VIDEO_MAX_HEIGHT) + 120, 500)
                   : singlePrint && prints[0].kind === "photo"
                     ? Math.min(printWidth(prints[0].img.width, prints[0].img.height) + 120, 500)
                     : null;
@@ -278,7 +279,7 @@ let skinIndex = 0;
                   {video && (
                     <div
                       class="diary-print mt-[15px]"
-                      style={`width:min(100%,${printWidth(video.width, video.height)}px)`}
+                      style={`width:min(100%,${printWidth(video.width, video.height, VIDEO_MAX_HEIGHT)}px)`}
                     >
                       <video
                         src={video.url}
