@@ -157,7 +157,7 @@ Guest colours come from a fixed, reusable palette. Every one is mid-dark and sli
 - **Canal Teal** `#2F6B6B`
 - **Monsoon Slate** `#4F5A66`
 
-Colours repeat across guests. **Sofa Green** `#5F6E4F` is reserved for the shared hero on days when two dogs are staying, and for a diary entry shared by two dogs (always its pure-colour skin, cream text), so it's not in the palette.
+Colours repeat across guests. **Sofa Green** `#5F6E4F` is reserved for the shared hero on days when two dogs are staying, so it's not in the palette. **Night Indigo** `#4A5185` is reserved for a diary entry shared by two dogs (always its pure-colour skin, cream text at 6.7:1), and stays out of the palette so it never matches either dog.
 
 **The Same-Sofa Rule.** Two dogs whose stays overlap must have different colours, because their entries sit side by side in today's feed. Dogs staying on different dates may share a colour.
 

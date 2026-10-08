@@ -238,10 +238,10 @@ let skinIndex = 0;
           <div class="mt-4 grid gap-5">
             {day.entries.map((e) => {
               const i = skinIndex++;
-              // A shared entry wears Sofa Green, the two-dog hero's colour,
-              // rather than this dog's.
+              // A shared entry wears Night Indigo, a colour neither dog
+              // owns (Sofa Green sat too close to Guapo's Eucalyptus).
               const shared = e.with.length > 0;
-              const sk = shared ? diarySkin("#5F6E4F", 1) : diarySkin(bgColor, i);
+              const sk = shared ? diarySkin("#4A5185", 1) : diarySkin(bgColor, i);
               const darkSkin = !shared && i % 4 > 1;
               const prints = e.media.map((m) => resolveDiaryMedia(m, entry.id, `${day.label} ${e.time}`));
               const video = prints.find((p) => p.kind === "video");

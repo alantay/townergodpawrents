@@ -620,9 +620,9 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         if (pair) raw.sort((a, b) => b.mins - a.mins);
         var cards = raw
           .map((e, i) => {
-            // A shared entry wears Sofa Green, the two-dog hero's colour,
-            // rather than either dog's.
-            var sk = e.shared ? guestSkins("#5F6E4F")[1] : skin(e.bgColor, e.id);
+            // A shared entry wears Night Indigo, a colour neither dog
+            // owns (Sofa Green sat too close to Guapo's Eucalyptus).
+            var sk = e.shared ? guestSkins("#4A5185")[1] : skin(e.bgColor, e.id);
             var darkSkin = luma(sk.bg) < 110;
             var video = e.media.filter((m) => m.kind === "video")[0];
             // A caption goes on the mat only when one print can hold it in a
