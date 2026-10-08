@@ -17,6 +17,14 @@ stays:
 
 ## 8 Oct
 
+### 8:25pm
+
+<!-- entry-id: e041 -->
+
+Guapo likes to poop in bushes. Sometimes so dense we struggle to pick it up. Privacy matters to Guapo, I guess.
+
+![Guapo crouched in tall grass, nose down](./guapo/guapo-poop-in-bushes.jpg)
+
 ### 9am
 
 <!-- entry-id: e039 -->
