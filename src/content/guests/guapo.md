@@ -17,6 +17,12 @@ stays:
 
 ## 8 Oct
 
+### 8pm
+
+<!-- entry-id: e042 -->
+
+Guapo's been smelling around looking for his rawhide bone. Sorry Guapo, we had to sanitise the house to make sure you have no resources to guard from Bobbi.
+
 ### 1:15pm
 
 <!-- entry-id: e041 -->
