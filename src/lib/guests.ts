@@ -288,6 +288,16 @@ export function parseDiary(body: string, stays: Stay[], guestId: string): DiaryD
   return days.filter((d) => d.entries.length > 0).sort((a, b) => b.iso.localeCompare(a.iso));
 }
 
+/**
+ * Minutes past midnight for an entry time like "9:30pm" or "8am", so a day
+ * shared by two dogs can be merged in time order. Anything else sorts last.
+ */
+export function entryMinutes(time: string): number {
+  const m = time.trim().toLowerCase().match(/^(\d{1,2})(?::(\d{2}))?(am|pm)$/);
+  if (!m) return -1;
+  return ((+m[1] % 12) + (m[3] === "pm" ? 12 : 0)) * 60 + (+(m[2] ?? 0));
+}
+
 /** The diary day for a given date, if anything was written that day. */
 export function dayOn(g: Pick<GuestData, "days">, iso: string): DiaryDay | undefined {
   return g.days.find((d) => d.iso === iso);

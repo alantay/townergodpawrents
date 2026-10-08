@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { diaryTextHtml, dogNames, listNames, parseDiary } from "./guests.ts";
+import { diaryTextHtml, dogNames, entryMinutes, listNames, parseDiary } from "./guests.ts";
 
 test("parseDiary keeps two prints on one entry in markdown order", () => {
   const [day] = parseDiary(
@@ -112,4 +112,13 @@ test("diary captions strike words while escaping authored HTML", () => {
   assert.equal(diaryTextHtml("Post breakfast ~~nap~~ coma."), "Post breakfast <del>nap</del> coma.");
   assert.equal(diaryTextHtml("<script> & ~~<b>nap</b>~~"), "&lt;script&gt; &amp; <del>&lt;b&gt;nap&lt;/b&gt;</del>");
   assert.equal(diaryTextHtml("An unfinished ~~nap"), "An unfinished ~~nap");
+});
+
+test("entryMinutes orders entry times across noon and midnight", () => {
+  assert.equal(entryMinutes("12am"), 0);
+  assert.equal(entryMinutes("8am"), 480);
+  assert.equal(entryMinutes("12:15pm"), 735);
+  assert.equal(entryMinutes("9:30pm"), 1290);
+  assert.equal(entryMinutes("10:20PM"), 1340);
+  assert.equal(entryMinutes("teatime"), -1);
 });
