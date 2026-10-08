@@ -27,6 +27,8 @@ import {
   type DiaryMedia,
 } from "../../lib/guests";
 
+const portraitHeight = 280;
+
 // Diary media is referenced from inside the markdown body, which parseDiary
 // reads as raw text — so it never passes through Astro's markdown image
 // pipeline. Globbing the folder here gets photos optimized anyway; videos
@@ -183,8 +185,8 @@ let skinIndex = 0;
       )}
     </div>
 
-    <div class="guest-cutout -mx-2 mt-[18px]" style="height:280px">
-      <Cutout photo={photo} name={name} />
+    <div class="guest-cutout -mx-2 mt-[18px]" style={`height:${portraitHeight}px`}>
+      <Cutout photo={photo} name={name} loading="eager" height={portraitHeight} />
     </div>
   </header>
 
