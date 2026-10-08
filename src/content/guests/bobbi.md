@@ -13,6 +13,14 @@ stays:
 
 ## 8 Oct
 
+### 10:54pm
+
+<!-- entry-id: e058 -->
+
+Relax, Bobbi. Guapo is not going to eat you up... I hope. He eats spiders now.
+
+![Bobbi lying on the wooden floor, tongue out, glancing off to the side](./bobbi/bobbi-not-going-to-eat-you.jpg)
+
 ### 10:10pm
 
 <!-- entry-id: e057 -->
