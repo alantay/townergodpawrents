@@ -17,6 +17,12 @@ stays:
 
 ## 8 Oct
 
+### 10:20pm
+
+<!-- entry-id: e056 -->
+
+Guapo has been a good boy. He did not growl at Bobbi and did not guard the water bowls.
+
 ### 9:30pm
 
 <!-- entry-id: e054 -->
