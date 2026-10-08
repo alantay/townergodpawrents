@@ -153,7 +153,7 @@ let skinIndex = 0;
     {showLive && (
       <div
         id="here-today"
-        class="absolute top-[18px] right-[18px] bg-lime text-ink font-semibold text-xs tracking-[0.06em] uppercase px-[13px] py-2 rounded-full"
+        class="absolute top-[18px] right-[18px] status-tag"
         hidden={!isLive}
       >
         Here today
@@ -171,15 +171,15 @@ let skinIndex = 0;
     )}
 
     <div class="mt-[14px] flex gap-2 flex-wrap">
-      <span class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink bg-cream">{breed}</span>
-      <span id="hero-stay-dates" class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink bg-cream">
+      <span class="fact-chip">{breed}</span>
+      <span id="hero-stay-dates" class="fact-chip">
         {stayLabel(shownStay)}
       </span>
       {showLive && (
-        <span id="stay-day" class="text-[13px] font-semibold px-[13px] py-[7px] rounded-full text-ink bg-cream" hidden></span>
+        <span id="stay-day" class="fact-chip" hidden></span>
       )}
       {badge && (
-        <span class="text-[13px] font-semibold px-[11px] py-[7px] rounded-none -rotate-2 text-ink bg-tape">{badge}</span>
+        <span class="badge-tape">{badge}</span>
       )}
     </div>
 
@@ -248,7 +248,7 @@ let skinIndex = 0;
               return (
                 <div class="diary-card" id={`entry-${e.id}`}>
                   <article
-                    class:list={{ "diary-entry": true, "diary-entry--video": !!video, "diary-entry--step": i % 2 === 1, "card-keyline": true, "card-keyline--dark": darkSkin, "rounded-[24px]": true, "p-[18px_19px_20px]": true }}
+                    class:list={{ "diary-entry": true, "diary-entry--video": !!video, "diary-entry--step": i % 2 === 1, "card-keyline": true, "card-keyline--dark": darkSkin, "entry-surface": true }}
                     style={`background:${sk.bg};color:${sk.fg};--entry-tilt:${tilt(i)}`}
                   >
                   <div class="flex items-center gap-2">
@@ -261,7 +261,7 @@ let skinIndex = 0;
 
                   {video && (
                     <div
-                      class="diary-print mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px]"
+                      class="diary-print mt-[15px]"
                       style={`width:min(100%,${printWidth(video.width, video.height)}px)`}
                     >
                       <video
@@ -270,7 +270,7 @@ let skinIndex = 0;
                         controls
                         preload="metadata"
                         aria-label={video.alt || `${name}, ${day.label} ${e.time}`}
-                        class="block h-auto w-full rounded-[10px]"
+                        class="print-media"
                         style={`aspect-ratio:${video.width}/${video.height}`}
                       />
                     </div>
@@ -281,7 +281,7 @@ let skinIndex = 0;
                       separate paragraph under the whole card. */}
                   {singlePrint && prints[0].kind === "photo" && (
                     <div
-                      class="diary-print mt-[15px] mx-auto bg-cream card-keyline rounded-[16px] p-[7px]"
+                      class="diary-print mt-[15px]"
                       style={`width:min(100%,${printWidth(prints[0].img.width, prints[0].img.height)}px);transform:rotate(${printTilt(i)})`}
                     >
                       <button
@@ -295,11 +295,11 @@ let skinIndex = 0;
                           width={Math.min(prints[0].img.width, 1160)}
                           loading="lazy"
                           decoding="async"
-                          class="block h-auto w-full rounded-[10px]"
+                          class="print-media"
                         />
                       </button>
                       {matCaption && (
-                        <p class="mt-[9px] px-1 text-center text-[13.5px] leading-snug text-pretty text-ink/70" set:html={diaryTextHtml(e.text)} />
+                        <p class="print-caption" set:html={diaryTextHtml(e.text)} />
                       )}
                     </div>
                   )}
@@ -310,7 +310,7 @@ let skinIndex = 0;
                         <button
                           type="button"
                           aria-label={`Enlarge photo ${printIndex + 1}`}
-                          class="diary-print diary-print-tap block mx-auto bg-cream card-keyline rounded-[16px] p-[7px] cursor-zoom-in"
+                          class="diary-print diary-print-tap cursor-zoom-in"
                           style={`width:min(100%,${printWidth(p.img.width, p.img.height)}px);transform:rotate(${printTilt(i + printIndex)})`}
                         >
                           <Image
@@ -319,7 +319,7 @@ let skinIndex = 0;
                             width={Math.min(p.img.width, 1160)}
                             loading="lazy"
                             decoding="async"
-                            class="block h-auto w-full rounded-[10px]"
+                            class="print-media"
                           />
                         </button>
                       ))}
@@ -335,7 +335,7 @@ let skinIndex = 0;
                     >
                       <div class="diary-slip-paper" aria-hidden="true"></div>
                       <div class="diary-note">
-                        <p class="text-[15px] text-ink text-pretty" set:html={diaryTextHtml(e.text)} />
+                        <p class="slip-caption" set:html={diaryTextHtml(e.text)} />
                       </div>
                     </div>
                   )}

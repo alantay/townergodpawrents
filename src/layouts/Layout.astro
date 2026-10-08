@@ -3,6 +3,7 @@ import "../styles/global.css";
 
 interface Props {
   title?: string;
+  noindex?: boolean;
   description?: string;
   /** Site path of the link-preview image, e.g. "/og/tiny.jpg". Every
    * preview is drawn at 1200×630, see src/pages/og/. */
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const {
+  noindex = false,
   title = "The Towner Godpawrents",
   description = "No dog of our own, just everyone else's. A diary of whoever's on our sofa.",
   ogImage = "/og/home.jpg",
@@ -28,6 +30,7 @@ const buildId: string = import.meta.env.BUILD_ID;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <meta name="build-id" content={buildId} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

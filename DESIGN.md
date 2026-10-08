@@ -248,7 +248,7 @@ The dog's own card. It fills with the guest's `bgColor`, has a 32px radius and c
 - **NEW tag:** lime pill, 11px uppercase, 0.06em tracking.
 
 ### Diary Entry Card
-A 24px-radius card in one of the four guest-colour skins, with a 1.5px keyline (Kraft on light skins, Moss on dark), 18px 19px 20px padding, the alternating tilt and the diary-entry shadow. The timestamp and note sit inside, with prints and slips below. Each entry fades and rises into place once as it scrolls into view.
+A 24px-radius card in one of the four guest-colour skins, with a 1.5px keyline (Kraft on light skins, Moss on dark), 18px 19px 20px padding, the alternating tilt and the diary-entry shadow. The timestamp and note sit inside, with prints and slips below. Each entry fades and rises into place once as it scrolls into view. Today uses the compact variant with 17px 19px padding and no diary shadow; the full diary keeps its timeline spacing and shadow. Captions and prints stay the same in both.
 
 ### Guest Card
 A past guest on /guests and the homepage: a 24px card in the dog's `bgColor` with the cutout standing in it, a cream strip below for the name (22px serif) and dates, and the 1.5px keyline (Kraft on light coats, Moss on dark). Cards alternate −1° / +1° and keep the tilt when they lift on hover. On the homepage, the Next up card has no fill, just a dashed Pencil Rule outline on the paper, like the calendar's upcoming stays: the spot is marked out but the dog hasn't arrived. Last seen stays solid cream.
@@ -288,3 +288,23 @@ A sticky, horizontally scrolling row of outlined day chips on translucent paper.
 - **Don't** add a fourth typeface, or use Caveat anywhere the Pen on Paper Rule doesn't allow.
 - **Don't** add buttons, forms or sections that look like a service site (CTA bars, pricing cards, testimonial blocks). The only interactive pieces are navigation, day chips, prints and reactions.
 - **Don't** apply the tear filter to text; tear the paper layer only.
+
+
+## Implementation reference
+
+`src/styles/global.css` owns the shared paper objects. Use these classes in Astro markup and browser-generated homepage markup alike:
+
+| Object | Shared class | Variant |
+| --- | --- | --- |
+| Cream fact | `fact-chip` | None |
+| Nickname tape | `badge-tape` | None |
+| Current status | `status-tag` | `status-tag--compact` on guest cards |
+| Entry spacing | `entry-surface` | `entry-surface--compact` on today |
+| Print mat and media | `diary-print`, `print-media` | Width and tilt come from the existing diary helpers |
+| Mat caption | `print-caption` | 13.5px, centered |
+| Torn caption | `slip-caption` inside `diary-slip` / `diary-note` | 15px, 24px lines |
+| Multiple prints | `diary-prints` | `diary-prints--pair` or `diary-prints--quad` |
+
+Two and four prints use two columns from 480px up and one column below it. Three prints remain a single column. Video cards and mats stay level. The dark diary link hovers moss, keeping lime for current state. The calendar's red biro ring around today and red busy-sofa annotation are intentional pen-on-paper accents.
+
+The unlisted, noindex `/design` page shows these shared classes using real diary photos. It is a reference for changes, not another visitor destination. This document and the implementation are the design sources; there is no generated design sidecar to keep in sync.
