@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import Cutout from "../components/Cutout.astro";
+import { cutoutWidth } from "../lib/cutout-width";
 import { Image } from "astro:assets";
 import sofaCutout from "../assets/sofa-cutout-v2.png";
 import { getCollection } from "astro:content";
@@ -202,18 +203,18 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
   <Footer />
 
   <!-- Templates keep unused portraits from downloading. -->
-    {guests.map((g) => (
-      <template id={`photo-${g.id}`}>
-        <div class="h-full w-full">
-          <Cutout photo={g.photo} name={g.name} />
-        </div>
-      </template>
-    ))}
-    <template id="photo-sofa">
+  {guests.map((g) => (
+    <template id={`photo-${g.id}`}>
       <div class="h-full w-full">
-        <Image src={sofaCutout} alt="Our sofa, no dog on it" width={640} widths={[320, 640, 960, 1280]} sizes="(min-width: 700px) 628px, calc(100vw - 72px)" class="h-full w-full object-contain" />
+        <Cutout photo={g.photo} name={g.name} />
       </div>
     </template>
+  ))}
+  <template id="photo-sofa">
+    <div class="h-full w-full">
+      <Image src={sofaCutout} alt="Our sofa, no dog on it" width={640} widths={[320, 640, 960, 1280]} sizes="(min-width: 700px) 628px, calc(100vw - 72px)" class="h-full w-full object-contain" />
+    </div>
+  </template>
 
   <dialog id="print-viewer" class="print-viewer" aria-label="Photo">
     <form method="dialog">
@@ -243,6 +244,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
     })();
   </script>
 
+  <script is:inline set:html={`window.__tgpCutoutWidth = ${cutoutWidth.toString()};`} />
   <script type="application/json" id="guests-data" is:inline set:html={guestsJson} />
 
   <script is:inline>
@@ -835,17 +837,21 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         } catch (e) {}
       }
 
-      function insertPhoto(id, targetEl, heroHeight) {
+      function sizeHero(img, targetEl) {
+        img.sizes = window.__tgpCutoutWidth(targetEl.clientHeight, targetEl.clientWidth, img.width / img.height) + "px";
+      }
+
+      function insertPhoto(id, targetEl, sizes = "160px", hero = false, priority = "auto") {
         var node = document.getElementById("photo-" + id);
         if (!node || !targetEl) return;
         var copy = node.content.cloneNode(true);
         var img = copy.querySelector("img");
-        if (img && heroHeight) {
+        if (img && hero) {
+          sizeHero(img, targetEl);
           img.loading = "eager";
-          img.fetchPriority = "high";
-          if (id !== "sofa") img.sizes = Math.ceil(heroHeight * img.width / img.height) + "px";
+          img.fetchPriority = priority;
         } else if (img) {
-          img.sizes = targetEl.id === "next-up-photo" || targetEl.id === "last-seen-photo" ? "64px" : "160px";
+          img.sizes = "auto, " + sizes;
         }
         targetEl.appendChild(copy);
       }
@@ -861,20 +867,23 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         if (result.state === "vacancy") {
           var next = nextArrival(guests, today);
           appEl.innerHTML = heroVacancyHTML(result.lastGuest, next);
-          insertPhoto("sofa", document.getElementById("vacancy-photo"), 265);
-          if (next) insertPhoto(next.guest.id, document.getElementById("next-up-photo"));
-          if (result.lastGuest) insertPhoto(result.lastGuest.id, document.getElementById("last-seen-photo"));
+          appEl.hidden = false;
+          insertPhoto("sofa", document.getElementById("vacancy-photo"), undefined, true, "high");
+          if (next) insertPhoto(next.guest.id, document.getElementById("next-up-photo"), "64px");
+          if (result.lastGuest) insertPhoto(result.lastGuest.id, document.getElementById("last-seen-photo"), "64px");
         } else {
           var hero = heroLiveHTML(result.live, today);
           appEl.innerHTML = hero.html + entryCardsHTML(result.live, today);
           var photosEl = document.getElementById("hero-photos");
-          result.live.forEach((d) => {
+          appEl.hidden = false;
+          var photoLinks = result.live.map((d) => {
             var a = document.createElement("a");
             a.href = "/guests/" + d.id;
             a.className = "block flex-1 min-w-0 h-full animate-drift transition-[filter] duration-200";
             photosEl.appendChild(a);
-            insertPhoto(d.id, a, result.live.length === 1 ? 310 : result.live.length === 2 ? 320 : 250);
+            return a;
           });
+          result.live.forEach((d, i) => insertPhoto(d.id, photoLinks[i], undefined, true, i === 0 ? "high" : "auto"));
           result.live.forEach(markSeen);
         }
         if (preview) {
@@ -901,6 +910,11 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
 
         window.__tgpFitHeadlines();
         window.addEventListener("resize", window.__tgpFitHeadlines);
+        window.addEventListener("resize", function () {
+          document.querySelectorAll("#hero-photos img, #vacancy-photo img").forEach(function (img) {
+            sizeHero(img, img.parentElement.parentElement);
+          });
+        });
         if (document.fonts && document.fonts.ready) {
           document.fonts.ready.then(window.__tgpFitHeadlines);
         }
