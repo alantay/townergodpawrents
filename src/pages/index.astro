@@ -16,6 +16,7 @@ import {
   staysNewestFirst,
   warnOnOverlaps,
   dateStr,
+  GROUP_BADGES,
   todaySGT,
 } from "../lib/guests";
 
@@ -143,6 +144,7 @@ const guestsForClient = await Promise.all(
     ),
   })),
 );
+const groupBadgesJson = JSON.stringify(GROUP_BADGES);
 const guestsJson = JSON.stringify(guestsForClient).replace(/</g, "\\u003c");
 
 const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
@@ -246,6 +248,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
 
   <script is:inline set:html={`window.__tgpCutoutWidth = ${cutoutWidth.toString()};`} />
   <script type="application/json" id="guests-data" is:inline set:html={guestsJson} />
+  <script type="application/json" id="group-badges" is:inline set:html={groupBadgesJson} />
 
   <script is:inline>
     (function () {
@@ -265,6 +268,8 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var m = /[?&]date=(\d{4}-\d{2}-\d{2})\b/.exec(location.search);
         return m ? m[1] : null;
       }
+
+      var groupBadges = {};
 
       function stayOn(g, todayISO) {
         return g.stays.filter((s) => s.checkIn <= todayISO && todayISO <= s.checkOut)[0];
@@ -490,7 +495,8 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             var day = goingHome(d, today) ? "going home today" : stayDay(stayOn(d, today), today).toLowerCase();
             chips.push({ label: d.name + " · " + (day || d.breed) });
           });
-          chips.push({ label: "Vacuum on overtime", tape: true });
+          var groupKey = live.map((d) => d.id).sort().join("+");
+          chips.push({ label: groupBadges[groupKey] || "Vacuum on overtime", tape: true });
         }
 
         var chipsHTML = chips
@@ -859,6 +865,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       try {
         var dataEl = document.getElementById("guests-data");
         var guests = JSON.parse(dataEl.textContent);
+        groupBadges = JSON.parse(document.getElementById("group-badges").textContent);
         var preview = previewDate();
         var today = preview || todaySGT();
         var result = pickToday(guests, today);

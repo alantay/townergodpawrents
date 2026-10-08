@@ -16,6 +16,15 @@ export interface Stay {
   checkOut: string; // YYYY-MM-DD
 }
 
+/**
+ * Hand-written hero badges for a particular group of dogs staying together.
+ * Key: guest ids sorted and joined with "+". Any group not listed gets the
+ * default badge ("Vacuum on overtime").
+ */
+export const GROUP_BADGES: Record<string, string> = {
+  "bobbi+guapo": "The fox and the sheep",
+};
+
 export type MediaKind = "photo" | "video";
 
 export interface DiaryMedia {
