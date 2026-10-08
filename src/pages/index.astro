@@ -104,7 +104,7 @@ const guests = entries.map((e) => {
 // Sent to the client so it can work out who's "here today" in the
 // Asia/Singapore timezone at load time — see the inline script below.
 // Cut-outs aren't included here; they're pre-optimized at build time into the
-// hidden #photo-bank and the client just re-parents the <img> nodes it needs,
+// inert templates and the client inserts only the portraits it needs,
 // so no image processing has to happen in the browser. Diary media IS
 // included now (as plain resolved URLs, since the client builds the card
 // markup itself) — the teaser shows today's whole day, media and all.
@@ -201,19 +201,19 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
 
   <Footer />
 
-  <!-- Hidden bank of pre-optimized cut-outs, one per guest. The client script
-       re-parents (moves, doesn't clone) the node it needs into whichever
-       card is showing right now. -->
-  <div id="photo-bank" class="hidden">
+  <!-- Templates keep unused portraits from downloading. -->
     {guests.map((g) => (
-      <div id={`photo-${g.id}`} class="h-full w-full">
-        <Cutout photo={g.photo} name={g.name} />
-      </div>
+      <template id={`photo-${g.id}`}>
+        <div class="h-full w-full">
+          <Cutout photo={g.photo} name={g.name} />
+        </div>
+      </template>
     ))}
-    <div id="photo-sofa" class="h-full w-full">
-      <Image src={sofaCutout} alt="Our sofa, no dog on it" width={1000} class="h-full w-full object-contain" />
-    </div>
-  </div>
+    <template id="photo-sofa">
+      <div class="h-full w-full">
+        <Image src={sofaCutout} alt="Our sofa, no dog on it" width={640} widths={[320, 640, 960, 1280]} sizes="(min-width: 700px) 628px, calc(100vw - 72px)" class="h-full w-full object-contain" />
+      </div>
+    </template>
 
   <dialog id="print-viewer" class="print-viewer" aria-label="Photo">
     <form method="dialog">
@@ -835,17 +835,18 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         } catch (e) {}
       }
 
-      function movePhoto(id, targetEl) {
-        var node = document.getElementById("photo-" + id);
-        if (node && targetEl) targetEl.appendChild(node);
-      }
-      // For a dog shown twice on one page (the vacancy "Last seen here" card
-      // and the past guests strip), the second spot gets a copy.
-      function copyPhoto(id, targetEl) {
+      function insertPhoto(id, targetEl, heroHeight) {
         var node = document.getElementById("photo-" + id);
         if (!node || !targetEl) return;
-        var copy = node.cloneNode(true);
-        copy.removeAttribute("id");
+        var copy = node.content.cloneNode(true);
+        var img = copy.querySelector("img");
+        if (img && heroHeight) {
+          img.loading = "eager";
+          img.fetchPriority = "high";
+          if (id !== "sofa") img.sizes = Math.ceil(heroHeight * img.width / img.height) + "px";
+        } else if (img) {
+          img.sizes = targetEl.id === "next-up-photo" || targetEl.id === "last-seen-photo" ? "64px" : "160px";
+        }
         targetEl.appendChild(copy);
       }
 
@@ -860,9 +861,9 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         if (result.state === "vacancy") {
           var next = nextArrival(guests, today);
           appEl.innerHTML = heroVacancyHTML(result.lastGuest, next);
-          movePhoto("sofa", document.getElementById("vacancy-photo"));
-          if (next) copyPhoto(next.guest.id, document.getElementById("next-up-photo"));
-          if (result.lastGuest) copyPhoto(result.lastGuest.id, document.getElementById("last-seen-photo"));
+          insertPhoto("sofa", document.getElementById("vacancy-photo"), 265);
+          if (next) insertPhoto(next.guest.id, document.getElementById("next-up-photo"));
+          if (result.lastGuest) insertPhoto(result.lastGuest.id, document.getElementById("last-seen-photo"));
         } else {
           var hero = heroLiveHTML(result.live, today);
           appEl.innerHTML = hero.html + entryCardsHTML(result.live, today);
@@ -872,7 +873,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             a.href = "/guests/" + d.id;
             a.className = "block flex-1 min-w-0 h-full animate-drift transition-[filter] duration-200";
             photosEl.appendChild(a);
-            movePhoto(d.id, a);
+            insertPhoto(d.id, a, result.live.length === 1 ? 310 : result.live.length === 2 ? 320 : 250);
           });
           result.live.forEach(markSeen);
         }
@@ -892,7 +893,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var previewEl = document.getElementById("past-preview-app");
         if (past.length > 0) {
           previewEl.innerHTML = pastPreviewHTML(past);
-          past.forEach((g, i) => movePhoto(g.id, document.getElementById("past-photo-" + i)));
+          past.forEach((g, i) => insertPhoto(g.id, document.getElementById("past-photo-" + i)));
           var pastSection = document.getElementById("past-guests-section");
           pastSection.classList.add("entrance", "entrance-delay-3");
           pastSection.hidden = false;

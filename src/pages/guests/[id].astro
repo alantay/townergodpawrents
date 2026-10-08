@@ -184,7 +184,7 @@ let skinIndex = 0;
     </div>
 
     <div class="guest-cutout -mx-2 mt-[18px]" style="height:280px">
-      <Cutout photo={photo} name={name} />
+      <Cutout photo={photo} name={name} loading="eager" sizes={`${Math.ceil(280 * (photo ? photo.width / photo.height : 1))}px`} />
     </div>
   </header>
 

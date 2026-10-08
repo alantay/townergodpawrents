@@ -128,7 +128,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                     >
                       <span class="cal-tape cal-tape--small" aria-hidden="true" />
                       <span class={`block h-[92px] w-[92px] overflow-hidden rounded-[3px] ${s.photo ? "p-1.5" : ""}`} style={`background:${s.bgColor}`}>
-                        <Cutout photo={s.photo} name={s.name} bare />
+                        <Cutout photo={s.photo} name={s.name} bare sizes="80px" />
                       </span>
                       <span class="mt-1.5 block font-script text-[20px] leading-none font-medium">{s.name}</span>
                       {visits.map((v) => (

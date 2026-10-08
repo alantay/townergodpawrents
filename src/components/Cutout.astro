@@ -7,11 +7,13 @@ interface Props {
   photo?: ImageMetadata;
   name: string;
   class?: string;
+  loading?: "eager" | "lazy";
+  sizes?: string;
   /** Already inside a print (the calendar polaroid, a bar dot): show only the empty slot. */
   bare?: boolean;
 }
 
-const { photo, name, class: className = "", bare = false } = Astro.props;
+const { photo, name, class: className = "", bare = false, loading = "lazy", sizes = "160px" } = Astro.props;
 
 // No cut-out yet: an empty Polaroid per dog, name written underneath, waiting
 // for a photo. Where a frame is already drawn around it, just the empty slot.
@@ -23,7 +25,11 @@ const dogs = dogNames(name);
     <Image
       src={photo}
       alt={name}
-      loading="eager"
+      width={Math.min(photo.width, 640)}
+      widths={[96, 160, 320, 480, 640, 960, 1280]}
+      sizes={sizes}
+      loading={loading}
+      decoding="async"
       class={`h-full w-full object-contain ${className}`}
     />
   ) : bare ? (
