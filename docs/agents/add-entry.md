@@ -57,6 +57,7 @@ The slug is 2–4 words taken from the moment (`climbing-wall`, `lap-nap`).
 - Days are `## 16 Sep`, newest day at the top. If today's divider doesn't exist yet, add it above the previous newest day.
 - Entries are `### 12:10pm`, newest first within the day. Put the new one in time order.
 - Give each entry a unique, permanent ID in a comment just after its heading: `<!-- entry-id: e053 -->`. Check the guest's existing IDs and use the next free number. Keep the ID when editing the time or words; shared reactions use it.
+- An entry about two dogs together is written once, under one dog, with `<!-- with: bobbi -->` after the ID (comma-separate for more). The build copies it into the other dog's diary in time order, labels both "with …", and both share one reactions count. That day must fall within the other dog's stay, or the build fails.
 - Leave a blank line between the heading, the text and each image. Put at most four images under an entry, or a single video (same `![alt](./path)` syntax — the `.mp4` extension is what tells it apart from a photo).
 
 ```md

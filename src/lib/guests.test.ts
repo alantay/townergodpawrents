@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { diaryTextHtml, dogNames, entryMinutes, listNames, parseDiary } from "./guests.ts";
+import { crossPost, diaryTextHtml, dogNames, entryMinutes, listNames, parseDiary } from "./guests.ts";
 
 test("parseDiary keeps two prints on one entry in markdown order", () => {
   const [day] = parseDiary(
@@ -121,4 +121,37 @@ test("entryMinutes orders entry times across noon and midnight", () => {
   assert.equal(entryMinutes("9:30pm"), 1290);
   assert.equal(entryMinutes("10:20PM"), 1340);
   assert.equal(entryMinutes("teatime"), -1);
+});
+
+test("crossPost copies a shared entry into the other guest's day in time order", () => {
+  const stays = [{ checkIn: "2026-10-08", checkOut: "2026-10-12" }];
+  const guapo = {
+    id: "guapo",
+    stays,
+    days: parseDiary(`## 9 Oct\n\n### 9pm\n\n<!-- entry-id: e100 -->\n\n<!-- with: bobbi -->\n\nSofa truce.`, stays, "guapo"),
+  };
+  const bobbi = {
+    id: "bobbi",
+    stays,
+    days: parseDiary(`## 9 Oct\n\n### 10pm\n\n<!-- entry-id: e101 -->\n\nLate.\n\n### 8am\n\n<!-- entry-id: e102 -->\n\nEarly.`, stays, "bobbi"),
+  };
+  assert.deepEqual(guapo.days[0].entries[0].with, ["bobbi"]);
+  assert.equal(guapo.days[0].entries[0].text, "Sofa truce.");
+
+  crossPost([guapo, bobbi]);
+
+  assert.deepEqual(bobbi.days[0].entries.map((e) => e.id), ["e101", "e100", "e102"]);
+  assert.equal(bobbi.days[0].entries[1].from, "guapo");
+  assert.deepEqual(bobbi.days[0].entries[1].with, ["guapo"]);
+  assert.equal(guapo.days[0].entries.length, 1);
+});
+
+test("crossPost refuses a day outside the other guest's stays", () => {
+  const guapo = {
+    id: "guapo",
+    stays: [{ checkIn: "2026-10-01", checkOut: "2026-10-12" }],
+    days: parseDiary(`## 2 Oct\n\n### 9pm\n\n<!-- entry-id: e100 -->\n<!-- with: bobbi -->\nHi`, [{ checkIn: "2026-10-01", checkOut: "2026-10-12" }], "guapo"),
+  };
+  const bobbi = { id: "bobbi", stays: [{ checkIn: "2026-10-08", checkOut: "2026-10-12" }], days: [] };
+  assert.throws(() => crossPost([guapo, bobbi]), /isn't in any of bobbi's stays/);
 });
