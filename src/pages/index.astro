@@ -13,6 +13,7 @@ import {
   dogNames,
   parseDiary,
   entryMinutes,
+  crossPost,
   pastGuests,
   staysNewestFirst,
   warnOnOverlaps,
@@ -103,6 +104,8 @@ const guests = entries.map((e) => {
     days: parseDiary(e.body ?? "", stays, e.id),
   };
 });
+crossPost(guests);
+const nameOf = (id: string) => guests.find((g) => g.id === id)!.name;
 
 // Sent to the client so it can work out who's "here today" in the
 // Asia/Singapore timezone at load time — see the inline script below.
@@ -123,6 +126,8 @@ const guestsForClient = await Promise.all(
               id: e.id,
               time: e.time,
               mins: entryMinutes(e.time),
+              from: e.from ?? null,
+              withNames: e.with.map(nameOf),
               text: e.text,
               media: await Promise.all(e.media.map(async (m) => {
                 if (m.kind === "video") {
@@ -603,16 +608,21 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var pair = live.length > 1;
         var raw = [];
         live.forEach((d) =>
-          dayOn(d, today).entries.forEach((e) =>
-            raw.push({ entryId: e.id, time: e.time, mins: e.mins, text: e.text, media: e.media, who: d.name, id: d.id, bgColor: d.bgColor, key: today + " " + e.time })
-          )
+          dayOn(d, today).entries.forEach((e) => {
+            // A shared entry already shows under the dog it's written for,
+            // so skip the copy when that dog is here too.
+            if (e.from && live.some((o) => o.id === e.from)) return;
+            raw.push({ entryId: e.id, time: e.time, mins: e.mins, text: e.text, media: e.media, who: [d.name].concat(e.withNames).join(" & "), shared: e.withNames.length > 0, owner: e.from || d.id, id: d.id, bgColor: d.bgColor, key: today + " " + e.time });
+          })
         );
         // Two dogs share one day: merge their entries newest first, like
         // each dog's own diary. Stable sort keeps the written order on ties.
         if (pair) raw.sort((a, b) => b.mins - a.mins);
         var cards = raw
           .map((e, i) => {
-            var sk = skin(e.bgColor, e.id);
+            // A shared entry wears Night Indigo, a colour neither dog
+            // owns (Sofa Green sat too close to Guapo's Eucalyptus).
+            var sk = e.shared ? guestSkins("#4A5185")[1] : skin(e.bgColor, e.id);
             var darkSkin = luma(sk.bg) < 110;
             var video = e.media.filter((m) => m.kind === "video")[0];
             // A caption goes on the mat only when one print can hold it in a
@@ -730,17 +740,17 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               // above it and keep their own taps.
               '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:' +
               sk.accent +
-              '"><a href="/guests/' + esc(e.id) + '#entry-' + esc(e.entryId) + '" class="diary-entry-link" aria-label="' +
+              '"><a href="/guests/' + esc(e.owner) + '#entry-' + esc(e.entryId) + '" class="diary-entry-link" aria-label="' +
               esc(e.who + "'s diary, " + e.time) +
               '">' +
               esc(e.time) +
-              (pair ? " · " + esc(e.who) : "") +
+              (pair || e.shared ? " · " + esc(e.who) : "") +
               "</a>" +
               (isNew(e.id, e.key) ? ' <span class="new-tag ml-1 align-[1px]">New</span>' : "") +
               "</div>" +
               mediaHTML +
               textHTML +
-              '<entry-reactions data-guest="' + esc(e.id) + '" data-entry="' + esc(e.entryId) + '"></entry-reactions></div>'
+              '<entry-reactions data-guest="' + esc(e.owner) + '" data-entry="' + esc(e.entryId) + '"></entry-reactions></div>'
             );
           })
           .join("");

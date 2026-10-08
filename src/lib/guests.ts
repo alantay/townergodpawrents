@@ -43,6 +43,12 @@ export interface DiaryEntry {
   /** Photos (up to four) in the order they appear in the markdown, or a
    * single video — never both, see parseDiary. */
   media: DiaryMedia[];
+  /** Other guests this moment also belongs to, from `<!-- with: bobbi -->`.
+   * crossPost copies the entry into their diaries too. */
+  with: string[];
+  /** Set on a crossPost copy: the guest whose file the entry is written in.
+   * Reactions stay keyed to that guest, so both diaries share one count. */
+  from?: string;
 }
 
 /** One calendar day of a stay: a `## 13 Sep` divider and its entries. */
@@ -190,6 +196,7 @@ const HEADING_RE = /^(#{2,3})\s+(.+?)\s*$/gm;
 
 const DAY_RE = /^(\d{1,2})\s+([A-Za-z]{3,})$/;
 const ENTRY_ID_RE = /<!--\s*entry-id:\s*([a-z0-9-]+)\s*-->/g;
+const WITH_RE = /<!--\s*with:\s*([a-z0-9,\s-]*?)\s*-->/g;
 
 /**
  * Turns a `## 13 Sep` divider into a full date by finding the stay that
@@ -278,9 +285,10 @@ export function parseDiary(body: string, stays: Stay[], guestId: string): DiaryD
     if (media.length > 4) {
       throw new Error(`[guests] ${guestId}: entry "${title}" has ${media.length} prints — use at most four`);
     }
-    const text = raw.replace(IMAGE_RE, " ").replace(ENTRY_ID_RE, " ").trim().replace(/\s+/g, " ");
+    const text = raw.replace(IMAGE_RE, " ").replace(ENTRY_ID_RE, " ").replace(WITH_RE, " ").trim().replace(/\s+/g, " ");
+    const withIds = [...raw.matchAll(WITH_RE)].flatMap((m) => m[1].split(",").map((w) => w.trim()).filter(Boolean));
 
-    if (text || media.length > 0) current.entries.push({ id, time: title, text, media });
+    if (text || media.length > 0) current.entries.push({ id, time: title, text, media, with: withIds });
   }
 
   // Days newest first, whatever order they were written in. Entries keep the
@@ -296,6 +304,37 @@ export function entryMinutes(time: string): number {
   const m = time.trim().toLowerCase().match(/^(\d{1,2})(?::(\d{2}))?(am|pm)$/);
   if (!m) return -1;
   return ((+m[1] % 12) + (m[3] === "pm" ? 12 : 0)) * 60 + (+(m[2] ?? 0));
+}
+
+/**
+ * Copies every `<!-- with: ... -->` entry into the other guests' diaries, on
+ * the same day and in time order. The day must fall inside one of their
+ * stays, or the build fails, same as a day written in their own file.
+ */
+export function crossPost(guests: Pick<GuestData, "id" | "stays" | "days">[]): void {
+  const shares = guests.flatMap((g) =>
+    g.days.flatMap((d) => d.entries.flatMap((e) => e.with.map((to) => ({ from: g.id, day: d, entry: e, to })))),
+  );
+  for (const { from, day, entry, to } of shares) {
+    const target = guests.find((g) => g.id === to);
+    if (!target || to === from) {
+      throw new Error(`[guests] ${from}: entry ${entry.id} is shared "with: ${to}", which isn't another guest`);
+    }
+    if (!target.stays.some((s) => s.checkIn <= day.iso && day.iso <= s.checkOut)) {
+      throw new Error(`[guests] ${from}: entry ${entry.id} is shared with ${to}, but ${day.label} isn't in any of ${to}'s stays`);
+    }
+    let targetDay = target.days.find((d) => d.iso === day.iso);
+    if (!targetDay) {
+      targetDay = { iso: day.iso, label: day.label, entries: [] };
+      target.days.push(targetDay);
+      target.days.sort((a, b) => b.iso.localeCompare(a.iso));
+    }
+    // Shared entries name everyone on the card, so the copy lists the
+    // original guest plus any third guest, never the one it's filed under.
+    const copy = { ...entry, from, with: [from, ...entry.with.filter((w) => w !== to)] };
+    const at = targetDay.entries.findIndex((e) => entryMinutes(e.time) < entryMinutes(entry.time));
+    targetDay.entries.splice(at < 0 ? targetDay.entries.length : at, 0, copy);
+  }
 }
 
 /** The diary day for a given date, if anything was written that day. */
