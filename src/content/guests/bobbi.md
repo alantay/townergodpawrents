@@ -13,6 +13,14 @@ stays:
 
 ## 8 Oct
 
+### 10:10pm
+
+<!-- entry-id: e057 -->
+
+Bobbi looking at Guapo warily from a safe distance.
+
+![The back of Bobbi's fluffy white head, watching Guapo sniff around the hallway](./bobbi/bobbi-wary-of-guapo.jpg)
+
 ### 9:45pm
 
 <!-- entry-id: e055 -->
