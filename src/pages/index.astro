@@ -12,6 +12,7 @@ import type { ImageMetadata } from "astro";
 import {
   dogNames,
   parseDiary,
+  entryMinutes,
   pastGuests,
   staysNewestFirst,
   warnOnOverlaps,
@@ -121,6 +122,7 @@ const guestsForClient = await Promise.all(
             return {
               id: e.id,
               time: e.time,
+              mins: entryMinutes(e.time),
               text: e.text,
               media: await Promise.all(e.media.map(async (m) => {
                 if (m.kind === "video") {
@@ -602,9 +604,12 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var raw = [];
         live.forEach((d) =>
           dayOn(d, today).entries.forEach((e) =>
-            raw.push({ entryId: e.id, time: e.time, text: e.text, media: e.media, who: d.name, id: d.id, bgColor: d.bgColor, key: today + " " + e.time })
+            raw.push({ entryId: e.id, time: e.time, mins: e.mins, text: e.text, media: e.media, who: d.name, id: d.id, bgColor: d.bgColor, key: today + " " + e.time })
           )
         );
+        // Two dogs share one day: merge their entries newest first, like
+        // each dog's own diary. Stable sort keeps the written order on ties.
+        if (pair) raw.sort((a, b) => b.mins - a.mins);
         var cards = raw
           .map((e, i) => {
             var sk = skin(e.bgColor, e.id);
