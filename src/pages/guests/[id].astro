@@ -238,8 +238,11 @@ let skinIndex = 0;
           <div class="mt-4 grid gap-5">
             {day.entries.map((e) => {
               const i = skinIndex++;
-              const sk = diarySkin(bgColor, i);
-              const darkSkin = i % 4 > 1;
+              // A shared entry wears Sofa Green, the two-dog hero's colour,
+              // rather than this dog's.
+              const shared = e.with.length > 0;
+              const sk = shared ? diarySkin("#5F6E4F", 1) : diarySkin(bgColor, i);
+              const darkSkin = !shared && i % 4 > 1;
               const prints = e.media.map((m) => resolveDiaryMedia(m, entry.id, `${day.label} ${e.time}`));
               const video = prints.find((p) => p.kind === "video");
               const singlePrint = !video && prints.length === 1;
