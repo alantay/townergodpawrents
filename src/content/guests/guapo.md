@@ -17,6 +17,22 @@ stays:
 
 ## 8 Oct
 
+### 9:30pm
+
+<!-- entry-id: e054 -->
+
+Caught it! The spider was not available for comment.
+
+![Guapo with his nose jammed under the kitchen counter](./guapo/guapo-caught-it.mp4)
+
+### 9:30pm
+
+<!-- entry-id: e053 -->
+
+Guapo, hyper-focused on a spider under the kitchen counter, and...
+
+![Guapo lying on the kitchen floor, staring at the base of the counter](./guapo/guapo-spider-stalk.mp4)
+
 ### 8pm
 
 <!-- entry-id: e042 -->
