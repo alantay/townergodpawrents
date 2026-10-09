@@ -39,3 +39,5 @@ Add to this list whenever Alan reacts to a line, with the line itself as the exa
 - Prefers the empty-sofa hero as the hosts' side, not availability: chose "Sofa's empty" / "No dog today" / "The vacuum gets a day off. It's weirdly quiet." over "Vacancy" / "The sofa is free. The treats are ready." (read as a rooms-available sign). Headline: "Just us" read weird; "Nobody here" and "No doggo" (internet-cute, not his voice) lost to "No dog today".
 - Dislikes: "Two dogs, one sofa" as the 2+ dog badge (repeats the subline "Two dogs on the sofa. Humans on the floor." and isn't interesting). Chose "Vacuum on overtime", a callback to the empty-sofa "The vacuum gets a day off."
 - Dislikes: "(unpaid)" under the Godpawrents tape. It sounds bad, and it isn't true: they take a tiny token sum, because charging nothing just gets them red packets worth more. Chose "part-time" for the peel-the-tape easter egg.
+- Dislikes: "Everyone's asleep, Guapo & Bobbi included." as a late-night hero subline. The subline is there to describe the dog, so it stays the tagline at any hour.
+- Dislikes: "Recall sold separately." on the 404 page. Kept it plain: "There's no page here."
