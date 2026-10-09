@@ -31,13 +31,14 @@ bgColor: "#8E4A5C"              # hero colour from the guest palette in DESIGN.m
 showLive: true
 badge: Sock thief               # 2–3 word description of the dog
 tagline: sleeps with one eye on the treat jar   # a short character note, lowercase
+whenCalled: "Treat first. Then we'll see."   # optional, the dog's reply when you keep tapping its name on the homepage
 stays:
   - checkIn: 2026-10-01
     checkOut: 2026-10-05
 ---
 ```
 
-- Ask Alan for the breed, dates, and his take on the dog's character. Suggest a badge and tagline in chat for him to pick, the same way as the polish step in `docs/agents/add-entry.md`. Don't invent facts about the dog. Words follow `docs/agents/voice.md`.
+- Ask Alan for the breed, dates, and his take on the dog's character. Suggest a badge, tagline and `whenCalled` line in chat for him to pick, the same way as the polish step in `docs/agents/add-entry.md`. Don't invent facts about the dog. Words follow `docs/agents/voice.md`.
 - For the guest portrait, follow `.agents/skills/dog-avatar/SKILL.md`. It covers the required cream torn-paper edge, fine coloured outline, transparent exterior, and existing portraits to use as style references.
 - The cut-out stays a PNG with transparency. **Don't** run it through `scripts/prep-photo.sh`. If the source file is huge, shrink it with `sips -Z 1400 <file>`.
 - The body can start empty. Entries arrive with the add-entry flow.

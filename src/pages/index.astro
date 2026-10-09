@@ -97,6 +97,7 @@ const guests = entries.map((e) => {
     breed: e.data.breed,
     tagline: e.data.tagline ?? "",
     badge: e.data.badge ?? "",
+    whenCalled: e.data.whenCalled ?? "",
     bgColor: e.data.bgColor,
     showLive: e.data.showLive,
     photo: e.data.photo,
@@ -274,6 +275,13 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       function previewDate() {
         var m = /[?&]date=(\d{4}-\d{2}-\d{2})\b/.exec(location.search);
         return m ? m[1] : null;
+      }
+
+      // The hour in Singapore. ?hour=2 pretends it's 2am, to preview the
+      // night shift without staying up for it.
+      function sgtHour() {
+        var m = /[?&]hour=(\d{1,2})\b/.exec(location.search);
+        return m ? +m[1] : +new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Singapore", hour: "numeric", hourCycle: "h23" }).format(new Date());
       }
 
       var groupBadges = {};
@@ -483,7 +491,10 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               .map((n, i) => esc(n) + (i < dogs.length - 2 ? "," : i === dogs.length - 2 ? " &amp;" : ""))
               .join("<br>")
           : esc(live[0].name);
-        var sub = pair
+        // Past midnight, the subline owns up to what the house is doing.
+        var sub = sgtHour() < 6
+          ? "Everyone&#39;s asleep, " + esc(listNames(dogs)) + " included."
+          : pair
           ? groupWord(dogs.length) + " dogs on the sofa. Humans on the floor."
           : esc(live[0].tagline);
         var sizeClass = stacked
@@ -521,7 +532,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         return {
           color: color,
           html:
-            '<div class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:' +
+            '<div id="hero-card" class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:' +
             color +
             '">' +
             '<div id="hero-badge" class="absolute top-[18px] right-[18px] status-tag animate-wiggle">' +
@@ -529,7 +540,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             "</div>" +
             '<div class="w-full"><h1 class="fit-headline ' +
             sizeClass +
-            ' max-w-full" id="hero-name">' +
+            ' max-w-full cursor-pointer select-none" id="hero-name">' +
             nameHTML +
             "</h1></div>" +
             '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">' +
@@ -548,11 +559,11 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
 
       function heroVacancyHTML(lastGuest, next) {
         var html =
-          '<div class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:#5F6E4F">' +
+          '<div id="hero-card" class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:#5F6E4F">' +
           '<div id="hero-badge" class="absolute top-[18px] right-[18px] status-tag animate-wiggle">Sofa&#39;s empty</div>' +
           '<div class="w-full"><h1 class="fit-headline text-[clamp(62px,19vw,120px)] max-w-full">No dog today</h1></div>' +
           '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">The vacuum gets a day off. It&#39;s weirdly quiet.</div>' +
-          '<div id="vacancy-photo" class="h-[265px] mx-[-8px] mt-[18px] animate-drift-slow"></div>' +
+          '<button type="button" id="vacancy-photo" aria-label="Look down the side of the sofa" class="block w-[calc(100%+16px)] h-[265px] mx-[-8px] mt-[18px] animate-drift-slow cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime"></button>' +
           "</div>";
 
         if (next) {
@@ -780,7 +791,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         // Nothing written yet today: say so, or the empty space under the
         // hero reads like the page failed to load. Mood follows SGT clock.
         function quietLine() {
-          var hour = +new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Singapore", hour: "numeric", hourCycle: "h23" }).format(new Date());
+          var hour = sgtHour();
           var dogs = dogsIn(live);
           var who = pair ? "The " + groupWord(dogs.length).toLowerCase() + " of them" : esc(live[0].name);
           var leaving = live.every((d) => goingHome(d, today));
@@ -861,6 +872,41 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         } catch (e) {}
       }
 
+      // ---- easter eggs ----
+      // What turned up around the flat after the dogs went home.
+      var FOUND = [
+        "The vacuum, jammed with Luna's fur. Or Guapo's. Hard to tell.",
+        "A treat Tiny never found. Find it, we said.",
+        "One torn plushie. Alan is learning to sew.",
+        "Fur under the TV console.",
+        "Fur in every corner of the service yard.",
+        "A fur tumbleweed, rolling across the floor like the Wild West.",
+        "Guapo's chew. We forgot to give it back.",
+        "Egg snacks in the freezer. The dog went home before we finished them.",
+      ];
+
+      // Replays a one-shot animation, even mid-way through the last one.
+      function replay(el, cls) {
+        el.classList.remove(cls);
+        void el.offsetWidth;
+        el.classList.add(cls);
+      }
+
+      // A torn slip set down on the hero, swapped for a fresh one each time.
+      function heroNote(text) {
+        var card = document.getElementById("hero-card");
+        var note = card.querySelector(".hero-note");
+        if (!note) {
+          note = document.createElement("div");
+          note.className = "hero-note diary-slip diary-slip--tear-2";
+          note.setAttribute("role", "status");
+          note.innerHTML = '<div class="diary-slip-paper" aria-hidden="true"></div><div class="diary-note"><p></p></div>';
+          card.appendChild(note);
+        }
+        note.querySelector("p").textContent = text;
+        replay(note, "animate-pop");
+      }
+
       function sizeHero(img, targetEl) {
         img.sizes = window.__tgpCutoutWidth(targetEl.clientHeight, targetEl.clientWidth, img.width / img.height) + "px";
       }
@@ -896,6 +942,11 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           insertPhoto("sofa", document.getElementById("vacancy-photo"), undefined, true, "high");
           if (next) insertPhoto(next.guest.id, document.getElementById("next-up-photo"), "64px");
           if (result.lastGuest) insertPhoto(result.lastGuest.id, document.getElementById("last-seen-photo"), "64px");
+          // Tap the sofa to see what the last dogs left behind.
+          var found = Math.floor(Math.random() * FOUND.length);
+          document.getElementById("vacancy-photo").addEventListener("click", function () {
+            heroNote("Found: " + FOUND[found++ % FOUND.length]);
+          });
         } else {
           var hero = heroLiveHTML(result.live, today);
           appEl.innerHTML = hero.html + entryCardsHTML(result.live, today);
@@ -910,6 +961,14 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           });
           result.live.forEach((d, i) => insertPhoto(d.id, photoLinks[i], undefined, true, i === 0 ? "high" : "auto"));
           result.live.forEach(markSeen);
+          // Call a dog by name and it perks up. Keep calling and it answers.
+          var calls = 0;
+          document.getElementById("hero-name").addEventListener("click", function () {
+            photosEl.querySelectorAll("img").forEach((img) => replay(img, "dog-hop"));
+            if (++calls < 3) return;
+            var d = result.live[(calls - 3) % result.live.length];
+            heroNote((result.live.length > 1 ? d.name + ": " : "") + (d.whenCalled || "Heard you. Busy."));
+          });
         }
         if (preview) {
           var note = document.createElement("div");

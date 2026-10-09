@@ -3,18 +3,24 @@
 const path = Astro.url.pathname.replace(/\/$/, "");
 const isGuests = path === "/guests";
 const isCalendar = path === "/calendar";
+// On the homepage the wordmark has nowhere to go, so a tap peels its tape.
+const isHome = path === "";
 ---
 
 <nav aria-label="Main navigation" class="entrance flex items-center justify-between gap-2 sm:gap-3 py-5 border-b-[1.5px] border-line">
   <a
     href="/"
+    data-peel={isHome ? "" : undefined}
     class="group font-serif text-[21px] sm:text-[26px] leading-none flex items-baseline flex-wrap gap-x-1.5 gap-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 focus-visible:ring-offset-paper rounded-[5px]"
   >
     <span>The Towner</span>
-    <span
-      class="italic px-[7px] py-0.5 -rotate-2 bg-tape rounded-none inline-block transition-transform duration-200 group-hover:rotate-0"
-      >Godpawrents</span
-    >
+    <span class="relative inline-block">
+      {isHome && <span aria-hidden="true" class="tape-under">part-time</span>}
+      <span
+        class="tape relative italic px-[7px] py-0.5 -rotate-2 bg-tape rounded-none inline-block transition-transform duration-200 group-hover:rotate-0"
+        >Godpawrents</span
+      >
+    </span>
   </a>
   <div class="flex shrink-0 gap-1.5 sm:gap-2">
     <a
@@ -39,3 +45,37 @@ const isCalendar = path === "/calendar";
     </a>
   </div>
 </nav>
+
+{isHome && (
+  <script is:inline>
+    document.querySelector("[data-peel]").addEventListener("click", function (e) {
+      e.preventDefault();
+      this.classList.toggle("is-peeled");
+    });
+  </script>
+)}
+
+<style>
+  /* Under the tape, in pen on the paper: what we actually are. */
+  .tape-under {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 6px;
+    font-family: var(--font-script);
+    font-size: 0.82em;
+    font-weight: 600;
+    color: var(--color-muted);
+  }
+  .tape {
+    transform-origin: 0 100%;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    transition-duration: 380ms;
+  }
+  .is-peeled .tape {
+    transform: rotate(-26deg) translateY(-3px);
+    box-shadow: 0 6px 10px rgb(30 32 25 / 0.18);
+  }
+</style>

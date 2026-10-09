@@ -6,6 +6,7 @@ bgColor: "#A34A2E"
 showLive: true
 badge: Attention seeker
 tagline: squeaky-toy enthusiast, works only for snacks
+whenCalled: "Got a snack? Then maybe."
 stays:
   - checkIn: 2026-09-12
     checkOut: 2026-09-12
