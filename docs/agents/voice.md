@@ -41,3 +41,4 @@ Add to this list whenever Alan reacts to a line, with the line itself as the exa
 - Dislikes: "(unpaid)" under the Godpawrents tape. It sounds bad, and it isn't true: they take a tiny token sum, because charging nothing just gets them red packets worth more. Chose "part-time" for the peel-the-tape easter egg.
 - Dislikes: "Everyone's asleep, Guapo & Bobbi included." as a late-night hero subline. The subline is there to describe the dog, so it stays the tagline at any hour.
 - Dislikes: "Recall sold separately." on the 404 page. Kept it plain: "There's no dog here. No page either."
+- Prefers for Milk: "never without a leaf in her mouth, sometimes a stick too" over "..., downsized from sticks" (keep it plain that she still does sticks).
