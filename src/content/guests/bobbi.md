@@ -13,6 +13,15 @@ stays:
 
 ## 9 Oct
 
+### 9:12am
+
+<!-- entry-id: e062 -->
+<!-- with: guapo -->
+
+Bobbi's invitation to play, ignored by Guapo. Both dogs ended up going to their favourite person.
+
+![Bobbi bouncing around Guapo in the living room, then Guapo wandering off and Bobbi trotting over to Alan on the floor](./bobbi/bobbi-invite-to-play.mp4)
+
 ### 7:55am
 
 <!-- entry-id: e061 -->
