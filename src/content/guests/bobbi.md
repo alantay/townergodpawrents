@@ -23,6 +23,14 @@ Alan had a heart attack when Guapo opened his mouth wide like he was choking. He
 
 ![Bobbi and Guapo lying beside each other on the living room floor](./bobbi/bobbi-afternoon-chilling.mp4)
 
+### 1:40pm
+
+<!-- entry-id: e064 -->
+
+Baa baa Bobbi, have you any wool?
+
+![Bobbi lying on the living room floor, tongue out, front legs stretched long](./bobbi/bobbi-baa-baa-bobbi.jpg)
+
 ### 9:12am
 
 <!-- entry-id: e062 -->
