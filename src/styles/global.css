@@ -394,7 +394,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   margin-top: 26px;
 }
 
-.scrapbook-buddies > a {
+.scrapbook-buddies > button {
   flex: 0 0 60%;
   max-width: 320px;
   transform-origin: bottom center;
@@ -402,7 +402,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   animation: none;
 }
 
-.scrapbook-buddies > a + a {
+.scrapbook-buddies > button + button {
   margin-left: -18%;
   rotate: -3deg;
 }

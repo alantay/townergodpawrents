@@ -540,7 +540,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             "</div>" +
             '<div class="w-full"><h1 class="fit-headline ' +
             sizeClass +
-            ' max-w-full cursor-pointer select-none" id="hero-name">' +
+            ' max-w-full" id="hero-name">' +
             nameHTML +
             "</h1></div>" +
             '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">' +
@@ -952,23 +952,23 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           appEl.innerHTML = hero.html + entryCardsHTML(result.live, today);
           var photosEl = document.getElementById("hero-photos");
           appEl.hidden = false;
-          var photoLinks = result.live.map((d) => {
-            var a = document.createElement("a");
-            a.href = "/guests/" + d.id;
-            a.className = "block flex-1 min-w-0 h-full animate-drift transition-[filter] duration-200";
-            photosEl.appendChild(a);
-            return a;
+          // Pat a dog and it hops. Keep patting and it answers.
+          var dogBtns = result.live.map((d) => {
+            var b = document.createElement("button");
+            b.type = "button";
+            b.ariaLabel = "Pat " + d.name;
+            b.className = "block flex-1 min-w-0 h-full animate-drift cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime";
+            var pats = 0;
+            b.addEventListener("click", function () {
+              var img = b.querySelector("img");
+              if (img) replay(img, "dog-hop");
+              if (++pats >= 3) heroNote((result.live.length > 1 ? d.name + ": " : "") + (d.whenCalled || "Heard you. Busy."));
+            });
+            photosEl.appendChild(b);
+            return b;
           });
-          result.live.forEach((d, i) => insertPhoto(d.id, photoLinks[i], undefined, true, i === 0 ? "high" : "auto"));
+          result.live.forEach((d, i) => insertPhoto(d.id, dogBtns[i], undefined, true, i === 0 ? "high" : "auto"));
           result.live.forEach(markSeen);
-          // Call a dog by name and it perks up. Keep calling and it answers.
-          var calls = 0;
-          document.getElementById("hero-name").addEventListener("click", function () {
-            photosEl.querySelectorAll("img").forEach((img) => replay(img, "dog-hop"));
-            if (++calls < 3) return;
-            var d = result.live[(calls - 3) % result.live.length];
-            heroNote((result.live.length > 1 ? d.name + ": " : "") + (d.whenCalled || "Heard you. Busy."));
-          });
         }
         if (preview) {
           var note = document.createElement("div");
