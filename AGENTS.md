@@ -30,6 +30,10 @@ Single-context layout (`CONTEXT.md` + `docs/adr/` at the repo root). See `docs/a
 
 ## Development
 
+### Previews
+
+Whenever you create an image, preview or artifact for Alan to review, open it in the appropriate app or browser and verify it is visible. Open all variations together when comparing options; file links alone are not enough.
+
 ### Pushing changes
 
 Plain diary entries (text and media only) may be committed and pushed directly to `main`. Any architecture change must go on a branch and through a PR, including changes to rendering, parsing, shared code, or site behaviour needed for an entry. If a change includes both an entry and architecture work, submit the whole change as a PR.
