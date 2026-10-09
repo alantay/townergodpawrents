@@ -19,7 +19,7 @@ stays:
 <!-- entry-id: e065 -->
 <!-- with: guapo -->
 
-Teddy the Coton de Tulear made a Formula One car entrance. No pit stop required.
+Teddy the Coton de Tulear made a Formula One car entrance, zooming past the doggos. No pit stop required.
 
 ![Teddy racing across the rooftop carpark to join Bobbi, Guapo and the other dogs](./bobbi/bobbi-f1-entrance.mp4)
 
