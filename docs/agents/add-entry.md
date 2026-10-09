@@ -16,8 +16,11 @@ Alan's grammar is shaky and he knows it. He wants help, but it's his diary. Show
 > **Yours:** his text, untouched
 > **Polished:** grammar fixed, house voice applied, **every detail kept**
 > **Twist (optional):** one funnier closing line or rewording, only if one comes naturally
+> **Rewritten (optional):** improve the wording, order, pacing or sentence structure when it helps the story, **every detail kept**
 
-Then wait for his pick: yours / polished / twist / his own edit. Don't write the entry until he picks. If the polished version is identical to his, say so and skip the choice.
+Only offer Twist and Rewritten when relevant. Polished stays close to Alan's wording; Rewritten can rearrange and rewrite sentences for clearer flow without adding events or jokes.
+
+Then wait for his pick: yours / polished / twist / rewritten / his own edit. Don't write the entry until he picks. If the polished version is identical to his and neither optional version would help, say so and skip the choice.
 
 Rules for the polished version:
 - Fix grammar, tense and word order. Don't trim details or swap his words for "better" ones. Last time, cutting phrases like "right on cue" read as removing what he liked.

@@ -14,6 +14,15 @@ stays:
 
 ## 9 Oct
 
+### 2:25pm
+
+<!-- entry-id: e063 -->
+<!-- with: guapo -->
+
+Alan had a heart attack when Guapo opened his mouth wide like he was choking. He was just trying to get the dried tenderloin snack unstuck from his bottom teeth by dragging his mouth against the floor.
+
+![Bobbi and Guapo lying beside each other on the living room floor](./bobbi/bobbi-afternoon-chilling.mp4)
+
 ### 9:12am
 
 <!-- entry-id: e062 -->
