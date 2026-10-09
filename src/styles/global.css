@@ -394,7 +394,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   margin-top: 26px;
 }
 
-.scrapbook-buddies > a {
+.scrapbook-buddies > button {
   flex: 0 0 60%;
   max-width: 320px;
   transform-origin: bottom center;
@@ -402,7 +402,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   animation: none;
 }
 
-.scrapbook-buddies > a + a {
+.scrapbook-buddies > button + button {
   margin-left: -18%;
   rotate: -3deg;
 }
@@ -661,6 +661,60 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   animation: wiggle 4.5s ease-in-out infinite;
 }
 
+/* Easter eggs. Call a dog by name and it perks up for a second. */
+@keyframes hop {
+  0%,
+  60%,
+  100% {
+    transform: none;
+  }
+  30% {
+    transform: translateY(-14px) rotate(-2deg);
+  }
+  80% {
+    transform: translateY(-4px);
+  }
+}
+
+.dog-hop {
+  animation: hop 520ms cubic-bezier(0.3, 0.7, 0.4, 1);
+  transform-origin: 50% 100%;
+}
+
+/* A slip that turns up on the hero: the dog answering back, or what the
+   sofa coughed up. Uses `rotate` so the pop-in's transform can't undo it. */
+.hero-note {
+  position: absolute;
+  left: 14px;
+  bottom: 18px;
+  z-index: 2;
+  width: min(72%, 270px);
+  rotate: -2deg;
+  pointer-events: none;
+}
+
+/* Pops in, stays long enough to read (--note-hold, set per line), then fades. */
+@keyframes note-out {
+  to {
+    opacity: 0;
+  }
+}
+
+.hero-note-pop {
+  animation:
+    pop 500ms cubic-bezier(0.2, 0.8, 0.3, 1) both,
+    note-out 400ms ease-in var(--note-hold, 2s) forwards;
+}
+
+.hero-note .diary-note p {
+  color: var(--color-ink);
+  font-family: var(--font-script);
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 1.1;
+  text-wrap: pretty;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -673,6 +727,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   .animate-drift,
   .animate-drift-slow,
   .animate-wiggle,
+  .dog-hop,
   .entrance,
   .entrance-hero,
   .reveal-card {
@@ -680,6 +735,10 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .hero-note-pop {
+    animation: note-out 400ms ease-in var(--note-hold, 2s) forwards;
   }
 }
 

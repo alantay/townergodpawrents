@@ -6,6 +6,7 @@ bgColor: "#755A83"
 showLive: true
 badge: Destroyer of toys
 tagline: occasionally derpy, thinks every dog is her play buddy
+whenCalled: "Coming! Bringing what's left of the toy."
 stays:
   - checkIn: 2026-10-13
     checkOut: 2026-10-21

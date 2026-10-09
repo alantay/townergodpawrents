@@ -104,7 +104,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { name, breed, tagline, badge, bgColor, showLive, photo } = entry.data;
+const { name, breed, tagline, badge, bgColor, showLive, photo, whenCalled } = entry.data;
 
 const stays = staysNewestFirst(
   entry.data.stays.map((s) => ({ checkIn: dateStr(s.checkIn), checkOut: dateStr(s.checkOut) })),
@@ -197,10 +197,39 @@ let skinIndex = 0;
       )}
     </div>
 
-    <div class="guest-cutout -mx-2 mt-[18px]" style={`height:${portraitHeight}px`}>
+    <button type="button" id="pat-dog" aria-label={`Pat ${name}`} class="guest-cutout block w-[calc(100%+16px)] -mx-2 mt-[18px] cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime" style={`height:${portraitHeight}px`}>
       <Cutout photo={photo} name={name} loading="eager" height={portraitHeight} />
-    </div>
+    </button>
   </header>
+
+  <script is:inline define:vars={{ reply: whenCalled || "Heard you. Busy." }}>
+    // Pat the dog and it hops and woofs. Keep patting and it answers.
+    (function () {
+      var dog = document.getElementById("pat-dog");
+      var pats = 0;
+      function replay(el, cls) {
+        el.classList.remove(cls);
+        void el.offsetWidth;
+        el.classList.add(cls);
+      }
+      dog.addEventListener("click", function () {
+        var img = dog.querySelector("img");
+        if (img) replay(img, "dog-hop");
+        var note = dog.parentElement.querySelector(".hero-note");
+        if (!note) {
+          note = document.createElement("div");
+          note.className = "hero-note diary-slip diary-slip--tear-2";
+          note.setAttribute("role", "status");
+          note.innerHTML = '<div class="diary-slip-paper" aria-hidden="true"></div><div class="diary-note"><p></p></div>';
+          dog.parentElement.appendChild(note);
+        }
+        var text = ++pats < 3 ? "Woof!" : reply;
+        note.querySelector("p").textContent = text;
+        note.style.setProperty("--note-hold", 1200 + text.length * 25 + "ms");
+        replay(note, "hero-note-pop");
+      });
+    })();
+  </script>
 
   <div class="entrance entrance-delay-2 mt-12 border-t-[1.5px] border-line pt-[18px] flex items-end justify-between gap-4">
     <div>

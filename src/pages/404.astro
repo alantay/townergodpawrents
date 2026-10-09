@@ -1,0 +1,30 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import leash from "../assets/leash-cutout.png";
+---
+
+<Layout title="Wandered off · The Towner Godpawrents" noindex>
+  <Nav />
+
+  <header class="entrance entrance-delay-1 mt-4">
+    <h1 class="font-serif text-[clamp(40px,11vw,72px)] leading-[0.9] tracking-[-0.02em]">
+      Wandered off
+    </h1>
+    <p class="mt-3 text-base leading-relaxed text-pretty max-w-[52ch]">
+      There's no dog here. No page either.
+    </p>
+  </header>
+
+  <Image
+    src={leash}
+    alt="An empty leash lying on a scrap of torn paper"
+    width={600}
+    sizes="300px"
+    class="entrance entrance-delay-2 mt-8 w-[min(100%,300px)] -rotate-3"
+  />
+
+  <Footer />
+</Layout>

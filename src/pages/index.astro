@@ -97,6 +97,7 @@ const guests = entries.map((e) => {
     breed: e.data.breed,
     tagline: e.data.tagline ?? "",
     badge: e.data.badge ?? "",
+    whenCalled: e.data.whenCalled ?? "",
     bgColor: e.data.bgColor,
     showLive: e.data.showLive,
     photo: e.data.photo,
@@ -521,7 +522,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         return {
           color: color,
           html:
-            '<div class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:' +
+            '<div id="hero-card" class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:' +
             color +
             '">' +
             '<div id="hero-badge" class="absolute top-[18px] right-[18px] status-tag animate-wiggle">' +
@@ -548,11 +549,11 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
 
       function heroVacancyHTML(lastGuest, next) {
         var html =
-          '<div class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:#5F6E4F">' +
+          '<div id="hero-card" class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:#5F6E4F">' +
           '<div id="hero-badge" class="absolute top-[18px] right-[18px] status-tag animate-wiggle">Sofa&#39;s empty</div>' +
           '<div class="w-full"><h1 class="fit-headline text-[clamp(62px,19vw,120px)] max-w-full">No dog today</h1></div>' +
           '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">The vacuum gets a day off. It&#39;s weirdly quiet.</div>' +
-          '<div id="vacancy-photo" class="h-[265px] mx-[-8px] mt-[18px] animate-drift-slow"></div>' +
+          '<button type="button" id="vacancy-photo" aria-label="Look down the side of the sofa" class="block w-[calc(100%+16px)] h-[265px] mx-[-8px] mt-[18px] animate-drift-slow cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime"></button>' +
           "</div>";
 
         if (next) {
@@ -861,6 +862,42 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         } catch (e) {}
       }
 
+      // ---- easter eggs ----
+      // What turned up around the flat after the dogs went home.
+      var FOUND = [
+        "The vacuum, jammed with Luna's fur. Or Guapo's. Hard to tell.",
+        "A treat from a game of Find it. Tiny missed one.",
+        "One torn plushie. Alan is learning to sew.",
+        "Fur under the TV console.",
+        "Fur in every corner of the service yard.",
+        "A fur tumbleweed, rolling across the floor like the Wild West.",
+        "Guapo's chew. We forgot to give it back.",
+        "Egg snacks in the freezer. The dog went home before we finished them.",
+      ];
+
+      // Replays a one-shot animation, even mid-way through the last one.
+      function replay(el, cls) {
+        el.classList.remove(cls);
+        void el.offsetWidth;
+        el.classList.add(cls);
+      }
+
+      // A torn slip set down on the hero, swapped for a fresh one each time.
+      function heroNote(text) {
+        var card = document.getElementById("hero-card");
+        var note = card.querySelector(".hero-note");
+        if (!note) {
+          note = document.createElement("div");
+          note.className = "hero-note diary-slip diary-slip--tear-2";
+          note.setAttribute("role", "status");
+          note.innerHTML = '<div class="diary-slip-paper" aria-hidden="true"></div><div class="diary-note"><p></p></div>';
+          card.appendChild(note);
+        }
+        note.querySelector("p").textContent = text;
+        note.style.setProperty("--note-hold", 1200 + text.length * 25 + "ms");
+        replay(note, "hero-note-pop");
+      }
+
       function sizeHero(img, targetEl) {
         img.sizes = window.__tgpCutoutWidth(targetEl.clientHeight, targetEl.clientWidth, img.width / img.height) + "px";
       }
@@ -896,19 +933,32 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           insertPhoto("sofa", document.getElementById("vacancy-photo"), undefined, true, "high");
           if (next) insertPhoto(next.guest.id, document.getElementById("next-up-photo"), "64px");
           if (result.lastGuest) insertPhoto(result.lastGuest.id, document.getElementById("last-seen-photo"), "64px");
+          // Tap the sofa to see what the last dogs left behind.
+          var found = Math.floor(Math.random() * FOUND.length);
+          document.getElementById("vacancy-photo").addEventListener("click", function () {
+            heroNote("Found: " + FOUND[found++ % FOUND.length]);
+          });
         } else {
           var hero = heroLiveHTML(result.live, today);
           appEl.innerHTML = hero.html + entryCardsHTML(result.live, today);
           var photosEl = document.getElementById("hero-photos");
           appEl.hidden = false;
-          var photoLinks = result.live.map((d) => {
-            var a = document.createElement("a");
-            a.href = "/guests/" + d.id;
-            a.className = "block flex-1 min-w-0 h-full animate-drift transition-[filter] duration-200";
-            photosEl.appendChild(a);
-            return a;
+          // Pat a dog and it hops and woofs. Keep patting and it answers.
+          var dogBtns = result.live.map((d) => {
+            var b = document.createElement("button");
+            b.type = "button";
+            b.ariaLabel = "Pat " + d.name;
+            b.className = "block flex-1 min-w-0 h-full animate-drift cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime";
+            var pats = 0;
+            b.addEventListener("click", function () {
+              var img = b.querySelector("img");
+              if (img) replay(img, "dog-hop");
+              heroNote((result.live.length > 1 ? d.name + ": " : "") + (++pats < 3 ? "Woof!" : d.whenCalled || "Heard you. Busy."));
+            });
+            photosEl.appendChild(b);
+            return b;
           });
-          result.live.forEach((d, i) => insertPhoto(d.id, photoLinks[i], undefined, true, i === 0 ? "high" : "auto"));
+          result.live.forEach((d, i) => insertPhoto(d.id, dogBtns[i], undefined, true, i === 0 ? "high" : "auto"));
           result.live.forEach(markSeen);
         }
         if (preview) {

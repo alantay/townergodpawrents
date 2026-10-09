@@ -23,6 +23,9 @@ const guests = defineCollection({
       // Character notes, not visit notes — optional.
       badge: z.string().optional(),
       tagline: z.string().optional(),
+      // What the dog says back when you keep tapping its name on the
+      // homepage. Its own voice, one short line.
+      whenCalled: z.string().optional(),
 
       // ---- when the dog was here ----
       // Adjacent dates are separate stays: home on the 23rd, back on the

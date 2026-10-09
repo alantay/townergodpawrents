@@ -6,6 +6,7 @@ bgColor: "#3F6655"
 showLive: true
 badge: Cat in a dog's body
 tagline: recall sold separately, million-dollar smile included
+whenCalled: "Heard you. Choosing not to."
 stays:
   - checkIn: 2026-09-30
     checkOut: 2026-10-13

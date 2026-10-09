@@ -6,6 +6,7 @@ bgColor: "#8E4A5C"
 showLive: true
 badge: Sheep in disguise
 tagline: derpy by default, still working out how play works
+whenCalled: "Coming. Which way was that again?"
 stays:
   - checkIn: 2026-10-08
     checkOut: 2026-10-12
