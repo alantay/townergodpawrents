@@ -223,8 +223,10 @@ let skinIndex = 0;
           note.innerHTML = '<div class="diary-slip-paper" aria-hidden="true"></div><div class="diary-note"><p></p></div>';
           dog.parentElement.appendChild(note);
         }
-        note.querySelector("p").textContent = ++pats < 3 ? "Woof!" : reply;
-        replay(note, "animate-pop");
+        var text = ++pats < 3 ? "Woof!" : reply;
+        note.querySelector("p").textContent = text;
+        note.style.setProperty("--note-hold", 1200 + text.length * 25 + "ms");
+        replay(note, "hero-note-pop");
       });
     })();
   </script>

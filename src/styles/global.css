@@ -693,6 +693,19 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   pointer-events: none;
 }
 
+/* Pops in, stays long enough to read (--note-hold, set per line), then fades. */
+@keyframes note-out {
+  to {
+    opacity: 0;
+  }
+}
+
+.hero-note-pop {
+  animation:
+    pop 500ms cubic-bezier(0.2, 0.8, 0.3, 1) both,
+    note-out 400ms ease-in var(--note-hold, 2s) forwards;
+}
+
 .hero-note .diary-note p {
   color: var(--color-ink);
   font-family: var(--font-script);
@@ -722,6 +735,10 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .hero-note-pop {
+    animation: note-out 400ms ease-in var(--note-hold, 2s) forwards;
   }
 }
 

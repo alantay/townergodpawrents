@@ -904,7 +904,8 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           card.appendChild(note);
         }
         note.querySelector("p").textContent = text;
-        replay(note, "animate-pop");
+        note.style.setProperty("--note-hold", 1200 + text.length * 25 + "ms");
+        replay(note, "hero-note-pop");
       }
 
       function sizeHero(img, targetEl) {
