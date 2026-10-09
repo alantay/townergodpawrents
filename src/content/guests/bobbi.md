@@ -14,6 +14,15 @@ stays:
 
 ## 9 Oct
 
+### 10:21pm
+
+<!-- entry-id: e065 -->
+<!-- with: guapo -->
+
+Teddy the Coton de Tulear made a Formula One car entrance. No pit stop required.
+
+![Teddy racing across the rooftop carpark to join Bobbi, Guapo and the other dogs](./bobbi/bobbi-f1-entrance.mp4)
+
 ### 2:25pm
 
 <!-- entry-id: e063 -->
