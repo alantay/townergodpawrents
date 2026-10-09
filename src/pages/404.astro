@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
-import bushes from "../content/guests/guapo/guapo-poop-in-bushes.jpg";
+import leash from "../assets/leash-cutout.png";
 ---
 
 <Layout title="Wandered off · The Towner Godpawrents" noindex>
@@ -18,16 +18,13 @@ import bushes from "../content/guests/guapo/guapo-poop-in-bushes.jpg";
     </p>
   </header>
 
-  <div class="entrance entrance-delay-2 diary-print mt-8 w-[min(100%,360px)] rotate-[1.5deg]">
-    <Image
-      src={bushes}
-      alt="Guapo nose down in tall grass"
-      width={720}
-      sizes="(min-width: 400px) 346px, calc(100vw - 54px)"
-      class="print-media"
-    />
-    <p class="print-caption">Guapo's checking the bushes for it.</p>
-  </div>
+  <Image
+    src={leash}
+    alt="An empty leash lying on a scrap of torn paper"
+    width={600}
+    sizes="300px"
+    class="entrance entrance-delay-2 mt-8 w-[min(100%,300px)] -rotate-3"
+  />
 
   <Footer />
 </Layout>
