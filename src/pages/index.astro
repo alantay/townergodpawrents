@@ -277,13 +277,6 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         return m ? m[1] : null;
       }
 
-      // The hour in Singapore. ?hour=2 pretends it's 2am, to preview the
-      // night shift without staying up for it.
-      function sgtHour() {
-        var m = /[?&]hour=(\d{1,2})\b/.exec(location.search);
-        return m ? +m[1] : +new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Singapore", hour: "numeric", hourCycle: "h23" }).format(new Date());
-      }
-
       var groupBadges = {};
 
       function stayOn(g, todayISO) {
@@ -491,10 +484,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               .map((n, i) => esc(n) + (i < dogs.length - 2 ? "," : i === dogs.length - 2 ? " &amp;" : ""))
               .join("<br>")
           : esc(live[0].name);
-        // Past midnight, the subline owns up to what the house is doing.
-        var sub = sgtHour() < 6
-          ? "Everyone&#39;s asleep, " + esc(listNames(dogs)) + " included."
-          : pair
+        var sub = pair
           ? groupWord(dogs.length) + " dogs on the sofa. Humans on the floor."
           : esc(live[0].tagline);
         var sizeClass = stacked
@@ -791,7 +781,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         // Nothing written yet today: say so, or the empty space under the
         // hero reads like the page failed to load. Mood follows SGT clock.
         function quietLine() {
-          var hour = sgtHour();
+          var hour = +new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Singapore", hour: "numeric", hourCycle: "h23" }).format(new Date());
           var dogs = dogsIn(live);
           var who = pair ? "The " + groupWord(dogs.length).toLowerCase() + " of them" : esc(live[0].name);
           var leaving = live.every((d) => goingHome(d, today));
