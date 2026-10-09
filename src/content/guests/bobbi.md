@@ -11,6 +11,17 @@ stays:
     checkOut: 2026-10-12
 ---
 
+## 9 Oct
+
+### 7:40am
+
+<!-- entry-id: e060 -->
+<!-- with: guapo -->
+
+Back from the morning walk with the sheep and the fox.
+
+![Bobbi and Guapo trotting back in through the front door after their walk](./bobbi/bobbi-morning-walk-with-guapo.mp4)
+
 ## 8 Oct
 
 ### 10:54pm
