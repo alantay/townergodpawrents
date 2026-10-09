@@ -18,7 +18,7 @@ stays:
 <!-- entry-id: e061 -->
 <!-- with: guapo -->
 
-Say cheese... no cheese treats, though.
+Say cheese... no cheese treats though.
 
 ![Guapo and Bobbi lying on the living room floor, both grinning at the camera, a good few metres apart](./bobbi/bobbi-say-cheese-with-guapo.jpg)
 
