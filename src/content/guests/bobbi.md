@@ -14,7 +14,7 @@ stays:
 
 ## 9 Oct
 
-### 10:21pm
+### 6pm
 
 <!-- entry-id: e065 -->
 <!-- with: guapo -->
