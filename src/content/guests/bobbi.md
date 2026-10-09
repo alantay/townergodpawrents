@@ -19,7 +19,7 @@ stays:
 <!-- entry-id: e063 -->
 <!-- with: guapo -->
 
-Alan had a heart attack when Guapo opened his mouth wide like he was choking. He was just trying to get the dried tenderloin snack unstuck from his bottom teeth by dragging his mouth against the floor.
+Alan had a heart attack when Guapo opened his mouth wide like he was choking. He was just trying to get the dried tenderloin snack unstuck from his bottom teeth by dragging his mouth against the floor. Weiwen saw what was actually happening, so she didn’t react.
 
 ![Bobbi and Guapo lying beside each other on the living room floor](./bobbi/bobbi-afternoon-chilling.mp4)
 
