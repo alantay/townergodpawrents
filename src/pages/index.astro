@@ -496,13 +496,14 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var chips = [];
         if (!pair) {
           var stay = stayOn(live[0], today);
-          chips.push({ label: stayLabel(stay) });
-          if (stayDay(stay, today)) chips.push({ label: stayDay(stay, today) });
+          var href = "/guests/" + live[0].id;
+          chips.push({ label: stayLabel(stay), href: href });
+          if (stayDay(stay, today)) chips.push({ label: stayDay(stay, today), href: href });
           if (live[0].badge) chips.push({ label: live[0].badge, tape: true });
         } else {
           live.forEach((d) => {
             var day = goingHome(d, today) ? "going home today" : stayDay(stayOn(d, today), today).toLowerCase();
-            chips.push({ label: d.name + " · " + (day || d.breed) });
+            chips.push({ label: d.name + " · " + (day || d.breed), href: "/guests/" + d.id });
           });
           var groupKey = live.map((d) => d.id).sort().join("+");
           chips.push({ label: groupBadges[groupKey] || "Vacuum on overtime", tape: true });
@@ -511,11 +512,11 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var chipsHTML = chips
           .map(
             (c) =>
-              (c.tape
-                ? '<span class="badge-tape">'
-                : '<span class="fact-chip">') +
-              esc(c.label) +
-              "</span>"
+              // The cut-outs are pat buttons now, so the dog's own pills
+              // are the way into its diary.
+              (c.href
+                ? '<a href="' + esc(c.href) + '" class="fact-chip transition-transform duration-250 hover:scale-[1.04]">' + esc(c.label) + "</a>"
+                : (c.tape ? '<span class="badge-tape">' : '<span class="fact-chip">') + esc(c.label) + "</span>")
           )
           .join("");
 
