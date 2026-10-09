@@ -203,7 +203,7 @@ let skinIndex = 0;
   </header>
 
   <script is:inline define:vars={{ reply: whenCalled || "Heard you. Busy." }}>
-    // Pat the dog and it hops. Keep patting and it answers.
+    // Pat the dog and it hops and woofs. Keep patting and it answers.
     (function () {
       var dog = document.getElementById("pat-dog");
       var pats = 0;
@@ -215,7 +215,6 @@ let skinIndex = 0;
       dog.addEventListener("click", function () {
         var img = dog.querySelector("img");
         if (img) replay(img, "dog-hop");
-        if (++pats < 3) return;
         var note = dog.parentElement.querySelector(".hero-note");
         if (!note) {
           note = document.createElement("div");
@@ -224,7 +223,7 @@ let skinIndex = 0;
           note.innerHTML = '<div class="diary-slip-paper" aria-hidden="true"></div><div class="diary-note"><p></p></div>';
           dog.parentElement.appendChild(note);
         }
-        note.querySelector("p").textContent = reply;
+        note.querySelector("p").textContent = ++pats < 3 ? "Woof!" : reply;
         replay(note, "animate-pop");
       });
     })();

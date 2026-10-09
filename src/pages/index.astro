@@ -952,7 +952,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           appEl.innerHTML = hero.html + entryCardsHTML(result.live, today);
           var photosEl = document.getElementById("hero-photos");
           appEl.hidden = false;
-          // Pat a dog and it hops. Keep patting and it answers.
+          // Pat a dog and it hops and woofs. Keep patting and it answers.
           var dogBtns = result.live.map((d) => {
             var b = document.createElement("button");
             b.type = "button";
@@ -962,7 +962,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             b.addEventListener("click", function () {
               var img = b.querySelector("img");
               if (img) replay(img, "dog-hop");
-              if (++pats >= 3) heroNote((result.live.length > 1 ? d.name + ": " : "") + (d.whenCalled || "Heard you. Busy."));
+              heroNote((result.live.length > 1 ? d.name + ": " : "") + (++pats < 3 ? "Woof!" : d.whenCalled || "Heard you. Busy."));
             });
             photosEl.appendChild(b);
             return b;
