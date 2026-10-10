@@ -15,6 +15,14 @@ stays:
 
 ## 10 Oct
 
+### 12:38pm
+
+<!-- entry-id: e068 -->
+
+The entrance to our house was Bobbi’s favourite spot. Alan could lure her away, but she always came back to lie there.
+
+![Bobbi lying at the entrance to our house](./bobbi/bobbi-entrance-favourite-spot.mp4)
+
 ### 8am
 
 <!-- entry-id: e066 -->
