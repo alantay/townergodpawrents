@@ -31,7 +31,8 @@ bgColor: "#8E4A5C"              # hero colour from the guest palette in DESIGN.m
 showLive: true
 badge: Sock thief               # 2–3 word description of the dog
 tagline: sleeps with one eye on the treat jar   # a short character note, lowercase
-whenCalled: "Treat first. Then we'll see."   # optional, the dog's reply when you keep tapping its name on the homepage
+whenCalled: "Treat first. Then we'll see."   # optional, one of the dog's replies when you pat it
+sounds: ["Grrr."]   # optional, noises mixed in with "Woof!" when you pat it
 stays:
   - checkIn: 2026-10-01
     checkOut: 2026-10-05

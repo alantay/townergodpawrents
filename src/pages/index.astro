@@ -98,6 +98,7 @@ const guests = entries.map((e) => {
     tagline: e.data.tagline ?? "",
     badge: e.data.badge ?? "",
     whenCalled: e.data.whenCalled ?? "",
+    sounds: e.data.sounds,
     bgColor: e.data.bgColor,
     showLive: e.data.showLive,
     photo: e.data.photo,
@@ -944,17 +945,20 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           appEl.innerHTML = hero.html + entryCardsHTML(result.live, today);
           var photosEl = document.getElementById("hero-photos");
           appEl.hidden = false;
-          // Pat a dog and it hops and woofs. Keep patting and it answers.
+          // Pat a dog and it hops and woofs. After that it's anyone's guess, never the same twice in a row.
           var dogBtns = result.live.map((d) => {
             var b = document.createElement("button");
             b.type = "button";
             b.ariaLabel = "Pat " + d.name;
             b.className = "block flex-1 min-w-0 h-full animate-drift cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime";
-            var pats = 0;
+            var lines = ["Woof!"].concat(d.sounds, d.whenCalled || "Heard you. Busy.");
+            var last;
             b.addEventListener("click", function () {
               var img = b.querySelector("img");
               if (img) replay(img, "dog-hop");
-              heroNote((result.live.length > 1 ? d.name + ": " : "") + (++pats < 3 ? "Woof!" : d.whenCalled || "Heard you. Busy."));
+              var fresh = lines.filter((l) => l !== last);
+              last = last ? fresh[Math.floor(Math.random() * fresh.length)] : "Woof!";
+              heroNote((result.live.length > 1 ? d.name + ": " : "") + last);
             });
             photosEl.appendChild(b);
             return b;

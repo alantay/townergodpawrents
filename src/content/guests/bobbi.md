@@ -7,6 +7,7 @@ showLive: true
 badge: Sheep in disguise
 tagline: derpy by default, still working out how play works
 whenCalled: "Coming. Which way was that again?"
+sounds: ["Baaaa."]
 stays:
   - checkIn: 2026-10-08
     checkOut: 2026-10-12

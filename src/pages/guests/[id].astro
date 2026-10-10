@@ -104,7 +104,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { name, breed, tagline, badge, bgColor, showLive, photo, whenCalled } = entry.data;
+const { name, breed, tagline, badge, bgColor, showLive, photo, whenCalled, sounds } = entry.data;
 
 const stays = staysNewestFirst(
   entry.data.stays.map((s) => ({ checkIn: dateStr(s.checkIn), checkOut: dateStr(s.checkOut) })),
@@ -202,11 +202,11 @@ let skinIndex = 0;
     </button>
   </header>
 
-  <script is:inline define:vars={{ reply: whenCalled || "Heard you. Busy." }}>
-    // Pat the dog and it hops and woofs. Keep patting and it answers.
+  <script is:inline define:vars={{ lines: ["Woof!", ...sounds, whenCalled || "Heard you. Busy."] }}>
+    // Pat the dog and it hops and woofs. After that it's anyone's guess, never the same twice in a row.
     (function () {
       var dog = document.getElementById("pat-dog");
-      var pats = 0;
+      var last;
       function replay(el, cls) {
         el.classList.remove(cls);
         void el.offsetWidth;
@@ -223,7 +223,8 @@ let skinIndex = 0;
           note.innerHTML = '<div class="diary-slip-paper" aria-hidden="true"></div><div class="diary-note"><p></p></div>';
           dog.parentElement.appendChild(note);
         }
-        var text = ++pats < 3 ? "Woof!" : reply;
+        var fresh = lines.filter(function (l) { return l !== last; });
+        var text = (last = last ? fresh[Math.floor(Math.random() * fresh.length)] : "Woof!");
         note.querySelector("p").textContent = text;
         note.style.setProperty("--note-hold", 1200 + text.length * 25 + "ms");
         replay(note, "hero-note-pop");
