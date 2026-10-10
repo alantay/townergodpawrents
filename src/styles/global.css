@@ -736,6 +736,19 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   font-weight: 600;
   rotate: 1.5deg;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Haze lines, drifting like the smog. */
+.haze-tag svg {
+  width: 1.15em;
+  height: 1.15em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
 }
 
 /* Pops in, stays long enough to read (--note-hold, set per line), then fades. */
