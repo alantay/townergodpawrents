@@ -17,6 +17,16 @@ stays:
     checkOut: 2027-01-03
 ---
 
+## 10 Oct
+
+### 2:30pm
+
+<!-- entry-id: e069 -->
+
+Today's episode of pooping in the bush. Deep in the undergrowth, Guapo found the ideal spot, where the long weeds tickled his butt into action.
+
+![Guapo nosing through long grass and weeds in the bushes](./guapo/guapo-bush-episode.mp4)
+
 ## 8 Oct
 
 ### 10:20pm
