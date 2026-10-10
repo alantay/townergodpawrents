@@ -906,7 +906,8 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       // The weather in front of the day: "Cloudy Saturday". NEA's 2-hour
       // forecast for Kallang, which covers Towner. Haze season wins: when the
       // central 24-hour PSI is unhealthy, smog drifts over the hero too.
-      // ?sky=Showers and ?psi=170 preview them.
+      // The tag adds the hourly PM2.5, the right-now reading for a dog walk.
+      // ?sky=Showers, ?psi=170 and ?pm25=81 preview them.
       function skyWord(forecast) {
         return /haz/i.test(forecast) ? "Hazy"
           : /thunder/i.test(forecast) ? "Stormy"
@@ -930,7 +931,8 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           param("sky")
             ? decodeURIComponent(param("sky"))
             : api("two-hr-forecast").then((i) => i.forecasts.filter((f) => f.area === "Kallang")[0].forecast).catch(() => ""),
-        ]).then(([psi, forecast]) => {
+          param("pm25") ? +param("pm25") : api("pm25").then((i) => i.readings.pm25_one_hourly.central).catch(() => 0),
+        ]).then(([psi, forecast, pm25]) => {
           var card = document.getElementById("hero-card");
           if (!card) return;
           var hazy = psi > 100;
@@ -945,7 +947,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             var tag = document.createElement("div");
             tag.className = "haze-tag";
             tag.innerHTML =
-              '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4.5h9M5 8h9M2 11.5h9"/></svg>PSI ' + psi;
+              '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4.5h9M5 8h9M2 11.5h9"/></svg>PSI ' + psi + (pm25 ? " · PM2.5 " + pm25 : "");
             card.append(haze, tag);
           }
           var day = document.getElementById("sky-day");
