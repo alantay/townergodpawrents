@@ -18,10 +18,9 @@ stays:
 ### 5:55pm
 
 <!-- entry-id: e071 -->
+<!-- credit: Music: Viacheslav Starostin, from Pixabay -->
 
 It was time for the pre-dinner walk. We pranked Bobbi by opening the door while she was lying there, and she slid out. Her head came up, wondering what was going on, but went back down shortly after. She ended up resting her head on the artificial grass outside.
-
-Music: Viacheslav Starostin, from Pixabay.
 
 ![Bobbi lying in the open doorway, her head resting on the artificial grass outside](./bobbi/bobbi-door-prank.mp4)
 
