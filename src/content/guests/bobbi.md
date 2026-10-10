@@ -12,6 +12,16 @@ stays:
     checkOut: 2026-10-12
 ---
 
+## 10 Oct
+
+### 8am
+
+<!-- entry-id: e066 -->
+
+Rare sighting of Bobbi playing with another dog, Lingo.
+
+![Bobbi and Lingo, a small tan dog, playing on the rooftop carpark](./bobbi/bobbi-playing-with-lingo.mp4)
+
 ## 9 Oct
 
 ### 6pm
