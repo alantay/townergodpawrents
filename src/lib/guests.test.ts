@@ -87,6 +87,23 @@ Tiny now prefers this sofa.`, [{ checkIn: "2026-09-13", checkOut: "2026-09-23" }
   assert.equal(day.entries[0].text, "Tiny now prefers this sofa.");
 });
 
+test("parseDiary keeps paragraph breaks and a credit", () => {
+  const [day] = parseDiary(`## 10 Oct
+
+### 5:55pm
+
+<!-- entry-id: e071 -->
+<!-- credit: Music: someone -->
+
+Slid out
+the door.
+
+More.`, [{ checkIn: "2026-10-08", checkOut: "2026-10-12" }], "bobbi");
+
+  assert.equal(day.entries[0].text, "Slid out the door.\n\nMore.");
+  assert.equal(day.entries[0].credit, "Music: someone");
+});
+
 test("parseDiary rejects missing or duplicate entry IDs", () => {
   const stays = [{ checkIn: "2026-09-13", checkOut: "2026-09-23" }];
   assert.throws(() => parseDiary("## 17 Sep\n\n### 8am\n\nTiny naps.", stays, "tiny"), /needs exactly one/);
