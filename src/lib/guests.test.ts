@@ -1,6 +1,14 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { crossPost, diaryTextHtml, dogNames, entryMinutes, listNames, parseDiary, printWidth, VIDEO_MAX_HEIGHT } from "./guests.ts";
+import { crossPost, diaryTextHtml, dogNames, entryMinutes, listNames, parseDiary, printWidth, stayLabel, VIDEO_MAX_HEIGHT } from "./guests.ts";
+
+test("stayLabel adds diary years without changing compact labels", () => {
+  const stay = { checkIn: "2026-09-13", checkOut: "2026-09-23" };
+  assert.equal(stayLabel(stay), "13–23 Sep");
+  assert.equal(stayLabel(stay, true), "13–23 Sep 2026");
+  assert.equal(stayLabel({ checkIn: "2026-10-14", checkOut: "2026-10-14" }, true), "14 Oct 2026");
+  assert.equal(stayLabel({ checkIn: "2026-12-30", checkOut: "2027-01-02" }, true), "30 Dec 2026 – 2 Jan 2027");
+});
 
 test("parseDiary keeps two prints on one entry in markdown order", () => {
   const [day] = parseDiary(

@@ -120,15 +120,13 @@ const started = stays.filter((s) => s.checkIn <= today);
 // one that happened.
 const shownStay = here ?? next ?? latestStay({ stays: started.length ? started : stays });
 const hasArrived = started.length > 0;
-const daysAway = next ? Math.round((Date.parse(next.checkIn) - Date.parse(today)) / 86400000) : 0;
-const comingIn = (n: number) => (n === 1 ? "Coming tomorrow" : `Coming · in ${n} days`);
 const emptyLines = {
   arrived: "Nothing written yet. Busy settling in.",
   waiting: `Nothing written yet. ${name} ${dogNames(name).length > 1 ? "haven't" : "hasn't"} met the sofa.`,
 };
 // Labels are formatted here so the browser script below doesn't need its own
 // copy of stayLabel.
-const labelledStays = stays.map((s) => ({ ...s, label: stayLabel(s) }));
+const labelledStays = stays.map((s) => ({ ...s, label: stayLabel(s, true) }));
 
 // Every diary is parsed so entries other guests share "with" this one land
 // here too, see crossPost.
@@ -141,6 +139,8 @@ const everyone = (await getCollection("guests")).map((g) => {
 crossPost(everyone);
 const nameOf = (id: string) => everyone.find((g) => g.id === id)!.name;
 const days = everyone.find((g) => g.id === entry.id)!.days;
+const recordedStay = days[0] ? stayOn({ stays }, days[0].iso) : undefined;
+const diaryStay = recordedStay ?? shownStay;
 const entryCount = days.reduce((total, day) => total + day.entries.length, 0);
 
 // The palette rotates through the whole diary rather than restarting each
@@ -187,7 +187,7 @@ let skinIndex = 0;
     <div class="mt-[14px] flex gap-2 flex-wrap">
       <span class="fact-chip">{breed}</span>
       <span id="hero-stay-dates" class="fact-chip">
-        {stayLabel(shownStay)}
+        {!here && next ? "Next stay · " : ""}{stayLabel(shownStay, true)}
       </span>
       {showLive && (
         <span id="stay-day" class="fact-chip" hidden></span>
@@ -238,7 +238,7 @@ let skinIndex = 0;
       {entryCount > 0 && <p class="mt-1.5 text-sm text-label">{entryCount} {entryCount === 1 ? "entry" : "entries"}.</p>}
     </div>
     <div id="diary-stay" class:list={["diary-stay text-right text-[11px] font-semibold tracking-[0.08em] uppercase text-label", !here && next ? "" : "hidden sm:block"]}>
-      <span id="diary-stay-when">{here ? "Latest stay" : next ? comingIn(daysAway) : "Latest stay"}</span><br /><span id="diary-stay-dates">{stayLabel(shownStay)}</span>
+      <span id="diary-stay-when">{diaryStay.checkOut < today ? "Last stay" : !recordedStay && !here && next ? "Next stay" : "Latest stay"}</span><br /><span id="diary-stay-dates">{stayLabel(diaryStay, true)}</span>
     </div>
   </div>
 
@@ -262,7 +262,7 @@ let skinIndex = 0;
       {days.map((day) => (
         <section id={`day-${day.iso}`} class="diary-day mt-8 first:mt-5">
           <div class="diary-day-heading flex items-baseline gap-3">
-            <h3 class="diary-date font-serif text-[24px] leading-none flex-none">{day.label}</h3>
+            <h3 class="diary-date font-serif text-[24px] leading-none flex-none">{day.label} <span class="font-sans text-sm text-label">{day.iso.slice(0, 4)}</span></h3>
             <div class="h-px flex-1 bg-ink/20"></div>
           </div>
 
@@ -501,7 +501,7 @@ let skinIndex = 0;
     })();
   </script>
 
-  <script is:inline define:vars={{ stays: labelledStays, showLive, emptyLines }}>
+  <script is:inline define:vars={{ stays: labelledStays, showLive, emptyLines, recordedCheckIn: recordedStay?.checkIn }}>
     // The page is built once, so everything that depends on today (the "Here
     // today" pill, the stay chip, the empty-diary line) goes stale. Re-decide
     // it all in the browser from one "today", and honour ?date=YYYY-MM-DD the
@@ -539,15 +539,13 @@ let skinIndex = 0;
       }
 
       // The chip: the visit that's happening, the one coming up, or the last
-      // one that happened. A countdown shows on phones too.
+      // one that happened. Keep the diary heading on the latest recorded visit.
       var shown = here || next || (started.length ? started : stays)[0];
       var coming = !here && next;
-      var away = coming ? Math.round((Date.parse(next.checkIn) - Date.parse(today)) / ms) : 0;
-      document.getElementById("hero-stay-dates").textContent = shown.label;
-      document.getElementById("diary-stay-dates").textContent = shown.label;
-      document.getElementById("diary-stay-when").textContent = coming
-        ? away === 1 ? "Coming tomorrow" : "Coming · in " + away + " days"
-        : "Latest stay";
+      var diaryStay = stays.find((s) => s.checkIn === recordedCheckIn) || shown;
+      document.getElementById("hero-stay-dates").textContent = (coming ? "Next stay · " : "") + shown.label;
+      document.getElementById("diary-stay-dates").textContent = diaryStay.label;
+      document.getElementById("diary-stay-when").textContent = diaryStay.checkOut < today ? "Last stay" : !recordedCheckIn && coming ? "Next stay" : "Latest stay";
       var chip = document.getElementById("diary-stay");
       chip.classList.toggle("hidden", !coming);
       chip.classList.toggle("sm:block", !coming);

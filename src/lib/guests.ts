@@ -169,7 +169,14 @@ export function fmtDay(iso: string): string {
   return `${d} ${M[m - 1]}`;
 }
 
-export function stayLabel(s: Stay): string {
+export function stayLabel(s: Stay, withYear = false): string {
+  if (withYear) {
+    const startYear = s.checkIn.slice(0, 4);
+    const endYear = s.checkOut.slice(0, 4);
+    return startYear === endYear
+      ? `${stayLabel(s)} ${startYear}`
+      : `${fmtDay(s.checkIn)} ${startYear} – ${fmtDay(s.checkOut)} ${endYear}`;
+  }
   if (s.checkIn === s.checkOut) return fmtDay(s.checkIn);
   // Same month: "13–23 Sep", not "13 Sep – 23 Sep".
   if (s.checkIn.slice(0, 7) === s.checkOut.slice(0, 7)) {
@@ -230,7 +237,7 @@ function resolveDay(label: string, stays: Stay[], guestId: string): string {
 
   throw new Error(
     `[guests] ${guestId}: diary day "${label}" falls outside every stay ` +
-      `(${stays.map(stayLabel).join(", ")}) — wrong date, or a stay is missing?`,
+      `(${stays.map((s) => stayLabel(s)).join(", ")}) — wrong date, or a stay is missing?`,
   );
 }
 
