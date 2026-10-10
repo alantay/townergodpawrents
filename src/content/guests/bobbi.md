@@ -15,6 +15,17 @@ stays:
 
 ## 10 Oct
 
+### 2:48pm
+
+<!-- entry-id: e070 -->
+<!-- with: guapo -->
+
+Featured sleeping positions of the day. Guapo, dreaming of a sumptuous meal. Bobbi, praying in her sleep not to be part of the sumptuous meal.
+
+![Guapo asleep by the window, chin resting on a metal pole on the floor](./guapo/guapo-sumptuous-meal-dream.jpg)
+
+![Bobbi asleep belly-up on the floor, front paws pressed together like she's praying](./bobbi/bobbi-praying-sleep.jpg)
+
 ### 12:38pm
 
 <!-- entry-id: e068 -->
