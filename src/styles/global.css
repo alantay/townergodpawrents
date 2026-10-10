@@ -118,47 +118,21 @@ a:focus-visible {
   transform: rotate(0deg);
 }
 
-/* Homepage entry cards: the time is the link, and it stretches over the
-   whole card. Prints and video sit above it so a tap on them does their own
-   thing (enlarge, play) instead of leaving the page. */
-/* Keep the card's accent colour, not the site's ink link colour. */
-.diary-entry-link,
-.diary-entry-link:hover {
+.diary-guest-link,
+.diary-guest-link:hover {
   color: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  margin-block: -14px;
+  vertical-align: middle;
+  text-decoration: none;
 }
 
-.diary-entry-link::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-}
-
-/* The whole card is the link, so ring the card, inside its edge in the
-   card's own label colour. Ink would vanish on the dark skins. */
-.diary-entry-link:focus-visible {
-  outline: none;
-}
-
-.diary-entry-link:focus-visible::after {
-  border-radius: 24px;
-  outline: 2px solid currentColor;
-  outline-offset: -6px;
-}
-
-.diary-entry-card:has(.diary-entry-link) .diary-print-tap,
-.diary-entry-card:has(.diary-entry-link) video {
-  position: relative;
-  z-index: 1;
-  pointer-events: auto;
-}
-
-/* The tilted mats and caption slips paint above the stretched link, so let
-   taps on them fall through to it. Only the print and video inside answer. */
-.diary-entry-card:has(.diary-entry-link) .diary-print:not(.diary-print-tap),
-.diary-entry-card:has(.diary-entry-link) .diary-prints,
-.diary-entry-card:has(.diary-entry-link) .diary-slip {
-  pointer-events: none;
+.diary-guest-link:focus-visible {
+  outline-color: currentColor;
 }
 
 entry-reactions {
