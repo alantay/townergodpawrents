@@ -484,8 +484,9 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   line-height: 1.375;
   text-align: center;
   text-wrap: pretty;
+  white-space: pre-line;
 }
-.slip-caption { color: var(--color-ink); font-size: 15px; text-wrap: pretty; }
+.slip-caption { color: var(--color-ink); font-size: 15px; text-wrap: pretty; white-space: pre-line; }
 
 /* Give the writing breathing room within the torn-paper caption. */
 .diary-note {

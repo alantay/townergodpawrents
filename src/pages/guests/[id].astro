@@ -388,7 +388,7 @@ let skinIndex = 0;
                   )}
 
                   {e.text && !matCaption && !noteCaption && (
-                    <p class={`${prints.length > 0 ? "mt-4" : "mt-2"} text-base leading-relaxed text-pretty max-w-[58ch]`} set:html={diaryTextHtml(e.text)} />
+                    <p class={`${prints.length > 0 ? "mt-4" : "mt-2"} text-base leading-relaxed text-pretty whitespace-pre-line max-w-[58ch]`} set:html={diaryTextHtml(e.text)} />
                   )}
                   <entry-reactions data-guest={e.from ?? entry.id} data-entry={e.id} />
                   </article>
