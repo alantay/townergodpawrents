@@ -904,10 +904,11 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       }
 
       // The weather in front of the day: "Cloudy Saturday". NEA's 2-hour
-      // forecast for Kallang, which covers Towner. Haze season wins: when the
-      // central 24-hour PSI is unhealthy, smog drifts over the hero too.
-      // The tag adds the hourly PM2.5, the right-now reading for a dog walk.
-      // ?sky=Showers, ?psi=170 and ?pm25=81 preview them.
+      // forecast for Kallang, which covers Towner. The hero gets one weather
+      // at a time: haze wins when the central 24-hour PSI is unhealthy, then
+      // rain (with lightning when it's thundery), then heat shimmer when the
+      // nearest station reads 33°C or more.
+      // ?psi=170, ?sky=Thundery Showers and ?temp=34 preview them.
       function skyWord(forecast) {
         return /haz/i.test(forecast) ? "Hazy"
           : /thunder/i.test(forecast) ? "Stormy"
@@ -919,20 +920,109 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           : /fair|sunny/i.test(forecast) ? "Sunny"
           : "";
       }
+      // The reading on the hero, so the weather doesn't look like a bad photo.
+      function skyTag(card, kind, icon, text) {
+        var tag = document.createElement("div");
+        tag.className = "sky-tag sky-tag--" + kind;
+        tag.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="' + icon + '"/></svg>';
+        tag.append(text);
+        card.appendChild(tag);
+      }
+      // Rain on the glass: thin streaks falling, and a few fat drops that
+      // slide down slowly with a wet trail. Heavier when it's thundery.
+      function addRain(card, heavy) {
+        var c = document.createElement("canvas");
+        c.className = "sky-rain";
+        c.setAttribute("aria-hidden", "true");
+        card.appendChild(c);
+        var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var amt = heavy ? 1.8 : 1, ctx = c.getContext("2d"), w, h, streaks, drops;
+        // Sized from the card once it's laid out; the rain starts then.
+        new ResizeObserver(function () {
+          var r = devicePixelRatio || 1;
+          w = c.clientWidth;
+          h = c.clientHeight;
+          c.width = w * r;
+          c.height = h * r;
+          ctx.setTransform(r, 0, 0, r, 0, 0);
+          if (!streaks) {
+            streaks = [];
+            drops = [];
+            for (var i = 0; i < 70 * amt; i++) streaks.push({ x: Math.random() * w, y: Math.random() * h, l: 10 + Math.random() * 18, v: 9 + Math.random() * 7 });
+            for (var j = 0; j < 9 * amt; j++) drops.push({ x: Math.random() * w, y: Math.random() * h, r: 2 + Math.random() * 3.5 });
+            frame();
+          } else if (still) frame();
+        }).observe(c);
+        function frame() {
+          ctx.clearRect(0, 0, w, h);
+          ctx.fillStyle = "rgba(40,60,70," + 0.08 * amt + ")";
+          ctx.fillRect(0, 0, w, h);
+          ctx.strokeStyle = "rgba(225,235,240,.38)";
+          ctx.lineWidth = 1;
+          ctx.lineCap = "round";
+          ctx.beginPath();
+          streaks.forEach((s) => {
+            ctx.moveTo(s.x, s.y);
+            ctx.lineTo(s.x - s.l * 0.18, s.y + s.l);
+            if (still) return;
+            s.y += s.v;
+            s.x -= s.v * 0.18;
+            if (s.y > h) {
+              s.y = -s.l;
+              s.x = Math.random() * (w + 40);
+            }
+          });
+          ctx.stroke();
+          drops.forEach((d) => {
+            var g = ctx.createRadialGradient(d.x - d.r * 0.3, d.y - d.r * 0.4, 0, d.x, d.y, d.r);
+            g.addColorStop(0, "rgba(255,255,255,.75)");
+            g.addColorStop(0.6, "rgba(220,235,240,.25)");
+            g.addColorStop(1, "rgba(20,40,50,.3)");
+            ctx.fillStyle = g;
+            ctx.beginPath();
+            ctx.ellipse(d.x, d.y, d.r * 0.85, d.r, 0, 0, 7);
+            ctx.fill();
+          });
+          // ponytail: keeps drawing while scrolled away; pause with an IntersectionObserver if it costs battery.
+          if (!still) requestAnimationFrame(frame);
+        }
+      }
+      // Heat shimmer: wobbly noise pushed through the dogs. Holds still for
+      // reduced motion, so it's just a slight warp.
+      function addHeat(card) {
+        var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        card.insertAdjacentHTML(
+          "beforeend",
+          '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="heat-shimmer" x="-5%" y="-5%" width="110%" height="110%">' +
+            '<feTurbulence type="fractalNoise" baseFrequency="0.012 0.09" numOctaves="2" seed="3">' +
+            (still ? "" : '<animate attributeName="baseFrequency" dur="4s" values="0.012 0.09;0.014 0.11;0.012 0.09" repeatCount="indefinite"/>') +
+            '</feTurbulence><feDisplacementMap in="SourceGraphic" scale="7"/></filter></svg>' +
+            '<div class="sky-heat" aria-hidden="true"></div>'
+        );
+        card.classList.add("sky-hot");
+      }
       function addSky(today) {
         var param = (k) => (new RegExp("[?&]" + k + "=([^&]+)").exec(location.search) || [])[1];
         var api = (path) =>
           fetch("https://api-open.data.gov.sg/v2/real-time/api/" + path)
             .then((r) => r.json())
-            .then((j) => j.data.items[0]);
+            .then((j) => j.data);
         Promise.all([
           // No reading, no haze or weather. The page is fine without them.
-          param("psi") ? +param("psi") : api("psi").then((i) => i.readings.psi_twenty_four_hourly.central).catch(() => 0),
+          param("psi") ? +param("psi") : api("psi").then((d) => d.items[0].readings.psi_twenty_four_hourly.central).catch(() => 0),
           param("sky")
             ? decodeURIComponent(param("sky"))
-            : api("two-hr-forecast").then((i) => i.forecasts.filter((f) => f.area === "Kallang")[0].forecast).catch(() => ""),
-          param("pm25") ? +param("pm25") : api("pm25").then((i) => i.readings.pm25_one_hourly.central).catch(() => 0),
-        ]).then(([psi, forecast, pm25]) => {
+            : api("two-hr-forecast").then((d) => d.items[0].forecasts.filter((f) => f.area === "Kallang")[0].forecast).catch(() => ""),
+          // Scotts Road is the nearest thermometer to Towner, Kim Chuan Road the next.
+          param("temp")
+            ? +param("temp")
+            : api("air-temperature")
+                .then((d) => {
+                  var at = (id) => d.readings[0].data.filter((x) => x.stationId === id)[0];
+                  return (at("S111") || at("S43")).value;
+                })
+                .catch(() => 0),
+        ]).then(([psi, forecast, temp]) => {
           var card = document.getElementById("hero-card");
           if (!card) return;
           var hazy = psi > 100;
@@ -943,12 +1033,21 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             haze.setAttribute("aria-hidden", "true");
             haze.style.setProperty("--haze", Math.min(1, 0.4 + (psi - 100) / 220));
             haze.innerHTML = "<i></i><i></i><i></i>";
-            // The reading on the hero, so the fog doesn't look like a bad photo.
-            var tag = document.createElement("div");
-            tag.className = "haze-tag";
-            tag.innerHTML =
-              '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4.5h9M5 8h9M2 11.5h9"/></svg>PSI ' + psi + (pm25 ? " · PM2.5 " + pm25 : "");
-            card.append(haze, tag);
+            card.appendChild(haze);
+            skyTag(card, "haze", "M2 4.5h9M5 8h9M2 11.5h9", "PSI " + psi);
+          } else if (word === "Rainy" || word === "Stormy") {
+            var stormy = word === "Stormy";
+            addRain(card, stormy || /heavy/i.test(forecast));
+            if (stormy) card.insertAdjacentHTML("beforeend", '<div class="sky-flash" aria-hidden="true"></div>');
+            skyTag(
+              card,
+              stormy ? "storm" : "rain",
+              stormy ? "M9 1.5L4 9h4l-1 5.5L12 7H8z" : "M4 3l-1.5 4M8 5l-1.5 4M12 3l-1.5 4M6 10l-1.5 4M10 10l-1.5 4",
+              forecast
+            );
+          } else if (temp >= 33) {
+            addHeat(card);
+            skyTag(card, "heat", "M7 2.5a1.5 1.5 0 0 1 3 0v6.8a3 3 0 1 1-3 0z", Math.round(temp) + "°C");
           }
           var day = document.getElementById("sky-day");
           if (word && day) day.textContent = word + " " + day.textContent;
