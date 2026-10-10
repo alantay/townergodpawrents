@@ -22,7 +22,7 @@ export interface Stay {
  * the defaults ("Vacuum on overtime", "Two dogs on the sofa. ...").
  */
 export const GROUP_HERO: Record<string, { badge?: string; tagline?: string }> = {
-  "bobbi+guapo": { badge: "The fox and the sheep", tagline: "a handsome delinquent and a timid class monitor" },
+  "bobbi+guapo": { badge: "The fox and the sheep", tagline: "social experiment: the school bully and the timid prefect" },
 };
 
 export type MediaKind = "photo" | "video";
