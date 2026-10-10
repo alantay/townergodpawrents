@@ -693,7 +693,8 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   pointer-events: none;
 }
 
-/* Haze season: smog drifts across the hero when the PSI is unhealthy.
+/* Haze season: patches of smog drift across the dogs when the PSI is unhealthy,
+   with clear gaps between them. It thins out above the dogs, so the names stay sharp.
    --haze runs from 0.4 (just over 100) to 1 (very unhealthy). */
 .haze {
   --smog: 192 195 198;
@@ -702,24 +703,36 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   z-index: 1;
   overflow: hidden;
   pointer-events: none;
-  background: linear-gradient(to top, rgb(var(--smog) / calc(var(--haze) * 0.55)), rgb(var(--smog) / calc(var(--haze) * 0.18)) 70%);
+  mask-image: linear-gradient(to top, #000 38%, transparent 58%);
 }
+/* Each bank repeats one patch every 27% of its width, the same distance it
+   drifts, so the loop never jumps. */
 .haze i {
   position: absolute;
   left: -60%;
-  bottom: -8%;
+  bottom: -12%;
   width: 220%;
-  height: 55%;
-  background:
-    radial-gradient(closest-side, rgb(var(--smog) / 0.9), transparent) 0 0 / 34% 100% no-repeat,
-    radial-gradient(closest-side, rgb(var(--smog) / 0.7), transparent) 40% 60% / 28% 80% no-repeat,
-    radial-gradient(closest-side, rgb(var(--smog) / 0.85), transparent) 78% 20% / 36% 90% no-repeat;
-  filter: blur(14px);
-  opacity: calc(var(--haze) * 0.9);
+  height: 58%;
+  background: radial-gradient(32% 42% at 50% 55%, rgb(var(--smog)) 45%, rgb(var(--smog) / 0)) 0 0 / 27% 100% repeat-x;
+  filter: blur(10px);
+  opacity: calc(0.35 + var(--haze) * 0.65);
   animation: smog-drift 26s linear infinite;
 }
-.haze i:nth-child(2) { bottom: 22%; animation-duration: 38s; animation-direction: reverse; opacity: calc(var(--haze) * 0.6); }
-.haze i:nth-child(3) { top: -10%; bottom: auto; animation-duration: 47s; opacity: calc(var(--haze) * 0.45); }
+.haze i:nth-child(2) {
+  bottom: 14%;
+  height: 40%;
+  background-position: 13% 0;
+  animation-duration: 38s;
+  animation-direction: reverse;
+  opacity: calc(var(--haze) * 0.85);
+}
+.haze i:nth-child(3) {
+  bottom: 2%;
+  height: 34%;
+  background-position: 7% 0;
+  animation-duration: 47s;
+  opacity: calc(var(--haze) * 0.7);
+}
 @keyframes smog-drift { to { transform: translateX(27%); } }
 
 .haze-tag {
