@@ -946,7 +946,11 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             haze.setAttribute("aria-hidden", "true");
             haze.style.setProperty("--haze", Math.min(1, 0.4 + (psi - 100) / 220));
             haze.innerHTML = "<i></i><i></i><i></i>";
-            card.append(haze);
+            // The reading on the hero, so the fog doesn't look like a bad photo.
+            var tag = document.createElement("div");
+            tag.className = "haze-tag";
+            tag.textContent = "PSI " + psi;
+            card.append(haze, tag);
           }
           var day = document.getElementById("sky-day");
           if (word && day) day.textContent = word + " " + day.textContent;
