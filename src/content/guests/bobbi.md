@@ -22,6 +22,15 @@ Rare sighting of Bobbi playing with another dog, Lingo.
 
 ![Bobbi and Lingo, a small tan dog, playing on the rooftop carpark](./bobbi/bobbi-playing-with-lingo.mp4)
 
+### 7:48am
+
+<!-- entry-id: e067 -->
+<!-- with: guapo -->
+
+Two chill dogs waited for Alan to buy breakfast. None of it was for them.
+
+![Guapo lying on the grass and Bobbi standing beside him, both smiling at the camera](./bobbi/bobbi-breakfast-wait.jpg)
+
 ## 9 Oct
 
 ### 6pm
