@@ -699,7 +699,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 .haze i:nth-child(3) { top: -10%; bottom: auto; animation-duration: 47s; opacity: calc(var(--haze) * 0.45); }
 @keyframes smog-drift { to { transform: translateX(27%); } }
 
-.haze-tag {
+.sky-tag {
   position: absolute;
   right: 14px;
   bottom: 16px;
@@ -716,14 +716,59 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   gap: 5px;
 }
 
-/* Haze lines, drifting like the smog. */
-.haze-tag svg {
+/* The icon, drawn in the same line as the haze lines. */
+.sky-tag svg {
   width: 1.15em;
   height: 1.15em;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.6;
   stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sky-tag--rain { background: #b9cdd6; }
+.sky-tag--storm { background: #e4e0a6; }
+.sky-tag--heat { background: #f3bf7e; }
+
+/* Rain on the glass: the canvas draws the streaks and drops (addRain).
+   Thundery showers add lightning, a double flash every few seconds. */
+.sky-rain,
+.sky-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.sky-rain {
+  width: 100%;
+  height: 100%;
+}
+.sky-flash {
+  background: #f4f6ff;
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: lightning 7s infinite;
+}
+@keyframes lightning {
+  0%, 58% { opacity: 0; }
+  59% { opacity: 0.6; }
+  60% { opacity: 0.1; }
+  61.5% { opacity: 0.45; }
+  64%, 100% { opacity: 0; }
+}
+
+/* A hot afternoon: the dogs wobble like a road in the sun (#heat-shimmer),
+   with a warm glow coming up from the bottom of the card. */
+.sky-hot :is(#hero-photos, #vacancy-photo) {
+  filter: url("#heat-shimmer");
+}
+.sky-heat {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to top, rgb(255 170 80 / 0.32), rgb(255 190 110 / 0.08) 55%, transparent 75%);
+  mix-blend-mode: soft-light;
 }
 
 /* Pops in, stays long enough to read (--note-hold, set per line), then fades. */
@@ -774,7 +819,8 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
     animation: note-out 400ms ease-in var(--note-hold, 2s) forwards;
   }
 
-  .haze i {
+  .haze i,
+  .sky-flash {
     animation: none;
   }
 }
