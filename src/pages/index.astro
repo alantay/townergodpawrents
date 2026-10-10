@@ -725,7 +725,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             var textHTML = e.text && !matCaption && !noteCaption
               ? '<p class="' +
                 (e.media.length ? "mt-4" : "mt-2") +
-                ' text-base leading-relaxed text-pretty">' +
+                ' text-base leading-relaxed text-pretty whitespace-pre-line">' +
                 esc(e.text).replace(/~~([^~]+)~~/g, "<del>$1</del>") +
                 "</p>"
               : "";

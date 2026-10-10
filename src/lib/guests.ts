@@ -292,7 +292,8 @@ export function parseDiary(body: string, stays: Stay[], guestId: string): DiaryD
     if (media.length > 4) {
       throw new Error(`[guests] ${guestId}: entry "${title}" has ${media.length} prints — use at most four`);
     }
-    const text = raw.replace(IMAGE_RE, " ").replace(ENTRY_ID_RE, " ").replace(WITH_RE, " ").trim().replace(/\s+/g, " ");
+    const text = raw.replace(IMAGE_RE, " ").replace(ENTRY_ID_RE, " ").replace(WITH_RE, " ").trim()
+      .split(/\n\s*\n/).map((p) => p.trim().replace(/\s+/g, " ")).filter(Boolean).join("\n\n");
     const withIds = [...raw.matchAll(WITH_RE)].flatMap((m) => m[1].split(",").map((w) => w.trim()).filter(Boolean));
 
     if (text || media.length > 0) current.entries.push({ id, time: title, text, media, with: withIds });
