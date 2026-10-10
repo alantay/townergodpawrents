@@ -904,6 +904,33 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         replay(note, "hero-note-pop");
       }
 
+      // Haze season: when the air's unhealthy, smog drifts over the hero.
+      // NEA's 24-hour PSI for central, which covers Towner. ?psi=170 previews it.
+      function addHaze() {
+        var m = /[?&]psi=(\d+)/.exec(location.search);
+        (m
+          ? Promise.resolve(+m[1])
+          : fetch("https://api-open.data.gov.sg/v2/real-time/api/psi")
+              .then((r) => r.json())
+              .then((j) => j.data.items[0].readings.psi_twenty_four_hourly.central)
+        )
+          .then((psi) => {
+            var card = document.getElementById("hero-card");
+            if (!(psi > 100) || !card) return;
+            var haze = document.createElement("div");
+            haze.className = "haze";
+            haze.setAttribute("aria-hidden", "true");
+            haze.style.setProperty("--haze", Math.min(1, 0.4 + (psi - 100) / 220));
+            haze.innerHTML = "<i></i><i></i><i></i>";
+            var tag = document.createElement("div");
+            tag.className = "haze-tag";
+            tag.textContent = (psi > 200 ? "Very hazy" : "Hazy") + " · PSI " + psi;
+            card.append(haze, tag);
+          })
+          // No reading, no haze. The hero is fine without it.
+          .catch(() => {});
+      }
+
       function sizeHero(img, targetEl) {
         img.sizes = window.__tgpCutoutWidth(targetEl.clientHeight, targetEl.clientWidth, img.width / img.height) + "px";
       }
@@ -978,6 +1005,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           appEl.prepend(note);
         }
         appEl.hidden = false;
+        addHaze();
 
         var liveIds = result.live.map((d) => d.id);
         var past = pastGuests(guests, today)
