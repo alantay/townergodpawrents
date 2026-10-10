@@ -949,7 +949,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             streaks = [];
             drops = [];
             for (var i = 0; i < 70 * amt; i++) streaks.push({ x: Math.random() * w, y: Math.random() * h, l: 10 + Math.random() * 18, v: 9 + Math.random() * 7 });
-            for (var j = 0; j < 9 * amt; j++) drops.push({ x: Math.random() * w, y: Math.random() * h, r: 2 + Math.random() * 3.5 });
+            for (var j = 0; j < 28 * amt; j++) drops.push({ x: Math.random() * w, y: Math.random() * h, r: 3 + Math.random() * 5 });
             frame();
           } else if (still) frame();
         }).observe(c);
@@ -973,14 +973,36 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             }
           });
           ctx.stroke();
+          // Each drop is a tiny lens: the dogs behind it, shrunk and upside
+          // down. The cutouts are object-contain, bottom-centred.
+          var o = c.getBoundingClientRect(), pics = [];
+          card.querySelectorAll("#hero-photos img, #vacancy-photo img").forEach((img) => {
+            if (!img.naturalWidth) return;
+            var b = img.getBoundingClientRect(), k = Math.min(b.width / img.naturalWidth, b.height / img.naturalHeight);
+            var dw = img.naturalWidth * k, dh = img.naturalHeight * k;
+            pics.push([img, b.left - o.left + (b.width - dw) / 2, b.bottom - o.top - dh, dw, dh]);
+          });
           drops.forEach((d) => {
-            var g = ctx.createRadialGradient(d.x - d.r * 0.3, d.y - d.r * 0.4, 0, d.x, d.y, d.r);
-            g.addColorStop(0, "rgba(255,255,255,.75)");
-            g.addColorStop(0.6, "rgba(220,235,240,.25)");
-            g.addColorStop(1, "rgba(20,40,50,.3)");
+            ctx.save();
+            ctx.beginPath();
+            ctx.ellipse(d.x, d.y, d.r * 0.85, d.r, 0, 0, 7);
+            ctx.clip();
+            ctx.translate(d.x, d.y);
+            ctx.scale(-0.22, -0.22);
+            ctx.translate(-d.x, -d.y);
+            pics.forEach((p) => ctx.drawImage(...p));
+            ctx.restore();
+            var g = ctx.createRadialGradient(d.x, d.y, 0, d.x, d.y, d.r);
+            g.addColorStop(0, "rgba(255,255,255,.08)");
+            g.addColorStop(0.7, "rgba(255,255,255,.04)");
+            g.addColorStop(1, "rgba(15,30,35,.55)");
             ctx.fillStyle = g;
             ctx.beginPath();
             ctx.ellipse(d.x, d.y, d.r * 0.85, d.r, 0, 0, 7);
+            ctx.fill();
+            ctx.fillStyle = "rgba(255,255,255,.8)";
+            ctx.beginPath();
+            ctx.arc(d.x - d.r * 0.3, d.y - d.r * 0.45, d.r * 0.18, 0, 7);
             ctx.fill();
           });
           // ponytail: keeps drawing while scrolled away; pause with an IntersectionObserver if it costs battery.
