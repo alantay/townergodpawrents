@@ -17,12 +17,12 @@ export interface Stay {
 }
 
 /**
- * Hand-written hero badges for a particular group of dogs staying together.
- * Key: guest ids sorted and joined with "+". Any group not listed gets the
- * default badge ("Vacuum on overtime").
+ * Hand-written hero badge and tagline for a particular group of dogs staying
+ * together. Key: guest ids sorted and joined with "+". Anything not set gets
+ * the defaults ("Vacuum on overtime", "Two dogs on the sofa. ...").
  */
-export const GROUP_BADGES: Record<string, string> = {
-  "bobbi+guapo": "The fox and the sheep",
+export const GROUP_HERO: Record<string, { badge?: string; tagline?: string }> = {
+  "bobbi+guapo": { badge: "The fox and the sheep", tagline: "social experiment: the school bully and the timid prefect" },
 };
 
 export type MediaKind = "photo" | "video";
