@@ -722,22 +722,6 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 .haze i:nth-child(3) { top: -10%; bottom: auto; animation-duration: 47s; opacity: calc(var(--haze) * 0.45); }
 @keyframes smog-drift { to { transform: translateX(27%); } }
 
-/* The weather and the day, stuck on the hero's corner. */
-.sky-tag {
-  position: absolute;
-  right: 14px;
-  bottom: 16px;
-  z-index: 2;
-  padding: 6px 10px;
-  background: var(--color-cream);
-  color: var(--color-ink);
-  font-size: 12px;
-  font-weight: 600;
-  rotate: 1.5deg;
-  pointer-events: none;
-}
-.sky-tag--hazy { background: rgb(192 195 198); }
-
 /* Pops in, stays long enough to read (--note-hold, set per line), then fades. */
 @keyframes note-out {
   to {
