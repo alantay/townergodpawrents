@@ -129,7 +129,7 @@ const guestsForClient = await Promise.all(
               time: e.time,
               mins: entryMinutes(e.time),
               from: e.from ?? null,
-              withNames: e.with.map(nameOf),
+              withGuests: e.with.map((id) => ({ id, name: nameOf(id) })),
               text: e.text,
               credit: e.credit ?? null,
               media: await Promise.all(e.media.map(async (m) => {
@@ -617,7 +617,8 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             // A shared entry already shows under the dog it's written for,
             // so skip the copy when that dog is here too.
             if (e.from && live.some((o) => o.id === e.from)) return;
-            raw.push({ entryId: e.id, time: e.time, mins: e.mins, text: e.text, credit: e.credit, media: e.media, who: [d.name].concat(e.withNames).join(" & "), shared: e.withNames.length > 0, owner: e.from || d.id, id: d.id, bgColor: d.bgColor, key: today + " " + e.time });
+            var participants = [{ id: d.id, name: d.name }].concat(e.withGuests);
+            raw.push({ entryId: e.id, time: e.time, mins: e.mins, text: e.text, credit: e.credit, media: e.media, who: participants.map((g) => g.name).join(" & "), participants, shared: e.withGuests.length > 0, owner: e.from || d.id, id: d.id, bgColor: d.bgColor, key: today + " " + e.time });
           })
         );
         // Two dogs share one day: merge their entries newest first, like
@@ -742,17 +743,14 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               ";--card-tilt:" +
               tilt(i) +
               '">' +
-              // The time is the link, stretched over the card so the whole card
-              // opens this entry in the dog's diary, while prints and video sit
-              // above it and keep their own taps.
               '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:' +
               sk.accent +
-              '"><a href="/guests/' + esc(e.owner) + '#entry-' + esc(e.entryId) + '" class="diary-entry-link" aria-label="' +
-              esc(e.who + "'s diary, " + e.time) +
               '">' +
               esc(e.time) +
-              (pair || e.shared ? " · " + esc(e.who) : "") +
-              "</a>" +
+              " · " + e.participants.map((g) =>
+                '<a href="/guests/' + esc(g.id) + '#entry-' + esc(e.entryId) + '" class="diary-guest-link" aria-label="' +
+                esc(g.name + "'s diary, " + e.time) + '">' + esc(g.name) + "</a>"
+              ).join(" &amp; ") +
               (isNew(e.id, e.key) ? ' <span class="new-tag ml-1 align-[1px]">New</span>' : "") +
               "</div>" +
               mediaHTML +

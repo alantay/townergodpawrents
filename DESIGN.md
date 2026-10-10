@@ -250,6 +250,8 @@ The dog's own card. It fills with the guest's `bgColor`, has a 32px radius and c
 ### Diary Entry Card
 A 24px-radius card in one of the four guest-colour skins, with a 1.5px keyline (Kraft on light skins, Moss on dark), 18px 19px 20px padding, the alternating tilt and the diary-entry shadow. The timestamp and note sit inside, with prints and slips below. Each entry fades and rises into place once as it scrolls into view. Today uses the compact variant with 17px 19px padding and no diary shadow; the full diary keeps its timeline spacing and shadow. Captions and prints stay the same in both.
 
+Homepage cards have plain timestamps and backgrounds. Each guest's name links to that moment in their own diary, including on shared entries. Names keep the header's colour without an underline, with a visible keyboard focus outline. Prints, clips and reactions keep their own controls.
+
 ### Guest Card
 A past guest on /guests and the homepage: a 24px card in the dog's `bgColor` with the cutout standing in it, a cream strip below for the name (22px serif) and dates, and the 1.5px keyline (Kraft on light coats, Moss on dark). Cards alternate −1° / +1° and keep the tilt when they lift on hover. On the homepage, the Next up card has no fill, just a dashed Pencil Rule outline on the paper, like the calendar's upcoming stays: the spot is marked out but the dog hasn't arrived. Last seen stays solid cream.
 
