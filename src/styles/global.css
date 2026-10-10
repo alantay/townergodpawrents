@@ -693,6 +693,49 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   pointer-events: none;
 }
 
+/* Haze season: smog drifts across the hero when the PSI is unhealthy.
+   --haze runs from 0.4 (just over 100) to 1 (very unhealthy). */
+.haze {
+  --smog: 192 195 198;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  background: linear-gradient(to top, rgb(var(--smog) / calc(var(--haze) * 0.55)), rgb(var(--smog) / calc(var(--haze) * 0.18)) 70%);
+}
+.haze i {
+  position: absolute;
+  left: -60%;
+  bottom: -8%;
+  width: 220%;
+  height: 55%;
+  background:
+    radial-gradient(closest-side, rgb(var(--smog) / 0.9), transparent) 0 0 / 34% 100% no-repeat,
+    radial-gradient(closest-side, rgb(var(--smog) / 0.7), transparent) 40% 60% / 28% 80% no-repeat,
+    radial-gradient(closest-side, rgb(var(--smog) / 0.85), transparent) 78% 20% / 36% 90% no-repeat;
+  filter: blur(14px);
+  opacity: calc(var(--haze) * 0.9);
+  animation: smog-drift 26s linear infinite;
+}
+.haze i:nth-child(2) { bottom: 22%; animation-duration: 38s; animation-direction: reverse; opacity: calc(var(--haze) * 0.6); }
+.haze i:nth-child(3) { top: -10%; bottom: auto; animation-duration: 47s; opacity: calc(var(--haze) * 0.45); }
+@keyframes smog-drift { to { transform: translateX(27%); } }
+
+.haze-tag {
+  position: absolute;
+  right: 14px;
+  bottom: 16px;
+  z-index: 2;
+  padding: 6px 10px;
+  background: rgb(192 195 198);
+  color: var(--color-ink);
+  font-size: 12px;
+  font-weight: 600;
+  rotate: 1.5deg;
+  pointer-events: none;
+}
+
 /* Pops in, stays long enough to read (--note-hold, set per line), then fades. */
 @keyframes note-out {
   to {
@@ -739,6 +782,10 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 
   .hero-note-pop {
     animation: note-out 400ms ease-in var(--note-hold, 2s) forwards;
+  }
+
+  .haze i {
+    animation: none;
   }
 }
 
