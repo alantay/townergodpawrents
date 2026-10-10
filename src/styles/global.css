@@ -696,7 +696,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 /* Haze season: smog drifts across the hero when the PSI is unhealthy.
    --haze runs from 0.4 (just over 100) to 1 (very unhealthy). */
 .haze {
-  --smog: 222 206 170;
+  --smog: 192 195 198;
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -728,7 +728,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   bottom: 16px;
   z-index: 2;
   padding: 6px 10px;
-  background: rgb(222 206 170);
+  background: rgb(192 195 198);
   color: var(--color-ink);
   font-size: 12px;
   font-weight: 600;
