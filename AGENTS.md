@@ -8,6 +8,10 @@ A personal, just-for-fun website. Alan and his wife Weiwen look after neighbours
 
 Personal, playful, warm. **Never "lah" and never em dashes.** Other Singlish only sparingly. Before writing any words that appear on the site (entries, taglines, page copy, labels, errors), read `docs/agents/voice.md`. Tagline: "No dog of our own, just everyone else's."
 
+## Homepage vs diary
+
+The homepage is where funny, experimental touches go (haze, weather, pats). The diary page stays toned down. See `docs/adr/0007-homepage-playful-diary-quiet.md`.
+
 ## Posting
 
 - **Diary entry** (a moment, a photo): follow `docs/agents/add-entry.md`. That covers polishing Alan's words with him, `scripts/prep-photo.sh`, filing under the right day, then build and push.
