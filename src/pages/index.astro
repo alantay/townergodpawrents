@@ -793,7 +793,11 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           return "No news yet today. " + who + " " + (dogs.length > 1 ? "are " : "is ") + mood + ".";
         }
         var cardsHTML = raw.length
-          ? '<div class="mt-5 grid gap-3.5">' + cards + "</div>"
+          ? // Just a count, no date: dates are how the diary files things.
+            '<div class="mt-5 border-t-[1.5px] border-line pt-3 font-semibold text-xs tracking-[0.08em] uppercase text-label">' +
+            raw.length + (raw.length === 1 ? " moment" : " moments") +
+            "</div>" +
+            '<div class="mt-3.5 grid gap-3.5">' + cards + "</div>"
           : // A note left on the table, torn from the same pad as the captions,
             // so a quiet day reads as news rather than a page that didn't load.
             '<div class="diary-slip diary-slip--tear-1 mt-5 w-[min(100%,440px)]" style="transform:rotate(-0.4deg)">' +
