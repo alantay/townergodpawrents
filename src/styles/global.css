@@ -694,7 +694,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 }
 
 /* Haze season: smog drifts across the hero when the PSI is unhealthy.
-   It thins out going up, so it only just touches the names.
+   It stays on the dogs, thinning out so it only just touches the pills.
    --haze runs from 0.4 (just over 100) to 1 (very unhealthy). */
 .haze {
   --smog: 192 195 198;
@@ -703,7 +703,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   z-index: 1;
   overflow: hidden;
   pointer-events: none;
-  mask-image: linear-gradient(to top, #000 45%, transparent 85%);
+  mask-image: linear-gradient(to top, #000 35%, transparent 60%);
   background: linear-gradient(to top, rgb(var(--smog) / calc(var(--haze) * 0.55)), rgb(var(--smog) / calc(var(--haze) * 0.18)) 70%);
 }
 .haze i {
