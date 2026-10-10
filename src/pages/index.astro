@@ -781,16 +781,11 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             "</div>"
           : "";
         // Nothing written yet today: say so, or the empty space under the
-        // hero reads like the page failed to load. Mood follows SGT clock.
+        // hero reads like the page failed to load.
         function quietLine() {
-          var hour = +new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Singapore", hour: "numeric", hourCycle: "h23" }).format(new Date());
           var dogs = dogsIn(live);
           var who = pair ? "The " + groupWord(dogs.length).toLowerCase() + " of them" : esc(live[0].name);
-          var leaving = live.every((d) => goingHome(d, today));
-          var mood = leaving
-            ? "making the most of the sofa"
-            : hour < 12 ? "still waking up" : hour < 19 ? "busy chilling" : "knocked out already";
-          return "No news yet today. " + who + " " + (dogs.length > 1 ? "are " : "is ") + mood + ".";
+          return "No news yet today. " + who + " " + (dogs.length > 1 ? "are " : "is ") + "probably busy chilling.";
         }
         // The day, not the date: dates are how the diary files things.
         // addSky puts the weather in front of it when NEA answers.

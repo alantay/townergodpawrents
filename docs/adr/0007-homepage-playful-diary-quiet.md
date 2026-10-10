@@ -4,6 +4,8 @@
 
 Funny and experimental touches go on the homepage. The diary page (`/guests/[id]`) stays toned down: the guest, the stay and the entries, with nothing that reacts to the outside world.
 
+The portrait is an exception. Alan confirmed on 10 October 2026 that the diary portrait should keep the homepage's pat interaction because it looks like the same control.
+
 ## Context
 
 The homepage and the diary page started to look alike, both a hero over a list of entries. They do different jobs. The homepage is about today: which dog is here and what has happened so far. The diary page is the record of a whole stay, read back later by the guest's human and by Alan and Weiwen.
