@@ -668,36 +668,43 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   pointer-events: none;
 }
 
-/* Haze season: smog drifts across the hero when the PSI is unhealthy.
-   It stays on the dogs, thinning out so it only just touches the pills.
+/* Haze season: banks of smog roll across the hero when the PSI is unhealthy,
+   three layers drifting at different speeds and thickening and thinning as
+   they go (after braedencraig's CSS fog pen). The texture is SVG noise that
+   tiles, so each layer is two tiles wide and slides one tile along.
+   It stays on the dogs and thins out before the pills, so the name stays clear.
    --haze runs from 0.4 (just over 100) to 1 (very unhealthy). */
 .haze {
   --smog: 192 195 198;
+  --fog-soft: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' preserveAspectRatio='none'%3E%3Cfilter id='f' x='0' y='0' width='1' height='1'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 .009' numOctaves='4' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .75 0 0 0 0 .77 0 0 0 0 .78 3 0 0 0 -1.1'/%3E%3C/filter%3E%3Crect width='600' height='400' filter='url(%23f)'/%3E%3C/svg%3E");
+  --fog-fine: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' preserveAspectRatio='none'%3E%3Cfilter id='f' x='0' y='0' width='1' height='1'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.008 .02' numOctaves='4' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .75 0 0 0 0 .77 0 0 0 0 .78 3.4 0 0 0 -1.35'/%3E%3C/filter%3E%3Crect width='600' height='400' filter='url(%23f)'/%3E%3C/svg%3E");
   position: absolute;
   inset: 0;
   z-index: 1;
   overflow: hidden;
   pointer-events: none;
-  mask-image: linear-gradient(to top, #000 35%, transparent 60%);
-  background: linear-gradient(to top, rgb(var(--smog) / calc(var(--haze) * 0.55)), rgb(var(--smog) / calc(var(--haze) * 0.18)) 70%);
+  mask-image: linear-gradient(to top, #000 30%, transparent 52%);
+  background: linear-gradient(to top, rgb(var(--smog) / calc(var(--haze) * 0.5)), rgb(var(--smog) / calc(var(--haze) * 0.2)));
 }
 .haze i {
   position: absolute;
-  left: -60%;
-  bottom: -8%;
-  width: 220%;
-  height: 55%;
-  background:
-    radial-gradient(closest-side, rgb(var(--smog) / 0.9), transparent) 0 0 / 34% 100% no-repeat,
-    radial-gradient(closest-side, rgb(var(--smog) / 0.7), transparent) 40% 60% / 28% 80% no-repeat,
-    radial-gradient(closest-side, rgb(var(--smog) / 0.85), transparent) 78% 20% / 36% 90% no-repeat;
-  filter: blur(14px);
-  opacity: calc(var(--haze) * 0.9);
-  animation: smog-drift 26s linear infinite;
+  inset: 0 auto 0 0;
+  width: 200%;
+  background: var(--fog-soft) 0 0 / 50% 100% repeat-x;
+  opacity: var(--haze);
+  animation: fog-drift 50s linear infinite, fog-thick 12s ease-in-out infinite alternate;
 }
-.haze i:nth-child(2) { bottom: 22%; animation-duration: 38s; animation-direction: reverse; opacity: calc(var(--haze) * 0.6); }
-.haze i:nth-child(3) { top: -10%; bottom: auto; animation-duration: 47s; opacity: calc(var(--haze) * 0.45); }
-@keyframes smog-drift { to { transform: translateX(27%); } }
+.haze i:nth-child(2) {
+  background-image: var(--fog-fine);
+  animation-duration: 32s, 17s;
+}
+.haze i:nth-child(3) {
+  background-position: 30% 60%;
+  animation-duration: 21s, 9s;
+  animation-delay: 0s, -4s;
+}
+@keyframes fog-drift { to { transform: translateX(-50%); } }
+@keyframes fog-thick { from { opacity: calc(var(--haze) * 0.45); } }
 
 .sky-tag {
   position: absolute;
