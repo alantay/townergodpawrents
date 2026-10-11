@@ -176,7 +176,7 @@ const guestsForClient = await Promise.all(
     ),
   })),
 );
-const groupHeroJson = JSON.stringify(GROUP_HERO);
+const groupHeroJson = JSON.stringify(GROUP_HERO).replace(/</g, "\\u003c");
 const guestsJson = JSON.stringify(guestsForClient).replace(/</g, "\\u003c");
 
 const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
