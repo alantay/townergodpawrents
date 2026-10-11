@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
+import { diaryTextHtml, SOFA_GREEN } from "./guests.ts";
 
 const source = readFileSync(new URL("../pages/index.astro", import.meta.url), "utf8");
 const render = runInNewContext(
@@ -9,7 +10,9 @@ const render = runInNewContext(
   {
     dayOn: (guest: { entries: unknown[] }) => ({ entries: guest.entries }),
     esc: (value: string) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll('"', "&quot;"),
-    guestSkins: () => [{}, { bg: "#5F6E4F", fg: "#fff", accent: "#fff" }],
+    guestSkins: () => [{}, { bg: SOFA_GREEN, fg: "#fff", accent: "#fff" }],
+    SOFA_GREEN,
+    diaryTextHtml,
     skin: () => ({ bg: "#fff", fg: "#000", accent: "#000" }),
     luma: () => 100,
     tilt: () => 0,

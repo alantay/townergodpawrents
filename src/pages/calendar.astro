@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 import Cutout from "../components/Cutout.astro";
 import { dateStr, diarySkin, dogNames, stayLabel, todaySGT } from "../lib/guests";
 import { calendarMonths } from "../lib/calendar";
@@ -34,7 +35,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
 >
   <Nav />
 
-  <a href="/" class="entrance entrance-delay-1 mt-8 inline-block text-sm font-semibold text-label transition-colors duration-200 hover:text-ink">
+  <a href="/" class="entrance entrance-delay-1 relative mt-8 inline-block text-sm font-semibold text-label transition-colors duration-200 hover:text-ink before:content-[''] before:absolute before:-inset-y-3 before:inset-x-0">
     ← Back to today
   </a>
 
@@ -72,7 +73,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                 <p class="font-script text-[22px] leading-none font-medium text-muted">
                   {pups === 0
                     ? "sofa's free"
-                    : <>{pups} {pups === 1 ? "pup" : "pups"} this month{pups >= 3 && <span class="text-[#b3261e]">, busy sofa</span>}</>}
+                    : <>{pups} {pups === 1 ? "pup" : "pups"} this month{pups >= 3 && <span class="text-biro">, busy sofa</span>}</>}
                 </p>
               </div>
 
@@ -81,7 +82,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
               </div>
 
               {month.weeks.map((week) => (
-                <div class="cal-week" style={`grid-template-rows:auto repeat(${week.lanes},26px)`}>
+                <div class="cal-week" aria-hidden="true" style={`grid-template-rows:auto repeat(${week.lanes},26px)`}>
                   {week.days.map((d, col) => (
                     <span
                       class:list={["cal-day", { "cal-day--out": !d.inMonth }]}
@@ -127,12 +128,12 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                       style={`--polaroid-tilt:${pi % 2 === 0 ? "-2deg" : "1.5deg"}`}
                     >
                       <span class="cal-tape cal-tape--small" aria-hidden="true" />
-                      <span class={`block h-[92px] w-[92px] overflow-hidden rounded-[3px] ${s.photo ? "p-1.5" : ""}`} style={`background:${s.bgColor}`}>
+                      <span class={`block h-[92px] w-[92px] overflow-hidden ${s.photo ? "p-1.5" : ""}`} style={`background:${s.bgColor}`}>
                         <Cutout photo={s.photo} name={s.name} bare sizes="80px" />
                       </span>
                       <span class="mt-1.5 block font-script text-[20px] leading-none font-medium">{s.name}</span>
                       {visits.map((v) => (
-                        <span class="mt-0.5 block text-[11px] text-label tabular-nums">{stayLabel(v)}</span>
+                        <span class="mt-0.5 block text-[0.6875rem] text-label tabular-nums">{stayLabel(v)}</span>
                       ))}
                     </a>
                     );
@@ -146,9 +147,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     })}
   </div>
 
-  <footer class="entrance entrance-delay-3 mt-12 border-t-[1.5px] border-line pt-[18px] text-xs tracking-[0.1em] uppercase text-label">
-    Towner &middot; No dog of our own, just everyone else's
-  </footer>
+  <Footer />
 </Layout>
 
 <script is:inline>
@@ -172,7 +171,6 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     });
     document.querySelectorAll('.cal-day[data-date="' + today + '"]').forEach(function (d) {
       d.classList.add("is-today");
-      d.setAttribute("aria-current", "date");
     });
     document.querySelectorAll(".cal-bar").forEach(function (b) {
       b.classList.toggle("is-upcoming", b.dataset.checkIn > today);
@@ -198,7 +196,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     inset: 0;
     background: var(--color-cream);
     background-clip: padding-box;
-    border: 5px solid #fdfaf1;
+    border: 5px solid var(--color-slip-fibre);
     filter: url("#torn-slip-0") drop-shadow(0 6px 10px rgb(30 32 25 / 0.18));
   }
   .cal-sheet-paper--tear-1 { filter: url("#torn-slip-1") drop-shadow(0 6px 10px rgb(30 32 25 / 0.18)); }
@@ -283,7 +281,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
 
   /* A red biro ring, slightly off-round, around today. */
   .cal-day.is-today {
-    border: 2px solid #b3261e;
+    border: 2px solid var(--color-biro);
     border-radius: 55% 45% 50% 50% / 50% 55% 45% 50%;
     transform: rotate(-8deg);
   }
@@ -363,7 +361,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     height: 20px;
     overflow: hidden;
     border-radius: 999px;
-    box-shadow: 0 0 0 2px #fdfaf1;
+    box-shadow: 0 0 0 2px var(--color-slip-fibre);
   }
   .cal-bar-name {
     overflow: hidden;
@@ -384,7 +382,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     display: block;
     width: 108px;
     padding: 8px 8px 10px;
-    background: #fdfaf1;
+    background: var(--color-slip-fibre);
     box-shadow: 0 4px 9px rgb(30 32 25 / 0.16);
     transform: rotate(var(--polaroid-tilt));
   }

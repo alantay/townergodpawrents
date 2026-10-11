@@ -18,6 +18,8 @@ import {
   warnOnOverlaps,
   dateStr,
   diarySkin,
+  luma,
+  SOFA_GREEN,
   tilt,
   printTilt,
   noteTilt,
@@ -156,7 +158,7 @@ let skinIndex = 0;
 >
   <Nav />
 
-  <a href="/" class="entrance entrance-delay-1 mt-8 inline-block text-sm font-semibold text-label transition-colors duration-200 hover:text-ink">
+  <a href="/" class="entrance entrance-delay-1 relative mt-8 inline-block text-sm font-semibold text-label transition-colors duration-200 hover:text-ink before:content-[''] before:absolute before:-inset-y-3 before:inset-x-0">
     ← Back to today
   </a>
 
@@ -237,7 +239,7 @@ let skinIndex = 0;
       <h2 class="font-serif text-[32px] leading-none">The full diary</h2>
       {entryCount > 0 && <p class="mt-1.5 text-sm text-label">{entryCount} {entryCount === 1 ? "entry" : "entries"}.</p>}
     </div>
-    <div id="diary-stay" class:list={["diary-stay text-right text-[11px] font-semibold tracking-[0.08em] uppercase text-label", !here && next ? "" : "hidden sm:block"]}>
+    <div id="diary-stay" class:list={["diary-stay text-right text-[0.6875rem] font-semibold tracking-[0.08em] uppercase text-label", !here && next ? "" : "hidden sm:block"]}>
       <span id="diary-stay-when">{diaryStay.checkOut < today ? "Last stay" : !recordedStay && !here && next ? "Next stay" : "Latest stay"}</span><br /><span id="diary-stay-dates">{stayLabel(diaryStay, true)}</span>
     </div>
   </div>
@@ -272,8 +274,8 @@ let skinIndex = 0;
               // A shared entry wears Sofa Green, the two-dog hero's colour,
               // rather than this dog's.
               const shared = e.with.length > 0;
-              const sk = shared ? diarySkin("#5F6E4F", 1) : diarySkin(bgColor, i);
-              const darkSkin = !shared && i % 4 > 1;
+              const sk = shared ? diarySkin(SOFA_GREEN, 1) : diarySkin(bgColor, i);
+              const darkSkin = luma(sk.bg) < 110;
               const prints = e.media.map((m) => resolveDiaryMedia(m, entry.id, `${day.label} ${e.time}`));
               const video = prints.find((p) => p.kind === "video");
               const singlePrint = !video && prints.length === 1;
@@ -333,7 +335,6 @@ let skinIndex = 0;
                     >
                       <button
                         type="button"
-                        aria-label="Enlarge photo"
                         class="diary-print-tap block mx-auto w-full cursor-zoom-in"
                       >
                         <Image
@@ -356,7 +357,6 @@ let skinIndex = 0;
                       {prints.map((p, printIndex) => p.kind === "photo" && (
                         <button
                           type="button"
-                          aria-label={`Enlarge photo ${printIndex + 1}`}
                           class="diary-print diary-print-tap cursor-zoom-in"
                           style={`width:min(100%,${printWidth(p.img.width, p.img.height)}px);transform:rotate(${printTilt(i + printIndex)})`}
                         >

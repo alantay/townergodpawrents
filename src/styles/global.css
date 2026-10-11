@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "Instrument Serif", serif;
-  --font-script: "Caveat", cursive;
-  --font-sans: "Archivo", Helvetica, sans-serif;
+  --font-serif: var(--font-instrument-serif), serif;
+  --font-script: var(--font-caveat), cursive;
+  --font-sans: var(--font-archivo), Helvetica, sans-serif;
 
   --color-paper: #efe7d8;
   --color-ink: #1e2019;
@@ -12,6 +12,7 @@
   --color-lime: #d8f24e;
   --color-lime-soft: #e9f7ae;
   --color-tape: #f7e27a;
+  --color-biro: #b3261e;
   --color-moss: #4c6b3c;
   --color-muted: #4a4b41;
   --color-label: #55564a;
@@ -84,7 +85,7 @@ a:focus-visible {
   background: var(--color-cream);
   color: var(--color-ink);
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
 }
 .badge-tape {
@@ -93,17 +94,24 @@ a:focus-visible {
   border-radius: 0;
   transform: rotate(-2deg);
 }
+/* A chip that's a link gets the same invisible tap padding as a day chip. */
+a.fact-chip { position: relative; }
+a.fact-chip::before {
+  content: "";
+  position: absolute;
+  inset: -6px 0;
+}
 .status-tag {
   padding: 8px 13px;
   background: var(--color-lime);
   color: var(--color-ink);
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-.status-tag--compact { padding: 6px 11px; font-size: 11px; }
+.status-tag--compact { padding: 6px 11px; font-size: 0.6875rem; }
 .entry-surface { border-radius: 24px; padding: 18px 19px 20px; }
 .entry-surface--compact { padding: 17px 19px; }
 
@@ -172,10 +180,9 @@ entry-reactions:not(.has-reactions) .reaction-toggle {
   min-height: 1.6rem;
   padding: 0.1rem;
   border-color: transparent;
-  opacity: 0.6;
+  opacity: 0.65;
 }
 entry-reactions:not(.has-reactions) .reaction-summary-icons svg { width: 1.5rem; height: auto; }
-entry-reactions:not(.has-reactions) .reaction-toggle:hover,
 entry-reactions:not(.has-reactions) .reaction-toggle:focus-visible,
 entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opacity: 1; }
 
@@ -188,8 +195,13 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   border-radius: 0.4rem;
 }
 
-.reaction-toggle:hover { transform: translateY(-2px); background: color-mix(in srgb, currentColor 12%, transparent); }
-.has-reactions .reaction-toggle:hover { background: transparent; }
+/* Hover is for a pointer. On a touch screen it sticks after the tap, so the
+   lifts below only apply where the device can really hover. */
+@media (hover: hover) {
+  entry-reactions:not(.has-reactions) .reaction-toggle:hover { opacity: 1; }
+  .reaction-toggle:hover { transform: translateY(-2px); background: color-mix(in srgb, currentColor 12%, transparent); }
+  .has-reactions .reaction-toggle:hover { background: transparent; }
+}
 .reaction-toggle:focus-visible,
 .reaction-choice:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
 .reaction-summary-icons { display: inline-flex; align-items: center; font-size: 0.9rem; line-height: 1; }
@@ -308,7 +320,9 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   height: 2.2rem;
   filter: drop-shadow(0 2px 2px rgb(30 32 25 / 0.2));
 }
-.reaction-choice:hover { transform: scale(1.18) rotate(-6deg); }
+@media (hover: hover) {
+  .reaction-choice:hover { transform: scale(1.18) rotate(-6deg); }
+}
 .reaction-choice-count {
   font-size: 0.7rem;
   font-weight: 600;
@@ -341,8 +355,10 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   box-shadow: 0 10px 20px rgb(92 76 41 / 0.1);
 }
 
-.dog-card:hover {
-  box-shadow: 0 16px 26px rgb(70 92 56 / 0.17);
+@media (hover: hover) {
+  .dog-card:hover {
+    box-shadow: 0 16px 26px rgb(70 92 56 / 0.17);
+  }
 }
 
 .archive-date,
@@ -442,8 +458,8 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   background: var(--color-cream);
   border: 1.5px solid rgb(255 255 255 / 0.72);
   border-radius: 16px;
-  /* Keep the print edge quiet against the blue diary paper. Separation comes
-     from a cool, diffused shadow rather than another heavy coloured keyline. */
+  /* Keep the print edge quiet against the coloured card. Separation comes
+     from a low, soft shadow rather than another heavy coloured keyline. */
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.44),
     0 6px 12px rgb(30 32 25 / 0.12);
@@ -454,13 +470,13 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   margin-top: 9px;
   padding-inline: 4px;
   color: color-mix(in srgb, var(--color-ink) 70%, transparent);
-  font-size: 13.5px;
+  font-size: 0.84375rem;
   line-height: 1.375;
   text-align: center;
   text-wrap: pretty;
   white-space: pre-line;
 }
-.slip-caption { color: var(--color-ink); font-size: 15px; text-wrap: pretty; white-space: pre-line; }
+.slip-caption { color: var(--color-ink); font-size: 0.9375rem; text-wrap: pretty; white-space: pre-line; }
 
 /* Give the writing breathing room within the torn-paper caption. */
 .diary-note {
@@ -468,7 +484,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 }
 
 .diary-note p {
-  line-height: 24px;
+  line-height: 1.5rem;
 }
 
 /* A caption slip is torn from a pad, like the guest collages are torn from a
@@ -714,7 +730,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   padding: 6px 10px;
   background: rgb(192 195 198);
   color: var(--color-ink);
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   rotate: 1.5deg;
   pointer-events: none;
@@ -794,7 +810,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 .hero-note .diary-note p {
   color: var(--color-ink);
   font-family: var(--font-script);
-  font-size: 23px;
+  font-size: 1.4375rem;
   font-weight: 600;
   line-height: 1.1;
   text-wrap: pretty;
@@ -878,7 +894,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   padding: 0.3rem 0.8rem;
   border: 1.5px solid var(--color-line);
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
   transition: background-color 200ms ease, border-color 200ms ease;
 }
@@ -889,7 +905,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   border-color: var(--color-ink);
   background: var(--color-ink);
   color: var(--color-paper);
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .day-chip.day-chip--exit:hover {
@@ -931,7 +947,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   border-radius: 999px;
   background: var(--color-lime);
   color: var(--color-ink);
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;

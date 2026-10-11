@@ -4,7 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
 import Cutout from "../../components/Cutout.astro";
-import { stayLabel, staysNewestFirst, lastEndedStay, isLiveOn, stayOn, dateStr, todaySGT } from "../../lib/guests";
+import { stayLabel, staysNewestFirst, lastEndedStay, isLiveOn, stayOn, dateStr, todaySGT, luma } from "../../lib/guests";
 
 const entries = await getCollection("guests");
 const today = todaySGT();
@@ -42,11 +42,6 @@ const wide = (i: number) => i === 0 && guests.length > 2;
 const dateFor = (g: (typeof all)[number]) =>
   stayLabel((isLiveOn(g, today) && stayOn(g, today)) || lastEndedStay(g, today)!);
 
-// Same keyline rule as the homepage cards: darker line on dark coats.
-function luma(hex: string) {
-  const h = hex.replace("#", "");
-  return 0.2126 * parseInt(h.slice(0, 2), 16) + 0.7152 * parseInt(h.slice(2, 4), 16) + 0.0722 * parseInt(h.slice(4, 6), 16);
-}
 ---
 
 <Layout
@@ -55,7 +50,7 @@ function luma(hex: string) {
 >
   <Nav />
 
-  <a href="/" class="entrance entrance-delay-1 mt-8 inline-block text-sm font-semibold text-label transition-colors duration-200 hover:text-ink">
+  <a href="/" class="entrance entrance-delay-1 relative mt-8 inline-block text-sm font-semibold text-label transition-colors duration-200 hover:text-ink before:content-[''] before:absolute before:-inset-y-3 before:inset-x-0">
     ← Back to today
   </a>
 
@@ -67,7 +62,7 @@ function luma(hex: string) {
       Newest first.<span id="returning-note" hidden={returningGuests === 0}> Some of them keep coming back.</span>
     </p>
     {guests.length > 0 && (
-      <p id="archive-count" class="archive-count mt-5 text-[12px] font-semibold tracking-[0.1em] uppercase text-label">
+      <p id="archive-count" class="archive-count mt-5 text-xs font-semibold tracking-[0.1em] uppercase text-label">
         {guests.length} {guests.length === 1 ? "guest" : "guests"}
         {returningGuests > 0 && <> &middot; {returningGuests} sofa regular{returningGuests === 1 ? "" : "s"}</>}
       </p>
@@ -108,7 +103,7 @@ function luma(hex: string) {
             </div>
             <div class="p-[11px_13px_14px] bg-cream">
               <div class="font-serif text-[22px] leading-none">{g.name}</div>
-              <div class="mt-1 flex flex-col gap-0.5 text-[13px] text-muted">
+              <div class="mt-1 flex flex-col gap-0.5 text-[0.8125rem] text-muted">
                 <span>{g.breed}</span>
                 <span class="archive-date">{dateFor(g)}</span>
               </div>
