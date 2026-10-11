@@ -239,7 +239,7 @@ let skinIndex = 0;
       <h2 class="font-serif text-[32px] leading-none">The full diary</h2>
       {entryCount > 0 && <p class="mt-1.5 text-sm text-label">{entryCount} {entryCount === 1 ? "entry" : "entries"}.</p>}
     </div>
-    <div id="diary-stay" class:list={["diary-stay text-right text-[11px] font-semibold tracking-[0.08em] uppercase text-label", !here && next ? "" : "hidden sm:block"]}>
+    <div id="diary-stay" class:list={["diary-stay text-right text-[0.6875rem] font-semibold tracking-[0.08em] uppercase text-label", !here && next ? "" : "hidden sm:block"]}>
       <span id="diary-stay-when">{diaryStay.checkOut < today ? "Last stay" : !recordedStay && !here && next ? "Next stay" : "Latest stay"}</span><br /><span id="diary-stay-dates">{stayLabel(diaryStay, true)}</span>
     </div>
   </div>

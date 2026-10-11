@@ -84,7 +84,7 @@ a:focus-visible {
   background: var(--color-cream);
   color: var(--color-ink);
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
 }
 .badge-tape {
@@ -105,12 +105,12 @@ a.fact-chip::before {
   background: var(--color-lime);
   color: var(--color-ink);
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-.status-tag--compact { padding: 6px 11px; font-size: 11px; }
+.status-tag--compact { padding: 6px 11px; font-size: 0.6875rem; }
 .entry-surface { border-radius: 24px; padding: 18px 19px 20px; }
 .entry-surface--compact { padding: 17px 19px; }
 
@@ -469,13 +469,13 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   margin-top: 9px;
   padding-inline: 4px;
   color: color-mix(in srgb, var(--color-ink) 70%, transparent);
-  font-size: 13.5px;
+  font-size: 0.84375rem;
   line-height: 1.375;
   text-align: center;
   text-wrap: pretty;
   white-space: pre-line;
 }
-.slip-caption { color: var(--color-ink); font-size: 15px; text-wrap: pretty; white-space: pre-line; }
+.slip-caption { color: var(--color-ink); font-size: 0.9375rem; text-wrap: pretty; white-space: pre-line; }
 
 /* Give the writing breathing room within the torn-paper caption. */
 .diary-note {
@@ -483,7 +483,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 }
 
 .diary-note p {
-  line-height: 24px;
+  line-height: 1.5rem;
 }
 
 /* A caption slip is torn from a pad, like the guest collages are torn from a
@@ -729,7 +729,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   padding: 6px 10px;
   background: rgb(192 195 198);
   color: var(--color-ink);
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   rotate: 1.5deg;
   pointer-events: none;
@@ -809,7 +809,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 .hero-note .diary-note p {
   color: var(--color-ink);
   font-family: var(--font-script);
-  font-size: 23px;
+  font-size: 1.4375rem;
   font-weight: 600;
   line-height: 1.1;
   text-wrap: pretty;
@@ -893,7 +893,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   padding: 0.3rem 0.8rem;
   border: 1.5px solid var(--color-line);
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
   transition: background-color 200ms ease, border-color 200ms ease;
 }
@@ -904,7 +904,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   border-color: var(--color-ink);
   background: var(--color-ink);
   color: var(--color-paper);
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .day-chip.day-chip--exit:hover {
@@ -946,7 +946,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   border-radius: 999px;
   background: var(--color-lime);
   color: var(--color-ink);
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;

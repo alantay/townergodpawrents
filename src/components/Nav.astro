@@ -11,7 +11,7 @@ const isHome = path === "";
   <a
     href="/"
     data-peel={isHome ? "" : undefined}
-    class="group font-serif text-[21px] sm:text-[26px] leading-none flex items-baseline flex-wrap gap-x-1.5 gap-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 focus-visible:ring-offset-paper rounded-[5px]"
+    class="group font-serif text-[21px] sm:text-[26px] leading-none flex items-baseline flex-wrap gap-x-1.5 gap-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 focus-visible:ring-offset-paper rounded-[10px]"
   >
     <span>The Towner</span>
     <span class="relative inline-block">
@@ -27,7 +27,7 @@ const isHome = path === "";
       href="/calendar"
       aria-current={isCalendar ? "page" : undefined}
       class:list={[
-        "relative font-sans font-semibold text-[13px] border-[1.5px] border-line px-[11px] sm:px-[13px] py-1.5 rounded-full transition-all duration-200 hover:border-ink hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-3 focus-visible:ring-offset-paper flex-none before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:inset-x-0",
+        "relative font-sans font-semibold text-[0.8125rem] border-[1.5px] border-line px-[11px] sm:px-[13px] py-1.5 rounded-full transition-all duration-200 hover:border-ink hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-3 focus-visible:ring-offset-paper flex-none before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:inset-x-0",
         { "bg-lime border-ink": isCalendar },
       ]}
     >
@@ -37,7 +37,7 @@ const isHome = path === "";
       href="/guests"
       aria-current={isGuests ? "page" : undefined}
       class:list={[
-        "relative font-sans font-semibold text-[13px] border-[1.5px] border-line px-[11px] sm:px-[13px] py-1.5 rounded-full transition-all duration-200 hover:border-ink hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-3 focus-visible:ring-offset-paper flex-none before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:inset-x-0",
+        "relative font-sans font-semibold text-[0.8125rem] border-[1.5px] border-line px-[11px] sm:px-[13px] py-1.5 rounded-full transition-all duration-200 hover:border-ink hover:-translate-y-px active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-3 focus-visible:ring-offset-paper flex-none before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:inset-x-0",
         { "bg-lime border-ink": isGuests },
       ]}
     >
