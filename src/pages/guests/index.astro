@@ -37,7 +37,6 @@ const guests = all
   .filter((g) => arrived(g, today))
   .sort((a, b) => sortKey(b, today).localeCompare(sortKey(a, today)));
 const returningGuests = guests.filter((g) => g.stays.filter((s) => s.checkIn <= today).length > 1).length;
-const wide = (i: number) => i === 0 && guests.length > 2;
 // The date under each name: the stay they're on, else the last one that ended.
 const dateFor = (g: (typeof all)[number]) =>
   stayLabel((isLiveOn(g, today) && stayOn(g, today)) || lastEndedStay(g, today)!);
@@ -79,7 +78,7 @@ const dateFor = (g: (typeof all)[number]) =>
     >
       {guests.map((g, index) => (
         <div
-          class:list={["reveal-card guest-cell", { "sm:col-span-2": wide(index) }]}
+          class="reveal-card guest-cell"
           data-live={g.showLive ? "1" : undefined}
           data-stays={JSON.stringify(g.stays.map((s) => ({ in: s.checkIn, out: s.checkOut, label: stayLabel(s) })))}
         >
@@ -98,8 +97,8 @@ const dateFor = (g: (typeof all)[number]) =>
             >
               Here today
             </span>
-            <div class:list={["cell-photo p-[9px_9px_0]", wide(index) ? "h-[178px]" : "h-[132px]"]}>
-              <Cutout photo={g.photo} name={g.name} height={wide(index) ? 169 : 123} loading={index < 2 ? "eager" : "lazy"} />
+            <div class="cell-photo p-[9px_9px_0] h-[132px]">
+              <Cutout photo={g.photo} name={g.name} height={123} loading={index < 2 ? "eager" : "lazy"} />
             </div>
             <div class="p-[11px_13px_14px] bg-cream">
               <div class="font-serif text-[22px] leading-none">{g.name}</div>
@@ -139,14 +138,9 @@ const dateFor = (g: (typeof all)[number]) =>
       });
       shown.sort(function (a, b) { return a.key < b.key ? 1 : a.key > b.key ? -1 : 0; });
       shown.forEach(function (s, i) {
-        var wide = i === 0 && shown.length > 2;
         var card = s.cell.querySelector(".dog-card");
-        var photo = s.cell.querySelector(".cell-photo");
-        s.cell.classList.toggle("sm:col-span-2", wide);
         card.classList.toggle("rotate-1", i % 2 === 1);
         card.classList.toggle("-rotate-1", i % 2 === 0);
-        photo.classList.toggle("h-[178px]", wide);
-        photo.classList.toggle("h-[132px]", !wide);
         grid.appendChild(s.cell);
       });
       var count = document.getElementById("archive-count");
