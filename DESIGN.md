@@ -95,7 +95,6 @@ components:
     rounded: "{rounded.pill}"
     padding: "6px 13px"
   nav-pill-hover:
-    borderColor: "{colors.ink}"
     textColor: "{colors.ink}"
   day-chip-active:
     backgroundColor: "{colors.lime}"
@@ -192,7 +191,7 @@ Colours repeat across guests. **Sofa Green** `#5F6E4F` is reserved for the share
 - **Title** (400, 24px, 1): Diary day labels ("13 Sep") and card names (22–27px).
 - **Tagline** (italic 400, 20–22px): A dog's one-liner under its name, in Pale Lime Wash on the hero, and the rotating joke line in the homepage footer, in ink.
 - **Body** (400, 16px, 1.625, max ~52ch): Diary notes and intro copy. Slips use 15px text on 24px lines so the writing sits like ruled paper.
-- **Chip** (600, 13px): Pills, nav link and day chips.
+- **Chip** (600, 13px): Pills, nav links and day chips.
 - **Label** (600, 11–12px, 0.06–0.1em, uppercase): Stay ranges, "Here today", NEW tags and footer meta. Dates use tabular numbers.
 - **Script** (500–600, 18–40px, 1–1.15): Caveat, for words Alan or Weiwen have written onto the calendar: month names (40px), the pup-count note (22px), names on polaroids (20px) and on tape (18px).
 
@@ -272,7 +271,7 @@ A note too long for a print's mat goes on a torn cream slip. It's two layers: th
 The empty badge is a faint (65% opacity) add-reaction icon in the card's top-right corner that comes to full strength on hover or focus. It's faint on purpose, and so is the photo credit under a print (70% opacity): the words and photos are the point, and neither of these should pull the eye from them. Once an entry has reactions, the badge becomes up to three stickers (2.1rem) piled −8° / 6° / −4° and overlapping by 0.85rem, with the most-used on top. The total sits on a Post-it Yellow tape scrap in one of three clip-path cuts. The picker is a torn cream strip hanging under the badge, taped at both corners with Post-it Yellow scraps. Its stickers scale up and tilt on hover. Errors appear as a small italic cream note under the badge.
 
 ### Navigation
-The wordmark sits on the left: "The Towner" in serif, then an italic "Godpawrents" on a Post-it Yellow tape tag rotated −2°, which straightens on hover. On the right is the outlined "Past guests" pill; it gets inked on hover, and lime with the ink line already drawn marks the current page. Below them is a 1.5px Pencil Rule. Focus shows a 2px ink ring offset onto paper.
+The wordmark sits on the left: "The Towner" in serif, then an italic "Godpawrents" on a Post-it Yellow tape tag rotated −2°, which straightens on hover. On the right are two outlined pills, Calendar and Guests; each gets inked on hover, and lime with the ink line already drawn marks the current page. Below them is a 1.5px Pencil Rule. Focus shows a 2px ink ring offset onto paper.
 
 ### Day Strip
 A sticky, horizontally scrolling row of outlined day chips on translucent paper. Hover inks the chip like any outlined chip; the active day turns lime with a lime border.
