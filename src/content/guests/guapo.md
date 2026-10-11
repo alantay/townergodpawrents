@@ -19,6 +19,14 @@ stays:
 
 ## 11 Oct
 
+### 10:40pm
+
+<!-- entry-id: e076 -->
+
+Post-walk zoomies.
+
+![Guapo tearing around the living room and diving onto the sofa](./guapo/guapo-post-walk-zoomies.mp4)
+
 ### 8:15am
 
 <!-- entry-id: e073 -->
