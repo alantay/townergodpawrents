@@ -9,6 +9,7 @@ colors:
   lime: "#d8f24e"
   lime-soft: "#e9f7ae"
   tape: "#f7e27a"
+  biro: "#b3261e"
   moss: "#4c6b3c"
   muted: "#4a4b41"
   label: "#55564a"
@@ -124,7 +125,7 @@ Every page is something Alan and Weiwen have just put down on the kitchen table:
 
 The page is one narrow column (700px) read on a phone. Each dog is the main subject. It gets a big serif name, a colour of its own and a cutout photo standing in the hero card. Everything else stays quiet: warm neutrals, one small sans for the functional bits and a single acid-lime accent that means "look here" or "this is live".
 
-Motion is one-shot and physical. Cards arrive as if set down. Hover nudges a card up without straightening it: turning something big looks wonky, so only small things (the wordmark tag, a one-line link card) straighten. Once a card has arrived it stays put, apart from a couple of slow idle drifts on the cutout and the "Here today" tag.
+Motion is one-shot and physical. Cards arrive as if set down. Hover nudges a card up without straightening it: turning something big looks wonky, so only small things (the wordmark tag, a one-line link card) straighten. Once a card has arrived it stays put, apart from a couple of slow idle drifts on the cutout and the "Here today" tag. Those two loops are deliberate: they keep the page wacky and light, so don't stop them. The homepage hero also wears the day's weather (see Weather).
 
 **Key Characteristics:**
 - Warm paper ground, ink-green text, one lime accent, post-it yellow tape
@@ -142,6 +143,7 @@ A sun-faded kitchen palette: oatmeal paper, deep olive-black ink one highlighter
 - **Highlighter Lime** (`lime`): The single accent. It marks what's current or active: the "Here today" and "Sofa's empty" tags, the NEW tag, the current nav page, the active day chip and the skip link. Nothing else.
 - **Pale Lime Wash** (`lime-soft`): The quiet version of lime. It colours the italic tagline on a dark guest hero and the "photo soon" line under a blank print.
 - **Post-it Yellow** (`tape`): Every piece of tape: calendar sheets and polaroids (85%), the reaction picker's corners (90%), the scrap under a reaction count (75%), the tag behind the italic "Godpawrents" wordmark, and the strip carrying a dog's badge. Tape is translucent paper, so it has square corners.
+- **Red Biro** (`biro`): The pen on the calendar: the ring around today and the "busy sofa" note. Nowhere else.
 
 ### Secondary: the guest colour
 Each guest has a `bgColor` in its content frontmatter. The colour fills that dog's hero card. The diary then cycles through four skins mixed from it: a pale tint with ink text, the pure colour with cream text, a 38% ink-deepened version, and a 72% ink-deepened version.
@@ -189,10 +191,12 @@ Colours repeat across guests. **Sofa Green** `#5F6E4F` is reserved for the share
 - **Headline** (400, 32px, 1): Section heads like "The full diary", plus the wordmark at 21–26px.
 - **Title** (400, 24px, 1): Diary day labels ("13 Sep") and card names (22–27px).
 - **Tagline** (italic 400, 20–22px): A dog's one-liner under its name, in Pale Lime Wash on the hero, and the rotating joke line in the homepage footer, in ink.
-- **Body** (400, 16px, 1.625, max ~52ch): Diary notes and intro copy. Slips use 15px text on fixed 24px lines so the writing sits like ruled paper.
+- **Body** (400, 16px, 1.625, max ~52ch): Diary notes and intro copy. Slips use 15px text on 24px lines so the writing sits like ruled paper.
 - **Chip** (600, 13px): Pills, nav link and day chips.
 - **Label** (600, 11–12px, 0.06–0.1em, uppercase): Stay ranges, "Here today", NEW tags and footer meta. Dates use tabular numbers.
 - **Script** (500–600, 18–40px, 1–1.15): Caveat, for words Alan or Weiwen have written onto the calendar: month names (40px), the pup-count note (22px), names on polaroids (20px) and on tape (18px).
+
+Chip, Label, caption and slip sizes are written in rem, so they grow when a reader turns up their browser's text size. The px figures above are what they come to at the default 16px. Display sizes stay in px.
 
 ### Named Rules
 **The Pen on Paper Rule.** Caveat is Alan or Weiwen's own handwriting, so it only goes where one of them could have picked up a pen and written on something. Before using it, check all six:
@@ -265,13 +269,26 @@ Stands in for a cut-out when a guest has no photo yet: one cream Polaroid per do
 A note too long for a print's mat goes on a torn cream slip. It's two layers: the torn, shadowed paper layer and the text layer, which is never distorted. The paper has a 5px Slip Fibre border that the tear cuts through. The text is 15px Archivo with 24px lines, inset 8px plus 16px from the edges so the writing clears the ragged edge.
 
 ### Reaction Badge and Picker
-The empty badge is a faint (35% opacity) add-reaction icon in the card's top-right corner that comes to full strength on hover or focus. Once an entry has reactions, the badge becomes up to three stickers (2.1rem) piled −8° / 6° / −4° and overlapping by 0.85rem, with the most-used on top. The total sits on a Post-it Yellow tape scrap in one of three clip-path cuts. The picker is a torn cream strip hanging under the badge, taped at both corners with Post-it Yellow scraps. Its stickers scale up and tilt on hover. Errors appear as a small italic cream note under the badge.
+The empty badge is a faint (65% opacity) add-reaction icon in the card's top-right corner that comes to full strength on hover or focus. It's faint on purpose, and so is the photo credit under a print (70% opacity): the words and photos are the point, and neither of these should pull the eye from them. Once an entry has reactions, the badge becomes up to three stickers (2.1rem) piled −8° / 6° / −4° and overlapping by 0.85rem, with the most-used on top. The total sits on a Post-it Yellow tape scrap in one of three clip-path cuts. The picker is a torn cream strip hanging under the badge, taped at both corners with Post-it Yellow scraps. Its stickers scale up and tilt on hover. Errors appear as a small italic cream note under the badge.
 
 ### Navigation
 The wordmark sits on the left: "The Towner" in serif, then an italic "Godpawrents" on a Post-it Yellow tape tag rotated −2°, which straightens on hover. On the right is the outlined "Past guests" pill; its border turns ink on hover, and lime with an ink border marks the current page. Below them is a 1.5px Pencil Rule. Focus shows a 2px ink ring offset onto paper.
 
 ### Day Strip
 A sticky, horizontally scrolling row of outlined day chips on translucent paper. Hover turns the border ink; the active day turns lime with a lime border.
+
+The exit chip (`day-chip--exit`) is the same pill filled with ink, paper text, a size up (14px). It's the homepage's way into a dog's full diary, sitting under today's entries, and it hovers moss.
+
+### Weather
+The homepage hero wears one weather at a time, read from NEA for Kallang (which covers Towner). The diary and every other page stay dry.
+
+- **Haze** when the central 24-hour PSI is over 100: three layers of grey smog (`--smog: 192 195 198`) drift across the dogs and thin out before the chips, so the name stays clear. It thickens with the reading, from 0.4 just over 100 to full strength at about 230.
+- **Rain** when the 2-hour forecast says showers: streaks and drops drawn on a canvas over the hero, heavier when the forecast says heavy or thundery. Thundery showers add a pale double flash (`#f4f6ff`) every 7 seconds.
+- **Heat** at 33°C or more: the cutouts shimmer like a road in the sun, with a warm glow coming up from the bottom of the card.
+
+Haze wins over rain, and rain over heat. A small tilted tag in the hero's bottom-right corner says which it is ("PSI 170", "Thundery Showers", "34°C"): haze grey, rain `#b9cdd6`, storm `#e4e0a6`, heat `#f3bf7e`, always ink text. These colours belong to the sky and are used nowhere else.
+
+Rain and shimmer stop while the hero is scrolled out of sight. Under `prefers-reduced-motion` the smog, rain and shimmer hold still and the lightning is off. `?psi=170`, `?sky=Thundery Showers` and `?temp=34` preview each one.
 
 ## Do's and Don'ts
 
@@ -281,6 +298,7 @@ A sticky, horizontally scrolling row of outlined day chips on translucent paper.
 - **Do** take saturated colour from the guest's `bgColor` and derive tints with `diarySkin()` instead of inventing new colours.
 - **Do** keep entrances one-shot (520–620ms, same ease, 90ms stagger), and turn every animation off under `prefers-reduced-motion`.
 - **Do** give small controls an invisible `::before` hit area rather than enlarging them.
+- **Do** put hover movement inside `@media (hover: hover)`, so a lift doesn't stick after a tap on a phone.
 - **Do** use tabular numbers for dates, counts and stay ranges.
 
 ### Don't:
@@ -290,6 +308,7 @@ A sticky, horizontally scrolling row of outlined day chips on translucent paper.
 - **Don't** add a fourth typeface, or use Caveat anywhere the Pen on Paper Rule doesn't allow.
 - **Don't** add buttons, forms or sections that look like a service site (CTA bars, pricing cards, testimonial blocks). The only interactive pieces are navigation, day chips, prints and reactions.
 - **Don't** apply the tear filter to text; tear the paper layer only.
+- **Don't** make the photo credit or the empty reaction icon louder, and don't end the wiggle or the cutout drift. They're faint, and looping, on purpose.
 
 
 ## Implementation reference
@@ -305,6 +324,8 @@ A sticky, horizontally scrolling row of outlined day chips on translucent paper.
 | Print mat and media | `diary-print`, `print-media` | Width and tilt come from the existing diary helpers |
 | Mat caption | `print-caption` | 13.5px, centered |
 | Torn caption | `slip-caption` inside `diary-slip` / `diary-note` | 15px, 24px lines |
+| Day chip | `day-chip` | `day-chip--exit` for the homepage's link into a full diary |
+| Sky tag | `sky-tag` | `sky-tag--rain`, `sky-tag--storm`, `sky-tag--heat`; plain is haze |
 | Multiple prints | `diary-prints` | `diary-prints--pair` or `diary-prints--quad` |
 
 Two and four prints use two columns from 480px up and one column below it. Three prints remain a single column. Video cards and mats stay level. The dark diary link hovers moss, keeping lime for current state. The calendar's red biro ring around today and red busy-sofa annotation are intentional pen-on-paper accents.
