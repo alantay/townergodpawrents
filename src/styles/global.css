@@ -733,6 +733,14 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+.sky-tag--haze {
+  padding: 8px 12px;
+  gap: 8px;
+  background: var(--color-cream);
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  rotate: none;
+}
 .sky-tag--rain { background: #b9cdd6; }
 .sky-tag--storm { background: #e4e0a6; }
 .sky-tag--heat { background: #f3bf7e; }
