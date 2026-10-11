@@ -95,8 +95,13 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                   {week.segments.map((seg) => {
                     const s = seg.stay;
                     const endsHere = week.days[6].iso >= s.checkOut;
+                    // The week grid is hidden from assistive tech and the
+                    // polaroid below is the keyboard's way in, so the strip
+                    // is a pointer shortcut only.
                     return (
-                      <span
+                      <a
+                        href={`/guests/${s.guestId}`}
+                        tabindex="-1"
                         class:list={["cal-bar", { "cal-bar--continued": seg.continued, "cal-bar--carries": !endsHere, "cal-bar--short": seg.span === 1 }]}
                         style={`grid-row:${seg.lane + 2};grid-column:${seg.startCol + 1} / span ${seg.span};--bar-tint:${s.tint};--bar-colour:${s.bgColor}`}
                         data-check-in={s.checkIn}
@@ -111,11 +116,19 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
                         <span class="cal-bar-name">
                           {seg.continued ? `…${s.name}` : s.name}
                         </span>
-                      </span>
+                      </a>
                     );
                   })}
                 </div>
               ))}
+
+              {month.stays.length > 0 && (
+                <ul class="cal-key">
+                  <li><span class="cal-bar" aria-hidden="true" />Here now</li>
+                  <li><span class="cal-bar is-upcoming" aria-hidden="true" />Coming up</li>
+                  <li><span class="cal-bar is-past" aria-hidden="true" />Gone home</li>
+                </ul>
+              )}
 
               {month.stays.length > 0 && (
                 <div class="mt-7 flex flex-wrap gap-4">
@@ -172,7 +185,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     document.querySelectorAll('.cal-day[data-date="' + today + '"]').forEach(function (d) {
       d.classList.add("is-today");
     });
-    document.querySelectorAll(".cal-bar").forEach(function (b) {
+    document.querySelectorAll(".cal-bar[data-check-in]").forEach(function (b) {
       b.classList.toggle("is-upcoming", b.dataset.checkIn > today);
       b.classList.toggle("is-past", b.dataset.checkOut < today);
     });
@@ -376,6 +389,30 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     font-weight: 600;
     line-height: 1;
   }
+
+  /* What the three kinds of strip mean, printed once on the first sheet that
+     has a stay. */
+  .cal-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin-top: 14px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-label);
+  }
+  .cal-key li { display: flex; align-items: center; gap: 6px; }
+  .cal-key .cal-bar {
+    --bar-colour: var(--color-label);
+    isolation: isolate;
+    width: 30px;
+    height: 13px;
+    padding: 0;
+    transform: none;
+  }
+  .cal-month[data-has-stays]:not([hidden]) ~ .cal-month .cal-key { display: none; }
 
   .cal-polaroid {
     position: relative;

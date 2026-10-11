@@ -271,7 +271,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   isolation: isolate;
   display: flex;
   align-items: center;
-  gap: 0.15rem;
+  gap: 0.4rem;
   width: max-content;
   padding: 0.55rem 0.8rem;
   color: var(--color-ink);
@@ -311,10 +311,11 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 }
 .reaction-picker[hidden] { display: none; }
 .reaction-choice {
+  position: relative;
   display: grid;
   justify-items: center;
   gap: 0.1rem;
-  width: 2.6rem;
+  width: 2.75rem;
   padding: 0;
   border: 0;
   border-radius: 999px;
@@ -338,6 +339,21 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   font-variant-numeric: tabular-nums;
   color: color-mix(in srgb, var(--color-ink) 72%, transparent);
 }
+/* Your own sticker is ringed in ink, off-round like the biro ring on the
+   calendar. A second tap takes it back. */
+.reaction-choice[aria-pressed="true"]::before {
+  content: "";
+  position: absolute;
+  top: -0.2rem;
+  left: 50%;
+  width: 2.6rem;
+  height: 2.6rem;
+  margin-left: -1.3rem;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 55% 45% 50% 50% / 50% 55% 45% 50%;
+  transform: rotate(-8deg);
+}
+.reaction-choice[aria-pressed="true"] .reaction-choice-count { color: var(--color-ink); }
 
 /* A failed tap leaves a quiet pencilled note under the badge. */
 .reaction-message {

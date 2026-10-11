@@ -59,7 +59,8 @@ const isHome = path === "";
     justify-content: flex-end;
     padding-right: 6px;
     font-family: var(--font-script);
-    font-size: 0.82em;
+    /* Handwriting never drops below 18px, even under the phone-size wordmark. */
+    font-size: max(1.125rem, 0.82em);
     font-weight: 600;
     color: var(--color-muted);
   }

@@ -24,6 +24,9 @@ function fakeStore() {
         },
       };
     },
+    async hset(key: string, values: Record<string, number>) {
+      totals.set(key, { ...totals.get(key), ...values });
+    },
     pipeline() {
       const ops: Array<() => unknown> = [];
       const chain = {
@@ -45,11 +48,11 @@ function fakeStore() {
   return { store: () => client as unknown as Redis, rates, totals };
 }
 
-function tap(guest: string, entry: string, emoji: string, ip = "192.0.2.1") {
+function tap(guest: string, entry: string, emoji: string, ip = "192.0.2.1", undo = false) {
   return new Request("https://example.test/api/reactions", {
     method: "POST",
     headers: { "x-forwarded-for": ip, "content-type": "application/json" },
-    body: JSON.stringify({ guest, entry, emoji }),
+    body: JSON.stringify({ guest, entry, emoji, ...(undo && { undo }) }),
   });
 }
 
@@ -63,6 +66,16 @@ test("reaction API increments each valid tap and reads the same totals for a gue
     e001: { "❤️": 2, "😂": 0, "😍": 0, "😑": 0, "😅": 0 },
     e002: { "❤️": 0, "😂": 0, "😍": 0, "😑": 0, "😅": 0 },
   });
+});
+
+test("reaction API takes a tap back, and never below zero", async () => {
+  const { store, totals } = fakeStore();
+  const api = reactionApi(new Map([["tiny", ["e001"]]]), store);
+  await api.post(tap("tiny", "e001", "❤️"));
+  const none = { "❤️": 0, "😂": 0, "😍": 0, "😑": 0, "😅": 0 };
+  assert.deepEqual(await (await api.post(tap("tiny", "e001", "❤️", "192.0.2.1", true))).json(), none);
+  assert.deepEqual(await (await api.post(tap("tiny", "e001", "❤️", "192.0.2.1", true))).json(), none);
+  assert.equal(totals.get("reactions:tiny:e001")?.["❤️"], 0);
 });
 
 test("reaction API rejects unknown entries and emoji before writing", async () => {
