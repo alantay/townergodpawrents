@@ -21,6 +21,15 @@ stays:
 
 Bobbi is probably the pickiest eater we have ever taken care of. Alan always mixes her food together. She tries to pick out the eggs and the canned food, and leaves the kibble, rice and carrot. When she has picked out what she can, she just gives up on the food. Alan used to hand-feed her for more than an hour. These days he has stopped. He gives it some time, and once it's clear she is not going to touch what's left, he just throws it away.
 
+### 7pm
+
+<!-- entry-id: e075 -->
+<!-- with: guapo -->
+
+Twinning.
+
+![Guapo and Bobbi lying flat on their sides on the floor, in the same pose at opposite ends of the room](./bobbi/bobbi-twinning.jpg)
+
 ### 7:40am
 
 <!-- entry-id: e072 -->
