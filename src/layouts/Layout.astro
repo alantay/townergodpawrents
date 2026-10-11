@@ -1,4 +1,5 @@
 ---
+import { Font } from "astro:assets";
 import "../styles/global.css";
 
 interface Props {
@@ -42,11 +43,9 @@ const buildId: string = import.meta.env.BUILD_ID;
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Caveat:wght@500;600&family=Instrument+Serif:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
+    <Font cssVariable="--font-instrument-serif" preload={[{ style: "normal" }]} />
+    <Font cssVariable="--font-archivo" />
+    <Font cssVariable="--font-caveat" />
   </head>
   <body class="min-h-screen bg-paper text-ink font-sans pb-24">
     <a class="skip-link" href="#main-content">Skip to main content</a>

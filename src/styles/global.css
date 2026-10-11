@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "Instrument Serif", serif;
-  --font-script: "Caveat", cursive;
-  --font-sans: "Archivo", Helvetica, sans-serif;
+  --font-serif: var(--font-instrument-serif), serif;
+  --font-script: var(--font-caveat), cursive;
+  --font-sans: var(--font-archivo), Helvetica, sans-serif;
 
   --color-paper: #efe7d8;
   --color-ink: #1e2019;
