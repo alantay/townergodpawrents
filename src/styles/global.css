@@ -53,6 +53,12 @@ body {
   outline-offset: 2px;
 }
 
+/* Selected text looks run over with the Post-it highlighter. */
+::selection {
+  background: var(--color-tape);
+  color: var(--color-ink);
+}
+
 a {
   color: var(--color-ink);
   text-decoration: none;
@@ -112,6 +118,9 @@ a.fact-chip::before {
   text-transform: uppercase;
 }
 .status-tag--compact { padding: 6px 11px; font-size: 0.6875rem; }
+/* Every archive card keeps headroom for the tag, so it never lands on the
+   dog's face and the cards all stay one size. */
+.here-pill + .cell-photo { margin-top: 28px; }
 .entry-surface { border-radius: 24px; padding: 18px 19px 20px; }
 .entry-surface--compact { padding: 17px 19px; }
 
