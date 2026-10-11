@@ -333,7 +333,6 @@ let skinIndex = 0;
                     >
                       <button
                         type="button"
-                        aria-label="Enlarge photo"
                         class="diary-print-tap block mx-auto w-full cursor-zoom-in"
                       >
                         <Image
@@ -356,7 +355,6 @@ let skinIndex = 0;
                       {prints.map((p, printIndex) => p.kind === "photo" && (
                         <button
                           type="button"
-                          aria-label={`Enlarge photo ${printIndex + 1}`}
                           class="diary-print diary-print-tap cursor-zoom-in"
                           style={`width:min(100%,${printWidth(p.img.width, p.img.height)}px);transform:rotate(${printTilt(i + printIndex)})`}
                         >

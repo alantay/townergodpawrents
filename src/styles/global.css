@@ -172,7 +172,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle {
   min-height: 1.6rem;
   padding: 0.1rem;
   border-color: transparent;
-  opacity: 0.6;
+  opacity: 0.65;
 }
 entry-reactions:not(.has-reactions) .reaction-summary-icons svg { width: 1.5rem; height: auto; }
 entry-reactions:not(.has-reactions) .reaction-toggle:hover,

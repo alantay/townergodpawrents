@@ -679,7 +679,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
                 "px);transform:rotate(" +
                 printTilt(i) +
                 ')">' +
-                '<button type="button" aria-label="Enlarge photo" class="diary-print-tap block mx-auto w-full cursor-zoom-in">' +
+                '<button type="button" class="diary-print-tap block mx-auto w-full cursor-zoom-in">' +
                 '<img src="' +
                 esc(e.media[0].src) +
                 '" alt="' +
@@ -702,7 +702,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
                 e.media.map(function (photo, photoIndex) {
                   var w = printWidth(photo.width, photo.height);
                   return (
-                    '<button type="button" aria-label="Enlarge photo" class="diary-print diary-print-tap cursor-zoom-in" style="width:min(100%,' +
+                    '<button type="button" class="diary-print diary-print-tap cursor-zoom-in" style="width:min(100%,' +
                     w +
                     "px);transform:rotate(" +
                     printTilt(i + photoIndex) +

@@ -81,7 +81,7 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
               </div>
 
               {month.weeks.map((week) => (
-                <div class="cal-week" style={`grid-template-rows:auto repeat(${week.lanes},26px)`}>
+                <div class="cal-week" aria-hidden="true" style={`grid-template-rows:auto repeat(${week.lanes},26px)`}>
                   {week.days.map((d, col) => (
                     <span
                       class:list={["cal-day", { "cal-day--out": !d.inMonth }]}
@@ -172,7 +172,6 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     });
     document.querySelectorAll('.cal-day[data-date="' + today + '"]').forEach(function (d) {
       d.classList.add("is-today");
-      d.setAttribute("aria-current", "date");
     });
     document.querySelectorAll(".cal-bar").forEach(function (b) {
       b.classList.toggle("is-upcoming", b.dataset.checkIn > today);
