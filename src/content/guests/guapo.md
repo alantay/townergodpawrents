@@ -17,6 +17,17 @@ stays:
     checkOut: 2027-01-03
 ---
 
+## 11 Oct
+
+### 8:15am
+
+<!-- entry-id: e073 -->
+<!-- with: bobbi -->
+
+Guapo brought reinforcements to help dethrone the king cat, but I guess Bobbi was not very helpful here either.
+
+![Guapo and Bobbi walking past a white and grey cat lounging beside the bicycles in the back lane](./guapo/guapo-king-cat-reinforcements.mp4)
+
 ## 10 Oct
 
 ### 2:30pm
