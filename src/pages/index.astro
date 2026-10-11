@@ -21,7 +21,28 @@ import {
   dateStr,
   GROUP_HERO,
   todaySGT,
+  SOFA_GREEN,
+  luma,
+  diaryTextHtml,
+  tilt,
+  printTilt,
+  noteTilt,
+  videoNoteTilt,
+  fitsPrintMat,
+  PRINT_MAX_HEIGHT,
+  PRINT_MAT,
+  VIDEO_MAX_HEIGHT,
 } from "../lib/guests";
+
+// The browser redraws today's cards itself, so it needs the same small rules
+// the guest pages are built with. They go over as source, the way cutoutWidth
+// does, which only works for functions that lean on nothing outside
+// themselves. Anything bigger is still mirrored by hand in the script below.
+const sharedJs = `window.__tgpShared = {
+  SOFA_GREEN: "${SOFA_GREEN}", PRINT_MAX_HEIGHT: ${PRINT_MAX_HEIGHT}, PRINT_MAT: ${PRINT_MAT}, VIDEO_MAX_HEIGHT: ${VIDEO_MAX_HEIGHT},
+  luma: ${luma}, diaryTextHtml: ${diaryTextHtml}, tilt: ${tilt},
+  printTilt: ${printTilt}, noteTilt: ${noteTilt}, videoNoteTilt: ${videoNoteTilt}, fitsPrintMat: ${fitsPrintMat},
+};`;
 
 // Diary media is referenced from inside the markdown body, so it never
 // passes through Astro's markdown image pipeline on its own — glob the
@@ -260,11 +281,18 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
   </script>
 
   <script is:inline set:html={`window.__tgpCutoutWidth = ${cutoutWidth.toString()};`} />
+  <script is:inline set:html={sharedJs} />
   <script type="application/json" id="guests-data" is:inline set:html={guestsJson} />
   <script type="application/json" id="group-hero" is:inline set:html={groupHeroJson} />
 
   <script is:inline>
     (function () {
+      // ---- handed over from src/lib/guests.ts as source, so they can't drift ----
+      var S = window.__tgpShared;
+      var SOFA_GREEN = S.SOFA_GREEN, luma = S.luma, diaryTextHtml = S.diaryTextHtml, tilt = S.tilt;
+      var PRINT_MAX_HEIGHT = S.PRINT_MAX_HEIGHT, PRINT_MAT = S.PRINT_MAT, VIDEO_MAX_HEIGHT = S.VIDEO_MAX_HEIGHT;
+      var printTilt = S.printTilt, noteTilt = S.noteTilt, videoNoteTilt = S.videoNoteTilt, fitsPrintMat = S.fitsPrintMat;
+
       // ---- selection rules — MIRRORS src/lib/guests.ts, keep in sync ----
       function todaySGT() {
         return new Intl.DateTimeFormat("en-CA", {
@@ -375,11 +403,6 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var r = Math.round(ar + (br - ar) * t), g = Math.round(ag + (bg - ag) * t), bl = Math.round(ab + (bb - ab) * t);
         return "#" + [r, g, bl].map((v) => v.toString(16).padStart(2, "0")).join("");
       }
-      function luma(hex) {
-        hex = hex.replace("#", "");
-        var r = parseInt(hex.substr(0, 2), 16), g = parseInt(hex.substr(2, 2), 16), b = parseInt(hex.substr(4, 2), 16);
-        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
-      }
       function guestSkins(base) {
         return [
           { bg: mix(base, "#F7F2E7", 0.72), fg: "#1E2019", accent: mix(base, "#1E2019", 0.35) },
@@ -394,26 +417,8 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var i = skinIdxByGuest[id]++;
         return guestSkins(bgColor)[i % 4];
       }
-      function tilt(i) {
-        return i % 2 === 0 ? "-1deg" : "1deg";
-      }
-      var PRINT_MAX_HEIGHT = 420;
-      var PRINT_MAT = 7;
-      var VIDEO_MAX_HEIGHT = 560;
       function printWidth(w, h, maxHeight) {
         return Math.round((maxHeight || PRINT_MAX_HEIGHT) * (w / h)) + PRINT_MAT * 2;
-      }
-      function printTilt(i) {
-        return i % 2 === 0 ? "1.5deg" : "-1.5deg";
-      }
-      function noteTilt(i) {
-        return i % 2 === 0 ? "-0.4deg" : "0.4deg";
-      }
-      function videoNoteTilt(i) {
-        return i % 2 === 0 ? "-1.5deg" : "1.5deg";
-      }
-      function fitsPrintMat(text) {
-        return text.trim().split(/\s+/).length <= 8;
       }
       var GROUP_WORDS = { 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six" };
       function groupWord(n) {
@@ -478,7 +483,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       // ---- build hero + today-entries markup for the live states ----
       function heroLiveHTML(live, today) {
         var pair = live.length > 1;
-        var color = pair ? "#5F6E4F" : live[0].bgColor;
+        var color = pair ? SOFA_GREEN : live[0].bgColor;
         var dogs = dogsIn(live);
         // Two or more dogs: one name per line, starting below the "Here today"
         // pill, so each name gets the full width instead of shrinking to fit
@@ -555,7 +560,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
 
       function heroVacancyHTML(lastGuest, next) {
         var html =
-          '<div id="hero-card" class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:#5F6E4F">' +
+          '<div id="hero-card" class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:' + SOFA_GREEN + '">' +
           '<div id="hero-badge" class="absolute top-[18px] right-[18px] status-tag animate-wiggle">Sofa&#39;s empty</div>' +
           '<div class="w-full"><h1 class="fit-headline text-[clamp(62px,19vw,120px)] max-w-full">No dog today</h1></div>' +
           '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">The vacuum gets a day off. It&#39;s weirdly quiet.</div>' +
@@ -631,7 +636,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           .map((e, i) => {
             // A shared entry wears Sofa Green, the two-dog hero's colour,
             // rather than either dog's.
-            var sk = e.shared ? guestSkins("#5F6E4F")[1] : skin(e.bgColor, e.id);
+            var sk = e.shared ? guestSkins(SOFA_GREEN)[1] : skin(e.bgColor, e.id);
             var darkSkin = luma(sk.bg) < 110;
             var video = e.media.filter((m) => m.kind === "video")[0];
             // A caption goes on the mat only when one print can hold it in a
@@ -652,7 +657,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
                 (video ? videoNoteTilt(i) : noteTilt(i)) +
                 ')"><div class="diary-slip-paper" aria-hidden="true"></div>' +
                 '<div class="diary-note"><p class="slip-caption">' +
-                esc(e.text).replace(/~~([^~]+)~~/g, "<del>$1</del>") +
+                diaryTextHtml(e.text) +
                 "</p></div></div>"
               : "";
             var mediaHTML = "";
@@ -693,7 +698,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
                 e.media[0].height +
                 '" loading="lazy" decoding="async" class="print-media"></button>' +
                 (matCaption
-                  ? '<p class="print-caption">' + esc(e.text).replace(/~~([^~]+)~~/g, "<del>$1</del>") + "</p>"
+                  ? '<p class="print-caption">' + diaryTextHtml(e.text) + "</p>"
                   : "") +
                 "</div>" +
                 noteHTML;
@@ -730,12 +735,12 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             var textHTML = e.text && !matCaption && !noteCaption
               ? '<p class="' +
                 (e.media.length ? "mt-4" : "mt-2") +
-                ' text-base leading-relaxed text-pretty whitespace-pre-line">' +
-                esc(e.text).replace(/~~([^~]+)~~/g, "<del>$1</del>") +
+                ' text-base leading-relaxed text-pretty whitespace-pre-line max-w-[58ch]">' +
+                diaryTextHtml(e.text) +
                 "</p>"
               : "";
             return (
-              '<div class="card-keyline' +
+              '<article class="card-keyline' +
               (darkSkin ? " card-keyline--dark" : "") +
               ' diary-entry-card' +
               (video ? " diary-entry-card--video" : "") +
@@ -759,7 +764,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               mediaHTML +
               textHTML +
               (e.credit ? '<p class="mt-3 text-xs opacity-70' + (e.media.length ? " text-center" : "") + '">' + esc(e.credit) + "</p>" : "") +
-              '<entry-reactions data-guest="' + esc(e.owner) + '" data-entry="' + esc(e.entryId) + '"></entry-reactions></div>'
+              '<entry-reactions data-guest="' + esc(e.owner) + '" data-entry="' + esc(e.entryId) + '"></entry-reactions></article>'
             );
           })
           .join("");

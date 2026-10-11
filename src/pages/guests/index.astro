@@ -4,7 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
 import Cutout from "../../components/Cutout.astro";
-import { stayLabel, staysNewestFirst, lastEndedStay, isLiveOn, stayOn, dateStr, todaySGT } from "../../lib/guests";
+import { stayLabel, staysNewestFirst, lastEndedStay, isLiveOn, stayOn, dateStr, todaySGT, luma } from "../../lib/guests";
 
 const entries = await getCollection("guests");
 const today = todaySGT();
@@ -42,11 +42,6 @@ const wide = (i: number) => i === 0 && guests.length > 2;
 const dateFor = (g: (typeof all)[number]) =>
   stayLabel((isLiveOn(g, today) && stayOn(g, today)) || lastEndedStay(g, today)!);
 
-// Same keyline rule as the homepage cards: darker line on dark coats.
-function luma(hex: string) {
-  const h = hex.replace("#", "");
-  return 0.2126 * parseInt(h.slice(0, 2), 16) + 0.7152 * parseInt(h.slice(2, 4), 16) + 0.0722 * parseInt(h.slice(4, 6), 16);
-}
 ---
 
 <Layout

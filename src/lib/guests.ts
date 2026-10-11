@@ -384,6 +384,16 @@ function mixHex(a: string, b: string, amount: number): string {
   return `#${mix(ar, br)}${mix(ag, bg)}${mix(ab, bb)}`;
 }
 
+/** How light a six-digit hex colour reads, 0 (black) to 255 (white). A card
+ * darker than 110 takes the dark keyline. */
+export function luma(hex: string): number {
+  const h = hex.replace("#", "");
+  return 0.2126 * parseInt(h.slice(0, 2), 16) + 0.7152 * parseInt(h.slice(2, 4), 16) + 0.0722 * parseInt(h.slice(4, 6), 16);
+}
+
+/** The colour of a shared moment and of the hero when two homes are in. */
+export const SOFA_GREEN = "#5F6E4F";
+
 /** Each diary cycles through the guest's own avatar colour, from a pale wash
  * to deep evening shades. It keeps the scrapbook energy without borrowing
  * another dog's colour or the site's live-status lime. */
