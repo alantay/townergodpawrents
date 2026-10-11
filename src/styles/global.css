@@ -93,6 +93,13 @@ a:focus-visible {
   border-radius: 0;
   transform: rotate(-2deg);
 }
+/* A chip that's a link gets the same invisible tap padding as a day chip. */
+a.fact-chip { position: relative; }
+a.fact-chip::before {
+  content: "";
+  position: absolute;
+  inset: -6px 0;
+}
 .status-tag {
   padding: 8px 13px;
   background: var(--color-lime);
@@ -175,7 +182,6 @@ entry-reactions:not(.has-reactions) .reaction-toggle {
   opacity: 0.65;
 }
 entry-reactions:not(.has-reactions) .reaction-summary-icons svg { width: 1.5rem; height: auto; }
-entry-reactions:not(.has-reactions) .reaction-toggle:hover,
 entry-reactions:not(.has-reactions) .reaction-toggle:focus-visible,
 entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opacity: 1; }
 
@@ -188,8 +194,13 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   border-radius: 0.4rem;
 }
 
-.reaction-toggle:hover { transform: translateY(-2px); background: color-mix(in srgb, currentColor 12%, transparent); }
-.has-reactions .reaction-toggle:hover { background: transparent; }
+/* Hover is for a pointer. On a touch screen it sticks after the tap, so the
+   lifts below only apply where the device can really hover. */
+@media (hover: hover) {
+  entry-reactions:not(.has-reactions) .reaction-toggle:hover { opacity: 1; }
+  .reaction-toggle:hover { transform: translateY(-2px); background: color-mix(in srgb, currentColor 12%, transparent); }
+  .has-reactions .reaction-toggle:hover { background: transparent; }
+}
 .reaction-toggle:focus-visible,
 .reaction-choice:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
 .reaction-summary-icons { display: inline-flex; align-items: center; font-size: 0.9rem; line-height: 1; }
@@ -308,7 +319,9 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   height: 2.2rem;
   filter: drop-shadow(0 2px 2px rgb(30 32 25 / 0.2));
 }
-.reaction-choice:hover { transform: scale(1.18) rotate(-6deg); }
+@media (hover: hover) {
+  .reaction-choice:hover { transform: scale(1.18) rotate(-6deg); }
+}
 .reaction-choice-count {
   font-size: 0.7rem;
   font-weight: 600;
@@ -341,8 +354,10 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   box-shadow: 0 10px 20px rgb(92 76 41 / 0.1);
 }
 
-.dog-card:hover {
-  box-shadow: 0 16px 26px rgb(70 92 56 / 0.17);
+@media (hover: hover) {
+  .dog-card:hover {
+    box-shadow: 0 16px 26px rgb(70 92 56 / 0.17);
+  }
 }
 
 .archive-date,
