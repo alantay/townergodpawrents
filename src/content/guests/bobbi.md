@@ -13,6 +13,17 @@ stays:
     checkOut: 2026-10-12
 ---
 
+## 11 Oct
+
+### 7:40am
+
+<!-- entry-id: e072 -->
+<!-- with: guapo -->
+
+Bobbi and Guapo enjoying this larger dog run.
+
+![Bobbi and Guapo trotting across a big grassy field on a hazy morning](./bobbi/bobbi-bigger-dog-run.mp4)
+
 ## 10 Oct
 
 ### 5:55pm
