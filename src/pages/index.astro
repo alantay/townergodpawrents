@@ -485,7 +485,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       // ---- build hero + today-entries markup for the live states ----
       function heroLiveHTML(live, today) {
         var pair = live.length > 1;
-        var color = pair ? S.groupHeroColor(live.map((g) => g.id)) : live[0].bgColor;
+        var color = pair ? S.groupHeroColor(live.map((g) => g.id), today) : live[0].bgColor;
         var dogs = dogsIn(live);
         // Two or more dogs: one name per line, starting below the "Here today"
         // pill, so each name gets the full width instead of shrinking to fit
