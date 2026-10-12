@@ -104,6 +104,21 @@ More.`, [{ checkIn: "2026-10-08", checkOut: "2026-10-12" }], "bobbi");
   assert.equal(day.entries[0].credit, "Music: someone");
 });
 
+test("parseDiary reads a label and keeps the time for ordering", () => {
+  const [day] = parseDiary(`## 10 Oct
+
+### 9:30pm
+
+<!-- entry-id: e075 -->
+<!-- label: Throwback -->
+
+Twinning.`, [{ checkIn: "2026-10-08", checkOut: "2026-10-12" }], "bobbi");
+
+  assert.equal(day.entries[0].label, "Throwback");
+  assert.equal(day.entries[0].time, "9:30pm");
+  assert.equal(day.entries[0].text, "Twinning.");
+});
+
 test("parseDiary rejects missing or duplicate entry IDs", () => {
   const stays = [{ checkIn: "2026-09-13", checkOut: "2026-09-23" }];
   assert.throws(() => parseDiary("## 17 Sep\n\n### 8am\n\nTiny naps.", stays, "tiny"), /needs exactly one/);
