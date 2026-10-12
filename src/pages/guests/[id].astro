@@ -276,8 +276,7 @@ let skinIndex = 0;
           <div class="mt-4 grid gap-5">
             {day.entries.map((e) => {
               const i = skinIndex++;
-              // A shared entry wears Sofa Green, the two-dog hero's colour,
-              // rather than this dog's.
+              // Shared diary entries keep Sofa Green rather than this dog's colour.
               const shared = e.with.length > 0;
               const sk = shared ? diarySkin(SOFA_GREEN, 1) : diarySkin(bgColor, i);
               const darkSkin = luma(sk.bg) < 110;
