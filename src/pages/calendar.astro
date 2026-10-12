@@ -278,6 +278,10 @@ const WEEKDAYS = ["M", "T", "W", "T", "F", "S", "S"];
     transform: translateZ(0);
   }
   .cal-week:last-child::before { background-size: 0 0, calc((100% + 2px) / 7) 100%; }
+  /* Same as the inked pills: no wobble on a 1x screen, where it stair-steps. */
+  @media (resolution < 1.5dppx) {
+    .cal-week::before { filter: none; }
+  }
 
   .cal-day {
     grid-row: 1;

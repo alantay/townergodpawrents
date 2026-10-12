@@ -985,6 +985,14 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   transition: --drawn 200ms ease-out;
 }
 
+/* The wobble shifts whole pixels, which stair-steps a hairline on a 1x
+   screen. There the line stays straight. */
+@media (resolution < 1.5dppx) {
+  .inked::after {
+    filter: none;
+  }
+}
+
 /* A pill is not a text link, so it never goes moss. */
 .inked:hover {
   color: var(--color-ink);
