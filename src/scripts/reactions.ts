@@ -23,6 +23,35 @@ const sticker = (emoji: { value: string; label: string }) =>
 const latest = new Map<string, GuestCounts>();
 const loads = new Map<string, Promise<void>>();
 
+// Which stickers this visitor left, kept on their own device so a second tap
+// can take one back. The server never learns who tapped.
+const MINE_KEY = "tgp-reactions";
+const mine: Record<string, string[]> = (() => {
+  try {
+    const saved = JSON.parse(localStorage.getItem(MINE_KEY) || "{}");
+    return saved && typeof saved === "object" ? saved : {};
+  } catch {
+    return {};
+  }
+})();
+
+function isMine(guestId: string, entryId: string, emoji: string) {
+  return !!mine[`${guestId}/${entryId}`]?.includes(emoji);
+}
+
+function setMine(guestId: string, entryId: string, emoji: string, on: boolean) {
+  const key = `${guestId}/${entryId}`;
+  const kept = (mine[key] ?? []).filter((value) => value !== emoji);
+  if (on) kept.push(emoji);
+  if (kept.length) mine[key] = kept;
+  else delete mine[key];
+  try {
+    localStorage.setItem(MINE_KEY, JSON.stringify(mine));
+  } catch {
+    // Storage is blocked; the sticker is remembered until the page closes.
+  }
+}
+
 function countsFor(guestId: string, entryId: string): Counts {
   return latest.get(guestId)?.[entryId] ?? {};
 }
@@ -64,22 +93,27 @@ function bump(guestId: string, entryId: string, emoji: string, by: number) {
   setCounts(guestId, entryId, counts);
 }
 
-// Show the tap straight away, then settle on the server's totals.
-async function addReaction(guestId: string, entryId: string, emoji: string) {
-  bump(guestId, entryId, emoji, 1);
-  let problem = "Reaction didn't land. Try again?";
+// Show the tap straight away, then settle on the server's totals. A tap on
+// your own sticker takes it back.
+async function toggleReaction(guestId: string, entryId: string, emoji: string) {
+  const undo = isMine(guestId, entryId, emoji);
+  const by = undo ? -1 : 1;
+  setMine(guestId, entryId, emoji, !undo);
+  bump(guestId, entryId, emoji, by);
+  let problem = undo ? "Couldn't take that back. Try again?" : "Reaction didn't land. Try again?";
   try {
     const response = await fetch("/api/reactions", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ guest: guestId, entry: entryId, emoji }),
+      body: JSON.stringify({ guest: guestId, entry: entryId, emoji, ...(undo && { undo }) }),
     });
     if (response.ok) return setCounts(guestId, entryId, await response.json() as Counts);
     if (response.status === 429) problem = "Easy there, too many taps. Try again in a minute.";
   } catch {
     // Offline or the store is down; fall through and undo the tap.
   }
-  bump(guestId, entryId, emoji, -1);
+  setMine(guestId, entryId, emoji, undo);
+  bump(guestId, entryId, emoji, -by);
   throw new Error(problem);
 }
 
@@ -142,7 +176,7 @@ class EntryReactions extends HTMLElement {
         this.choiceCounts.set(emoji.value, count);
         button.addEventListener("click", () => {
           this.say("");
-          addReaction(this.dataset.guest!, this.dataset.entry!, emoji.value)
+          toggleReaction(this.dataset.guest!, this.dataset.entry!, emoji.value)
             .catch((error: Error) => this.say(error.message));
           this.close();
           toggle.focus({ preventScroll: true });
@@ -184,6 +218,7 @@ class EntryReactions extends HTMLElement {
       if (!label) continue;
       label.textContent = count ? String(count) : "–";
       label.parentElement!.setAttribute("aria-label", `React with ${emoji.label}${count ? `; ${count} so far` : ""}`);
+      label.parentElement!.setAttribute("aria-pressed", String(isMine(this.dataset.guest!, this.dataset.entry!, emoji.value)));
     }
     this.total.textContent = total ? String(total) : "";
     this.toggle.setAttribute("aria-label", total ? `Add a reaction; ${total} reactions so far` : "Add a reaction");

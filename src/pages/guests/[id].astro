@@ -266,6 +266,11 @@ let skinIndex = 0;
           <div class="diary-day-heading flex items-baseline gap-3">
             <h3 class="diary-date font-serif text-[24px] leading-none flex-none">{day.label} <span class="font-sans text-sm text-label">{day.iso.slice(0, 4)}</span></h3>
             <div class="h-px flex-1 bg-ink/20"></div>
+            {days.length > 1 && (
+              <span class="flex-none text-[0.6875rem] font-semibold tracking-[0.08em] uppercase text-label tabular-nums">
+                {day.entries.length} {day.entries.length === 1 ? "entry" : "entries"}
+              </span>
+            )}
           </div>
 
           <div class="mt-4 grid gap-5">
@@ -399,6 +404,18 @@ let skinIndex = 0;
           </div>
         </section>
       ))}
+    </div>
+
+    {/* The end of a long diary: back up, or on to the other dogs. */}
+    <div class="mt-10 flex flex-wrap gap-2">
+      {days.length > 1 && (
+        <a href="#" class="inked font-semibold text-[0.8125rem] border-[1.5px] border-line px-[13px] py-1.5 rounded-full before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:inset-x-0">
+          Back to the top
+        </a>
+      )}
+      <a href="/guests" class="inked font-semibold text-[0.8125rem] border-[1.5px] border-line px-[13px] py-1.5 rounded-full before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:inset-x-0">
+        Everyone who's stayed
+      </a>
     </div>
 
     {days.length > 1 && (

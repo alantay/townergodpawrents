@@ -15,7 +15,7 @@ function json(value: unknown, status = 200): Response {
 }
 
 function counts(raw: Record<string, unknown> | null): Counts {
-  return Object.fromEntries(EMOJI.map((emoji) => [emoji, Number(raw?.[emoji] ?? 0)]));
+  return Object.fromEntries(EMOJI.map((emoji) => [emoji, Math.max(0, Number(raw?.[emoji] ?? 0))]));
 }
 
 function entryKey(guest: string, entry: string): string {
@@ -50,7 +50,7 @@ export function reactionApi(entriesByGuest: Map<string, string[]>, store: () => 
         return json({ error: "Invalid reaction" }, 400);
       }
       if (!body || typeof body !== "object" || Array.isArray(body)) return json({ error: "Invalid reaction" }, 400);
-      const { guest, entry, emoji } = body as Record<string, unknown>;
+      const { guest, entry, emoji, undo } = body as Record<string, unknown>;
       if (typeof guest !== "string" || typeof entry !== "string" || typeof emoji !== "string" ||
           !EMOJI.includes(emoji) || !entriesByGuest.get(guest)?.includes(entry)) {
         return json({ error: "Unknown reaction" }, 400);
@@ -66,7 +66,9 @@ export function reactionApi(entriesByGuest: Map<string, string[]>, store: () => 
         const [attempts] = await client.multi().incr(throttle).expire(throttle, WINDOW_SECONDS, "NX").exec();
         if (Number(attempts) > LIMIT) return json({ error: "Too many taps" }, 429);
         const key = entryKey(guest, entry);
-        const [, rawCounts] = await client.pipeline().hincrby(key, emoji, 1).hgetall(key).exec();
+        const [after, rawCounts] = await client.pipeline().hincrby(key, emoji, undo === true ? -1 : 1).hgetall(key).exec();
+        // Taking back a sticker that was never there must not leave the count in debt.
+        if (Number(after) < 0) await client.hset(key, { [emoji]: 0 });
         return json(counts(rawCounts as Record<string, unknown> | null));
       } catch {
         return json({ error: "Reactions unavailable" }, 503);

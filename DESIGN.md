@@ -209,6 +209,8 @@ Chip, Label, caption and slip sizes are written in rem, so they grow when a read
 
 The calendar is the one page that's meant to look handwritten. Everywhere else, the default is no Caveat.
 
+**Homepage exceptions.** Two homepage jokes are handwriting on purpose, even though neither is Alan or Weiwen writing on a sheet: the hero note (the dog answering a pat, or what the sofa coughed up) and the "part-time" scribble under the wordmark tape. Keep them to a few words and never below 18px. Nowhere else.
+
 ## Layout
 
 One centred column, 700px max, with a 20px side gutter, built for phones first. Sections are separated by generous vertical space (32–48px) and a 1.5px Pencil Rule with an 18px gap beneath it, never by boxes. The diary is a timeline: a 1px spine on the left, an ink dot punched through the paper at each day heading, and entry cards alternating their tilt (−1° / 1°). From 640px up, every even entry also steps in by 24px, which keeps the pile looking loose. Prints sit in a single column, or in a 2-up grid from 480px when there's a pair or a set of four.
@@ -268,13 +270,13 @@ Stands in for a cut-out when a guest has no photo yet: one cream Polaroid per do
 A note too long for a print's mat goes on a torn cream slip. It's two layers: the torn, shadowed paper layer and the text layer, which is never distorted. The paper has a 5px Slip Fibre border that the tear cuts through. The text is 15px Archivo with 24px lines, inset 8px plus 16px from the edges so the writing clears the ragged edge.
 
 ### Reaction Badge and Picker
-The empty badge is a faint (65% opacity) add-reaction icon in the card's top-right corner that comes to full strength on hover or focus. It's faint on purpose, and so is the photo credit under a print (70% opacity): the words and photos are the point, and neither of these should pull the eye from them. Once an entry has reactions, the badge becomes up to three stickers (2.1rem) piled −8° / 6° / −4° and overlapping by 0.85rem, with the most-used on top. The total sits on a Post-it Yellow tape scrap in one of three clip-path cuts. The picker is a torn cream strip hanging under the badge, taped at both corners with Post-it Yellow scraps. Its stickers scale up and tilt on hover. Errors appear as a small italic cream note under the badge.
+The empty badge is a faint (65% opacity) add-reaction icon in the card's top-right corner that comes to full strength on hover or focus. It's faint on purpose, and so is the photo credit under a print (70% opacity): the words and photos are the point, and neither of these should pull the eye from them. Once an entry has reactions, the badge becomes up to three stickers (2.1rem) piled −8° / 6° / −4° and overlapping by 0.85rem, with the most-used on top. The total sits on a Post-it Yellow tape scrap in one of three clip-path cuts. The picker is a torn cream strip hanging under the badge, taped at both corners with Post-it Yellow scraps. Its stickers sit 0.4rem apart in 2.75rem slots, so a thumb lands on the right one, and they scale up and tilt on hover. A sticker you left yourself is ringed in ink, off-round like the biro ring on the calendar, and a second tap takes it back. Errors appear as a small italic cream note under the badge.
 
 ### Navigation
 The wordmark sits on the left: "The Towner" in serif, then an italic "Godpawrents" on a Post-it Yellow tape tag rotated −2°, which straightens on hover. On the right are two outlined pills, Calendar and Guests; each gets inked on hover, and lime with the ink line already drawn marks the current page. Below them is a 1.5px Pencil Rule. Focus shows a 2px ink ring offset onto paper.
 
 ### Day Strip
-A sticky, horizontally scrolling row of outlined day chips on translucent paper. Hover inks the chip like any outlined chip; the active day turns lime with a lime border.
+A sticky, horizontally scrolling row of outlined day chips on translucent paper. Hover inks the chip like any outlined chip; the active day turns lime with a lime border. In a diary of more than one day, each day's rule ends with its entry count in Label type, and the diary closes with two outlined chips: "Back to the top" and "Everyone who's stayed".
 
 The exit chip (`day-chip--exit`) is the same pill filled with ink, paper text, a size up (14px). It's the homepage's way into a dog's full diary, sitting under today's entries, and it hovers moss.
 
@@ -293,7 +295,7 @@ Rain and shimmer stop while the hero is scrolled out of sight. Under `prefers-re
 
 ### Do:
 - **Do** build new surfaces from paper objects: a card, a print on a mat, a torn slip, a scrap of tape, a sticker.
-- **Do** give every new card or print a small tilt (±0.4°–2°) and keep it on hover. Straighten only small things, with the 200ms `cubic-bezier(0.16, 1, 0.3, 1)` ease; a big card turning looks wonky. The calendar doesn't move on hover at all, since its sheets and polaroids are taped down. A focus ring still shows.
+- **Do** give every new card or print a small tilt (±0.4°–2°) and keep it on hover. Straighten only small things, with the 200ms `cubic-bezier(0.16, 1, 0.3, 1)` ease; a big card turning looks wonky. The calendar doesn't move on hover at all, since its sheets and polaroids are taped down. A focus ring still shows. A tape strip opens that dog's diary on a tap, and the first sheet with a stay prints a key in Label type under its weeks: Here now, Coming up, Gone home.
 - **Do** take saturated colour from the guest's `bgColor` and derive tints with `diarySkin()` instead of inventing new colours.
 - **Do** keep entrances one-shot (520–620ms, same ease, 90ms stagger), and turn every animation off under `prefers-reduced-motion`.
 - **Do** give small controls an invisible `::before` hit area rather than enlarging them.
