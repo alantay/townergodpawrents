@@ -13,6 +13,16 @@ stays:
     checkOut: 2026-10-12
 ---
 
+## 12 Oct
+
+### 7:55am
+
+<!-- entry-id: e077 -->
+
+We gave Bobbi a few kibbles in the morning, hoping she would eat better. She only ate a few, so we used the rest to turn her into Phua Chu Kang.
+
+![Bobbi with three pieces of kibble arranged above her nose](./bobbi/bobbi-phua-chu-kang.jpg)
+
 ## 11 Oct
 
 ### 9:30pm
