@@ -308,7 +308,7 @@ let skinIndex = 0;
                   <div class="flex items-center gap-2">
                     <span class="diary-dot" style={`background:${sk.accent}`}></span>
                     <div class="font-semibold text-xs tracking-[0.08em] uppercase" style={`color:${sk.accent}`}>
-                      {e.time}{e.with.length > 0 && ` · with ${e.with.map(nameOf).join(" & ")}`}
+                      {e.label ?? e.time}{e.with.length > 0 && ` · with ${e.with.map(nameOf).join(" & ")}`}
                     </div>
                     <span class="new-tag" data-entry-key={`${day.iso} ${e.time}`} hidden>New</span>
                   </div>
@@ -323,7 +323,7 @@ let skinIndex = 0;
                         poster={video.poster}
                         controls
                         preload="metadata"
-                        aria-label={video.alt || `${name}, ${day.label} ${e.time}`}
+                        aria-label={video.alt || `${name}, ${day.label} ${e.label ?? e.time}`}
                         class="print-media"
                         style={`aspect-ratio:${video.width}/${video.height}`}
                       />
@@ -344,7 +344,7 @@ let skinIndex = 0;
                       >
                         <Image
                           src={prints[0].img}
-                          alt={prints[0].alt || `${name}, ${day.label} ${e.time}`}
+                          alt={prints[0].alt || `${name}, ${day.label} ${e.label ?? e.time}`}
                           width={Math.min(prints[0].img.width, 1160)}
                           loading="lazy"
                           decoding="async"
@@ -367,7 +367,7 @@ let skinIndex = 0;
                         >
                           <Image
                             src={p.img}
-                            alt={p.alt || `${name}, ${day.label} ${e.time}`}
+                            alt={p.alt || `${name}, ${day.label} ${e.label ?? e.time}`}
                             width={Math.min(p.img.width, 1160)}
                             loading="lazy"
                             decoding="async"

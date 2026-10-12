@@ -33,6 +33,7 @@ Add to this list whenever Alan reacts to a line, with the line itself as the exa
 - Prefers for Tyrion: "Keeper of the Ball" with "loves a game of fetch, skips the returning part", over the Lannister debts line.
 - Likes: the deadpan "Rare sighting, caught on camera." twist on Guapo's playing-outside video.
 - Prefers "chilling" over "lepak" in new writing.
+- Chose three entry labels: "Throwback", "Thoughts", "Fun fact". Passed on "Confession", "Overheard", "House rule", "Lesson learnt" and "Pawrents say" for now.
 - Dislikes: "lah" anywhere ("sofa's free lah", "Steady lah, too many taps").
 - Dislikes: "Who's been on our sofa, and what they got up to." (reads odd). Chose "A diary of whoever's on our sofa." for the site description.
 - Dislikes: "So the neighbours know why we keep turning down dinner." (forced joke). Chose "Furcast" (over "Fur forecast") / "When the sofa needs extra vacuuming, and when it doesn't." for the calendar. Heading and subline shouldn't repeat words.

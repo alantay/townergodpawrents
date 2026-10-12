@@ -51,3 +51,12 @@ test("an individual homepage entry also has a name link and a plain timestamp", 
   assert.ok(html.includes(">5:55pm · <a "));
   assert.ok(html.includes("Bobbi&rsquo;s full diary"));
 });
+
+test("a labelled homepage entry shows its label, not its time", () => {
+  const html = render([{
+    id: "bobbi", name: "Bobbi", bgColor: "#fff",
+    entries: [{ id: "e075", time: "9:30pm", label: "Throwback", mins: 1290, text: "Twinning.", media: [], withGuests: [] }],
+  }], "2026-10-11");
+  assert.ok(html.includes(">Throwback · <a "));
+  assert.ok(!html.includes("9:30pm"));
+});

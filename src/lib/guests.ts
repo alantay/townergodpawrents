@@ -48,6 +48,9 @@ export interface DiaryEntry {
   with: string[];
   /** Small print under the entry, from `<!-- credit: Music: ... -->`. */
   credit?: string;
+  /** Shown in place of the time, from `<!-- label: Throwback -->`. The time
+   * still orders the entry and keys its "New" tag. */
+  label?: string;
   /** Set on a crossPost copy: the guest whose file the entry is written in.
    * Reactions stay keyed to that guest, so both diaries share one count. */
   from?: string;
@@ -207,6 +210,7 @@ const DAY_RE = /^(\d{1,2})\s+([A-Za-z]{3,})$/;
 const ENTRY_ID_RE = /<!--\s*entry-id:\s*([a-z0-9-]+)\s*-->/g;
 const WITH_RE = /<!--\s*with:\s*([a-z0-9,\s-]*?)\s*-->/g;
 const CREDIT_RE = /<!--\s*credit:\s*([\s\S]*?)\s*-->/;
+const LABEL_RE = /<!--\s*label:\s*(.+?)\s*-->/;
 
 /**
  * Turns a `## 13 Sep` divider into a full date by finding the stay that
@@ -295,13 +299,14 @@ export function parseDiary(body: string, stays: Stay[], guestId: string): DiaryD
     if (media.length > 4) {
       throw new Error(`[guests] ${guestId}: entry "${title}" has ${media.length} prints — use at most four`);
     }
-    const text = raw.replace(IMAGE_RE, " ").replace(ENTRY_ID_RE, " ").replace(WITH_RE, " ").replace(CREDIT_RE, " ").trim()
+    const text = raw.replace(IMAGE_RE, " ").replace(ENTRY_ID_RE, " ").replace(WITH_RE, " ").replace(CREDIT_RE, " ").replace(LABEL_RE, " ").trim()
       .split(/\n\s*\n/).map((p) => p.trim().replace(/\s+/g, " ")).filter(Boolean).join("\n\n");
     const withIds = [...raw.matchAll(WITH_RE)].flatMap((m) => m[1].split(",").map((w) => w.trim()).filter(Boolean));
 
     const credit = raw.match(CREDIT_RE)?.[1];
+    const label = raw.match(LABEL_RE)?.[1];
 
-    if (text || media.length > 0) current.entries.push({ id, time: title, text, media, with: withIds, ...(credit && { credit }) });
+    if (text || media.length > 0) current.entries.push({ id, time: title, text, media, with: withIds, ...(credit && { credit }), ...(label && { label }) });
   }
 
   // Days newest first, whatever order they were written in. Entries keep the
