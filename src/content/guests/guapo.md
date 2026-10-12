@@ -17,6 +17,18 @@ stays:
     checkOut: 2027-01-03
 ---
 
+## 12 Oct
+
+### 9:18am
+
+<!-- entry-id: e078 -->
+<!-- with: bobbi -->
+<!-- label: Throwback -->
+
+Coming home to two dogs. We had to keep Guapo and Bobbi apart while they greeted us, in case of Guapo’s resource guarding.
+
+![Guapo and Bobbi getting pats separately as we arrive home](./guapo/guapo-home-greeting.mp4)
+
 ## 11 Oct
 
 ### 10:40pm
