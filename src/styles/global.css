@@ -427,6 +427,39 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   filter: drop-shadow(0 4px 3px rgb(30 32 25 / 0.16));
 }
 
+#hero-name.hero-pack-name {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(48px, 11vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: normal;
+  text-wrap: balance;
+}
+
+#hero-photos.scrapbook-pack {
+  gap: 0;
+  padding-bottom: 14px;
+}
+
+.scrapbook-pack > button {
+  rotate: -3deg;
+  transform-origin: bottom center;
+  animation: none;
+}
+
+.scrapbook-pack > button + button {
+  margin-left: -5%;
+  rotate: 3deg;
+}
+
+.scrapbook-pack > button:nth-child(3) { rotate: -2deg; }
+
+.scrapbook-pack img {
+  object-position: bottom;
+  filter: drop-shadow(0 4px 3px rgb(30 32 25 / 0.16));
+}
+
 .diary-timeline {
   position: relative;
   padding-left: 1.1rem;
