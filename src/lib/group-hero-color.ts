@@ -28,6 +28,8 @@ export function groupHeroColor(guests: { id: string; bgColor: string }[], date: 
     : h < 70 ? "ochre" : h < 170 ? "green" : h < 250 ? "blue" : "plum";
   const ownFamilies = ownHues.map(family);
   const distinct = palette.filter((colour) => separation(colour) >= 60 && !ownFamilies.includes(family(hue(colour)!)));
+  // Sofa Green is the sofa's own colour, so it wins whenever it is clear of every guest.
+  if (distinct.includes("#5F6E4F")) return "#5F6E4F";
   // This pair gets rust, which separates from Guapo's green and Luna's plum.
   if (key === '["guapo","luna"]' && distinct.includes("#A34A2E")) return "#A34A2E";
   let hash = 2166136261;

@@ -54,6 +54,13 @@ test("real guest combinations vary and every selectable shade has readable cream
   }
 });
 
+test("Sofa Green wins whenever it is clear of both dogs", () => {
+  assert.equal(colourFor(["luna", "tiny"]), "#5F6E4F");
+  assert.equal(colourFor(["luna", "tyrion"]), "#5F6E4F");
+  assert.notEqual(colourFor(["luna", "hugo-and-luffy"]), "#5F6E4F");
+  assert.notEqual(colourFor(["guapo", "tiny"]), "#5F6E4F");
+});
+
 test("nearby hue families are avoided, including shorthand guest colours", () => {
   const colour = groupHeroColor([{ id: "one", bgColor: "#369" }, { id: "two", bgColor: "#755A83" }], "2026-10-13");
   assert.ok(["#5F6E4F", "#A34A2E", "#7A5C24"].includes(colour));
