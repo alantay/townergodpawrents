@@ -899,6 +899,21 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         el.classList.add(cls);
       }
 
+      function restHero(card) {
+        var visible = true;
+        function update() {
+          card.classList.toggle("hero-resting", !visible || document.hidden);
+        }
+        document.addEventListener("visibilitychange", update);
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver(function (entries) {
+            visible = entries[0].isIntersecting;
+            update();
+          }).observe(card);
+        }
+        update();
+      }
+
       // A torn slip set down on the hero, swapped for a fresh one each time.
       function heroNote(text) {
         var card = document.getElementById("hero-card");
@@ -1139,6 +1154,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           // Tap the sofa to see what the last dogs left behind.
           var found = Math.floor(Math.random() * FOUND.length);
           document.getElementById("vacancy-photo").addEventListener("click", function () {
+            replay(this, "sofa-rummage");
             heroNote("Found: " + FOUND[found++ % FOUND.length]);
           });
         } else {
@@ -1151,12 +1167,14 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             var b = document.createElement("button");
             b.type = "button";
             b.ariaLabel = "Pat " + d.name;
-            b.className = "block flex-1 min-w-0 h-full animate-drift cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime";
+            b.className = "pat-dog relative block flex-1 min-w-0 h-full animate-drift cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime";
+            b.innerHTML = '<span class="pat-marks" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 27C12 23 4 18 4 11a7 7 0 0 1 12-4 7 7 0 0 1 12 4c0 7-8 12-12 16Z"/></svg><svg viewBox="0 0 32 32"><path d="M16 27C12 23 4 18 4 11a7 7 0 0 1 12-4 7 7 0 0 1 12 4c0 7-8 12-12 16Z"/></svg><svg viewBox="0 0 32 32"><path d="M16 27C12 23 4 18 4 11a7 7 0 0 1 12-4 7 7 0 0 1 12 4c0 7-8 12-12 16Z"/></svg></span>';
             var lines = ["Woof!"].concat(d.sounds, d.whenCalled || "Heard you. Busy.");
             var last;
             b.addEventListener("click", function () {
-              var img = b.querySelector("img");
+              var img = b.querySelector("img, .undeveloped");
               if (img) replay(img, "dog-hop");
+              replay(b.querySelector(".pat-marks"), "pat-marks--playing");
               var fresh = lines.filter((l) => l !== last);
               last = last ? fresh[Math.floor(Math.random() * fresh.length)] : "Woof!";
               heroNote((result.live.length > 1 ? d.name + ": " : "") + last);
@@ -1175,6 +1193,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           appEl.prepend(note);
         }
         appEl.hidden = false;
+        restHero(document.getElementById("hero-card"));
         addSky(today);
 
         var liveIds = result.live.map((d) => d.id);
@@ -1213,4 +1232,89 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       }
     })();
   </script>
+
+  <style is:global>
+    #home-app .pat-dog :is(img, .undeveloped) {
+      transform-origin: bottom center;
+      transition: scale 220ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #home-app .pat-dog:focus-visible :is(img, .undeveloped) { scale: 1.025; }
+
+    @media (hover: hover) {
+      #home-app .pat-dog:hover :is(img, .undeveloped) { scale: 1.025; }
+    }
+
+    #past-preview-app .dog-card img {
+      transform-origin: bottom center;
+      transition: rotate 250ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #past-preview-app .dog-card:focus-visible img { rotate: -4deg; }
+
+    @media (hover: hover) {
+      #past-preview-app .dog-card:hover img { rotate: -4deg; }
+    }
+
+    #home-app .pat-marks {
+      position: absolute;
+      inset: 20% 0 auto;
+      height: 40px;
+      z-index: 2;
+      pointer-events: none;
+      color: var(--color-cream);
+    }
+    #home-app .pat-marks svg {
+      position: absolute;
+      left: 50%;
+      width: 28px;
+      height: 28px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0;
+      --heart-x: -55px;
+      --heart-turn: -16deg;
+    }
+    #home-app .pat-marks svg:nth-child(2) {
+      --heart-x: 0px;
+      --heart-turn: 8deg;
+      animation-delay: 70ms;
+    }
+    #home-app .pat-marks svg:nth-child(3) {
+      --heart-x: 45px;
+      --heart-turn: 20deg;
+      animation-delay: 140ms;
+    }
+    #home-app .pat-marks--playing svg {
+      animation-name: pat-affection;
+      animation-duration: 950ms;
+      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+      animation-fill-mode: both;
+    }
+    @keyframes pat-affection {
+      0% { opacity: 0; transform: translate(-50%, 8px) scale(0.6); }
+      20%, 55% { opacity: 1; }
+      100% { opacity: 0; transform: translate(calc(-50% + var(--heart-x)), -56px) rotate(var(--heart-turn)); }
+    }
+    #home-app .sofa-rummage {
+      animation: sofa-rummage 460ms ease-out;
+      transform-origin: bottom center;
+    }
+    @keyframes sofa-rummage {
+      0%, 100% { transform: none; }
+      25% { transform: rotate(-1.5deg) translateY(2px); }
+      60% { transform: rotate(1deg); }
+    }
+    #home-app .hero-resting,
+    #home-app .hero-resting * { animation-play-state: paused; }
+
+    @media (prefers-reduced-motion: reduce) {
+      #home-app .pat-dog:is(:hover, :focus-visible) :is(img, .undeveloped),
+      #past-preview-app .dog-card:is(:hover, :focus-visible) img { scale: none; rotate: none; }
+      #home-app .pat-marks--playing svg { animation: none; }
+      #home-app .sofa-rummage { animation: none; }
+    }
+  </style>
 </Layout>

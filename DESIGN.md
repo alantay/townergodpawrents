@@ -126,6 +126,8 @@ The page is one narrow column (700px) read on a phone. Each dog is the main subj
 
 Motion is one-shot and physical. Cards arrive as if set down. Hover nudges a card up without straightening it: turning something big looks wonky, so only small things (the wordmark tag, a one-line link card) straighten. Once a card has arrived it stays put, apart from a couple of slow idle drifts on the cutout and the "Here today" tag. Those two loops are deliberate: they keep the page wacky and light, so don't stop them. The homepage hero also wears the day's weather (see Weather).
 
+On the homepage, a pat sends three cream outline hearts up from that dog's portrait alongside its hop and handwritten reply. Repeated pats replay the same bounded marks. Searching the empty sofa gives it a brief rocking rummage before its found-object note. Hero portraits lean closer on hover or keyboard focus; past-guest portraits tilt within their cards. These touches stay on the homepage. Reduced motion keeps the written replies and removes the new spatial effects. Hero CSS animations rest while offscreen or in a hidden tab and resume when visible.
+
 **Key Characteristics:**
 - Warm paper ground, ink-green text, one lime accent, post-it yellow tape
 - Instrument Serif for names and headings; Archivo for everything functional
