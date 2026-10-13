@@ -438,22 +438,35 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 }
 
 #hero-photos.scrapbook-pack {
-  gap: 0;
-  padding-bottom: 14px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: clamp(80px, 20vw, 120px);
+  gap: 0 16px;
+  margin-inline: 0;
+  margin-top: 36px;
+  padding-bottom: 24px;
 }
 
 .scrapbook-pack > button {
+  grid-column: span 2;
+  grid-row: span 2;
   rotate: -3deg;
   transform-origin: bottom center;
   animation: none;
 }
 
 .scrapbook-pack > button + button {
-  margin-left: -5%;
   rotate: 3deg;
 }
 
-.scrapbook-pack > button:nth-child(3) { rotate: -2deg; }
+.scrapbook-pack > button:nth-child(1) { grid-area: 1 / 1 / span 2 / span 2; }
+.scrapbook-pack > button:nth-child(2) { grid-area: 1 / 3 / span 2 / span 2; }
+
+.scrapbook-pack > button:nth-child(3) {
+  grid-column: 2 / span 2;
+  grid-row: 2 / span 2;
+  rotate: -2deg;
+}
 
 .scrapbook-pack img {
   object-position: bottom;

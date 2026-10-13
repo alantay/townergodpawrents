@@ -505,7 +505,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           : stacked
           ? "text-[clamp(56px,17vw,96px)] mt-[30px] fit-headline--clear"
           : "text-[clamp(62px,19vw,120px)]";
-        var photoH = live.length === 2 ? "clamp(240px, 60vw, 320px)" : pair ? "clamp(160px, 42vw, 250px)" : "310px";
+        var photoH = live.length === 2 ? "clamp(240px, 60vw, 320px)" : pair ? "auto" : "310px";
         var leaving = live.every((d) => goingHome(d, today));
 
         var chips = [];
