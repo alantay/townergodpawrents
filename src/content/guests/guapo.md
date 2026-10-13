@@ -19,6 +19,14 @@ stays:
 
 ## 13 Oct
 
+### 9:40am
+
+<!-- entry-id: e080 -->
+
+Guapo finally got his rawhide bone back after Bobbi left.
+
+![Guapo lying on the wooden floor, holding and chewing his rawhide bone](./guapo/guapo-rawhide-bone-back.mp4)
+
 ### 6:45am
 
 <!-- entry-id: e079 -->
