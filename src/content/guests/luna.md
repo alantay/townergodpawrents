@@ -16,6 +16,14 @@ stays:
 
 ## 13 Oct
 
+### 10:34pm
+
+<!-- entry-id: e002 -->
+
+Itsy bitsy skirt.
+
+![Luna lying on the floor in a tiny frilly skirt, panting and looking off to the side](./luna/luna-itsy-bitsy-skirt.jpg)
+
 ### 8:45pm
 
 <!-- entry-id: e001 -->
