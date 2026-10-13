@@ -19,6 +19,12 @@ stays:
 
 ## 13 Oct
 
+### 4:45pm
+
+<!-- entry-id: e081 -->
+
+The handsome boy just went home with his owner. We hope he didn’t gain too much weight from all the treats we hid around the house for him to hunt. Or from the spider meals...
+
 ### 9:40am
 
 <!-- entry-id: e080 -->
