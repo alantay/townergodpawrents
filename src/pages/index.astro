@@ -4,6 +4,7 @@ import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import Cutout from "../components/Cutout.astro";
 import { cutoutWidth } from "../lib/cutout-width";
+import { groupHeroColor } from "../lib/group-hero-color";
 import { Image } from "astro:assets";
 import sofaCutout from "../assets/sofa-cutout-v2.png";
 import portrait from "../assets/alan-weiwen-portrait.jpg";
@@ -40,7 +41,7 @@ import {
 // themselves. Anything bigger is still mirrored by hand in the script below.
 const sharedJs = `window.__tgpShared = {
   SOFA_GREEN: "${SOFA_GREEN}", PRINT_MAX_HEIGHT: ${PRINT_MAX_HEIGHT}, PRINT_MAT: ${PRINT_MAT}, VIDEO_MAX_HEIGHT: ${VIDEO_MAX_HEIGHT},
-  luma: ${luma}, diaryTextHtml: ${diaryTextHtml}, tilt: ${tilt},
+  groupHeroColor: ${groupHeroColor}, luma: ${luma}, diaryTextHtml: ${diaryTextHtml}, tilt: ${tilt},
   printTilt: ${printTilt}, noteTilt: ${noteTilt}, videoNoteTilt: ${videoNoteTilt}, fitsPrintMat: ${fitsPrintMat},
 };`;
 
@@ -484,7 +485,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       // ---- build hero + today-entries markup for the live states ----
       function heroLiveHTML(live, today) {
         var pair = live.length > 1;
-        var color = pair ? SOFA_GREEN : live[0].bgColor;
+        var color = pair ? S.groupHeroColor(live.map((g) => g.id), today) : live[0].bgColor;
         var dogs = dogsIn(live);
         // Two or more dogs: one name per line, starting below the "Here today"
         // pill, so each name gets the full width instead of shrinking to fit
@@ -635,8 +636,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         if (pair) raw.sort((a, b) => b.mins - a.mins);
         var cards = raw
           .map((e, i) => {
-            // A shared entry wears Sofa Green, the two-dog hero's colour,
-            // rather than either dog's.
+            // Shared diary entries keep Sofa Green rather than either dog's colour.
             var sk = e.shared ? guestSkins(SOFA_GREEN)[1] : skin(e.bgColor, e.id);
             var darkSkin = luma(sk.bg) < 110;
             var video = e.media.filter((m) => m.kind === "video")[0];
