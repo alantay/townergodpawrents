@@ -20,4 +20,4 @@ stays:
 
 <!-- entry-id: e001 -->
 
-Luna came charging in, cute skirt and all, and went straight for the blue squirrel plushies. So unladylike. When her owners left, she sang her usual symphony of whines.
+Luna came charging in and went straight for the blue squirrel plushies. Cute skirt, very unladylike behaviour. When her owners left, she sang her usual symphony of whines.
