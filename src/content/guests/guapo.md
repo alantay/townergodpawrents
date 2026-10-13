@@ -17,6 +17,16 @@ stays:
     checkOut: 2027-01-03
 ---
 
+## 13 Oct
+
+### 6:45am
+
+<!-- entry-id: e079 -->
+
+Guapo loves to roll in the grass.
+
+![Guapo rolling on his back in the grass](./guapo/guapo-grass-roll.mp4)
+
 ## 12 Oct
 
 ### 9:18am
