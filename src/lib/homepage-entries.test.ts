@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
+import { groupHeroColor } from "./group-hero-color.ts";
 import { diaryTextHtml, SOFA_GREEN } from "./guests.ts";
 
 const source = readFileSync(new URL("../pages/index.astro", import.meta.url), "utf8");
@@ -10,8 +11,8 @@ const render = runInNewContext(
   {
     dayOn: (guest: { entries: unknown[] }) => ({ entries: guest.entries }),
     esc: (value: string) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll('"', "&quot;"),
-    guestSkins: () => [{}, { bg: SOFA_GREEN, fg: "#fff", accent: "#fff" }],
-    SOFA_GREEN,
+    guestSkins: (base: string) => [{}, { bg: base, fg: "#fff", accent: "#fff" }],
+    groupHeroColor,
     diaryTextHtml,
     skin: () => ({ bg: "#fff", fg: "#000", accent: "#000" }),
     luma: () => 100,
@@ -59,4 +60,15 @@ test("a labelled homepage entry shows its label, not its time", () => {
   }], "2026-10-11");
   assert.ok(html.includes(">Throwback · <a "));
   assert.ok(!html.includes("9:30pm"));
+});
+
+test("a shared homepage entry wears its dogs' group colour", () => {
+  const shared = (other: { id: string; name: string; bgColor: string }) => ({
+    id: "e080", time: "9:00am", mins: 540, text: "Both.", media: [], withGuests: [other],
+  });
+  const guapo = { id: "guapo", name: "Guapo", bgColor: "#3F6655" };
+  const withBobbi = render([{ ...guapo, entries: [shared({ id: "bobbi", name: "Bobbi", bgColor: "#8E4A5C" })] }], "2026-10-10");
+  assert.ok(withBobbi.includes("background:" + SOFA_GREEN));
+  const withLuna = render([{ ...guapo, entries: [shared({ id: "luna", name: "Luna", bgColor: "#755A83" })] }], "2026-10-29");
+  assert.ok(withLuna.includes("background:#A34A2E"));
 });

@@ -19,7 +19,6 @@ import {
   dateStr,
   diarySkin,
   luma,
-  SOFA_GREEN,
   tilt,
   printTilt,
   noteTilt,
@@ -276,9 +275,7 @@ let skinIndex = 0;
           <div class="mt-4 grid gap-5">
             {day.entries.map((e) => {
               const i = skinIndex++;
-              // Shared diary entries keep Sofa Green rather than this dog's colour.
-              const shared = e.with.length > 0;
-              const sk = shared ? diarySkin(SOFA_GREEN, 1) : diarySkin(bgColor, i);
+              const sk = diarySkin(bgColor, i);
               const darkSkin = luma(sk.bg) < 110;
               const prints = e.media.map((m) => resolveDiaryMedia(m, entry.id, `${day.label} ${e.time}`));
               const video = prints.find((p) => p.kind === "video");
