@@ -13,3 +13,11 @@ stays:
   - checkIn: 2026-11-26
     checkOut: 2026-12-03
 ---
+
+## 13 Oct
+
+### 8:45pm
+
+<!-- entry-id: e001 -->
+
+Luna came charging in, cute skirt and all, and went straight for the blue squirrel plushies. So unladylike. When her owners left, she sang her usual symphony of whines.
