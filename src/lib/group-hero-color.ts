@@ -6,6 +6,8 @@ export function groupHeroColor(guestIds: string[], date: string): string {
   // Existing scrapbook shades, all dark enough for the hero's cream text.
   const palette = ["#5F6E4F", "#39617E", "#755A83", "#8E4A5C", "#A34A2E", "#7A5C24"];
   const key = JSON.stringify([...new Set(guestIds)].sort());
+  // Alan's chosen shade for this pair; the date cutoff still applies above.
+  if (key === '["guapo","luna"]') return "#755A83";
   let hash = 2166136261;
   for (let i = 0; i < key.length; i++) {
     hash = Math.imul(hash ^ key.charCodeAt(i), 16777619) >>> 0;

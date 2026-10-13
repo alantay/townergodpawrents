@@ -4,6 +4,12 @@ import { groupHeroColor } from "./group-hero-color.ts";
 
 const colourFor = (ids: string[]) => groupHeroColor(ids, "2026-10-13");
 
+test("Guapo and Luna keep their chosen plum shade from the rollout onward", () => {
+  assert.equal(colourFor(["luna", "guapo"]), "#755A83");
+  assert.equal(groupHeroColor(["guapo", "luna"], "2027-01-01"), "#755A83");
+  assert.equal(groupHeroColor(["guapo", "luna"], "2026-10-12"), "#5F6E4F");
+});
+
 test("past days keep Sofa Green and the palette starts on 13 October", () => {
   assert.equal(groupHeroColor(["guapo", "bobbi"], "2026-10-12"), "#5F6E4F");
   assert.equal(groupHeroColor(["guapo", "luna"], "2026-09-30"), "#5F6E4F");
