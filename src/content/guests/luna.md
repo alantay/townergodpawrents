@@ -24,8 +24,6 @@ Itsy bitsy skirt.
 
 ![Luna lying on the floor in a tiny frilly skirt, panting and looking off to the side](./luna/luna-itsy-bitsy-skirt.jpg)
 
-![Luna seen from above, standing with the frilly skirt around her hips](./luna/luna-skirt-from-above.jpg)
-
 ### 8:45pm
 
 <!-- entry-id: e001 -->
