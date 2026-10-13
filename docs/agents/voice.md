@@ -45,4 +45,4 @@ Add to this list whenever Alan reacts to a line, with the line itself as the exa
 - Prefers for Milk: "never without a leaf in her mouth, sometimes a stick too" over "..., downsized from sticks" (keep it plain that she still does sticks).
 - Prefers for Guapo & Bobbi's group tagline: "social experiment: the school bully and the timid prefect", over "a handsome delinquent and a timid class monitor" (and dropped "that skips school" from that one).
 - Chose for Guapo & Luna's group tagline, in his own words: "the aloof, dashing bad boy and the submissive fair maiden".
-- Chose for Luna, Tiny & Tyrion's group badge: "Fur is coming". The Game of Thrones theme was his idea, after Tyrion's name.
+- Chose for Luna, Tiny & Tyrion's group hero: badge "Fur is coming", tagline "the breaker of toys, the queen of fetch and a small lord with big opinions" (he put the breaker of toys first). The Game of Thrones theme was his idea, after Tyrion's name. Passed on "when you play the game of fetch, you win or you never see the ball again".
