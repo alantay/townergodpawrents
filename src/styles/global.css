@@ -440,6 +440,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 #hero-photos.scrapbook-pack {
   display: block;
   position: relative;
+  isolation: isolate;
   aspect-ratio: 1.45;
   margin-inline: 0;
   margin-top: 36px;
