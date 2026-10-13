@@ -788,8 +788,14 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   z-index: 1;
   overflow: hidden;
   pointer-events: none;
+  opacity: 0.7;
   mask-image: linear-gradient(to top, #000 30%, transparent 52%);
   background: linear-gradient(to top, rgb(var(--smog) / calc(var(--haze) * 0.5)), rgb(var(--smog) / calc(var(--haze) * 0.2)));
+}
+@media (max-width: 450px) {
+  .haze {
+    mask-image: linear-gradient(to top, #000 12%, transparent 35%);
+  }
 }
 .haze i {
   position: absolute;

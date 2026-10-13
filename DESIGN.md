@@ -285,7 +285,7 @@ The exit chip (`day-chip--exit`) is the same pill filled with ink, paper text, a
 ### Weather
 The homepage hero wears one weather at a time, read from NEA for Kallang (which covers Towner). The diary and every other page stay dry.
 
-- **Haze** when the central 24-hour PSI is over 100: three layers of grey smog (`--smog: 192 195 198`) drift across the dogs and thin out before the chips, so the name stays clear. It thickens with the reading, from 0.4 just over 100 to full strength at about 230.
+- **Haze** when the central 24-hour PSI is over 100: three layers of grey smog (`--smog: 192 195 198`) drift across the dogs and thin out before the chips, so the name stays clear. Its intensity rises from 0.4 just over 100 to 1 at about 230, with the whole effect held at 70% opacity to keep the dogs' expressions clear. On screens up to 450px wide, it fades out 35% of the way up the card so it stays below the ears in the taller phone layout.
 - **Rain** when the 2-hour forecast says showers: streaks and drops drawn on a canvas over the hero, heavier when the forecast says heavy or thundery. Thundery showers add a pale double flash (`#f4f6ff`) every 7 seconds.
 - **Heat** at 33°C or more: the cutouts shimmer like a road in the sun, with a warm glow coming up from the bottom of the card.
 
