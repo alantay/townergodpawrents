@@ -153,7 +153,7 @@ const guestsForClient = await Promise.all(
               label: e.label ?? null,
               mins: entryMinutes(e.time),
               from: e.from ?? null,
-              withGuests: e.with.map((id) => ({ id, name: nameOf(id) })),
+              withGuests: e.with.map((id) => ({ id, name: nameOf(id), bgColor: guests.find((g) => g.id === id)!.bgColor })),
               text: e.text,
               credit: e.credit ?? null,
               media: await Promise.all(e.media.map(async (m) => {
@@ -291,7 +291,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
     (function () {
       // ---- handed over from src/lib/guests.ts as source, so they can't drift ----
       var S = window.__tgpShared;
-      var SOFA_GREEN = S.SOFA_GREEN, luma = S.luma, diaryTextHtml = S.diaryTextHtml, tilt = S.tilt;
+      var SOFA_GREEN = S.SOFA_GREEN, groupHeroColor = S.groupHeroColor, luma = S.luma, diaryTextHtml = S.diaryTextHtml, tilt = S.tilt;
       var PRINT_MAX_HEIGHT = S.PRINT_MAX_HEIGHT, PRINT_MAT = S.PRINT_MAT, VIDEO_MAX_HEIGHT = S.VIDEO_MAX_HEIGHT;
       var printTilt = S.printTilt, noteTilt = S.noteTilt, videoNoteTilt = S.videoNoteTilt, fitsPrintMat = S.fitsPrintMat;
 
@@ -628,7 +628,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             // A shared entry already shows under the dog it's written for,
             // so skip the copy when that dog is here too.
             if (e.from && live.some((o) => o.id === e.from)) return;
-            var participants = [{ id: d.id, name: d.name }].concat(e.withGuests);
+            var participants = [{ id: d.id, name: d.name, bgColor: d.bgColor }].concat(e.withGuests);
             raw.push({ entryId: e.id, time: e.time, shown: e.label || e.time, mins: e.mins, text: e.text, credit: e.credit, media: e.media, who: participants.map((g) => g.name).join(" & "), participants, shared: e.withGuests.length > 0, owner: e.from || d.id, id: d.id, bgColor: d.bgColor, key: today + " " + e.time });
           })
         );
@@ -637,10 +637,10 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         if (pair) raw.sort((a, b) => b.mins - a.mins);
         var cards = raw
           .map((e, i) => {
-            // Shared diary entries keep Sofa Green rather than either dog's colour.
-            // With two dogs in one list, each keeps to its two lightest skins
+            // A shared entry wears its dogs' group colour, the one their hero
+            // gets, rather than either dog's own. With two dogs in one list, each keeps to its two lightest skins
             // so the day doesn't jump between eight shades.
-            var sk = e.shared ? guestSkins(SOFA_GREEN)[1] : skin(e.bgColor, e.id, pair ? 2 : 4);
+            var sk = e.shared ? guestSkins(groupHeroColor(e.participants, today))[1] : skin(e.bgColor, e.id, pair ? 2 : 4);
             var darkSkin = luma(sk.bg) < 110;
             var video = e.media.filter((m) => m.kind === "video")[0];
             // A caption goes on the mat only when one print can hold it in a
