@@ -488,23 +488,24 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var pair = live.length > 1;
         var color = pair ? S.groupHeroColor(live, today) : live[0].bgColor;
         var dogs = dogsIn(live);
-        // Two or more dogs: one name per line, starting below the "Here today"
-        // pill, so each name gets the full width instead of shrinking to fit
-        // everyone on one line beside the pill.
+        // Pairs keep their big stacked names; larger groups wrap below the pill.
         var stacked = dogs.length > 1;
+        var pack = dogs.length > 2;
         var nameHTML = stacked
           ? dogs
               .map((n, i) => esc(n) + (i < dogs.length - 2 ? "," : i === dogs.length - 2 ? " &amp;" : ""))
-              .join("<br>")
+              .join(pack ? " " : "<br>")
           : esc(live[0].name);
         var group = (pair && groupHero[live.map((d) => d.id).sort().join("+")]) || {};
         var sub = pair
           ? group.tagline ? esc(group.tagline) : groupWord(dogs.length) + " dogs on the sofa. Humans on the floor."
           : esc(live[0].tagline);
-        var sizeClass = stacked
+        var sizeClass = pack
+          ? "hero-pack-name mt-[30px] fit-headline--clear"
+          : stacked
           ? "text-[clamp(56px,17vw,96px)] mt-[30px] fit-headline--clear"
           : "text-[clamp(62px,19vw,120px)]";
-        var photoH = live.length === 2 ? "clamp(240px, 60vw, 320px)" : pair ? "250px" : "310px";
+        var photoH = live.length === 2 ? "clamp(240px, 60vw, 320px)" : pair ? "auto" : "310px";
         var leaving = live.every((d) => goingHome(d, today));
 
         var chips = [];
@@ -542,7 +543,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             '<div id="hero-badge" class="absolute top-[18px] right-[18px] status-tag animate-wiggle">' +
             (leaving ? "Going home today" : "Here today") +
             "</div>" +
-            '<div class="w-full"><h1 class="fit-headline ' +
+            '<div class="w-full"><h1 class="' + (pack ? '' : 'fit-headline ') +
             sizeClass +
             ' max-w-full" id="hero-name">' +
             nameHTML +
@@ -553,7 +554,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             '<div class="mt-[14px] flex gap-2 flex-wrap">' +
             chipsHTML +
             "</div>" +
-            '<div id="hero-photos" class="flex gap-1.5 items-end -mx-2 mt-[18px]' + (live.length === 2 ? ' scrapbook-buddies' : '') + '" style="height:' +
+            '<div id="hero-photos" class="flex gap-1.5 items-end -mx-2 mt-[18px]' + (live.length === 2 ? ' scrapbook-buddies' : live.length > 2 ? ' scrapbook-pack' : '') + '" style="height:' +
             photoH +
             '"></div>' +
             "</div>",

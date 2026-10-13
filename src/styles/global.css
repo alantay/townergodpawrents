@@ -427,6 +427,70 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   filter: drop-shadow(0 4px 3px rgb(30 32 25 / 0.16));
 }
 
+#hero-name.hero-pack-name {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(48px, 11vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: normal;
+  text-wrap: balance;
+}
+
+#hero-photos.scrapbook-pack {
+  display: block;
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 1.45;
+  margin-inline: 0;
+  margin-top: 36px;
+  margin-bottom: 24px;
+}
+
+.scrapbook-pack > button {
+  position: absolute;
+  transform-origin: 50% 70%;
+  animation: none;
+}
+
+.scrapbook-pack > button:nth-child(1) {
+  left: 2%;
+  top: 22%;
+  width: 48%;
+  height: 78%;
+  rotate: -7deg;
+  z-index: 2;
+}
+
+.scrapbook-pack > button:nth-child(2) {
+  left: 29%;
+  top: 0;
+  width: 46%;
+  height: 76%;
+  rotate: 4deg;
+  z-index: 1;
+}
+
+.scrapbook-pack > button:nth-child(3) {
+  right: 0;
+  top: 41%;
+  width: 53%;
+  height: 59%;
+  rotate: 6deg;
+  z-index: 3;
+}
+
+@media (max-width: 450px) {
+  #hero-photos.scrapbook-pack {
+    aspect-ratio: 1.1;
+  }
+}
+
+.scrapbook-pack img {
+  object-position: bottom;
+  filter: drop-shadow(0 4px 3px rgb(30 32 25 / 0.16));
+}
+
 .diary-timeline {
   position: relative;
   padding-left: 1.1rem;
