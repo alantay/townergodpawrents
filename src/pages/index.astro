@@ -414,10 +414,11 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         ];
       }
       var skinIdxByGuest = {};
-      function skin(bgColor, id) {
+      // count is how many of the skins to cycle through, lightest first.
+      function skin(bgColor, id, count) {
         skinIdxByGuest[id] = skinIdxByGuest[id] || 0;
         var i = skinIdxByGuest[id]++;
-        return guestSkins(bgColor)[i % 4];
+        return guestSkins(bgColor)[i % count];
       }
       function printWidth(w, h, maxHeight) {
         return Math.round((maxHeight || PRINT_MAX_HEIGHT) * (w / h)) + PRINT_MAT * 2;
@@ -637,7 +638,9 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var cards = raw
           .map((e, i) => {
             // Shared diary entries keep Sofa Green rather than either dog's colour.
-            var sk = e.shared ? guestSkins(SOFA_GREEN)[1] : skin(e.bgColor, e.id);
+            // With two dogs in one list, each keeps to its two lightest skins
+            // so the day doesn't jump between eight shades.
+            var sk = e.shared ? guestSkins(SOFA_GREEN)[1] : skin(e.bgColor, e.id, pair ? 2 : 4);
             var darkSkin = luma(sk.bg) < 110;
             var video = e.media.filter((m) => m.kind === "video")[0];
             // A caption goes on the mat only when one print can hold it in a

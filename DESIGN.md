@@ -145,7 +145,7 @@ A sun-faded kitchen palette: oatmeal paper, deep olive-black ink one highlighter
 - **Red Biro** (`biro`): The pen on the calendar: the ring around today and the "busy sofa" note. Nowhere else.
 
 ### Secondary: the guest colour
-Each guest has a `bgColor` in its content frontmatter. The colour fills that dog's hero card. The diary then cycles through four skins mixed from it: a pale tint with ink text, the pure colour with cream text, a 38% ink-deepened version, and a 72% ink-deepened version.
+Each guest has a `bgColor` in its content frontmatter. The colour fills that dog's hero card. The diary then cycles through four skins mixed from it: a pale tint with ink text, the pure colour with cream text, a 38% ink-deepened version, and a 72% ink-deepened version. On the homepage, when more than one guest is staying, each dog keeps to the first two (pale tint and pure colour) so the merged list stays calm.
 
 Guest colours come from a fixed, reusable palette. Every one is mid-dark and slightly dusty, and cream text on it passes 5:1:
 
@@ -158,7 +158,7 @@ Guest colours come from a fixed, reusable palette. Every one is mid-dark and sli
 - **Canal Teal** `#2F6B6B`
 - **Monsoon Slate** `#4F5A66`
 
-Colours repeat across guests. Dates before 13 October 2026 keep the original Sofa Green hero. From that date, when multiple guest groups are staying, the homepage hero chooses a stable colour from Sofa Green `#5F6E4F`, blue `#39617E`, plum `#755A83`, rose `#8E4A5C`, rust `#A34A2E` and ochre `#7A5C24`. The selection excludes palette shades in either guest’s hue family or within 60 degrees of either guest’s own hue, then uses sorted guest IDs to pick a stable remaining shade. Collection order, dates and returning stays do not change it while guest colours stay the same. If a larger group exhausts the palette, it uses the shade with the greatest minimum hue separation. Different combinations can share a shade. Guapo & Luna prefer rust (`#A34A2E`) from the same cutoff, provided it still passes the hue-separation rule. A single guest group keeps its own colour, including a duo recorded together. Shared diary entries keep Sofa Green (always its pure-colour skin, cream text).
+Colours repeat across guests. Dates before 13 October 2026 keep the original Sofa Green hero. From that date, when multiple guest groups are staying, the homepage hero chooses a stable colour from Sofa Green `#5F6E4F`, blue `#39617E`, plum `#755A83`, rose `#8E4A5C`, rust `#A34A2E` and ochre `#7A5C24`. The selection excludes palette shades in either guest’s hue family or within 60 degrees of either guest’s own hue, then uses sorted guest IDs to pick a stable remaining shade. Collection order, dates and returning stays do not change it while guest colours stay the same. If a larger group exhausts the palette, it uses the shade with the greatest minimum hue separation. Different combinations can share a shade. Guapo & Luna prefer rust (`#A34A2E`) from the same cutoff, provided it still passes the hue-separation rule. A single guest group keeps its own colour, including a duo recorded together. On the homepage, shared diary entries keep Sofa Green (always its pure-colour skin, cream text). On a dog's own diary page they wear that dog's colour like any other entry, and the "with" label says who else was there.
 
 **The Same-Sofa Rule.** Two dogs whose stays overlap must have different colours, because their entries sit side by side in today's feed. Dogs staying on different dates may share a colour.
 
