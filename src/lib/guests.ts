@@ -24,6 +24,7 @@ export interface Stay {
 export const GROUP_HERO: Record<string, { badge?: string; tagline?: string }> = {
   "bobbi+guapo": { badge: "The fox and the sheep", tagline: "social experiment: the school bully and the timid prefect" },
   "guapo+luna": { tagline: "the aloof, dashing bad boy and the submissive fair maiden" },
+  "luna+tiny+tyrion": { badge: "Fur is coming", tagline: "when you play the game of fetch, you win or you never see the ball again" },
 };
 
 export type MediaKind = "photo" | "video";
