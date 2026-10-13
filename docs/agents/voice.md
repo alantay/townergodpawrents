@@ -44,3 +44,4 @@ Add to this list whenever Alan reacts to a line, with the line itself as the exa
 - Dislikes: "Recall sold separately." on the 404 page. Kept it plain: "There's no dog here. No page either."
 - Prefers for Milk: "never without a leaf in her mouth, sometimes a stick too" over "..., downsized from sticks" (keep it plain that she still does sticks).
 - Prefers for Guapo & Bobbi's group tagline: "social experiment: the school bully and the timid prefect", over "a handsome delinquent and a timid class monitor" (and dropped "that skips school" from that one).
+- Chose for Guapo & Luna's group tagline, in his own words: "the aloof dashing bad boy and the submissive fair maiden".
