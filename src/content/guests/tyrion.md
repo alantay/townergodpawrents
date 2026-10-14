@@ -20,6 +20,14 @@ to show his displeasure. -->
 
 ## 14 Oct
 
+### 11:09am
+
+<!-- entry-id: e003 -->
+
+Lord Tyrion is grounded with me in the room, separated from the other two. With him out there, there would not be a calm moment. Lady Luna whined a bit at not being able to see her liege. Now the realm is at peace.
+
+![Tyrion sitting on the floor, looking back over his shoulder with a side-eye and his tongue out](./tyrion/tyrion-grounded-in-room.jpg)
+
 ### 9:31am
 
 <!-- entry-id: e002 -->
