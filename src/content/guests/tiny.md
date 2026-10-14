@@ -16,6 +16,16 @@ stays:
 
 ## 14 Oct
 
+### 12:56pm
+
+<!-- entry-id: e055 -->
+
+<!-- with: luna, tyrion -->
+
+Staff Sergeant Tiny is very serious when it comes to discipline. When Tyrion and Luna are playing wildly, Tiny will come in between them to get them to stop. "Please be serious, recruits," she says. "We must stand ready to aid the helpless human in retrieving plushies and balls."
+
+![Tiny stepping in between Luna and Tyrion as they wrestle on the living room floor](./tiny/tiny-breaking-up-play.mp4)
+
 ### 10am
 
 <!-- entry-id: e054 -->
