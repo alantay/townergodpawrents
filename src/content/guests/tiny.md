@@ -26,6 +26,16 @@ Staff Sergeant Tiny is very serious when it comes to discipline. When Tyrion and
 
 ![Tiny stepping in between Luna and Tyrion as they wrestle on the living room floor](./tiny/tiny-breaking-up-play.mp4)
 
+### 12:13pm
+
+<!-- entry-id: e056 -->
+
+<!-- with: luna, tyrion -->
+
+Tiny showing her recruits how to fetch.
+
+![Tiny chasing a ball down the corridor while Luna and Tyrion tag along](./tiny/tiny-fetch-drill.mp4)
+
 ### 10am
 
 <!-- entry-id: e054 -->
