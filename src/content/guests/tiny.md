@@ -20,7 +20,7 @@ stays:
 
 <!-- entry-id: e054 -->
 
-Tiny opened our master bedroom door to let the whole pack in. She stood on her hind legs to pull the handle. Your breed's reputation precedes you, Tiny.
+Tiny opened our master bedroom door to let the whole pack in. She stood on her hind legs to pull the handle. They say Border Collies are the smartest breed. Your reputation precedes you, Tiny.
 
 ### 9:53am
 
