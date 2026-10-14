@@ -16,6 +16,16 @@ stays:
 
 ## 14 Oct
 
+### 5:13pm
+
+<!-- entry-id: e083 -->
+
+<!-- with: tiny -->
+
+Luna didn't know she had Tiny's prized possession, and wondered why Tiny couldn't stop staring at her.
+
+![Luna lying under the table with her chin on its leg and a tennis ball by her paw, while Tiny stands behind her, staring](./luna/luna-tinys-ball-stare.jpg)
+
 ### 8:05am
 
 <!-- entry-id: e005 -->
