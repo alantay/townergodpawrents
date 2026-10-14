@@ -16,6 +16,14 @@ stays:
 
 ## 14 Oct
 
+### 3:54pm
+
+<!-- entry-id: e082 -->
+
+Tiny was really tired from maintaining law and order. She needed a well-deserved belly rub.
+
+![Tiny lying belly-up between the sofa cushions, paws curled and teeth showing in a goofy grin](./tiny/tiny-belly-rub-break.jpg)
+
 ### 2pm
 
 <!-- entry-id: e057 -->
