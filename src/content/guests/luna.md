@@ -14,6 +14,18 @@ stays:
     checkOut: 2026-12-03
 ---
 
+## 14 Oct
+
+### 7:20am
+
+<!-- entry-id: e003 -->
+
+<!-- with: tiny -->
+
+Tiny is coming over later today. She and Luna got a head start at the carpark during our walk.
+
+![Luna running across the rooftop carpark to Tiny, then the two of them trotting back together, Tiny with a blue ball in her mouth](./luna/luna-carpark-with-tiny.mp4)
+
 ## 13 Oct
 
 ### 10:20pm
