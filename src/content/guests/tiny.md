@@ -16,6 +16,12 @@ stays:
 
 ## 14 Oct
 
+### 10am
+
+<!-- entry-id: e054 -->
+
+Tiny opened our master bedroom door to let the whole pack in. She stood on her hind legs to pull the handle. Your breed's reputation precedes you, Tiny.
+
 ### 9:53am
 
 <!-- entry-id: e053 -->
