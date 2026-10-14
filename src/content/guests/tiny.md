@@ -14,6 +14,18 @@ stays:
     checkOut: 2026-10-14
 ---
 
+## 14 Oct
+
+### 9:53am
+
+<!-- entry-id: e053 -->
+
+<!-- with: luna, tyrion -->
+
+And in comes Tiny the pack leader, now leading the search and rescue for the tennis ball underneath the rubble.
+
+![Tiny, Tyrion and Luna sniffing around the dog bed and sofa cushions together, hunting for a tennis ball](./tiny/tiny-ball-search-and-rescue.mp4)
+
 ## 23 Sep
 
 ### 7pm
