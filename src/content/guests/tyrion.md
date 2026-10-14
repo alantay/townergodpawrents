@@ -17,3 +17,15 @@ but best friends with Ebi. Loves rolling around on the sofa and wants us to
 chase him. Plays with the ball but never brings it back to us. Thinks he is a
 big dog too. Named after Tyrion Lannister from Game of Thrones. Barks a lot
 to show his displeasure. -->
+
+## 14 Oct
+
+### 8:33am
+
+<!-- entry-id: e001 -->
+
+<!-- with: luna -->
+
+Lord Tyrion has arrived, and Lady Luna has not left his side since. These two are like star-crossed lovers.
+
+![Luna and Tyrion wrestling on the living room floor, taking turns rolling onto their backs, while Alan laughs beside them](./tyrion/tyrion-playing-with-luna.mp4)
