@@ -24,6 +24,8 @@ Tiny was really tired from maintaining law and order. She needed a well-deserved
 
 ![Tiny lying belly-up between the sofa cushions, paws curled and teeth showing in a goofy grin](./tiny/tiny-belly-rub-break.jpg)
 
+![Tiny sprawled belly-up on the floor, legs everywhere, head resting on a cushion](./tiny/tiny-belly-up-sprawl.jpg)
+
 ### 2pm
 
 <!-- entry-id: e057 -->
