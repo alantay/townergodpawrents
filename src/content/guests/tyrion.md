@@ -20,6 +20,16 @@ to show his displeasure. -->
 
 ## 14 Oct
 
+### 5:02pm
+
+<!-- entry-id: e004 -->
+
+<!-- with: luna -->
+
+<!-- label: Thoughts -->
+
+Tyrion and Luna are like a chemical reaction. Once they get near each other, they just have unlimited energy for playing and barking loudly, which sets Tiny off barking at them too. I can't count how many times I've grounded Tyrion in the room with me.
+
 ### 11:09am
 
 <!-- entry-id: e003 -->
