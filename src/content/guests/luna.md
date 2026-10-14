@@ -16,6 +16,14 @@ stays:
 
 ## 14 Oct
 
+### 7:55am
+
+<!-- entry-id: e004 -->
+
+Luna pulled off this bunny plushie's hat within seconds. The same plushie Tiny played with so gently for many days.
+
+![A bunny plushie in an orange dress lying on the floor, its pink hat torn off beside its head](./luna/luna-bunny-hat-off.jpg)
+
 ### 7:20am
 
 <!-- entry-id: e003 -->
