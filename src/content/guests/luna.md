@@ -16,6 +16,14 @@ stays:
 
 ## 14 Oct
 
+### 7:45pm
+
+<!-- entry-id: e085 -->
+
+<!-- with: tyrion -->
+
+Tyrion left with his owner, and Luna went chasing after her lover, not knowing they had already taken the lift down.
+
 ### 5:13pm
 
 <!-- entry-id: e083 -->
