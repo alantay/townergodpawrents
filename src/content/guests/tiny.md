@@ -32,7 +32,7 @@ Staff Sergeant Tiny is very serious when it comes to discipline. When Tyrion and
 
 <!-- with: luna, tyrion -->
 
-Tiny showing her recruits how to fetch.
+Tiny showing them how to fetch.
 
 ![Tiny chasing a ball down the corridor while Luna and Tyrion tag along](./tiny/tiny-fetch-drill.mp4)
 
