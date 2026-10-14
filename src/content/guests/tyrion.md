@@ -20,6 +20,16 @@ to show his displeasure. -->
 
 ## 14 Oct
 
+### 9:31am
+
+<!-- entry-id: e002 -->
+
+<!-- with: luna -->
+
+Luna and Tyrion finally settled down after an hour of play. We are glad the house is still intact.
+
+![Tyrion sitting in the foreground and Luna lying on the floor behind him, both panting with their tongues out](./tyrion/tyrion-settled-after-play.jpg)
+
 ### 8:20am
 
 <!-- entry-id: e001 -->
