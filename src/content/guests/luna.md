@@ -16,6 +16,14 @@ stays:
 
 ## 14 Oct
 
+### 8:05am
+
+<!-- entry-id: e005 -->
+
+Luna did not finish her breakfast, so we proceeded to give her kibble tattoos.
+
+![Luna lying on the floor with her tongue out, a piece of kibble on her forehead and three lined up on each front paw](./luna/luna-kibble-decoration.jpg)
+
 ### 7:55am
 
 <!-- entry-id: e004 -->
