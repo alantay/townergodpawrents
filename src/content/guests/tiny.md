@@ -22,7 +22,7 @@ stays:
 
 <!-- with: luna, tyrion -->
 
-And in comes Tiny the pack leader, now leading the search and rescue for Mr Tennis Ball underneath the rubble.
+And in comes Staff Sergeant Tiny the pack leader, now leading the search and rescue for Mr Tennis Ball underneath the rubble.
 
 ![Tiny, Tyrion and Luna sniffing around the dog bed and sofa cushions together, hunting for a tennis ball](./tiny/tiny-ball-search-and-rescue.mp4)
 
