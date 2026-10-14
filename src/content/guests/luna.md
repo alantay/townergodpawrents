@@ -22,7 +22,7 @@ stays:
 
 <!-- with: tiny -->
 
-Tiny is coming over later today. She and Luna got a head start at the carpark during our walk.
+Tiny is coming over later today. Luna didn't have to wait that long. We bumped into her at the carpark during our walk.
 
 ![Luna running across the rooftop carpark to Tiny, then the two of them trotting back together, Tiny with a blue ball in her mouth](./luna/luna-carpark-with-tiny.mp4)
 
