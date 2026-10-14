@@ -16,6 +16,14 @@ stays:
 
 ## 14 Oct
 
+### 2pm
+
+<!-- entry-id: e057 -->
+
+<!-- with: luna, tyrion -->
+
+We put them in a room, broke Tiny's humongous fish snack into pieces and hid them around the house, then let them out to find them. Pieces found: Tyrion 1, Luna 2, Tiny 5.
+
 ### 12:56pm
 
 <!-- entry-id: e055 -->
