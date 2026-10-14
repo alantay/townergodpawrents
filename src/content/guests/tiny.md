@@ -16,6 +16,15 @@ stays:
 
 ## 14 Oct
 
+### 7pm
+
+<!-- entry-id: e084 -->
+<!-- with: luna, tyrion -->
+
+Our dinner time, after feeding them. Tiny in her usual head-too-heavy begging position.
+
+![Tyrion under the table, Tiny with her chin on the table and Luna watching from the floor while we eat dinner](./tiny/tiny-dinner-time.mp4)
+
 ### 3:54pm
 
 <!-- entry-id: e082 -->
