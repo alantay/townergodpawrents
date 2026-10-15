@@ -16,6 +16,14 @@ stays:
 
 ## 15 Oct
 
+### 12:55pm
+
+<!-- entry-id: e090 -->
+
+Looking satisfied and dozing off. Puzzle solved, world saved.
+
+![Luna lying under the table, eyes shut, tongue out, paws crossed over the table leg](./luna/luna-satisfied-doze.jpg)
+
 ### 12:30pm
 
 <!-- entry-id: e089 -->
