@@ -16,6 +16,18 @@ stays:
 
 ## 15 Oct
 
+### 9:01pm
+
+<!-- entry-id: e094 -->
+
+A collection of sleeping positions.
+
+![Luna asleep on her side on the wooden floor, wearing her patterned skirt](./luna/luna-sleeping-positions-side.jpg)
+
+![Luna stretched out on the floor with her head resting on a dark cushion](./luna/luna-sleeping-positions-cushion.jpg)
+
+![Luna asleep beside the fan with her head tucked behind it](./luna/luna-sleeping-positions-fan.jpg)
+
 ### 6pm
 
 <!-- entry-id: e093 -->
