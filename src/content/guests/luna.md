@@ -20,7 +20,9 @@ stays:
 
 <!-- entry-id: e088 -->
 
-Alan left the house. "He's never coming back," Luna sobbed. "Just like Tyrion."
+Luna bade Alan farewell at the door and lay there looking sad. "He's never coming back," she sobbed. "Just like Tyrion."
+
+![Luna lying by the front door in her frilly skirt, chin on the floor](./luna/luna-farewell-door.jpg)
 
 ### 8am
 
