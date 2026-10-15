@@ -16,6 +16,14 @@ stays:
 
 ## 15 Oct
 
+### 2:12pm
+
+<!-- entry-id: e091 -->
+
+Tiny and Guapo's favourite hiding spot is under Weiwen's table while she works. They fit nicely in there. Luna tries too, but this is the best she can do. Weiwen has no space to sit.
+
+![Luna asleep on the floor with only her head under Weiwen's table](./luna/luna-under-the-table.jpg)
+
 ### 12:55pm
 
 <!-- entry-id: e090 -->
