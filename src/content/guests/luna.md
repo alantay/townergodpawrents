@@ -16,7 +16,7 @@ stays:
 
 ## 15 Oct
 
-### 8:57am
+### 8am
 
 <!-- entry-id: e087 -->
 
