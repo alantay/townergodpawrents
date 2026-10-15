@@ -5,7 +5,7 @@ photo: ./luna/luna-collage-edge-a.png
 bgColor: "#755A83"
 showLive: true
 badge: Destroyer of toys
-tagline: occasionally derpy, thinks every dog is her play buddy
+tagline: always has something to whine about, thinks every dog is her play buddy
 whenCalled: "Coming! Bringing what's left of the toy."
 stays:
   - checkIn: 2026-10-13
