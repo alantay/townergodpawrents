@@ -16,6 +16,14 @@ stays:
 
 ## 15 Oct
 
+### 4:40pm
+
+<!-- entry-id: e092 -->
+
+Luna dreaming. Still working on that snuffle puzzle.
+
+![Luna fast asleep on the floor, dreaming](./luna/luna-dreaming.mp4)
+
 ### 2:12pm
 
 <!-- entry-id: e091 -->
