@@ -16,6 +16,12 @@ stays:
 
 ## 15 Oct
 
+### 8:20am
+
+<!-- entry-id: e088 -->
+
+Alan left the house. "He's never coming back," Luna sobbed. "Just like Tyrion."
+
 ### 8am
 
 <!-- entry-id: e087 -->
