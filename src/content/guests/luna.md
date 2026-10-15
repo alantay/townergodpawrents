@@ -20,7 +20,7 @@ stays:
 
 <!-- entry-id: e087 -->
 
-Luna just being dramatic this morning. "The rain wets my fur," she says. "It's the end of the world." Life without Tyrion is hard.
+Luna just being dramatic this morning. "The rain wets my fur," she says. "It's the end of the world." I think she just misses Tyrion.
 
 ![Luna lying flat on the floor, chin down, eyes half-closed](./luna/luna-dramatic-morning.jpg)
 
