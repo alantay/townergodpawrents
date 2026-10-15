@@ -16,6 +16,14 @@ stays:
 
 ## 15 Oct
 
+### 6pm
+
+<!-- entry-id: e093 -->
+
+Why play with one toy when you can play with two? Luna is greedy like that.
+
+![Luna in a play bow, chewing a plush toy while pinning a fluffy white one under her paws](./luna/luna-two-toys.jpg)
+
 ### 4:40pm
 
 <!-- entry-id: e092 -->
