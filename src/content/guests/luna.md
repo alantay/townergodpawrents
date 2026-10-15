@@ -16,6 +16,14 @@ stays:
 
 ## 15 Oct
 
+### 12:30pm
+
+<!-- entry-id: e089 -->
+
+Nothing like a snuffle puzzle to cheer the emo girl up.
+
+![Luna nosing through a bone-shaped snuffle puzzle on the floor](./luna/luna-snuffle-toy.mp4)
+
 ### 8:20am
 
 <!-- entry-id: e088 -->
