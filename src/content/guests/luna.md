@@ -20,7 +20,7 @@ stays:
 
 <!-- entry-id: e094 -->
 
-Space helmet on. Chair for a pillow. Halfway through a freestyle lap.
+A collection of sleeping positions. Space helmet on. Chair for a pillow. Halfway through a freestyle lap.
 
 ![Luna asleep beside the fan with her head tucked behind it](./luna/luna-sleeping-positions-fan.jpg)
 
