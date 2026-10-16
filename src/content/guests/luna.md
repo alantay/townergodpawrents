@@ -20,7 +20,7 @@ stays:
 
 <!-- entry-id: e097 -->
 
-Luna begging for food. Gosh, her nose is too cute.
+Luna begging for food.
 
 ![Luna resting her chin on an arm, watching a forkful of food](./luna/luna-begging-for-food.mp4)
 
