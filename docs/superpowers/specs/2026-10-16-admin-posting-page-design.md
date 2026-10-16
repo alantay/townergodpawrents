@@ -1,6 +1,6 @@
 # Admin posting page
 
-Date: 2026-10-16. Status: design approved in chat, awaiting spec review.
+Date: 2026-10-16. Status: approved. Plan: `docs/superpowers/plans/2026-10-16-admin-posting-page.md`.
 
 ## Goal
 
@@ -51,10 +51,10 @@ All `/api/admin/*` routes except login reject a request without a valid cookie (
 Each is a small module in `src/lib/admin/`, pure where possible, with its own tests.
 
 - **`session.ts`**: `sign(payload, secret)`, `verify(cookie, secret)`. HMAC-SHA256 over `{exp}`. No user identity, just "logged in until".
-- **`insert-entry.ts`**: `insertEntry(markdown, entry) -> markdown`. Pure. Adds the `## 16 Oct` heading if missing (in date order among existing days, newest first), places the `### 3:20pm` entry in time order (newest first, using `entryMinutes`), assigns the next free ID for that file (highest `eNNN` + 1, zero-padded to 3), and writes the comment lines in the order: entry-id, with, label. Blank line between heading, comments, text and each image, as in `add-entry.md`.
-- **`photo-name.ts`**: `photoName(guest, text, taken: Set<string>) -> "luna-slipper-garden.jpg"`. Slug from the first 2 to 4 meaningful words of the text (or `photo` if empty). The first free name wins: `luna-slipper-garden.jpg`, then `-2`, `-3` and so on. Each photo in an entry is added to `taken` before naming the next.
+- **`insert-entry.ts`**: `insertEntry(markdown, entry, stays, guestId) -> markdown`. Pure. Adds the `## 16 Oct` heading if missing (in date order among existing days, newest first), places the `### 3:20pm` entry in time order (newest first, using `entryMinutes`), takes the entry ID from `nextId(allGuestMarkdowns)` (highest `eNNN` across every guest file + 1, zero-padded to 3; IDs are global because shared entries carry their ID onto the other dog's page), and writes the comment lines in the order: entry-id, with, label. Blank line between heading, comments, text and each image, as in `add-entry.md`.
+- **`photo-name.ts`**: `slugWords(text, dogName) -> string[]` and `photoName(guestId, words, taken: Set<string>) -> "luna-slipper-garden.jpg"`. Slug from the first 3 meaningful words of the text, never the dog's name (or `photo` if none). The first free name wins: `luna-slipper-garden.jpg`, then `-2`, `-3` and so on. Each photo in an entry is added to `taken` before naming the next.
 - **`validate.ts`**: checks the day is inside one of the guest's stays and inside each "with" dog's stay (using `stayOn` from `guests.ts`), time format, label is one of the three, text or photos (at least one, at most 4 photos), each photo a JPEG under 1MB and all under 4MB. Returns a reason string on failure.
-- **`github.ts`**: thin client over the GitHub REST API, injected with `fetch` so tests can fake it. `readFile(path, branch)`, `listDir(path, branch)`, `commitFiles(branch, files[], message)`.
+- **`github.ts`**: thin client over the GitHub REST API, injected with `fetch` so tests can fake it. `head()`, `readFile(path, sha)`, `listDir(path, sha)`, `commit(parent, files[], message)`.
 - **`openai.ts`**: thin client, injected `fetch`. `polish(text, context)`, `altText(photo, context)`.
 - **`clean-ai.ts`**: replaces em and en dashes used as punctuation in AI output with a comma or full stop. Leaves en dashes in number ranges.
 - **`post-entry.ts`**: the orchestration behind `/api/admin/post`, with GitHub and OpenAI injected (same pattern as `reaction-api.ts` taking a store).
@@ -65,8 +65,8 @@ Each is a small module in `src/lib/admin/`, pure where possible, with its own te
 2. Phone sends `multipart/form-data`: guest, day (ISO), time, label?, with[], text, photos[], and a one-time `postKey` (random, made when the form loads).
 3. Server: verify cookie, then `validate`. On failure return 400 with the reason, nothing written.
 4. Server: alt text for all photos in parallel (`altText`, 15s timeout each). On failure or timeout, fall back to `"<Name>, <d Mon> <time>"`. Output goes through `clean-ai`.
-5. Server: `readFile("src/content/guests/<guest>.md", branch)`, `insertEntry`, `photoName` for each photo against `listDir("src/content/guests/<guest>/", branch)`.
-6. Server: `commitFiles` makes one commit with the markdown and photos. Message: `Add <Name> <time> <slug words> entry (via admin)`. Steps, all plain code:
+5. Server: at the head sha, read every guest file (for `nextId`) including `src/content/guests/<guest>.md`, `insertEntry`, `photoName` for each photo against `listDir("src/content/guests/<guest>/", sha)`.
+6. Server: `commit` makes one commit with the markdown and photos. Message: `Add <Name> <time> <slug words> entry (via admin)`. Steps, all plain code:
    1. `GET /git/ref/heads/<branch>` for the head SHA.
    2. `POST /git/blobs` for the markdown and each photo (base64).
    3. `POST /git/trees` with `base_tree` = head's tree.
@@ -109,7 +109,7 @@ Copy follows `docs/agents/voice.md`.
 
 | Case | Message | Behaviour |
 |---|---|---|
-| Wrong passphrase | "That's not it." | 5 wrong tries per IP in 10 minutes, then 429: "Too many tries. Wait 10 minutes." Counted in the existing Upstash Redis. |
+| Wrong passphrase | "That's not it." | 5 wrong tries per IP in 10 minutes, then 303 to `/admin?error=slow`: "Too many tries. Wait 10 minutes." Counted in the existing Upstash Redis. |
 | Cookie expired or missing | "Logged out. Type the passphrase again." | Draft kept in `localStorage`. |
 | Polish fails or takes over 15s | "Polish didn't work this time. Your words are still here." | Post still works. |
 | Alt text fails | none | Fallback alt text, post continues. |
