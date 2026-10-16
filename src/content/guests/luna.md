@@ -4,7 +4,7 @@ breed: Golden Retriever
 photo: ./luna/luna-collage-edge-a.png
 bgColor: "#755A83"
 showLive: true
-badge: FOMO queen
+badge: FOMO Queen
 tagline: always has something to whine about, thinks every dog is her play buddy
 whenCalled: "Coming! Bringing what's left of the toy."
 stays:
