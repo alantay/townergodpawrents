@@ -16,6 +16,14 @@ stays:
 
 ## 16 Oct
 
+### 12:40pm
+
+<!-- entry-id: e097 -->
+
+Luna begging for food. Gosh, her nose is too cute.
+
+![Luna resting her chin on an arm, watching a forkful of food](./luna/luna-begging-for-food.mp4)
+
 ### 7:40am
 
 <!-- entry-id: e096 -->
