@@ -16,6 +16,14 @@ stays:
 
 ## 16 Oct
 
+### 7:40am
+
+<!-- entry-id: e096 -->
+
+Kentucky Furry Chicken. One drumstick, extra fluffy.
+
+![Close-up of Luna's fluffy hind leg stretched out on the carpark floor, looking like a drumstick](./luna/luna-kfc-drumstick.jpg)
+
 ### 7:35am
 
 <!-- entry-id: e095 -->
