@@ -16,6 +16,14 @@ stays:
 
 ## 16 Oct
 
+### 9:45pm
+
+<!-- entry-id: e098 -->
+
+FOMO queen needed to keep half her body out to supervise both humans in different places.
+
+![Luna lying halfway through the doorway, looking into the living room](./luna/luna-doorway-supervisor.jpg)
+
 ### 12:40pm
 
 <!-- entry-id: e097 -->
