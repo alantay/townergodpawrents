@@ -14,6 +14,16 @@ stays:
     checkOut: 2026-12-03
 ---
 
+## 16 Oct
+
+### 7:35am
+
+<!-- entry-id: e095 -->
+
+Met our neighbour Rosie, a lovely female corgi, at the carpark. Luna showing her how to clumsily catch a ball.
+
+![Luna fumbling a ball in the carpark while Rosie the corgi lies on the ground watching](./luna/luna-rosie-ball-lesson.mp4)
+
 ## 15 Oct
 
 ### 9:01pm
