@@ -12,7 +12,7 @@
 
 ## Global Constraints
 
-- Work in the worktree `/Users/alantay/Developer/townergodpawrents-admin` on branch `feature/admin-posting-page` (check with `git branch --show-current`). Never commit to `main`. The finished work goes to `main` through one PR.
+- Work in the worktree `/Users/alantay/Developer/townergodpawrents-admin` on branch `feature/admin-posting` (check with `git branch --show-current`). Never commit to `main`. The finished work goes to `main` through one PR.
 - Shell cwd resets after each command. Always run `cd /Users/alantay/Developer/townergodpawrents-admin && <command>`.
 - Tests: `node:test` + `node:assert/strict`, hand-rolled fakes, no new packages. Test files live next to the code: `src/lib/admin/<name>.test.ts`.
 - Node runs TS with `--experimental-strip-types`: only erasable syntax. No `enum`, no `namespace`, no constructor parameter properties. Use `import type` for type-only imports.
@@ -82,7 +82,7 @@
 cd /Users/alantay/Developer/townergodpawrents-admin && git branch --show-current && npm install
 ```
 
-Expected: `feature/admin-posting-page`, then install finishes. If the branch is `main` or anything else, stop and ask Alan.
+Expected: `feature/admin-posting`, then install finishes. If the branch is `main` or anything else, stop and ask Alan.
 
 - [ ] **Step 2: Quote the test glob**
 
@@ -3432,7 +3432,7 @@ The agent stops here and hands these steps to Alan. The agent never sees or type
 - [ ] **Step 1: Push the branch and open the PR**
 
 ```bash
-cd /Users/alantay/Developer/townergodpawrents-admin && npm test 2>&1 | grep -E "(pass|fail) [0-9]+$" && npm run build 2>&1 | tail -2 && git push -u origin feature/admin-posting-page && gh pr create --fill
+cd /Users/alantay/Developer/townergodpawrents-admin && npm test 2>&1 | grep -E "(pass|fail) [0-9]+$" && npm run build 2>&1 | tail -2 && git push -u origin feature/admin-posting && gh pr create --fill
 ```
 
 Expected: `fail 0`, `Complete!`, then a PR URL. End the PR body with `🤖 Generated with [Claude Code](https://claude.com/claude-code)`.
