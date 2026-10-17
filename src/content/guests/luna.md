@@ -16,6 +16,20 @@ stays:
 
 ## 17 Oct
 
+### 8:20pm
+
+<!-- entry-id: e104 -->
+
+Playground role play. Luna worked part-time at a fruit stall. She is wanted for finishing the fruit on display. Sentence: six months in jail for the crime.
+
+Photo alt text: Luna at a pretend fruit stall, looking guilty.
+
+![Luna behind a pretend village shop fruit stall counter looking up with a guilty expression](./luna/luna-playground-role-play.jpg)
+
+![Luna peeking through a playground wanted poster cutout at a pretend fruit stall looking guilty](./luna/luna-playground-role-play-2.jpg)
+
+![Luna sitting behind playground pretend jail bars at a fruit stall prop looking guilty](./luna/luna-playground-role-play-3.jpg)
+
 ### 8:10pm
 
 <!-- entry-id: e103 -->
