@@ -16,6 +16,14 @@ stays:
 
 ## 17 Oct
 
+### 2pm
+
+<!-- entry-id: e101 -->
+
+When you're lazy but still want to play.
+
+![Luna lying on her side on the floor, playing tug with a rope toy](./luna/luna-lazy-tug-play.mp4)
+
 ### 8:15am
 
 <!-- entry-id: e099 -->
