@@ -219,7 +219,7 @@ const LABEL_RE = /<!--\s*label:\s*(.+?)\s*-->/;
  * contains it. The year is never written in the diary — the stay list is
  * what supplies it, which makes the stay list a checksum on the diary.
  */
-function resolveDay(label: string, stays: Stay[], guestId: string): string {
+export function resolveDay(label: string, stays: Stay[], guestId: string): string {
   const m = DAY_RE.exec(label);
   if (!m) {
     throw new Error(
