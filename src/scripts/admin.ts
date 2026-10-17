@@ -272,6 +272,8 @@ form.addEventListener("submit", async (event) => {
 $("again").addEventListener("click", () => {
   const now = nowSGT();
   state = { guest: state.guest, iso: now.iso, time: now.time, label: "", with: [], text: "" };
+  iso.value = state.iso;
+  time.value = state.time;
   text.value = "";
   photos = [];
   postKey = crypto.randomUUID();
@@ -279,7 +281,7 @@ $("again").addEventListener("click", () => {
   done.hidden = true;
   form.hidden = false;
   renderPhotos();
-  save();
+  update();
 });
 
 iso.addEventListener("change", () => {

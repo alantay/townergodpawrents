@@ -89,3 +89,16 @@ test("a branch that moved makes commit throw 422", async () => {
   });
   await assert.rejects(client.commit("parent1", [{ path: "a.md", content: "a" }], "m"), (e: unknown) => e instanceof GitHubError && e.status === 422);
 });
+
+test("a ref move that landed but lost its answer still counts as done", async () => {
+  let ref = "parent1";
+  const { client } = fake({
+    "GET /git/ref/heads/main": () => ({ body: { object: { sha: ref } } }),
+    "GET /git/commits/parent1": () => ({ body: { tree: { sha: "tree1" } } }),
+    "POST /git/blobs": () => ({ body: { sha: "blob1" } }),
+    "POST /git/trees": () => ({ body: { sha: "tree2" } }),
+    "POST /git/commits": () => ({ body: { sha: "commit2" } }),
+    "PATCH /git/refs/heads/main": () => { ref = "commit2"; return { status: 502, body: "Bad gateway" }; },
+  });
+  assert.equal(await client.commit("parent1", [{ path: "a.md", content: "a" }], "m"), "commit2");
+});

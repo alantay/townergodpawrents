@@ -86,7 +86,13 @@ export function gitHub(deps: { token: string; repo: string; branch: string; fetc
         tree: files.map((file, i) => ({ path: file.path, mode: "100644", type: "blob", sha: blobs[i].sha })),
       });
       const commit = await send<{ sha: string }>("POST", "/git/commits", { message, tree: newTree.sha, parents: [parent] });
-      await send("PATCH", `/git/refs/heads/${branch}`, { sha: commit.sha, force: false });
+      try {
+        await send("PATCH", `/git/refs/heads/${branch}`, { sha: commit.sha, force: false });
+      } catch (error) {
+        // The move can land even when its answer is lost. Retrying then would post twice.
+        const now = await send<{ object: { sha: string } }>("GET", `/git/ref/heads/${branch}`).catch(() => undefined);
+        if (now?.object.sha !== commit.sha) throw error;
+      }
       return commit.sha;
     },
   };
