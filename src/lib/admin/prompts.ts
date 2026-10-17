@@ -7,12 +7,12 @@ export interface Message {
   content: string | ({ type: "text"; text: string } | { type: "image_url"; image_url: { url: string; detail: "low" } })[];
 }
 
-/** Section 2 of add-entry.md, from its heading up to section 3. */
+/** Section 2 of add-entry.md, from its heading up to section 3, minus the alt text bullet (the app writes alt text itself). */
 export function polishRules(addEntryMd: string): string {
   const start = addEntryMd.indexOf("## 2.");
   const end = addEntryMd.indexOf("## 3.", start);
   if (start < 0 || end < 0) throw new Error("[admin] add-entry.md has no section 2");
-  return addEntryMd.slice(start, end).trim();
+  return addEntryMd.slice(start, end).split("\n").filter((line) => !/alt text/i.test(line)).join("\n").trim();
 }
 
 const names = (ctx: AiContext) => [ctx.name, ...ctx.withNames].join(", ");
@@ -26,6 +26,7 @@ export function polishMessages(text: string, ctx: AiContext, voice: string, rule
     voice,
     "Answer in JSON. polished: grammar fixed, every detail kept, no jokes. twist: one funnier rewording, or null. rewritten: better flow, every detail kept, or null. note: one short line if you spot a POV or tense slip, else null.",
     "Never use em dashes or en dashes as punctuation. Never use \"lah\".",
+    "Only rewrite the words. Never add alt text or photo descriptions; the app writes those separately.",
   ].join("\n\n");
   const recent = ctx.recent.length ? `Recent entries, for tone only:\n${ctx.recent.map((r) => `- ${r}`).join("\n")}\n\n` : "";
   return [

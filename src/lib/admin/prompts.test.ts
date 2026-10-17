@@ -13,6 +13,17 @@ test("polishRules takes section 2 of the real add-entry.md", () => {
   assert.throws(() => polishRules("# nothing here"));
 });
 
+test("polishRules leaves out the alt text bullet, since the app writes alt text separately", () => {
+  const rules = polishRules(readFileSync("docs/agents/add-entry.md", "utf8"));
+  assert.doesNotMatch(rules, /alt text/i);
+  assert.match(rules, /every detail kept/);
+});
+
+test("polishMessages tells the model to never add alt text to the words", () => {
+  const [system] = polishMessages("luna stole slipper", CTX, "VOICE RULES", "POLISH RULES");
+  assert.match(String(system.content), /Never add alt text or photo descriptions/);
+});
+
 test("polishMessages carries the rules, the voice, the dogs, recent entries and the text", () => {
   const [system, user] = polishMessages("luna stole slipper", CTX, "VOICE RULES", "POLISH RULES");
   assert.equal(system.role, "system");
