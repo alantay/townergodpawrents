@@ -4,7 +4,11 @@ import { cleanAi } from "./clean-ai.ts";
 import { ALT_SCHEMA, POLISH_SCHEMA, altMessages, polishMessages, type Message } from "./prompts.ts";
 import type { Ai, AiContext, PolishResult } from "./types.ts";
 
-export const DEFAULT_MODEL = "gpt-5-mini";
+export const DEFAULT_MODEL = "gpt-6-luna";
+
+// Least thinking each family allows: gpt-6 says "none", gpt-5 "minimal".
+const effort = (model: string) =>
+  model.startsWith("gpt-6") ? { reasoning_effort: "none" } : model.startsWith("gpt-5") ? { reasoning_effort: "minimal" } : {};
 
 export function openAI(deps: {
   key: string;
@@ -27,7 +31,7 @@ export function openAI(deps: {
         messages,
         response_format: { type: "json_schema", json_schema: schema },
         max_completion_tokens: maxTokens,
-        ...(model.startsWith("gpt-5") ? { reasoning_effort: "minimal" } : {}),
+        ...effort(model),
       }),
       signal: AbortSignal.timeout(timeoutMs),
     });
