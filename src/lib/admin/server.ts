@@ -36,7 +36,8 @@ function store(): KeyStore {
   const url = getSecret("KV_REST_API_URL") ?? getSecret("UPSTASH_REDIS_REST_URL");
   const token = getSecret("KV_REST_API_TOKEN") ?? getSecret("UPSTASH_REDIS_REST_TOKEN");
   if (!url || !token) throw new Error("[admin] Redis isn't configured");
-  redis ??= new Redis({ url, token });
+  // One quick retry, so a Redis outage costs a second, not the request.
+  redis ??= new Redis({ url, token, retry: { retries: 1 } });
   return redisStore(redis);
 }
 
