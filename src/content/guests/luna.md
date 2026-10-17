@@ -16,6 +16,14 @@ stays:
 
 ## 17 Oct
 
+### 8:10pm
+
+<!-- entry-id: e103 -->
+
+From begging to demanding.
+
+![Luna leaning over Alan's shoulder with her nose beside his ear](./luna/luna-begging-to-demanding.mp4)
+
 ### 3pm
 
 <!-- entry-id: e102 -->
