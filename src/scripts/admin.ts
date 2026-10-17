@@ -1,6 +1,6 @@
 // The post form on /admin. Keeps a draft in this browser, shrinks photos
 // before upload, and talks to /api/admin/polish and /api/admin/post.
-import { dogsOn, nowSGT, type FormGuest } from "../lib/admin/form.ts";
+import { dogsOn, draftWhen, nowSGT, type FormGuest } from "../lib/admin/form.ts";
 
 const DRAFT_KEY = "tgp-admin-draft";
 const MAX_PHOTOS = 4;
@@ -8,6 +8,7 @@ const LONG_SIDE = 1600;
 const MAX_PHOTO_BYTES = 1_000_000;
 const BAD_SEND = "That didn't send properly. Try again.";
 const BAD_PHOTO = "Can't read this photo. Try a JPEG or a screenshot of it.";
+const BAD_POLISH = "Polish didn't work this time. Your words are still here.";
 
 interface Draft {
   guest: string;
@@ -46,11 +47,11 @@ let busy = false;
 
 function save() {
   try {
-    localStorage.setItem(DRAFT_KEY, JSON.stringify(state));
+    localStorage.setItem(DRAFT_KEY, JSON.stringify({ ...state, savedAt: Date.now() }));
   } catch {}
 }
 
-function load(): Partial<Draft> {
+function load(): Partial<Draft & { savedAt: number }> {
   try {
     return JSON.parse(localStorage.getItem(DRAFT_KEY) || "{}");
   } catch {
@@ -224,7 +225,7 @@ polishBtn.addEventListener("click", async () => {
     polishNote.hidden = !body.note;
     optionsField.hidden = false;
   } catch {
-    showError(BAD_SEND);
+    showError(BAD_POLISH);
   } finally {
     polishBtn.disabled = false;
     polishBtn.textContent = "Polish my words";
@@ -300,12 +301,12 @@ for (const button of labelsBox.querySelectorAll<HTMLButtonElement>("[data-label]
   });
 }
 
-const now = nowSGT();
 const draft = load();
+const when = draftWhen(draft);
 state = {
   guest: draft.guest ?? "",
-  iso: draft.iso || now.iso,
-  time: draft.time || now.time,
+  iso: when.iso,
+  time: when.time,
   label: draft.label ?? "",
   with: Array.isArray(draft.with) ? draft.with : [],
   text: draft.text ?? "",
