@@ -24,6 +24,14 @@ Saturday morning atop the castle. The small council of dogs assembled. Attendanc
 
 ![Luna hanging out with other dogs on the carpark rooftop](./luna/luna-small-council.mp4)
 
+### 6:40am
+
+<!-- entry-id: e100 -->
+
+Luna trying to wake us up by resting her head on us.
+
+![Luna resting her head on us in bed, with morning light filtering through the curtains](./luna/luna-morning-wake-up.jpg)
+
 ## 16 Oct
 
 ### 9:45pm

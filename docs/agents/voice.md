@@ -23,7 +23,7 @@ The voice is Alan's. Personal, warm, a bit dry. Like telling a neighbour what th
 - Keep the dog the main character. Name the humans when describing events: "Alan got home." "Tiny eyed Weiwen's toast."
 - Use "we / us / our" when both humans did it together: "We took Tiny to Kallang."
 - "I" is fine for personal reactions: "I swear…", "I melted". Don't turn these into "Alan swears…" or mix "I" and a human's name in one sentence.
-- Use past tense for events ("Tiny finally pooped"). A present participle is fine for captions ("Tiny napping on the lap while the human tries to work").
+- Match the tense to the telling. Present tense and present participles are natural for captions describing what is happening in a photo or video ("Luna trying to wake us up by resting her head on us"). Keep Alan's present-tense phrasing when it fits and makes grammatical sense; fix grammar where needed without automatically converting it to past tense. Caption fragments are fine when they read naturally. Past tense works for recounting completed events ("Tiny finally pooped").
 
 ## Keeping this guide useful
 
