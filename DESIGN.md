@@ -141,10 +141,10 @@ On the homepage, a pat sends three cream outline hearts up from that dog's portr
 A sun-faded kitchen palette: oatmeal paper, deep olive-black ink one highlighter lime and a post-it yellow for tape, with each guest dog adding its own saturated colour.
 
 ### Primary
-- **Highlighter Lime** (`lime`): The single accent. It marks what's current or active: the "Here today" and "Sofa's empty" tags, the NEW tag, the current nav page, the active day chip and the skip link. Nothing else.
+- **Highlighter Lime** (`lime`): The single accent. It marks what's current or active: the "Here today" and "Sofa's empty" tags, the NEW tag, the current nav page, the active day chip, the skip link and the link to a just-posted entry on the admin page. Nothing else.
 - **Pale Lime Wash** (`lime-soft`): The quiet version of lime. It colours the italic tagline on a dark guest hero and the "photo soon" line under a blank print.
 - **Post-it Yellow** (`tape`): Every piece of tape: calendar sheets and polaroids (85%), the reaction picker's corners (90%), the scrap under a reaction count (75%), the tag behind the italic "Godpawrents" wordmark, and the strip carrying a dog's badge. Tape is translucent paper, so it has square corners.
-- **Red Biro** (`biro`): The pen on the calendar: the ring around today and the "busy sofa" note. Nowhere else.
+- **Red Biro** (`biro`): The pen on the calendar (the ring around today and the "busy sofa" note) and on mistakes: error messages on the admin page. Nowhere else.
 
 ### Secondary: the guest colour
 Each guest has a `bgColor` in its content frontmatter. The colour fills that dog's hero card. The diary then cycles through four skins mixed from it: a pale tint with ink text, the pure colour with cream text, a 38% ink-deepened version, and a 72% ink-deepened version. On the homepage, when more than one guest is staying, each dog keeps to the first two (pale tint and pure colour) so the merged list stays calm.
