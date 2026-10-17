@@ -133,7 +133,10 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
   .chip { font: 600 13px/1 var(--font-archivo), sans-serif; padding: 9px 14px; border-radius: 999px; border: 1.5px solid var(--color-card-line); background: var(--color-cream); color: var(--color-ink); cursor: pointer; }
   .chip[aria-pressed="true"] { background: var(--color-lime); border-color: var(--color-ink); }
   .chip.tape { border-radius: 0; }
-  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  /* iOS Safari gives date and time inputs a wide intrinsic width; let them shrink to the column. */
+  input[type="date"], input[type="time"] { -webkit-appearance: none; appearance: none; min-width: 0; min-height: 50px; display: block; }
+  input::-webkit-date-and-time-value { text-align: left; }
   input[type="password"], input[type="date"], input[type="time"], textarea { width: 100%; box-sizing: border-box; font: 16px/1.5 var(--font-archivo), sans-serif; color: var(--color-ink); background: var(--color-cream); border: 1.5px solid var(--color-card-line); border-radius: 14px; padding: 11px 13px; }
   textarea { min-height: 110px; resize: vertical; }
   :focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; }
