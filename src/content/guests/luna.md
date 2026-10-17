@@ -16,6 +16,14 @@ stays:
 
 ## 17 Oct
 
+### 3pm
+
+<!-- entry-id: e102 -->
+
+Luna was invited by Lord Tyrion to Casterly Rock. Much chasing, much wrestling, much love. We should be expecting a wedding invitation by raven.
+
+![Luna and Tyrion wrestling and playing together indoors](./luna/luna-casterly-rock-visit.mp4)
+
 ### 2pm
 
 <!-- entry-id: e101 -->
