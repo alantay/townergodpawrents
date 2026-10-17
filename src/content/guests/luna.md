@@ -16,6 +16,14 @@ stays:
 
 ## 17 Oct
 
+### 9:10pm
+
+<!-- entry-id: e102 -->
+
+Luna just chilling
+
+![Luna lying on a tiled floor next to wood flooring looking relaxed](./luna/luna-chilling.jpg)
+
 ### 9:08pm
 
 <!-- entry-id: e101 -->
