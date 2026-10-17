@@ -14,6 +14,16 @@ stays:
     checkOut: 2026-12-03
 ---
 
+## 17 Oct
+
+### 8:15am
+
+<!-- entry-id: e099 -->
+
+Saturday morning atop the castle. The small council of dogs assembled. Attendance was good. Attention spans were poor.
+
+![Luna hanging out with other dogs on the carpark rooftop](./luna/luna-small-council.mp4)
+
 ## 16 Oct
 
 ### 9:45pm
