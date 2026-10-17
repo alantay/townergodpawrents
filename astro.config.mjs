@@ -9,7 +9,9 @@ export default defineConfig({
   // Absolute URLs for link previews (og:image) need to know where we live.
   site: 'https://townergodpawrents.vercel.app',
   // Counts visitors so we can see how many people drop by. No cookies.
-  adapter: vercel({ webAnalytics: { enabled: true } }),
+  // maxDuration: a phone post waits on AI alt text and several GitHub calls,
+  // which can outlast the 10s default.
+  adapter: vercel({ webAnalytics: { enabled: true }, maxDuration: 60 }),
   // Fetched at build time and served from our own domain, so a visit doesn't
   // wait on Google for the dog's name to appear.
   fonts: [

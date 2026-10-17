@@ -36,6 +36,8 @@ If you spot a POV or tense slip in another entry **from the same day**, mention 
 
 ## 3. File it
 
+**First:** on main, `git pull`. Entries posted from `/admin` land on main without the laptop knowing.
+
 **Photos:** always put each one through the script. Never copy a raw phone photo in.
 
 ```sh

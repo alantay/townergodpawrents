@@ -15,6 +15,7 @@ The homepage is where funny, experimental touches go (haze, weather, pats). The 
 ## Posting
 
 - **Diary entry** (a moment, a photo): follow `docs/agents/add-entry.md`. That covers polishing Alan's words with him, `scripts/prep-photo.sh`, filing under the right day, then build and push.
+- **From a phone**: Weiwen and Alan post at `/admin`, which commits to main through the GitHub API. See `docs/adr/0009-admin-posts-via-github-api.md`.
 - **New dog or stay**: follow `docs/agents/new-stay.md`.
 - **Dog avatar, portrait or cutout**: follow `.agents/skills/dog-avatar/SKILL.md`, even when no stay is being added. Use the site's photographic torn-paper treatment.
 
