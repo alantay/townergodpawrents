@@ -16,6 +16,13 @@ stays:
 
 ## 17 Oct
 
+### 9:08pm
+
+<!-- entry-id: e101 -->
+<!-- label: Fun fact -->
+
+Luna insists on a full headcount during walks. If one of us is missing, she launches a one-dog search party until we reappear.
+
 ### 8:15am
 
 <!-- entry-id: e099 -->
