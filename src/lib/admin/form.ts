@@ -18,6 +18,19 @@ export function nowSGT(now: Date = new Date()): { iso: string; time: string } {
   return { iso: sgt.slice(0, 10), time: sgt.slice(11, 16) };
 }
 
+/**
+ * The time to post with. A labelled or no-time entry hides the time field,
+ * so on today it goes in the day by when it's posted. On another day there's
+ * no "now" to use, so it keeps whatever the field last held.
+ */
+export function postTime(
+  draft: { iso: string; time: string; label: string },
+  now: Date = new Date(),
+): string {
+  const today = nowSGT(now);
+  return draft.label && draft.iso === today.iso ? today.time : draft.time;
+}
+
 /** How long an unsent draft keeps its own day and time. */
 const DRAFT_FRESH_MS = 6 * 60 * 60 * 1000;
 

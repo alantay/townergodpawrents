@@ -97,6 +97,14 @@ test("a guest with no diary yet gets their first day", () => {
   assert.equal(insert({}, `${FRONT}\n`), `${FRONT}\n\n## 16 Oct\n\n${BLOCK}\n`);
 });
 
+test("no-time goes under the entry ID and survives the parser", () => {
+  assert.equal(entryBlock({ ...ENTRY, noTime: true }, "luna"), "### 3:20pm\n\n<!-- entry-id: e099 -->\n<!-- no-time -->\n\nStole a slipper.");
+  const md = insert({ noTime: true });
+  const entry = parseDiary(splitFrontmatter(md).body, STAYS, "luna").flatMap((d) => d.entries).find((e) => e.id === "e099")!;
+  assert.equal(entry.noTime, true);
+  assert.equal(entry.text, "Stole a slipper.");
+});
+
 test("photos, with and label survive a trip through the parser", () => {
   const md = insert({ with: ["guapo"], label: "Fun fact", images: [{ alt: "Luna with a slipper", file: "luna-stole-slipper.jpg" }] });
   const entry = parseDiary(splitFrontmatter(md).body, STAYS, "luna")[0].entries[1];

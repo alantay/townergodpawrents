@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { dogsOn, draftWhen, nowSGT } from "./form.ts";
+import { dogsOn, draftWhen, nowSGT, postTime } from "./form.ts";
 
 const GUESTS = [
   { id: "luna", name: "Luna", stays: [{ checkIn: "2026-10-13", checkOut: "2026-10-21" }] },
@@ -33,4 +33,12 @@ test("draftWhen falls back to now for an old draft, an empty one, or one with no
   assert.deepEqual(draftWhen({ ...old, text: "", savedAt: now.getTime() }, now), fresh);
   assert.deepEqual(draftWhen({ iso: "2026-10-12", time: "08:00", text: "zoomies" }, now), fresh);
   assert.deepEqual(draftWhen({}, now), fresh);
+});
+
+test("postTime uses now for a labelled entry today, else the field", () => {
+  const now = new Date("2026-10-18T07:20:00Z"); // 3:20pm SGT
+  assert.equal(postTime({ iso: "2026-10-18", time: "09:00", label: "No time" }, now), "15:20");
+  assert.equal(postTime({ iso: "2026-10-18", time: "09:00", label: "Throwback" }, now), "15:20");
+  assert.equal(postTime({ iso: "2026-10-18", time: "09:00", label: "" }, now), "09:00");
+  assert.equal(postTime({ iso: "2026-10-17", time: "09:00", label: "No time" }, now), "09:00");
 });

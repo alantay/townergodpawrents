@@ -21,7 +21,7 @@ One calendar day within a stay, written as a `## 13 Sep` divider. The year is no
 _Avoid_: Date section, day entry
 
 **Entry**:
-One timestamped moment inside a diary day, written as a `### 9:50am` heading and the words under it. May be up to four prints, or one clip, with no words. A label (`<!-- label: Throwback -->`) is shown on the card in place of the time; the time still orders the entry.
+One timestamped moment inside a diary day, written as a `### 9:50am` heading and the words under it. May be up to four prints, or one clip, with no words. A label (`<!-- label: Throwback -->`) is shown on the card in place of the time; the time still orders the entry. `<!-- no-time -->` hides the time with nothing in its place.
 _Avoid_: Post, note, log line, update
 
 **Reaction**:

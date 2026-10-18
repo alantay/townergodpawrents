@@ -151,6 +151,7 @@ const guestsForClient = await Promise.all(
               id: e.id,
               time: e.time,
               label: e.label ?? null,
+              noTime: !!e.noTime,
               mins: entryMinutes(e.time),
               from: e.from ?? null,
               withGuests: e.with.map((id) => ({ id, name: nameOf(id), bgColor: guests.find((g) => g.id === id)!.bgColor })),
@@ -630,7 +631,10 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             // so skip the copy when that dog is here too.
             if (e.from && live.some((o) => o.id === e.from)) return;
             var participants = [{ id: d.id, name: d.name, bgColor: d.bgColor }].concat(e.withGuests);
-            raw.push({ entryId: e.id, time: e.time, shown: e.label || e.time, mins: e.mins, text: e.text, credit: e.credit, media: e.media, who: participants.map((g) => g.name).join(" & "), participants, shared: e.withGuests.length > 0, owner: e.from || d.id, id: d.id, bgColor: d.bgColor, key: today + " " + e.time });
+            // A label stands in for the time, and a no-time entry shows neither.
+            var shown = e.label || (e.noTime ? "" : e.time);
+            var who = participants.map((g) => g.name).join(" & ");
+            raw.push({ entryId: e.id, time: e.time, shown, mins: e.mins, text: e.text, credit: e.credit, media: e.media, who, alt: shown ? who + ", " + shown : who, participants, shared: e.withGuests.length > 0, owner: e.from || d.id, id: d.id, bgColor: d.bgColor, key: today + " " + e.time });
           })
         );
         // Two dogs share one day: merge their entries newest first, like
@@ -676,7 +680,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
                 '" poster="' +
                 esc(video.poster) +
                 '" controls preload="metadata" aria-label="' +
-                esc(video.alt || e.who + ", " + e.shown) +
+                esc(video.alt || e.alt) +
                 '" class="print-media" style="aspect-ratio:' +
                 video.width +
                 "/" +
@@ -696,7 +700,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
                 '<img src="' +
                 esc(e.media[0].src) +
                 '" alt="' +
-                esc(e.media[0].alt || e.who + ", " + e.shown) +
+                esc(e.media[0].alt || e.alt) +
                 '" width="' +
                 e.media[0].width +
                 '" height="' +
@@ -723,7 +727,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
                     '<img src="' +
                     esc(photo.src) +
                     '" alt="' +
-                    esc(photo.alt || e.who + ", " + e.shown) +
+                    esc(photo.alt || e.alt) +
                     '" width="' +
                     photo.width +
                     '" height="' +
@@ -759,10 +763,10 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:' +
               sk.accent +
               '">' +
-              esc(e.shown) +
-              " · " + e.participants.map((g) =>
+              (e.shown ? esc(e.shown) + " · " : "") +
+              e.participants.map((g) =>
                 '<a href="/guests/' + esc(g.id) + '#entry-' + esc(e.entryId) + '" class="diary-guest-link" aria-label="' +
-                esc(g.name + "'s diary, " + e.shown) + '">' + esc(g.name) + "</a>"
+                esc(g.name + "'s diary" + (e.shown ? ", " + e.shown : "")) + '">' + esc(g.name) + "</a>"
               ).join(" &amp; ") +
               (isNew(e.id, e.key) ? ' <span class="new-tag ml-1 align-[1px]">New</span>' : "") +
               "</div>" +

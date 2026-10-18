@@ -27,6 +27,7 @@ test("formatTime output sorts with entryMinutes", () => {
 
 test("fallbackAlt names the dog, day and time", () => {
   assert.equal(fallbackAlt("Luna", "2026-10-16", "3:20pm"), "Luna, 16 Oct 3:20pm");
+  assert.equal(fallbackAlt("Luna", "2026-10-16"), "Luna, 16 Oct");
 });
 
 test("sanitizeAlt keeps alt text from breaking the image syntax", () => {

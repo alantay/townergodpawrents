@@ -62,6 +62,16 @@ test("a labelled homepage entry shows its label, not its time", () => {
   assert.ok(!html.includes("9:30pm"));
 });
 
+test("a no-time homepage entry shows just the dog", () => {
+  const html = render([{
+    id: "bobbi", name: "Bobbi", bgColor: "#fff",
+    entries: [{ id: "e075", time: "9:30pm", noTime: true, mins: 1290, text: "Twinning.", media: [], withGuests: [] }],
+  }], "2026-10-11");
+  assert.ok(html.includes('"><a href="/guests/bobbi#entry-e075"'));
+  assert.ok(html.includes('aria-label="Bobbi\'s diary"'));
+  assert.ok(!html.includes("9:30pm"));
+});
+
 test("a shared homepage entry wears its dogs' group colour", () => {
   const shared = (other: { id: string; name: string; bgColor: string }) => ({
     id: "e080", time: "9:00am", mins: 540, text: "Both.", media: [], withGuests: [other],

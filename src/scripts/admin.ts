@@ -1,6 +1,7 @@
 // The post form on /admin. Keeps a draft in this browser, shrinks photos
 // before upload, and talks to /api/admin/polish and /api/admin/post.
-import { dogsOn, draftWhen, nowSGT, type FormGuest } from "../lib/admin/form.ts";
+import { dogsOn, draftWhen, nowSGT, postTime, type FormGuest } from "../lib/admin/form.ts";
+import { NO_TIME } from "../lib/admin/types.ts";
 
 const DRAFT_KEY = "tgp-admin-draft";
 const MAX_PHOTOS = 4;
@@ -29,6 +30,9 @@ const dogsBox = $("dogs");
 const withBox = $("with");
 const withField = $("with-field");
 const labelsBox = $("labels");
+const labelHint = $("label-hint");
+const whenRow = $("when-row");
+const timeField = $("time-field");
 const polishBtn = $<HTMLButtonElement>("polish");
 const optionsField = $("options-field");
 const optionsBox = $("options");
@@ -104,6 +108,13 @@ function render() {
   for (const button of labelsBox.querySelectorAll<HTMLButtonElement>("[data-label]")) {
     button.setAttribute("aria-pressed", String(button.dataset.label === state.label));
   }
+  // Any chip takes the time off the card, so the time field goes too.
+  timeField.hidden = !!state.label;
+  whenRow.classList.toggle("solo", !!state.label);
+  labelHint.hidden = !state.label;
+  labelHint.textContent = state.label === NO_TIME
+    ? "No time on the card. It goes in the day by when you post."
+    : "The label shows instead of the time. It goes in the day by when you post.";
 
   const name = guests.find((g) => g.id === state.guest)?.name;
   go.textContent = busy ? "Posting…" : name ? `Post to ${name}'s diary` : "Post";
@@ -242,7 +253,7 @@ form.addEventListener("submit", async (event) => {
   data.set("postKey", postKey);
   data.set("guest", state.guest);
   data.set("iso", state.iso);
-  data.set("time", state.time);
+  data.set("time", postTime(state));
   data.set("label", state.label);
   data.set("text", text.value);
   for (const id of state.with) data.append("with", id);

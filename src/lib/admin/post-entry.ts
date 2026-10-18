@@ -75,7 +75,7 @@ export function postApi(deps: {
       }
 
       const ctx = { name: guest.name, withNames: withGuests.map((g) => g.name), recent: guest.recent };
-      const fallback = fallbackAlt(guest.name, input.iso, input.time);
+      const fallback = fallbackAlt(guest.name, input.iso, input.label ?? (input.noTime ? undefined : input.time));
       const alts = await Promise.all(
         input.photos.map(async (photo) => {
           try {
@@ -102,7 +102,7 @@ export function postApi(deps: {
         const images = input.photos.map((_, i) => ({ alt: alts[i], file: photoName(guest.id, words, taken) }));
         const markdown = insertEntry(
           markdowns[files.indexOf(own)],
-          { iso: input.iso, time: input.time, label: input.label, with: input.with, text: input.text, images, id: nextId(markdowns) },
+          { iso: input.iso, time: input.time, label: input.label, noTime: input.noTime, with: input.with, text: input.text, images, id: nextId(markdowns) },
           guest.stays,
           guest.id,
         );
