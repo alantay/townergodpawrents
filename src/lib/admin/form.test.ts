@@ -25,6 +25,12 @@ test("draftWhen keeps a recent unsent draft's day and time", () => {
   assert.deepEqual(draftWhen(draft, now), { iso: "2026-10-16", time: "21:40" });
 });
 
+test("draftWhen keeps a recent photo-only draft's day and time", () => {
+  const now = new Date("2026-10-18T04:00:00Z"); // 12pm SGT
+  const draft = { iso: "2026-10-17", time: "21:30", text: "", photoCount: 2, savedAt: now.getTime() - 60 * 1000 };
+  assert.deepEqual(draftWhen(draft, now), { iso: "2026-10-17", time: "21:30" });
+});
+
 test("draftWhen falls back to now for an old draft, an empty one, or one with no savedAt", () => {
   const now = new Date("2026-10-17T02:00:00Z");
   const fresh = { iso: "2026-10-17", time: "10:00" };

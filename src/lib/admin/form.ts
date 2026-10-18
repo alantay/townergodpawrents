@@ -35,15 +35,16 @@ export function postTime(
 const DRAFT_FRESH_MS = 6 * 60 * 60 * 1000;
 
 /**
- * Day and time to open the form on. A recent draft with words keeps its own,
+ * Day and time to open the form on. A recent draft with words or photos keeps its own,
  * so a half-written moment stays on the right day. Anything else opens on now,
  * so an old draft can't quietly file a new post under last week.
  */
 export function draftWhen(
-  draft: { iso?: string; time?: string; text?: string; savedAt?: number },
+  draft: { iso?: string; time?: string; text?: string; photoCount?: number; savedAt?: number },
   now: Date = new Date(),
 ): { iso: string; time: string } {
   const fresh = typeof draft.savedAt === "number" && now.getTime() - draft.savedAt < DRAFT_FRESH_MS;
-  if (fresh && draft.text?.trim() && draft.iso && draft.time) return { iso: draft.iso, time: draft.time };
+  const started = !!draft.text?.trim() || (draft.photoCount ?? 0) > 0;
+  if (fresh && started && draft.iso && draft.time) return { iso: draft.iso, time: draft.time };
   return nowSGT(now);
 }

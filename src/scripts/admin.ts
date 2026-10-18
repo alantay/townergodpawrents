@@ -65,6 +65,8 @@ let state: Draft = { guest: "", iso: "", time: "", label: "", with: [], text: ""
 let photos: Blob[] = [];
 let postKey = crypto.randomUUID();
 let shrinking = 0;
+// Saved photos still coming back from IndexedDB: posting or picking now would lose them.
+let restoring = true;
 let busy = false;
 const urls = new WeakMap<Blob, string>();
 
@@ -143,8 +145,9 @@ function render() {
 
   const name = guests.find((g) => g.id === state.guest)?.name;
   go.textContent = busy ? "Posting…" : name ? `Post to ${name}'s diary` : "Post";
-  go.disabled = busy || shrinking > 0;
+  go.disabled = busy || restoring || shrinking > 0;
   fields.disabled = busy;
+  files.disabled = restoring;
   addTile.hidden = photos.length + shrinking >= MAX_PHOTOS;
   renderPreview();
 }
@@ -406,7 +409,7 @@ time.value = state.time;
 text.value = state.text;
 render();
 void loadPhotos().then((kept) => {
-  if (photos.length || shrinking) return;
+  restoring = false;
   photos = kept.slice(0, MAX_PHOTOS);
   renderPhotos();
   // Photos that didn't make it back (no IndexedDB, or iOS cleared it): say so.
