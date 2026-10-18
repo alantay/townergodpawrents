@@ -14,6 +14,19 @@ stays:
     checkOut: 2026-12-03
 ---
 
+## 18 Oct
+
+### 9:26am
+
+<!-- entry-id: e105 -->
+<!-- label: Throwback -->
+
+The day Luna learnt to half-sit on the sofa.
+
+![Luna sits upright on a sofa cushion, leaning back with her hind legs stretched out and tongue out.](./luna/luna-day-learnt-half.jpg)
+
+![Luna half sits on the sofa, leaning forward with her front paws on the floor beside another dog.](./luna/luna-day-learnt-half-2.jpg)
+
 ## 17 Oct
 
 ### 8:20pm
