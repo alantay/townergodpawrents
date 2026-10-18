@@ -16,6 +16,14 @@ stays:
 
 ## 18 Oct
 
+### 1:30pm
+
+<!-- entry-id: e107 -->
+
+Currently in a million-dollar discussion. No further comments at this time.
+
+![Luna, a golden dog, lies with her front paws crossed on the floor.](./luna/luna-currently-million-dollar.jpg)
+
 ### 9:45am
 
 <!-- entry-id: e106 -->
