@@ -16,6 +16,14 @@ stays:
 
 ## 18 Oct
 
+### 9:45am
+
+<!-- entry-id: e106 -->
+
+Luna is an annoying obstacle in the kitchen. Meal prep now includes navigating around her.
+
+![Luna lies across the kitchen floor in front of the cabinets.](./luna/luna-annoying-obstacle-kitchen.jpg)
+
 ### 9:26am
 
 <!-- entry-id: e105 -->
