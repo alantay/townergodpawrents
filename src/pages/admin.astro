@@ -54,6 +54,7 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
 
       {loggedIn && (
         <form id="post" class="wrap" novalidate>
+          <fieldset id="fields">
           <div class="row" id="when-row">
             <div class="field">
               <label class="lbl" for="iso">Day</label>
@@ -98,15 +99,26 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
                 <input id="files" type="file" accept="image/*" multiple class="sr-only" />
               </label>
             </div>
+            <p class="hint" id="photo-note" role="status" hidden></p>
           </div>
           <hr />
+          <div class="field" id="preview-field" hidden>
+            <span class="lbl" id="preview-lbl">Preview</span>
+            <div class="peek" aria-labelledby="preview-lbl">
+              <div class="peek-line" id="preview-line"><span class="peek-dot"></span><span id="preview-when"></span></div>
+              <div class="peek-photos" id="preview-photos"></div>
+              <p class="peek-text" id="preview-text"></p>
+            </div>
+          </div>
           <p class="flag" id="error" role="alert" hidden></p>
           <button class="btn go" type="submit" id="go">Post</button>
+          </fieldset>
         </form>
       )}
 
       <section class="done" id="done" hidden aria-live="polite">
-        <h2>Posted.</h2>
+        <div class="done-photos" id="done-photos"></div>
+        <h2 id="done-title" tabindex="-1">Posted.</h2>
         <p>Live on the site in about a minute.</p>
         <p><a id="done-link" href="/">See the diary</a></p>
         <button type="button" class="btn ghost" id="again">Post another one</button>
@@ -125,13 +137,16 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
   header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
   h1 { font: 400 40px/1 var(--font-instrument-serif), serif; margin: 0; letter-spacing: -0.01em; }
   h1 em { font-style: italic; }
-  .out { font: 13px/1 var(--font-archivo), sans-serif; color: var(--color-label); text-decoration: underline; background: none; border: 0; padding: 4px; cursor: pointer; }
+  /* Field edges need 3:1 on paper; --color-card-line is too faint for that. */
+  :root { --field-line: #8a7d63; }
+  .out { font: 13px/1 var(--font-archivo), sans-serif; color: var(--color-label); text-decoration: underline; background: none; border: 0; padding: 0 8px; margin-right: -8px; min-height: 44px; cursor: pointer; }
+  fieldset { display: contents; }
   .field { display: grid; gap: 8px; }
   .wrap[hidden], .field[hidden], .done[hidden], .flag[hidden], .hint[hidden] { display: none; }
   .lbl { font: 600 12px/1.3 var(--font-archivo), sans-serif; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-label); }
   .hint { margin: 0; font-size: 13px; color: var(--color-muted); }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .chip { font: 600 13px/1 var(--font-archivo), sans-serif; padding: 9px 14px; border-radius: 999px; border: 1.5px solid var(--color-card-line); background: var(--color-cream); color: var(--color-ink); cursor: pointer; }
+  .chip { font: 600 13px/1 var(--font-archivo), sans-serif; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1.5px solid var(--field-line); background: var(--color-cream); color: var(--color-ink); cursor: pointer; }
   .chip[aria-pressed="true"] { background: var(--color-lime); border-color: var(--color-ink); }
   .chip.tape { border-radius: 0; }
   .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -139,7 +154,8 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
   /* iOS Safari gives date and time inputs a wide intrinsic width; let them shrink to the column. */
   input[type="date"], input[type="time"] { -webkit-appearance: none; appearance: none; min-width: 0; min-height: 50px; display: block; }
   input::-webkit-date-and-time-value { text-align: left; }
-  input[type="password"], input[type="date"], input[type="time"], textarea { width: 100%; box-sizing: border-box; font: 16px/1.5 var(--font-archivo), sans-serif; color: var(--color-ink); background: var(--color-cream); border: 1.5px solid var(--color-card-line); border-radius: 14px; padding: 11px 13px; }
+  input[type="password"], input[type="date"], input[type="time"], textarea { width: 100%; box-sizing: border-box; font: 16px/1.5 var(--font-archivo), sans-serif; color: var(--color-ink); background: var(--color-cream); border: 1.5px solid var(--field-line); border-radius: 14px; padding: 11px 13px; }
+  :disabled { cursor: wait; }
   textarea { min-height: 110px; resize: vertical; }
   :focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; }
   .flag { margin: 0; font-size: 13px; color: var(--color-biro); display: flex; gap: 8px; align-items: baseline; }
@@ -149,8 +165,12 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
   .print:nth-child(odd) { transform: rotate(-1.2deg); }
   .print:nth-child(even) { transform: rotate(1deg); }
   .print img { display: block; width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 8px; }
-  .print button { position: absolute; top: 12px; right: 12px; font: 600 12px/1 var(--font-archivo), sans-serif; padding: 6px 9px; border-radius: 999px; border: 0; background: var(--color-ink); color: var(--color-cream); cursor: pointer; }
-  .add { aspect-ratio: 4/5; border: 1.5px dashed var(--color-line); border-radius: 12px; display: grid; place-items: center; color: var(--color-label); font-size: 13px; cursor: pointer; }
+  .print button { position: absolute; top: 12px; right: 12px; font: 600 13px/1 var(--font-archivo), sans-serif; padding: 9px 12px; border-radius: 999px; border: 0; background: var(--color-ink); color: var(--color-cream); cursor: pointer; }
+  /* Visible pill stays small on the print; the tap area is 44px. */
+  .print button::before { content: ""; position: absolute; inset: -7px; }
+  .print.shrinking { aspect-ratio: 4/5; display: grid; place-items: center; font-size: 13px; color: var(--color-label); box-sizing: border-box; }
+  .add { aspect-ratio: 4/5; border: 1.5px dashed var(--field-line); border-radius: 12px; display: grid; place-items: center; color: var(--color-label); font-size: 13px; cursor: pointer; }
+  .add:focus-within { outline: 2px solid var(--color-ink); outline-offset: 2px; }
   .add[hidden] { display: none; }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   .btn { font: 600 15px/1 var(--font-archivo), sans-serif; padding: 14px 18px; border-radius: 999px; border: 1.5px solid var(--color-ink); cursor: pointer; }
@@ -162,6 +182,18 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
   .opt[aria-pressed="true"] { border-color: var(--color-ink); background: var(--color-lime-soft); }
   .opt .k { font: 600 11px/1.3 var(--font-archivo), sans-serif; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-label); }
   .opt .t { font-size: 15px; }
+  /* Preview: the card's header line and prints, small and plain. */
+  .peek { background: var(--color-cream); border: 1.5px solid var(--color-card-line); border-radius: 16px; padding: 14px 15px; display: grid; gap: 10px; }
+  .peek-line { display: flex; align-items: center; gap: 8px; font: 600 12px/1.3 var(--font-archivo), sans-serif; letter-spacing: 0.08em; text-transform: uppercase; }
+  .peek-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-ink); flex: none; }
+  .peek-photos { display: flex; gap: 8px; }
+  .peek-photos img, .done-photos img { width: 56px; aspect-ratio: 4/5; object-fit: cover; border-radius: 6px; background: var(--color-paper); }
+  .peek-text { margin: 0; font-size: 15px; white-space: pre-line; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  .peek-line[hidden], .peek-photos[hidden], .peek-text[hidden] { display: none; }
+  .done-photos { display: flex; gap: 8px; margin-bottom: 8px; }
+  .done-photos:empty { display: none; }
+  .done-photos img { border: 3px solid var(--color-cream); border-radius: 8px; }
+  .done h2:focus { outline: none; }
   .done { background: var(--color-ink); color: var(--color-cream); border-radius: 24px; padding: 20px 22px; display: grid; gap: 6px; }
   .done h2 { font: 400 28px/1 var(--font-instrument-serif), serif; margin: 0; }
   .done p { margin: 0; font-size: 14px; color: #d9d3c4; }
