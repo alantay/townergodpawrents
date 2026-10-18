@@ -2,6 +2,8 @@ import type { Stay } from "../guests.ts";
 
 /** The labels an entry can wear instead of its time (add-entry.md). */
 export const LABELS = ["Throwback", "Thoughts", "Fun fact"] as const;
+/** The fourth chip: no label and no time on the card (`<!-- no-time -->`). */
+export const NO_TIME = "No time";
 
 export interface GuestInfo {
   id: string;
@@ -22,6 +24,7 @@ export interface EntryInput {
   /** Already formatted: "3:20pm". */
   time: string;
   label?: string;
+  noTime?: boolean;
   with: string[];
   text: string;
   photos: Photo[];

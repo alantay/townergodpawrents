@@ -12,6 +12,7 @@ export interface NewEntry {
   iso: string;
   time: string;
   label?: string;
+  noTime?: boolean;
   with: string[];
   text: string;
   images: { alt: string; file: string }[];
@@ -40,6 +41,7 @@ export function entryBlock(entry: NewEntry, guestId: string): string {
     `<!-- entry-id: ${entry.id} -->`,
     ...(entry.with.length ? [`<!-- with: ${entry.with.join(", ")} -->`] : []),
     ...(entry.label ? [`<!-- label: ${entry.label} -->`] : []),
+    ...(entry.noTime ? ["<!-- no-time -->"] : []),
   ].join("\n");
   return [
     `### ${entry.time}`,

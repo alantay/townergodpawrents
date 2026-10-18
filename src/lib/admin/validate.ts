@@ -2,7 +2,7 @@
 // reach the build. Messages follow docs/agents/voice.md.
 import { dogNames, fmtDay, stayLabel, stayOn, type Stay } from "../guests.ts";
 import { formatTime, sanitizeText } from "./format.ts";
-import { LABELS, type EntryInput, type GuestInfo, type Photo } from "./types.ts";
+import { LABELS, NO_TIME, type EntryInput, type GuestInfo, type Photo } from "./types.ts";
 
 export const MAX_TEXT = 4000;
 export const MAX_PHOTOS = 4;
@@ -52,7 +52,9 @@ export function validate(raw: RawEntry, guests: GuestInfo[]): Checked {
   const time = formatTime(raw.time);
   if (!isDate(raw.iso) || !time) return fail("Pick a day and time.");
 
-  const label = raw.label.trim();
+  const picked = raw.label.trim();
+  const noTime = picked === NO_TIME;
+  const label = noTime ? "" : picked;
   if (label && !(LABELS as readonly string[]).includes(label)) return fail("Pick a label from the list.");
 
   const withIds = [...new Set(raw.with.map((id) => id.trim()).filter(Boolean))].filter((id) => id !== guest.id);
@@ -80,6 +82,6 @@ export function validate(raw: RawEntry, guests: GuestInfo[]): Checked {
     ok: true,
     guest,
     withGuests: withGuests as GuestInfo[],
-    input: { guest: guest.id, iso: raw.iso, time, ...(label ? { label } : {}), with: withIds, text, photos: raw.photos },
+    input: { guest: guest.id, iso: raw.iso, time, ...(label ? { label } : {}), ...(noTime ? { noTime } : {}), with: withIds, text, photos: raw.photos },
   };
 }

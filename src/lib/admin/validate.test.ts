@@ -32,6 +32,14 @@ test("no label means no label key", () => {
   assert.equal("label" in result.input, false);
 });
 
+test("No time is a flag, not a label", () => {
+  const result = validate({ ...OK, label: "No time" }, GUESTS);
+  assert.ok(result.ok);
+  assert.equal(result.input.noTime, true);
+  assert.equal("label" in result.input, false);
+  assert.equal(result.input.time, "3:20pm");
+});
+
 test("check-in and check-out days both count", () => {
   assert.equal(error({ iso: "2026-10-13" }), undefined);
   assert.equal(error({ iso: "2026-10-21" }), undefined);

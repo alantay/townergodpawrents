@@ -4,7 +4,7 @@
 import { Font } from "astro:assets";
 import "../styles/global.css";
 import { adminGuests, authed } from "../lib/admin/server";
-import { LABELS } from "../lib/admin/types";
+import { LABELS, NO_TIME } from "../lib/admin/types";
 
 export const prerender = false;
 
@@ -54,12 +54,12 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
 
       {loggedIn && (
         <form id="post" class="wrap" novalidate>
-          <div class="row">
+          <div class="row" id="when-row">
             <div class="field">
               <label class="lbl" for="iso">Day</label>
               <input id="iso" name="iso" type="date" required />
             </div>
-            <div class="field">
+            <div class="field" id="time-field">
               <label class="lbl" for="time">Time</label>
               <input id="time" name="time" type="time" required />
             </div>
@@ -75,8 +75,9 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
           <div class="field">
             <span class="lbl" id="label-lbl">Label (optional)</span>
             <div class="chips" id="labels" role="group" aria-labelledby="label-lbl">
-              {LABELS.map((label) => <button type="button" class="chip tape" aria-pressed="false" data-label={label}>{label}</button>)}
+              {[...LABELS, NO_TIME].map((label) => <button type="button" class="chip tape" aria-pressed="false" data-label={label}>{label}</button>)}
             </div>
+            <p class="hint" id="label-hint" hidden></p>
           </div>
           <div class="field">
             <label class="lbl" for="text">What happened</label>
@@ -134,6 +135,7 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
   .chip[aria-pressed="true"] { background: var(--color-lime); border-color: var(--color-ink); }
   .chip.tape { border-radius: 0; }
   .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .row.solo { grid-template-columns: 1fr; }
   /* iOS Safari gives date and time inputs a wide intrinsic width; let them shrink to the column. */
   input[type="date"], input[type="time"] { -webkit-appearance: none; appearance: none; min-width: 0; min-height: 50px; display: block; }
   input::-webkit-date-and-time-value { text-align: left; }

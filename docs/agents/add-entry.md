@@ -7,6 +7,7 @@ Alan tells you a moment, sometimes with one or two photos. You polish the words 
 - **Guest**: the live one if only one dog is here today (check `stays` in `src/content/guests/*.md` against today in Asia/Singapore). Otherwise ask.
 - **Time**: use what he says. If he doesn't give one, use now in SGT (`TZ=Asia/Singapore date "+%-I:%M%p"`, lowercased, and drop `:00`, so `9am` and `2:45pm`).
 - **Label** (for an entry that isn't a moment from that time): keep the time heading as usual and add `<!-- label: Throwback -->` after the ID. The card shows the label where the time would; the time only orders the entry. Use one of three: `Throwback` (an old photo or moment from before today), `Thoughts` (something on his mind, not something that happened), `Fun fact` (a thing learned about the dog). Ask before using any other word.
+- **No time** (when he wants neither a time nor a label on the card): keep the time heading as usual and add `<!-- no-time -->` after the ID. The card shows no time; the time only orders the entry.
 - **Day**: today in SGT unless he says otherwise. It must fall inside one of the guest's stays, or the build fails. If it doesn't, ask whether a stay needs extending.
 - **Media**: optional; either up to four photos, or one short video, per entry. Never mix a video with a photo in the same entry. A photo or video on its own is a valid entry.
 
@@ -65,6 +66,7 @@ The slug is 2–4 words taken from the moment (`climbing-wall`, `lap-nap`).
 - Give each entry a unique, permanent ID in a comment just after its heading: `<!-- entry-id: e053 -->`. Check the guest's existing IDs and use the next free number. Keep the ID when editing the time or words; shared reactions use it.
 - An entry about two dogs together is written once, under one dog, with `<!-- with: bobbi -->` after the ID (comma-separate for more). The build copies it into the other dog's diary in time order, labels both "with …", and both share one reactions count. That day must fall within the other dog's stay, or the build fails.
 - Swap the time shown on the card for a word with `<!-- label: Throwback -->` after the ID. The heading keeps its time, so the entry still sorts and files like any other.
+- Hide the time without a label using `<!-- no-time -->` after the ID. Same deal: the heading keeps its time for ordering.
 - Credit borrowed music or media with `<!-- credit: Music: Name, from Pixabay -->` after the ID. It shows as small print under the entry, not in the words.
 - Leave a blank line between the heading, the text and each image. Put at most four images under an entry, or a single video (same `![alt](./path)` syntax — the `.mp4` extension is what tells it apart from a photo).
 

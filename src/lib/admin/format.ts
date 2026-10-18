@@ -12,9 +12,10 @@ export function formatTime(hhmm: string): string | undefined {
   return m[2] === "00" ? `${h12}${suffix}` : `${h12}:${m[2]}${suffix}`;
 }
 
-/** Alt text when OpenAI can't help: "Luna, 16 Oct 3:20pm". */
-export function fallbackAlt(name: string, iso: string, time12: string): string {
-  return `${name}, ${fmtDay(iso)} ${time12}`;
+/** Alt text when OpenAI can't help: "Luna, 16 Oct 3:20pm", or "Luna, 16 Oct"
+ * when the card shows no time. */
+export function fallbackAlt(name: string, iso: string, time12?: string): string {
+  return time12 ? `${name}, ${fmtDay(iso)} ${time12}` : `${name}, ${fmtDay(iso)}`;
 }
 
 /** Alt text goes inside ![...](...), so it can't carry brackets or comments. */
