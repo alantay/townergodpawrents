@@ -577,7 +577,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             '<a href="/guests/' +
             esc(next.guest.id) +
             '" class="mt-[18px] flex items-center gap-3.5 border-[1.5px] border-dashed border-line rounded-[24px] p-[13px_15px] rotate-1 transition-transform duration-250 hover:rotate-0 hover:scale-[1.02]">' +
-            '<div id="next-up-photo" class="w-16 h-16 rounded-[17px] overflow-hidden flex-none" style="background:' +
+            '<div id="next-up-photo" aria-hidden="true" class="w-16 h-16 rounded-[17px] overflow-hidden flex-none" style="background:' +
             next.guest.bgColor +
             '"></div>' +
             '<div class="min-w-0">' +
@@ -600,7 +600,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             '<a href="/guests/' +
             esc(lastGuest.id) +
             '" class="' + (next ? "mt-3" : "mt-[18px]") + ' flex items-center gap-3.5 bg-cream card-keyline rounded-[24px] p-[13px_15px] -rotate-1 transition-transform duration-250 hover:rotate-0 hover:scale-[1.02]">' +
-            '<div id="last-seen-photo" class="w-16 h-16 rounded-[17px] overflow-hidden flex-none" style="background:' +
+            '<div id="last-seen-photo" aria-hidden="true" class="w-16 h-16 rounded-[17px] overflow-hidden flex-none" style="background:' +
             lastGuest.bgColor +
             '"></div>' +
             '<div class="min-w-0">' +
@@ -837,7 +837,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               '">' +
               '<div class="h-[114px] p-[9px_9px_0]"><div id="past-photo-' +
               i +
-              '" class="h-full w-full"></div></div>' +
+              '" aria-hidden="true" class="h-full w-full"></div></div>' +
               '<div class="p-[9px_13px_13px] bg-cream">' +
               '<div class="font-serif text-[22px] leading-none">' +
               esc(g.name) +

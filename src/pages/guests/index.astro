@@ -97,7 +97,7 @@ const dateFor = (g: (typeof all)[number]) =>
             >
               Here today
             </span>
-            <div class="cell-photo p-[9px_9px_0] h-[132px]">
+            <div class="cell-photo p-[9px_9px_0] h-[132px]" aria-hidden="true">
               <Cutout photo={g.photo} name={g.name} height={123} loading={index < 2 ? "eager" : "lazy"} />
             </div>
             <div class="p-[11px_13px_14px] bg-cream">
