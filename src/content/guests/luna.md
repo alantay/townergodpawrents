@@ -16,6 +16,14 @@ stays:
 
 ## 18 Oct
 
+### 6:55pm
+
+<!-- entry-id: e108 -->
+
+“What are you doing, hoomans? Share!”
+
+![Luna peeks around a person's leg, looking up with her head tilted.](./luna/luna-what-are-you.jpg)
+
 ### 1:30pm
 
 <!-- entry-id: e107 -->
