@@ -16,6 +16,14 @@ stays:
 
 ## 19 Oct
 
+### 9:16pm
+
+<!-- entry-id: e111 -->
+
+Fomo queen ready to launch
+
+![Luna lies on the wooden floor with her legs spread out and tongue peeking out.](./luna/luna-fomo-queen-ready.jpg)
+
 ### 7:30pm
 
 <!-- entry-id: e110 -->
