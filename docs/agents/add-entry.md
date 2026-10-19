@@ -67,7 +67,7 @@ The slug is 2–4 words taken from the moment (`climbing-wall`, `lap-nap`).
 - An entry about two dogs together is written once, under one dog, with `<!-- with: bobbi -->` after the ID (comma-separate for more). The build copies it into the other dog's diary in time order, labels both "with …", and both share one reactions count. That day must fall within the other dog's stay, or the build fails.
 - Swap the time shown on the card for a word with `<!-- label: Throwback -->` after the ID. The heading keeps its time, so the entry still sorts and files like any other.
 - Hide the time without a label using `<!-- no-time -->` after the ID. Same deal: the heading keeps its time for ordering.
-- Credit borrowed music or media with `<!-- credit: Music: Name, from Pixabay -->` after the ID. It shows as small print under the entry, not in the words.
+- Credit borrowed music or media with `<!-- credit: Music: Name, from Pixabay -->` after the ID. It shows as small print under the entry, not in the words. For CC BY, link the source and licence: `[Name](https://...), [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)`. CC0 needs no credit.
 - Leave a blank line between the heading, the text and each image. Put at most four images under an entry, or a single video (same `![alt](./path)` syntax — the `.mp4` extension is what tells it apart from a photo).
 
 ```md

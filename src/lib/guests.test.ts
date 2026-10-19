@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { crossPost, diaryTextHtml, dogNames, entryMinutes, listNames, parseDiary, printWidth, stayLabel, VIDEO_MAX_HEIGHT } from "./guests.ts";
+import { creditHtml, crossPost, diaryTextHtml, dogNames, entryMinutes, listNames, parseDiary, printWidth, stayLabel, VIDEO_MAX_HEIGHT } from "./guests.ts";
 
 test("stayLabel adds diary years without changing compact labels", () => {
   const stay = { checkIn: "2026-09-13", checkOut: "2026-09-23" };
@@ -167,6 +167,11 @@ test("diary captions strike words while escaping authored HTML", () => {
   assert.equal(diaryTextHtml("Post breakfast ~~nap~~ coma."), "Post breakfast <del>nap</del> coma.");
   assert.equal(diaryTextHtml("<script> & ~~<b>nap</b>~~"), "&lt;script&gt; &amp; <del>&lt;b&gt;nap&lt;/b&gt;</del>");
   assert.equal(diaryTextHtml("An unfinished ~~nap"), "An unfinished ~~nap");
+});
+
+test("credits link to sources while escaping authored HTML", () => {
+  assert.equal(creditHtml("Sound: [Ann](https://x.org/a?b=1&c=2), CC BY"), 'Sound: <a href="https://x.org/a?b=1&amp;c=2" class="credit-link">Ann</a>, CC BY');
+  assert.equal(creditHtml("[x](javascript:alert(1)) <b>"), "[x](javascript:alert(1)) &lt;b&gt;");
 });
 
 test("entryMinutes orders entry times across noon and midnight", () => {
