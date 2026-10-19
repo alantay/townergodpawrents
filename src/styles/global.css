@@ -68,6 +68,11 @@ a:hover {
   color: var(--color-moss);
 }
 
+/* Small print under an entry, so its links need the underline to read as links. */
+.credit-link {
+  text-decoration: underline;
+}
+
 a:focus-visible {
   outline: 2px solid var(--color-ink);
   outline-offset: 3px;

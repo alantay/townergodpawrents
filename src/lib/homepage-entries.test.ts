@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 import { groupHeroColor } from "./group-hero-color.ts";
-import { diaryTextHtml, SOFA_GREEN } from "./guests.ts";
+import { creditHtml, diaryTextHtml, SOFA_GREEN } from "./guests.ts";
 
 const source = readFileSync(new URL("../pages/index.astro", import.meta.url), "utf8");
 const render = runInNewContext(
@@ -14,6 +14,7 @@ const render = runInNewContext(
     guestSkins: (base: string) => [{}, { bg: base, fg: "#fff", accent: "#fff" }],
     groupHeroColor,
     diaryTextHtml,
+    creditHtml,
     skin: () => ({ bg: "#fff", fg: "#000", accent: "#000" }),
     luma: () => 100,
     tilt: () => 0,

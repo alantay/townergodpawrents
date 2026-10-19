@@ -460,3 +460,9 @@ export function diaryTextHtml(text: string): string {
   return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
     .replace(/~~([^~]+)~~/g, "<del>$1</del>");
 }
+
+/** Credits allow `[text](https://...)` links, e.g. to a sound and its licence. */
+export function creditHtml(text: string): string {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/\[([^\]]+)\]\((https:\/\/[^\s()"]+)\)/g, '<a href="$2" class="credit-link">$1</a>');
+}
