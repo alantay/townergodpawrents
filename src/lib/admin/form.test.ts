@@ -19,22 +19,22 @@ test("nowSGT is Singapore time, rolling over midnight", () => {
   assert.deepEqual(nowSGT(new Date("2026-10-16T16:30:00Z")), { iso: "2026-10-17", time: "00:30" });
 });
 
-test("draftWhen keeps a recent unsent draft's day and time", () => {
+test("draftWhen keeps a recent unsent draft's day, time and label", () => {
   const now = new Date("2026-10-17T02:00:00Z"); // 10am SGT
-  const draft = { iso: "2026-10-16", time: "21:40", text: "zoomies", savedAt: now.getTime() - 3 * 60 * 60 * 1000 };
-  assert.deepEqual(draftWhen(draft, now), { iso: "2026-10-16", time: "21:40" });
+  const draft = { iso: "2026-10-16", time: "21:40", label: "", text: "zoomies", savedAt: now.getTime() - 3 * 60 * 60 * 1000 };
+  assert.deepEqual(draftWhen(draft, now), { iso: "2026-10-16", time: "21:40", label: "" });
 });
 
 test("draftWhen keeps a recent photo-only draft's day and time", () => {
   const now = new Date("2026-10-18T04:00:00Z"); // 12pm SGT
   const draft = { iso: "2026-10-17", time: "21:30", text: "", photoCount: 2, savedAt: now.getTime() - 60 * 1000 };
-  assert.deepEqual(draftWhen(draft, now), { iso: "2026-10-17", time: "21:30" });
+  assert.deepEqual(draftWhen(draft, now), { iso: "2026-10-17", time: "21:30", label: "No time" });
 });
 
-test("draftWhen falls back to now for an old draft, an empty one, or one with no savedAt", () => {
+test("draftWhen falls back to now and No time for an old draft, an empty one, or one with no savedAt", () => {
   const now = new Date("2026-10-17T02:00:00Z");
-  const fresh = { iso: "2026-10-17", time: "10:00" };
-  const old = { iso: "2026-10-12", time: "08:00", text: "zoomies", savedAt: now.getTime() - 7 * 60 * 60 * 1000 };
+  const fresh = { iso: "2026-10-17", time: "10:00", label: "No time" };
+  const old = { iso: "2026-10-12", time: "08:00", label: "Throwback", text: "zoomies", savedAt: now.getTime() - 7 * 60 * 60 * 1000 };
   assert.deepEqual(draftWhen(old, now), fresh);
   assert.deepEqual(draftWhen({ ...old, text: "", savedAt: now.getTime() }, now), fresh);
   assert.deepEqual(draftWhen({ iso: "2026-10-12", time: "08:00", text: "zoomies" }, now), fresh);

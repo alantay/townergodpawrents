@@ -61,7 +61,7 @@ const errorBox = $("error");
 const go = $<HTMLButtonElement>("go");
 const done = $("done");
 
-let state: Draft = { guest: "", iso: "", time: "", label: "", with: [], text: "" };
+let state: Draft = { guest: "", iso: "", time: "", label: NO_TIME, with: [], text: "" };
 let photos: Blob[] = [];
 let postKey = crypto.randomUUID();
 let shrinking = 0;
@@ -358,7 +358,7 @@ form.addEventListener("submit", async (event) => {
 
 $("again").addEventListener("click", () => {
   const now = nowSGT();
-  state = { guest: state.guest, iso: now.iso, time: now.time, label: "", with: [], text: "" };
+  state = { guest: state.guest, iso: now.iso, time: now.time, label: NO_TIME, with: [], text: "" };
   iso.value = state.iso;
   time.value = state.time;
   text.value = "";
@@ -400,7 +400,7 @@ state = {
   guest: draft.guest ?? "",
   iso: when.iso,
   time: when.time,
-  label: draft.label ?? "",
+  label: when.label,
   with: Array.isArray(draft.with) ? draft.with : [],
   text: draft.text ?? "",
 };
