@@ -20,7 +20,7 @@ stays:
 
 <!-- entry-id: e109 -->
 <!-- no-time -->
-<!-- credit: Record scratch: [Raccoonanimator](https://opengameart.org/content/scratch-speed), [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) -->
+<!-- credit: Credit: [Raccoonanimator](https://opengameart.org/content/scratch-speed), [CC BY](https://creativecommons.org/licenses/by/3.0/) -->
 
 Luna having an intimate time with the fridge until Alan came home. The fridge is filing for harassment.
 
