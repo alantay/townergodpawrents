@@ -5,6 +5,7 @@ import { formatTime } from "../lib/admin/format.ts";
 import { NO_TIME } from "../lib/admin/types.ts";
 import { fmtDay } from "../lib/guests.ts";
 import { loadPhotos, savePhotos } from "./photo-draft.ts";
+import type { PhotoDescription } from "../lib/admin/photo-descriptions.ts";
 
 const DRAFT_KEY = "tgp-admin-draft";
 const MAX_PHOTOS = 4;
@@ -15,7 +16,7 @@ const POST_TIMEOUT_MS = 45_000;
 const POLISH_TIMEOUT_MS = 30_000;
 const BAD_SEND = "That didn't send properly. Try again.";
 const BAD_PHOTO = "Can't read this photo. Try a JPEG or a screenshot of it.";
-const BAD_POLISH = "Polish didn't work this time. Your words are still here.";
+const BAD_POLISH = "Couldn't suggest words this time. Your words and photos are still here. Try again.";
 // The postKey makes a retry safe even if the slow one did land.
 const SLOW_SEND = "Taking too long. Try again, it won't post twice.";
 const LOST_PHOTOS = "Your words came back but the photos didn't. Add them again.";
@@ -47,6 +48,7 @@ const polishBtn = $<HTMLButtonElement>("polish");
 const optionsField = $("options-field");
 const optionsBox = $("options");
 const polishNote = $("polish-note");
+const suggestionStatus = $("suggestion-status");
 const photosBox = $("photos");
 const addTile = $("add");
 const files = $<HTMLInputElement>("files");
@@ -68,6 +70,10 @@ let shrinking = 0;
 // Saved photos still coming back from IndexedDB: posting or picking now would lose them.
 let restoring = true;
 let busy = false;
+let suggesting = false;
+let descriptions: PhotoDescription[] = [];
+let optionContext = "";
+let optionPhotos: Blob[] = [];
 const urls = new WeakMap<Blob, string>();
 
 function urlFor(blob: Blob): string {
@@ -109,6 +115,7 @@ function render() {
   const here = dogsOn(guests, state.iso);
   if (!here.some((g) => g.id === state.guest)) state.guest = here.length === 1 ? here[0].id : "";
   state.with = state.with.filter((id) => id !== state.guest && here.some((g) => g.id === id));
+  if (optionContext !== contextKey() || !samePhotos(optionPhotos)) optionsField.hidden = true;
 
   dogsBox.replaceChildren(
     ...here.map((g) => chip(g.name, g.id === state.guest, () => {
@@ -145,11 +152,21 @@ function render() {
 
   const name = guests.find((g) => g.id === state.guest)?.name;
   go.textContent = busy ? "Posting…" : name ? `Post to ${name}'s diary` : "Post";
-  go.disabled = busy || restoring || shrinking > 0;
+  go.disabled = busy || restoring || suggesting || shrinking > 0;
+  polishBtn.disabled = busy || restoring || suggesting || shrinking > 0;
+  polishBtn.textContent = suggesting ? (photos.length ? "Looking at photos…" : "Polishing…") : state.text.trim() ? "Polish my words" : "Suggest words";
   fields.disabled = busy;
   files.disabled = restoring;
   addTile.hidden = photos.length + shrinking >= MAX_PHOTOS;
   renderPreview();
+}
+
+function contextKey(): string {
+  return JSON.stringify([state.guest, [...state.with].sort()]);
+}
+
+function samePhotos(snapshot: Blob[]): boolean {
+  return snapshot.length === photos.length && snapshot.every((photo, i) => photo === photos[i]);
 }
 
 function thumb(blob: Blob): HTMLImageElement {
@@ -272,7 +289,7 @@ function card(kind: string, words: string, pressed: boolean): HTMLButtonElement 
     text.value = words;
     state.text = words;
     save();
-    renderPreview();
+    render();
     for (const other of optionsBox.querySelectorAll(".opt")) other.setAttribute("aria-pressed", String(other === button));
   });
   return button;
@@ -285,25 +302,42 @@ function loggedOut(res: Response): boolean {
 }
 
 polishBtn.addEventListener("click", async () => {
+  if (busy || suggesting || shrinking) return;
   showError("");
-  polishBtn.disabled = true;
-  polishBtn.textContent = "Polishing…";
+  suggestionStatus.hidden = true;
+  const yours = text.value;
+  const requestContext = contextKey();
+  const requestPhotos = [...photos];
+  const data = new FormData();
+  data.set("guest", state.guest);
+  data.set("text", yours);
+  for (const id of state.with) data.append("with", id);
+  requestPhotos.forEach((blob, i) => data.append("photos", blob, `photo-${i + 1}.jpg`));
+  suggesting = true;
+  render();
   try {
     const res = await fetch("/api/admin/polish", {
       method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ guest: state.guest, text: text.value, with: state.with }),
+      body: data,
       signal: AbortSignal.timeout(POLISH_TIMEOUT_MS),
     });
     if (loggedOut(res)) return;
     const body = await res.json();
     if (!res.ok) return showError(body.error || BAD_SEND);
-    const yours = text.value;
+    if (requestContext !== contextKey() || !samePhotos(requestPhotos) || text.value !== yours || shrinking) {
+      suggestionStatus.textContent = "Your entry changed. Ask for suggestions again.";
+      suggestionStatus.hidden = false;
+      return;
+    }
+    descriptions = body.descriptions || [];
+    optionContext = requestContext;
+    optionPhotos = requestPhotos;
+    const hasWords = !!yours.trim();
     optionsBox.replaceChildren(
-      card("Yours", yours, true),
-      card("Polished", body.polished, false),
-      ...(body.twist ? [card("Twist", body.twist, false)] : []),
-      ...(body.rewritten ? [card("Rewritten", body.rewritten, false)] : []),
+      ...(hasWords ? [card("Yours", yours, true)] : []),
+      card(hasWords ? "Polished" : "Caption", body.polished, false),
+      ...(body.twist ? [card(hasWords ? "Twist" : "Playful", body.twist, false)] : []),
+      ...(hasWords && body.rewritten ? [card("Rewritten", body.rewritten, false)] : []),
     );
     polishNote.textContent = body.note || "";
     polishNote.hidden = !body.note;
@@ -311,14 +345,14 @@ polishBtn.addEventListener("click", async () => {
   } catch {
     showError(BAD_POLISH);
   } finally {
-    polishBtn.disabled = false;
-    polishBtn.textContent = "Polish my words";
+    suggesting = false;
+    render();
   }
 });
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  if (busy) return;
+  if (busy || suggesting || shrinking) return;
   showError("");
   busy = true;
   render();
@@ -329,6 +363,7 @@ form.addEventListener("submit", async (event) => {
   data.set("time", postTime(state));
   data.set("label", state.label);
   data.set("text", text.value);
+  data.set("descriptions", JSON.stringify(descriptions));
   for (const id of state.with) data.append("with", id);
   photos.forEach((blob, i) => data.append("photos", blob, `photo-${i + 1}.jpg`));
   try {
@@ -364,9 +399,11 @@ $("again").addEventListener("click", () => {
   text.value = "";
   for (const blob of photos) URL.revokeObjectURL(urlFor(blob));
   photos = [];
+  descriptions = [];
   $("done-photos").replaceChildren();
   postKey = crypto.randomUUID();
   optionsField.hidden = true;
+  suggestionStatus.hidden = true;
   done.hidden = true;
   form.hidden = false;
   renderPhotos();
@@ -384,8 +421,10 @@ time.addEventListener("change", () => {
 });
 text.addEventListener("input", () => {
   state.text = text.value;
+  optionsField.hidden = true;
+  suggestionStatus.hidden = true;
   save();
-  renderPreview();
+  render();
 });
 for (const button of labelsBox.querySelectorAll<HTMLButtonElement>("[data-label]")) {
   button.addEventListener("click", () => {

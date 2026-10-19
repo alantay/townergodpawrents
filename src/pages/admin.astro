@@ -81,18 +81,7 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
             <p class="hint" id="label-hint" hidden></p>
           </div>
           <div class="field">
-            <label class="lbl" for="text">What happened</label>
-            <textarea id="text" name="text"></textarea>
-            <button type="button" class="btn ghost" id="polish">Polish my words</button>
-          </div>
-          <div class="field" id="options-field" hidden>
-            <span class="lbl">Pick one (you can still edit after)</span>
-            <div class="options" id="options"></div>
-            <p class="hint" id="polish-note" hidden></p>
-          </div>
-          <div class="field">
             <span class="lbl">Photos (up to 4)</span>
-            <p class="hint">AI writes the alt text when you post.</p>
             <div class="photos" id="photos">
               <label class="add" id="add">
                 + Add photo
@@ -100,6 +89,18 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
               </label>
             </div>
             <p class="hint" id="photo-note" role="status" hidden></p>
+          </div>
+          <div class="field">
+            <label class="lbl" for="text">What happened (optional)</label>
+            <p class="hint" id="text-hint">Add a little context, or let the photos do the talking.</p>
+            <textarea id="text" name="text" aria-describedby="text-hint"></textarea>
+            <button type="button" class="btn ghost" id="polish">Suggest words</button>
+            <p class="hint" id="suggestion-status" role="status" hidden></p>
+          </div>
+          <div class="field" id="options-field" aria-live="polite" hidden>
+            <span class="lbl">Pick one (you can still edit after)</span>
+            <div class="options" id="options"></div>
+            <p class="hint" id="polish-note" hidden></p>
           </div>
           <hr />
           <div class="field" id="preview-field" hidden>

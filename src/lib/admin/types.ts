@@ -41,9 +41,11 @@ export interface PolishResult {
   twist: string | null;
   rewritten: string | null;
   note: string | null;
+  /** Plain descriptions in the same order as the input photos. */
+  alts?: string[];
 }
 
 export interface Ai {
-  polish(text: string, ctx: AiContext): Promise<PolishResult>;
+  polish(text: string, ctx: AiContext, photos?: Photo[]): Promise<PolishResult>;
   altText(photo: Uint8Array, ctx: AiContext, text: string): Promise<string>;
 }

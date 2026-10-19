@@ -5,6 +5,7 @@ import { COOKIE } from "./auth.ts";
 import { GitHubError, type CommitFile, type GitHub } from "./github.ts";
 import { postApi } from "./post-entry.ts";
 import { sign } from "./session.ts";
+import { descriptionKey } from "./photo-descriptions.ts";
 import { memoryStore, type KeyStore } from "./store.ts";
 import type { Ai, GuestInfo } from "./types.ts";
 
@@ -76,6 +77,32 @@ function request(fields: Record<string, string | string[]>, photos = 0, authed =
 }
 
 const lunaMd = (repo: ReturnType<typeof fakeRepo>) => String(repo.state.files.get(`${DIR}/luna.md`));
+
+test("matching photo descriptions are reused after caption edits without an AI call", async () => {
+  const { api, repo, alts } = setup();
+  const key = descriptionKey({ bytes: JPEG, type: "image/jpeg" }, { name: "Luna", withNames: [], recent: [] });
+  const response = await api.post(request({ text: "A completely edited caption.", descriptions: JSON.stringify([{ key, alt: "Luna [on] the sofa." }]) }, 1));
+  assert.equal(response.status, 200);
+  assert.deepEqual(alts, []);
+  assert.match(lunaMd(repo), /!\[Luna on the sofa\.\]/);
+});
+
+test("changed photos or selected guests get fresh descriptions", async () => {
+  for (const withNames of [[], ["Guapo"]]) {
+    const { api, alts } = setup();
+    const key = descriptionKey({ bytes: withNames.length ? JPEG : new Uint8Array([0xff, 0xd8, 0xff, 9]), type: "image/jpeg" }, { name: "Luna", withNames, recent: [] });
+    assert.equal((await api.post(request({ descriptions: JSON.stringify([{ key, alt: "Stale description." }]) }, 1))).status, 200);
+    assert.deepEqual(alts, ["Luna"]);
+  }
+});
+
+test("malformed description metadata falls back to normal AI alt text", async () => {
+  for (const descriptions of ["not JSON", "null", "{}", '[{"key":null,"alt":12}]']) {
+    const { api, alts } = setup();
+    assert.equal((await api.post(request({ descriptions }, 1))).status, 200);
+    assert.deepEqual(alts, ["Luna"]);
+  }
+});
 
 test("no cookie, no post", async () => {
   const { api, repo } = setup();
