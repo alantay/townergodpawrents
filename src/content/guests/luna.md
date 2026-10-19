@@ -16,6 +16,14 @@ stays:
 
 ## 19 Oct
 
+### 7:30pm
+
+<!-- entry-id: e110 -->
+
+Luna's new strategy to beg for food. Clowning around.
+
+![Luna peeking over the dinner table, head tilted sideways and tongue out, behind a bowl of rice and a jar of treats](./luna/luna-clowning-for-food.mp4)
+
 ### 8:47am
 
 <!-- entry-id: e109 -->
