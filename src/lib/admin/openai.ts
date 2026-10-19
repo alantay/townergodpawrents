@@ -2,7 +2,7 @@
 // is injected so tests never call the API. Every answer goes through cleanAi.
 import { cleanAi } from "./clean-ai.ts";
 import { ALT_SCHEMA, POLISH_SCHEMA, altMessages, polishMessages, type Message } from "./prompts.ts";
-import type { Ai, AiContext, PolishResult } from "./types.ts";
+import type { Ai, AiContext, Photo, PolishResult } from "./types.ts";
 
 export const DEFAULT_MODEL = "gpt-6-luna";
 
@@ -48,11 +48,13 @@ export function openAI(deps: {
   };
 
   return {
-    async polish(text: string, ctx: AiContext): Promise<PolishResult> {
-      const answer = await ask(polishMessages(text, ctx, deps.voice, deps.rules), POLISH_SCHEMA, 1500);
+    async polish(text: string, ctx: AiContext, photos: Photo[] = []): Promise<PolishResult> {
+      const answer = await ask(polishMessages(text, ctx, deps.voice, deps.rules, photos), POLISH_SCHEMA, 1500);
       const polished = clean(answer.polished);
       if (!polished) throw new Error("[admin] OpenAI polish came back empty");
-      return { polished, twist: clean(answer.twist), rewritten: clean(answer.rewritten), note: clean(answer.note) };
+      const alts = Array.isArray(answer.alts) && answer.alts.length === photos.length
+        ? answer.alts.map((alt) => clean(alt) ?? "") : [];
+      return { polished, twist: clean(answer.twist), rewritten: clean(answer.rewritten), note: clean(answer.note), alts };
     },
 
     async altText(photo: Uint8Array, ctx: AiContext, text: string): Promise<string> {

@@ -34,7 +34,7 @@ function isDate(iso: string): boolean {
   return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === iso;
 }
 
-function isJpeg(photo: Photo): boolean {
+export function isJpeg(photo: Photo): boolean {
   const b = photo.bytes;
   return photo.type === "image/jpeg" && b.length > 3 && b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff;
 }

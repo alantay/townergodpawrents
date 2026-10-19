@@ -7,6 +7,7 @@ import type { GitHub } from "./github.ts";
 import { json } from "./http.ts";
 import { insertEntry, nextId } from "./insert-entry.ts";
 import { photoName, slugWords } from "./photo-name.ts";
+import { cachedAlt } from "./photo-descriptions.ts";
 import type { KeyStore } from "./store.ts";
 import type { Ai, GuestInfo, Photo } from "./types.ts";
 import { validate } from "./validate.ts";
@@ -59,6 +60,8 @@ export function postApi(deps: {
       );
       if (!checked.ok) return json({ error: checked.error }, 400);
       const { guest, withGuests, input } = checked;
+      let descriptions: unknown;
+      try { descriptions = JSON.parse(field("descriptions")); } catch { /* No suggestions requested, or an older client. */ }
 
       // The double-tap guard. If Redis is down we post anyway, unguarded.
       const key = `admin-post:${postKey}`;
@@ -78,6 +81,8 @@ export function postApi(deps: {
       const fallback = fallbackAlt(guest.name, input.iso, input.label ?? (input.noTime ? undefined : input.time));
       const alts = await Promise.all(
         input.photos.map(async (photo) => {
+          const reused = cachedAlt(descriptions, photo, ctx);
+          if (reused) return reused;
           try {
             return sanitizeAlt(await deps.ai().altText(photo.bytes, ctx, input.text), fallback);
           } catch (error) {

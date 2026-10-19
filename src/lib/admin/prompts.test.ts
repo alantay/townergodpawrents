@@ -47,3 +47,18 @@ test("schemas are strict and list every property as required", () => {
     assert.deepEqual([...s.schema.required].sort(), Object.keys(s.schema.properties).sort());
   }
 });
+
+test("photo-only prompts carry every image at low detail and separate factual captions from humour", () => {
+  const [system, user] = polishMessages("", CTX, "VOICE", "RULES", [
+    { bytes: new Uint8Array([0xff, 0xd8, 0xff]), type: "image/jpeg" },
+    { bytes: new Uint8Array([0xff, 0xd8, 0xff, 1]), type: "image/jpeg" },
+  ]);
+  const parts = user.content as any[];
+  assert.equal(parts.length, 3);
+  assert.match(parts[0].text, /no words; suggest a caption/);
+  assert.equal(parts[1].image_url.detail, "low");
+  assert.notEqual(parts[1].image_url.url, parts[2].image_url.url);
+  assert.match(String(system.content), /writer's words are the source of truth/);
+  assert.match(String(system.content), /must not invent events/);
+  assert.match(String(system.content), /Return alts separately/);
+});
