@@ -5,9 +5,9 @@ Alan tells you a moment, sometimes with one or two photos. You polish the words 
 ## 1. Gather
 
 - **Guest**: the live one if only one dog is here today (check `stays` in `src/content/guests/*.md` against today in Asia/Singapore). Otherwise ask.
-- **Time**: use what he says. If he doesn't give one, use now in SGT (`TZ=Asia/Singapore date "+%-I:%M%p"`, lowercased, and drop `:00`, so `9am` and `2:45pm`).
+- **Time**: use what he says. If he doesn't give one, it's a **No time** entry (below) by default. The heading then uses now in SGT (`TZ=Asia/Singapore date "+%-I:%M%p"`, lowercased, and drop `:00`, so `9am` and `2:45pm`), or the time on the photo or clip if it has one, just for ordering.
 - **Label** (for an entry that isn't a moment from that time): keep the time heading as usual and add `<!-- label: Throwback -->` after the ID. The card shows the label where the time would; the time only orders the entry. Use one of three: `Throwback` (an old photo or moment from before today), `Thoughts` (something on his mind, not something that happened), `Fun fact` (a thing learned about the dog). Ask before using any other word.
-- **No time** (when he wants neither a time nor a label on the card): keep the time heading as usual and add `<!-- no-time -->` after the ID. The card shows no time; the time only orders the entry.
+- **No time** (the default when he gives no time, or when he wants neither a time nor a label on the card): keep the time heading as usual and add `<!-- no-time -->` after the ID. The card shows no time; the time only orders the entry.
 - **Day**: today in SGT unless he says otherwise. It must fall inside one of the guest's stays, or the build fails. If it doesn't, ask whether a stay needs extending.
 - **Media**: optional; either up to four photos, or one short video, per entry. Never mix a video with a photo in the same entry. A photo or video on its own is a valid entry.
 
