@@ -14,6 +14,17 @@ stays:
     checkOut: 2026-12-03
 ---
 
+## 19 Oct
+
+### 8:47am
+
+<!-- entry-id: e109 -->
+<!-- no-time -->
+
+Luna having an intimate time with the fridge until Alan came home. The fridge is filing for harassment.
+
+![Luna lying pressed up against the fridge, then getting up and trotting to the front door](./luna/luna-fridge-cuddle.mp4)
+
 ## 18 Oct
 
 ### 6:55pm
