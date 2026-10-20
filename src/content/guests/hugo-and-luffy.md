@@ -14,6 +14,16 @@ stays:
 
 ## 20 Oct
 
+### 9:15pm
+
+<!-- entry-id: e002 -->
+<!-- with: luna -->
+<!-- no-time -->
+
+Hugo found his calling. His self-appointed job is to hump Luna. Meanwhile, Luffy wants to play with her, so Luna has to juggle playing with Luffy and protecting herself from Hugo.
+
+![Hugo and Luffy crowd around Luna as she tries to play.](./hugo-and-luffy/hugo-and-luffy-luna-two-jobs.mp4)
+
 ### 8:15pm
 
 <!-- entry-id: e001 -->
