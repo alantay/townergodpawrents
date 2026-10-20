@@ -20,9 +20,9 @@ stays:
 
 <!-- entry-id: e114 -->
 
-Luna, apparently testing whether the black box is head rest.
+Luna testing whether her water stand doubles as a headrest. Early results look promising.
 
-![A brown dog lies beside a black box, with a blue plush toy nearby.](./luna/luna-apparently-testing-whether.jpg)
+![Luna lies with her chin resting on her black water stand, a Snorlax plush beside her.](./luna/luna-apparently-testing-whether.jpg)
 
 ### 11:34am
 
