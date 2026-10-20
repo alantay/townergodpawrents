@@ -408,6 +408,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 }
 
 #hero-photos.scrapbook-buddies {
+  isolation: isolate;
   justify-content: center;
   gap: 0;
   padding-bottom: 12px;
@@ -425,6 +426,10 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 .scrapbook-buddies > button + button {
   margin-left: -18%;
   rotate: -3deg;
+}
+
+.scrapbook-buddies > button:first-child {
+  z-index: 1;
 }
 
 .scrapbook-buddies img {
