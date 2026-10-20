@@ -14,6 +14,17 @@ stays:
     checkOut: 2026-12-03
 ---
 
+## 20 Oct
+
+### 9:38am
+
+<!-- entry-id: e112 -->
+<!-- no-time -->
+
+Luna whining to go out and meet the M1 technician fixing up our fibre.
+
+![Luna pacing beside the closed bedroom door](./luna/luna-meet-m1-technician.mp4)
+
 ## 19 Oct
 
 ### 9:16pm
