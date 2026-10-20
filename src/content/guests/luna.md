@@ -9,7 +9,7 @@ tagline: always has something to whine about, thinks every dog is her play buddy
 whenCalled: "Coming! Bringing what's left of the toy."
 stays:
   - checkIn: 2026-10-13
-    checkOut: 2026-10-21
+    checkOut: 2026-10-20
   - checkIn: 2026-11-26
     checkOut: 2026-12-03
 ---
