@@ -1,5 +1,7 @@
 # Copy choice history
 
+- Chose for Luna, Hugo & Luffy: "Luna thinks she has two new best friends. Hugo and Luffy are still deciding." with "Friendship pending". Named Hugo and Luffy in the second sentence instead of "They".
+
 - Chose for Luna: "always has something to whine about, thinks every dog is her play buddy". Replaced "occasionally derpy"; kept her assumption that every dog wants to play, rather than implying she always has willing play buddies.
 
 Past choices Alan made, preserved from the house voice guide. These record decisions about specific lines; they are not blanket rules for new writing. Read [voice.md](voice.md) for the current guidance, and consult this history when revisiting a particular line.
