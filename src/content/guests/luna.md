@@ -16,6 +16,14 @@ stays:
 
 ## 20 Oct
 
+### 11:34am
+
+<!-- entry-id: e113 -->
+
+Even asleep, Luna is committed to the investigation of backsides.
+
+![A golden dog lies asleep on the floor with its nose near a blue plush toy.](./luna/luna-even-asleep-committed.jpg)
+
 ### 9:38am
 
 <!-- entry-id: e112 -->
