@@ -2,21 +2,21 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { calendarMonths, monthGrid } from "./calendar.ts";
 
-test("monthGrid starts weeks on Monday and pads with the neighbouring months", () => {
+test("monthGrid starts weeks on Sunday and pads with the neighbouring months", () => {
   const sep = monthGrid(2026, 8, []);
   assert.equal(sep.name, "September");
-  // 1 Sep 2026 is a Tuesday, so the first row opens on Monday 31 Aug.
-  assert.deepEqual(sep.weeks[0].days[0], { iso: "2026-08-31", day: 31, inMonth: false });
-  assert.equal(sep.weeks[0].days[1].iso, "2026-09-01");
-  assert.equal(sep.weeks.at(-1)!.days.at(-1)!.iso, "2026-10-04");
+  // 1 Sep 2026 is a Tuesday, so the first row opens on Sunday 30 Aug.
+  assert.deepEqual(sep.weeks[0].days[0], { iso: "2026-08-30", day: 30, inMonth: false });
+  assert.equal(sep.weeks[0].days[2].iso, "2026-09-01");
+  assert.equal(sep.weeks.at(-1)!.days.at(-1)!.iso, "2026-10-03");
 });
 
 test("monthGrid splits a stay across week rows and marks the continuation", () => {
   const stay = { guestId: "suki", checkIn: "2026-09-25", checkOut: "2026-09-28" };
   const sep = monthGrid(2026, 8, [stay]);
   const [first, rest] = sep.weeks.flatMap((w) => w.segments);
-  assert.deepEqual(first, { stay, startCol: 4, span: 3, lane: 0, continued: false });
-  assert.deepEqual(rest, { stay, startCol: 0, span: 1, lane: 0, continued: true });
+  assert.deepEqual(first, { stay, startCol: 5, span: 2, lane: 0, continued: false });
+  assert.deepEqual(rest, { stay, startCol: 0, span: 2, lane: 0, continued: true });
 });
 
 test("monthGrid stacks overlapping stays in separate lanes and reuses free ones", () => {

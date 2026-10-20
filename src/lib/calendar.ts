@@ -14,7 +14,7 @@ export interface CalendarStay extends Stay {
 /** One piece of a stay's bar, clipped to a single week row. */
 export interface Segment<S extends CalendarStay = CalendarStay> {
   stay: S;
-  /** 0 = Monday. */
+  /** 0 = Sunday. */
   startCol: number;
   span: number;
   /** Stacking row within the week, so overlapping stays don't collide. */
@@ -51,12 +51,12 @@ const addDays = (s: string, n: number) => {
   return iso(d);
 };
 
-/** Monday-first weeks covering one month, with stays laid out as bars. */
+/** Sunday-first weeks covering one month, with stays laid out as bars. */
 export function monthGrid<S extends CalendarStay>(year: number, month: number, stays: S[]): Month<S> {
   const first = iso(new Date(Date.UTC(year, month, 1)));
   const last = iso(new Date(Date.UTC(year, month + 1, 0)));
-  const mondayOffset = (utc(first).getUTCDay() + 6) % 7;
-  let weekStart = addDays(first, -mondayOffset);
+  const sundayOffset = utc(first).getUTCDay();
+  let weekStart = addDays(first, -sundayOffset);
 
   const weeks: Week<S>[] = [];
   while (weekStart <= last) {
