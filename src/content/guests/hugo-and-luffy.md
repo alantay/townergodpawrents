@@ -11,3 +11,13 @@ stays:
   - checkIn: 2026-10-20
     checkOut: 2026-10-25
 ---
+
+## 20 Oct
+
+### 8:15pm
+
+<!-- entry-id: e001 -->
+
+Welcome Hugo and Luffy!
+
+![Hugo and Luffy exploring the living room with Luna nearby.](./hugo-and-luffy/hugo-and-luffy-welcome-hugo-luffy.mp4)
