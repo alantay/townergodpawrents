@@ -24,7 +24,7 @@ export interface Stay {
 export const GROUP_HERO: Record<string, { badge?: string; tagline?: string }> = {
   "bobbi+guapo": { badge: "The fox and the sheep", tagline: "social experiment: the school bully and the timid prefect" },
   "guapo+luna": { tagline: "the aloof, dashing bad boy and the submissive fair maiden" },
-  "hugo-and-luffy+luna": { badge: "Round and round", tagline: "Hugo chases Luna. Luna chases Luffy. Luffy follows Hugo." },
+  "hugo-and-luffy+luna": { badge: "Love triangle", tagline: "Hugo chases Luna. Luna chases Luffy. Luffy follows Hugo." },
   "luna+tiny+tyrion": { badge: "Fur is coming", tagline: "the Breaker of Toys, the Queen of Fetch and the Small Lord of Big Opinions" },
 };
 
