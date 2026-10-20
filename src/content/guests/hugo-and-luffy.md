@@ -1,7 +1,7 @@
 ---
 name: Hugo & Luffy
 breed: Border Collie & Pomsky
-photo: ./hugo-and-luffy/hugo-and-luffy-collage-v2.png
+photo: ./hugo-and-luffy/hugo-and-luffy-collage-no-outline-v1.png
 bgColor: "#7A5C24"
 showLive: true
 badge: Big brother, shy shadow
