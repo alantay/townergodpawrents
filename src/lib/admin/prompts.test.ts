@@ -59,6 +59,6 @@ test("photo-only prompts carry every image at low detail and separate factual ca
   assert.equal(parts[1].image_url.detail, "low");
   assert.notEqual(parts[1].image_url.url, parts[2].image_url.url);
   assert.match(String(system.content), /writer's words are the source of truth/);
-  assert.match(String(system.content), /must not invent events/);
+  assert.match(String(system.content), /must not add anything a reader could mistake/);
   assert.match(String(system.content), /Return alts separately/);
 });
