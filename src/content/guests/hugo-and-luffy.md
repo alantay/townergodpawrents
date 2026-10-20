@@ -17,6 +17,7 @@ stays:
 ### 8:15pm
 
 <!-- entry-id: e001 -->
+<!-- with: luna -->
 
 Welcome Hugo and Luffy!
 
