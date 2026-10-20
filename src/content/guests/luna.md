@@ -16,6 +16,14 @@ stays:
 
 ## 20 Oct
 
+### 1:13pm
+
+<!-- entry-id: e114 -->
+
+Luna, apparently testing whether the black box is head rest.
+
+![A brown dog lies beside a black box, with a blue plush toy nearby.](./luna/luna-apparently-testing-whether.jpg)
+
 ### 11:34am
 
 <!-- entry-id: e113 -->
