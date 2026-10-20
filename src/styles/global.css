@@ -416,15 +416,15 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 }
 
 .scrapbook-buddies > button {
-  flex: 0 0 60%;
-  max-width: 320px;
+  /* Same height as #hero-photos; shrinks in proportion when the row is narrow. */
+  flex: 0 1 calc(clamp(240px, 60vw, 320px) * var(--ar, 0.8));
   transform-origin: bottom center;
   rotate: 3deg;
   animation: none;
 }
 
 .scrapbook-buddies > button + button {
-  margin-left: -18%;
+  margin-left: -10%;
   rotate: -3deg;
 }
 

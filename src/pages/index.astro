@@ -1132,6 +1132,9 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var copy = node.content.cloneNode(true);
         var img = copy.querySelector("img");
         if (img && hero) {
+          // Buddies share the row by shape, so a two-dog card isn't squeezed
+          // next to a tall single portrait.
+          targetEl.style.setProperty("--ar", img.width / img.height);
           sizeHero(img, targetEl);
           img.loading = "eager";
           img.fetchPriority = priority;
