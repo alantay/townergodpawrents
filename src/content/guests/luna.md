@@ -16,6 +16,15 @@ stays:
 
 ## 20 Oct
 
+### 6:15pm
+
+<!-- entry-id: e115 -->
+<!-- credit: Music: [Monkeys Spinning Monkeys](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1400011) by Kevin MacLeod (incompetech.com), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Excerpted, mixed and faded. -->
+
+Rosie refuses to give up her toy to Luna. Luna is obsessed with it but too slow to snatch it from Rosie.
+
+![Rosie the corgi keeps hold of her toy while Luna tries to snatch it.](./luna/luna-rosie-toy-standoff.mp4)
+
 ### 1:13pm
 
 <!-- entry-id: e114 -->
