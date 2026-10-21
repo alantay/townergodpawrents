@@ -14,6 +14,15 @@ stays:
 
 ## 21 Oct
 
+### 6:59pm
+
+<!-- entry-id: e008 -->
+<!-- no-time -->
+
+Tiny's owner hilariously added, “Find yourself a man who looks at you the way Hugo looks at Tiny.”
+
+![Hugo looking at Tiny in her orange vest on the rooftop car park](./hugo-and-luffy/hugo-and-luffy-eyes-for-tiny.jpg)
+
 ### 6:22pm
 
 <!-- entry-id: e007 -->
