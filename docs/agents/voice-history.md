@@ -1,5 +1,7 @@
 # Copy choice history
 
+- Removed the guests page's "sofa regular" count and "Some of them keep coming back" line. Alan didn't find the repeat-visit information useful there; kept just the guest count.
+
 - Chose for Hugo & Luffy: "A black & white comedy" with "Hugo only has eyes for the girls. Luffy thinks the whole world is playing chase with him." The badge nods to their black and white coats and the feel of a Charlie Chaplin comedy.
 
 - Chose for Luna, Hugo & Luffy: "Luna thinks she has two new best friends. Hugo and Luffy are still deciding." with "Friendship pending". Named Hugo and Luffy in the second sentence instead of "They".
