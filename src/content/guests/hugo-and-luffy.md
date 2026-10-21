@@ -14,6 +14,15 @@ stays:
 
 ## 21 Oct
 
+### 6:22pm
+
+<!-- entry-id: e007 -->
+<!-- no-time -->
+
+Meeting their neighbours, Rosie and Tiny. Hugo is once again fixated on a girl. This time, it’s Tiny.
+
+![Meeting Rosie and Tiny, with Hugo fixated on Tiny.](./hugo-and-luffy/hugo-and-luffy-meeting-neighbours.mp4)
+
 ### 4:20pm
 
 <!-- entry-id: e006 -->
