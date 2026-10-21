@@ -16,6 +16,16 @@ stays:
 
 ## 20 Oct
 
+### 9:53pm
+
+<!-- entry-id: e117 -->
+<!-- with: hugo-and-luffy -->
+<!-- no-time -->
+
+Hugo kept trying to hump Luna, and she kept snapping at him. Now he’s scared of her.
+
+![Hugo and Luna facing each other on the living room floor](./luna/luna-hugo-keeps-trying.mp4)
+
 ### 9:36pm
 
 <!-- entry-id: e116 -->
