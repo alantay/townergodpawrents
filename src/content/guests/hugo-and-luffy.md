@@ -12,6 +12,17 @@ stays:
     checkOut: 2026-10-25
 ---
 
+## 21 Oct
+
+### 8:10am
+
+<!-- entry-id: e003 -->
+<!-- no-time -->
+
+this morning's play. Luffy baiting Hugo to chase after him.
+
+![Luffy baiting Hugo into a chase in the living room.](./hugo-and-luffy/hugo-and-luffy-morning-chase.mp4)
+
 ## 20 Oct
 
 ### 9:15pm
