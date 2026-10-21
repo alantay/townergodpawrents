@@ -306,7 +306,7 @@ let skinIndex = 0;
                     style={`background:${sk.bg};color:${sk.fg};--entry-tilt:${tilt(i)}`}
                   >
                   <div class="flex items-center gap-2">
-                    <span class="diary-dot" style={`background:${sk.accent}`}></span>
+                    {shown && <span class="diary-dot" style={`background:${sk.accent}`}></span>}
                     <div class="font-semibold text-xs tracking-[0.08em] uppercase" style={`color:${sk.accent}`}>
                       {[shown, e.with.length > 0 && `with ${e.with.map(nameOf).join(" & ")}`].filter(Boolean).join(" · ")}
                     </div>
