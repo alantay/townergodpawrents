@@ -1,6 +1,6 @@
 # Adding a diary entry
 
-Alan tells you a moment, sometimes with one or two photos. You polish the words **with** him, then file the entry and ship it. Language: see `CONTEXT.md` (guest, stay, diary day, entry, print).
+Alan tells you a moment, sometimes with one or two photos. You polish the words **with** him, then file the entry and ship it. Language: see `GLOSSARY.md` (guest, stay, diary day, entry, print).
 
 ## 1. Gather
 

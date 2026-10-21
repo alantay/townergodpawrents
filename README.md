@@ -26,7 +26,7 @@ Tiny napping on the lap while the human tries to work.
 ![Tiny napping on lap](./tiny/tiny-lap-nap.jpg)
 ```
 
-`npm run build` catches days outside a stay and missing photos. New dog or new stay: `docs/agents/new-stay.md`. Words used here (guest, stay, entry, print): `CONTEXT.md`.
+`npm run build` catches days outside a stay and missing photos. New dog or new stay: `docs/agents/new-stay.md`. Words used here (guest, stay, entry, print): `GLOSSARY.md`.
 
 Reactions currently stay in each visitor's browser; see [docs/agents/reactions.md](docs/agents/reactions.md). Each new entry needs a unique, permanent `entry-id` comment; see [the posting guide](docs/agents/add-entry.md).
 

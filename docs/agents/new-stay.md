@@ -1,6 +1,6 @@
 # Adding a guest or a stay
 
-Read `CONTEXT.md` and `docs/adr/0002-guest-has-many-stays.md` first. One dog is one file, forever.
+Read `GLOSSARY.md` and `docs/adr/0002-guest-has-many-stays.md` first. One dog is one file, forever.
 
 Whenever you add a stay or change its dates, check who else is staying over those days. Dogs whose stays overlap must have different `bgColor`s (the Same-Sofa Rule in `DESIGN.md`). If they clash, pick another colour from the guest palette for the dog you're adding or changing.
 

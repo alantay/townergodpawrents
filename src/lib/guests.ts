@@ -1,6 +1,6 @@
 // Shared "who's here today" logic for The Towner Godpawrents.
 //
-// A guest is a dog; a guest has one or more stays. See CONTEXT.md for the
+// A guest is a dog; a guest has one or more stays. See GLOSSARY.md for the
 // language and docs/adr/0002-guest-has-many-stays.md for why.
 //
 // This runs at BUILD time (for the no-JS <noscript> fallback and for the

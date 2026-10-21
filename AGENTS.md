@@ -31,7 +31,7 @@ Triage uses the canonical state labels: `needs-triage`, `needs-info`, `ready-for
 
 ### Domain docs
 
-Single-context layout (`CONTEXT.md` + `docs/adr/` at the repo root). See `docs/agents/domain.md`.
+Single-context layout (`GLOSSARY.md` + `docs/adr/` at the repo root). See `docs/agents/domain.md`.
 
 ## Development
 
