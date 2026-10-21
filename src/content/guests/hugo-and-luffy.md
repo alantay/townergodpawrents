@@ -14,6 +14,15 @@ stays:
 
 ## 21 Oct
 
+### 1:41pm
+
+<!-- entry-id: e005 -->
+<!-- no-time -->
+
+Brothers taking their afternoon nap
+
+![Hugo and Luffy asleep on the wooden floor beside the cupboards.](./hugo-and-luffy/hugo-and-luffy-afternoon-nap.jpg)
+
 ### 12:09pm
 
 <!-- entry-id: e004 -->
