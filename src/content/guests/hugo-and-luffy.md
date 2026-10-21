@@ -19,7 +19,7 @@ stays:
 <!-- entry-id: e003 -->
 <!-- no-time -->
 
-this morning's play. Luffy baiting Hugo to chase after him.
+This morning's play. Luffy baiting Hugo into chasing him.
 
 ![Luffy baiting Hugo into a chase in the living room.](./hugo-and-luffy/hugo-and-luffy-morning-chase.mp4)
 
