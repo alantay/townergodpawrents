@@ -14,6 +14,14 @@ stays:
 
 ## 21 Oct
 
+### 4:20pm
+
+<!-- entry-id: e006 -->
+
+Gravity works sideways for Luffy.
+
+![Luffy asleep on his side on the wooden floor, back paws propped up against the cupboard.](./hugo-and-luffy/hugo-and-luffy-luffy-sideways-gravity.jpg)
+
 ### 1:41pm
 
 <!-- entry-id: e005 -->
