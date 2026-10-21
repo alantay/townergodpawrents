@@ -790,7 +790,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
    they go (after braedencraig's CSS fog pen). The texture is SVG noise that
    tiles, so each layer is two tiles wide and slides one tile along.
    It stays on the dogs and thins out before the pills, so the name stays clear.
-   --haze runs from 0.4 (just over 100) to 1 (very unhealthy). */
+   --haze runs from about 0.27 (just over 100) to 1 (very unhealthy). */
 .haze {
   --smog: 192 195 198;
   --fog-soft: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' preserveAspectRatio='none'%3E%3Cfilter id='f' x='0' y='0' width='1' height='1'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 .009' numOctaves='4' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .75 0 0 0 0 .77 0 0 0 0 .78 3 0 0 0 -1.1'/%3E%3C/filter%3E%3Crect width='600' height='400' filter='url(%23f)'/%3E%3C/svg%3E");

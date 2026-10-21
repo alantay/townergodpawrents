@@ -1098,7 +1098,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             var haze = document.createElement("div");
             haze.className = "haze";
             haze.setAttribute("aria-hidden", "true");
-            haze.style.setProperty("--haze", Math.min(1, 0.4 + (psi - 100) / 220));
+            haze.style.setProperty("--haze", Math.min(1, 0.4 + (psi - 130) / 220));
             haze.innerHTML = "<i></i><i></i><i></i>";
             card.appendChild(haze);
             skyTag(card, "haze", "M2 4.5h9M5 8h9M2 11.5h9", "PSI " + psi);
