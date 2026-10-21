@@ -14,6 +14,15 @@ stays:
 
 ## 21 Oct
 
+### 12:09pm
+
+<!-- entry-id: e004 -->
+<!-- no-time -->
+
+Hugo is a manja king. He keeps asking me to sayang him.
+
+![Hugo asking for more pats.](./hugo-and-luffy/hugo-and-luffy-manja-king.mp4)
+
 ### 8:10am
 
 <!-- entry-id: e003 -->
