@@ -123,6 +123,8 @@ a.fact-chip::before {
   text-transform: uppercase;
 }
 .status-tag--compact { padding: 6px 11px; font-size: 0.6875rem; }
+/* Guest page: long names wrap clear of the "Here today" pill. */
+#here-today:not([hidden]) + h1 { padding-right: 112px; }
 /* Every archive card keeps headroom for the tag, so it never lands on the
    dog's face and the cards all stay one size. */
 .here-pill + .cell-photo { margin-top: 28px; }
