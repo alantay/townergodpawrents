@@ -4,8 +4,8 @@ breed: Border Collie & Pomsky
 photo: ./hugo-and-luffy/hugo-and-luffy-collage-v4.png
 bgColor: "#7A5C24"
 showLive: true
-badge: Big brother, shy shadow
-tagline: Hugo claims every lap, Luffy claims Hugo
+badge: A black & white comedy
+tagline: Hugo only has eyes for the girls. Luffy thinks the whole world is playing chase with him.
 whenCalled: "Hugo's coming. So Luffy's coming."
 stays:
   - checkIn: 2026-10-20

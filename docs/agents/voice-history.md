@@ -1,5 +1,7 @@
 # Copy choice history
 
+- Chose for Hugo & Luffy: "A black & white comedy" with "Hugo only has eyes for the girls. Luffy thinks the whole world is playing chase with him." The badge nods to their black and white coats and the feel of a Charlie Chaplin comedy.
+
 - Chose for Luna, Hugo & Luffy: "Luna thinks she has two new best friends. Hugo and Luffy are still deciding." with "Friendship pending". Named Hugo and Luffy in the second sentence instead of "They".
 
 - Chose for Luna: "always has something to whine about, thinks every dog is her play buddy". Replaced "occasionally derpy"; kept her assumption that every dog wants to play, rather than implying she always has willing play buddies.
