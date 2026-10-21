@@ -16,6 +16,16 @@ stays:
 
 ## 20 Oct
 
+### 9:36pm
+
+<!-- entry-id: e116 -->
+<!-- with: hugo-and-luffy -->
+<!-- no-time -->
+
+Last group photo before Luna leaves.
+
+![Luna, Hugo and Luffy lying together on the living room floor](./luna/luna-last-group-photo.jpg)
+
 ### 6:15pm
 
 <!-- entry-id: e115 -->
