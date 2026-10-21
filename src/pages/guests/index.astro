@@ -36,7 +36,6 @@ function sortKey(g: (typeof all)[number], iso: string) {
 const guests = all
   .filter((g) => arrived(g, today))
   .sort((a, b) => sortKey(b, today).localeCompare(sortKey(a, today)));
-const returningGuests = guests.filter((g) => g.stays.filter((s) => s.checkIn <= today).length > 1).length;
 // The date under each name: the stay they're on, else the last one that ended.
 const dateFor = (g: (typeof all)[number]) =>
   stayLabel((isLiveOn(g, today) && stayOn(g, today)) || lastEndedStay(g, today)!);
@@ -58,12 +57,11 @@ const dateFor = (g: (typeof all)[number]) =>
       Everyone who's stayed
     </h1>
     <p class="mt-3 text-base leading-relaxed text-pretty max-w-[52ch]">
-      Newest first.<span id="returning-note" hidden={returningGuests === 0}> Some of them keep coming back.</span>
+      Newest first.
     </p>
     {guests.length > 0 && (
       <p id="archive-count" class="archive-count mt-5 text-xs font-semibold tracking-[0.1em] uppercase text-label">
         {guests.length} {guests.length === 1 ? "guest" : "guests"}
-        {returningGuests > 0 && <> &middot; {returningGuests} sofa regular{returningGuests === 1 ? "" : "s"}</>}
       </p>
     )}
   </header>
@@ -123,7 +121,6 @@ const dateFor = (g: (typeof all)[number]) =>
       var today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Singapore", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
       var cells = Array.prototype.slice.call(grid.querySelectorAll(".guest-cell"));
       var shown = [];
-      var returning = 0;
       cells.forEach(function (cell) {
         var stays = JSON.parse(cell.dataset.stays);
         var started = stays.filter(function (s) { return s.in <= today; });
@@ -131,7 +128,6 @@ const dateFor = (g: (typeof all)[number]) =>
         var ended = stays.filter(function (s) { return s.out < today; })[0];
         cell.hidden = started.length === 0;
         if (cell.hidden) return;
-        if (started.length > 1) returning++;
         cell.querySelector(".here-pill").hidden = !now;
         cell.querySelector(".archive-date").textContent = (now || ended).label;
         shown.push({ cell: cell, key: now ? "9999" : ended ? ended.out : "" });
@@ -145,12 +141,8 @@ const dateFor = (g: (typeof all)[number]) =>
       });
       var count = document.getElementById("archive-count");
       if (count) {
-        count.textContent =
-          shown.length + (shown.length === 1 ? " guest" : " guests") +
-          (returning > 0 ? " \u00b7 " + returning + " sofa regular" + (returning === 1 ? "" : "s") : "");
+        count.textContent = shown.length + (shown.length === 1 ? " guest" : " guests");
       }
-      var note = document.getElementById("returning-note");
-      if (note) note.hidden = returning === 0;
     })();
   </script>
 
