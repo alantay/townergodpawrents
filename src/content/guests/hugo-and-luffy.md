@@ -18,7 +18,7 @@ stays:
 
 <!-- entry-id: e118 -->
 
-A grandpa, a grandma and a grandkid down at the playground. Hugo and Luffy are watching all three.
+A grandpa, a grandma and a grandkid, under watch by an official canine surveillance team.
 
 ![A fluffy white dog and a black-and-white dog sit by a window, looking outside.](./hugo-and-luffy/hugo-and-luffy-two-grandpas-one.jpg)
 
