@@ -14,6 +14,14 @@ stays:
 
 ## 22 Oct
 
+### 11:22am
+
+<!-- entry-id: e120 -->
+
+It's Weiwen's turn to be harassed by Hugo for pats.
+
+![Hugo pushing his head up under Weiwen's arm at her desk, grinning.](./hugo-and-luffy/hugo-and-luffy-harassed-for-pats.mp4)
+
 ### 10:15am
 
 <!-- entry-id: e119 -->
