@@ -14,6 +14,14 @@ stays:
 
 ## 22 Oct
 
+### 9:12am
+
+<!-- entry-id: e118 -->
+
+Two grandpas, one grandchild, and an official canine surveillance team.
+
+![A fluffy white dog and a black-and-white dog sit by a window, looking outside.](./hugo-and-luffy/hugo-and-luffy-two-grandpas-one.jpg)
+
 ### 7:15am
 
 <!-- entry-id: e009 -->
