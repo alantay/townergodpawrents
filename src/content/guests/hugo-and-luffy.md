@@ -14,6 +14,14 @@ stays:
 
 ## 22 Oct
 
+### 2:18pm
+
+<!-- entry-id: e121 -->
+
+Hugo’s refuge when Luffy’s idea of a break is to keep playing.
+
+![Black-and-white dog lying under a desk beside cables and a power strip.](./hugo-and-luffy/hugo-and-luffy-refuge-when-idea.jpg)
+
 ### 11:22am
 
 <!-- entry-id: e120 -->
