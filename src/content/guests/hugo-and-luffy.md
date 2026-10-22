@@ -19,7 +19,7 @@ stays:
 <!-- entry-id: e124 -->
 <!-- no-time -->
 
-Is this a Border Collie thing?
+Same same but different.
 
 ![Tiny and Hugo resting their heads against walls, shown side by side.](./hugo-and-luffy/hugo-and-luffy-border-collie-wall-comparison.jpg)
 
