@@ -14,6 +14,15 @@ stays:
 
 ## 22 Oct
 
+### 9:58pm
+
+<!-- entry-id: e124 -->
+<!-- no-time -->
+
+Is this a Border Collie thing?
+
+![Tiny and Hugo resting their heads against walls, shown side by side.](./hugo-and-luffy/hugo-and-luffy-border-collie-wall-comparison.jpg)
+
 ### 4:30pm
 
 <!-- entry-id: e123 -->
