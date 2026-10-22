@@ -14,6 +14,14 @@ stays:
 
 ## 22 Oct
 
+### 10:15am
+
+<!-- entry-id: e119 -->
+
+"Kor kor wants it, so I must have it," Luffy thinks.
+
+![Luffy going after Hugo's green ball on the floor cushion.](./hugo-and-luffy/hugo-and-luffy-kor-kor-wants-it.mp4)
+
 ### 9:12am
 
 <!-- entry-id: e118 -->
