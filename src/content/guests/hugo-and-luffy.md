@@ -14,6 +14,14 @@ stays:
 
 ## 22 Oct
 
+### 2:30pm
+
+<!-- entry-id: e122 -->
+
+Featuring Luffy's way of asking for pats
+
+![Luffy looking up and asking for pats.](./hugo-and-luffy/hugo-and-luffy-luffy-asking-pats.mp4)
+
 ### 2:18pm
 
 <!-- entry-id: e121 -->
