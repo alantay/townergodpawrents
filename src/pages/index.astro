@@ -742,6 +742,9 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
                 // gets its own slip of ruled paper tucked under them.
                 noteHTML;
             }
+            // With one guest on the sofa the name says nothing new, so only
+            // two-guest days and shared moments carry it.
+            var named = pair || e.shared;
             var textHTML = e.text && !matCaption && !noteCaption
               ? '<p class="' +
                 (e.media.length ? "mt-4" : "mt-2") +
@@ -764,11 +767,11 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               '<div class="font-semibold text-xs tracking-[0.08em] uppercase" style="color:' +
               sk.accent +
               '">' +
-              (e.shown ? esc(e.shown) + " · " : "") +
-              e.participants.map((g) =>
+              (e.shown ? esc(e.shown) + (named ? " · " : "") : "") +
+              (named ? e.participants.map((g) =>
                 '<a href="/guests/' + esc(g.id) + '#entry-' + esc(e.entryId) + '" class="diary-guest-link" aria-label="' +
                 esc(g.name + "'s diary" + (e.shown ? ", " + e.shown : "")) + '">' + esc(g.name) + "</a>"
-              ).join(" &amp; ") +
+              ).join(" &amp; ") : "") +
               (isNew(e.id, e.key) ? ' <span class="new-tag ml-1 align-[1px]">New</span>' : "") +
               "</div>" +
               mediaHTML +

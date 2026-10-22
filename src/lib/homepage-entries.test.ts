@@ -44,14 +44,24 @@ test("homepage names link to each participant's copy of a shared moment", () => 
   }
 });
 
-test("an individual homepage entry also has a name link and a plain timestamp", () => {
+test("a lone guest's own entry shows just its time, no name", () => {
   const html = render([{
     id: "bobbi", name: "Bobbi", bgColor: "#fff",
     entries: [{ id: "e071", time: "5:55pm", mins: 1075, text: "Door prank.", media: [], withGuests: [] }],
   }], "2026-10-10");
+  assert.ok(!html.includes("diary-guest-link"));
+  assert.ok(html.includes(">5:55pm<"));
+  assert.ok(html.includes("Bobbi&rsquo;s full diary"));
+});
+
+test("on a two-guest day each entry names its dog", () => {
+  const entry = { id: "e071", time: "5:55pm", mins: 1075, text: "Door prank.", media: [], withGuests: [] };
+  const html = render([
+    { id: "bobbi", name: "Bobbi", bgColor: "#fff", entries: [entry] },
+    { id: "guapo", name: "Guapo", bgColor: "#fff", entries: [] },
+  ], "2026-10-10");
   assert.ok(html.includes('href="/guests/bobbi#entry-e071" class="diary-guest-link"'));
   assert.ok(html.includes(">5:55pm · <a "));
-  assert.ok(html.includes("Bobbi&rsquo;s full diary"));
 });
 
 test("a labelled homepage entry shows its label, not its time", () => {
@@ -59,17 +69,16 @@ test("a labelled homepage entry shows its label, not its time", () => {
     id: "bobbi", name: "Bobbi", bgColor: "#fff",
     entries: [{ id: "e075", time: "9:30pm", label: "Throwback", mins: 1290, text: "Twinning.", media: [], withGuests: [] }],
   }], "2026-10-11");
-  assert.ok(html.includes(">Throwback · <a "));
+  assert.ok(html.includes(">Throwback<"));
   assert.ok(!html.includes("9:30pm"));
 });
 
-test("a no-time homepage entry shows just the dog", () => {
+test("a no-time entry from a lone guest shows neither time nor name", () => {
   const html = render([{
     id: "bobbi", name: "Bobbi", bgColor: "#fff",
     entries: [{ id: "e075", time: "9:30pm", noTime: true, mins: 1290, text: "Twinning.", media: [], withGuests: [] }],
   }], "2026-10-11");
-  assert.ok(html.includes('"><a href="/guests/bobbi#entry-e075"'));
-  assert.ok(html.includes('aria-label="Bobbi\'s diary"'));
+  assert.ok(!html.includes("diary-guest-link"));
   assert.ok(!html.includes("9:30pm"));
 });
 
