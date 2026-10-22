@@ -14,12 +14,13 @@ stays:
 
 ## 22 Oct
 
-### 4:58pm
+### 4:30pm
 
 <!-- entry-id: e123 -->
-<!-- no-time -->
 
-Maro the Pomeranian, our next-door neighbour, came to visit. Luffy was having fun with him while Hugo wondered when he’d get to join in.
+Marou the Pomeranian, our next-door neighbour, came to visit. Luffy was having fun with him while Hugo wondered when he’d get to join in.
+
+![Marou and Luffy playing on the sofa while Hugo watches.](./hugo-and-luffy/hugo-and-luffy-maro-visit.mp4)
 
 ### 2:30pm
 
