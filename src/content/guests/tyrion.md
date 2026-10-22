@@ -10,6 +10,10 @@ whenCalled: "Throw something and we'll talk."
 stays:
   - checkIn: 2026-10-14
     checkOut: 2026-10-14
+  - checkIn: 2026-11-04
+    checkOut: 2026-11-04
+  - checkIn: 2026-11-18
+    checkOut: 2026-11-18
 ---
 
 <!-- Character notes from Alan: Feisty and very playful. Picky about his friends,
