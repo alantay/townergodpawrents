@@ -12,6 +12,16 @@ stays:
     checkOut: 2026-10-25
 ---
 
+## 22 Oct
+
+### 7:15am
+
+<!-- entry-id: e009 -->
+
+Luffy is convinced Hugo's water tastes better, so he squeezes in to drink with him.
+
+![Luffy and Hugo with their heads squeezed into the same water bowl.](./hugo-and-luffy/hugo-and-luffy-shared-water-bowl.jpg)
+
 ## 21 Oct
 
 ### 6:59pm
