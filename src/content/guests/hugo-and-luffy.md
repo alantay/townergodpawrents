@@ -12,6 +12,16 @@ stays:
     checkOut: 2026-10-25
 ---
 
+## 23 Oct
+
+### 7:30am
+
+<!-- entry-id: e125 -->
+
+No one was at the carpark this morning but that doesn't stop the brothers entertaining themselves.
+
+![Hugo and Luffy entertaining each other in the empty rooftop carpark](./hugo-and-luffy/hugo-and-luffy-carpark-entertainment.mp4)
+
 ## 22 Oct
 
 ### 9:58pm
