@@ -14,6 +14,14 @@ stays:
 
 ## 23 Oct
 
+### 6:45pm
+
+<!-- entry-id: e128 -->
+
+Luffy is bringing the ball back every time we throw it! He rarely does that. Maybe he learnt from Rosie. Now, Rosie, can you teach him to stop biting everything?
+
+![Luffy bringing the ball back](./hugo-and-luffy/hugo-and-luffy-luffy-bringing-ball.mp4)
+
 ### 5pm
 
 <!-- entry-id: e127 -->
