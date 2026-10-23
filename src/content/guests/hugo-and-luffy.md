@@ -14,6 +14,14 @@ stays:
 
 ## 23 Oct
 
+### 5pm
+
+<!-- entry-id: e127 -->
+
+Tired from asking for pats.
+
+![A black-and-white dog and a white dog lie stretched out on the floor beside a wooden table.](./hugo-and-luffy/hugo-and-luffy-tired-asking-pats.jpg)
+
 ### 2:20pm
 
 <!-- entry-id: e126 -->
