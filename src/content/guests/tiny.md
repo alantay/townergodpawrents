@@ -12,6 +12,8 @@ stays:
     checkOut: 2026-09-23
   - checkIn: 2026-10-14
     checkOut: 2026-10-14
+  - checkIn: 2026-10-31
+    checkOut: 2026-10-31
 ---
 
 ## 14 Oct
