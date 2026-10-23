@@ -961,6 +961,11 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   max-width: 100%;
 }
 
+/* Leave room between stacked names for descenders such as the g in Hugo. */
+.fit-headline--stacked {
+  line-height: 0.95;
+}
+
 /* Day jump strip: sticks under the top edge so a long stay is one tap from
    any day. Scrolls sideways rather than wrapping once a stay runs long. */
 .day-strip {
