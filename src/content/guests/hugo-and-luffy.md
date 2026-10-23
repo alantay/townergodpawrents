@@ -14,6 +14,14 @@ stays:
 
 ## 23 Oct
 
+### 2:20pm
+
+<!-- entry-id: e126 -->
+
+Hugo came to Weiwen to hide from Luffy, but Luffy found him.
+
+![Hugo hiding near Weiwen as Luffy finds him](./hugo-and-luffy/hugo-and-luffy-hide-from-luffy.mp4)
+
 ### 7:30am
 
 <!-- entry-id: e125 -->
