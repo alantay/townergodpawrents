@@ -14,6 +14,14 @@ stays:
 
 ## 23 Oct
 
+### 8:50pm
+
+<!-- entry-id: e129 -->
+
+Luffy loves our purple squeaky plushie so much that he’s trying to bury it. We’re dying from the cuteness.
+
+![Luffy trying to bury the purple squeaky plushie.](./hugo-and-luffy/hugo-and-luffy-burying-purple-plushie.mp4)
+
 ### 6:45pm
 
 <!-- entry-id: e128 -->
