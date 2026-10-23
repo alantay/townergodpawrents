@@ -16,6 +16,10 @@ _Avoid_: Owner (ambiguous with the site's owners), client
 One visit by a guest, from check-in to check-out. A guest has one or more; each is a date range.
 _Avoid_: Booking, reservation, visit, session
 
+**Drop-in**:
+A stay where Alan and Weiwen look after the guest at the guest's own home instead of on their sofa. Marked `dropIn: true` on the stay. On the homepage the guest's cut-out sits in a paper house; elsewhere a small house mark sits by the dates. See ADR 0010.
+_Avoid_: Home visit, house call, sitting
+
 **Diary day**:
 One calendar day within a stay, written as a `## 13 Sep` divider. The year is not written down — it comes from whichever stay contains the day.
 _Avoid_: Date section, day entry

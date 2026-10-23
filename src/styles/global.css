@@ -503,6 +503,143 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   filter: drop-shadow(0 4px 3px rgb(30 32 25 / 0.16));
 }
 
+/* Drop-in: a dog we look after at its own home sits in the doorway of a
+   paper house. See docs/adr/0010-drop-in-stays.md. */
+.pat-dog.drop-in > div {
+  position: relative;
+  z-index: 2;
+}
+
+.paper-house {
+  position: absolute;
+  z-index: 0;
+  inset: -40% -3% 3% -3%;
+  filter: drop-shadow(0 4px 6px rgb(30 32 25 / 0.35));
+  pointer-events: none;
+}
+
+.paper-house > * {
+  position: absolute;
+}
+
+.paper-house .eave,
+.paper-house .roof {
+  left: -6%;
+  right: -6%;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.paper-house .roof {
+  left: -1%;
+  right: -1%;
+  top: 5%;
+  height: 36%;
+}
+
+.paper-house .wall {
+  left: 5%;
+  right: 5%;
+  top: 40%;
+  bottom: 0;
+}
+
+.paper-house .door {
+  bottom: 0;
+  border-radius: 999px 999px 0 0;
+}
+
+/* Cardboard kennel, for a boy: kraft, corrugated, stitched, a bone over
+   the door and a strip of striped tape. */
+.paper-house--kennel .eave { top: 0; height: 42%; background: #8f6740; }
+.paper-house--kennel .roof { background: #b98a5a repeating-linear-gradient(90deg, rgb(0 0 0 / 0.07) 0 2px, transparent 2px 6px); }
+.paper-house--kennel .wall { background: #d6b585 repeating-linear-gradient(90deg, rgb(0 0 0 / 0.06) 0 2px, transparent 2px 6px); }
+.paper-house--kennel .wall::after {
+  content: "";
+  position: absolute;
+  inset: 6px 6px 0;
+  border: 2px dashed rgb(253 250 241 / 0.75);
+  border-bottom: 0;
+}
+.paper-house--kennel .door { left: 18%; right: 18%; top: 48%; background: #4a3826; }
+.paper-house--kennel .bone { left: 50%; top: 22%; translate: -50% 0; rotate: -6deg; }
+.paper-house--kennel .tape {
+  right: 0;
+  top: 38%;
+  width: 46px;
+  height: 15px;
+  rotate: 32deg;
+  opacity: 0.95;
+  background: repeating-linear-gradient(-45deg, rgb(247 226 122 / 0.95) 0 4px, rgb(253 250 241 / 0.9) 4px 7px);
+  clip-path: polygon(0 0, 100% 0, 95% 25%, 100% 50%, 95% 75%, 100% 100%, 0 100%, 5% 75%, 0 50%, 5% 25%);
+}
+
+/* Gingham, for a girl: pink gingham walls, a polka-dot roof, a heart in
+   the gable. */
+.paper-house--gingham .eave { top: 1%; height: 41%; background: #fdfaf1; }
+.paper-house--gingham .roof {
+  background-color: #8e4a5c;
+  background-image: radial-gradient(circle, rgb(253 250 241 / 0.6) 0 2.2px, transparent 2.7px);
+  background-size: 11px 11px;
+}
+.paper-house--gingham .heart { left: 50%; top: 18%; translate: -50% 0; }
+.paper-house--gingham .wall {
+  background-color: #fdfaf1;
+  background-image: linear-gradient(90deg, rgb(217 140 156 / 0.45) 50%, transparent 0), linear-gradient(rgb(217 140 156 / 0.45) 50%, transparent 0);
+  background-size: 14px 14px;
+}
+.paper-house--gingham .door {
+  left: 17%;
+  right: 17%;
+  top: 48%;
+  background: #4b5a3e;
+  outline: 3px dotted #fdfaf1;
+  outline-offset: -6px;
+  border: 5px solid #8e4a5c;
+  border-bottom: 0;
+}
+
+/* On its own or in a pair, the dog keeps the shape it has in the pack, so
+   the house is never stretched. A smaller dog, so the roof fits under the
+   chips. */
+#hero-photos.has-house:not(.scrapbook-pack) > .drop-in {
+  flex: 0 0 auto;
+  aspect-ratio: 1.18;
+  max-width: 54%;
+}
+#hero-photos.has-house:not(.scrapbook-buddies, .scrapbook-pack) {
+  justify-content: center;
+}
+#hero-photos.has-house:not(.scrapbook-buddies, .scrapbook-pack) > .drop-in {
+  height: 66%;
+  margin-bottom: 4%;
+}
+
+/* A pair in two places stands apart. */
+#hero-photos.scrapbook-buddies.has-house {
+  justify-content: space-between;
+  gap: 6%;
+  margin-top: 40px;
+  margin-inline: 4% 6%;
+}
+.scrapbook-buddies.has-house > button {
+  flex: 0 0 46%;
+  height: 92%;
+  rotate: -5deg;
+}
+.scrapbook-buddies.has-house > button.drop-in {
+  height: 64%;
+  margin-left: 0;
+  rotate: 3deg;
+}
+
+/* A pack shuffles over so the last dog's house has room. */
+#hero-photos.scrapbook-pack.has-house {
+  margin-inline: -6px;
+}
+.scrapbook-pack.has-house > button:nth-child(1) { left: -2%; width: 44%; }
+.scrapbook-pack.has-house > button:nth-child(2) { left: 19%; width: 40%; height: 72%; }
+.scrapbook-pack.has-house > button:nth-child(3) { right: 1%; top: 46%; width: 44%; height: 54%; rotate: 3deg; }
+
 .diary-timeline {
   position: relative;
   padding-left: 1.1rem;

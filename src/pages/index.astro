@@ -18,6 +18,7 @@ import {
   crossPost,
   pastGuests,
   staysNewestFirst,
+  houseFor,
   warnOnOverlaps,
   dateStr,
   GROUP_HERO,
@@ -111,9 +112,12 @@ const entries = await getCollection("guests");
 
 const guests = entries.map((e) => {
   const stays = staysNewestFirst(
-    e.data.stays.map((s) => ({ checkIn: dateStr(s.checkIn), checkOut: dateStr(s.checkOut) })),
+    e.data.stays.map((s) => ({ checkIn: dateStr(s.checkIn), checkOut: dateStr(s.checkOut), dropIn: s.dropIn })),
   );
   warnOnOverlaps(e.id, stays);
+  if (stays.some((s) => s.dropIn) && !e.data.sex) {
+    console.warn(`[guests] ${e.id}: drop-in with no sex set, so it gets the cardboard kennel.`);
+  }
   return {
     id: e.id,
     name: e.data.name,
@@ -125,6 +129,8 @@ const guests = entries.map((e) => {
     sounds: e.data.sounds,
     bgColor: e.data.bgColor,
     showLive: e.data.showLive,
+    sex: e.data.sex ?? null,
+    house: houseFor(e.data.sex),
     photo: e.data.photo,
     stays,
     days: parseDiary(e.body ?? "", stays, e.id),
@@ -486,7 +492,25 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       };
 
       // ---- build hero + today-entries markup for the live states ----
+      // A drop-in dog is looked after at its own home, so it gets a paper
+      // house on the homepage. Sofa dogs go first, drop-ins take the last spot.
+      function dropsIn(g, today) {
+        var s = stayOn(g, today);
+        return !!(s && s.dropIn);
+      }
+      var BONE = '<svg class="bone" width="40" height="17" viewBox="0 0 78 32" aria-hidden="true"><g fill="#fdfaf1"><circle cx="10" cy="9" r="8"/><circle cx="10" cy="23" r="8"/><circle cx="68" cy="9" r="8"/><circle cx="68" cy="23" r="8"/><rect x="10" y="8" width="58" height="16" rx="3"/></g></svg>';
+      var HEART = '<svg class="heart" width="24" height="22" viewBox="0 0 24 22" aria-hidden="true"><path d="M12 21C5 15 1 11 1 6.5 1 3.4 3.4 1 6.5 1 8.6 1 10.6 2.2 12 4c1.4-1.8 3.4-3 5.5-3C20.6 1 23 3.4 23 6.5 23 11 19 15 12 21z" fill="#f4d9de"/></svg>';
+      function houseHTML(house) {
+        var top = '<span class="eave"></span><span class="roof"></span>';
+        var body = '<span class="wall"></span><span class="door"></span>';
+        return '<span class="paper-house paper-house--' + house + '" aria-hidden="true">' + top +
+          (house === "gingham" ? HEART + body : body + BONE + '<span class="tape"></span>') + "</span>";
+      }
+      var AT = { female: "at hers", male: "at his" };
+
       function heroLiveHTML(live, today) {
+        live = live.filter((d) => !dropsIn(d, today)).concat(live.filter((d) => dropsIn(d, today)));
+        var drops = live.filter((d) => dropsIn(d, today)).length;
         var pair = live.length > 1;
         var color = pair ? S.groupHeroColor(live, today) : live[0].bgColor;
         var dogs = dogsIn(live);
@@ -500,7 +524,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           : esc(live[0].name);
         var group = (pair && groupHero[live.map((d) => d.id).sort().join("+")]) || {};
         var sub = pair
-          ? group.tagline ? esc(group.tagline) : groupWord(dogs.length) + " dogs on the sofa. Humans on the floor."
+          ? group.tagline ? esc(group.tagline) : drops ? "We commute between sofas now." : groupWord(dogs.length) + " dogs on the sofa. Humans on the floor."
           : esc(live[0].tagline);
         var sizeClass = pack
           ? "hero-pack-name mt-[30px] fit-headline--clear"
@@ -520,9 +544,10 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         } else {
           live.forEach((d) => {
             var day = goingHome(d, today) ? "going home today" : stayDay(stayOn(d, today), today).toLowerCase();
+            if (dropsIn(d, today)) day = AT[d.sex] || "at home";
             chips.push({ label: d.name + " · " + (day || d.breed), href: "/guests/" + d.id });
           });
-          chips.push({ label: group.badge || "Vacuum on overtime", tape: true });
+          chips.push({ label: group.badge || (drops ? "Two-house day" : "Vacuum on overtime"), tape: true });
         }
 
         var chipsHTML = chips
@@ -543,7 +568,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             color +
             '">' +
             '<div id="hero-badge" class="absolute top-[18px] right-[18px] status-tag animate-wiggle">' +
-            (leaving ? "Going home today" : "Here today") +
+            (leaving ? "Going home today" : drops === live.length ? "Dropping in today" : "Here today") +
             "</div>" +
             '<div class="w-full"><h1 class="' + (pack ? '' : 'fit-headline ') +
             sizeClass +
@@ -556,7 +581,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             '<div class="mt-[14px] flex gap-2 flex-wrap">' +
             chipsHTML +
             "</div>" +
-            '<div id="hero-photos" class="flex gap-1.5 items-end -mx-2 mt-[18px]' + (live.length === 2 ? ' scrapbook-buddies' : live.length > 2 ? ' scrapbook-pack' : '') + '" style="height:' +
+            '<div id="hero-photos" class="flex gap-1.5 items-end -mx-2 mt-[18px]' + (live.length === 2 ? ' scrapbook-buddies' : live.length > 2 ? ' scrapbook-pack' : '') + (drops ? ' has-house' : '') + '" style="height:' +
             photoH +
             '"></div>' +
             "</div>",
@@ -1175,11 +1200,11 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           var photosEl = document.getElementById("hero-photos");
           appEl.hidden = false;
           // Pat a dog and it hops and woofs. After that it's anyone's guess, never the same twice in a row.
-          var dogBtns = result.live.map((d) => {
+          var dogBtns = hero.live.map((d) => {
             var b = document.createElement("button");
             b.type = "button";
             b.ariaLabel = "Pat " + d.name;
-            b.className = "pat-dog relative block flex-1 min-w-0 h-full animate-drift cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime";
+            b.className = "pat-dog relative block flex-1 min-w-0 h-full animate-drift cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime" + (dropsIn(d, today) ? " drop-in" : "");
             b.innerHTML = '<span class="pat-marks" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 27C12 23 4 18 4 11a7 7 0 0 1 12-4 7 7 0 0 1 12 4c0 7-8 12-12 16Z"/></svg><svg viewBox="0 0 32 32"><path d="M16 27C12 23 4 18 4 11a7 7 0 0 1 12-4 7 7 0 0 1 12 4c0 7-8 12-12 16Z"/></svg><svg viewBox="0 0 32 32"><path d="M16 27C12 23 4 18 4 11a7 7 0 0 1 12-4 7 7 0 0 1 12 4c0 7-8 12-12 16Z"/></svg></span>';
             var lines = ["Woof!"].concat(d.sounds, d.whenCalled || "Heard you. Busy.");
             var last;
@@ -1189,12 +1214,15 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               replay(b.querySelector(".pat-marks"), "pat-marks--playing");
               var fresh = lines.filter((l) => l !== last);
               last = last ? fresh[Math.floor(Math.random() * fresh.length)] : "Woof!";
-              heroNote((result.live.length > 1 ? d.name + ": " : "") + last);
+              heroNote((hero.live.length > 1 ? d.name + ": " : "") + last);
             });
             photosEl.appendChild(b);
             return b;
           });
-          result.live.forEach((d, i) => insertPhoto(d.id, dogBtns[i], undefined, true, i === 0 ? "high" : "auto"));
+          hero.live.forEach((d, i) => {
+            insertPhoto(d.id, dogBtns[i], undefined, true, i === 0 ? "high" : "auto");
+            if (dropsIn(d, today)) dogBtns[i].insertAdjacentHTML("beforeend", houseHTML(d.house));
+          });
           result.live.forEach(markSeen);
         }
         if (preview) {

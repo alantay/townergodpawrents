@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { creditHtml, crossPost, diaryTextHtml, dogNames, entryMinutes, listNames, parseDiary, printWidth, stayLabel, VIDEO_MAX_HEIGHT } from "./guests.ts";
+import { atHome, creditHtml, crossPost, diaryTextHtml, dogNames, entryMinutes, listNames, parseDiary, printWidth, stayLabel, houseFor, VIDEO_MAX_HEIGHT } from "./guests.ts";
 
 test("stayLabel adds diary years without changing compact labels", () => {
   const stay = { checkIn: "2026-09-13", checkOut: "2026-09-23" };
@@ -218,4 +218,16 @@ test("crossPost refuses a day outside the other guest's stays", () => {
 
 test("a 9:16 phone video prints as wide as a 3:4 photo", () => {
   assert.equal(printWidth(1080, 1920, VIDEO_MAX_HEIGHT), printWidth(1200, 1600));
+});
+
+test("a drop-in girl gets gingham, a boy or an unknown gets the kennel", () => {
+  assert.equal(houseFor("female"), "gingham");
+  assert.equal(houseFor("male"), "kennel");
+  assert.equal(houseFor(undefined), "kennel");
+});
+
+test("atHome says whose home a drop-in stay is at", () => {
+  assert.equal(atHome("female"), "at hers");
+  assert.equal(atHome("male"), "at his");
+  assert.equal(atHome(undefined), "at home");
 });
