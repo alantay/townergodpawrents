@@ -13,6 +13,8 @@ import {
   diaryTextHtml,
   dogNames,
   stayLabel,
+  atHome,
+  type Stay,
   staysNewestFirst,
   stayOn,
   latestStay,
@@ -106,10 +108,10 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { name, breed, tagline, badge, bgColor, showLive, photo, whenCalled, sounds } = entry.data;
+const { name, breed, tagline, badge, bgColor, showLive, photo, whenCalled, sounds, sex } = entry.data;
 
 const stays = staysNewestFirst(
-  entry.data.stays.map((s) => ({ checkIn: dateStr(s.checkIn), checkOut: dateStr(s.checkOut) })),
+  entry.data.stays.map((s) => ({ checkIn: dateStr(s.checkIn), checkOut: dateStr(s.checkOut), dropIn: s.dropIn })),
 );
 warnOnOverlaps(entry.id, stays);
 
@@ -128,7 +130,9 @@ const emptyLines = {
 };
 // Labels are formatted here so the browser script below doesn't need its own
 // copy of stayLabel.
-const labelledStays = stays.map((s) => ({ ...s, label: stayLabel(s, true) }));
+// A drop-in stay happens at the dog's own home, so the label says whose.
+const whenWhere = (s: Stay) => stayLabel(s, true) + (s.dropIn ? ` · ${atHome(sex)}` : "");
+const labelledStays = stays.map((s) => ({ ...s, label: whenWhere(s) }));
 
 // Every diary is parsed so entries other guests share "with" this one land
 // here too, see crossPost.
@@ -189,7 +193,7 @@ let skinIndex = 0;
     <div class="mt-[14px] flex gap-2 flex-wrap">
       <span class="fact-chip">{breed}</span>
       <span id="hero-stay-dates" class="fact-chip">
-        {!here && next ? "Next stay · " : ""}{stayLabel(shownStay, true)}
+        {!here && next ? "Next stay · " : ""}{whenWhere(shownStay)}
       </span>
       {showLive && (
         <span id="stay-day" class="fact-chip" hidden></span>
@@ -240,7 +244,7 @@ let skinIndex = 0;
       {entryCount > 0 && <p class="mt-1.5 text-sm text-label">{entryCount} {entryCount === 1 ? "entry" : "entries"}.</p>}
     </div>
     <div id="diary-stay" class:list={["diary-stay text-right text-[0.6875rem] font-semibold tracking-[0.08em] uppercase text-label", !here && next ? "" : "hidden sm:block"]}>
-      <span id="diary-stay-when">{diaryStay.checkOut < today ? "Last stay" : !recordedStay && !here && next ? "Next stay" : "Latest stay"}</span><br /><span id="diary-stay-dates">{stayLabel(diaryStay, true)}</span>
+      <span id="diary-stay-when">{diaryStay.checkOut < today ? "Last stay" : !recordedStay && !here && next ? "Next stay" : "Latest stay"}</span><br /><span id="diary-stay-dates">{whenWhere(diaryStay)}</span>
     </div>
   </div>
 

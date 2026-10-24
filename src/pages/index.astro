@@ -111,9 +111,12 @@ const entries = await getCollection("guests");
 
 const guests = entries.map((e) => {
   const stays = staysNewestFirst(
-    e.data.stays.map((s) => ({ checkIn: dateStr(s.checkIn), checkOut: dateStr(s.checkOut) })),
+    e.data.stays.map((s) => ({ checkIn: dateStr(s.checkIn), checkOut: dateStr(s.checkOut), dropIn: s.dropIn })),
   );
   warnOnOverlaps(e.id, stays);
+  if (stays.some((s) => s.dropIn) && !e.data.sex) {
+    console.warn(`[guests] ${e.id}: drop-in with no sex set, so its card says "At home" instead of his or her place.`);
+  }
   return {
     id: e.id,
     name: e.data.name,
@@ -125,6 +128,7 @@ const guests = entries.map((e) => {
     sounds: e.data.sounds,
     bgColor: e.data.bgColor,
     showLive: e.data.showLive,
+    sex: e.data.sex ?? null,
     photo: e.data.photo,
     stays,
     days: parseDiary(e.body ?? "", stays, e.id),
@@ -486,7 +490,54 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       };
 
       // ---- build hero + today-entries markup for the live states ----
-      function heroLiveHTML(live, today) {
+      // A drop-in dog is looked after at its own home, so it never shares the
+      // sofa dogs' card. It gets its own card, tucked under ours.
+      function dropsIn(g, today) {
+        var s = stayOn(g, today);
+        return !!(s && s.dropIn);
+      }
+      var PLACE = { female: "At her place.", male: "At his place." };
+      function tuckHTML(away, today) {
+        return away
+          .map((d, i) => {
+            var place = PLACE[d.sex] || "At home.";
+            return '<div class="behind" style="background:' + d.bgColor + ";--i:" + (away.length - 1 - i) + '">' +
+              '<button type="button" class="behind-pull" aria-expanded="false" aria-label="' + esc(d.name) + ". " + place + ' Pull out the card"></button>' +
+              '<span class="behind-name" aria-hidden="true">' + esc(d.name) + "</span>" +
+              '<span class="behind-line" aria-hidden="true">' + place + " We pop over.</span>" +
+              '<span class="behind-dog" id="behind-photo-' + i + '" aria-hidden="true"></span>' +
+              '<span class="behind-info">' + (goingHome(d, today) ? "Last day today." : stayDay(stayOn(d, today), today) + ".") +
+              '<br><a href="/guests/' + esc(d.id) + '">' + esc(d.name) + "&#39;s diary</a></span>" +
+              "</div>";
+          })
+          .join("");
+      }
+      // Wraps the hero so the drop-ins' cards can peek out under it. Tap one
+      // to pull it out; tap ours to tuck it back.
+      function tuck(away, today) {
+        var card = document.getElementById("hero-card");
+        var wrap = document.createElement("div");
+        wrap.className = "tuck";
+        wrap.style.setProperty("--n", away.length);
+        card.before(wrap);
+        wrap.innerHTML = tuckHTML(away, today);
+        wrap.appendChild(card);
+        away.forEach((d, i) => insertPhoto(d.id, document.getElementById("behind-photo-" + i), "120px"));
+        wrap.querySelectorAll(".behind-pull").forEach((b) =>
+          b.addEventListener("click", function () {
+            var open = b.parentNode.classList.toggle("pulled");
+            b.ariaExpanded = open;
+          })
+        );
+        card.addEventListener("click", function () {
+          wrap.querySelectorAll(".pulled").forEach((p) => {
+            p.classList.remove("pulled");
+            p.firstChild.ariaExpanded = false;
+          });
+        }, true);
+      }
+
+      function heroLiveHTML(live, today, away) {
         var pair = live.length > 1;
         var color = pair ? S.groupHeroColor(live, today) : live[0].bgColor;
         var dogs = dogsIn(live);
@@ -543,7 +594,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             color +
             '">' +
             '<div id="hero-badge" class="absolute top-[18px] right-[18px] status-tag animate-wiggle">' +
-            (leaving ? "Going home today" : "Here today") +
+            (leaving ? "Going home today" : away.length ? "On our sofa" : "Here today") +
             "</div>" +
             '<div class="w-full"><h1 class="' + (pack ? '' : 'fit-headline ') +
             sizeClass +
@@ -564,12 +615,14 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         };
       }
 
-      function heroVacancyHTML(lastGuest, next) {
+      // `away` are the drop-ins: our sofa's empty because we're at theirs.
+      function heroVacancyHTML(lastGuest, next, away) {
+        var round = away && away.length ? "We&#39;re round at " + away.map((d) => esc(d.name)).join(" &amp; ") + "&#39;s." : "";
         var html =
           '<div id="hero-card" class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:' + SOFA_GREEN + '">' +
           '<div id="hero-badge" class="absolute top-[18px] right-[18px] status-tag animate-wiggle">Sofa&#39;s empty</div>' +
-          '<div class="w-full"><h1 class="fit-headline text-[clamp(62px,19vw,120px)] max-w-full">No dog today</h1></div>' +
-          '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">The vacuum gets a day off. It&#39;s weirdly quiet.</div>' +
+          '<div class="w-full"><h1 class="fit-headline text-[clamp(62px,19vw,120px)] max-w-full">' + (round ? "No dog here" : "No dog today") + "</h1></div>" +
+          '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">' + (round || "The vacuum gets a day off. It&#39;s weirdly quiet.") + "</div>" +
           '<button type="button" id="vacancy-photo" aria-label="Look down the side of the sofa" class="block w-[calc(100%+16px)] h-[265px] mx-[-8px] mt-[18px] animate-drift-slow cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime"></button>' +
           "</div>";
 
@@ -1156,13 +1209,16 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var result = pickToday(guests, today);
 
         var appEl = document.getElementById("home-app");
-        if (result.state === "vacancy") {
+        var away = result.live.filter((d) => dropsIn(d, today));
+        var sofa = result.live.filter((d) => !dropsIn(d, today));
+        if (!sofa.length) {
           var next = nextArrival(guests, today);
-          appEl.innerHTML = heroVacancyHTML(result.lastGuest, next);
+          var lastGuest = away.length ? null : result.lastGuest;
+          appEl.innerHTML = heroVacancyHTML(lastGuest, next, away) + (away.length ? entryCardsHTML(away, today) : "");
           appEl.hidden = false;
           insertPhoto("sofa", document.getElementById("vacancy-photo"), undefined, true, "high");
           if (next) insertPhoto(next.guest.id, document.getElementById("next-up-photo"), "64px");
-          if (result.lastGuest) insertPhoto(result.lastGuest.id, document.getElementById("last-seen-photo"), "64px");
+          if (lastGuest) insertPhoto(lastGuest.id, document.getElementById("last-seen-photo"), "64px");
           // Tap the sofa to see what the last dogs left behind.
           var found = Math.floor(Math.random() * FOUND.length);
           document.getElementById("vacancy-photo").addEventListener("click", function () {
@@ -1170,12 +1226,12 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             heroNote("Found: " + FOUND[found++ % FOUND.length]);
           });
         } else {
-          var hero = heroLiveHTML(result.live, today);
+          var hero = heroLiveHTML(sofa, today, away);
           appEl.innerHTML = hero.html + entryCardsHTML(result.live, today);
           var photosEl = document.getElementById("hero-photos");
           appEl.hidden = false;
           // Pat a dog and it hops and woofs. After that it's anyone's guess, never the same twice in a row.
-          var dogBtns = result.live.map((d) => {
+          var dogBtns = hero.live.map((d) => {
             var b = document.createElement("button");
             b.type = "button";
             b.ariaLabel = "Pat " + d.name;
@@ -1189,14 +1245,15 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               replay(b.querySelector(".pat-marks"), "pat-marks--playing");
               var fresh = lines.filter((l) => l !== last);
               last = last ? fresh[Math.floor(Math.random() * fresh.length)] : "Woof!";
-              heroNote((result.live.length > 1 ? d.name + ": " : "") + last);
+              heroNote((hero.live.length > 1 ? d.name + ": " : "") + last);
             });
             photosEl.appendChild(b);
             return b;
           });
-          result.live.forEach((d, i) => insertPhoto(d.id, dogBtns[i], undefined, true, i === 0 ? "high" : "auto"));
-          result.live.forEach(markSeen);
+          hero.live.forEach((d, i) => insertPhoto(d.id, dogBtns[i], undefined, true, i === 0 ? "high" : "auto"));
         }
+        if (away.length) tuck(away, today);
+        result.live.forEach(markSeen);
         if (preview) {
           var note = document.createElement("div");
           note.className =
