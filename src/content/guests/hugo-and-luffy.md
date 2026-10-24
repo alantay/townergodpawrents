@@ -14,6 +14,15 @@ stays:
 
 ## 24 Oct
 
+### 8:35pm
+
+<!-- entry-id: e134 -->
+<!-- no-time -->
+
+Luffy, don’t be rude to Tiny.
+
+![Luffy and Tiny tugging on a purple toy on the rooftop car park.](./hugo-and-luffy/hugo-and-luffy-rude-to-tiny.mp4)
+
 ### 2:45pm
 
 <!-- entry-id: e133 -->
