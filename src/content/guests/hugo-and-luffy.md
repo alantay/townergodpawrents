@@ -14,6 +14,15 @@ stays:
 
 ## 24 Oct
 
+### 11:03pm
+
+<!-- entry-id: e135 -->
+<!-- no-time -->
+
+Hugo is stealing my husband
+
+![A black-and-white dog leans toward a seated man wearing glasses.](./hugo-and-luffy/hugo-and-luffy-stealing-husband.jpg)
+
 ### 2:45pm
 
 <!-- entry-id: e133 -->
