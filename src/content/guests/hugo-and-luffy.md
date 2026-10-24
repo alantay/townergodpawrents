@@ -14,6 +14,14 @@ stays:
 
 ## 24 Oct
 
+### 2:45pm
+
+<!-- entry-id: e133 -->
+
+The brothers are KO after a fun-filled morning.
+
+![Hugo and Luffy asleep on the wooden floor beside the cabinets.](./hugo-and-luffy/hugo-and-luffy-brothers-ko.jpg)
+
 ### 10:45am
 
 <!-- entry-id: e132 -->
