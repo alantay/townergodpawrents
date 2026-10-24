@@ -1156,6 +1156,9 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 }
 
 .print-viewer-close {
+  display: grid;
+  place-items: center;
+  padding: 0;
   position: fixed;
   top: calc(env(safe-area-inset-top, 0px) + 0.75rem);
   right: 0.75rem;
@@ -1164,6 +1167,4 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   border-radius: 999px;
   background: var(--color-cream);
   color: var(--color-ink);
-  font-size: 1.5rem;
-  line-height: 1;
 }
