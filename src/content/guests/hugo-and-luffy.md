@@ -14,6 +14,15 @@ stays:
 
 ## 24 Oct
 
+### 2:51pm
+
+<!-- entry-id: e132 -->
+<!-- no-time -->
+
+Hugo having a play with Mocha, Marou’s half sister, while Luffy plays with Marou in the background.
+
+![Hugo playing with Mocha while Luffy plays with Marou in the background.](./hugo-and-luffy/hugo-and-luffy-mocha-marou-play.mp4)
+
 ### 8:30am
 
 <!-- entry-id: e131 -->
