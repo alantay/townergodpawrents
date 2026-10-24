@@ -14,15 +14,6 @@ stays:
 
 ## 24 Oct
 
-### 8:35pm
-
-<!-- entry-id: e134 -->
-<!-- no-time -->
-
-Luffy, don’t be rude to Tiny.
-
-![Luffy and Tiny tugging on a purple toy on the rooftop car park.](./hugo-and-luffy/hugo-and-luffy-rude-to-tiny.mp4)
-
 ### 2:45pm
 
 <!-- entry-id: e133 -->
@@ -38,6 +29,15 @@ The brothers are KO after a fun-filled morning.
 Hugo having a play with Mocha, Marou’s half sister, while Luffy plays with Marou in the background.
 
 ![Hugo playing with Mocha while Luffy plays with Marou in the background.](./hugo-and-luffy/hugo-and-luffy-mocha-marou-play.mp4)
+
+### 8:35am
+
+<!-- entry-id: e134 -->
+<!-- no-time -->
+
+Luffy, don’t be rude to Tiny.
+
+![Luffy and Tiny tugging on a purple toy on the rooftop car park.](./hugo-and-luffy/hugo-and-luffy-rude-to-tiny.mp4)
 
 ### 8:30am
 
