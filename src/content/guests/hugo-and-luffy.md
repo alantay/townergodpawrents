@@ -20,6 +20,8 @@ stays:
 
 This morning Hugo briefly has a new obsession. Liesel, the beautiful black dachshund. Then it’s back to Tiny.
 
+![Hugo and the other dogs running across the rooftop car park with Liesel.](./hugo-and-luffy/hugo-and-luffy-liesel-obsession.mp4)
+
 ## 23 Oct
 
 ### 8:50pm
