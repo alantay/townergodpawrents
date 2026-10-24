@@ -14,15 +14,6 @@ stays:
 
 ## 24 Oct
 
-### 9:18pm
-
-<!-- entry-id: e135 -->
-<!-- no-time -->
-
-Weiwen is trying to exercise at home. Luffy has joined in with his own routine.
-
-![Luffy joining Weiwen while she exercises on a mat at home.](./hugo-and-luffy/hugo-and-luffy-exercise-routine.mp4)
-
 ### 2:45pm
 
 <!-- entry-id: e133 -->
