@@ -18,7 +18,7 @@ stays:
 
 <!-- entry-id: e131 -->
 
-And then it’s back to Tiny, our track and field champion.
+And then it’s back to Tiny, our track and field champion. Hugo has a thing for sporty girls.
 
 ![Hugo and Tiny together on the rooftop car park.](./hugo-and-luffy/hugo-and-luffy-back-to-tiny.mp4)
 
