@@ -1,7 +1,7 @@
 ---
 name: Marou
 breed: Pomeranian
-photo: ./marou/marou-collage.png
+photo: ./marou/marou-collage-v2.png
 bgColor: "#2F6B6B"
 showLive: true
 sex: male
