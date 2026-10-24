@@ -12,6 +12,14 @@ stays:
     checkOut: 2026-10-25
 ---
 
+## 24 Oct
+
+### 8:15am
+
+<!-- entry-id: e130 -->
+
+This morning Hugo briefly has a new obsession. Liesel, the beautiful black dachshund. Then it’s back to Tiny.
+
 ## 23 Oct
 
 ### 8:50pm
