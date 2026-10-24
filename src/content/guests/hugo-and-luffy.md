@@ -14,10 +14,9 @@ stays:
 
 ## 24 Oct
 
-### 2:51pm
+### 10:45am
 
 <!-- entry-id: e132 -->
-<!-- no-time -->
 
 Hugo having a play with Mocha, Marou’s half sister, while Luffy plays with Marou in the background.
 
