@@ -14,11 +14,19 @@ stays:
 
 ## 24 Oct
 
-### 8:15am
+### 8:30am
+
+<!-- entry-id: e131 -->
+
+And then it’s back to Tiny.
+
+![Hugo and Tiny together on the rooftop car park.](./hugo-and-luffy/hugo-and-luffy-back-to-tiny.mp4)
+
+### 8:25am
 
 <!-- entry-id: e130 -->
 
-This morning Hugo briefly has a new obsession. Liesel, the beautiful black dachshund. Then it’s back to Tiny.
+This morning Hugo briefly has a new obsession. Liesel, the beautiful black dachshund.
 
 ![Hugo and the other dogs running across the rooftop car park with Liesel.](./hugo-and-luffy/hugo-and-luffy-liesel-obsession.mp4)
 
