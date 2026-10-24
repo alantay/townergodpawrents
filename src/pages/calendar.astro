@@ -62,7 +62,7 @@ const WEEKDAYS = ["S", "M", "T", "W", "T", "F", "S"];
           aria-labelledby={`cal-${month.key}`}
         >
           <div class="cal-sheet">
-            <div class:list={["cal-sheet-paper", `cal-sheet-paper--tear-${mi % 3}`]} aria-hidden="true" />
+            <div class="cal-sheet-paper" aria-hidden="true" />
             <span class="cal-tape" aria-hidden="true" />
 
             <div class="cal-sheet-body">
@@ -193,9 +193,7 @@ const WEEKDAYS = ["S", "M", "T", "W", "T", "F", "S"];
 </script>
 
 <style>
-  /* One month is a planner sheet, torn out and taped to the page. The tear
-     is a filter on the paper layer only, like the diary slips; the grid lives
-     on the weeks so the filter can't smudge it. */
+  /* One month is a planner sheet taped to the page; the grid lives on the weeks. */
   .cal-month[hidden] { display: none; }
 
   .cal-sheet {
@@ -210,13 +208,8 @@ const WEEKDAYS = ["S", "M", "T", "W", "T", "F", "S"];
     background: var(--color-cream);
     background-clip: padding-box;
     border: 5px solid var(--color-slip-fibre);
-    filter: url("#torn-slip-0") drop-shadow(0 6px 10px rgb(30 32 25 / 0.18));
-  }
-  .cal-sheet-paper--tear-1 { filter: url("#torn-slip-1") drop-shadow(0 6px 10px rgb(30 32 25 / 0.18)); }
-  .cal-sheet-paper--tear-2 { filter: url("#torn-slip-2") drop-shadow(0 6px 10px rgb(30 32 25 / 0.18)); }
-
-  @supports not (filter: url("#torn-slip-0")) {
-    .cal-sheet-paper { filter: none; border: 1.5px solid var(--color-card-line); }
+    /* SVG torn-edge filters make these sheets go blank while scrolling on iPhone. */
+    filter: drop-shadow(0 6px 10px rgb(30 32 25 / 0.18));
   }
 
   .cal-sheet-body { position: relative; isolation: isolate; }
