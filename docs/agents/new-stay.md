@@ -20,7 +20,7 @@ If a stay runs longer or shorter than planned, edit its `checkOut`. Diary days o
 
 ## A drop-in
 
-When Alan and Weiwen look after the dog at its own home, add `dropIn: true` to that stay. Make sure the guest has `sex: male` or `sex: female`; it picks the paper house on the homepage (kennel for a boy, gingham for a girl) and the "at his"/"at hers" label. See `docs/adr/0010-drop-in-stays.md`.
+When Alan and Weiwen look after the dog at its own home, add `dropIn: true` to that stay. Make sure the guest has `sex: male` or `sex: female`; it picks "At his place" or "At her place" on the dog's tucked card on the homepage, and the "at his"/"at hers" label elsewhere. See `docs/adr/0010-drop-in-stays.md`.
 
 ```yaml
   - checkIn: 2026-11-19

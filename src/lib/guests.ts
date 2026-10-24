@@ -18,14 +18,6 @@ export interface Stay {
   dropIn?: boolean;
 }
 
-export type House = "kennel" | "gingham";
-
-/** The paper house a drop-in dog sits in: gingham for a girl, a cardboard
- * kennel for a boy, or for a guest whose sex isn't written down. */
-export function houseFor(sex?: "male" | "female"): House {
-  return sex === "female" ? "gingham" : "kennel";
-}
-
 /** Whose home a drop-in stay happens at: "at hers", "at his", or "at home"
  * when the guest's sex isn't written down. */
 export function atHome(sex?: "male" | "female"): string {
