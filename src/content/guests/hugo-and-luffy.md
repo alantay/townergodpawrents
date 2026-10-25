@@ -14,15 +14,6 @@ stays:
 
 ## 25 Oct
 
-### 7:45pm
-
-<!-- entry-id: e138 -->
-<!-- no-time -->
-
-Hugo is a player. Chasing girls and switching targets.
-
-![Hugo chasing other dogs at the dog run.](./hugo-and-luffy/hugo-and-luffy-girls-pace.mp4)
-
 ### 10:07am
 
 <!-- entry-id: e136 -->
@@ -30,6 +21,15 @@ Hugo is a player. Chasing girls and switching targets.
 Round 2: KO after a fun-filled morning of smelling girls and chasing dogs. The brothers have clocked out.
 
 ![Two dogs lie sprawled on the living room floor among scattered toys.](./hugo-and-luffy/hugo-and-luffy-round-2-ko.jpg)
+
+### 7:45am
+
+<!-- entry-id: e138 -->
+<!-- no-time -->
+
+Hugo is a player. Chasing girls and switching targets.
+
+![Hugo chasing other dogs at the dog run.](./hugo-and-luffy/hugo-and-luffy-girls-pace.mp4)
 
 ### 7:30am
 
