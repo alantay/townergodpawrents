@@ -29,15 +29,7 @@ Don’t know which of the brothers created a work of modern art on our wall.
 
 Hugo and Luffy’s parents came, and both brothers were spinning in the air with excitement.
 
-### 10:07am
-
-<!-- entry-id: e136 -->
-
-Round 2: KO after a fun-filled morning of smelling girls and chasing dogs. The brothers have clocked out.
-
-![Two dogs lie sprawled on the living room floor among scattered toys.](./hugo-and-luffy/hugo-and-luffy-round-2-ko.jpg)
-
-### 10:06am
+### 10:08am
 
 <!-- entry-id: e141 -->
 <!-- no-time -->
@@ -45,6 +37,14 @@ Round 2: KO after a fun-filled morning of smelling girls and chasing dogs. The b
 Luffy is having an out-of-body experience.
 
 ![Luffy sitting with his eyes half closed while having his head stroked.](./hugo-and-luffy/hugo-and-luffy-out-of-body.mp4)
+
+### 10:07am
+
+<!-- entry-id: e136 -->
+
+Round 2: KO after a fun-filled morning of smelling girls and chasing dogs. The brothers have clocked out.
+
+![Two dogs lie sprawled on the living room floor among scattered toys.](./hugo-and-luffy/hugo-and-luffy-round-2-ko.jpg)
 
 ### 7:45am
 
