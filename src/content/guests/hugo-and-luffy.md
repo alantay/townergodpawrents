@@ -22,10 +22,9 @@ Round 2: KO after a fun-filled morning of smelling girls and chasing dogs. The b
 
 ![Two dogs lie sprawled on the living room floor among scattered toys.](./hugo-and-luffy/hugo-and-luffy-round-2-ko.jpg)
 
-### 7:40am
+### 7:30am
 
 <!-- entry-id: e137 -->
-<!-- no-time -->
 
 Brought them to the temporary dog run near City Square.
 
