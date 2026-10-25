@@ -12,6 +12,16 @@ stays:
     checkOut: 2026-10-25
 ---
 
+## 25 Oct
+
+### 10:07am
+
+<!-- entry-id: e136 -->
+
+Round 2: KO after a fun-filled morning of smelling girls and chasing dogs. The brothers have clocked out.
+
+![Two dogs lie sprawled on the living room floor among scattered toys.](./hugo-and-luffy/hugo-and-luffy-round-2-ko.jpg)
+
 ## 24 Oct
 
 ### 11:03pm
