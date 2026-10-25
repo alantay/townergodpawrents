@@ -14,6 +14,15 @@ stays:
 
 ## 25 Oct
 
+### 10:21pm
+
+<!-- entry-id: e142 -->
+<!-- no-time -->
+
+Hello Hugo, is your nose working? Wake up before Luffy finishes the Greek yogurt.
+
+![Hugo resting on the floor with a spoon of Greek yogurt held near his nose.](./hugo-and-luffy/hugo-and-luffy-greek-yogurt.mp4)
+
 ### 7:30pm
 
 <!-- entry-id: e139 -->
