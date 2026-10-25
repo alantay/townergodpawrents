@@ -14,15 +14,6 @@ stays:
 
 ## 25 Oct
 
-### 10:21pm
-
-<!-- entry-id: e142 -->
-<!-- no-time -->
-
-Hello Hugo, is your nose working? Wake up before Luffy finishes the Greek yogurt.
-
-![Hugo resting on the floor with a spoon of Greek yogurt held near his nose.](./hugo-and-luffy/hugo-and-luffy-greek-yogurt.mp4)
-
 ### 7:30pm
 
 <!-- entry-id: e139 -->
@@ -37,6 +28,15 @@ Don’t know which of the brothers created a work of modern art on our wall.
 <!-- entry-id: e140 -->
 
 Hugo and Luffy’s parents came, and both brothers were spinning in the air with excitement.
+
+### 10:09am
+
+<!-- entry-id: e142 -->
+<!-- no-time -->
+
+Hello Hugo, is your nose working? Wake up before Luffy finishes the Greek yogurt.
+
+![Hugo resting on the floor with a spoon of Greek yogurt held near his nose.](./hugo-and-luffy/hugo-and-luffy-greek-yogurt.mp4)
 
 ### 10:08am
 
