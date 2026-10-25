@@ -37,6 +37,15 @@ Round 2: KO after a fun-filled morning of smelling girls and chasing dogs. The b
 
 ![Two dogs lie sprawled on the living room floor among scattered toys.](./hugo-and-luffy/hugo-and-luffy-round-2-ko.jpg)
 
+### 10:06am
+
+<!-- entry-id: e141 -->
+<!-- no-time -->
+
+Luffy is having an out-of-body experience.
+
+![Luffy sitting with his eyes half closed while having his head stroked.](./hugo-and-luffy/hugo-and-luffy-out-of-body.mp4)
+
 ### 7:45am
 
 <!-- entry-id: e138 -->
