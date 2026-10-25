@@ -50,7 +50,7 @@ Hugo is a player. Chasing girls and switching targets.
 
 <!-- entry-id: e137 -->
 
-Brought them to the temporary dog run near City Square. Luffy running excitedly and Hugo stalking a girl as usual.
+Brought them to the temporary dog run near City Square. Luffy running excitedly and Hugo being a pervert as usual.
 
 ![Hugo and Luffy at the temporary dog run near City Square.](./hugo-and-luffy/hugo-and-luffy-city-square-run.mp4)
 
