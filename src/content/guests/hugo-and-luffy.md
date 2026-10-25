@@ -22,6 +22,15 @@ Round 2: KO after a fun-filled morning of smelling girls and chasing dogs. The b
 
 ![Two dogs lie sprawled on the living room floor among scattered toys.](./hugo-and-luffy/hugo-and-luffy-round-2-ko.jpg)
 
+### 7:40am
+
+<!-- entry-id: e137 -->
+<!-- no-time -->
+
+Brought them to the temporary dog run near City Square.
+
+![Hugo and Luffy at the temporary dog run near City Square.](./hugo-and-luffy/hugo-and-luffy-city-square-run.mp4)
+
 ## 24 Oct
 
 ### 11:03pm
