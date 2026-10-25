@@ -23,6 +23,12 @@ Don’t know which of the brothers created a work of modern art on our wall.
 
 ![White marks and chips on the lower wall and wooden baseboard, with small white fragments scattered on the floor.](./hugo-and-luffy/hugo-and-luffy-dont-know-which.jpg)
 
+### 7:15pm
+
+<!-- entry-id: e140 -->
+
+Hugo and Luffy’s parents came, and both brothers were spinning in the air with excitement.
+
 ### 10:07am
 
 <!-- entry-id: e136 -->
