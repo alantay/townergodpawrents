@@ -26,7 +26,7 @@ Round 2: KO after a fun-filled morning of smelling girls and chasing dogs. The b
 
 <!-- entry-id: e137 -->
 
-Brought them to the temporary dog run near City Square.
+Brought them to the temporary dog run near City Square. Luffy running excitedly and Hugo stalking a girl as usual.
 
 ![Hugo and Luffy at the temporary dog run near City Square.](./hugo-and-luffy/hugo-and-luffy-city-square-run.mp4)
 
