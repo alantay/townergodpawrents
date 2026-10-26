@@ -917,6 +917,106 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   text-wrap: pretty;
 }
 
+/* A dog answering a pat (comic) or thinking out loud (dots), over its
+   head on the homepage hero and the diary portrait. See src/lib/dog-bubbles.ts. */
+.dog-bubble {
+  position: absolute;
+  z-index: 3;
+  max-width: min(70%, 240px);
+  width: max-content;
+  translate: -50% -100%;
+  pointer-events: none;
+  transform-origin: calc(50% + var(--tail-x, 0px)) 100%;
+}
+.dog-bubble p {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-script);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.05;
+  text-wrap: balance;
+  text-align: center;
+  color: var(--color-ink);
+}
+.dog-bubble::after {
+  content: "";
+  position: absolute;
+  left: calc(50% + var(--tail-x, 0px));
+  top: 100%;
+}
+
+/* comic: cream bubble, inked outline, curly tail */
+.dog-bubble--comic {
+  background: var(--color-cream);
+  border: 2.5px solid var(--color-ink);
+  border-radius: 50% / 46%;
+  padding: 14px 22px 12px;
+  box-shadow: 3px 4px 0 rgb(0 0 0 / 0.18);
+}
+.dog-bubble--comic::before {
+  content: "";
+  position: absolute;
+  left: calc(50% + var(--tail-x, 0px) - 8px);
+  top: calc(100% - 1px);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 20px solid var(--color-ink);
+  transform: skewX(-25deg);
+  transform-origin: top;
+}
+.dog-bubble--comic::after {
+  left: calc(50% + var(--tail-x, 0px) - 4.5px);
+  top: calc(100% - 3px);
+  width: 0;
+  height: 0;
+  border-left: 6.5px solid transparent;
+  border-right: 6.5px solid transparent;
+  border-top: 14px solid var(--color-cream);
+  transform: skewX(-25deg);
+  transform-origin: top;
+}
+
+/* dots: a thought, cream pill with a trail of dots down to the dog */
+.dog-bubble--dots p { font-weight: 500; }
+.dog-bubble--dots {
+  background: var(--color-cream);
+  border-radius: 999px;
+  padding: 12px 22px 10px;
+  box-shadow: 0 6px 14px rgb(0 0 0 / 0.22);
+  margin-top: -18px;
+}
+.dog-bubble--dots::before,
+.dog-bubble--dots::after {
+  content: "";
+  position: absolute;
+  background: var(--color-cream);
+  border-radius: 50%;
+  left: calc(50% + var(--tail-x, 0px));
+}
+.dog-bubble--dots::before {
+  width: 14px; height: 14px;
+  top: calc(100% + 4px);
+  margin-left: -10px;
+}
+.dog-bubble--dots::after {
+  width: 8px; height: 8px;
+  top: calc(100% + 20px);
+  margin-left: -2px;
+}
+
+.dog-bubble-pop {
+  animation:
+    bubble-in 420ms cubic-bezier(0.3, 1.5, 0.5, 1) both,
+    note-out 300ms ease-in var(--note-hold, 2s) forwards;
+}
+@keyframes bubble-in {
+  from { opacity: 0; scale: 0.3; }
+  to { opacity: 1; scale: 1; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -941,6 +1041,10 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 
   .hero-note-pop {
     animation: note-out 400ms ease-in var(--note-hold, 2s) forwards;
+  }
+
+  .dog-bubble-pop {
+    animation: note-out 300ms ease-in var(--note-hold, 2s) forwards;
   }
 
   .haze i,

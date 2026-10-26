@@ -5,6 +5,7 @@ import Footer from "../components/Footer.astro";
 import Cutout from "../components/Cutout.astro";
 import { cutoutWidth } from "../lib/cutout-width";
 import { groupHeroColor } from "../lib/group-hero-color";
+import { bubblesJs } from "../lib/dog-bubbles";
 import { Image } from "astro:assets";
 import sofaCutout from "../assets/sofa-cutout-v2.png";
 import portrait from "../assets/alan-weiwen-portrait.jpg";
@@ -291,6 +292,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
 
   <script is:inline set:html={`window.__tgpCutoutWidth = ${cutoutWidth.toString()};`} />
   <script is:inline set:html={sharedJs} />
+  <script is:inline set:html={bubblesJs} />
   <script type="application/json" id="guests-data" is:inline set:html={guestsJson} />
   <script type="application/json" id="group-hero" is:inline set:html={groupHeroJson} />
 
@@ -944,57 +946,6 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         replay(note, "hero-note-pop");
       }
 
-      // A bubble over a dog's head, tail pointing at it: "comic" when it
-      // answers a pat, "dots" when it's thinking out loud.
-      // Lives on the card, not the button, so the card's edge can't clip it.
-      function dogSays(text, btn, kind) {
-        var card = document.getElementById("hero-card");
-        card.querySelectorAll(".dog-bubble").forEach((old) => old.remove());
-        var bubble = document.createElement("div");
-        bubble.className = "dog-bubble dog-bubble--" + kind;
-        bubble.setAttribute("role", "status");
-        bubble.innerHTML = "<p></p>";
-        bubble.querySelector("p").textContent = text;
-        card.appendChild(bubble);
-        var c = card.getBoundingClientRect();
-        var dog = (btn.querySelector("img, .undeveloped") || btn).getBoundingClientRect();
-        var x = dog.left + dog.width / 2 - c.left;
-        var y = dog.top + dog.height * 0.06 - c.top;
-        var half = bubble.offsetWidth / 2;
-        var left = Math.min(Math.max(x, half + 12), c.width - half - 12);
-        bubble.style.left = left + "px";
-        bubble.style.top = Math.max(y, bubble.offsetHeight + 16) + "px";
-        bubble.style.setProperty("--tail-x", Math.min(Math.max(x - left, -half + 22), half - 22) + "px");
-        bubble.style.setProperty("--note-hold", 2200 + text.length * 40 + "ms");
-        replay(bubble, "dog-bubble-pop");
-        bubble.addEventListener("animationend", (e) => {
-          if (e.animationName === "note-out") bubble.remove();
-        });
-      }
-
-      // Left alone, the dogs think out loud every so often. Not while the
-      // hero is off screen, and not over a bubble that's still up.
-      var SHARED_THOUGHTS = [
-        "Was that the fridge?",
-        "Somebody said walk. I heard it.",
-        "Is that cheese? Smells like cheese.",
-        "Nap first. Then another nap.",
-      ];
-      function startThinking(dogs, btns) {
-        var last;
-        function think() {
-          var card = document.getElementById("hero-card");
-          if (!card.classList.contains("hero-resting") && !card.querySelector(".dog-bubble")) {
-            var i = Math.floor(Math.random() * dogs.length);
-            var pool = dogs[i].thoughts.concat(SHARED_THOUGHTS).filter((t) => t !== last);
-            last = pool[Math.floor(Math.random() * pool.length)];
-            dogSays(last, btns[i], "dots");
-          }
-          setTimeout(think, 12000 + Math.random() * 8000);
-        }
-        setTimeout(think, 5000 + Math.random() * 4000);
-      }
-
       // The weather in front of the day: "Cloudy Saturday". NEA's 2-hour
       // forecast for Kallang, which covers Towner. The hero gets one weather
       // at a time: haze wins when the central 24-hour PSI is unhealthy, then
@@ -1245,14 +1196,14 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               replay(b.querySelector(".pat-marks"), "pat-marks--playing");
               var fresh = lines.filter((l) => l !== last);
               last = last ? fresh[Math.floor(Math.random() * fresh.length)] : "Woof!";
-              dogSays(last, b, "comic");
+              window.__tgpBubbles.dogSays(document.getElementById("hero-card"), b, last, "comic");
             });
             photosEl.appendChild(b);
             return b;
           });
           result.live.forEach((d, i) => insertPhoto(d.id, dogBtns[i], undefined, true, i === 0 ? "high" : "auto"));
           result.live.forEach(markSeen);
-          startThinking(result.live, dogBtns);
+          window.__tgpBubbles.startThinking(document.getElementById("hero-card"), result.live, dogBtns, window.__tgpBubbles.dogSays);
         }
         if (preview) {
           var note = document.createElement("div");
@@ -1367,104 +1318,6 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       20%, 55% { opacity: 1; }
       100% { opacity: 0; transform: translate(calc(-50% + var(--heart-x)), -56px) rotate(var(--heart-turn)); }
     }
-    #home-app .dog-bubble {
-      position: absolute;
-      z-index: 3;
-      max-width: min(70%, 240px);
-      width: max-content;
-      translate: -50% -100%;
-      pointer-events: none;
-      transform-origin: calc(50% + var(--tail-x, 0px)) 100%;
-    }
-    #home-app .dog-bubble p {
-      position: relative;
-      z-index: 1;
-      font-family: var(--font-script);
-      font-size: 1.75rem;
-      font-weight: 600;
-      line-height: 1.05;
-      text-wrap: balance;
-      text-align: center;
-      color: var(--color-ink);
-    }
-    #home-app .dog-bubble::after {
-      content: "";
-      position: absolute;
-      left: calc(50% + var(--tail-x, 0px));
-      top: 100%;
-    }
-
-    /* comic: cream bubble, inked outline, curly tail */
-    #home-app .dog-bubble--comic {
-      background: var(--color-cream);
-      border: 2.5px solid var(--color-ink);
-      border-radius: 50% / 46%;
-      padding: 14px 22px 12px;
-      box-shadow: 3px 4px 0 rgb(0 0 0 / 0.18);
-    }
-    #home-app .dog-bubble--comic::before {
-      content: "";
-      position: absolute;
-      left: calc(50% + var(--tail-x, 0px) - 8px);
-      top: calc(100% - 1px);
-      width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-top: 20px solid var(--color-ink);
-      transform: skewX(-25deg);
-      transform-origin: top;
-    }
-    #home-app .dog-bubble--comic::after {
-      left: calc(50% + var(--tail-x, 0px) - 4.5px);
-      top: calc(100% - 3px);
-      width: 0;
-      height: 0;
-      border-left: 6.5px solid transparent;
-      border-right: 6.5px solid transparent;
-      border-top: 14px solid var(--color-cream);
-      transform: skewX(-25deg);
-      transform-origin: top;
-    }
-
-    /* dots: a thought, cream pill with a trail of dots down to the dog */
-    #home-app .dog-bubble--dots p { font-weight: 500; }
-    #home-app .dog-bubble--dots {
-      background: var(--color-cream);
-      border-radius: 999px;
-      padding: 12px 22px 10px;
-      box-shadow: 0 6px 14px rgb(0 0 0 / 0.22);
-      margin-top: -18px;
-    }
-    #home-app .dog-bubble--dots::before,
-    #home-app .dog-bubble--dots::after {
-      content: "";
-      position: absolute;
-      background: var(--color-cream);
-      border-radius: 50%;
-      left: calc(50% + var(--tail-x, 0px));
-    }
-    #home-app .dog-bubble--dots::before {
-      width: 14px; height: 14px;
-      top: calc(100% + 4px);
-      margin-left: -10px;
-    }
-    #home-app .dog-bubble--dots::after {
-      width: 8px; height: 8px;
-      top: calc(100% + 20px);
-      margin-left: -2px;
-    }
-
-    #home-app .dog-bubble-pop {
-      animation:
-        bubble-in 420ms cubic-bezier(0.3, 1.5, 0.5, 1) both,
-        note-out 300ms ease-in var(--note-hold, 2s) forwards;
-    }
-    @keyframes bubble-in {
-      from { opacity: 0; scale: 0.3; }
-      to { opacity: 1; scale: 1; }
-    }
-
     #home-app .sofa-rummage {
       animation: sofa-rummage 460ms ease-out;
       transform-origin: bottom center;
@@ -1482,7 +1335,6 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       #past-preview-app .dog-card:is(:hover, :focus-visible) img { scale: none; rotate: none; }
       #home-app .pat-marks--playing svg { animation: none; }
       #home-app .sofa-rummage { animation: none; }
-      #home-app .dog-bubble-pop { animation: note-out 300ms ease-in var(--note-hold, 2s) forwards; }
     }
   </style>
 </Layout>
