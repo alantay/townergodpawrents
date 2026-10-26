@@ -4,7 +4,7 @@
 
 Funny and experimental touches go on the homepage. The diary page (`/guests/[id]`) stays toned down: the guest, the stay and the entries, with nothing that reacts to the outside world.
 
-The portrait is an exception. Alan confirmed on 10 October 2026 that the diary portrait should keep the homepage's pat interaction because it looks like the same control.
+The portrait is an exception. Alan confirmed on 10 October 2026 that the diary portrait should keep the homepage's pat interaction because it looks like the same control. On 26 October 2026 he asked for the portrait's thought bubbles too, so the dog on the diary page also thinks out loud now and then.
 
 ## Context
 

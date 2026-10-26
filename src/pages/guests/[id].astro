@@ -1,4 +1,5 @@
 ---
+import { bubblesJs } from "../../lib/dog-bubbles";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
@@ -106,7 +107,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { name, breed, tagline, badge, bgColor, showLive, photo, whenCalled, sounds } = entry.data;
+const { name, breed, tagline, badge, bgColor, showLive, photo, whenCalled, sounds, thoughts } = entry.data;
 
 const stays = staysNewestFirst(
   entry.data.stays.map((s) => ({ checkIn: dateStr(s.checkIn), checkOut: dateStr(s.checkOut) })),
@@ -204,10 +205,14 @@ let skinIndex = 0;
     </button>
   </header>
 
-  <script is:inline define:vars={{ lines: ["Woof!", ...sounds, whenCalled || "Heard you. Busy."] }}>
+  <script is:inline set:html={bubblesJs} />
+  <script is:inline define:vars={{ lines: ["Woof!", ...sounds, whenCalled || "Heard you. Busy."], thoughts }}>
     // Pat the dog and it hops and woofs. After that it's anyone's guess, never the same twice in a row.
+    // Left alone, it thinks out loud now and then.
     (function () {
       var dog = document.getElementById("pat-dog");
+      var card = dog.parentElement;
+      var bubbles = window.__tgpBubbles;
       var last;
       function replay(el, cls) {
         el.classList.remove(cls);
@@ -217,20 +222,11 @@ let skinIndex = 0;
       dog.addEventListener("click", function () {
         var img = dog.querySelector("img");
         if (img) replay(img, "dog-hop");
-        var note = dog.parentElement.querySelector(".hero-note");
-        if (!note) {
-          note = document.createElement("div");
-          note.className = "hero-note diary-slip diary-slip--tear-2";
-          note.setAttribute("role", "status");
-          note.innerHTML = '<div class="diary-slip-paper" aria-hidden="true"></div><div class="diary-note"><p></p></div>';
-          dog.parentElement.appendChild(note);
-        }
         var fresh = lines.filter(function (l) { return l !== last; });
-        var text = (last = last ? fresh[Math.floor(Math.random() * fresh.length)] : "Woof!");
-        note.querySelector("p").textContent = text;
-        note.style.setProperty("--note-hold", 1200 + text.length * 25 + "ms");
-        replay(note, "hero-note-pop");
+        last = last ? fresh[Math.floor(Math.random() * fresh.length)] : "Woof!";
+        bubbles.dogSays(card, dog, last, "comic");
       });
+      bubbles.startThinking(card, [{ thoughts: thoughts }], [dog], bubbles.dogSays);
     })();
   </script>
 
