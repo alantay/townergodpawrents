@@ -12,7 +12,8 @@ The homepage and the diary page started to look alike, both a hero over a list o
 
 Today-only things only make sense on the homepage, and that's where the playful stuff has landed:
 
-- Pat a dog in the hero and it hops and says something.
+- Pat a dog in the hero and it hops and says something in a speech bubble.
+- Left alone, a dog now and then thinks out loud in a thought bubble.
 - When the PSI is unhealthy, grey smog drifts over the hero (#58).
 - The row above today's entries reads "Hazy Saturday" or "Sunny Sunday", with the count of today's moments on the right (#57, #59).
 

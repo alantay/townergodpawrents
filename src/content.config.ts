@@ -28,6 +28,9 @@ const guests = defineCollection({
       whenCalled: z.string().optional(),
       // Extra noises mixed in with "Woof!" when you pat it.
       sounds: z.array(z.string()).default([]),
+      // What the dog is thinking, floated up in a thought bubble now and
+      // then on the homepage without anyone patting it.
+      thoughts: z.array(z.string()).default([]),
 
       // ---- when the dog was here ----
       // Adjacent dates are separate stays: home on the 23rd, back on the

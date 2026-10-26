@@ -7,6 +7,9 @@ showLive: true
 badge: Keeper of the Ball
 tagline: loves a game of fetch, skips the returning part
 whenCalled: "Throw something and we'll talk."
+thoughts:
+  - "The ball is safe with me. Forever."
+  - "Fetch is a two-way deal? Since when?"
 stays:
   - checkIn: 2026-10-14
     checkOut: 2026-10-14

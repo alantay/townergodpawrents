@@ -33,13 +33,14 @@ badge: Sock thief               # 2–3 word description of the dog
 tagline: sleeps with one eye on the treat jar   # a short character note, lowercase
 whenCalled: "Treat first. Then we'll see."   # optional, one of the dog's replies when you pat it
 sounds: ["Grrr."]   # optional, noises mixed in with "Woof!" when you pat it
+thoughts: ["Treats are a human right."]   # optional, thought bubbles that float up on the homepage now and then
 stays:
   - checkIn: 2026-10-01
     checkOut: 2026-10-05
 ---
 ```
 
-- Ask Alan for the breed, dates, and his take on the dog's character. Suggest a badge, tagline and `whenCalled` line in chat for him to pick, the same way as the polish step in `docs/agents/add-entry.md`. Don't invent facts about the dog. Words follow `docs/agents/voice.md`.
+- Ask Alan for the breed, dates, and his take on the dog's character. Suggest a badge, tagline, `whenCalled` line and a couple of `thoughts` in chat for him to pick, the same way as the polish step in `docs/agents/add-entry.md`. Don't invent facts about the dog. Words follow `docs/agents/voice.md`.
 - For the guest portrait, follow `.agents/skills/dog-avatar/SKILL.md`. It covers the required cream torn-paper edge, fine coloured outline, transparent exterior, and existing portraits to use as style references.
 - The cut-out stays a PNG with transparency. **Don't** run it through `scripts/prep-photo.sh`. If the source file is huge, shrink it with `sips -Z 1400 <file>`.
 - The body can start empty. Entries arrive with the add-entry flow.

@@ -7,6 +7,9 @@ showLive: true
 badge: A black & white comedy
 tagline: Hugo only has eyes for the girls. Luffy thinks the whole world is playing chase with him.
 whenCalled: "Hugo's coming. So Luffy's coming."
+thoughts:
+  - "Luffy: Chase me. Chase me. Chase me."
+  - "Hugo: Any girls coming over today?"
 stays:
   - checkIn: 2026-10-20
     checkOut: 2026-10-25

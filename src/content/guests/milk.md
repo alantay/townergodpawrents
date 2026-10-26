@@ -7,6 +7,9 @@ showLive: true
 badge: Leaf retriever
 tagline: never without a leaf in her mouth, sometimes a stick too
 whenCalled: "Can't talk. Mouth full of leaf."
+thoughts:
+  - "That leaf has my name on it."
+  - "A stick would also be acceptable."
 stays:
   - checkIn: 2026-11-19
     checkOut: 2026-11-21

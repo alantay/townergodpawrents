@@ -7,6 +7,9 @@ showLive: true
 badge: Cat in a dog's body
 tagline: recall sold separately, million-dollar smile included
 whenCalled: "Heard you. Choosing not to."
+thoughts:
+  - "I heard my name. I simply chose peace."
+  - "One smile and they forgive everything."
 sounds: ["Grrr."]
 stays:
   - checkIn: 2026-09-30

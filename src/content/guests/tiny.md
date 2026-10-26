@@ -7,6 +7,9 @@ showLive: true
 badge: Obsessive ball fetcher
 tagline: loves rolling on her back, barks at 120 decibels
 whenCalled: "Is there a ball? No? Then no."
+thoughts:
+  - "Ball. Ball. Ball. Ball."
+  - "Someone should really throw something."
 stays:
   - checkIn: 2026-09-13
     checkOut: 2026-09-23
