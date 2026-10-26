@@ -18,6 +18,16 @@ stays:
 
 If a stay runs longer or shorter than planned, edit its `checkOut`. Diary days outside every stay fail the build.
 
+## A drop-in
+
+When Alan and Weiwen look after the dog at its own home, add `dropIn: true` to that stay. Make sure the guest has `sex: male` or `sex: female`; it picks "At his place" or "At her place" on the dog's tucked card on the homepage, and the "at his"/"at hers" label elsewhere. See `docs/adr/0010-drop-in-stays.md`.
+
+```yaml
+  - checkIn: 2026-11-19
+    checkOut: 2026-11-21
+    dropIn: true
+```
+
 ## A new dog
 
 Create `src/content/guests/<id>.md`. The id is the dog's name in lowercase, and it becomes `/guests/<id>`. Dogs from one home share one file: `name: Hugo & Luffy`, id `hugo-and-luffy` (see `docs/adr/0006-dogs-from-one-home-share-a-guest.md`).
@@ -33,6 +43,7 @@ badge: Sock thief               # 2–3 word description of the dog
 tagline: sleeps with one eye on the treat jar   # a short character note, lowercase
 whenCalled: "Treat first. Then we'll see."   # optional, one of the dog's replies when you pat it
 sounds: ["Grrr."]   # optional, noises mixed in with "Woof!" when you pat it
+sex: female         # optional, needed for drop-ins
 stays:
   - checkIn: 2026-10-01
     checkOut: 2026-10-05
