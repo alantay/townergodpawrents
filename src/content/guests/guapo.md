@@ -20,6 +20,16 @@ stays:
     checkOut: 2027-01-03
 ---
 
+## 29 Oct
+
+### 1pm
+
+<!-- entry-id: e143 -->
+
+Guapo's back! Always awesome to have this happy, handsome boi with us. We were so excited 😂
+
+![Guapo lying on the wooden floor, grinning with his tongue out and one paw stretched forward](./guapo/guapo-happy-handsome-back.jpg)
+
 ## 13 Oct
 
 ### 4:45pm
