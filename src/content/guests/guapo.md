@@ -22,6 +22,14 @@ stays:
 
 ## 29 Oct
 
+### 9:40pm
+
+<!-- entry-id: e145 -->
+
+Guapo’s waggy tail when Alan comes home.
+
+![Guapo wagging his curled tail as Alan comes home](./guapo/guapo-waggy-tail-home.mp4)
+
 ### 1:51pm
 
 <!-- entry-id: e144 -->
