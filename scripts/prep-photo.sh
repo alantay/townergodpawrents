@@ -25,11 +25,21 @@ out="$dir/$guest-$slug.jpg"
 [ -e "$out" ] && { echo "$out already exists — pick another slug" >&2; exit 1; }
 
 mkdir -p "$dir"
-# -Z would also upscale a small photo, so only shrink ones that are too big.
-long=$(sips -g pixelWidth -g pixelHeight "$src" | awk '/pixel/ { if ($2 > m) m = $2 } END { print m }')
-if [ "$long" -gt 1600 ]; then
-  sips -s format jpeg -s formatOptions 80 -Z 1600 "$src" --out "$out" >/dev/null
+if command -v sips >/dev/null 2>&1; then
+  # -Z would also upscale a small photo, so only shrink ones that are too big.
+  long=$(sips -g pixelWidth -g pixelHeight "$src" | awk '/pixel/ { if ($2 > m) m = $2 } END { print m }')
+  if [ "$long" -gt 1600 ]; then
+    sips -s format jpeg -s formatOptions 80 -Z 1600 "$src" --out "$out" >/dev/null
+  else
+    sips -s format jpeg -s formatOptions 80 "$src" --out "$out" >/dev/null
+  fi
 else
-  sips -s format jpeg -s formatOptions 80 "$src" --out "$out" >/dev/null
+  # No sips off a Mac (cloud sessions run Linux), so use ImageMagick. The ">"
+  # only shrinks, and -auto-orient bakes in the phone's rotation.
+  if command -v magick >/dev/null 2>&1; then im=magick
+  elif command -v convert >/dev/null 2>&1; then im=convert
+  else echo "needs sips (macOS) or ImageMagick" >&2; exit 1
+  fi
+  "$im" "$src" -auto-orient -resize '1600x1600>' -quality 80 "$out"
 fi
 echo "./$guest/$guest-$slug.jpg ($(du -k "$out" | cut -f1)KB)"

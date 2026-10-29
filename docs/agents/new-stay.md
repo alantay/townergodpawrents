@@ -42,7 +42,7 @@ stays:
 
 - Ask Alan for the breed, dates, and his take on the dog's character. Suggest a badge, tagline, `whenCalled` line and a couple of `thoughts` in chat for him to pick, the same way as the polish step in `docs/agents/add-entry.md`. Don't invent facts about the dog. Words follow `docs/agents/voice.md`.
 - For the guest portrait, follow `.agents/skills/dog-avatar/SKILL.md`. It covers the required cream torn-paper edge, fine coloured outline, transparent exterior, and existing portraits to use as style references.
-- The cut-out stays a PNG with transparency. **Don't** run it through `scripts/prep-photo.sh`. If the source file is huge, shrink it with `sips -Z 1400 <file>`.
+- The cut-out stays a PNG with transparency. **Don't** run it through `scripts/prep-photo.sh`. If the source file is huge, shrink it with `sips -Z 1400 <file>` (on Linux, `convert <file> -resize '1400x1400>' <file>`).
 - The body can start empty. Entries arrive with the add-entry flow.
 
 Run `npm run build`, then follow **Pushing changes** in `AGENTS.md`. For content-only guest or stay changes, make one commit to main and push; accompanying architecture changes require a PR.
