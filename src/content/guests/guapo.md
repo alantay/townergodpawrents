@@ -22,6 +22,15 @@ stays:
 
 ## 29 Oct
 
+### 1:51pm
+
+<!-- entry-id: e144 -->
+<!-- no-time -->
+
+Whenever Alan and Weiwen are at home, Guapo always prefers to chill beside Weiwen. Alan has resigned himself to the fact that he is the spare.
+
+![Guapo sitting beside Weiwen on the sofa while she uses her laptop](./guapo/guapo-chill-beside-weiwen.jpg)
+
 ### 1pm
 
 <!-- entry-id: e143 -->
