@@ -22,6 +22,15 @@ stays:
 
 ## 29 Oct
 
+### 10:49pm
+
+<!-- entry-id: e146 -->
+<!-- no-time -->
+
+Whenever Alan has Greek yogurt, he never fails to let Guapo lick the remnants from his cup.
+
+![Guapo licking Greek yogurt remnants from a cup held by Alan](./guapo/guapo-greek-yogurt-cup.mp4)
+
 ### 9:40pm
 
 <!-- entry-id: e145 -->
