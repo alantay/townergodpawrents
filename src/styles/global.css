@@ -979,32 +979,27 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   transform-origin: top;
 }
 
-/* dots: a thought, cream pill with a trail of dots down to the dog */
+/* dots: a thought, inked cloud with a trail of dots down to the dog. The
+   cloud is an SVG that dogSays draws to fit the words. */
 .dog-bubble--dots p { font-weight: 500; }
 .dog-bubble--dots {
-  background: var(--color-cream);
-  border-radius: 999px;
-  padding: 12px 22px 10px;
-  box-shadow: 0 6px 14px rgb(0 0 0 / 0.22);
-  margin-top: -18px;
+  padding: 16px 26px 14px;
+  margin-top: -26px;
 }
-.dog-bubble--dots::before,
-.dog-bubble--dots::after {
-  content: "";
+.dog-bubble--dots svg {
   position: absolute;
-  background: var(--color-cream);
-  border-radius: 50%;
-  left: calc(50% + var(--tail-x, 0px));
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(3px 4px 0 rgb(0 0 0 / 0.18));
 }
-.dog-bubble--dots::before {
-  width: 14px; height: 14px;
-  top: calc(100% + 4px);
-  margin-left: -10px;
-}
-.dog-bubble--dots::after {
-  width: 8px; height: 8px;
-  top: calc(100% + 20px);
-  margin-left: -2px;
+.dog-bubble--dots path,
+.dog-bubble--dots circle {
+  fill: var(--color-cream);
+  stroke: var(--color-ink);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
 }
 
 .dog-bubble-pop {
