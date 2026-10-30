@@ -10,7 +10,7 @@ whenCalled: "Heard you. Choosing not to."
 thoughts:
   - "I heard my name. I simply chose peace."
   - "One smile and they forgive everything."
-sounds: ["Grrr."]
+sounds: ["Grrr.", "Zzzzzzz."]
 stays:
   - checkIn: 2026-09-30
     checkOut: 2026-10-13
