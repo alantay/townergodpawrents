@@ -27,7 +27,7 @@ stays:
 <!-- entry-id: e149 -->
 <!-- no-time -->
 
-Guapo is in love with this ball. Whenever I get near, he runs away with it. Guapo, your mum says you're too fat, so I guess this is your fitness plan with us.
+Guapo is in love with this ball. Whenever I get near, he runs away with it. This boy is getting chonky, so I guess this is his fitness plan with us.
 
 ![Guapo trotting off across a rooftop carpark at dusk with his ball](./guapo/guapo-ball-keepaway.mp4)
 
