@@ -20,6 +20,16 @@ stays:
     checkOut: 2027-01-03
 ---
 
+## 30 Oct
+
+### 7:15am
+
+<!-- entry-id: e147 -->
+
+Breakfast tastes better from a precarious position.
+
+![A tan dog sits on the edge of a concrete drainage channel beside tall grass, with apartment buildings in the background.](./guapo/guapo-breakfast-tastes-better.jpg)
+
 ## 29 Oct
 
 ### 10:49pm
