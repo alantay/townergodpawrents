@@ -22,6 +22,14 @@ stays:
 
 ## 30 Oct
 
+### 3:24pm
+
+<!-- entry-id: e148 -->
+
+Guapo looks like he fell out of love.
+
+![A tan dog lies with his head resting on a grey cushion.](./guapo/guapo-looks-like-fell.jpg)
+
 ### 7:15am
 
 <!-- entry-id: e147 -->
