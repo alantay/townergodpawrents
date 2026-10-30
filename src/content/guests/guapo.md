@@ -22,6 +22,15 @@ stays:
 
 ## 30 Oct
 
+### 7:25pm
+
+<!-- entry-id: e150 -->
+<!-- no-time -->
+
+Sorry, neighbours, Guapo is bringing the ball home. I will return it tomorrow 😂
+
+![Guapo on his leash with an orange ball in his mouth, another Shiba walking past behind him](./guapo/guapo-bringing-ball-home.jpg)
+
 ### 7pm
 
 <!-- entry-id: e149 -->
