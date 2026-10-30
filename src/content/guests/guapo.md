@@ -29,7 +29,9 @@ stays:
 
 Sorry, neighbours, Guapo is bringing the ball home. I will return it tomorrow 😂
 
-![Guapo on his leash with an orange ball in his mouth, another Shiba walking past behind him](./guapo/guapo-bringing-ball-home.jpg)
+![Guapo on his leash with an orange ball in his mouth, another Shiba walking past behind him](./guapo/guapo-ball-carpark-walk.jpg)
+
+![Guapo back home, still holding the orange ball in his mouth](./guapo/guapo-bringing-ball-home.jpg)
 
 ### 7pm
 
