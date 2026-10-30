@@ -22,6 +22,15 @@ stays:
 
 ## 30 Oct
 
+### 7pm
+
+<!-- entry-id: e149 -->
+<!-- no-time -->
+
+Guapo is in love with this ball. Whenever I get near, he runs away with it. His mama says he's too fat. I guess this is the new fitness plan.
+
+![Guapo trotting off across a rooftop carpark at dusk with his ball](./guapo/guapo-ball-keepaway.mp4)
+
 ### 3:24pm
 
 <!-- entry-id: e148 -->
