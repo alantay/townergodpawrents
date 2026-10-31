@@ -648,6 +648,11 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   .diary-prints--quad {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  /* Different photo shapes read naturally one above the other. */
+  .diary-prints--mixed {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media (min-width: 640px) {

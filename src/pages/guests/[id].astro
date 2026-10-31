@@ -354,7 +354,9 @@ let skinIndex = 0;
                   )}
 
                   {manyPrints && (
-                    <div class:list={{ "diary-prints": true, "diary-prints--pair": prints.length === 2, "diary-prints--quad": prints.length === 4, "mt-[15px]": true }}>
+                    <div
+                      class:list={{ "diary-prints": true, "diary-prints--pair": prints.length === 2, "diary-prints--quad": prints.length === 4, "diary-prints--mixed": prints.length === 2 && prints.some((p) => p.kind === "photo" && p.img.width > p.img.height) && prints.some((p) => p.kind === "photo" && p.img.width < p.img.height), "mt-[15px]": true }}
+                    >
                       {prints.map((p, printIndex) => p.kind === "photo" && (
                         <button
                           type="button"
