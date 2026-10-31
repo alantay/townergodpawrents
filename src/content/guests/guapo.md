@@ -22,6 +22,15 @@ stays:
 
 ## 31 Oct
 
+### 10:54pm
+
+<!-- entry-id: e160 -->
+<!-- no-time -->
+
+Naughty Guapo enjoying Tiny's toy. Tiny was not consulted.
+
+![Guapo jumping for Tiny's toy while she's not around](./guapo/guapo-tinys-toy.mp4)
+
 ### 11:13am
 
 <!-- entry-id: e155 -->
