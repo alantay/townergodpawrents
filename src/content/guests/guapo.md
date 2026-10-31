@@ -31,6 +31,14 @@ Went out with one dog, came back with two.
 
 ![Black-and-white dog lying on the floor with its tongue out, beside a tan dog sitting near the sofa.](./guapo/guapo-went-one-dog.jpg)
 
+### 7:30am
+
+<!-- entry-id: e152 -->
+
+Guapo senses the plastic bag is a threat.
+
+![Guapo stalking and pouncing on an orange plastic bag](./guapo/guapo-plastic-bag-threat.mp4)
+
 ## 30 Oct
 
 ### 7:25pm
