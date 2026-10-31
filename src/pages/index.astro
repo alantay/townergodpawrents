@@ -950,7 +950,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       // The weather in front of the day: "Cloudy Saturday". NEA's 2-hour
       // forecast for Kallang, which covers Towner. The hero gets one weather
       // at a time: haze wins when the central 24-hour PSI is unhealthy, then
-      // rain (with lightning when it's thundery), then heat shimmer when the
+      // rain (with lightning when it's thundery), then heat lines and sun when the
       // nearest station reads 33°C or more.
       // ?psi=170, ?sky=Thundery Showers and ?temp=34 preview them.
       function skyWord(forecast) {
@@ -1058,26 +1058,10 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           if (!still && visible) raf = requestAnimationFrame(frame);
         }
       }
-      // Heat shimmer: wobbly noise pushed through the dogs. Holds still for
-      // reduced motion, so it's just a slight warp.
+      // Heat: wavy lines rising off the dogs under a drifting sun (.sky-heat).
       function addHeat(card) {
-        var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
-        card.insertAdjacentHTML(
-          "beforeend",
-          '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="heat-shimmer" x="-5%" y="-5%" width="110%" height="110%">' +
-            '<feTurbulence type="fractalNoise" baseFrequency="0.012 0.09" numOctaves="2" seed="3">' +
-            (still ? "" : '<animate attributeName="baseFrequency" dur="4s" values="0.012 0.09;0.014 0.11;0.012 0.09" repeatCount="indefinite"/>') +
-            '</feTurbulence><feDisplacementMap in="SourceGraphic" scale="7"/></filter></svg>' +
-            '<div class="sky-heat" aria-hidden="true"></div>'
-        );
-        card.classList.add("sky-hot");
-        // The shimmer rests while the hero is scrolled out of sight.
-        var svg = card.querySelector("#heat-shimmer").ownerSVGElement;
-        if (!still)
-          new IntersectionObserver(function (seen) {
-            if (seen[0].isIntersecting) svg.unpauseAnimations();
-            else svg.pauseAnimations();
-          }).observe(card);
+        var line = '<svg viewBox="0 0 22 70"><path d="M11 68c-7-8 7-14 0-22s7-14 0-22 7-14 0-22"/></svg>';
+        card.insertAdjacentHTML("beforeend", '<div class="sky-heat" aria-hidden="true">' + line.repeat(5) + "</div>");
       }
       function addSky(today) {
         var param = (k) => (new RegExp("[?&]" + k + "=([^&]+)").exec(location.search) || [])[1];

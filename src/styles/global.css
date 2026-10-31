@@ -886,19 +886,59 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   64%, 100% { opacity: 0; }
 }
 
-/* A hot afternoon: the dogs wobble like a road in the sun (#heat-shimmer),
-   with a warm glow coming up from the bottom of the card. */
-.sky-hot :is(#hero-photos, #vacancy-photo) {
-  filter: url("#heat-shimmer");
-}
+/* A hot afternoon: a warm glow coming up from the bottom of the card, heat
+   lines rising off the dogs and the sun drifting across the top, flaring now
+   and then. Plain CSS, since iOS Safari can't animate an SVG filter on HTML. */
 .sky-heat {
   position: absolute;
   inset: 0;
   z-index: 1;
+  overflow: hidden;
   pointer-events: none;
+}
+.sky-heat::after {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: linear-gradient(to top, rgb(255 170 80 / 0.32), rgb(255 190 110 / 0.08) 55%, transparent 75%);
   mix-blend-mode: soft-light;
 }
+.sky-heat::before {
+  content: "";
+  position: absolute;
+  top: -140px;
+  left: -160px;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255 236 180 / 0.75), rgb(255 200 110 / 0.3) 40%, transparent 70%);
+  mix-blend-mode: screen;
+  animation: sun-drift 14s ease-in-out infinite alternate, sun-flare 7s ease-in-out infinite;
+}
+.sky-heat svg {
+  position: absolute;
+  bottom: 30px;
+  width: 22px;
+  height: 70px;
+  fill: none;
+  stroke: var(--color-cream);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  opacity: 0;
+  animation: heat-rise 3.6s ease-in infinite;
+}
+.sky-heat svg:nth-child(1) { left: 18%; }
+.sky-heat svg:nth-child(2) { left: 44%; height: 84px; animation-delay: -1.2s; }
+.sky-heat svg:nth-child(3) { left: 70%; animation-delay: -2.4s; }
+.sky-heat svg:nth-child(4) { left: 30%; bottom: 90px; height: 56px; animation-delay: -0.6s; }
+.sky-heat svg:nth-child(5) { left: 60%; bottom: 110px; height: 60px; animation-delay: -3s; }
+@keyframes heat-rise {
+  from { transform: translateY(20px); opacity: 0; }
+  25% { opacity: 0.75; }
+  to { transform: translateY(-150px); opacity: 0; }
+}
+@keyframes sun-drift { to { transform: translate(260px, 30px); } }
+@keyframes sun-flare { 0%, 70%, 100% { opacity: 0.65; } 80% { opacity: 1; } }
 
 /* Pops in, stays long enough to read (--note-hold, set per line), then fades. */
 @keyframes note-out {
@@ -1048,8 +1088,14 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   }
 
   .haze i,
-  .sky-flash {
+  .sky-flash,
+  .sky-heat::before {
     animation: none;
+  }
+
+  .sky-heat svg {
+    animation: none;
+    opacity: 0.5;
   }
 }
 
