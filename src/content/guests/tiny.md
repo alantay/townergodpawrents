@@ -22,6 +22,14 @@ stays:
 
 ## 31 Oct
 
+### 10:55pm
+
+<!-- entry-id: e159 -->
+<!-- with: guapo -->
+<!-- no-time -->
+
+The experiment is over. Tiny and Guapo can't share the house. They fought twice, and we stopped them both times. It goes the same way every time. Guapo thinks his chilling spot is in jeopardy and growls. Tiny won't tolerate a growl, so she barks. Guapo won't tolerate a bark, so he barks back...
+
 ### 2:04pm
 
 <!-- entry-id: e158 -->
