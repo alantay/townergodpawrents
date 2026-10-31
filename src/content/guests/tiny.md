@@ -22,6 +22,18 @@ stays:
 
 ## 31 Oct
 
+### 1:57pm
+
+<!-- entry-id: e157 -->
+<!-- with: guapo -->
+<!-- no-time -->
+
+One is begging for food. The other is still deciding whether begging is worth it.
+
+![Black-and-white dog standing beside a table with a bowl of rice and food.](./tiny/tiny-one-begging-food.jpg)
+
+![Brown dog lying on the floor with its head resting on a table leg.](./tiny/tiny-one-begging-food-2.jpg)
+
 ### 11:58am
 
 <!-- entry-id: e156 -->
