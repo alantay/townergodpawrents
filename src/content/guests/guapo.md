@@ -27,7 +27,7 @@ stays:
 <!-- entry-id: e160 -->
 <!-- no-time -->
 
-Guapo jumping for Tiny's toy while she's not around. Tiny was not consulted.
+Guapo jumping for Tiny's toy while she's not around. The fitness plan continues.
 
 ![Guapo jumping for Tiny's toy while she's not around](./guapo/guapo-tinys-toy.mp4)
 
