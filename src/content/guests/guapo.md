@@ -22,6 +22,17 @@ stays:
 
 ## 31 Oct
 
+### 9:32am
+
+<!-- entry-id: e154 -->
+<!-- with: tiny -->
+
+Guapo reclaimed his terriority & Tiny is chill about it
+
+![A brown dog lies on a wooden floor beneath a table, eyes closed.](./guapo/guapo-reclaimed-terriority-tiny.jpg)
+
+![A black-and-white dog lies on its back beside a wooden door, paws in the air.](./guapo/guapo-reclaimed-terriority-tiny-2.jpg)
+
 ### 9am
 
 <!-- entry-id: e151 -->
