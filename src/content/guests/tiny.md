@@ -22,6 +22,14 @@ stays:
 
 ## 31 Oct
 
+### 2:04pm
+
+<!-- entry-id: e158 -->
+
+Looks like Tiny is self-soothing because there was no ball play after lunch.
+
+![Tiny lying on her bed, nibbling the edge of the cushion](./tiny/tiny-self-soothing.mp4)
+
 ### 1:57pm
 
 <!-- entry-id: e157 -->
