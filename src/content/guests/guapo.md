@@ -22,6 +22,18 @@ stays:
 
 ## 31 Oct
 
+### 11:13am
+
+<!-- entry-id: e155 -->
+<!-- with: tiny -->
+<!-- no-time -->
+
+Each sleeping under a desk.
+
+![Guapo stretched out asleep under a desk](./guapo/guapo-under-desk.jpg)
+
+![Tiny curled up asleep under a wooden desk](./guapo/guapo-tiny-under-desk.jpg)
+
 ### 9:32am
 
 <!-- entry-id: e154 -->
