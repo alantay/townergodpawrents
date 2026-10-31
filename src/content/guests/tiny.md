@@ -22,6 +22,15 @@ stays:
 
 ## 31 Oct
 
+### 11:58am
+
+<!-- entry-id: e156 -->
+<!-- no-time -->
+
+This girl is dangerously smart...
+
+![Tiny jumping up and pulling the door handle down with her paw](./tiny/tiny-door-opener.mp4)
+
 ### 8:45am
 
 <!-- entry-id: e153 -->
