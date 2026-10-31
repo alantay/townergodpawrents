@@ -19,6 +19,16 @@ stays:
     checkOut: 2026-10-31
 ---
 
+## 31 Oct
+
+### 8:45am
+
+<!-- entry-id: e153 -->
+
+Tiny focusing on the unfocused ball.
+
+![Tiny on the carpark roof, tongue out, eyes locked on a blue ball held up to the camera](./tiny/tiny-unfocused-ball.jpg)
+
 ## 14 Oct
 
 ### 9pm
