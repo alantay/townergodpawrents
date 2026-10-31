@@ -951,7 +951,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       // forecast for Kallang, which covers Towner. The hero gets one weather
       // at a time: haze wins when the central 24-hour PSI is unhealthy, then
       // rain (with lightning when it's thundery), then heat lines and sun when the
-      // nearest station reads 33°C or more.
+      // nearest station reads 34°C or more.
       // ?psi=170, ?sky=Thundery Showers and ?temp=34 preview them.
       function skyWord(forecast) {
         return /haz/i.test(forecast) ? "Hazy"
@@ -1107,7 +1107,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               stormy ? "M9 1.5L4 9h4l-1 5.5L12 7H8z" : "M4 3l-1.5 4M8 5l-1.5 4M12 3l-1.5 4M6 10l-1.5 4M10 10l-1.5 4",
               forecast
             );
-          } else if (temp >= 33) {
+          } else if (temp >= 34) {
             addHeat(card);
             skyTag(card, "heat", "M7 2.5a1.5 1.5 0 0 1 3 0v6.8a3 3 0 1 1-3 0z", Math.round(temp) + "°C");
           }
