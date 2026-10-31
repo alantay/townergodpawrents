@@ -20,6 +20,17 @@ stays:
     checkOut: 2027-01-03
 ---
 
+## 31 Oct
+
+### 9am
+
+<!-- entry-id: e151 -->
+<!-- with: tiny -->
+
+Went out with one dog, came back with two.
+
+![Black-and-white dog lying on the floor with its tongue out, beside a tan dog sitting near the sofa.](./guapo/guapo-went-one-dog.jpg)
+
 ## 30 Oct
 
 ### 7:25pm
