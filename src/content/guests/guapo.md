@@ -22,6 +22,14 @@ stays:
 
 ## 1 Nov
 
+### 1pm
+
+<!-- entry-id: e163 -->
+
+This massage is life-changing.
+
+![A brown-and-white dog lies on the floor with its tongue out as a person scratches its neck.](./guapo/guapo-massage-life-changing.jpg)
+
 ### 9:30am
 
 <!-- entry-id: e162 -->
