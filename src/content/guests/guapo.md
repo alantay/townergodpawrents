@@ -20,6 +20,17 @@ stays:
     checkOut: 2027-01-03
 ---
 
+## 1 Nov
+
+### 8:06am
+
+<!-- entry-id: e161 -->
+<!-- no-time -->
+
+Guapo meets the garden T-rex, mid-way through eating a dwarf.
+
+![Guapo sniffing a garden statue of a T-rex with a dwarf in its mouth](./guapo/guapo-trex-statue.mp4)
+
 ## 31 Oct
 
 ### 10:54pm
