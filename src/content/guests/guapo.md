@@ -22,6 +22,14 @@ stays:
 
 ## 1 Nov
 
+### 3pm
+
+<!-- entry-id: e164 -->
+
+We brought Guapo to the pet fair nearby. One of the booth owners said he looked like their mascot and asked him to model. This is him looking awkward modelling.
+
+![Guapo sitting stiffly in front of a pet treat booth, next to a packet with a Shiba mascot on it](./guapo/guapo-pet-fair-model.jpg)
+
 ### 1pm
 
 <!-- entry-id: e163 -->
