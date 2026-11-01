@@ -22,6 +22,16 @@ stays:
 
 ## 1 Nov
 
+### 9:30am
+
+<!-- entry-id: e162 -->
+
+Back to bed after the T-rex. Big morning.
+
+![Guapo lying on his cushion bed, chin down, eyes open](./guapo/guapo-cushion-chin.jpg)
+
+![Guapo curled up asleep on the cushion, tail over his back](./guapo/guapo-cushion-curl.jpg)
+
 ### 8:06am
 
 <!-- entry-id: e161 -->
