@@ -22,6 +22,19 @@ stays:
 
 ## 1 Nov
 
+### 10:06pm
+
+<!-- entry-id: e165 -->
+<!-- no-time -->
+
+This boy was totally destroyed today.
+
+![A tan dog wearing an orange collar rests his head on a dark cushion beneath a wooden desk.](./guapo/guapo-boy-totally-destroyed.jpg)
+
+![A tan dog rests with his head on a person's leg beside a sofa.](./guapo/guapo-boy-totally-destroyed-2.jpg)
+
+![A tan dog lies stretched out on a sunlit floor near a window.](./guapo/guapo-boy-totally-destroyed-3.jpg)
+
 ### 3pm
 
 <!-- entry-id: e164 -->
