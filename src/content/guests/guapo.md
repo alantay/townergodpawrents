@@ -22,6 +22,14 @@ stays:
 
 ## 2 Nov
 
+### 5:20pm
+
+<!-- entry-id: e168 -->
+
+And sometimes he’s a loaf.
+
+![A brown dog curled into a loaf shape on a large gray cushion.](./guapo/guapo-sometimes-loaf.jpg)
+
 ### 1:30pm
 
 <!-- entry-id: e167 -->
