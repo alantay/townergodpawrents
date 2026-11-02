@@ -32,6 +32,12 @@ Guapo looked like he is on fast forward when Weiwen came home.
 
 ![Guapo zooming around Weiwen as she comes home](./guapo/guapo-fast-forward.mp4)
 
+### 6pm
+
+<!-- entry-id: e170 -->
+
+See ya, handsome boy, till next time. Time for us to vacuum up your fur. He left enough to build a second Guapo.
+
 ### 5:20pm
 
 <!-- entry-id: e168 -->
