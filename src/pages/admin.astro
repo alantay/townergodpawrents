@@ -169,8 +169,9 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
   .print img, .print video { display: block; width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 8px; }
   .print button, .print .video-mark { position: absolute; top: 12px; right: 12px; font: 600 13px/1 var(--font-archivo), sans-serif; padding: 9px 12px; border-radius: 999px; border: 0; background: var(--color-ink); color: var(--color-cream); }
   .print button { cursor: pointer; }
-  .print .video-mark { right: auto; left: 12px; pointer-events: none; }
-  .print .video-mark::before { content: ""; display: block; border-block: 6px solid transparent; border-left: 9px solid currentColor; }
+  .print .video-mark { right: auto; left: 12px; }
+  .print .video-mark::after { content: ""; display: block; border-block: 6px solid transparent; border-left: 9px solid currentColor; }
+  .print .video-mark.playing::after { width: 9px; height: 12px; box-sizing: border-box; border: 0; border-inline: 3px solid currentColor; }
   /* Visible pill stays small on the print; the tap area is 44px. */
   .print button::before { content: ""; position: absolute; inset: -7px; }
   .print.shrinking { aspect-ratio: 4/5; display: grid; place-items: center; font-size: 13px; color: var(--color-label); box-sizing: border-box; }
