@@ -39,6 +39,7 @@ const fields = $<HTMLFieldSetElement>("fields");
 const iso = $<HTMLInputElement>("iso");
 const time = $<HTMLInputElement>("time");
 const text = $<HTMLTextAreaElement>("text");
+const textHint = $("text-hint");
 const dogsBox = $("dogs");
 const withBox = $("with");
 const withField = $("with-field");
@@ -162,6 +163,10 @@ function render() {
   polishBtn.textContent = suggesting ? (photos.length ? "Looking at photos…" : "Polishing…") : state.text.trim() ? "Polish my words" : "Suggest words";
   fields.disabled = busy;
   files.disabled = restoring;
+  files.accept = photos.length || shrinking ? "image/*" : ["image/*", ...VIDEO_CONTENT_TYPES].join(",");
+  textHint.textContent = video
+    ? "Add a little context, or let the video do the talking."
+    : "Add a little context, or let the photos do the talking.";
   addTile.hidden = !!video || photos.length + shrinking >= MAX_PHOTOS;
   renderPreview();
 }
@@ -216,6 +221,11 @@ function renderPhotos() {
   if (video) {
     const print = document.createElement("div");
     print.className = "print";
+    print.setAttribute("role", "group");
+    print.setAttribute("aria-label", "Selected video");
+    const play = document.createElement("span");
+    play.className = "video-mark";
+    play.setAttribute("aria-hidden", "true");
     const remove = document.createElement("button");
     remove.type = "button";
     remove.textContent = "Remove";
@@ -226,7 +236,7 @@ function renderPhotos() {
       videoUrl = undefined;
       renderPhotos();
     });
-    print.append(videoThumb(video), remove);
+    print.append(videoThumb(video), play, remove);
     photosBox.insertBefore(print, addTile);
   }
   photos.forEach((blob, i) => {
