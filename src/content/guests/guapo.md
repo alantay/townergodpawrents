@@ -22,6 +22,15 @@ stays:
 
 ## 2 Nov
 
+### 1:30pm
+
+<!-- entry-id: e167 -->
+<!-- label: Throwback -->
+
+Guapo has chosen not to resist.
+
+![Guapo lying still with a pink plush dragon balanced on his head and back](./guapo/guapo-pink-dragon.jpg)
+
 ### 8am
 
 <!-- entry-id: e166 -->
