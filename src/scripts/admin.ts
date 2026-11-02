@@ -190,7 +190,9 @@ function videoThumb(file: File): HTMLVideoElement {
   const clip = document.createElement("video");
   clip.muted = true;
   clip.playsInline = true;
-  clip.src = urlFor(file);
+  clip.preload = "metadata";
+  // The fragment makes iOS Safari paint the first frame instead of a blank box.
+  clip.src = `${urlFor(file)}#t=0.001`;
   clip.setAttribute("aria-label", "Selected video");
   return clip;
 }
@@ -223,9 +225,24 @@ function renderPhotos() {
     print.className = "print";
     print.setAttribute("role", "group");
     print.setAttribute("aria-label", "Selected video");
-    const play = document.createElement("span");
+    const clip = videoThumb(video);
+    const play = document.createElement("button");
+    play.type = "button";
     play.className = "video-mark";
-    play.setAttribute("aria-hidden", "true");
+    play.setAttribute("aria-label", "Play video");
+    const toggle = () => {
+      clip.muted = false;
+      if (clip.paused) void clip.play();
+      else clip.pause();
+    };
+    const sync = () => {
+      play.classList.toggle("playing", !clip.paused);
+      play.setAttribute("aria-label", clip.paused ? "Play video" : "Pause video");
+    };
+    play.addEventListener("click", toggle);
+    clip.addEventListener("click", toggle);
+    clip.addEventListener("play", sync);
+    clip.addEventListener("pause", sync);
     const remove = document.createElement("button");
     remove.type = "button";
     remove.textContent = "Remove";
@@ -236,7 +253,7 @@ function renderPhotos() {
       videoUrl = undefined;
       renderPhotos();
     });
-    print.append(videoThumb(video), play, remove);
+    print.append(clip, play, remove);
     photosBox.insertBefore(print, addTile);
   }
   photos.forEach((blob, i) => {
