@@ -36,7 +36,7 @@ Guapo looked like he is on fast forward when Weiwen came home.
 
 <!-- entry-id: e170 -->
 
-Bye handsome boy, see you in December. Time for us to vacuum up your fur. He left enough to build a second Guapo.
+Bye handsome boy, see you in December. Time for us to vacuum up your fur. You left enough to build a second Guapo.
 
 ### 5:20pm
 
