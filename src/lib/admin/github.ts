@@ -23,6 +23,7 @@ export interface GitHub {
   listDir(path: string, sha: string): Promise<string[]>;
   /** One commit on top of `parent`. Fails (422) if the branch moved. */
   commit(parent: string, files: CommitFile[], message: string): Promise<string>;
+  dispatch(eventType: string, payload: Record<string, unknown>): Promise<void>;
 }
 
 const encodePath = (path: string) => path.split("/").map(encodeURIComponent).join("/");
@@ -58,6 +59,11 @@ export function gitHub(deps: { token: string; repo: string; branch: string; fetc
     (await call(method, path, body)).json() as Promise<T>;
 
   return {
+    async dispatch(eventType, payload) {
+      const response = await call("POST", "/dispatches", { event_type: eventType, client_payload: payload });
+      if (response.status !== 204) throw new GitHubError(response.status, "Dispatch wasn't accepted");
+    },
+
     async head() {
       return (await send<{ object: { sha: string } }>("GET", `/git/ref/heads/${branch}`)).object.sha;
     },

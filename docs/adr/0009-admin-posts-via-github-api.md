@@ -20,6 +20,8 @@ Posts go live with no review. The page validates everything before writing, so a
 
 Entry IDs are numbered across every guest file, not per file, so a shared entry's ID stays unique on every page it appears on.
 
-Secrets (`ADMIN_PASSPHRASE`, `ADMIN_SECRET`, `GITHUB_TOKEN`, `OPENAI_API_KEY`) live only in Vercel. The GitHub token is fine-grained, this repo only, Contents read and write. Changing `ADMIN_SECRET` logs everyone out.
+Videos upload straight from the browser to Vercel Blob. The server dispatches an `admin-video` GitHub Action, which runs the same `prep-video.sh` used on the laptop, files the entry and pushes the MP4, dimensions and poster to `main`. They take about 1-3 minutes to appear. The raw upload is deleted after a successful push and kept if processing fails.
 
-Not handled yet: videos, editing or deleting entries, new dogs or stays. Those still go through Claude Code.
+Secrets (`ADMIN_PASSPHRASE`, `ADMIN_SECRET`, `GITHUB_TOKEN`, `OPENAI_API_KEY`) live only in Vercel. `BLOB_READ_WRITE_TOKEN` lives in both Vercel and the repo's Actions secrets. The GitHub token is fine-grained, this repo only, Contents read and write. The Action uses its own `GITHUB_TOKEN` with Contents write permission. Changing `ADMIN_SECRET` logs everyone out.
+
+Not handled yet: editing or deleting entries, new dogs or stays. Those still go through Claude Code.

@@ -87,3 +87,23 @@ test("typed markdown is defused on the way in", () => {
   assert.ok(result.ok);
   assert.equal(result.input.text, " ## 1 Oct\n< !-- entry-id: e001 -->");
 });
+
+test("a video counts as media, with or without words", () => {
+  const videoUrl = "https://test.public.blob.vercel-storage.com/admin-video/clip.mp4";
+  for (const text of ["Chasing slippers.", ""]) {
+    const result = validate({ ...OK, text, videoUrl }, GUESTS);
+    assert.ok(result.ok);
+    assert.equal(result.input.videoUrl, videoUrl);
+  }
+  assert.equal(error({ videoUrl, photos: [JPEG] }), "One video or up to four photos, not both.");
+});
+
+test("video URLs must be HTTPS uploads on a public Blob host", () => {
+  for (const videoUrl of [
+    "not a URL", "http://test.public.blob.vercel-storage.com/admin-video/clip.mp4",
+    "https://evil.test/admin-video/clip.mp4", "https://test.public.blob.vercel-storage.com.evil.test/admin-video/clip.mp4",
+    "https://test.public.blob.vercel-storage.com/elsewhere/clip.mp4",
+    "https://test.public.blob.vercel-storage.com:8080/admin-video/clip.mp4",
+    "https://user:pass@test.public.blob.vercel-storage.com/admin-video/clip.mp4",
+  ]) assert.equal(error({ videoUrl }), "That didn't send properly. Try again.");
+});
