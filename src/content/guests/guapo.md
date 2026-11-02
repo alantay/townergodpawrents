@@ -22,6 +22,16 @@ stays:
 
 ## 2 Nov
 
+### 6:09pm
+
+<!-- entry-id: e169 -->
+
+<!-- no-time -->
+
+Guapo looked like he is on fast forward when Weiwen came home.
+
+![Guapo zooming around Weiwen as she comes home](./guapo/guapo-fast-forward.mp4)
+
 ### 5:20pm
 
 <!-- entry-id: e168 -->
