@@ -14,6 +14,7 @@ import { postApi } from "./post-entry.ts";
 import { polishRules } from "./prompts.ts";
 import { redisStore, type KeyStore } from "./store.ts";
 import type { Ai, GuestInfo } from "./types.ts";
+import { videoUploadApi } from "./video-upload.ts";
 
 const REPO = "alantay/townergodpawrents";
 
@@ -59,6 +60,8 @@ export const authed = (request: Request) => isAuthed(request, secret());
 export const login = () => loginApi({ passphrase: getSecret("ADMIN_PASSPHRASE"), secret: secret(), store });
 export const polish = () => polishApi({ secret: secret(), guests: adminGuests, ai });
 export const post = () => postApi({ secret: secret(), guests: adminGuests, ai, gitHub: gh, store });
+
+export const videoUpload = (request: Request) => videoUploadApi(request, { secret: secret(), token: getSecret("BLOB_READ_WRITE_TOKEN") });
 
 /** Vercel gives clientAddress; fall back to the forwarded header. */
 export function clientIp(request: Request, clientAddress: () => string): string {

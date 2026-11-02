@@ -1,11 +1,13 @@
 // The post form on /admin. Keeps a draft in this browser, shrinks photos
 // before upload, and talks to /api/admin/polish and /api/admin/post.
 import { dogsOn, draftWhen, nowSGT, postTime, type FormGuest } from "../lib/admin/form.ts";
+import { BAD_VIDEO, MAX_VIDEO_BYTES, VIDEO_CONTENT_TYPES } from "../lib/admin/constants.ts";
 import { formatTime } from "../lib/admin/format.ts";
 import { NO_TIME } from "../lib/admin/types.ts";
 import { fmtDay } from "../lib/guests.ts";
 import { loadPhotos, savePhotos } from "./photo-draft.ts";
 import type { PhotoDescription } from "../lib/admin/photo-descriptions.ts";
+import { put } from "@vercel/blob/client";
 
 const DRAFT_KEY = "tgp-admin-draft";
 const MAX_PHOTOS = 4;
@@ -37,6 +39,7 @@ const fields = $<HTMLFieldSetElement>("fields");
 const iso = $<HTMLInputElement>("iso");
 const time = $<HTMLInputElement>("time");
 const text = $<HTMLTextAreaElement>("text");
+const textHint = $("text-hint");
 const dogsBox = $("dogs");
 const withBox = $("with");
 const withField = $("with-field");
@@ -65,6 +68,9 @@ const done = $("done");
 
 let state: Draft = { guest: "", iso: "", time: "", label: NO_TIME, with: [], text: "" };
 let photos: Blob[] = [];
+let video: File | undefined;
+let videoUrl: string | undefined;
+let uploadingVideo = false;
 let postKey = crypto.randomUUID();
 let shrinking = 0;
 // Saved photos still coming back from IndexedDB: posting or picking now would lose them.
@@ -151,13 +157,17 @@ function render() {
     : "The label shows instead of the time. It goes in the day by when you post.";
 
   const name = guests.find((g) => g.id === state.guest)?.name;
-  go.textContent = busy ? "Posting…" : name ? `Post to ${name}'s diary` : "Post";
+  go.textContent = uploadingVideo ? "Sending video…" : busy ? "Posting…" : name ? `Post to ${name}'s diary` : "Post";
   go.disabled = busy || restoring || suggesting || shrinking > 0;
   polishBtn.disabled = busy || restoring || suggesting || shrinking > 0;
   polishBtn.textContent = suggesting ? (photos.length ? "Looking at photos…" : "Polishing…") : state.text.trim() ? "Polish my words" : "Suggest words";
   fields.disabled = busy;
   files.disabled = restoring;
-  addTile.hidden = photos.length + shrinking >= MAX_PHOTOS;
+  files.accept = photos.length || shrinking ? "image/*" : ["image/*", ...VIDEO_CONTENT_TYPES].join(",");
+  textHint.textContent = video
+    ? "Add a little context, or let the video do the talking."
+    : "Add a little context, or let the photos do the talking.";
+  addTile.hidden = !!video || photos.length + shrinking >= MAX_PHOTOS;
   renderPreview();
 }
 
@@ -176,18 +186,27 @@ function thumb(blob: Blob): HTMLImageElement {
   return img;
 }
 
+function videoThumb(file: File): HTMLVideoElement {
+  const clip = document.createElement("video");
+  clip.muted = true;
+  clip.playsInline = true;
+  clip.src = urlFor(file);
+  clip.setAttribute("aria-label", "Selected video");
+  return clip;
+}
+
 /** A quiet look at the card: the day, the time or label line, the photos. */
 function renderPreview() {
   const name = guests.find((g) => g.id === state.guest)?.name;
-  previewField.hidden = !name || (!state.text.trim() && !photos.length);
+  previewField.hidden = !name || (!state.text.trim() && !photos.length && !video);
   if (previewField.hidden) return;
   previewLbl.textContent = `On ${name}'s diary, ${fmtDay(state.iso)}`;
   const shown = state.label === NO_TIME ? "" : state.label || formatTime(postTime(state)) || "";
   const withNames = state.with.map((id) => guests.find((g) => g.id === id)?.name).filter(Boolean);
   previewWhen.textContent = [shown, withNames.length > 0 && `with ${withNames.join(" & ")}`].filter(Boolean).join(" · ");
   previewLine.hidden = !previewWhen.textContent;
-  previewPhotos.replaceChildren(...photos.map(thumb));
-  previewPhotos.hidden = !photos.length;
+  previewPhotos.replaceChildren(...(video ? [videoThumb(video)] : photos.map(thumb)));
+  previewPhotos.hidden = !photos.length && !video;
   previewText.textContent = state.text.trim();
   previewText.hidden = !previewText.textContent;
 }
@@ -199,6 +218,27 @@ function update() {
 
 function renderPhotos() {
   for (const print of photosBox.querySelectorAll(".print")) print.remove();
+  if (video) {
+    const print = document.createElement("div");
+    print.className = "print";
+    print.setAttribute("role", "group");
+    print.setAttribute("aria-label", "Selected video");
+    const play = document.createElement("span");
+    play.className = "video-mark";
+    play.setAttribute("aria-hidden", "true");
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.textContent = "Remove";
+    remove.setAttribute("aria-label", "Remove video");
+    remove.addEventListener("click", () => {
+      URL.revokeObjectURL(urlFor(video!));
+      video = undefined;
+      videoUrl = undefined;
+      renderPhotos();
+    });
+    print.append(videoThumb(video), play, remove);
+    photosBox.insertBefore(print, addTile);
+  }
   photos.forEach((blob, i) => {
     const print = document.createElement("div");
     print.className = "print";
@@ -257,8 +297,21 @@ async function shrink(file: File): Promise<Blob> {
 files.addEventListener("change", async () => {
   showError("");
   photoNote.hidden = true;
-  const picked = Array.from(files.files ?? []).slice(0, MAX_PHOTOS - photos.length - shrinking);
+  const selected = Array.from(files.files ?? []);
   files.value = "";
+  const clips = selected.filter((file) => file.type.startsWith("video/"));
+  if (video || (clips.length && (clips.length !== 1 || selected.length !== 1 || photos.length || shrinking))) {
+    return showError("One video or up to four photos, not both.");
+  }
+  if (clips.length) {
+    const clip = clips[0];
+    if (!VIDEO_CONTENT_TYPES.includes(clip.type) || clip.size > MAX_VIDEO_BYTES) return showError(BAD_VIDEO);
+    video = clip;
+    videoUrl = undefined;
+    renderPhotos();
+    return;
+  }
+  const picked = selected.slice(0, MAX_PHOTOS - photos.length - shrinking);
   shrinking += picked.length;
   renderPhotos();
   for (const file of picked) {
@@ -367,6 +420,38 @@ form.addEventListener("submit", async (event) => {
   for (const id of state.with) data.append("with", id);
   photos.forEach((blob, i) => data.append("photos", blob, `photo-${i + 1}.jpg`));
   try {
+    if (video) {
+      if (!videoUrl) {
+        uploadingVideo = true;
+        render();
+        try {
+          const pathname = `admin-video/${postKey}.${video.type === "video/quicktime" ? "mov" : "mp4"}`;
+          // The SDK's upload() hides HTTP status, so fetch the token ourselves.
+          const tokenRes = await fetch("/api/admin/video-upload", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ type: "blob.generate-client-token", payload: { pathname, multipart: true } }),
+            signal: AbortSignal.timeout(POST_TIMEOUT_MS),
+          });
+          if (loggedOut(tokenRes)) return;
+          if (!tokenRes.ok) return showError(BAD_VIDEO);
+          const { clientToken } = await tokenRes.json();
+          const blob = await put(pathname, video, {
+            access: "public",
+            multipart: true,
+            token: clientToken,
+            contentType: video.type,
+          });
+          videoUrl = blob.url;
+        } catch {
+          return showError(BAD_VIDEO);
+        } finally {
+          uploadingVideo = false;
+          render();
+        }
+      }
+      data.set("videoUrl", videoUrl);
+    }
     const res = await fetch("/api/admin/post", { method: "POST", body: data, signal: AbortSignal.timeout(POST_TIMEOUT_MS) });
     if (loggedOut(res)) return;
     const body = await res.json().catch(() => ({}));
@@ -375,7 +460,9 @@ form.addEventListener("submit", async (event) => {
     const link = $<HTMLAnchorElement>("done-link");
     link.href = body.url;
     link.textContent = name ? `See ${name}'s diary` : "See the diary";
-    $("done-photos").replaceChildren(...photos.map(thumb));
+    $("done-photos").replaceChildren(...(video ? [videoThumb(video)] : photos.map(thumb)));
+    $("done-title").textContent = body.pending ? "Video's on its way." : "Posted.";
+    $("done-note").textContent = body.pending ? "It'll show up in a couple of minutes." : "Live on the site in about a minute.";
     try {
       localStorage.removeItem(DRAFT_KEY);
     } catch {}
@@ -399,6 +486,9 @@ $("again").addEventListener("click", () => {
   text.value = "";
   for (const blob of photos) URL.revokeObjectURL(urlFor(blob));
   photos = [];
+  if (video) URL.revokeObjectURL(urlFor(video));
+  video = undefined;
+  videoUrl = undefined;
   descriptions = [];
   $("done-photos").replaceChildren();
   postKey = crypto.randomUUID();

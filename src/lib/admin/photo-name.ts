@@ -25,11 +25,11 @@ export function slugWords(text: string, dogName: string): string[] {
   return words.length ? words : ["photo"];
 }
 
-/** First free "<guest>-<words>.jpg", then -2, -3… Adds the winner to `taken`. */
-export function photoName(guestId: string, words: string[], taken: Set<string>): string {
+/** First free "<guest>-<words>.<ext>", then -2, -3… Adds the winner to `taken`. */
+export function photoName(guestId: string, words: string[], taken: Set<string>, ext = "jpg"): string {
   const base = `${guestId}-${words.join("-")}`;
-  let name = `${base}.jpg`;
-  for (let n = 2; taken.has(name); n++) name = `${base}-${n}.jpg`;
+  let name = `${base}.${ext}`;
+  for (let n = 2; taken.has(name); n++) name = `${base}-${n}.${ext}`;
   taken.add(name);
   return name;
 }

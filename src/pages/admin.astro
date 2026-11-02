@@ -4,6 +4,7 @@
 import { Font } from "astro:assets";
 import "../styles/global.css";
 import { adminGuests, authed } from "../lib/admin/server";
+import { VIDEO_CONTENT_TYPES } from "../lib/admin/constants";
 import { LABELS, NO_TIME } from "../lib/admin/types";
 
 export const prerender = false;
@@ -81,11 +82,11 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
             <p class="hint" id="label-hint" hidden></p>
           </div>
           <div class="field">
-            <span class="lbl">Photos (up to 4)</span>
+            <span class="lbl">One video or up to 4 photos</span>
             <div class="photos" id="photos">
               <label class="add" id="add">
-                + Add photo
-                <input id="files" type="file" accept="image/*" multiple class="sr-only" />
+                + Add photo or video
+                <input id="files" type="file" accept={["image/*", ...VIDEO_CONTENT_TYPES].join(",")} multiple class="sr-only" />
               </label>
             </div>
             <p class="hint" id="photo-note" role="status" hidden></p>
@@ -120,7 +121,7 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
       <section class="done" id="done" hidden aria-live="polite">
         <div class="done-photos" id="done-photos"></div>
         <h2 id="done-title" tabindex="-1">Posted.</h2>
-        <p>Live on the site in about a minute.</p>
+        <p id="done-note">Live on the site in about a minute.</p>
         <p><a id="done-link" href="/">See the diary</a></p>
         <button type="button" class="btn ghost" id="again">Post another one</button>
       </section>
@@ -165,8 +166,11 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
   .print { position: relative; background: var(--color-cream); border-radius: 12px; padding: 7px 7px 10px; box-shadow: 0 1px 0 var(--color-card-line); min-width: 0; }
   .print:nth-child(odd) { transform: rotate(-1.2deg); }
   .print:nth-child(even) { transform: rotate(1deg); }
-  .print img { display: block; width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 8px; }
-  .print button { position: absolute; top: 12px; right: 12px; font: 600 13px/1 var(--font-archivo), sans-serif; padding: 9px 12px; border-radius: 999px; border: 0; background: var(--color-ink); color: var(--color-cream); cursor: pointer; }
+  .print img, .print video { display: block; width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 8px; }
+  .print button, .print .video-mark { position: absolute; top: 12px; right: 12px; font: 600 13px/1 var(--font-archivo), sans-serif; padding: 9px 12px; border-radius: 999px; border: 0; background: var(--color-ink); color: var(--color-cream); }
+  .print button { cursor: pointer; }
+  .print .video-mark { right: auto; left: 12px; pointer-events: none; }
+  .print .video-mark::before { content: ""; display: block; border-block: 6px solid transparent; border-left: 9px solid currentColor; }
   /* Visible pill stays small on the print; the tap area is 44px. */
   .print button::before { content: ""; position: absolute; inset: -7px; }
   .print.shrinking { aspect-ratio: 4/5; display: grid; place-items: center; font-size: 13px; color: var(--color-label); box-sizing: border-box; }
@@ -188,7 +192,7 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
   .peek-line { display: flex; align-items: center; gap: 8px; font: 600 0.75rem/1.3 var(--font-archivo), sans-serif; letter-spacing: 0.08em; text-transform: uppercase; }
   .peek-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-ink); flex: none; }
   .peek-photos { display: flex; gap: 8px; }
-  .peek-photos img, .done-photos img { width: 56px; aspect-ratio: 4/5; object-fit: cover; border-radius: 6px; background: var(--color-paper); }
+  .peek-photos img, .done-photos img, .peek-photos video, .done-photos video { width: 56px; aspect-ratio: 4/5; object-fit: cover; border-radius: 6px; background: var(--color-paper); }
   .peek-text { margin: 0; font-size: 15px; white-space: pre-line; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
   .peek-line[hidden], .peek-photos[hidden], .peek-text[hidden] { display: none; }
   .done-photos { display: flex; gap: 8px; margin-bottom: 8px; }
