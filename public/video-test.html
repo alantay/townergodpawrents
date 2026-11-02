@@ -21,6 +21,7 @@ document.querySelector("input").onchange = (e) => {
     ["B #t", url + "#t=0.001", (v) => { v.preload = "metadata"; }],
     ["C #t+load", url + "#t=0.001", (v) => { v.preload = "metadata"; v.load(); }],
     ["D controls", url + "#t=0.001", (v) => { v.preload = "metadata"; v.controls = true; }],
+    ["E seek", url, (v) => { v.preload = "metadata"; v.addEventListener("loadedmetadata", () => (v.currentTime = 0.001), { once: true }); }],
   ];
   const box = document.getElementById("v");
   box.replaceChildren();

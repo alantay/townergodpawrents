@@ -191,8 +191,10 @@ function videoThumb(file: File): HTMLVideoElement {
   clip.muted = true;
   clip.playsInline = true;
   clip.preload = "metadata";
-  // The fragment makes iOS Safari paint the first frame instead of a blank box.
-  clip.src = `${urlFor(file)}#t=0.001`;
+  // iOS Safari shows a blank box until a frame is decoded; a tiny seek makes it paint one.
+  // (A #t=0.001 fragment does the same on desktop but breaks blob URLs on iOS.)
+  clip.addEventListener("loadedmetadata", () => (clip.currentTime = 0.001), { once: true });
+  clip.src = urlFor(file);
   clip.setAttribute("aria-label", "Selected video");
   return clip;
 }
