@@ -20,6 +20,16 @@ stays:
     checkOut: 2027-01-03
 ---
 
+## 2 Nov
+
+### 8am
+
+<!-- entry-id: e166 -->
+
+Post-breakfast coma, or still recovering from yesterday?
+
+![A tan dog lies stretched out on a wooden floor, eyes closed, with a food bowl nearby.](./guapo/guapo-post-breakfast-coma.jpg)
+
 ## 1 Nov
 
 ### 10:06pm
