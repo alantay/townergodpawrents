@@ -44,3 +44,11 @@ test("without IntersectionObserver, hidden-tab resting still works", () => {
   onVisibility();
   assert.equal(resting, false);
 });
+
+test("homepage exposes its loading, pat, freshness, and archive cues", () => {
+  assert.ok(source.includes('role="status" aria-live="polite"'));
+  assert.ok(source.includes('class="pat-cue"'));
+  assert.ok(source.includes("freshnessHTML()"));
+  assert.ok(source.includes("Everyone who&rsquo;s stayed"));
+  assert.ok(source.includes(".slice(0, 3)"));
+});

@@ -52,6 +52,7 @@ test("a lone guest's own entry shows just its time, no name", () => {
   assert.ok(!html.includes("diary-guest-link"));
   assert.ok(html.includes(">5:55pm<"));
   assert.ok(html.includes("Bobbi&rsquo;s full diary"));
+  assert.ok(html.indexOf("Bobbi&rsquo;s full diary") < html.indexOf('id="sky-day"'));
 });
 
 test("on a two-guest day each entry names its dog", () => {
