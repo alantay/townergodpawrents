@@ -6,7 +6,7 @@ bgColor: "#2F6B6B"
 showLive: true
 sex: male
 badge: Grandma's boy
-tagline: marks every few steps, even when there's nothing left, and trusts nobody but his grandparents
+tagline: marks even on empty, trusts nobody
 whenCalled: "Only if you're Grandma."
 thoughts:
   - "One more for the lamp post. Even if it's just air."
