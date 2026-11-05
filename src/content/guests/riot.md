@@ -16,3 +16,14 @@ stays:
     checkOut: 2026-11-11
     dropIn: true
 ---
+
+## 5 Nov
+
+### 8:33am
+
+<!-- entry-id: e171 -->
+<!-- no-time -->
+
+Riot walks nicely unleashed. He gets to mark whenever he likes, but he still follows you well.
+
+![Riot, off the leash, sniffs along a planter on the pavement and lifts his leg on it](./riot/riot-off-leash-marking.mp4)
