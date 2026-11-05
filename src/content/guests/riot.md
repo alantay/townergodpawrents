@@ -19,6 +19,15 @@ stays:
 
 ## 5 Nov
 
+### 2:22pm
+
+<!-- entry-id: e172 -->
+<!-- no-time -->
+
+Someone's feeling manja today.
+
+![Riot circles and presses against Weiwen's legs while she pats him on the floor](./riot/riot-manja-weiwen.mp4)
+
 ### 8:33am
 
 <!-- entry-id: e171 -->
