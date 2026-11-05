@@ -7,7 +7,7 @@ showLive: true
 sex: male
 badge: Grandma's boy
 tagline: marks even on empty, keeps one eye on you
-whenCalled: "Only if you're Grandma."
+whenCalled: "Treat first. Then we'll see."
 thoughts:
   - "One more for the lamp post. Even if it's just air."
   - "You're not Grandpa. Hands where I can see them."
