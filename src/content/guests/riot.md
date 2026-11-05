@@ -6,7 +6,7 @@ bgColor: "#2F6B6B"
 showLive: true
 sex: male
 badge: Grandma's boy
-tagline: marks even on empty, trusts nobody
+tagline: marks even on empty, keeps one eye on you
 whenCalled: "Only if you're Grandma."
 thoughts:
   - "One more for the lamp post. Even if it's just air."
