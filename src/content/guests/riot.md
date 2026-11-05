@@ -6,7 +6,7 @@ bgColor: "#2F6B6B"
 showLive: true
 sex: male
 badge: Grandma's boy
-tagline: marks even on empty, shy around new faces
+tagline: marks even on empty, skittish around new faces
 whenCalled: "Treat first. Then we'll see."
 thoughts:
   - "One more for the lamp post. Even if it's just air."
