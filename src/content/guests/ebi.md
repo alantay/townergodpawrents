@@ -7,6 +7,9 @@ showLive: true
 badge: Attention seeker
 tagline: squeaky-toy enthusiast, works only for snacks
 whenCalled: "Got a snack? Then maybe."
+thoughts:
+  - "Squeak it again."
+  - "Pretty sure I deserve a snack for this."
 stays:
   - checkIn: 2026-09-12
     checkOut: 2026-09-12

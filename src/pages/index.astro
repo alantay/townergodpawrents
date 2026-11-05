@@ -5,6 +5,7 @@ import Footer from "../components/Footer.astro";
 import Cutout from "../components/Cutout.astro";
 import { cutoutWidth } from "../lib/cutout-width";
 import { groupHeroColor } from "../lib/group-hero-color";
+import { bubblesJs } from "../lib/dog-bubbles";
 import { Image } from "astro:assets";
 import sofaCutout from "../assets/sofa-cutout-v2.png";
 import portrait from "../assets/alan-weiwen-portrait.jpg";
@@ -126,6 +127,7 @@ const guests = entries.map((e) => {
     badge: e.data.badge ?? "",
     whenCalled: e.data.whenCalled ?? "",
     sounds: e.data.sounds,
+    thoughts: e.data.thoughts,
     bgColor: e.data.bgColor,
     showLive: e.data.showLive,
     sex: e.data.sex ?? null,
@@ -262,7 +264,11 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
 
   <dialog id="print-viewer" class="print-viewer" aria-label="Photo">
     <form method="dialog">
-      <button class="print-viewer-close" aria-label="Close">×</button>
+      <button class="print-viewer-close" aria-label="Close">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path d="m6 6 12 12M18 6 6 18" />
+        </svg>
+      </button>
     </form>
     <img alt="" />
   </dialog>
@@ -290,6 +296,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
 
   <script is:inline set:html={`window.__tgpCutoutWidth = ${cutoutWidth.toString()};`} />
   <script is:inline set:html={sharedJs} />
+  <script is:inline set:html={bubblesJs} />
   <script type="application/json" id="guests-data" is:inline set:html={guestsJson} />
   <script type="application/json" id="group-hero" is:inline set:html={groupHeroJson} />
 
@@ -769,6 +776,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               mediaHTML =
                 '<div class="diary-prints' +
                 (e.media.length === 2 ? " diary-prints--pair" : e.media.length === 4 ? " diary-prints--quad" : "") +
+                (e.media.length === 2 && e.media.some(function (p) { return p.width > p.height; }) && e.media.some(function (p) { return p.width < p.height; }) ? " diary-prints--mixed" : "") +
                 ' mt-[15px]">' +
                 e.media.map(function (photo, photoIndex) {
                   var w = printWidth(photo.width, photo.height);
@@ -995,8 +1003,8 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       // The weather in front of the day: "Cloudy Saturday". NEA's 2-hour
       // forecast for Kallang, which covers Towner. The hero gets one weather
       // at a time: haze wins when the central 24-hour PSI is unhealthy, then
-      // rain (with lightning when it's thundery), then heat shimmer when the
-      // nearest station reads 33°C or more.
+      // rain (with lightning when it's thundery), then heat lines and sun when the
+      // nearest station reads 34°C or more.
       // ?psi=170, ?sky=Thundery Showers and ?temp=34 preview them.
       function skyWord(forecast) {
         return /haz/i.test(forecast) ? "Hazy"
@@ -1103,26 +1111,10 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           if (!still && visible) raf = requestAnimationFrame(frame);
         }
       }
-      // Heat shimmer: wobbly noise pushed through the dogs. Holds still for
-      // reduced motion, so it's just a slight warp.
+      // Heat: wavy lines rising off the dogs under a drifting sun (.sky-heat).
       function addHeat(card) {
-        var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
-        card.insertAdjacentHTML(
-          "beforeend",
-          '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="heat-shimmer" x="-5%" y="-5%" width="110%" height="110%">' +
-            '<feTurbulence type="fractalNoise" baseFrequency="0.012 0.09" numOctaves="2" seed="3">' +
-            (still ? "" : '<animate attributeName="baseFrequency" dur="4s" values="0.012 0.09;0.014 0.11;0.012 0.09" repeatCount="indefinite"/>') +
-            '</feTurbulence><feDisplacementMap in="SourceGraphic" scale="7"/></filter></svg>' +
-            '<div class="sky-heat" aria-hidden="true"></div>'
-        );
-        card.classList.add("sky-hot");
-        // The shimmer rests while the hero is scrolled out of sight.
-        var svg = card.querySelector("#heat-shimmer").ownerSVGElement;
-        if (!still)
-          new IntersectionObserver(function (seen) {
-            if (seen[0].isIntersecting) svg.unpauseAnimations();
-            else svg.pauseAnimations();
-          }).observe(card);
+        var line = '<svg viewBox="0 0 22 70"><path d="M11 68c-7-8 7-14 0-22s7-14 0-22 7-14 0-22"/></svg>';
+        card.insertAdjacentHTML("beforeend", '<div class="sky-heat" aria-hidden="true">' + line.repeat(5) + "</div>");
       }
       function addSky(today) {
         var param = (k) => (new RegExp("[?&]" + k + "=([^&]+)").exec(location.search) || [])[1];
@@ -1168,7 +1160,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               stormy ? "M9 1.5L4 9h4l-1 5.5L12 7H8z" : "M4 3l-1.5 4M8 5l-1.5 4M12 3l-1.5 4M6 10l-1.5 4M10 10l-1.5 4",
               forecast
             );
-          } else if (temp >= 33) {
+          } else if (temp >= 34) {
             addHeat(card);
             skyTag(card, "heat", "M7 2.5a1.5 1.5 0 0 1 3 0v6.8a3 3 0 1 1-3 0z", Math.round(temp) + "°C");
           }
@@ -1245,12 +1237,13 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               replay(b.querySelector(".pat-marks"), "pat-marks--playing");
               var fresh = lines.filter((l) => l !== last);
               last = last ? fresh[Math.floor(Math.random() * fresh.length)] : "Woof!";
-              heroNote((hero.live.length > 1 ? d.name + ": " : "") + last);
+              window.__tgpBubbles.dogSays(document.getElementById("hero-card"), b, last, "comic");
             });
             photosEl.appendChild(b);
             return b;
           });
           hero.live.forEach((d, i) => insertPhoto(d.id, dogBtns[i], undefined, true, i === 0 ? "high" : "auto"));
+          window.__tgpBubbles.startThinking(document.getElementById("hero-card"), hero.live, dogBtns, window.__tgpBubbles.dogSays);
         }
         if (away.length) tuck(away, today);
         result.live.forEach(markSeen);

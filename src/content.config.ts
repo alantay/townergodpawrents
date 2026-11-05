@@ -28,6 +28,9 @@ const guests = defineCollection({
       whenCalled: z.string().optional(),
       // Extra noises mixed in with "Woof!" when you pat it.
       sounds: z.array(z.string()).default([]),
+      // What the dog is thinking, floated up in a thought bubble now and
+      // then on the homepage without anyone patting it.
+      thoughts: z.array(z.string()).default([]),
       // Picks "At his place" or "At her place" on a drop-in dog's card.
       sex: z.enum(["male", "female"]).optional(),
 

@@ -758,6 +758,11 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   .diary-prints--quad {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  /* Different photo shapes read naturally one above the other. */
+  .diary-prints--mixed {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media (min-width: 640px) {
@@ -991,19 +996,59 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   64%, 100% { opacity: 0; }
 }
 
-/* A hot afternoon: the dogs wobble like a road in the sun (#heat-shimmer),
-   with a warm glow coming up from the bottom of the card. */
-.sky-hot :is(#hero-photos, #vacancy-photo) {
-  filter: url("#heat-shimmer");
-}
+/* A hot afternoon: a warm glow coming up from the bottom of the card, heat
+   lines rising off the dogs and the sun drifting across the top, flaring now
+   and then. Plain CSS, since iOS Safari can't animate an SVG filter on HTML. */
 .sky-heat {
   position: absolute;
   inset: 0;
   z-index: 1;
+  overflow: hidden;
   pointer-events: none;
+}
+.sky-heat::after {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: linear-gradient(to top, rgb(255 170 80 / 0.32), rgb(255 190 110 / 0.08) 55%, transparent 75%);
   mix-blend-mode: soft-light;
 }
+.sky-heat::before {
+  content: "";
+  position: absolute;
+  top: -140px;
+  left: -160px;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255 236 180 / 0.75), rgb(255 200 110 / 0.3) 40%, transparent 70%);
+  mix-blend-mode: screen;
+  animation: sun-drift 14s ease-in-out infinite alternate, sun-flare 7s ease-in-out infinite;
+}
+.sky-heat svg {
+  position: absolute;
+  bottom: 30px;
+  width: 22px;
+  height: 70px;
+  fill: none;
+  stroke: var(--color-cream);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  opacity: 0;
+  animation: heat-rise 3.6s ease-in infinite;
+}
+.sky-heat svg:nth-child(1) { left: 18%; }
+.sky-heat svg:nth-child(2) { left: 44%; height: 84px; animation-delay: -1.2s; }
+.sky-heat svg:nth-child(3) { left: 70%; animation-delay: -2.4s; }
+.sky-heat svg:nth-child(4) { left: 30%; bottom: 90px; height: 56px; animation-delay: -0.6s; }
+.sky-heat svg:nth-child(5) { left: 60%; bottom: 110px; height: 60px; animation-delay: -3s; }
+@keyframes heat-rise {
+  from { transform: translateY(20px); opacity: 0; }
+  25% { opacity: 0.75; }
+  to { transform: translateY(-150px); opacity: 0; }
+}
+@keyframes sun-drift { to { transform: translate(260px, 30px); } }
+@keyframes sun-flare { 0%, 70%, 100% { opacity: 0.65; } 80% { opacity: 1; } }
 
 /* Pops in, stays long enough to read (--note-hold, set per line), then fades. */
 @keyframes note-out {
@@ -1025,6 +1070,101 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   font-weight: 600;
   line-height: 1.1;
   text-wrap: pretty;
+}
+
+/* A dog answering a pat (comic) or thinking out loud (dots), over its
+   head on the homepage hero and the diary portrait. See src/lib/dog-bubbles.ts. */
+.dog-bubble {
+  position: absolute;
+  z-index: 3;
+  max-width: min(70%, 240px);
+  width: max-content;
+  translate: -50% -100%;
+  pointer-events: none;
+  transform-origin: calc(50% + var(--tail-x, 0px)) 100%;
+}
+.dog-bubble p {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-script);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.05;
+  text-wrap: balance;
+  text-align: center;
+  color: var(--color-ink);
+}
+.dog-bubble::after {
+  content: "";
+  position: absolute;
+  left: calc(50% + var(--tail-x, 0px));
+  top: 100%;
+}
+
+/* comic: cream bubble, inked outline, curly tail */
+.dog-bubble--comic {
+  background: var(--color-cream);
+  border: 2.5px solid var(--color-ink);
+  border-radius: 50% / 46%;
+  padding: 14px 22px 12px;
+  box-shadow: 3px 4px 0 rgb(0 0 0 / 0.18);
+}
+.dog-bubble--comic::before {
+  content: "";
+  position: absolute;
+  left: calc(50% + var(--tail-x, 0px) - 8px);
+  top: calc(100% - 1px);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 20px solid var(--color-ink);
+  transform: skewX(-25deg);
+  transform-origin: top;
+}
+.dog-bubble--comic::after {
+  left: calc(50% + var(--tail-x, 0px) - 4.5px);
+  top: calc(100% - 3px);
+  width: 0;
+  height: 0;
+  border-left: 6.5px solid transparent;
+  border-right: 6.5px solid transparent;
+  border-top: 14px solid var(--color-cream);
+  transform: skewX(-25deg);
+  transform-origin: top;
+}
+
+/* dots: a thought, inked cloud with a trail of dots down to the dog. The
+   cloud is an SVG that dogSays draws to fit the words. */
+.dog-bubble--dots p { font-weight: 500; }
+.dog-bubble--dots {
+  padding: 16px 26px 14px;
+  margin-top: -26px;
+}
+.dog-bubble--dots svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(3px 4px 0 rgb(0 0 0 / 0.18));
+}
+.dog-bubble--dots path,
+.dog-bubble--dots circle {
+  fill: var(--color-cream);
+  stroke: var(--color-ink);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+
+.dog-bubble-pop {
+  animation:
+    bubble-in 420ms cubic-bezier(0.3, 1.5, 0.5, 1) both,
+    note-out 300ms ease-in var(--note-hold, 2s) forwards;
+}
+@keyframes bubble-in {
+  from { opacity: 0; scale: 0.3; }
+  to { opacity: 1; scale: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1053,9 +1193,19 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
     animation: note-out 400ms ease-in var(--note-hold, 2s) forwards;
   }
 
+  .dog-bubble-pop {
+    animation: note-out 300ms ease-in var(--note-hold, 2s) forwards;
+  }
+
   .haze i,
-  .sky-flash {
+  .sky-flash,
+  .sky-heat::before {
     animation: none;
+  }
+
+  .sky-heat svg {
+    animation: none;
+    opacity: 0.5;
   }
 }
 
@@ -1266,6 +1416,9 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 }
 
 .print-viewer-close {
+  display: grid;
+  place-items: center;
+  padding: 0;
   position: fixed;
   top: calc(env(safe-area-inset-top, 0px) + 0.75rem);
   right: 0.75rem;
@@ -1274,6 +1427,4 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   border-radius: 999px;
   background: var(--color-cream);
   color: var(--color-ink);
-  font-size: 1.5rem;
-  line-height: 1;
 }

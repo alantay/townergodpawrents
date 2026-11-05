@@ -1,0 +1,44 @@
+name: Admin video
+
+on:
+  repository_dispatch:
+    types: [admin-video]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: admin-video
+  cancel-in-progress: false
+  queue: max
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: node --experimental-strip-types scripts/admin-video.ts
+        env:
+          PAYLOAD: ${{ toJSON(github.event.client_payload) }}
+      - name: Delete uploaded video after posting
+        if: success()
+        run: |
+          node --experimental-strip-types --input-type=module -e '
+            import { del } from "@vercel/blob";
+            import { isVideoUrl } from "./src/lib/admin/validate.ts";
+            const { videoUrl } = JSON.parse(process.env.PAYLOAD);
+            if (!isVideoUrl(videoUrl)) throw new Error("Bad video URL");
+            await del(videoUrl);
+          '
+        env:
+          PAYLOAD: ${{ toJSON(github.event.client_payload) }}
+          BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}

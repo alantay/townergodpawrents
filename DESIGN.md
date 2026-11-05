@@ -331,6 +331,6 @@ Rain and shimmer stop while the hero is scrolled out of sight. Under `prefers-re
 | Sky tag | `sky-tag` | `sky-tag--rain`, `sky-tag--storm`, `sky-tag--heat`; plain is haze |
 | Multiple prints | `diary-prints` | `diary-prints--pair` or `diary-prints--quad` |
 
-Two and four prints use two columns from 480px up and one column below it. Three prints remain a single column. Video cards and mats stay level. The dark diary link hovers moss, keeping lime for current state. The calendar's red biro ring around today and red busy-sofa annotation are intentional pen-on-paper accents.
+Two and four prints use equal-width columns from 480px up and one column below it. Mixed landscape and portrait pairs stay in one column at every screen size, with each photo shown in full. Three prints remain a single column. Video cards and mats stay level. The dark diary link hovers moss, keeping lime for current state. The calendar's red biro ring around today and red busy-sofa annotation are intentional pen-on-paper accents.
 
 The unlisted, noindex `/design` page shows these shared classes using real diary photos. It is a reference for changes, not another visitor destination. This document and the implementation are the design sources; there is no generated design sidecar to keep in sync.

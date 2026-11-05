@@ -4,7 +4,7 @@
 
 Funny and experimental touches go on the homepage. The diary page (`/guests/[id]`) stays toned down: the guest, the stay and the entries, with nothing that reacts to the outside world.
 
-The portrait is an exception. Alan confirmed on 10 October 2026 that the diary portrait should keep the homepage's pat interaction because it looks like the same control.
+The portrait is an exception. Alan confirmed on 10 October 2026 that the diary portrait should keep the homepage's pat interaction because it looks like the same control. On 26 October 2026 he asked for the portrait's thought bubbles too, so the dog on the diary page also thinks out loud now and then.
 
 ## Context
 
@@ -12,7 +12,8 @@ The homepage and the diary page started to look alike, both a hero over a list o
 
 Today-only things only make sense on the homepage, and that's where the playful stuff has landed:
 
-- Pat a dog in the hero and it hops and says something.
+- Pat a dog in the hero and it hops and says something in a speech bubble.
+- Left alone, a dog now and then thinks out loud in a thought bubble.
 - When the PSI is unhealthy, grey smog drifts over the hero (#58).
 - The row above today's entries reads "Hazy Saturday" or "Sunny Sunday", with the count of today's moments on the right (#57, #59).
 

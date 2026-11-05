@@ -28,6 +28,7 @@ export interface EntryInput {
   with: string[];
   text: string;
   photos: Photo[];
+  videoUrl?: string;
 }
 
 export interface AiContext {

@@ -19,7 +19,7 @@ function fake(routes: Record<string, (call: Call) => { status?: number; body: un
     const route = routes[`${call.method} ${path}`];
     if (!route) return new Response("not found", { status: 404 });
     const { status = 200, body } = route(call);
-    return new Response(typeof body === "string" ? body : JSON.stringify(body), { status });
+    return new Response(status === 204 ? null : typeof body === "string" ? body : JSON.stringify(body), { status });
   }) as typeof globalThis.fetch;
   return { calls, client: gitHub({ token: "tok", repo: "alantay/townergodpawrents", branch: "main", fetch }) };
 }
@@ -30,6 +30,20 @@ test("head reads the branch ref with the token and API headers", async () => {
   assert.equal(calls[0].headers.authorization, "Bearer tok");
   assert.equal(calls[0].headers["x-github-api-version"], "2022-11-28");
   assert.equal(calls[0].headers["user-agent"], "townergodpawrents-admin");
+});
+
+test("dispatch posts the event and payload and accepts an empty 204", async () => {
+  const { calls, client } = fake({ "POST /dispatches": () => ({ status: 204, body: null }) });
+  const payload = { guest: "luna", videoUrl: "https://example.test/clip.mp4" };
+  await client.dispatch("admin-video", payload);
+  assert.equal(calls[0].url, "https://api.github.com/repos/alantay/townergodpawrents/dispatches");
+  assert.equal(calls[0].method, "POST");
+  assert.deepEqual(calls[0].body, { event_type: "admin-video", client_payload: payload });
+});
+
+test("a failed dispatch throws", async () => {
+  const { client } = fake({ "POST /dispatches": () => ({ status: 403, body: "Forbidden" }) });
+  await assert.rejects(client.dispatch("admin-video", {}), (e: unknown) => e instanceof GitHubError && e.status === 403);
 });
 
 test("readFile asks for the raw file at the sha", async () => {

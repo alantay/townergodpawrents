@@ -2,6 +2,7 @@
 // The order matters: nothing is written until everything is checked, and a
 // post key stops a double tap from posting twice.
 import { requireAuth } from "./auth.ts";
+import { POST_KEY_RE } from "./constants.ts";
 import { fallbackAlt, sanitizeAlt } from "./format.ts";
 import type { GitHub } from "./github.ts";
 import { json } from "./http.ts";
@@ -14,7 +15,6 @@ import { validate } from "./validate.ts";
 
 const GUESTS_DIR = "src/content/guests";
 const MAX_BODY = 4_500_000;
-const KEY_RE = /^[A-Za-z0-9-]{8,100}$/;
 const PENDING = "pending";
 const PENDING_SECONDS = 300;
 const DONE_SECONDS = 86_400;
@@ -38,7 +38,7 @@ export function postApi(deps: {
       const form = await request.formData().catch(() => undefined);
       if (!form) return json({ error: BAD_SEND }, 400);
       const postKey = String(form.get("postKey") ?? "");
-      if (!KEY_RE.test(postKey)) return json({ error: BAD_SEND }, 400);
+      if (!POST_KEY_RE.test(postKey)) return json({ error: BAD_SEND }, 400);
 
       const photos: Photo[] = [];
       for (const value of form.getAll("photos")) {
@@ -55,6 +55,7 @@ export function postApi(deps: {
           with: form.getAll("with").map(String),
           text: field("text"),
           photos,
+          videoUrl: field("videoUrl") || undefined,
         },
         await deps.guests(),
       );
@@ -69,7 +70,7 @@ export function postApi(deps: {
       try {
         if (!(await deps.store().setNX(key, PENDING, PENDING_SECONDS))) {
           const earlier = await deps.store().get(key);
-          if (earlier?.startsWith("/")) return json({ ok: true, url: earlier });
+          if (earlier?.startsWith("/")) return json({ ok: true, url: earlier, ...(input.videoUrl ? { pending: true } : {}) });
           return json({ error: "Still posting. Give it a moment." }, 409);
         }
       } catch (error) {
@@ -79,6 +80,19 @@ export function postApi(deps: {
 
       const ctx = { name: guest.name, withNames: withGuests.map((g) => g.name), recent: guest.recent };
       const fallback = fallbackAlt(guest.name, input.iso, input.label ?? (input.noTime ? undefined : input.time));
+      const url = `/guests/${guest.id}`;
+      if (input.videoUrl) {
+        const { photos: _photos, ...payload } = input;
+        try {
+          await deps.gitHub().dispatch("admin-video", { ...payload, alt: fallback, postKey });
+        } catch (error) {
+          console.error("[admin] video dispatch failed", error);
+          if (guarded) await deps.store().del(key).catch(() => {});
+          return json({ error: NOT_SAVED }, 502);
+        }
+        if (guarded) await deps.store().set(key, url, DONE_SECONDS).catch(() => {});
+        return json({ ok: true, url, pending: true });
+      }
       const alts = await Promise.all(
         input.photos.map(async (photo) => {
           const reused = cachedAlt(descriptions, photo, ctx);
@@ -92,7 +106,6 @@ export function postApi(deps: {
         }),
       );
       const words = slugWords(input.text, guest.name);
-      const url = `/guests/${guest.id}`;
 
       // Read everything fresh at the branch head, so a retry after the branch
       // moved files the entry against what's really there.

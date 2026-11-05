@@ -7,6 +7,10 @@ showLive: true
 badge: Obsessive ball fetcher
 tagline: loves rolling on her back, barks at 120 decibels
 whenCalled: "Is there a ball? No? Then no."
+sounds: ["I can see the ball from here, you know."]
+thoughts:
+  - "Ball. Ball. Ball. Ball."
+  - "Someone should really throw something."
 stays:
   - checkIn: 2026-09-13
     checkOut: 2026-09-23
@@ -15,6 +19,53 @@ stays:
   - checkIn: 2026-10-31
     checkOut: 2026-10-31
 ---
+
+## 31 Oct
+
+### 10:55pm
+
+<!-- entry-id: e159 -->
+<!-- with: guapo -->
+<!-- no-time -->
+
+The experiment is over. Tiny and Guapo can't share the house. They fought twice, and we stopped them both times. It goes the same way every time. Guapo thinks his chilling spot is in jeopardy and growls. Tiny won't tolerate a growl, so she barks. Guapo won't tolerate a bark, so he barks back...
+
+### 2:04pm
+
+<!-- entry-id: e158 -->
+
+Looks like Tiny is self-soothing because there was no ball play after lunch.
+
+![Tiny lying on her bed, nibbling the edge of the cushion](./tiny/tiny-self-soothing.mp4)
+
+### 1:57pm
+
+<!-- entry-id: e157 -->
+<!-- with: guapo -->
+<!-- no-time -->
+
+One is begging for food. The other is still deciding whether begging is worth it.
+
+![Black-and-white dog standing beside a table with a bowl of rice and food.](./tiny/tiny-one-begging-food.jpg)
+
+![Brown dog lying on the floor with its head resting on a table leg.](./tiny/tiny-one-begging-food-2.jpg)
+
+### 11:58am
+
+<!-- entry-id: e156 -->
+<!-- no-time -->
+
+This girl is dangerously smart...
+
+![Tiny jumping up and pulling the door handle down with her paw](./tiny/tiny-door-opener.mp4)
+
+### 8:45am
+
+<!-- entry-id: e153 -->
+
+Tiny focusing on the unfocused ball.
+
+![Tiny on the carpark roof, tongue out, eyes locked on a blue ball held up to the camera](./tiny/tiny-unfocused-ball.jpg)
 
 ## 14 Oct
 

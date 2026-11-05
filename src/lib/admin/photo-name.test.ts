@@ -29,3 +29,9 @@ test("each photo in an entry gets its own name", () => {
   const names = [1, 2, 3].map(() => photoName("luna", ["nap"], taken));
   assert.deepEqual(names, ["luna-nap.jpg", "luna-nap-2.jpg", "luna-nap-3.jpg"]);
 });
+
+test("video names use MP4 and dedupe independently of JPEGs", () => {
+  const taken = new Set(["luna-nap.jpg", "luna-nap.mp4"]);
+  assert.equal(photoName("luna", ["nap"], taken, "mp4"), "luna-nap-2.mp4");
+  assert.ok(taken.has("luna-nap-2.mp4"));
+});

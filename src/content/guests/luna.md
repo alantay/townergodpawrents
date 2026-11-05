@@ -7,9 +7,14 @@ showLive: true
 badge: FOMO Queen
 tagline: always has something to whine about, thinks every dog is her play buddy
 whenCalled: "Coming! Bringing what's left of the toy."
+thoughts:
+  - "Are they playing without me?"
+  - "That toy had it coming."
 stays:
   - checkIn: 2026-10-13
     checkOut: 2026-10-20
+  - checkIn: 2026-11-20
+    checkOut: 2026-11-22
   - checkIn: 2026-11-26
     checkOut: 2026-12-03
 ---

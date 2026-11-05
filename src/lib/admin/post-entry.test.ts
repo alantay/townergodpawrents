@@ -22,8 +22,9 @@ const JPEG = new Uint8Array([0xff, 0xd8, 0xff, 0xe0, 1, 2, 3]);
 
 /** An in-memory repo. `failCommits` makes the next N commits throw 422. */
 function fakeRepo(files: Record<string, string | Uint8Array>, failCommits = 0) {
-  const state = { files: new Map(Object.entries(files)), head: "sha1", commits: [] as { files: CommitFile[]; message: string }[], failCommits };
+  const state = { files: new Map(Object.entries(files)), head: "sha1", commits: [] as { files: CommitFile[]; message: string }[], dispatches: [] as { eventType: string; payload: Record<string, unknown> }[], failCommits };
   const gh: GitHub = {
+    async dispatch(eventType, payload) { state.dispatches.push({ eventType, payload }); },
     async head() { return state.head; },
     async readFile(path) {
       const file = state.files.get(path);
@@ -211,4 +212,38 @@ test("hostile text stays one plain entry with no extra days, IDs or images", asy
   const entry = days[0].entries.find((e) => e.id === "e102")!;
   assert.ok(entry);
   assert.equal(entry.media.length, 0);
+});
+
+test("video dispatches the checked entry once, without a commit or AI", async () => {
+  const { api, repo, store, alts } = setup();
+  const videoUrl = "https://test.public.blob.vercel-storage.com/admin-video/clip.mp4";
+  const fields = { videoUrl, text: "", with: "guapo", label: "No time" };
+  const response = await api.post(request(fields));
+  assert.deepEqual(await response.json(), { ok: true, url: "/guests/luna", pending: true });
+  assert.deepEqual(repo.state.dispatches, [{ eventType: "admin-video", payload: {
+    guest: "luna", iso: "2026-10-16", time: "3:20pm", noTime: true,
+    with: ["guapo"], text: "", alt: "Luna, 16 Oct", videoUrl, postKey: "key-12345678",
+  } }]);
+  assert.equal(repo.state.commits.length, 0);
+  assert.deepEqual(alts, []);
+  assert.equal(await store.get("admin-post:key-12345678"), "/guests/luna");
+  assert.deepEqual(await (await api.post(request(fields))).json(), { ok: true, url: "/guests/luna", pending: true });
+  assert.equal(repo.state.dispatches.length, 1);
+});
+
+test("video dispatch failure frees the key and leaves the repo alone", async () => {
+  const { api, repo, store } = setup();
+  repo.gh.dispatch = async () => { throw new GitHubError(502, "unavailable"); };
+  const response = await api.post(request({ videoUrl: "https://test.public.blob.vercel-storage.com/admin-video/clip.mov" }));
+  assert.equal(response.status, 502);
+  assert.equal((await response.json()).error, "Couldn't save it. Nothing was posted. Try again.");
+  assert.equal(await store.get("admin-post:key-12345678"), null);
+  assert.equal(repo.state.commits.length, 0);
+});
+
+test("invalid or mixed video posts never dispatch", async () => {
+  const { api, repo } = setup();
+  assert.equal((await api.post(request({ videoUrl: "https://evil.test/admin-video/clip.mp4" }))).status, 400);
+  assert.equal((await api.post(request({ videoUrl: "https://test.public.blob.vercel-storage.com/admin-video/clip.mp4" }, 1))).status, 400);
+  assert.equal(repo.state.dispatches.length, 0);
 });

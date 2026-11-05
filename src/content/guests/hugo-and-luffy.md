@@ -7,10 +7,125 @@ showLive: true
 badge: A black & white comedy
 tagline: Hugo only has eyes for the girls. Luffy thinks the whole world is playing chase with him.
 whenCalled: "Hugo's coming. So Luffy's coming."
+thoughts:
+  - "Luffy: Chase me. Chase me. Chase me."
+  - "Hugo: Any girls coming over today?"
 stays:
   - checkIn: 2026-10-20
     checkOut: 2026-10-25
 ---
+
+## 25 Oct
+
+### 7:30pm
+
+<!-- entry-id: e139 -->
+<!-- no-time -->
+
+Don’t know which of the brothers created a work of modern art on our wall.
+
+![White marks and chips on the lower wall and wooden baseboard, with small white fragments scattered on the floor.](./hugo-and-luffy/hugo-and-luffy-dont-know-which.jpg)
+
+### 7:15pm
+
+<!-- entry-id: e140 -->
+
+Hugo and Luffy’s parents came, and both brothers were spinning in the air with excitement.
+
+### 10:09am
+
+<!-- entry-id: e142 -->
+<!-- no-time -->
+
+Hello Hugo, is your nose working? Wake up before Luffy finishes the Greek yogurt.
+
+![Hugo resting on the floor with a spoon of Greek yogurt held near his nose.](./hugo-and-luffy/hugo-and-luffy-greek-yogurt.mp4)
+
+### 10:08am
+
+<!-- entry-id: e141 -->
+<!-- no-time -->
+
+Luffy is having an out-of-body experience.
+
+![Luffy sitting with his eyes half closed while having his head stroked.](./hugo-and-luffy/hugo-and-luffy-out-of-body.mp4)
+
+### 10:07am
+
+<!-- entry-id: e136 -->
+
+Round 2: KO after a fun-filled morning of smelling girls and chasing dogs. The brothers have clocked out.
+
+![Two dogs lie sprawled on the living room floor among scattered toys.](./hugo-and-luffy/hugo-and-luffy-round-2-ko.jpg)
+
+### 7:45am
+
+<!-- entry-id: e138 -->
+<!-- no-time -->
+
+Hugo is a player. Chasing girls and switching targets.
+
+![Hugo chasing other dogs at the dog run.](./hugo-and-luffy/hugo-and-luffy-girls-pace.mp4)
+
+### 7:30am
+
+<!-- entry-id: e137 -->
+
+Brought them to the temporary dog run near City Square. Luffy running excitedly and Hugo being a pervert as usual.
+
+![Hugo and Luffy at the temporary dog run near City Square.](./hugo-and-luffy/hugo-and-luffy-city-square-run.mp4)
+
+## 24 Oct
+
+### 11:03pm
+
+<!-- entry-id: e135 -->
+<!-- no-time -->
+
+Hugo is stealing my husband
+
+![A black-and-white dog leans toward a seated man wearing glasses.](./hugo-and-luffy/hugo-and-luffy-stealing-husband.jpg)
+
+### 2:45pm
+
+<!-- entry-id: e133 -->
+
+The brothers are KO after a fun-filled morning.
+
+![Hugo and Luffy asleep on the wooden floor beside the cabinets.](./hugo-and-luffy/hugo-and-luffy-brothers-ko.jpg)
+
+### 10:45am
+
+<!-- entry-id: e132 -->
+
+Hugo having a play with Mocha, Marou’s half sister, while Luffy plays with Marou in the background.
+
+![Hugo playing with Mocha while Luffy plays with Marou in the background.](./hugo-and-luffy/hugo-and-luffy-mocha-marou-play.mp4)
+
+### 8:35am
+
+<!-- entry-id: e134 -->
+<!-- no-time -->
+
+Luffy, don’t be rude to Tiny.
+
+![Luffy and Tiny tugging on a purple toy on the rooftop car park.](./hugo-and-luffy/hugo-and-luffy-rude-to-tiny.mp4)
+
+### 8:30am
+
+<!-- entry-id: e131 -->
+
+And then it’s back to Tiny, our track and field champion. Hugo has a thing for sporty girls.
+
+![Hugo and Tiny together on the rooftop car park.](./hugo-and-luffy/hugo-and-luffy-back-to-tiny.mp4)
+
+### 8:25am
+
+<!-- entry-id: e130 -->
+
+This morning Hugo briefly has a new obsession. Liesel, the beautiful black dachshund.
+
+![Hugo and the other dogs running across the rooftop car park with Liesel.](./hugo-and-luffy/hugo-and-luffy-liesel-obsession.mp4)
 
 ## 23 Oct
 

@@ -7,7 +7,10 @@ showLive: true
 badge: Cat in a dog's body
 tagline: recall sold separately, million-dollar smile included
 whenCalled: "Heard you. Choosing not to."
-sounds: ["Grrr."]
+thoughts:
+  - "I heard my name. I simply chose peace."
+  - "One smile and they forgive everything."
+sounds: ["Grrr.", "Zzzzzzz."]
 stays:
   - checkIn: 2026-09-30
     checkOut: 2026-10-13
@@ -16,6 +19,225 @@ stays:
   - checkIn: 2026-12-06
     checkOut: 2027-01-03
 ---
+
+## 2 Nov
+
+### 6:09pm
+
+<!-- entry-id: e169 -->
+
+<!-- no-time -->
+
+Guapo looked like he is on fast forward when Weiwen came home.
+
+![Guapo zooming around Weiwen as she comes home](./guapo/guapo-fast-forward.mp4)
+
+### 6pm
+
+<!-- entry-id: e170 -->
+<!-- label: Throwback -->
+
+Bye handsome boy, see you in December. Time for us to vacuum up your fur. You left enough to build a second Guapo.
+
+### 5:20pm
+
+<!-- entry-id: e168 -->
+
+And sometimes he’s a loaf.
+
+![A brown dog curled into a loaf shape on a large gray cushion.](./guapo/guapo-sometimes-loaf.jpg)
+
+### 1:30pm
+
+<!-- entry-id: e167 -->
+<!-- label: Throwback -->
+
+Guapo has chosen not to resist.
+
+![Guapo lying still with a pink plush dragon balanced on his head and back](./guapo/guapo-pink-dragon.jpg)
+
+### 8am
+
+<!-- entry-id: e166 -->
+
+Post-breakfast coma, or still recovering from yesterday?
+
+![A tan dog lies stretched out on a wooden floor, eyes closed, with a food bowl nearby.](./guapo/guapo-post-breakfast-coma.jpg)
+
+## 1 Nov
+
+### 10:06pm
+
+<!-- entry-id: e165 -->
+<!-- no-time -->
+
+This boy was totally destroyed today.
+
+![A tan dog wearing an orange collar rests his head on a dark cushion beneath a wooden desk.](./guapo/guapo-boy-totally-destroyed.jpg)
+
+![A tan dog rests with his head on a person's leg beside a sofa.](./guapo/guapo-boy-totally-destroyed-2.jpg)
+
+![A tan dog lies stretched out on a sunlit floor near a window.](./guapo/guapo-boy-totally-destroyed-3.jpg)
+
+### 3pm
+
+<!-- entry-id: e164 -->
+
+We brought Guapo to the pet fair nearby. One of the booth owners said he looked like their mascot and asked him to model. This is him looking awkward modelling.
+
+![Guapo sitting stiffly in front of a pet treat booth, next to a packet with a Shiba mascot on it](./guapo/guapo-pet-fair-model.jpg)
+
+### 1pm
+
+<!-- entry-id: e163 -->
+
+This massage is life-changing.
+
+![A brown-and-white dog lies on the floor with its tongue out as a person scratches its neck.](./guapo/guapo-massage-life-changing.jpg)
+
+### 9:30am
+
+<!-- entry-id: e162 -->
+
+Back to bed after the T-rex. Big morning.
+
+![Guapo lying on his cushion bed, chin down, eyes open](./guapo/guapo-cushion-chin.jpg)
+
+![Guapo curled up asleep on the cushion, tail over his back](./guapo/guapo-cushion-curl.jpg)
+
+### 8:06am
+
+<!-- entry-id: e161 -->
+<!-- no-time -->
+
+Guapo meets the garden T-rex, mid-way through eating a dwarf.
+
+![Guapo sniffing a garden statue of a T-rex with a dwarf in its mouth](./guapo/guapo-trex-statue.mp4)
+
+## 31 Oct
+
+### 10:54pm
+
+<!-- entry-id: e160 -->
+<!-- no-time -->
+
+Guapo jumping for Tiny's toy while she's not around. The fitness plan continues.
+
+![Guapo jumping for Tiny's toy while she's not around](./guapo/guapo-tinys-toy.mp4)
+
+### 11:13am
+
+<!-- entry-id: e155 -->
+<!-- with: tiny -->
+<!-- no-time -->
+
+Each sleeping under a desk.
+
+![Guapo stretched out asleep under a desk](./guapo/guapo-under-desk.jpg)
+
+![Tiny curled up asleep under a wooden desk](./guapo/guapo-tiny-under-desk.jpg)
+
+### 9:32am
+
+<!-- entry-id: e154 -->
+<!-- with: tiny -->
+
+Guapo reclaimed his territory & Tiny is chill about it
+
+![A brown dog lies on a wooden floor beneath a table, eyes closed.](./guapo/guapo-reclaimed-territory-tiny.jpg)
+
+![A black-and-white dog lies on its back beside a wooden door, paws in the air.](./guapo/guapo-reclaimed-territory-tiny-2.jpg)
+
+### 9am
+
+<!-- entry-id: e151 -->
+<!-- with: tiny -->
+
+Went out with one dog, came back with two.
+
+![Black-and-white dog lying on the floor with its tongue out, beside a tan dog sitting near the sofa.](./guapo/guapo-went-one-dog.jpg)
+
+### 7:30am
+
+<!-- entry-id: e152 -->
+
+Guapo senses the plastic bag is a threat.
+
+![Guapo stalking and pouncing on an orange plastic bag](./guapo/guapo-plastic-bag-threat.mp4)
+
+## 30 Oct
+
+### 7:25pm
+
+<!-- entry-id: e150 -->
+<!-- no-time -->
+
+Sorry, neighbours, Guapo is bringing the ball home. I will return it tomorrow 😂
+
+![Guapo on his leash with an orange ball in his mouth, another Shiba walking past behind him](./guapo/guapo-ball-carpark-walk.jpg)
+
+![Guapo back home, still holding the orange ball in his mouth](./guapo/guapo-bringing-ball-home.jpg)
+
+### 7pm
+
+<!-- entry-id: e149 -->
+<!-- no-time -->
+
+Guapo is in love with this ball. Whenever I get near, he runs away with it. This boy is getting chonky, so I guess this is his fitness plan with us.
+
+![Guapo trotting off across a rooftop carpark at dusk with his ball](./guapo/guapo-ball-keepaway.mp4)
+
+### 3:24pm
+
+<!-- entry-id: e148 -->
+
+Guapo looks like he fell out of love.
+
+![A tan dog lies with his head resting on a grey cushion.](./guapo/guapo-looks-like-fell.jpg)
+
+### 7:15am
+
+<!-- entry-id: e147 -->
+
+Breakfast tastes better from a precarious position.
+
+![A tan dog sits on the edge of a concrete drainage channel beside tall grass, with apartment buildings in the background.](./guapo/guapo-breakfast-tastes-better.jpg)
+
+## 29 Oct
+
+### 10:49pm
+
+<!-- entry-id: e146 -->
+<!-- no-time -->
+
+Whenever Alan has Greek yogurt, he never fails to let Guapo lick the remnants from his cup.
+
+![Guapo licking Greek yogurt remnants from a cup held by Alan](./guapo/guapo-greek-yogurt-cup.mp4)
+
+### 9:40pm
+
+<!-- entry-id: e145 -->
+
+Guapo’s waggy tail when Alan comes home.
+
+![Guapo wagging his curled tail as Alan comes home](./guapo/guapo-waggy-tail-home.mp4)
+
+### 1:51pm
+
+<!-- entry-id: e144 -->
+<!-- no-time -->
+
+Whenever Alan and Weiwen are at home, Guapo always prefers to chill beside Weiwen. Alan has resigned himself to the fact that he is the spare.
+
+![Guapo sitting beside Weiwen on the sofa while she uses her laptop](./guapo/guapo-chill-beside-weiwen.jpg)
+
+### 1pm
+
+<!-- entry-id: e143 -->
+
+Guapo's back! Always awesome to have this happy, handsome boi with us. We were so excited 😂
+
+![Guapo lying on the wooden floor, grinning with his tongue out and one paw stretched forward](./guapo/guapo-happy-handsome-back.jpg)
 
 ## 13 Oct
 
