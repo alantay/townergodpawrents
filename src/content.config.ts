@@ -31,6 +31,8 @@ const guests = defineCollection({
       // What the dog is thinking, floated up in a thought bubble now and
       // then on the homepage without anyone patting it.
       thoughts: z.array(z.string()).default([]),
+      // Picks "At his place" or "At her place" on a drop-in dog's card.
+      sex: z.enum(["male", "female"]).optional(),
 
       // ---- when the dog was here ----
       // Adjacent dates are separate stays: home on the 23rd, back on the
@@ -41,6 +43,9 @@ const guests = defineCollection({
             .object({
               checkIn: z.coerce.date(),
               checkOut: z.coerce.date(),
+              // We look after the dog at its own home, not on our sofa.
+              // See docs/adr/0010-drop-in-stays.md.
+              dropIn: z.boolean().default(false),
             })
             .refine((s) => s.checkOut >= s.checkIn, {
               message: "checkOut must be on or after checkIn",
