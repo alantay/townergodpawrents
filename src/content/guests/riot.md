@@ -19,6 +19,15 @@ stays:
 
 ## 5 Nov
 
+### 3:43pm
+
+<!-- entry-id: e173 -->
+<!-- no-time -->
+
+Riot looking proud to have pooped so many times today.
+
+![Riot standing on the kitchen tiles, looking up at the camera](./riot/riot-proud-pooper.jpg)
+
 ### 2:22pm
 
 <!-- entry-id: e172 -->
