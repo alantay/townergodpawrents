@@ -19,6 +19,15 @@ stays:
 
 ## 6 Nov
 
+### 2:51pm
+
+<!-- entry-id: e178 -->
+<!-- no-time -->
+
+Back to her usual cave under Alan's desk. Neighbourhood watch is on hold.
+
+![Ebi curled up in her usual spot under Alan's desk, looking at the camera](./ebi/ebi-desk-cave.jpg)
+
 ### 1:58pm
 
 <!-- entry-id: e176 -->
