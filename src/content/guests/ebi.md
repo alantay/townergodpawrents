@@ -19,6 +19,14 @@ stays:
 
 ## 6 Nov
 
+### 6:15pm
+
+<!-- entry-id: e181 -->
+
+Everyone noticed Ebi was more manja than usual today, going to every human in rotation for pats at the car park. She must be missing her parents.
+
+![Several people and small dogs walk across a wet car park marked with yellow arrows and the word SLOW, surrounded by high-rise buildings.](./ebi/ebi-everyone-noticed-more.jpg)
+
 ### 3:56pm
 
 <!-- entry-id: e179 -->
