@@ -17,6 +17,17 @@ stays:
     checkOut: 2026-11-14
 ---
 
+## 6 Nov
+
+### 11:43am
+
+<!-- entry-id: e007 -->
+<!-- no-time -->
+
+Ebi defeating Tiny's pink dragon. One less opponent to compete with for snacks.
+
+![Ebi chewing Tiny's pink dragon toy beside the dog bed](./ebi/ebi-defeating-pink-dragon.jpg)
+
 ## 12 Sep
 
 ### 6:25pm
