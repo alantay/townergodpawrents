@@ -24,10 +24,10 @@ export function polishMessages(text: string, ctx: AiContext, voice: string, rule
     rules,
     "The house voice:",
     voice,
-    "Answer in JSON. polished: grammar fixed, every detail kept, no jokes. twist: one funnier rewording. Always give one when the entry has words. rewritten: better flow, every detail kept, or null. note: one short line if you spot a POV or tense slip, else null.",
+    "Answer in JSON. polished: grammar fixed, every detail kept, no jokes. twist: one funnier rewording. Always give one when the entry has words. rewritten: better flow, every detail kept, or null. commentary: when the words mainly describe what a photo already shows, one short line with the dog's attitude, subtext or joke, else null. note: one short line if you spot a POV or tense slip, else null.",
     "Never use em dashes or en dashes as punctuation. Never use \"lah\".",
-    "The writer's words are the source of truth. Use attached photos as context, never to contradict or remove supplied details. Polished only corrects grammar, tense and word order; do not add visible details to it. Rewritten may use clearly visible details for flow. Twist may speak for the dog and invent obviously made-up comic beats, like a fridge filing for harassment. It must not add anything a reader could mistake for something that really happened.",
-    "If there are photos but no words, override the polishing instructions: put a short, straightforward caption based only on visible details in polished, an optional playful alternative in twist, and null in rewritten and note. Do not invent events, identities or feelings. Recent entries are tone references, not facts about these photos.",
+    "The writer's words are the source of truth. Use attached photos as context, never to contradict or remove supplied details. Polished only corrects grammar, tense and word order; do not add visible details to it. Rewritten may use clearly visible details for flow. Commentary, like Twist, may speak for the dog but must not add anything a reader could mistake for something that really happened. Twist may speak for the dog and invent obviously made-up comic beats, like a fridge filing for harassment. It must not add anything a reader could mistake for something that really happened.",
+    "If there are photos but no words, override the polishing instructions: put a short, straightforward caption based only on visible details in polished, an optional playful alternative in twist, and null in rewritten, commentary and note. Do not invent events, identities or feelings. Recent entries are tone references, not facts about these photos.",
     "Never add alt text or photo descriptions to the entry words. Return alts separately: one plain description per attached photo, in attachment order. Under 20 words each, no jokes, no 'image of' or 'photo of'. Describe only what is visible, independently of the draft caption. Use supplied dog names only when identity is clear; do not guess which dog is which. With no photos, return an empty alts array.",
   ].join("\n\n");
   const recent = ctx.recent.length ? `Recent entries, for tone only:\n${ctx.recent.map((r) => `- ${r}`).join("\n")}\n\n` : "";
@@ -65,8 +65,8 @@ export const POLISH_SCHEMA = {
   schema: {
     type: "object",
     additionalProperties: false,
-    required: ["polished", "twist", "rewritten", "note", "alts"],
-    properties: { polished: { type: "string" }, twist: nullableString, rewritten: nullableString, note: nullableString, alts: { type: "array", items: { type: "string" } } },
+    required: ["polished", "twist", "rewritten", "commentary", "note", "alts"],
+    properties: { polished: { type: "string" }, twist: nullableString, rewritten: nullableString, commentary: nullableString, note: nullableString, alts: { type: "array", items: { type: "string" } } },
   },
 };
 

@@ -16,9 +16,9 @@ const reply = (content: unknown) => ({ choices: [{ message: { content: JSON.stri
 const ai = (fetch: typeof globalThis.fetch, model?: string) => openAI({ key: "k", model, voice: "v", rules: "r", fetch });
 
 test("polish asks gpt-6-luna for strict JSON and cleans the dashes out", async () => {
-  const { bodies, fetch } = fake(reply({ polished: "Luna stole a slipper — again.", twist: "", rewritten: null, note: "Tense slip – check it." }));
+  const { bodies, fetch } = fake(reply({ polished: "Luna stole a slipper — again.", twist: "", rewritten: null, commentary: "Luna — unbothered.", note: "Tense slip – check it." }));
   const result = await ai(fetch).polish("luna stole slipper", CTX);
-  assert.deepEqual(result, { polished: "Luna stole a slipper, again.", twist: null, rewritten: null, note: "Tense slip, check it.", alts: [] });
+  assert.deepEqual(result, { polished: "Luna stole a slipper, again.", twist: null, rewritten: null, commentary: "Luna, unbothered.", note: "Tense slip, check it.", alts: [] });
   assert.equal(bodies[0].model, "gpt-6-luna");
   assert.equal(bodies[0].reasoning_effort, "none");
   assert.equal(bodies[0].response_format.json_schema.name, "polish");
@@ -53,7 +53,7 @@ test("a slow answer times out", async () => {
 });
 
 test("suggestions and photo descriptions use one image request", async () => {
-  const { bodies, fetch } = fake(reply({ polished: "Luna on the sofa.", twist: null, rewritten: null, note: null, alts: ["Luna — on the sofa."] }));
+  const { bodies, fetch } = fake(reply({ polished: "Luna on the sofa.", twist: null, rewritten: null, commentary: null, note: null, alts: ["Luna — on the sofa."] }));
   const result = await ai(fetch).polish("", CTX, [{ bytes: new Uint8Array([0xff, 0xd8, 0xff]), type: "image/jpeg" }]);
   assert.deepEqual(result.alts, ["Luna, on the sofa."]);
   assert.equal(bodies.length, 1);

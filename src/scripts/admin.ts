@@ -410,6 +410,7 @@ polishBtn.addEventListener("click", async () => {
       card(hasWords ? "Polished" : "Caption", body.polished, false),
       ...(body.twist ? [card(hasWords ? "Twist" : "Playful", body.twist, false)] : []),
       ...(hasWords && body.rewritten ? [card("Rewritten", body.rewritten, false)] : []),
+      ...(hasWords && body.commentary ? [card("Commentary", body.commentary, false)] : []),
     );
     polishNote.textContent = body.note || "";
     polishNote.hidden = !body.note;
