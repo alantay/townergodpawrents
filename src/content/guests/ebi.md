@@ -19,6 +19,14 @@ stays:
 
 ## 6 Nov
 
+### 3:56pm
+
+<!-- entry-id: e179 -->
+
+“I’m going to be first when the donut comes out of the oven, guarding it with my life,” Ebi says.
+
+![A tan-and-white dog lies on a tiled floor in a kitchen.](./ebi/ebi-im-going-first.jpg)
+
 ### 2:51pm
 
 <!-- entry-id: e178 -->
