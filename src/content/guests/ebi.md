@@ -19,6 +19,14 @@ stays:
 
 ## 6 Nov
 
+### 9:45pm
+
+<!-- entry-id: e183 -->
+
+Obstacle course.
+
+![A reddish dog lies stretched across the floor beside a small white object, with furniture and hanging bags in the room.](./ebi/ebi-obstacle-course.jpg)
+
 ### 6:30pm
 
 <!-- entry-id: e182 -->
