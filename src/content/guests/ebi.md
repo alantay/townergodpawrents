@@ -19,6 +19,14 @@ stays:
 
 ## 6 Nov
 
+### 6:30pm
+
+<!-- entry-id: e182 -->
+
+Manja Ebi’s commercial break to play some ball.
+
+![Ebi, 6 Nov 6:30pm](./ebi/ebi-manja-commercial-break.mp4)
+
 ### 6:15pm
 
 <!-- entry-id: e181 -->
