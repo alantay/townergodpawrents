@@ -19,6 +19,14 @@ stays:
 
 ## 6 Nov
 
+### 11:45am
+
+<!-- entry-id: e175 -->
+
+Ha, this feels good.
+
+![A tan-and-white dog lies on its back on a wooden floor as a hand rubs its belly.](./ebi/ebi-ha-feels-good.jpg)
+
 ### 11:43am
 
 <!-- entry-id: e007 -->
