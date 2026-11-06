@@ -23,7 +23,7 @@ stays:
 
 <!-- entry-id: e175 -->
 
-Ha, this feels good.
+Collecting scratch tax from the humans.
 
 ![A tan-and-white dog lies on its back on a wooden floor as a hand rubs its belly.](./ebi/ebi-ha-feels-good.jpg)
 
