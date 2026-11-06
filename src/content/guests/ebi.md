@@ -30,6 +30,15 @@ Barking at every movement outside. Neighbourhood watch is tiring work.
 
 ![Ebi resting with her eyes closed by the front gate](./ebi/ebi-neighbourhood-watch-rest.jpg)
 
+### 1:55pm
+
+<!-- entry-id: e177 -->
+<!-- no-time -->
+
+Alan the snake charmer, with a plate for a flute and Ebi under his spell.
+
+![Alan moves a plate around while Ebi follows it closely with her nose](./ebi/ebi-snake-charmer.mp4)
+
 ### 11:45am
 
 <!-- entry-id: e175 -->
