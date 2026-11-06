@@ -19,6 +19,17 @@ stays:
 
 ## 6 Nov
 
+### 1:58pm
+
+<!-- entry-id: e176 -->
+<!-- no-time -->
+
+Barking at every movement outside. Neighbourhood watch is tiring work.
+
+![Ebi yawning while lying by the front gate](./ebi/ebi-neighbourhood-watch-yawn.jpg)
+
+![Ebi resting with her eyes closed by the front gate](./ebi/ebi-neighbourhood-watch-rest.jpg)
+
 ### 11:45am
 
 <!-- entry-id: e175 -->
