@@ -1,0 +1,6 @@
+.hyperframes/
+.thumbnails/
+.waveform-cache/
+.cross-pair/
+node_modules/
+renders/

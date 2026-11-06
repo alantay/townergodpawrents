@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Instrument Serif";
+        src: url("assets/fonts/InstrumentSerif-Regular.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Instrument Serif";
+        src: url("assets/fonts/InstrumentSerif-Italic.woff2") format("woff2");
+        font-weight: 400;
+        font-style: italic;
+      }
+      @font-face {
+        font-family: Archivo;
+        src: url("assets/fonts/Archivo-600.woff2") format("woff2");
+        font-weight: 600;
+      }
+      @font-face {
+        font-family: Archivo;
+        src: url("assets/fonts/Archivo-800.woff2") format("woff2");
+        font-weight: 800;
+      }
+      @font-face {
+        font-family: Caveat;
+        src: url("assets/fonts/Caveat-600.woff2") format("woff2");
+        font-weight: 600;
+      }
+      :root {
+        --teal: #2F6B6B;
+        --red: #C2332B;
+        --ink: #1E2423;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--teal); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; color: var(--ink); }
+      .clip { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .picture { object-fit: cover; object-position: center; }
+      .overlay { z-index: 2; }
+      #location {
+        position: absolute; left: 108px; bottom: 240px;
+        color: white; font: 800 40px/1.3 Archivo; letter-spacing: .18em;
+        text-shadow: 0 2px 12px #1E2423;
+      }
+      #field-card {
+        position: absolute; left: 108px; bottom: 280px; width: 864px;
+        padding: 34px 44px 38px; border-left: 8px solid var(--teal);
+        background: rgb(255 255 255 / 94%);
+      }
+      #field-name { font: 400 88px/1.1 "Instrument Serif"; letter-spacing: .06em; }
+      #field-breed { margin-top: 14px; font: 600 34px/1.3 Archivo; }
+      #field-note { margin-top: 18px; font: italic 400 46px/1.2 "Instrument Serif"; }
+      #proud-photo { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+      #stamp-position { position: absolute; top: 58%; width: 100%; display: flex; justify-content: center; }
+      #stamp {
+        padding: 18px 24px; border: 7px solid var(--red); color: var(--red);
+        font: 800 78px/1.1 Archivo; letter-spacing: .12em; mix-blend-mode: multiply;
+      }
+      #sleeping { object-fit: contain; background: var(--teal); }
+      #end-card { background: var(--teal); color: white; text-align: center; }
+      #collage { position: absolute; top: 100px; left: 11%; width: 78%; height: auto; }
+      #end-name { position: absolute; top: 1280px; width: 100%; font: 400 150px/1.1 "Instrument Serif"; }
+      #end-note { position: absolute; top: 1460px; width: 100%; font: 600 70px/1.2 Caveat; }
+      #voice-credit { position: absolute; bottom: 192px; width: 100%; font: 600 32px/1.3 Archivo; opacity: .85; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="28" data-width="1080" data-height="1920" data-fps="30">
+      <video id="marking-establish" class="clip picture" src="assets/riot-off-leash-marking.mp4" data-start="0" data-duration="3.3" data-media-start="0" data-playback-rate="1" data-track-index="0" muted playsinline data-volume="0"></video>
+      <video id="marking-profile" class="clip picture" src="assets/riot-off-leash-marking.mp4" data-start="3.3" data-duration="3.7" data-media-start="3.3" data-playback-rate="1" data-track-index="0" muted playsinline data-volume="0"></video>
+      <video id="marking-slow" class="clip picture" src="assets/riot-off-leash-marking.mp4" data-start="7" data-duration="1.6" data-media-start="7" data-playback-rate="0.7" data-track-index="0" muted playsinline data-volume="0"></video>
+      <img id="marking-hold" class="clip picture" src="assets/riot-marking-freeze-8.12.jpg" alt="" data-start="8.6" data-duration="1.3" data-track-index="0" data-hold />
+      <img id="proud-photo" class="clip picture" src="assets/riot-proud-pooper.jpg" alt="" data-start="9.9" data-duration="3.4" data-track-index="0" />
+      <video id="manja-first" class="clip picture" src="assets/riot-manja-weiwen.mp4" data-start="13.3" data-duration="3" data-media-start="2" data-playback-rate="1" data-track-index="0" muted playsinline data-volume="0"></video>
+      <video id="manja-second" class="clip picture" src="assets/riot-manja-weiwen.mp4" data-start="16.3" data-duration="2.9" data-media-start="9.5" data-playback-rate="1" data-track-index="0" muted playsinline data-volume="0"></video>
+      <img id="sleeping" class="clip picture" src="assets/riot-sleeping-away-obstacle.jpg" alt="" data-start="19.2" data-duration="3" data-track-index="0" data-hold />
+      <video id="manja-last" class="clip picture" src="assets/riot-manja-weiwen.mp4" data-start="22.2" data-duration="0.5" data-media-start="15.3" data-playback-rate="1" data-track-index="0" muted playsinline data-volume="0"></video>
+      <img id="manja-hold" class="clip picture" src="assets/riot-manja-freeze-15.8.jpg" alt="" data-start="22.7" data-duration="0.5" data-track-index="0" data-hold />
+      <div id="end-card" class="clip" data-start="23.2" data-duration="4.8" data-track-index="0" data-hold>
+        <img id="collage" class="clip" src="assets/riot-collage-v2.png" alt="" data-start="23.2" data-duration="4.8" data-track-index="2" />
+        <p id="end-name">Riot</p>
+        <p id="end-note">Known vandal</p>
+        <p id="voice-credit">Voice generated with ElevenLabs</p>
+      </div>
+      <div id="location-overlay" class="clip overlay" data-start="0.3" data-duration="2.8" data-track-index="1" data-track-kind="graphics">
+        <p id="location">TOWNER CREST, SINGAPORE</p>
+      </div>
+      <div id="profile-overlay" class="clip overlay" data-start="3.5" data-duration="3.2" data-track-index="1" data-track-kind="graphics">
+        <div id="field-card">
+          <p id="field-name">RIOT</p>
+          <p id="field-breed">Maltese</p>
+          <p id="field-note">Known vandal</p>
+        </div>
+      </div>
+      <div id="stamp-overlay" class="clip overlay" data-start="11.2" data-duration="2.1" data-track-index="1" data-track-kind="graphics">
+        <div id="stamp-position"><p id="stamp">ON RECORD</p></div>
+      </div>
+      <audio id="vo-line1" class="clip" src="assets/line1.mp3" data-start="0.3" data-duration="3.715193" data-track-index="10" data-volume="1"></audio>
+      <audio id="vo-line2" class="clip" src="assets/line2.mp3" data-start="3.6" data-duration="3.065034" data-track-index="11" data-volume="1"></audio>
+      <audio id="vo-line3" class="clip" src="assets/line3.mp3" data-start="7.2" data-duration="2.043356" data-track-index="12" data-volume="1"></audio>
+      <audio id="vo-line4" class="clip" src="assets/line4.mp3" data-start="9.9" data-duration="3.808073" data-track-index="13" data-volume="1"></audio>
+      <audio id="vo-line5" class="clip" src="assets/line5.mp3" data-start="13.5" data-duration="3.761633" data-track-index="14" data-volume="1"></audio>
+      <audio id="vo-line6" class="clip" src="assets/line6.mp3" data-start="19.4" data-duration="2.136236" data-track-index="15" data-volume="1"></audio>
+      <audio id="vo-line7" class="clip" src="assets/line7.mp3" data-start="22.6" data-duration="4.272472" data-track-index="16" data-volume="1"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#location", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "none" }, 0.3);
+      tl.to("#location", { opacity: 0, duration: 0.3, ease: "none" }, 2.8);
+      tl.fromTo("#field-card", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power2.out" }, 3.5);
+      tl.to("#field-card", { opacity: 0, duration: 0.3, ease: "none" }, 6.4);
+      tl.fromTo("#proud-photo", { scale: 1 }, { scale: 1.08, duration: 3.4, ease: "none" }, 9.9);
+      tl.fromTo("#stamp", { scale: 1.6, rotation: -12 }, { scale: 1, rotation: -12, duration: 0.18, ease: "power4.out" }, 11.2);
+      tl.fromTo("#collage", { y: 40 }, { y: 0, duration: 0.4, ease: "power2.out" }, 23.2);
+      window.__timelines = window.__timelines || {};
+      window.__timelines.main = tl;
+    </script>
+  </body>
+</html>
