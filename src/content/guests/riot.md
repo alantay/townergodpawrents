@@ -17,6 +17,16 @@ stays:
     dropIn: true
 ---
 
+## 6 Nov
+
+### 11:53am
+
+<!-- entry-id: e174 -->
+
+Sleeping away from the obstacle course he left around the house.
+
+![A small white dog lies stretched out on a tiled floor between several wooden chairs.](./riot/riot-sleeping-away-obstacle.jpg)
+
 ## 5 Nov
 
 ### 3:43pm
