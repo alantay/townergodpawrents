@@ -19,6 +19,15 @@ stays:
 
 ## 6 Nov
 
+### 4:02pm
+
+<!-- entry-id: e180 -->
+<!-- no-time -->
+
+Riot gobbled down his food while keeping one eye on me.
+
+![Riot, 6 Nov](./riot/riot-gobbled-down-food.mp4)
+
 ### 11:53am
 
 <!-- entry-id: e174 -->
