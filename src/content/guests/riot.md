@@ -1,7 +1,7 @@
 ---
 name: Riot
 breed: Maltese
-photo: ./riot/riot-collage-v2.png
+photo: ./riot/riot-collage-v3.png
 bgColor: "#2F6B6B"
 showLive: true
 sex: male
