@@ -19,6 +19,14 @@ stays:
 
 ## 7 Nov
 
+### 6:03pm
+
+<!-- entry-id: e188 -->
+
+Ebi went to the dog run for snacks, not to play.
+
+![A tan dog sits on the grass beside two other dogs, looking up at a woman holding a treat.](./ebi/ebi-went-dog-run.jpg)
+
 ### 12:45pm
 
 <!-- entry-id: e187 -->
