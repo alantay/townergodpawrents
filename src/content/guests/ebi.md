@@ -19,6 +19,14 @@ stays:
 
 ## 7 Nov
 
+### 12:45pm
+
+<!-- entry-id: e187 -->
+
+Is this a snack? I can’t seem to bite through it. Maybe it’s a toy. Or maybe it’s a very stubborn snack.
+
+![Ebi, 7 Nov 12:45pm](./ebi/ebi-snack-cant-seem.mp4)
+
 ### 8:53am
 
 <!-- entry-id: e186 -->
