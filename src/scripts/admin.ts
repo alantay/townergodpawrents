@@ -54,6 +54,7 @@ const polishNote = $("polish-note");
 const suggestionStatus = $("suggestion-status");
 const photosBox = $("photos");
 const addTile = $("add");
+const addText = $("add-text");
 const files = $<HTMLInputElement>("files");
 const photoNote = $("photo-note");
 const previewField = $("preview-field");
@@ -67,12 +68,15 @@ const go = $<HTMLButtonElement>("go");
 const done = $("done");
 
 let state: Draft = { guest: "", iso: "", time: "", label: NO_TIME, with: [], text: "" };
-let photos: Blob[] = [];
-let video: File | undefined;
+/** Photos and at most one video, in the order they were added. */
+type Item = { kind: "photo"; blob: Blob } | { kind: "video"; file: File } | { kind: "shrinking" };
+let items: Item[] = [];
+const photos = () => items.flatMap((item) => (item.kind === "photo" ? [item.blob] : []));
+const video = () => items.flatMap((item) => (item.kind === "video" ? [item.file] : []))[0];
+const shrinking = () => items.filter((item) => item.kind === "shrinking").length;
 let videoUrl: string | undefined;
 let uploadingVideo = false;
 let postKey = crypto.randomUUID();
-let shrinking = 0;
 // Saved photos still coming back from IndexedDB: posting or picking now would lose them.
 let restoring = true;
 let busy = false;
@@ -90,7 +94,7 @@ function urlFor(blob: Blob): string {
 
 function save() {
   try {
-    localStorage.setItem(DRAFT_KEY, JSON.stringify({ ...state, photoCount: photos.length, savedAt: Date.now() }));
+    localStorage.setItem(DRAFT_KEY, JSON.stringify({ ...state, photoCount: photos().length, savedAt: Date.now() }));
   } catch {}
 }
 
@@ -158,16 +162,17 @@ function render() {
 
   const name = guests.find((g) => g.id === state.guest)?.name;
   go.textContent = uploadingVideo ? "Sending video…" : busy ? "Posting…" : name ? `Post to ${name}'s diary` : "Post";
-  go.disabled = busy || restoring || suggesting || shrinking > 0;
-  polishBtn.disabled = busy || restoring || suggesting || shrinking > 0;
-  polishBtn.textContent = suggesting ? (photos.length ? "Looking at photos…" : "Polishing…") : state.text.trim() ? "Polish my words" : "Suggest words";
+  go.disabled = busy || restoring || suggesting || shrinking() > 0;
+  polishBtn.disabled = busy || restoring || suggesting || shrinking() > 0;
+  polishBtn.textContent = suggesting ? (photos().length ? "Looking at photos…" : "Polishing…") : state.text.trim() ? "Polish my words" : "Suggest words";
   fields.disabled = busy;
   files.disabled = restoring;
-  files.accept = photos.length || shrinking ? "image/*" : ["image/*", ...VIDEO_CONTENT_TYPES].join(",");
-  textHint.textContent = video
+  files.accept = video() ? "image/*" : ["image/*", ...VIDEO_CONTENT_TYPES].join(",");
+  addText.textContent = video() ? "+ Add photo" : "+ Add photo or video";
+  textHint.textContent = video() && !photos().length
     ? "Add a little context, or let the video do the talking."
     : "Add a little context, or let the photos do the talking.";
-  addTile.hidden = !!video || photos.length + shrinking >= MAX_PHOTOS;
+  addTile.hidden = items.length >= MAX_PHOTOS;
   renderPreview();
 }
 
@@ -176,7 +181,8 @@ function contextKey(): string {
 }
 
 function samePhotos(snapshot: Blob[]): boolean {
-  return snapshot.length === photos.length && snapshot.every((photo, i) => photo === photos[i]);
+  const now = photos();
+  return snapshot.length === now.length && snapshot.every((photo, i) => photo === now[i]);
 }
 
 function thumb(blob: Blob): HTMLImageElement {
@@ -199,18 +205,23 @@ function videoThumb(file: File): HTMLVideoElement {
   return clip;
 }
 
+/** Small thumbnails of the photos and video, in order. */
+function thumbs(): HTMLElement[] {
+  return items.flatMap((item): HTMLElement[] => (item.kind === "photo" ? [thumb(item.blob)] : item.kind === "video" ? [videoThumb(item.file)] : []));
+}
+
 /** A quiet look at the card: the day, the time or label line, the photos. */
 function renderPreview() {
   const name = guests.find((g) => g.id === state.guest)?.name;
-  previewField.hidden = !name || (!state.text.trim() && !photos.length && !video);
+  previewField.hidden = !name || (!state.text.trim() && !photos().length && !video());
   if (previewField.hidden) return;
   previewLbl.textContent = `On ${name}'s diary, ${fmtDay(state.iso)}`;
   const shown = state.label === NO_TIME ? "" : state.label || formatTime(postTime(state)) || "";
   const withNames = state.with.map((id) => guests.find((g) => g.id === id)?.name).filter(Boolean);
   previewWhen.textContent = [shown, withNames.length > 0 && `with ${withNames.join(" & ")}`].filter(Boolean).join(" · ");
   previewLine.hidden = !previewWhen.textContent;
-  previewPhotos.replaceChildren(...(video ? [videoThumb(video)] : photos.map(thumb)));
-  previewPhotos.hidden = !photos.length && !video;
+  previewPhotos.replaceChildren(...thumbs());
+  previewPhotos.hidden = !photos().length && !video();
   previewText.textContent = state.text.trim();
   previewText.hidden = !previewText.textContent;
 }
@@ -220,67 +231,74 @@ function update() {
   render();
 }
 
+function remove(item: Item) {
+  items = items.filter((other) => other !== item);
+  if (item.kind === "photo") {
+    URL.revokeObjectURL(urlFor(item.blob));
+    keepPhotos();
+  }
+  if (item.kind === "video") {
+    URL.revokeObjectURL(urlFor(item.file));
+    videoUrl = undefined;
+  }
+  renderPhotos();
+}
+
+function removeButton(label: string, item: Item): HTMLButtonElement {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.textContent = "Remove";
+  button.setAttribute("aria-label", label);
+  button.addEventListener("click", () => remove(item));
+  return button;
+}
+
+function videoPrint(item: Item & { kind: "video" }): HTMLElement {
+  const print = document.createElement("div");
+  print.className = "print";
+  print.setAttribute("role", "group");
+  print.setAttribute("aria-label", "Selected video");
+  const clip = videoThumb(item.file);
+  const play = document.createElement("button");
+  play.type = "button";
+  play.className = "video-mark";
+  play.setAttribute("aria-label", "Play video");
+  const toggle = () => {
+    clip.muted = false;
+    if (clip.paused) void clip.play();
+    else clip.pause();
+  };
+  const sync = () => {
+    play.classList.toggle("playing", !clip.paused);
+    play.setAttribute("aria-label", clip.paused ? "Play video" : "Pause video");
+  };
+  play.addEventListener("click", toggle);
+  clip.addEventListener("click", toggle);
+  clip.addEventListener("play", sync);
+  clip.addEventListener("pause", sync);
+  print.append(clip, play, removeButton("Remove video", item));
+  return print;
+}
+
 function renderPhotos() {
   for (const print of photosBox.querySelectorAll(".print")) print.remove();
-  if (video) {
-    const print = document.createElement("div");
-    print.className = "print";
-    print.setAttribute("role", "group");
-    print.setAttribute("aria-label", "Selected video");
-    const clip = videoThumb(video);
-    const play = document.createElement("button");
-    play.type = "button";
-    play.className = "video-mark";
-    play.setAttribute("aria-label", "Play video");
-    const toggle = () => {
-      clip.muted = false;
-      if (clip.paused) void clip.play();
-      else clip.pause();
-    };
-    const sync = () => {
-      play.classList.toggle("playing", !clip.paused);
-      play.setAttribute("aria-label", clip.paused ? "Play video" : "Pause video");
-    };
-    play.addEventListener("click", toggle);
-    clip.addEventListener("click", toggle);
-    clip.addEventListener("play", sync);
-    clip.addEventListener("pause", sync);
-    const remove = document.createElement("button");
-    remove.type = "button";
-    remove.textContent = "Remove";
-    remove.setAttribute("aria-label", "Remove video");
-    remove.addEventListener("click", () => {
-      URL.revokeObjectURL(urlFor(video!));
-      video = undefined;
-      videoUrl = undefined;
-      renderPhotos();
-    });
-    print.append(clip, play, remove);
-    photosBox.insertBefore(print, addTile);
-  }
-  photos.forEach((blob, i) => {
-    const print = document.createElement("div");
-    print.className = "print";
-    const img = thumb(blob);
-    img.alt = `Photo ${i + 1}`;
-    const remove = document.createElement("button");
-    remove.type = "button";
-    remove.textContent = "Remove";
-    remove.setAttribute("aria-label", `Remove photo ${i + 1}`);
-    remove.addEventListener("click", () => {
-      const [gone] = photos.splice(i, 1);
-      URL.revokeObjectURL(urlFor(gone));
-      keepPhotos();
-      renderPhotos();
-    });
-    print.append(img, remove);
-    photosBox.insertBefore(print, addTile);
-  });
-  for (let i = 0; i < shrinking; i++) {
-    const print = document.createElement("div");
-    print.className = "print shrinking";
-    print.setAttribute("role", "status");
-    print.textContent = "Shrinking…";
+  let n = 0;
+  for (const item of items) {
+    let print: HTMLElement;
+    if (item.kind === "video") print = videoPrint(item);
+    else if (item.kind === "photo") {
+      n++;
+      print = document.createElement("div");
+      print.className = "print";
+      const img = thumb(item.blob);
+      img.alt = `Photo ${n}`;
+      print.append(img, removeButton(`Remove photo ${n}`, item));
+    } else {
+      print = document.createElement("div");
+      print.className = "print shrinking";
+      print.setAttribute("role", "status");
+      print.textContent = "Shrinking…";
+    }
     photosBox.insertBefore(print, addTile);
   }
   render();
@@ -288,7 +306,7 @@ function renderPhotos() {
 
 function keepPhotos() {
   save();
-  void savePhotos(photos);
+  void savePhotos(photos());
 }
 
 /** Draw to a canvas, long side 1600px, JPEG 0.8, like scripts/prep-photo.sh. */
@@ -319,27 +337,25 @@ files.addEventListener("change", async () => {
   const selected = Array.from(files.files ?? []);
   files.value = "";
   const clips = selected.filter((file) => file.type.startsWith("video/"));
-  if (video || (clips.length && (clips.length !== 1 || selected.length !== 1 || photos.length || shrinking))) {
-    return showError("One video or up to four photos, not both.");
-  }
-  if (clips.length) {
-    const clip = clips[0];
-    if (!VIDEO_CONTENT_TYPES.includes(clip.type) || clip.size > MAX_VIDEO_BYTES) return showError(BAD_VIDEO);
-    video = clip;
-    videoUrl = undefined;
-    renderPhotos();
-    return;
-  }
-  const picked = selected.slice(0, MAX_PHOTOS - photos.length - shrinking);
-  shrinking += picked.length;
+  if (clips.length > (video() ? 0 : 1)) return showError("One video per post. The rest can be photos.");
+  if (clips.some((clip) => !VIDEO_CONTENT_TYPES.includes(clip.type) || clip.size > MAX_VIDEO_BYTES)) return showError(BAD_VIDEO);
+  // Each pick holds its place in the order while it shrinks.
+  const picked = selected.slice(0, MAX_PHOTOS - items.length).map((file) => ({
+    file,
+    item: (file.type.startsWith("video/") ? { kind: "video", file } : { kind: "shrinking" }) as Item,
+  }));
+  if (picked.some((p) => p.item.kind === "video")) videoUrl = undefined;
+  items.push(...picked.map((p) => p.item));
   renderPhotos();
-  for (const file of picked) {
+  for (const { file, item } of picked) {
+    if (item.kind !== "shrinking") continue;
+    let blob: Blob | undefined;
     try {
-      photos.push(await shrink(file));
+      blob = await shrink(file);
     } catch {
       showError(BAD_PHOTO);
     }
-    shrinking--;
+    items = items.flatMap((other) => (other !== item ? [other] : blob ? [{ kind: "photo", blob } as Item] : []));
     renderPhotos();
   }
   keepPhotos();
@@ -374,12 +390,12 @@ function loggedOut(res: Response): boolean {
 }
 
 polishBtn.addEventListener("click", async () => {
-  if (busy || suggesting || shrinking) return;
+  if (busy || suggesting || shrinking()) return;
   showError("");
   suggestionStatus.hidden = true;
   const yours = text.value;
   const requestContext = contextKey();
-  const requestPhotos = [...photos];
+  const requestPhotos = photos();
   const data = new FormData();
   data.set("guest", state.guest);
   data.set("text", yours);
@@ -396,7 +412,7 @@ polishBtn.addEventListener("click", async () => {
     if (loggedOut(res)) return;
     const body = await res.json();
     if (!res.ok) return showError(body.error || BAD_SEND);
-    if (requestContext !== contextKey() || !samePhotos(requestPhotos) || text.value !== yours || shrinking) {
+    if (requestContext !== contextKey() || !samePhotos(requestPhotos) || text.value !== yours || shrinking()) {
       suggestionStatus.textContent = "Your entry changed. Ask for suggestions again.";
       suggestionStatus.hidden = false;
       return;
@@ -425,7 +441,7 @@ polishBtn.addEventListener("click", async () => {
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  if (busy || suggesting || shrinking) return;
+  if (busy || suggesting || shrinking()) return;
   showError("");
   busy = true;
   render();
@@ -438,14 +454,15 @@ form.addEventListener("submit", async (event) => {
   data.set("text", text.value);
   data.set("descriptions", JSON.stringify(descriptions));
   for (const id of state.with) data.append("with", id);
-  photos.forEach((blob, i) => data.append("photos", blob, `photo-${i + 1}.jpg`));
+  photos().forEach((blob, i) => data.append("photos", blob, `photo-${i + 1}.jpg`));
+  const clip = video();
   try {
-    if (video) {
+    if (clip) {
       if (!videoUrl) {
         uploadingVideo = true;
         render();
         try {
-          const pathname = `admin-video/${postKey}.${video.type === "video/quicktime" ? "mov" : "mp4"}`;
+          const pathname = `admin-video/${postKey}.${clip.type === "video/quicktime" ? "mov" : "mp4"}`;
           // The SDK's upload() hides HTTP status, so fetch the token ourselves.
           const tokenRes = await fetch("/api/admin/video-upload", {
             method: "POST",
@@ -456,11 +473,11 @@ form.addEventListener("submit", async (event) => {
           if (loggedOut(tokenRes)) return;
           if (!tokenRes.ok) return showError(BAD_VIDEO);
           const { clientToken } = await tokenRes.json();
-          const blob = await put(pathname, video, {
+          const blob = await put(pathname, clip, {
             access: "public",
             multipart: true,
             token: clientToken,
-            contentType: video.type,
+            contentType: clip.type,
           });
           videoUrl = blob.url;
         } catch {
@@ -471,6 +488,7 @@ form.addEventListener("submit", async (event) => {
         }
       }
       data.set("videoUrl", videoUrl);
+      data.set("videoAt", String(items.findIndex((item) => item.kind === "video")));
     }
     const res = await fetch("/api/admin/post", { method: "POST", body: data, signal: AbortSignal.timeout(POST_TIMEOUT_MS) });
     if (loggedOut(res)) return;
@@ -480,7 +498,7 @@ form.addEventListener("submit", async (event) => {
     const link = $<HTMLAnchorElement>("done-link");
     link.href = body.url;
     link.textContent = name ? `See ${name}'s diary` : "See the diary";
-    $("done-photos").replaceChildren(...(video ? [videoThumb(video)] : photos.map(thumb)));
+    $("done-photos").replaceChildren(...thumbs());
     $("done-title").textContent = body.pending ? "Video's on its way." : "Posted.";
     $("done-note").textContent = body.pending ? "It'll show up in a couple of minutes." : "Live on the site in about a minute.";
     try {
@@ -504,10 +522,8 @@ $("again").addEventListener("click", () => {
   iso.value = state.iso;
   time.value = state.time;
   text.value = "";
-  for (const blob of photos) URL.revokeObjectURL(urlFor(blob));
-  photos = [];
-  if (video) URL.revokeObjectURL(urlFor(video));
-  video = undefined;
+  for (const blob of [...photos(), video()].filter((b) => !!b)) URL.revokeObjectURL(urlFor(blob));
+  items = [];
   videoUrl = undefined;
   descriptions = [];
   $("done-photos").replaceChildren();
@@ -559,10 +575,10 @@ text.value = state.text;
 render();
 void loadPhotos().then((kept) => {
   restoring = false;
-  photos = kept.slice(0, MAX_PHOTOS);
+  items = kept.slice(0, MAX_PHOTOS).map((blob): Item => ({ kind: "photo", blob }));
   renderPhotos();
   // Photos that didn't make it back (no IndexedDB, or iOS cleared it): say so.
-  if ((draft.photoCount ?? 0) > photos.length) {
+  if ((draft.photoCount ?? 0) > items.length) {
     photoNote.textContent = LOST_PHOTOS;
     photoNote.hidden = false;
   }

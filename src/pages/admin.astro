@@ -82,10 +82,10 @@ const guestsJson = JSON.stringify(guests).replace(/</g, "\\u003c");
             <p class="hint" id="label-hint" hidden></p>
           </div>
           <div class="field">
-            <span class="lbl">One video or up to 4 photos</span>
+            <span class="lbl">Up to 4 photos, 1 can be a video</span>
             <div class="photos" id="photos">
               <label class="add" id="add">
-                + Add photo or video
+                <span id="add-text">+ Add photo or video</span>
                 <input id="files" type="file" accept={["image/*", ...VIDEO_CONTENT_TYPES].join(",")} multiple class="sr-only" />
               </label>
             </div>

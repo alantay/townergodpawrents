@@ -50,19 +50,21 @@ function setup(opts: { repo?: ReturnType<typeof fakeRepo>; ai?: Partial<Ai>; sto
   const repo = opts.repo ?? fakeRepo({ [`${DIR}/luna.md`]: LUNA, [`${DIR}/guapo.md`]: GUAPO, [`${DIR}/luna/luna-stole-slipper.jpg`]: JPEG });
   const store = opts.store ?? memoryStore();
   const alts: string[] = [];
+  const uploads: string[] = [];
   const api = postApi({
     secret: SECRET,
     now: () => NOW,
     guests: async () => GUESTS,
     gitHub: () => repo.gh,
     store: typeof store === "function" ? store : () => store,
+    upload: () => async (path) => { uploads.push(path); return `https://test.public.blob.vercel-storage.com/${path}`; },
     ai: () => ({
       polish: async () => { throw new Error("unused"); },
       altText: async (_photo, ctx) => { alts.push(ctx.name); return `${ctx.name} with a slipper`; },
       ...opts.ai,
     }),
   });
-  return { api, repo, store: store as KeyStore, alts };
+  return { api, repo, store: store as KeyStore, alts, uploads };
 }
 
 function request(fields: Record<string, string | string[]>, photos = 0, authed = true): Request {
@@ -222,7 +224,7 @@ test("video dispatches the checked entry once, without a commit or AI", async ()
   assert.deepEqual(await response.json(), { ok: true, url: "/guests/luna", pending: true });
   assert.deepEqual(repo.state.dispatches, [{ eventType: "admin-video", payload: {
     guest: "luna", iso: "2026-10-16", time: "3:20pm", noTime: true,
-    with: ["guapo"], text: "", alt: "Luna, 16 Oct", videoUrl, postKey: "key-12345678",
+    with: ["guapo"], text: "", media: [{ url: videoUrl, alt: "Luna, 16 Oct" }], postKey: "key-12345678",
   } }]);
   assert.equal(repo.state.commits.length, 0);
   assert.deepEqual(alts, []);
@@ -241,9 +243,43 @@ test("video dispatch failure frees the key and leaves the repo alone", async () 
   assert.equal(repo.state.commits.length, 0);
 });
 
-test("invalid or mixed video posts never dispatch", async () => {
+test("photos with a video ride to Blob and dispatch in the order they were added", async () => {
+  const { api, repo, alts, uploads } = setup();
+  const videoUrl = "https://test.public.blob.vercel-storage.com/admin-video/clip.mp4";
+  const response = await api.post(request({ videoUrl, videoAt: "1" }, 2));
+  assert.deepEqual(await response.json(), { ok: true, url: "/guests/luna", pending: true });
+  assert.deepEqual(uploads, ["admin-video/key-12345678-1.jpg", "admin-video/key-12345678-2.jpg"]);
+  assert.deepEqual(alts, ["Luna", "Luna"]);
+  const blob = "https://test.public.blob.vercel-storage.com/admin-video/key-12345678";
+  assert.deepEqual(repo.state.dispatches[0].payload.media, [
+    { url: `${blob}-1.jpg`, alt: "Luna with a slipper" },
+    { url: videoUrl, alt: "Luna, 16 Oct 3:20pm" },
+    { url: `${blob}-2.jpg`, alt: "Luna with a slipper" },
+  ]);
+  assert.equal(repo.state.commits.length, 0);
+});
+
+test("a failed photo upload posts nothing", async () => {
+  const repo = fakeRepo({ [`${DIR}/luna.md`]: LUNA, [`${DIR}/guapo.md`]: GUAPO });
+  const store = memoryStore();
+  const api = postApi({
+    secret: SECRET, now: () => NOW, guests: async () => GUESTS, gitHub: () => repo.gh, store: () => store,
+    ai: () => ({ polish: async () => "", altText: async () => "Luna" }) as unknown as ReturnType<Parameters<typeof postApi>[0]["ai"]>,
+    upload: () => async () => { throw new Error("blob down"); },
+  });
+  const response = await api.post(request({ videoUrl: "https://test.public.blob.vercel-storage.com/admin-video/clip.mp4" }, 1));
+  assert.equal(response.status, 502);
+  assert.equal(repo.state.dispatches.length, 0);
+  assert.equal(await store.get("admin-post:key-12345678"), null);
+});
+
+test("invalid or overfull video posts never dispatch", async () => {
   const { api, repo } = setup();
+  const videoUrl = "https://test.public.blob.vercel-storage.com/admin-video/clip.mp4";
   assert.equal((await api.post(request({ videoUrl: "https://evil.test/admin-video/clip.mp4" }))).status, 400);
-  assert.equal((await api.post(request({ videoUrl: "https://test.public.blob.vercel-storage.com/admin-video/clip.mp4" }, 1))).status, 400);
+  const full = await api.post(request({ videoUrl }, 4));
+  assert.equal(full.status, 400);
+  assert.equal((await full.json()).error, "Four at most, counting the video.");
+  for (const videoAt of ["2", "-1", "0.5", "x"]) assert.equal((await api.post(request({ videoUrl, videoAt }, 1))).status, 400);
   assert.equal(repo.state.dispatches.length, 0);
 });

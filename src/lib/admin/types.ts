@@ -29,6 +29,7 @@ export interface EntryInput {
   text: string;
   photos: Photo[];
   videoUrl?: string;
+  videoAt?: number;
 }
 
 export interface AiContext {
