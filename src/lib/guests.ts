@@ -52,8 +52,8 @@ export interface DiaryEntry {
   id: string; // stable within this guest, even if the time or words change
   time: string; // e.g. "9:50am"
   text: string;
-  /** Photos (up to four) in the order they appear in the markdown, or a
-   * single video — never both, see parseDiary. */
+  /** Up to four photos and videos in markdown order, with at most one video.
+   * See parseDiary. */
   media: DiaryMedia[];
   /** Other guests this moment also belongs to, from `<!-- with: bobbi -->`.
    * crossPost copies the entry into their diaries too. */
@@ -207,9 +207,9 @@ export function stayLabel(s: Stay, withYear = false): string {
 
 // ---- diary ----
 
-// A markdown image inside an entry. An entry can carry up to four prints,
-// or a single video — reuses the same `![alt](path)` syntax, and the file
-// extension decides whether it plays as a photo or a video.
+// A markdown image inside an entry. An entry can carry up to four media
+// items, with at most one video. Both use the same `![alt](path)` syntax;
+// the file extension decides whether it plays as a photo or a video.
 const IMAGE_RE = /!\[([^\]]*)\]\(\s*([^)\s]+)(?:\s+"[^"]*")?\s*\)/g;
 
 const VIDEO_EXT_RE = /\.mp4$/i;
@@ -268,11 +268,10 @@ export function resolveDay(label: string, stays: Stay[], guestId: string): strin
  * Parses a guest's markdown body into diary days.
  *
  * Convention: `## 13 Sep` day dividers, `### 9:50am` entries under them,
- * newest first. One to four `![alt](./photo.jpg)` lines anywhere in an entry
- * become its prints; a `.mp4` line becomes a video instead, and an entry
- * can only carry one — a photo (or photos) on its own, or a single video,
- * never both. A photo or video on its own is a valid entry — some moments
- * don't need words.
+ * newest first. Up to four `![alt](./path)` lines anywhere in an entry
+ * become its media, in markdown order. A `.mp4` line becomes a video;
+ * at most one video can sit alongside photos in the same entry.
+ * Media without words is a valid entry. Some moments don't need words.
  */
 export function parseDiary(body: string, stays: Stay[], guestId: string): DiaryDay[] {
   const heads = [...body.matchAll(HEADING_RE)];
@@ -309,11 +308,11 @@ export function parseDiary(body: string, stays: Stay[], guestId: string): DiaryD
     const matches = [...raw.matchAll(IMAGE_RE)];
     const media = matches.map((match) => ({ src: match[2], alt: match[1].trim(), kind: mediaKind(match[2]) }));
     const videos = media.filter((m) => m.kind === "video");
-    if (videos.length > 1 || (videos.length === 1 && media.length > 1)) {
-      throw new Error(`[guests] ${guestId}: entry "${title}" mixes a video with other media. Use up to four photos, or one video on its own`);
+    if (videos.length > 1) {
+      throw new Error(`[guests] ${guestId}: entry "${title}" has ${videos.length} videos. Use at most one`);
     }
     if (media.length > 4) {
-      throw new Error(`[guests] ${guestId}: entry "${title}" has ${media.length} prints — use at most four`);
+      throw new Error(`[guests] ${guestId}: entry "${title}" has ${media.length} photos and videos. Use at most four`);
     }
     const text = raw.replace(IMAGE_RE, " ").replace(ENTRY_ID_RE, " ").replace(WITH_RE, " ").replace(CREDIT_RE, " ").replace(LABEL_RE, " ").replace(NO_TIME_RE, " ").trim()
       .split(/\n\s*\n/).map((p) => p.trim().replace(/\s+/g, " ")).filter(Boolean).join("\n\n");

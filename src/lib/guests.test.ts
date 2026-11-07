@@ -53,11 +53,8 @@ Tiny's morning zoomies, on video.
   ]);
 });
 
-test("parseDiary rejects a video mixed with a photo in the same entry", () => {
-  assert.throws(
-    () =>
-      parseDiary(
-        `## 17 Sep
+test("parseDiary keeps mixed photos and a video in markdown order", () => {
+  const [day] = parseDiary(`## 17 Sep
 
 ### 7am
 
@@ -65,12 +62,61 @@ test("parseDiary rejects a video mixed with a photo in the same entry", () => {
 
 ![Tiny sniffing a shrub](./tiny/tiny-sniffing.jpg)
 
-![Tiny doing zoomies](./tiny/tiny-zoomies.mp4)`,
-        [{ checkIn: "2026-09-13", checkOut: "2026-09-23" }],
-        "tiny",
-      ),
-    /mixes a video with other media/,
-  );
+![Tiny doing zoomies](./tiny/tiny-zoomies.mp4)
+
+![Tiny on the path](./tiny/tiny-path.jpg)`,
+    [{ checkIn: "2026-09-13", checkOut: "2026-09-23" }], "tiny");
+
+  assert.deepEqual(day.entries[0].media, [
+    { src: "./tiny/tiny-sniffing.jpg", alt: "Tiny sniffing a shrub", kind: "photo" },
+    { src: "./tiny/tiny-zoomies.mp4", alt: "Tiny doing zoomies", kind: "video" },
+    { src: "./tiny/tiny-path.jpg", alt: "Tiny on the path", kind: "photo" },
+  ]);
+});
+
+test("parseDiary accepts one video and three photos", () => {
+  const [day] = parseDiary(`## 17 Sep
+
+### 7am
+
+<!-- entry-id: e001 -->
+
+![Zoomies](./tiny/zoomies.mp4)
+![First](./tiny/first.jpg)
+![Second](./tiny/second.jpg)
+![Third](./tiny/third.jpg)`,
+    [{ checkIn: "2026-09-13", checkOut: "2026-09-23" }], "tiny");
+
+  assert.deepEqual(day.entries[0].media.map((m) => m.kind), ["video", "photo", "photo", "photo"]);
+});
+
+test("parseDiary rejects two videos in the same entry", () => {
+  assert.throws(() => parseDiary(`## 17 Sep
+
+### 7am
+
+<!-- entry-id: e001 -->
+
+![First](./tiny/first.mp4)
+![Second](./tiny/second.mp4)`,
+    [{ checkIn: "2026-09-13", checkOut: "2026-09-23" }], "tiny"),
+    /tiny: entry "7am" has 2 videos\. Use at most one/);
+});
+
+test("parseDiary rejects five media items, including a video", () => {
+  assert.throws(() => parseDiary(`## 17 Sep
+
+### 7am
+
+<!-- entry-id: e001 -->
+
+![Zoomies](./tiny/zoomies.mp4)
+![First](./tiny/first.jpg)
+![Second](./tiny/second.jpg)
+![Third](./tiny/third.jpg)
+![Fourth](./tiny/fourth.jpg)`,
+    [{ checkIn: "2026-09-13", checkOut: "2026-09-23" }], "tiny"),
+    /tiny: entry "7am" has 5 photos and videos\. Use at most four/);
 });
 
 test("parseDiary keeps an entry ID separate from editable time and words", () => {
