@@ -95,7 +95,9 @@ test("a video counts as media, with or without words", () => {
     assert.ok(result.ok);
     assert.equal(result.input.videoUrl, videoUrl);
   }
-  assert.equal(error({ videoUrl, photos: [JPEG] }), "One video or up to four photos, not both.");
+  assert.equal(validate({ ...OK, videoUrl, videoAt: 1, photos: [JPEG] }, GUESTS).ok, true);
+  assert.equal(error({ videoUrl, photos: [JPEG, JPEG, JPEG, JPEG] }), "Four at most, counting the video.");
+  assert.equal(error({ videoUrl, videoAt: 2, photos: [JPEG] }), "That didn't send properly. Try again.");
 });
 
 test("video URLs must be HTTPS uploads on a public Blob host", () => {

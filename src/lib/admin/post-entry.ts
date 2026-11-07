@@ -27,6 +27,8 @@ export function postApi(deps: {
   ai: () => Ai;
   gitHub: () => GitHub;
   store: () => KeyStore;
+  /** Puts a photo on Blob for the video Action to fetch. Returns its URL. */
+  upload: () => (path: string, bytes: Uint8Array) => Promise<string>;
   now?: () => number;
 }) {
   return {
@@ -56,6 +58,7 @@ export function postApi(deps: {
           text: field("text"),
           photos,
           videoUrl: field("videoUrl") || undefined,
+          videoAt: form.has("videoAt") ? Number(field("videoAt")) : undefined,
         },
         await deps.guests(),
       );
@@ -81,18 +84,6 @@ export function postApi(deps: {
       const ctx = { name: guest.name, withNames: withGuests.map((g) => g.name), recent: guest.recent };
       const fallback = fallbackAlt(guest.name, input.iso, input.label ?? (input.noTime ? undefined : input.time));
       const url = `/guests/${guest.id}`;
-      if (input.videoUrl) {
-        const { photos: _photos, ...payload } = input;
-        try {
-          await deps.gitHub().dispatch("admin-video", { ...payload, alt: fallback, postKey });
-        } catch (error) {
-          console.error("[admin] video dispatch failed", error);
-          if (guarded) await deps.store().del(key).catch(() => {});
-          return json({ error: NOT_SAVED }, 502);
-        }
-        if (guarded) await deps.store().set(key, url, DONE_SECONDS).catch(() => {});
-        return json({ ok: true, url, pending: true });
-      }
       const alts = await Promise.all(
         input.photos.map(async (photo) => {
           const reused = cachedAlt(descriptions, photo, ctx);
@@ -105,6 +96,24 @@ export function postApi(deps: {
           }
         }),
       );
+      // A video post goes to the admin-video Action, photos and all, so the
+      // whole entry lands in one commit once the clip is prepped.
+      if (input.videoUrl) {
+        const { photos, videoUrl, videoAt = 0, ...payload } = input;
+        try {
+          const upload = deps.upload();
+          const urls = await Promise.all(photos.map((p, i) => upload(`admin-video/${postKey}-${i + 1}.jpg`, p.bytes)));
+          const media = urls.map((url, i) => ({ url, alt: alts[i] }));
+          media.splice(videoAt, 0, { url: videoUrl, alt: fallback });
+          await deps.gitHub().dispatch("admin-video", { ...payload, media, postKey });
+        } catch (error) {
+          console.error("[admin] video dispatch failed", error);
+          if (guarded) await deps.store().del(key).catch(() => {});
+          return json({ error: NOT_SAVED }, 502);
+        }
+        if (guarded) await deps.store().set(key, url, DONE_SECONDS).catch(() => {});
+        return json({ ok: true, url, pending: true });
+      }
       const words = slugWords(input.text, guest.name);
 
       // Read everything fresh at the branch head, so a retry after the branch

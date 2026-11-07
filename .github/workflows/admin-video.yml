@@ -29,15 +29,15 @@ jobs:
       - run: node --experimental-strip-types scripts/admin-video.ts
         env:
           PAYLOAD: ${{ toJSON(github.event.client_payload) }}
-      - name: Delete uploaded video after posting
+      - name: Delete uploads after posting
         if: success()
         run: |
           node --experimental-strip-types --input-type=module -e '
             import { del } from "@vercel/blob";
-            import { isVideoUrl } from "./src/lib/admin/validate.ts";
-            const { videoUrl } = JSON.parse(process.env.PAYLOAD);
-            if (!isVideoUrl(videoUrl)) throw new Error("Bad video URL");
-            await del(videoUrl);
+            import { isUploadUrl } from "./src/lib/admin/validate.ts";
+            const urls = JSON.parse(process.env.PAYLOAD).media.map((m) => m.url);
+            if (!urls.every(isUploadUrl)) throw new Error("Bad upload URL");
+            await del(urls);
           '
         env:
           PAYLOAD: ${{ toJSON(github.event.client_payload) }}

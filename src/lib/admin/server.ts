@@ -3,6 +3,7 @@
 import { getCollection } from "astro:content";
 import { getSecret } from "astro:env/server";
 import { Redis } from "@upstash/redis";
+import { put } from "@vercel/blob";
 import addEntryMd from "../../../docs/agents/add-entry.md?raw";
 import voiceMd from "../../../docs/agents/voice.md?raw";
 import { dateStr, parseDiary, type Stay } from "../guests.ts";
@@ -54,12 +55,19 @@ function ai(): Ai {
   return openAI({ key, model: getSecret("OPENAI_MODEL"), voice: voiceMd, rules: polishRules(addEntryMd) });
 }
 
+function upload() {
+  const token = getSecret("BLOB_READ_WRITE_TOKEN");
+  if (!token) throw new Error("[admin] BLOB_READ_WRITE_TOKEN isn't set");
+  return async (path: string, bytes: Uint8Array) =>
+    (await put(path, Buffer.from(bytes), { access: "public", token, contentType: "image/jpeg", addRandomSuffix: true })).url;
+}
+
 const secret = () => getSecret("ADMIN_SECRET");
 
 export const authed = (request: Request) => isAuthed(request, secret());
 export const login = () => loginApi({ passphrase: getSecret("ADMIN_PASSPHRASE"), secret: secret(), store });
 export const polish = () => polishApi({ secret: secret(), guests: adminGuests, ai });
-export const post = () => postApi({ secret: secret(), guests: adminGuests, ai, gitHub: gh, store });
+export const post = () => postApi({ secret: secret(), guests: adminGuests, ai, gitHub: gh, store, upload });
 
 export const videoUpload = (request: Request) => videoUploadApi(request, { secret: secret(), token: getSecret("BLOB_READ_WRITE_TOKEN") });
 

@@ -20,6 +20,8 @@ export interface RawEntry {
   text: string;
   photos: Photo[];
   videoUrl?: string;
+  /** Where the video sits among the photos, 0 = first. */
+  videoAt?: number;
 }
 
 export type Checked =
@@ -29,7 +31,8 @@ export type Checked =
 const fail = (error: string): Checked => ({ ok: false, error });
 const several = (name: string) => dogNames(name).length > 1;
 
-export function isVideoUrl(value: string): boolean {
+/** An admin upload on our public Blob store: the video, or photos riding along with it. */
+export function isUploadUrl(value: string): boolean {
   try {
     const url = new URL(value);
     return url.protocol === "https:" && url.host.endsWith(".public.blob.vercel-storage.com")
@@ -73,8 +76,11 @@ export function validate(raw: RawEntry, guests: GuestInfo[]): Checked {
   if (withGuests.some((g) => !g)) return fail("Pick dogs from the list.");
 
   const text = sanitizeText(raw.text);
-  if (raw.videoUrl && !isVideoUrl(raw.videoUrl)) return fail("That didn't send properly. Try again.");
-  if (raw.videoUrl && raw.photos.length) return fail("One video or up to four photos, not both.");
+  const videoAt = raw.videoAt ?? 0;
+  if (raw.videoUrl && (!isUploadUrl(raw.videoUrl) || !Number.isInteger(videoAt) || videoAt < 0 || videoAt > raw.photos.length)) {
+    return fail("That didn't send properly. Try again.");
+  }
+  if (raw.videoUrl && raw.photos.length >= MAX_PHOTOS) return fail("Four at most, counting the video.");
   if (!text && raw.photos.length === 0 && !raw.videoUrl) return fail("Add some words or a photo.");
   if (text.length > MAX_TEXT) return fail(TOO_LONG);
   if (raw.photos.length > MAX_PHOTOS) return fail("Four photos at most.");
@@ -95,6 +101,6 @@ export function validate(raw: RawEntry, guests: GuestInfo[]): Checked {
     ok: true,
     guest,
     withGuests: withGuests as GuestInfo[],
-    input: { guest: guest.id, iso: raw.iso, time, ...(label ? { label } : {}), ...(noTime ? { noTime } : {}), with: withIds, text, photos: raw.photos, ...(raw.videoUrl ? { videoUrl: raw.videoUrl } : {}) },
+    input: { guest: guest.id, iso: raw.iso, time, ...(label ? { label } : {}), ...(noTime ? { noTime } : {}), with: withIds, text, photos: raw.photos, ...(raw.videoUrl ? { videoUrl: raw.videoUrl, videoAt } : {}) },
   };
 }
