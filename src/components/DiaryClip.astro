@@ -1,0 +1,21 @@
+---
+interface Props {
+  url: string;
+  poster: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+const { url, poster, alt, width, height } = Astro.props;
+---
+
+<video
+  src={url}
+  poster={poster}
+  controls
+  preload="metadata"
+  aria-label={alt}
+  class="print-media"
+  style={`aspect-ratio:${width}/${height}`}
+/>

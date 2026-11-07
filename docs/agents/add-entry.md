@@ -9,7 +9,7 @@ Alan tells you a moment, sometimes with one or two photos. You polish the words 
 - **Label** (for an entry that isn't a moment from that time): keep the time heading as usual and add `<!-- label: Throwback -->` after the ID. The card shows the label where the time would; the time only orders the entry. Use one of three: `Throwback` (an old photo or moment from before today), `Thoughts` (something on his mind, not something that happened), `Fun fact` (a thing learned about the dog). Ask before using any other word.
 - **No time** (the default when he gives no time, or when he wants neither a time nor a label on the card): keep the time heading as usual and add `<!-- no-time -->` after the ID. The card shows no time; the time only orders the entry.
 - **Day**: today in SGT unless he says otherwise. It must fall inside one of the guest's stays, or the build fails. If it doesn't, ask whether a stay needs extending.
-- **Media**: optional; either up to four photos, or one short video, per entry. Never mix a video with a photo in the same entry. A photo or video on its own is a valid entry.
+- **Media**: optional; up to four items per entry, with at most one short video. Agent-filed entries may mix photos and a video in any order; `/admin` still accepts photos or a video separately. Media on its own is a valid entry.
 
 ## 2. Polish the words (in chat, before touching any file)
 
@@ -69,7 +69,7 @@ The slug is 2–4 words taken from the moment (`climbing-wall`, `lap-nap`).
 - Swap the time shown on the card for a word with `<!-- label: Throwback -->` after the ID. The heading keeps its time, so the entry still sorts and files like any other.
 - Hide the time without a label using `<!-- no-time -->` after the ID. Same deal: the heading keeps its time for ordering.
 - Credit borrowed music or media with `<!-- credit: Music: Name, from Pixabay -->` after the ID. It shows as small print under the entry, not in the words. For CC BY, link the source and licence: `[Name](https://...), [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)`. CC0 needs no credit.
-- Leave a blank line between the heading, the text and each image. Put at most four images under an entry, or a single video (same `![alt](./path)` syntax — the `.mp4` extension is what tells it apart from a photo).
+- Leave a blank line between the heading, the text and each image. Put at most four media items under an entry, with at most one `.mp4`, in the order they should appear. Photos and a video use the same `![alt](./path)` syntax; the `.mp4` extension tells the video apart from a photo.
 
 ```md
 ### 10:30pm

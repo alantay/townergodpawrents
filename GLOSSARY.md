@@ -25,7 +25,7 @@ One calendar day within a stay, written as a `## 13 Sep` divider. The year is no
 _Avoid_: Date section, day entry
 
 **Entry**:
-One timestamped moment inside a diary day, written as a `### 9:50am` heading and the words under it. May be up to four prints, or one clip, with no words. A label (`<!-- label: Throwback -->`) is shown on the card in place of the time; the time still orders the entry. `<!-- no-time -->` hides the time with nothing in its place.
+One timestamped moment inside a diary day, written as a `### 9:50am` heading and the words under it. May contain up to four prints and clips together, at most one clip, with or without words. Mixed entries are agent-filed; `/admin` cannot mix them yet. A label (`<!-- label: Throwback -->`) is shown on the card in place of the time; the time still orders the entry. `<!-- no-time -->` hides the time with nothing in its place.
 _Avoid_: Post, note, log line, update
 
 **Reaction**:
@@ -37,7 +37,7 @@ A photo attached to an entry, shown on the diary page as a tilted snapshot on a 
 _Avoid_: Image, snap, thumbnail
 
 **Clip**:
-A short video attached to an entry, shown on the diary page on a tilted cream mat like a print, but with native playback controls instead of a click-to-zoom (no autoplay). An entry has either prints or one clip, never both.
+A short video attached to an entry, shown on the diary page on a level cream mat like a print, but with native playback controls instead of a click-to-zoom (no autoplay). An entry can carry up to four prints and clips together, at most one clip. `/admin` cannot mix them yet.
 _Avoid_: Video, movie, reel
 
 **Cut-out**:

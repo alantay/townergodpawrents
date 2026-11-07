@@ -1,5 +1,7 @@
 # ADR 0003: An entry has prints or one clip, never both
 
+Superseded by [ADR 0011](0011-entry-mixes-prints-and-a-clip.md).
+
 ## Decision
 
 An entry carries either up to four **prints** (photos) or exactly one **clip** (video), never a mix. Parsing throws a build error naming the guest and entry title if a clip is found alongside any other media.

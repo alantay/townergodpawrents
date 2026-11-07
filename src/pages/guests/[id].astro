@@ -7,6 +7,7 @@ import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
 import Cutout from "../../components/Cutout.astro";
+import DiaryClip from "../../components/DiaryClip.astro";
 import {
   parseDiary,
   crossPost,
@@ -59,6 +60,10 @@ const diaryVideoDims = import.meta.glob<{ width: number; height: number }>(
 type ResolvedMedia =
   | { kind: "photo"; img: ImageMetadata; alt: string }
   | { kind: "video"; url: string; poster: string; alt: string; width: number; height: number };
+
+function dims(media: ResolvedMedia) {
+  return media.kind === "photo" ? media.img : media;
+}
 
 function resolveDiaryMedia(media: DiaryMedia, guestId: string, when: string): ResolvedMedia {
   const file = media.src.split("/").pop()!;
@@ -283,8 +288,9 @@ let skinIndex = 0;
               // A label stands in for the time, and a no-time entry shows neither.
               const shown = e.label ?? (e.noTime ? "" : e.time);
               const fallbackAlt = shown ? `${name}, ${day.label} ${shown}` : `${name}, ${day.label}`;
+              const onlyVideo = video && prints.length === 1;
               const singlePrint = !video && prints.length === 1;
-              const manyPrints = !video && prints.length > 1;
+              const manyPrints = prints.length > 1;
               // A caption goes on the mat only when one print can hold it in a
               // few words. Anything longer, or spread over several prints, gets
               // its own ruled slip underneath — never both.
@@ -294,7 +300,7 @@ let skinIndex = 0;
               // portrait print, so longer captions have room to breathe.
               // Under a grid it spans the card.
               const noteWidth =
-                video
+                onlyVideo
                   ? Math.min(printWidth(video.width, video.height, VIDEO_MAX_HEIGHT) + 120, 500)
                   : singlePrint && prints[0].kind === "photo"
                     ? Math.min(printWidth(prints[0].img.width, prints[0].img.height) + 120, 500)
@@ -313,20 +319,12 @@ let skinIndex = 0;
                     <span class="new-tag" data-entry-key={`${day.iso} ${e.time}`} hidden>New</span>
                   </div>
 
-                  {video && (
+                  {onlyVideo && (
                     <div
                       class="diary-print mt-[15px]"
                       style={`width:min(100%,${printWidth(video.width, video.height, VIDEO_MAX_HEIGHT)}px)`}
                     >
-                      <video
-                        src={video.url}
-                        poster={video.poster}
-                        controls
-                        preload="metadata"
-                        aria-label={video.alt || fallbackAlt}
-                        class="print-media"
-                        style={`aspect-ratio:${video.width}/${video.height}`}
-                      />
+                      <DiaryClip {...video} alt={video.alt || fallbackAlt} />
                     </div>
                   )}
 
@@ -359,9 +357,13 @@ let skinIndex = 0;
 
                   {manyPrints && (
                     <div
-                      class:list={{ "diary-prints": true, "diary-prints--pair": prints.length === 2, "diary-prints--quad": prints.length === 4, "diary-prints--mixed": prints.length === 2 && prints.some((p) => p.kind === "photo" && p.img.width > p.img.height) && prints.some((p) => p.kind === "photo" && p.img.width < p.img.height), "mt-[15px]": true }}
+                      class:list={{ "diary-prints": true, "diary-prints--pair": prints.length === 2, "diary-prints--quad": prints.length === 4, "diary-prints--mixed": prints.length === 2 && prints.some((p) => dims(p).width > dims(p).height) && prints.some((p) => dims(p).width < dims(p).height), "mt-[15px]": true }}
                     >
-                      {prints.map((p, printIndex) => p.kind === "photo" && (
+                      {prints.map((p, printIndex) => p.kind === "video" ? (
+                        <div class="diary-print" style={`width:min(100%,${printWidth(p.width, p.height, VIDEO_MAX_HEIGHT)}px)`}>
+                          <DiaryClip {...p} alt={p.alt || fallbackAlt} />
+                        </div>
+                      ) : (
                         <button
                           type="button"
                           class="diary-print diary-print-tap cursor-zoom-in"
