@@ -21,6 +21,17 @@ stays:
 
 ### 8:53am
 
+<!-- entry-id: e186 -->
+<!-- no-time -->
+
+Day 2 of Ebi being manja with everyone at the carpark.
+
+![Ebi belly-up on the carpark floor, getting belly rubs from two neighbours](./ebi/ebi-manja-belly-rubs.mp4)
+
+![Ebi sitting on the carpark deck next to a crouching neighbour](./ebi/ebi-manja-car-park.jpg)
+
+### 8:53am
+
 <!-- entry-id: e185 -->
 
 Before Ebi led an escape down the car park.
