@@ -19,6 +19,17 @@ stays:
 
 ## 7 Nov
 
+### 8:10pm
+
+<!-- entry-id: e189 -->
+<!-- no-time -->
+
+Ebi wants us to share mala with her.
+
+![A brown dog rests her head on a wooden table beside a mug.](./ebi/ebi-wants-share-mala.jpg)
+
+![A brown dog watches a pan of noodles on a wooden table.](./ebi/ebi-wants-share-mala-2.jpg)
+
 ### 6:03pm
 
 <!-- entry-id: e188 -->
