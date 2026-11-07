@@ -17,6 +17,16 @@ stays:
     checkOut: 2026-11-14
 ---
 
+## 7 Nov
+
+### 6:35am
+
+<!-- entry-id: e184 -->
+
+“I’m awake, so no one should be sleeping,” says Ebi. Here we are on a long walk to buy the hoomans’ breakfast.
+
+![A fluffy reddish-brown dog seen from behind on a paved path, with grass, trees, and a distant building.](./ebi/ebi-im-awake-no.jpg)
+
 ## 6 Nov
 
 ### 9:45pm
