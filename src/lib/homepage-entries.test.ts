@@ -124,7 +124,7 @@ test("homepage mixed entries keep every item, with only photos opening zoom", ()
     });
     assert.equal((html.match(/<video\b/g) ?? []).length, 1);
     const clip = tags.find((tag) => tag.startsWith("<video "))!;
-    assert.match(clip, /controls playsinline preload="metadata"/);
+    assert.match(clip, /controls preload="metadata"/);
     assert.ok(clip.includes('poster="/poster&quot;.jpg"'));
     assert.ok(clip.includes('aria-label="Tiny &amp; friends, 7am"'));
     assert.ok(html.includes('alt="Tiny &quot;resting&quot; &amp; watching"'));
@@ -154,7 +154,7 @@ test("homepage single clips and photo entries keep their caption layouts", () =>
     entries: [{ id: "e091", time: "7am", mins: 420, text: "Morning.", media, withGuests: [] }],
   }], "2026-09-17");
   const singleClip = entryHTML([clip]);
-  assert.match(singleClip, /<video[^>]* playsinline/);
+  assert.match(singleClip, /<video[^>]* controls preload="metadata"/);
   assert.ok(!singleClip.includes("diary-prints"));
   assert.equal((singleClip.match(/class="diary-slip /g) ?? []).length, 1);
   assert.ok(singleClip.includes('style="width:min(100%,' + Math.min(printWidth(clip.width, clip.height, VIDEO_MAX_HEIGHT) + 120, 500) + 'px);transform:rotate('));
