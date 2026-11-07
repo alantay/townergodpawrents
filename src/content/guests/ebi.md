@@ -19,6 +19,14 @@ stays:
 
 ## 7 Nov
 
+### 8:53am
+
+<!-- entry-id: e185 -->
+
+Before Ebi led an escape down the car park.
+
+![Ebi, 7 Nov 8:53am](./ebi/ebi-before-led-escape.mp4)
+
 ### 6:35am
 
 <!-- entry-id: e184 -->
