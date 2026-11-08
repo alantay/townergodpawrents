@@ -19,6 +19,16 @@ stays:
 
 ## 8 Nov
 
+### 3pm
+
+<!-- entry-id: e194 -->
+
+A busy afternoon stalking the aroma and waiting for a snack to fall.
+
+![Ebi, 8 Nov 3pm](./ebi/ebi-busy-afternoon-stalking.mp4)
+
+![A tan-and-white dog lies on the floor between a person's feet beside wooden cabinets.](./ebi/ebi-busy-afternoon-stalking.jpg)
+
 ### 1:03pm
 
 <!-- entry-id: e193 -->
