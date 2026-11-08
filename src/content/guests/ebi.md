@@ -19,6 +19,12 @@ stays:
 
 ## 8 Nov
 
+### 9:33am
+
+<!-- entry-id: e192 -->
+
+Ebi went gai gai with Ah Ma! She whined to leave the house with her.
+
 ### 8:39am
 
 <!-- entry-id: e191 -->
