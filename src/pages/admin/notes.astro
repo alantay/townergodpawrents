@@ -1,0 +1,164 @@
+---
+// Private notes per dog (allergies, watch-outs) for Alan and Weiwen. Notes
+// live only in Redis and only load after the login check. See ADR 0012.
+import { Font } from "astro:assets";
+import "../../styles/global.css";
+import "../../styles/admin.css";
+import { adminGuests, authed, notesFor } from "../../lib/admin/server";
+import { dogsOn, nowSGT } from "../../lib/admin/form";
+import { NOTE_MAX, type Note } from "../../lib/admin/notes-store";
+
+export const prerender = false;
+
+Astro.response.headers.set("cache-control", "no-store");
+Astro.response.headers.set("x-robots-tag", "noindex");
+
+const loggedIn = await authed(Astro.request);
+let today: { id: string; name: string }[] = [];
+let rest: { id: string; name: string }[] = [];
+let notes = new Map<string, Note[]>();
+let down = false;
+if (loggedIn) {
+  const guests = [...(await adminGuests())].sort((a, b) => a.name.localeCompare(b.name));
+  today = dogsOn(guests, nowSGT().iso);
+  rest = guests.filter((g) => !today.includes(g));
+  try {
+    notes = await notesFor(guests.map((g) => g.id));
+  } catch (error) {
+    console.error("[admin] notes page", error);
+    down = true;
+  }
+}
+// Dogs staying today get open slips. Everyone else folds to one line;
+// tapping a line opens that dog's slip.
+const count = (n: number) => (n ? `${n} ${n === 1 ? "note" : "notes"}` : "");
+const groups = [
+  { title: "Staying today", dogs: today, folded: false },
+  { title: today.length ? "Everyone else" : "Everyone", dogs: rest, folded: true },
+].filter((g) => g.dogs.length);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Notes</title>
+    <Font cssVariable="--font-instrument-serif" preload={[{ style: "normal" }]} />
+    <Font cssVariable="--font-archivo" />
+    <Font cssVariable="--font-caveat" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header>
+        <h1><em>Notes</em></h1>
+        {loggedIn && (
+          <nav class="top">
+            <a class="out" href="/admin">New entry</a>
+            <span aria-hidden="true">·</span>
+            <form method="post" action="/api/admin/logout">
+              <button class="out" type="submit">Log out</button>
+            </form>
+          </nav>
+        )}
+      </header>
+
+      {!loggedIn && <p>Log in on <a href="/admin">the posting page</a> first.</p>}
+
+      {loggedIn && down && <p class="flag" role="alert">Can't reach the notes right now. Try again in a bit.</p>}
+
+      {loggedIn && groups.map((group) => (
+        <section class="group" aria-label={group.title}>
+          <h2 class="lbl">{group.title}</h2>
+          {group.dogs.map((dog) => {
+            const list = notes.get(dog.id) ?? [];
+            const slip = (
+              <article class="slip" data-guest={dog.id} aria-labelledby={`dog-${dog.id}`}>
+                <span class="tape" aria-hidden="true"></span>
+                <h3 id={`dog-${dog.id}`} class={group.folded ? "sr-only" : undefined}>{dog.name}</h3>
+                <p class="empty" hidden={list.length > 0 || down}>Nothing to remember yet.</p>
+                <ul>
+                  {list.map((note) => (
+                    <li data-id={note.id}>
+                      <button type="button" class="txt" aria-label={`Change note: ${note.text}`}>{note.text}</button>
+                    </li>
+                  ))}
+                </ul>
+                <button type="button" class="more" disabled={down}><span aria-hidden="true">+</span> Add a note<span class="sr-only"> for {dog.name}</span></button>
+                <p class="err" aria-live="polite"></p>
+              </article>
+            );
+            return group.folded ? (
+              <details class="fold">
+                <summary><span class="nm">{dog.name}</span><span class="n">{count(list.length)}</span></summary>
+                {slip}
+              </details>
+            ) : slip;
+          })}
+        </section>
+      ))}
+
+      {loggedIn && <p class="hint">Only the two of you see these.</p>}
+    </main>
+    {loggedIn && <script>import "../../scripts/admin-notes";</script>}
+  </body>
+</html>
+
+<style is:global>
+  .group { display: grid; gap: 18px; }
+  .group h2 { margin: 0; }
+  /* A strip torn off the same pad as the diary captions. */
+  .slip { position: relative; background: var(--color-slip-fibre); color: var(--color-ink); padding: 22px 18px 22px; display: grid; gap: 6px;
+    box-shadow: 0 10px 24px -12px rgb(92 64 30 / 0.45), 0 2px 4px rgb(92 64 30 / 0.12);
+    clip-path: polygon(0 0, 100% 0, 100% 97%, 94% 100%, 86% 97.5%, 77% 99.6%, 68% 97.2%, 58% 99.8%, 49% 97.6%, 40% 100%, 31% 97.4%, 21% 99.5%, 12% 97.3%, 4% 99.7%, 0 98%); }
+  .slip[hidden] { display: none; }
+  .slip:nth-of-type(odd) { transform: rotate(-0.6deg); }
+  .slip:nth-of-type(even) { transform: rotate(0.5deg); }
+  .slip .tape { position: absolute; top: -4px; left: 40%; width: 64px; height: 20px; background: var(--color-tape); opacity: 0.85; transform: rotate(-3deg); }
+  .slip h3 { font: 400 28px/1 var(--font-instrument-serif), serif; margin: 0 0 4px; }
+  /* Notes are handwritten lines on the slip; tap one to change it. */
+  .slip ul { list-style: none; margin: 0; padding: 0; display: grid; }
+  .slip ul:empty { display: none; }
+  .slip li { border-bottom: 1px solid color-mix(in srgb, var(--color-card-line) 55%, transparent); }
+  .slip li:last-child { border-bottom: 0; }
+  .slip .txt, .slip textarea { font: 23px/1.25 var(--font-caveat), cursive; color: var(--color-ink); }
+  .slip .txt { display: block; width: 100%; background: none; border: 0; padding: 9px 0; min-height: 44px; text-align: left; cursor: pointer; overflow-wrap: anywhere; border-radius: 3px; }
+  .slip .txt:hover { background: color-mix(in srgb, var(--color-tape) 30%, transparent); }
+  .slip .empty { margin: 0; font: 21px/1.25 var(--font-caveat), cursive; color: var(--color-label); }
+  .slip .empty[hidden] { display: none; }
+  .slip .more { justify-self: start; display: inline-flex; gap: 6px; align-items: center; min-height: 44px; padding: 0 2px; margin-top: 2px; background: none; border: 0; font: 600 14px/1 var(--font-archivo), sans-serif; color: var(--color-moss); cursor: pointer; }
+  .slip .more span[aria-hidden] { font-size: 20px; font-weight: 400; }
+  .slip .more:hover { text-decoration: underline; }
+  .slip .more[hidden] { display: none; }
+  /* The pen: one composer for adding and changing a note. */
+  .pen { display: grid; gap: 10px; padding: 6px 0 2px; }
+  .slip textarea { width: 100%; box-sizing: border-box; resize: none; overflow: hidden; field-sizing: content; min-height: 44px; border: 0; border-bottom: 1.5px solid var(--color-ink); background: color-mix(in srgb, var(--color-tape) 22%, transparent); padding: 6px 6px 4px; border-radius: 3px 3px 0 0; }
+  .slip textarea:focus { outline: none; }
+  .slip textarea::placeholder { color: var(--color-label); }
+  .pen .row { display: flex; gap: 6px; align-items: center; }
+  .pen .btn { font-size: 14px; padding: 0 18px; min-height: 42px; background: var(--color-ink); color: var(--color-cream); }
+  .pen .btn.ghost { background: transparent; border-color: transparent; color: var(--color-label); padding: 0 10px; }
+  .pen .rm { margin-left: auto; background: none; border: 0; min-height: 42px; padding: 0 4px; font: 600 14px/1 var(--font-archivo), sans-serif; color: var(--color-biro); cursor: pointer; }
+  .pen .rm:hover { text-decoration: underline; }
+  .pen .count { margin-left: auto; font-size: 12px; color: var(--color-label); }
+  .pen .rm + .count, .pen .count:empty { display: none; }
+  .slip .err { margin: 0; font-size: 13px; color: var(--color-biro); }
+  .slip .err:empty { display: none; }
+  .slip .err a { color: inherit; }
+  /* Everyone not staying: one line each, tap to unfold their slip. */
+  .group:has(.fold) { gap: 0; }
+  .group:has(.fold) h2 { margin-bottom: 8px; }
+  .fold { border-bottom: 1px solid var(--color-card-line); }
+  .fold:first-of-type { border-top: 1px solid var(--color-card-line); }
+  .fold summary { list-style: none; display: flex; align-items: baseline; gap: 10px; min-height: 52px; padding: 12px 4px; cursor: pointer; box-sizing: border-box; }
+  .fold summary::-webkit-details-marker { display: none; }
+  .fold summary::after { content: ""; width: 8px; height: 8px; margin-left: 4px; border-right: 1.5px solid var(--color-label); border-bottom: 1.5px solid var(--color-label); transform: translateY(-3px) rotate(-45deg); transition: transform 0.15s; align-self: center; }
+  .fold[open] summary::after { transform: translateY(-3px) rotate(45deg); }
+  .fold .nm { font: 400 24px/1 var(--font-instrument-serif), serif; color: var(--color-ink); }
+  .fold .n { margin-left: auto; font: 20px/1 var(--font-caveat), cursive; color: var(--color-label); }
+  .fold summary:hover .nm { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+  .fold .slip { margin: 4px 0 18px; padding-top: 12px; transform: none; }
+  .fold .slip .tape { display: none; }
+  @media (prefers-reduced-motion: reduce) { .slip { transform: none !important; } .fold summary::after { transition: none; } }
+</style>
