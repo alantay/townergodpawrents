@@ -19,6 +19,14 @@ stays:
 
 ## 8 Nov
 
+### 1:03pm
+
+<!-- entry-id: e193 -->
+
+Caught sleeping on the job, then asking for scratches.
+
+![Ebi, 8 Nov 1:03pm](./ebi/ebi-caught-sleeping-job.mp4)
+
 ### 9:33am
 
 <!-- entry-id: e192 -->
