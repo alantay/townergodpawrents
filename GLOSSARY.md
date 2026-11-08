@@ -28,6 +28,10 @@ _Avoid_: Date section, day entry
 One timestamped moment inside a diary day, written as a `### 9:50am` heading and the words under it. May contain up to four prints and clips together, at most one clip, with or without words. Mixed entries are agent-filed; `/admin` cannot mix them yet. A label (`<!-- label: Throwback -->`) is shown on the card in place of the time; the time still orders the entry. `<!-- no-time -->` hides the time with nothing in its place.
 _Avoid_: Post, note, log line, update
 
+**Notes**:
+Private reminders about a guest (no chicken, ear drops at night) kept by Alan and Weiwen on `/admin/notes`. Stored in Redis, never in the repo or on a public page. Dogs sharing a guest share one list. See ADR 0012.
+_Avoid_: Profile, care sheet, record
+
 **Reaction**:
 One of ❤️, 😂, 🥹, or 🐾 left by a visitor on an entry. Reactions remain available after a stay ends and their totals are visible to everyone.
 _Avoid_: Like, rating, review

@@ -10,6 +10,8 @@ import { dateStr, parseDiary, type Stay } from "../guests.ts";
 import { isAuthed, loginApi } from "./auth.ts";
 import { gitHub, type GitHub } from "./github.ts";
 import { openAI } from "./openai.ts";
+import { notesApi } from "./notes-api.ts";
+import { redisNotesStore, type Note } from "./notes-store.ts";
 import { polishApi } from "./polish-api.ts";
 import { postApi } from "./post-entry.ts";
 import { polishRules } from "./prompts.ts";
@@ -33,15 +35,17 @@ const guestList = getCollection("guests").then((guests) =>
 export const adminGuests = (): Promise<GuestInfo[]> => guestList;
 
 let redis: Redis | undefined;
-function store(): KeyStore {
+function redisClient(): Redis {
   // Same variables as src/pages/api/reactions.ts.
   const url = getSecret("KV_REST_API_URL") ?? getSecret("UPSTASH_REDIS_REST_URL");
   const token = getSecret("KV_REST_API_TOKEN") ?? getSecret("UPSTASH_REDIS_REST_TOKEN");
   if (!url || !token) throw new Error("[admin] Redis isn't configured");
   // One quick retry, so a Redis outage costs a second, not the request.
   redis ??= new Redis({ url, token, retry: { retries: 1 } });
-  return redisStore(redis);
+  return redis;
 }
+const store = (): KeyStore => redisStore(redisClient());
+const notesStore = () => redisNotesStore(redisClient());
 
 function gh(): GitHub {
   const token = getSecret("GITHUB_TOKEN");
@@ -68,6 +72,14 @@ export const authed = (request: Request) => isAuthed(request, secret());
 export const login = () => loginApi({ passphrase: getSecret("ADMIN_PASSPHRASE"), secret: secret(), store });
 export const polish = () => polishApi({ secret: secret(), guests: adminGuests, ai });
 export const post = () => postApi({ secret: secret(), guests: adminGuests, ai, gitHub: gh, store, upload });
+
+export const notes = () => notesApi({ secret: secret(), guests: adminGuests, notesStore });
+
+/** Every guest's notes, for /admin/notes. Only call after authed(). Throws if Redis is down. */
+export async function notesFor(ids: string[]): Promise<Map<string, Note[]>> {
+  const s = notesStore();
+  return new Map(await Promise.all(ids.map(async (id) => [id, await s.list(id)] as const)));
+}
 
 export const videoUpload = (request: Request) => videoUploadApi(request, { secret: secret(), token: getSecret("BLOB_READ_WRITE_TOKEN") });
 
