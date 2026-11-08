@@ -4,9 +4,9 @@ breed: Golden Retriever
 photo: ./luna/luna-collage-no-outline-v1.png
 bgColor: "#755A83"
 showLive: true
-badge: FOMO Queen
+badge: FOMO queen
 tagline: always has something to whine about, thinks every dog is her play buddy
-whenCalled: "Coming! Bringing what's left of the toy."
+whenCalled: "You can pat. The toy stays with me."
 thoughts:
   - "Are they playing without me?"
   - "That toy had it coming."
@@ -81,7 +81,7 @@ Luna whining to go out and meet the M1 technician fixing up our fibre.
 
 <!-- entry-id: e111 -->
 
-Fomo queen ready to launch
+FOMO queen ready to launch
 
 ![Luna lies on the wooden floor with her legs spread out and tongue peeking out.](./luna/luna-fomo-queen-ready.jpg)
 

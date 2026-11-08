@@ -85,7 +85,7 @@ Day 2 of Ebi being manja with everyone at the carpark.
 
 <!-- entry-id: e185 -->
 
-Before Ebi led an escape down the car park.
+Before Ebi led an escape down the carpark.
 
 ![Ebi, 7 Nov 8:53am](./ebi/ebi-before-led-escape.mp4)
 
@@ -119,9 +119,9 @@ Manja Ebi’s commercial break to play some ball.
 
 <!-- entry-id: e181 -->
 
-Everyone noticed Ebi was more manja than usual today, going to every human in rotation for pats at the car park. She must be missing her parents.
+Everyone noticed Ebi was more manja than usual today, going to every human in rotation for pats at the carpark. She must be missing her parents.
 
-![Several people and small dogs walk across a wet car park marked with yellow arrows and the word SLOW, surrounded by high-rise buildings.](./ebi/ebi-everyone-noticed-more.jpg)
+![Several people and small dogs walk across a wet carpark marked with yellow arrows and the word SLOW, surrounded by high-rise buildings.](./ebi/ebi-everyone-noticed-more.jpg)
 
 ### 3:56pm
 
