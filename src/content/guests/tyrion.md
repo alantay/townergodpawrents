@@ -4,6 +4,7 @@ breed: Corgi
 photo: ./tyrion/tyrion-headshot-v2.png
 bgColor: "#A34A2E"
 showLive: true
+game: circles
 badge: Keeper of the Ball
 tagline: loves a game of fetch, skips the returning part
 whenCalled: "Throw something and we'll talk."

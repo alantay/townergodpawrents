@@ -68,6 +68,7 @@ export function dogSays(card: HTMLElement, btn: HTMLElement, text: string, kind:
 
 // Left alone, the dogs think out loud every so often. Not while the card is
 // off screen, and not over a bubble that's still up. `say` is dogSays.
+// Returns stop(), for when something else takes over the card (a game).
 export function startThinking(
   card: HTMLElement,
   dogs: { thoughts: string[] }[],
@@ -82,7 +83,10 @@ export function startThinking(
     "Dog barking downstairs. Must reply.",
   ];
   let last: string | undefined;
+  let stopped = false;
+  let timer = 0;
   function think() {
+    if (stopped) return;
     const r = card.getBoundingClientRect();
     const onScreen = !document.hidden && r.bottom > 0 && r.top < innerHeight;
     if (onScreen && !card.querySelector(".dog-bubble")) {
@@ -91,9 +95,13 @@ export function startThinking(
       last = pool[Math.floor(Math.random() * pool.length)];
       say(card, btns[i], last, "dots");
     }
-    setTimeout(think, 12000 + Math.random() * 8000);
+    timer = setTimeout(think, 12000 + Math.random() * 8000) as unknown as number;
   }
-  setTimeout(think, 5000 + Math.random() * 4000);
+  timer = setTimeout(think, 5000 + Math.random() * 4000) as unknown as number;
+  return function stop() {
+    stopped = true;
+    clearTimeout(timer);
+  };
 }
 
 export const bubblesJs = `window.__tgpBubbles = { dogSays: ${dogSays.toString()}, startThinking: ${startThinking.toString()} };`;

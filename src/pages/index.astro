@@ -11,6 +11,9 @@ import sofaCutout from "../assets/sofa-cutout-v2.png";
 import portrait from "../assets/alan-weiwen-portrait.jpg";
 import { getCollection } from "astro:content";
 import { getImage } from "astro:assets";
+import tyrionRunA from "../content/guests/tyrion/tyrion-running-a.png";
+import tyrionRunB from "../content/guests/tyrion/tyrion-running-b.png";
+import tyrionSit from "../content/guests/tyrion/tyrion-seated-v4.png";
 import type { ImageMetadata } from "astro";
 import {
   dogNames,
@@ -131,6 +134,7 @@ const guests = entries.map((e) => {
     bgColor: e.data.bgColor,
     showLive: e.data.showLive,
     sex: e.data.sex ?? null,
+    game: e.data.game ?? null,
     photo: e.data.photo,
     stays,
     days: parseDiary(e.body ?? "", stays, e.id),
@@ -187,6 +191,13 @@ const guestsForClient = await Promise.all(
   })),
 );
 const groupHeroJson = JSON.stringify(GROUP_HERO).replace(/</g, "\\u003c");
+// Tyrion's game art, small and ready. Only fetched once someone opens it.
+const gameArt = {
+  runA: (await getImage({ src: tyrionRunA, width: 480, format: "webp" })).src,
+  runB: (await getImage({ src: tyrionRunB, width: 480, format: "webp" })).src,
+  sit: (await getImage({ src: tyrionSit, width: 200, format: "webp" })).src,
+};
+const gameArtJson = JSON.stringify(gameArt);
 const guestsJson = JSON.stringify(guestsForClient).replace(/</g, "\\u003c");
 
 const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
@@ -298,6 +309,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
   <script is:inline set:html={sharedJs} />
   <script is:inline set:html={bubblesJs} />
   <script type="application/json" id="guests-data" is:inline set:html={guestsJson} />
+  <script type="application/json" id="game-art" is:inline set:html={gameArtJson} />
   <script type="application/json" id="group-hero" is:inline set:html={groupHeroJson} />
 
   <script is:inline>
@@ -1245,7 +1257,19 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             return b;
           });
           hero.live.forEach((d, i) => insertPhoto(d.id, dogBtns[i], undefined, true, i === 0 ? "high" : "auto"));
-          window.__tgpBubbles.startThinking(document.getElementById("hero-card"), hero.live, dogBtns, window.__tgpBubbles.dogSays);
+          var heroCard = document.getElementById("hero-card");
+          var stopThinking = window.__tgpBubbles.startThinking(heroCard, hero.live, dogBtns, window.__tgpBubbles.dogSays);
+          // Handed to the game script (src/lib/tyrion-circles), which runs later.
+          window.__tgpHero = {
+            live: hero.live,
+            card: heroCard,
+            photosEl: photosEl,
+            dogBtns: dogBtns,
+            stopThinking: function () { stopThinking(); },
+            restartThinking: function () {
+              stopThinking = window.__tgpBubbles.startThinking(heroCard, hero.live, dogBtns, window.__tgpBubbles.dogSays);
+            },
+          };
         }
         if (away.length) tuck(away, today);
         result.live.forEach(markSeen);
@@ -1277,6 +1301,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         window.addEventListener("resize", window.__tgpFitHeadlines);
         window.addEventListener("resize", function () {
           document.querySelectorAll("#hero-photos img, #vacancy-photo img").forEach(function (img) {
+            if (img.closest("[hidden]")) return; // a game has the card; redone when it closes
             sizeHero(img, img.parentElement.parentElement);
           });
         });
@@ -1381,4 +1406,58 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       #home-app .sofa-rummage { animation: none; }
     }
   </style>
+  <script>
+    // A dog's mini game, when it's here alone and has one (ADR 0013). The
+    // inline hero builder above has already run and left window.__tgpHero.
+    // The game itself only downloads when someone taps the button.
+    type Hero = {
+      live: { name: string; game: string | null }[];
+      card: HTMLElement;
+      photosEl: HTMLElement;
+      dogBtns: HTMLElement[];
+      stopThinking: () => void;
+      restartThinking: () => void;
+    };
+    const hero = (window as unknown as { __tgpHero?: Hero }).__tgpHero;
+    if (hero && hero.live.length === 1 && hero.live[0].game === "circles") {
+      const dog = hero.live[0];
+      const art = JSON.parse(document.getElementById("game-art")!.textContent!);
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "game-btn";
+      btn.textContent = "Chase " + dog.name;
+      hero.photosEl.previousElementSibling?.appendChild(btn);
+      let opening = false;
+      btn.addEventListener("click", async () => {
+        if (opening) return;
+        opening = true;
+        try {
+          const { mountCircles } = await import("../lib/tyrion-circles/mount");
+          hero.stopThinking();
+          hero.card.querySelectorAll(".dog-bubble").forEach((b) => b.remove());
+          hero.dogBtns.forEach((b) => (b.hidden = true));
+          btn.hidden = true;
+          let unmount = () => {};
+          let closed = false;
+          const close = () => {
+            if (closed) return; // Esc and the close button can both land
+            closed = true;
+            unmount();
+            unmount = () => {};
+            hero.dogBtns.forEach((b) => (b.hidden = false));
+            btn.hidden = false;
+            opening = false;
+            btn.focus();
+            hero.restartThinking();
+            window.dispatchEvent(new Event("resize")); // portraits re-size now they're back
+          };
+          unmount = mountCircles({ card: hero.card, host: hero.photosEl, art, onClose: close });
+        } catch (err) {
+          console.error("[towner-godpawrents] game failed to load", err);
+          btn.remove();
+          hero.dogBtns.forEach((b) => (b.hidden = false));
+        }
+      });
+    }
+  </script>
 </Layout>

@@ -48,6 +48,10 @@ _Avoid_: Video, movie, reel
 A guest's own portrait — a photo cut from its background, used in the hero and the past-guests grid. One per guest; a guest without one shows an empty Polaroid per dog instead.
 _Avoid_: Avatar, headshot, profile photo
 
+**Game**:
+A guest's own mini game on the homepage, opt-in with `game:` in the guest's file, shown only when that guest is here alone. Each is built from one real habit of that dog (Tyrion's is "circles"). See ADR 0013.
+_Avoid_: Minigame feature, activity, play mode
+
 **Live**:
 A guest whose stay contains today, in Singapore time. More than one guest can be live at once.
 _Avoid_: Active, current, checked-in

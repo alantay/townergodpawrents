@@ -33,6 +33,9 @@ const guests = defineCollection({
       thoughts: z.array(z.string()).default([]),
       // Picks "At his place" or "At her place" on a drop-in dog's card.
       sex: z.enum(["male", "female"]).optional(),
+      // A homepage mini game, for the odd dog that has one. Only shows when
+      // the dog is here alone. See docs/adr/0013-dog-games-opt-in.md.
+      game: z.enum(["circles"]).optional(),
 
       // ---- when the dog was here ----
       // Adjacent dates are separate stays: home on the 23rd, back on the

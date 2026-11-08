@@ -1428,3 +1428,111 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   background: var(--color-cream);
   color: var(--color-ink);
 }
+
+/* Tyrion's "Circles" game on the homepage hero. See src/lib/tyrion-circles. */
+.game-btn {
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #f7e27a;
+  color: #1e2019;
+  font-weight: 700;
+  font-size: 15px;
+  rotate: -2deg;
+  box-shadow: 0 2px 0 rgb(30 32 25 / 0.25);
+  cursor: pointer;
+  transition: rotate 0.2s, scale 0.2s;
+}
+.game-btn:hover { rotate: 0deg; scale: 1.04; }
+.game-btn:focus-visible { outline: 3px solid #d8f24e; outline-offset: 3px; }
+.tc-stage {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  isolation: isolate;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: none;
+  overflow: hidden;
+  border-radius: 24px 24px 0 0;
+}
+.tc-stage:focus-visible { outline: 3px solid #d8f24e; outline-offset: -3px; }
+.tc-stage > * { position: absolute; left: 0; top: 0; }
+.tc-table { z-index: 3; pointer-events: none; }
+.tc-table svg { display: block; width: 100%; height: auto; }
+.tc-shadow { border-radius: 50%; background: rgb(30 32 25 / 0.28); filter: blur(3px); }
+.tc-dog { transform-origin: 50% 90%; will-change: transform; pointer-events: none; }
+.tc-pose { position: absolute; background: center bottom / contain no-repeat; visibility: hidden; }
+.tc-runA, .tc-runB { inset: 0; }
+.tc-sit { left: 50%; translate: -50% 0; top: auto; }
+.tc-dog[data-pose="runA"] .tc-runA,
+.tc-dog[data-pose="runB"] .tc-runB,
+.tc-dog[data-pose="sit"] .tc-sit { visibility: visible; }
+.tc-ball {
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f4ffc0, #d8f24e 55%, #9fb52a);
+  box-shadow: 0 0 0 1.5px #1e2019;
+  pointer-events: none;
+  will-change: transform;
+}
+.tc-hand {
+  z-index: 8;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border-radius: 50%;
+  border: 2.5px dashed #f7f2e7;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.tc-hud {
+  z-index: 8;
+  left: 14px;
+  top: 10px;
+  font-family: var(--font-script);
+  font-size: 1.35rem;
+  color: #e9f7ae;
+  pointer-events: none;
+}
+.tc-live { width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.tc-close {
+  z-index: 9;
+  left: auto;
+  right: 10px;
+  top: 6px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #f7f2e7;
+  color: #1e2019;
+  cursor: pointer;
+}
+.tc-close:focus-visible { outline: 3px solid #d8f24e; outline-offset: 2px; }
+.tc-dust { z-index: 7; pointer-events: none; }
+.tc-dust i {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin: -5px;
+  border-radius: 50%;
+  background: #efe7d8;
+  animation: tc-dust 0.6s ease-out forwards;
+}
+.tc-dust i:nth-child(1) { --dx: -26px; --dy: -10px; }
+.tc-dust i:nth-child(2) { --dx: -12px; --dy: -22px; }
+.tc-dust i:nth-child(3) { --dx: 4px; --dy: -26px; }
+.tc-dust i:nth-child(4) { --dx: 18px; --dy: -18px; }
+.tc-dust i:nth-child(5) { --dx: 28px; --dy: -6px; }
+@keyframes tc-dust {
+  from { transform: none; opacity: 0.9; }
+  to { transform: translate(var(--dx), var(--dy)) scale(1.8); opacity: 0; }
+}
+@media (hover: none) { .tc-stage { cursor: auto; } }
+@media (prefers-reduced-motion: reduce) {
+  .game-btn { transition: none; }
+  .tc-dust { display: none; }
+}
