@@ -17,6 +17,16 @@ stays:
     checkOut: 2026-11-14
 ---
 
+## 8 Nov
+
+### 7:53am
+
+<!-- entry-id: e190 -->
+
+Breakfast no. 2 is happening, leg or no leg. I trained agility for this.
+
+![Ebi, 8 Nov 7:53am](./ebi/ebi-breakfast-no-2.mp4)
+
 ## 7 Nov
 
 ### 8:10pm
