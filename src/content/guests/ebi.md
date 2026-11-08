@@ -19,6 +19,14 @@ stays:
 
 ## 8 Nov
 
+### 8:39am
+
+<!-- entry-id: e191 -->
+
+Ebi had the most fun with Guapo’s birthday toy. It was destroyed in less than 2 minutes.
+
+![Ebi, 8 Nov 8:39am](./ebi/ebi-most-fun-guapo.mp4)
+
 ### 7:53am
 
 <!-- entry-id: e190 -->
