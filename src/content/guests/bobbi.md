@@ -6,7 +6,7 @@ bgColor: "#8E4A5C"
 showLive: true
 badge: Sheep in disguise
 tagline: derpy by default, still working out how play works
-whenCalled: "Coming. Which way was that again?"
+whenCalled: "Oh. Hello. Was I meant to do something?"
 thoughts:
   - "Wait, what are we doing?"
   - "Am I playing? I think I'm playing."

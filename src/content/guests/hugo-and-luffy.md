@@ -6,7 +6,7 @@ bgColor: "#7A5C24"
 showLive: true
 badge: A black & white comedy
 tagline: Hugo only has eyes for the girls. Luffy thinks the whole world is playing chase with him.
-whenCalled: "Hugo's coming. So Luffy's coming."
+whenCalled: "Pat Hugo and Luffy wants one too."
 thoughts:
   - "Luffy: Chase me. Chase me. Chase me."
   - "Hugo: Any girls coming over today?"
@@ -109,7 +109,7 @@ Hugo having a play with Mocha, Marou’s half sister, while Luffy plays with Mar
 
 Luffy, don’t be rude to Tiny.
 
-![Luffy and Tiny tugging on a purple toy on the rooftop car park.](./hugo-and-luffy/hugo-and-luffy-rude-to-tiny.mp4)
+![Luffy and Tiny tugging on a purple toy on the rooftop carpark.](./hugo-and-luffy/hugo-and-luffy-rude-to-tiny.mp4)
 
 ### 8:30am
 
@@ -117,7 +117,7 @@ Luffy, don’t be rude to Tiny.
 
 And then it’s back to Tiny, our track and field champion. Hugo has a thing for sporty girls.
 
-![Hugo and Tiny together on the rooftop car park.](./hugo-and-luffy/hugo-and-luffy-back-to-tiny.mp4)
+![Hugo and Tiny together on the rooftop carpark.](./hugo-and-luffy/hugo-and-luffy-back-to-tiny.mp4)
 
 ### 8:25am
 
@@ -125,7 +125,7 @@ And then it’s back to Tiny, our track and field champion. Hugo has a thing for
 
 This morning Hugo briefly has a new obsession. Liesel, the beautiful black dachshund.
 
-![Hugo and the other dogs running across the rooftop car park with Liesel.](./hugo-and-luffy/hugo-and-luffy-liesel-obsession.mp4)
+![Hugo and the other dogs running across the rooftop carpark with Liesel.](./hugo-and-luffy/hugo-and-luffy-liesel-obsession.mp4)
 
 ## 23 Oct
 
@@ -245,7 +245,7 @@ Luffy is convinced Hugo's water tastes better, so he squeezes in to drink with h
 
 Tiny's owner hilariously added, “Find yourself a man who looks at you the way Hugo looks at Tiny.”
 
-![Hugo looking at Tiny in her orange vest on the rooftop car park](./hugo-and-luffy/hugo-and-luffy-eyes-for-tiny.jpg)
+![Hugo looking at Tiny in her orange vest on the rooftop carpark](./hugo-and-luffy/hugo-and-luffy-eyes-for-tiny.jpg)
 
 ### 6:22pm
 

@@ -78,7 +78,8 @@ export function startThinking(
     "Was that the fridge?",
     "Somebody said walk. I heard it.",
     "Is that cheese? Smells like cheese.",
-    "Nap first. Then another nap.",
+    "Door opened. Must investigate.",
+    "Dog barking downstairs. Must reply.",
   ];
   let last: string | undefined;
   function think() {

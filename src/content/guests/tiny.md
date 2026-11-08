@@ -7,10 +7,10 @@ showLive: true
 badge: Obsessive ball fetcher
 tagline: loves rolling on her back, barks at 120 decibels
 whenCalled: "Is there a ball? No? Then no."
-sounds: ["I can see the ball from here, you know."]
 thoughts:
   - "Ball. Ball. Ball. Ball."
-  - "Someone should really throw something."
+  - "I can see the ball from here, you know."
+  - "Nobody's thrown anything in four minutes."
 stays:
   - checkIn: 2026-09-13
     checkOut: 2026-09-23

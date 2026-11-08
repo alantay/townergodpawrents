@@ -9,7 +9,7 @@ tagline: recall sold separately, million-dollar smile included
 whenCalled: "Heard you. Choosing not to."
 thoughts:
   - "I heard my name. I simply chose peace."
-  - "One smile and they forgive everything."
+  - "Smile. Works every time."
 sounds: ["Grrr.", "Zzzzzzz."]
 stays:
   - checkIn: 2026-09-30
@@ -624,7 +624,7 @@ Golden brown, extra fluffy, and best left to proof in peace.
 
 When the stars and moon align, Guapo plays outside.
 
-![Guapo trotting around an empty rooftop car park, tongue out and tail curled up](./guapo/guapo-playing-outside.mp4)
+![Guapo trotting around an empty rooftop carpark, tongue out and tail curled up](./guapo/guapo-playing-outside.mp4)
 
 ## 30 Sep
 
