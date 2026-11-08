@@ -19,6 +19,14 @@ stays:
 
 ## 8 Nov
 
+### 8:44pm
+
+<!-- entry-id: e195 -->
+
+Ebi has failed the home-alone test. We left the house for 5 minutes, and she helped herself to a new packet of treats on the counter. This is her post-treat satisfaction face.
+
+![Tan-and-white dog lying on a tiled floor, tongue hanging out](./ebi/ebi-failed-home-alone.jpg)
+
 ### 3pm
 
 <!-- entry-id: e194 -->
