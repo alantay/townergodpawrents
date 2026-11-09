@@ -19,6 +19,12 @@ stays:
 
 ## 9 Nov
 
+### 4:55pm
+
+<!-- entry-id: e197 -->
+
+![Ebi, 9 Nov 4:55pm](./ebi/ebi-photo.mp4)
+
 ### 7:30am
 
 <!-- entry-id: e196 -->
