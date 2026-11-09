@@ -17,6 +17,16 @@ stays:
     checkOut: 2026-11-14
 ---
 
+## 10 Nov
+
+### 7:40am
+
+<!-- entry-id: e202 -->
+
+Another day, another leg. Ebi remains committed to the menu.
+
+![A brown-and-white dog peeks from under a wooden table beside a person's bare leg.](./ebi/ebi-another-day-another.jpg)
+
 ## 9 Nov
 
 ### 8:28pm
