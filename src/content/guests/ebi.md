@@ -27,6 +27,16 @@ Ebi is acquiring a new skill: the backflip. Still needs some practice.
 
 ![Ebi, 9 Nov 6:45pm](./ebi/ebi-acquiring-new-skill.mp4)
 
+### 6:42pm
+
+<!-- entry-id: e200 -->
+<!-- no-time -->
+<!-- credit: Music: [Fluffing a Duck](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100768) by Kevin MacLeod (incompetech.com), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Excerpted, mixed and faded. -->
+
+Do you understand the words that are coming out of my mouth? Ebi: Nope.
+
+![Ebi tilting his head at the camera in the living room, tongue out](./ebi/ebi-words-out-of-mouth.mp4)
+
 ### 5:45pm
 
 <!-- entry-id: e198 -->
