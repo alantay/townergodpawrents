@@ -19,6 +19,14 @@ stays:
 
 ## 9 Nov
 
+### 6:45pm
+
+<!-- entry-id: e199 -->
+
+Ebi is acquiring a new skill: the backflip. Still needs some practice.
+
+![Ebi, 9 Nov 6:45pm](./ebi/ebi-acquiring-new-skill.mp4)
+
 ### 5:45pm
 
 <!-- entry-id: e198 -->
