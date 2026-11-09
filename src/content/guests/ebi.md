@@ -19,6 +19,14 @@ stays:
 
 ## 9 Nov
 
+### 8:28pm
+
+<!-- entry-id: e201 -->
+
+“Is that for me? I’m going to guard it now.” Ebi has appointed herself oven security. The snacks are under protection.
+
+![A tan and white dog stands beside an oven, looking at food cooking inside.](./ebi/ebi-im-going-guard.jpg)
+
 ### 6:45pm
 
 <!-- entry-id: e199 -->
