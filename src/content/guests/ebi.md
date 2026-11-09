@@ -39,7 +39,7 @@ Ebi is acquiring a new skill: the backflip. Still needs some practice.
 
 <!-- entry-id: e200 -->
 <!-- no-time -->
-<!-- credit: Music: [Fluffing a Duck](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100768) by Kevin MacLeod (incompetech.com), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Excerpted, mixed and faded. -->
+<!-- credit: Music: [Kevin MacLeod](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100768), [CC BY](https://creativecommons.org/licenses/by/4.0/) -->
 
 Do you understand the words that are coming out of my mouth? Ebi: Nope.
 
