@@ -17,6 +17,16 @@ stays:
     checkOut: 2026-11-14
 ---
 
+## 9 Nov
+
+### 7:30am
+
+<!-- entry-id: e196 -->
+
+Post-breakfast peace.
+
+![Ebi sprawled on her side across the wooden floor, legs stretched out](./ebi/ebi-post-breakfast-peace.jpg)
+
 ## 8 Nov
 
 ### 8:44pm
