@@ -19,6 +19,14 @@ stays:
 
 ## 9 Nov
 
+### 5:45pm
+
+<!-- entry-id: e198 -->
+
+I want to eat.. GRASS
+
+![A tan-and-white dog looks up with her mouth open while a person holds her leash on a concrete sidewalk.](./ebi/ebi-want-eat-grass.jpg)
+
 ### 4:55pm
 
 <!-- entry-id: e197 -->
