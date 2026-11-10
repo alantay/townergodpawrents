@@ -19,6 +19,14 @@ stays:
 
 ## 10 Nov
 
+### 1pm
+
+<!-- entry-id: e206 -->
+
+Burying his head in his meal.
+
+![A small white dog eats from a green bowl on a newspaper, with a metal bowl beside it.](./riot/riot-burying-head-meal.jpg)
+
 ### 9:44am
 
 <!-- entry-id: e204 -->
