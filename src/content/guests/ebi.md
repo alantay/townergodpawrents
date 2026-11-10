@@ -19,6 +19,14 @@ stays:
 
 ## 10 Nov
 
+### 4:17pm
+
+<!-- entry-id: e208 -->
+
+Ebi was razor-focused on Weiwen’s teatime snack. She ended up on the table, almost helping herself to it. It was a close snack-ounter.
+
+![A tan-and-white dog stands beside a low table, looking toward a biscuit on a stack of dishes.](./ebi/ebi-razor-focused-weiwen.jpg)
+
 ### 2:49pm
 
 <!-- entry-id: e207 -->
