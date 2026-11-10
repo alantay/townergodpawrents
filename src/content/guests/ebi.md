@@ -19,6 +19,15 @@ stays:
 
 ## 10 Nov
 
+### 8:06am
+
+<!-- entry-id: e203 -->
+<!-- no-time -->
+
+Alan's bag has to clear Ebi's customs before he leaves for work. She's searching for undeclared snacks.
+
+![Ebi with her nose deep in Alan's open backpack, then looking up with her eyes half shut](./ebi/ebi-customs-check.mp4)
+
 ### 7:40am
 
 <!-- entry-id: e202 -->
