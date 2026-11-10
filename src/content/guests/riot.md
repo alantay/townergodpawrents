@@ -17,6 +17,17 @@ stays:
     dropIn: true
 ---
 
+## 10 Nov
+
+### 9:44am
+
+<!-- entry-id: e204 -->
+<!-- no-time -->
+
+Riot’s bowel system waits until no one is around to start. Then this clean fella navigates his obstacle course.
+
+![Riot, 10 Nov](./riot/riot-bowel-system-waits.mp4)
+
 ## 6 Nov
 
 ### 4:02pm
