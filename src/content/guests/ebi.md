@@ -19,6 +19,14 @@ stays:
 
 ## 10 Nov
 
+### 11:31am
+
+<!-- entry-id: e205 -->
+
+Ebi sleeping on the job. A quiet morning, with nothing to guard.
+
+![A cream-coloured dog lies on its back on a tiled floor, legs stretched out.](./ebi/ebi-sleeping-job-quiet.jpg)
+
 ### 8:06am
 
 <!-- entry-id: e203 -->
