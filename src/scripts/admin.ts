@@ -361,6 +361,8 @@ files.addEventListener("change", async () => {
   keepPhotos();
 });
 
+const labelled = (kind: string, technique: string | null) => (technique ? `${kind} · ${technique}` : kind);
+
 function card(kind: string, words: string, pressed: boolean): HTMLButtonElement {
   const button = document.createElement("button");
   button.type = "button";
@@ -425,8 +427,8 @@ polishBtn.addEventListener("click", async () => {
       ...(hasWords ? [card("Yours", yours, true)] : []),
       card(hasWords ? "Polished" : "Caption", body.polished, false),
       ...(body.twist ? [card(hasWords ? "Twist" : "Playful", body.twist, false)] : []),
-      ...(hasWords && body.rewritten ? [card("Rewritten", body.rewritten, false)] : []),
-      ...(hasWords && body.commentary ? [card("Commentary", body.commentary, false)] : []),
+      ...(hasWords && body.rewritten ? [card(labelled("Rewritten", body.rewrittenTechnique), body.rewritten, false)] : []),
+      ...(hasWords && body.wordplay ? [card(labelled("Wordplay", body.wordplayTechnique), body.wordplay, false)] : []),
     );
     polishNote.textContent = body.note || "";
     polishNote.hidden = !body.note;

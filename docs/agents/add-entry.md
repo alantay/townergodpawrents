@@ -17,13 +17,13 @@ Alan's grammar is shaky and he knows it. He wants help, but it's his diary. Show
 
 > **Yours:** his text, untouched
 > **Polished:** grammar fixed, house voice applied, **every detail kept**
-> **Commentary (optional):** a short line that adds the dog's attitude, subtext or joke instead of describing what the photo already shows
-> **Twist (optional):** one funnier closing line or rewording, only if one comes naturally
-> **Rewritten (optional):** work out what he's going for (usually the joke) and write it better, so the joke lands. Free to restructure and reword; keep his idea and every detail
+> **Twist (optional):** his entry kept, plus one funnier closing line, only if one comes naturally
+> **Rewritten (optional):** work out what he's going for (usually the joke) and retell it with one narrative technique: punchline last, in medias res, unreliable narrator, deadpan, bathos, mock-heroic, callback to a recent entry, or rule of three. Name the technique. Keep his idea and every detail
+> **Wordplay (optional):** rework one phrase with a double meaning, a twisted saying, a simile, or by playing off the photo instead of describing it. Name which one
 
-When Alan's words mainly describe what is visible in a photo, offer Commentary. Only offer Twist and Rewritten when relevant. Polished stays close to Alan's wording; Rewritten serves his intention: it can rebuild the sentence around his joke so the punchline comes last, but doesn't add events or a new joke. Example: "Ebi doing custom immigration snack checks on Alan's bag before he leave for work" → "Alan's bag has to clear Ebi's customs before he leaves for work. She's searching for undeclared snacks."
+Only offer Twist, Rewritten and Wordplay when relevant. Twist never rewords his entry; Wordplay never adds a closing line. Polished stays close to Alan's wording; Rewritten serves his intention: it can rebuild the entry around his joke, but doesn't add events or a new joke. Example: "Ebi doing custom immigration snack checks on Alan's bag before he leave for work" → "Alan's bag has to clear Ebi's customs before he leaves for work. She's searching for undeclared snacks."
 
-Then wait for his pick: yours / polished / twist / rewritten / his own edit. Don't write the entry until he picks. If the polished version is identical to his and neither optional version would help, say so and skip the choice.
+Then wait for his pick: yours / polished / twist / rewritten / wordplay / his own edit. Don't write the entry until he picks. If the polished version is identical to his and neither optional version would help, say so and skip the choice.
 
 Rules for the polished version:
 - Fix grammar, tense and word order. Don't trim details or swap his words for "better" ones. Last time, cutting phrases like "right on cue" read as removing what he liked.

@@ -54,7 +54,7 @@ export function openAI(deps: {
       if (!polished) throw new Error("[admin] OpenAI polish came back empty");
       const alts = Array.isArray(answer.alts) && answer.alts.length === photos.length
         ? answer.alts.map((alt) => clean(alt) ?? "") : [];
-      return { polished, twist: clean(answer.twist), rewritten: clean(answer.rewritten), commentary: clean(answer.commentary), note: clean(answer.note), alts };
+      return { polished, twist: clean(answer.twist), rewritten: clean(answer.rewritten), rewrittenTechnique: clean(answer.rewrittenTechnique), wordplay: clean(answer.wordplay), wordplayTechnique: clean(answer.wordplayTechnique), note: clean(answer.note), alts };
     },
 
     async altText(photo: Uint8Array, ctx: AiContext, text: string): Promise<string> {
