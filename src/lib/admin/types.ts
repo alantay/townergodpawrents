@@ -42,7 +42,9 @@ export interface PolishResult {
   polished: string;
   twist: string | null;
   rewritten: string | null;
-  commentary: string | null;
+  rewrittenTechnique: string | null;
+  wordplay: string | null;
+  wordplayTechnique: string | null;
   note: string | null;
   /** Plain descriptions in the same order as the input photos. */
   alts?: string[];

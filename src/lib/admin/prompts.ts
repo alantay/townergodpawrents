@@ -24,10 +24,10 @@ export function polishMessages(text: string, ctx: AiContext, voice: string, rule
     rules,
     "The house voice:",
     voice,
-    "Answer in JSON. polished: grammar fixed, every detail kept, no jokes. twist: the writer's entry kept, with a funnier closing line or rewording. Always give one when the entry has words. rewritten: work out what the writer is going for, usually the joke, and write it better so it lands, free to restructure and reword, with the punchline last; keep their idea and every detail, add no new joke; null if it would barely differ from polished. commentary: when the words mainly describe what a photo already shows, one short line that replaces that description with the dog's attitude, subtext or joke, else null. It must be a different joke from twist, not a shorter copy of it. note: one short line if you spot a POV or tense slip, else null.",
+    "Answer in JSON. polished: grammar fixed, every detail kept, no jokes. twist: the writer's entry kept word for word, plus one funnier closing line. Never reword the entry itself. Always give one when the entry has words. rewritten: work out what the writer is going for, usually the joke, and retell it with whichever narrative technique suits it best: Punchline last (rebuild it so the joke lands at the end), In medias res (open at the peak moment, then explain), Unreliable narrator (the dog tells it, confidently wrong), Deadpan (a big moment told flat), Bathos (build it up as epic, land on something trivial), Mock-heroic (a tiny event told like a saga), Callback (tie it to one of the recent entries), Rule of three (two normal items, then one odd one). Keep their idea and every detail, add no new joke; null if it would barely differ from polished. rewrittenTechnique: the technique you used, null when rewritten is null. wordplay: rework one phrase inside the entry with whichever wordplay suits it: Double meaning (a phrase that reads two ways), Twisted saying (start a familiar saying, change its ending), Simile (compare the dog to something), Plays off the photo (when the words describe what a photo already shows, replace that with the dog's attitude or subtext). Keep the rest of the entry; null if nothing fits naturally. Not a closing line, that is twist's job. wordplayTechnique: the one you used, null when wordplay is null. note: one short line if you spot a POV or tense slip, else null.",
     "Never use em dashes or en dashes as punctuation. Never use \"lah\".",
-    "The writer's words are the source of truth. Use attached photos as context, never to contradict or remove supplied details. Polished only corrects grammar, tense and word order; do not add visible details to it. Rewritten may use clearly visible details for flow. Commentary, like Twist, may speak for the dog but must not add anything a reader could mistake for something that really happened. Twist may speak for the dog and invent obviously made-up comic beats, like a fridge filing for harassment. It must not add anything a reader could mistake for something that really happened.",
-    "If there are photos but no words, override the polishing instructions: put a short, straightforward caption based only on visible details in polished, an optional playful alternative in twist, and null in rewritten, commentary and note. Do not invent events, identities or feelings. Recent entries are tone references, not facts about these photos.",
+    "The writer's words are the source of truth. Use attached photos as context, never to contradict or remove supplied details. Polished only corrects grammar, tense and word order; do not add visible details to it. Rewritten may use clearly visible details for flow. Rewritten and Wordplay may speak for the dog but must not add anything a reader could mistake for something that really happened. Twist may speak for the dog and invent obviously made-up comic beats, like a fridge filing for harassment. It must not add anything a reader could mistake for something that really happened.",
+    "If there are photos but no words, override the polishing instructions: put a short, straightforward caption based only on visible details in polished, an optional playful alternative in twist, and null in rewritten, rewrittenTechnique, wordplay, wordplayTechnique and note. Do not invent events, identities or feelings. Recent entries are tone references, not facts about these photos.",
     "Never add alt text or photo descriptions to the entry words. Return alts separately: one plain description per attached photo, in attachment order. Under 20 words each, no jokes, no 'image of' or 'photo of'. Describe only what is visible, independently of the draft caption. Use supplied dog names only when identity is clear; do not guess which dog is which. With no photos, return an empty alts array.",
   ].join("\n\n");
   const recent = ctx.recent.length ? `Recent entries, for tone only:\n${ctx.recent.map((r) => `- ${r}`).join("\n")}\n\n` : "";
@@ -58,6 +58,9 @@ export function altMessages(photo: Uint8Array, ctx: AiContext, text: string): Me
 }
 
 const nullableString = { type: ["string", "null"] };
+export const NARRATIVE_TECHNIQUES = ["Punchline last", "In medias res", "Unreliable narrator", "Deadpan", "Bathos", "Mock-heroic", "Callback", "Rule of three"];
+export const WORDPLAY_TECHNIQUES = ["Double meaning", "Twisted saying", "Simile", "Plays off the photo"];
+const technique = (names: string[]) => ({ type: ["string", "null"], enum: [...names, null] });
 
 export const POLISH_SCHEMA = {
   name: "polish",
@@ -65,8 +68,8 @@ export const POLISH_SCHEMA = {
   schema: {
     type: "object",
     additionalProperties: false,
-    required: ["polished", "twist", "rewritten", "commentary", "note", "alts"],
-    properties: { polished: { type: "string" }, twist: nullableString, rewritten: nullableString, commentary: nullableString, note: nullableString, alts: { type: "array", items: { type: "string" } } },
+    required: ["polished", "twist", "rewritten", "rewrittenTechnique", "wordplay", "wordplayTechnique", "note", "alts"],
+    properties: { polished: { type: "string" }, twist: nullableString, rewritten: nullableString, rewrittenTechnique: technique(NARRATIVE_TECHNIQUES), wordplay: nullableString, wordplayTechnique: technique(WORDPLAY_TECHNIQUES), note: nullableString, alts: { type: "array", items: { type: "string" } } },
   },
 };
 

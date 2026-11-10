@@ -12,7 +12,7 @@ const GUESTS: GuestInfo[] = [
   { id: "luna", name: "Luna", stays: [], recent: ["Supervising from the doorway."] },
   { id: "guapo", name: "Guapo", stays: [], recent: [] },
 ];
-const RESULT = { polished: "Luna stole a slipper.", twist: null, rewritten: null, commentary: null, note: null };
+const RESULT = { polished: "Luna stole a slipper.", twist: null, rewritten: null, rewrittenTechnique: null, wordplay: null, wordplayTechnique: null, note: null };
 
 function setup(ai: Partial<Ai> = {}) {
   const seen: { text: string; ctx: AiContext }[] = [];
