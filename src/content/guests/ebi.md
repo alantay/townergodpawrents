@@ -19,6 +19,14 @@ stays:
 
 ## 10 Nov
 
+### 2:49pm
+
+<!-- entry-id: e207 -->
+
+Ebi’s turn to hide under Weiwen’s desk.
+
+![A tan-and-white dog lies beneath a desk, with one paw stretched forward.](./ebi/ebi-turn-hide-under.jpg)
+
 ### 11:31am
 
 <!-- entry-id: e205 -->
