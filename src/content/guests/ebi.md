@@ -19,6 +19,15 @@ stays:
 
 ## 10 Nov
 
+### 4:49pm
+
+<!-- entry-id: e209 -->
+<!-- no-time -->
+
+After the close snack-ounter at teatime, Ebi came back to make sure Weiwen didn't leave any food unattended. Nothing. Back under the desk to sulk.
+
+![Ebi sniffs across Weiwen's desk past the keyboard, then lies down under it looking glum.](./ebi/ebi-food-unattended.mp4)
+
 ### 4:17pm
 
 <!-- entry-id: e208 -->
