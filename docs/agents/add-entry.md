@@ -19,9 +19,9 @@ Alan's grammar is shaky and he knows it. He wants help, but it's his diary. Show
 > **Polished:** grammar fixed, house voice applied, **every detail kept**
 > **Commentary (optional):** a short line that adds the dog's attitude, subtext or joke instead of describing what the photo already shows
 > **Twist (optional):** one funnier closing line or rewording, only if one comes naturally
-> **Rewritten (optional):** improve the wording, order, pacing or sentence structure when it helps the story, **every detail kept**
+> **Rewritten (optional):** work out what he's going for (usually the joke) and write it better, so the joke lands. Free to restructure and reword; keep his idea and every detail
 
-When Alan's words mainly describe what is visible in a photo, offer Commentary. Only offer Twist and Rewritten when relevant. Polished stays close to Alan's wording; Rewritten can rearrange and rewrite sentences for clearer flow without adding events or jokes.
+When Alan's words mainly describe what is visible in a photo, offer Commentary. Only offer Twist and Rewritten when relevant. Polished stays close to Alan's wording; Rewritten serves his intention: it can rebuild the sentence around his joke so the punchline comes last, but doesn't add events or a new joke. Example: "Ebi doing custom immigration snack checks on Alan's bag before he leave for work" → "Alan's bag has to clear Ebi's customs before he leaves for work. She's searching for undeclared snacks."
 
 Then wait for his pick: yours / polished / twist / rewritten / his own edit. Don't write the entry until he picks. If the polished version is identical to his and neither optional version would help, say so and skip the choice.
 
