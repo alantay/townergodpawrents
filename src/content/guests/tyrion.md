@@ -24,6 +24,17 @@ chase him. Plays with the ball but never brings it back to us. Thinks he is a
 big dog too. Named after Tyrion Lannister from Game of Thrones. Barks a lot
 to show his displeasure. -->
 
+## 11 Nov
+
+### 11:24am
+
+<!-- entry-id: e215 -->
+<!-- no-time -->
+
+Tyrion is so manja. He kept asking for pats. Ebi, in the background, has called a ceasefire.
+
+![Tyrion looks up with his mouth open while a hand pats his head, with Ebi lying in the background.](./tyrion/tyrion-manja-asking-pats.jpg)
+
 ## 14 Oct
 
 ### 5:02pm
