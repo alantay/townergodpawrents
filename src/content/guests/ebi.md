@@ -19,7 +19,7 @@ stays:
 
 ## 11 Nov
 
-### 8:48am
+### 8:15am
 
 <!-- entry-id: e212 -->
 <!-- no-time -->
