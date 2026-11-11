@@ -15,6 +15,9 @@ const guests = defineCollection({
       // can go live before a photo is on hand — the UI falls back to a
       // colour-block placeholder in that case.
       photo: image().optional(),
+      // Optional cut-out for when the dog shares the hero. For a dog whose
+      // `photo` is a tight headshot, so it doesn't dwarf a full-body buddy.
+      sharedPhoto: image().optional(),
       bgColor: z
         .string()
         .regex(/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, "bgColor must be a hex colour like #5F6E4F"),
