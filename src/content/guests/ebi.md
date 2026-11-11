@@ -17,6 +17,17 @@ stays:
     checkOut: 2026-11-14
 ---
 
+## 11 Nov
+
+### 8:15am
+
+<!-- entry-id: e210 -->
+<!-- no-time -->
+
+Morning job: Judge people. Ebi is on window duty, keeping an eye on the public.
+
+![A tan dog looks out a window beside a leafy potted plant.](./ebi/ebi-morning-job-judge.jpg)
+
 ## 10 Nov
 
 ### 4:49pm
