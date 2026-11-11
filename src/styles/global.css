@@ -426,7 +426,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 }
 
 .scrapbook-buddies > button + button {
-  margin-left: -10%;
+  margin-left: 12px;
   rotate: -3deg;
 }
 

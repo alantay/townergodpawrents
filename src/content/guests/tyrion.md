@@ -2,6 +2,7 @@
 name: Tyrion
 breed: Corgi
 photo: ./tyrion/tyrion-headshot-v2.png
+sharedPhoto: ./tyrion/tyrion-seated-v5.png
 bgColor: "#A34A2E"
 showLive: true
 badge: Keeper of the Ball

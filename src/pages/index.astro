@@ -132,6 +132,7 @@ const guests = entries.map((e) => {
     showLive: e.data.showLive,
     sex: e.data.sex ?? null,
     photo: e.data.photo,
+    sharedPhoto: e.data.sharedPhoto,
     stays,
     days: parseDiary(e.body ?? "", stays, e.id),
   };
@@ -147,7 +148,7 @@ const nameOf = (id: string) => guests.find((g) => g.id === id)!.name;
 // included now (as plain resolved URLs, since the client builds the card
 // markup itself) — the teaser shows today's whole day, media and all.
 const guestsForClient = await Promise.all(
-  guests.map(async ({ photo, days, ...rest }) => ({
+  guests.map(async ({ photo, sharedPhoto, days, ...rest }) => ({
     ...rest,
     days: await Promise.all(
       days.map(async (d) => ({
@@ -253,6 +254,13 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
     <template id={`photo-${g.id}`}>
       <div class="h-full w-full">
         <Cutout photo={g.photo} name={g.name} />
+      </div>
+    </template>
+  ))}
+  {guests.filter((g) => g.sharedPhoto).map((g) => (
+    <template id={`photo-${g.id}-shared`}>
+      <div class="h-full w-full">
+        <Cutout photo={g.sharedPhoto} name={g.name} />
       </div>
     </template>
   ))}
@@ -1244,7 +1252,10 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             photosEl.appendChild(b);
             return b;
           });
-          hero.live.forEach((d, i) => insertPhoto(d.id, dogBtns[i], undefined, true, i === 0 ? "high" : "auto"));
+          hero.live.forEach((d, i) => {
+            var id = hero.live.length > 1 && document.getElementById("photo-" + d.id + "-shared") ? d.id + "-shared" : d.id;
+            insertPhoto(id, dogBtns[i], undefined, true, i === 0 ? "high" : "auto");
+          });
           window.__tgpBubbles.startThinking(document.getElementById("hero-card"), hero.live, dogBtns, window.__tgpBubbles.dogSays);
         }
         if (away.length) tuck(away, today);

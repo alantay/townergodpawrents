@@ -45,7 +45,7 @@ A short video attached to an entry, shown on the diary page on a level cream mat
 _Avoid_: Video, movie, reel
 
 **Cut-out**:
-A guest's own portrait — a photo cut from its background, used in the hero and the past-guests grid. One per guest; a guest without one shows an empty Polaroid per dog instead.
+A guest's own portrait — a photo cut from its background, used in the hero and the past-guests grid. One per guest; a guest without one shows an empty Polaroid per dog instead. A guest whose cut-out is a tight headshot may add a second, full-body one (`sharedPhoto`), used only when it shares the hero with another dog.
 _Avoid_: Avatar, headshot, profile photo
 
 **Live**:
