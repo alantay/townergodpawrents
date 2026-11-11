@@ -11,6 +11,7 @@ whenCalled: "Throw something and we'll talk."
 thoughts:
   - "The ball is safe with me. Forever."
   - "Fetch is a two-way deal? Since when?"
+  - "Oops, dropped it. Come a bit closer."
 stays:
   - checkIn: 2026-10-14
     checkOut: 2026-10-14
