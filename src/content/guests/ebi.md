@@ -19,6 +19,18 @@ stays:
 
 ## 11 Nov
 
+### 5:29pm
+
+<!-- entry-id: e220 -->
+<!-- with: tyrion -->
+<!-- no-time -->
+
+Whoever wins the tug of war gets to wear the T-shirt. Looks like Ebi won, but she doesn't seem too pleased with her prize.
+
+![Ebi and Tyrion play tug of war with the old navy T-shirt across the living room floor.](./ebi/ebi-tug-war-prize.mp4)
+
+![Ebi stands on the floor wearing the torn navy T-shirt, looking unimpressed.](./ebi/ebi-tshirt-prize.jpg)
+
 ### 4:45pm
 
 <!-- entry-id: e219 -->
