@@ -19,6 +19,15 @@ stays:
 
 ## 11 Nov
 
+### 8:30am
+
+<!-- entry-id: e213 -->
+<!-- with: tyrion -->
+
+Emergency alert: Hurricane Tyrion has arrived. The sofa took a direct hit.
+
+![Ebi and Tyrion wrestle and chase each other across the dark sofa in the living room.](./ebi/ebi-hurricane-tyrion-arrived.mp4)
+
 ### 8:15am
 
 <!-- entry-id: e212 -->
