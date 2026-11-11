@@ -28,6 +28,14 @@ Morning job: Judge people. Ebi is on window duty, keeping an eye on the public.
 
 ![A tan dog looks out a window beside a leafy potted plant.](./ebi/ebi-morning-job-judge.jpg)
 
+### 8:10am
+
+<!-- entry-id: e211 -->
+
+Floaty paw.
+
+![Ebi, 11 Nov 8:10am](./ebi/ebi-floaty-paw.mp4)
+
 ## 10 Nov
 
 ### 4:49pm
