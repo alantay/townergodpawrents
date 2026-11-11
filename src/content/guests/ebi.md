@@ -19,6 +19,16 @@ stays:
 
 ## 11 Nov
 
+### 8:44am
+
+<!-- entry-id: e214 -->
+<!-- with: tyrion -->
+<!-- no-time -->
+
+Hurricane Tyrion has been downgraded to a tropical storm. The damage is heavy, but we live to see another day.
+
+![Ebi pants by the cupboard while Tyrion sprawls on the floor, then the two start wrestling again.](./ebi/ebi-hurricane-downgraded.mp4)
+
 ### 8:30am
 
 <!-- entry-id: e213 -->
