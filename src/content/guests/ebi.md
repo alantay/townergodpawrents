@@ -19,6 +19,16 @@ stays:
 
 ## 11 Nov
 
+### 4:45pm
+
+<!-- entry-id: e219 -->
+<!-- with: tyrion -->
+<!-- no-time -->
+
+The couple is back.
+
+![Ebi and Tyrion wrestle on the living room floor beside a crumpled blue T-shirt.](./ebi/ebi-couple-is-back.mp4)
+
 ### 2:30pm
 
 <!-- entry-id: e218 -->
