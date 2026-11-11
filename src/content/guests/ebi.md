@@ -19,6 +19,15 @@ stays:
 
 ## 11 Nov
 
+### 8:48am
+
+<!-- entry-id: e212 -->
+<!-- no-time -->
+
+The calm before Hurricane Tyrion.
+
+![Ebi asleep on the wooden floor, curled against a chair leg with her tail fanned out.](./ebi/ebi-calm-before-hurricane.jpg)
+
 ### 8:15am
 
 <!-- entry-id: e210 -->
