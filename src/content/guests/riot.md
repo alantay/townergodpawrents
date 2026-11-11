@@ -17,6 +17,17 @@ stays:
     dropIn: true
 ---
 
+## 11 Nov
+
+### 12:32pm
+
+<!-- entry-id: e217 -->
+<!-- no-time -->
+
+Riot walking down the runway.
+
+![Riot, a small white fluffy dog, trots down a stepping-stone path through the grass toward the camera.](./riot/riot-walking-runway.mp4)
+
 ## 10 Nov
 
 ### 1pm
