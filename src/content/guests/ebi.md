@@ -19,6 +19,16 @@ stays:
 
 ## 11 Nov
 
+### 11:40am
+
+<!-- entry-id: e216 -->
+<!-- with: tyrion -->
+<!-- no-time -->
+
+No toys for them, but one man's old torn T-shirt is two dogs' treasure.
+
+![Ebi and Tyrion play tug of war with an old blue T-shirt on the floor.](./ebi/ebi-tshirt-treasure.mp4)
+
 ### 8:44am
 
 <!-- entry-id: e214 -->
