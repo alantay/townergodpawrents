@@ -19,6 +19,13 @@ stays:
 
 ## 11 Nov
 
+### 2:30pm
+
+<!-- entry-id: e218 -->
+<!-- with: tyrion -->
+
+Ebi's grandma came down to take her up to her place for a while, with a plus-one: her boyfriend, Tyrion.
+
 ### 11:40am
 
 <!-- entry-id: e216 -->
