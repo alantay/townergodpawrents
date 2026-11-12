@@ -17,6 +17,16 @@ stays:
     checkOut: 2026-11-14
 ---
 
+## 12 Nov
+
+### 8am
+
+<!-- entry-id: e221 -->
+
+Ebi is prepared to wait here until the begging request is approved.
+
+![A tan-and-white dog lies on the floor beside a chair, resting her head against a dark cushion.](./ebi/ebi-prepared-wait-here.jpg)
+
 ## 11 Nov
 
 ### 5:29pm
