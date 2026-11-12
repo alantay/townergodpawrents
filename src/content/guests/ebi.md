@@ -19,6 +19,14 @@ stays:
 
 ## 12 Nov
 
+### 7:50pm
+
+<!-- entry-id: e225 -->
+
+Sounds on 🔈 to hear Ebi’s plea for chicken.
+
+![Ebi, 12 Nov 7:50pm](./ebi/ebi-sounds-hear-plea.mp4)
+
 ### 5pm
 
 <!-- entry-id: e224 -->
