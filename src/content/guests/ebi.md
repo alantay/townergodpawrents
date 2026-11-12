@@ -19,6 +19,14 @@ stays:
 
 ## 12 Nov
 
+### 12:55pm
+
+<!-- entry-id: e223 -->
+
+Ebi could hold the “place” command the longest with food in sight.
+
+![A tan-and-white dog rests its muzzle on a black object on a brown cushion.](./ebi/ebi-could-hold-place.jpg)
+
 ### 9:59am
 
 <!-- entry-id: e222 -->
