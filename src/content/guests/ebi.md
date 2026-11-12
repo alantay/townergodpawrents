@@ -19,6 +19,12 @@ stays:
 
 ## 12 Nov
 
+### 5pm
+
+<!-- entry-id: e224 -->
+
+Ebi whined her way to her boyfriend’s house, without a care in the world.
+
 ### 12:55pm
 
 <!-- entry-id: e223 -->
