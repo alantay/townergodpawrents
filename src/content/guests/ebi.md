@@ -19,6 +19,14 @@ stays:
 
 ## 12 Nov
 
+### 9:59am
+
+<!-- entry-id: e222 -->
+
+Ebi is extremely manja today, whining for pats. I think she misses her boyfriend.
+
+![A tan-and-white dog lies on her back across a dark cushion beside a light wooden surface.](./ebi/ebi-extremely-manja-today.jpg)
+
 ### 8am
 
 <!-- entry-id: e221 -->
