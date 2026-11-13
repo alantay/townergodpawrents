@@ -19,6 +19,15 @@ stays:
 
 ## 13 Nov
 
+### 1pm
+
+<!-- entry-id: e229 -->
+<!-- no-time -->
+
+Ebi left her chew on the bed and came to curry favour for chicken.
+
+![Ebi, 13 Nov](./ebi/ebi-left-chew-bed.mp4)
+
 ### 10:44am
 
 <!-- entry-id: e228 -->
