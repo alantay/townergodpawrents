@@ -19,6 +19,15 @@ stays:
 
 ## 13 Nov
 
+### 10:44am
+
+<!-- entry-id: e228 -->
+<!-- label: Throwback -->
+
+Ebi's really strange sleeping position last night.
+
+![Ebi asleep belly-up on the floor, one back paw propped against the wall and her legs splayed.](./ebi/ebi-strange-sleep-position.jpg)
+
 ### 9am
 
 <!-- entry-id: e227 -->
