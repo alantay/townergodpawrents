@@ -19,6 +19,12 @@ stays:
 
 ## 13 Nov
 
+### 3pm
+
+<!-- entry-id: e230 -->
+
+Once again, Ebi dashed to her boyfriend’s house.
+
 ### 1pm
 
 <!-- entry-id: e229 -->
