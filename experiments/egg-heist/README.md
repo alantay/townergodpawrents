@@ -1,6 +1,16 @@
-# The Egg Heist: KIV prototypes
+# The Egg Heist: art and gameplay experiments
 
-**Status: parked. Not approved for the live site.** Related to [issue #131](https://github.com/alantay/townergodpawrents/issues/131).
+**Status: illustrated rear-view art approved as the visual target; gameplay still experimental. Not approved for the live site.** Related to [issue #131](https://github.com/alantay/townergodpawrents/issues/131).
+
+## Latest: illustrated Ebi, 12 November 2026
+
+Alan chose the clean illustrated direction A, accepted its motion study, and approved the rear-view version with the same kitchen and egg position. [The illustrated studies](illustrated/README.md) preserve that progression and a one-button playable test: Ebi crouches, jumps, catches the eggs and lands. This is an interaction test with no timing challenge or scoring yet.
+
+Open [the playable HTML](illustrated/ebi-a-playable-20261112.html) locally, or use the local server below at [the playable test](http://localhost:8877/illustrated/ebi-a-playable-20261112.html). Space, the Jump button or a click on the kitchen starts an attempt; Reset restores the eggs. Phone input has not been tested on a real device.
+
+The earlier paper and painted prototypes below remain parked. Their KIV verdict does not describe the newer illustrated art, and approval of that art does not approve site integration or establish that the game is fun.
+
+## Earlier KIV prototypes
 
 Ebi tries to pull an egg tray off the kitchen counter while the house is empty. Hold to charge a jump and release in the green band. Weak jumps miss; a good jump pulls the tray closer; too much power pushes it back. Eventually the tray falls, and Ebi looks innocent beside the mess.
 
@@ -14,7 +24,7 @@ From the repository root:
 python3 -m http.server 8877 --bind 127.0.0.1 --directory experiments/egg-heist
 ```
 
-- [Paper B, polished](http://localhost:8877/paper/): latest prototype, with outcome feedback, paper reaction portraits, landing dust and the innocent ending pose.
+- [Paper B, polished](http://localhost:8877/paper/): latest paper prototype, with outcome feedback, paper reaction portraits, landing dust and the innocent ending pose.
 - [Paper B, before polish](http://localhost:8877/paper/baseline.html): original B for comparison.
 - [Painted A](http://localhost:8877/painted/): same hold-and-release rules, different art treatment.
 
@@ -28,6 +38,7 @@ painted/         A prototype, kitchen and sprite sheet
 art-directions/  A gouache, B layered paper, C felt two-pose studies
 screenshots/     B before/after, hook and ending captures
 notes/           original plan, art prompts and design audit
+illustrated/     approved art direction, side/rear motion studies and playable jump
 ```
 
 Raster images were extracted unchanged from the self-contained Artifact files, so the archived HTML is readable. Runtime constants, scoring and input handling remain inline. These are disposable prototypes, not production components. All files live outside Astro's `src/` and `public/`; there is no route, homepage hook, production import or dependency change.
