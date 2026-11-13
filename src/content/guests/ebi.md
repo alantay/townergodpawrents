@@ -19,6 +19,14 @@ stays:
 
 ## 13 Nov
 
+### 5:30pm
+
+<!-- entry-id: e231 -->
+
+Ebi flew up this ledge with great precision when she saw birds on it. A great high jumper in the making, with her eye on the prize.
+
+![A tan dog on a leash leans over the edge of a white raised planter filled with grass.](./ebi/ebi-flew-ledge-great.jpg)
+
 ### 3pm
 
 <!-- entry-id: e230 -->
