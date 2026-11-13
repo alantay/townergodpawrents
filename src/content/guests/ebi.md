@@ -17,6 +17,16 @@ stays:
     checkOut: 2026-11-14
 ---
 
+## 13 Nov
+
+### 7:30am
+
+<!-- entry-id: e226 -->
+
+Post structured walk activity
+
+![Ebi, 13 Nov 7:30am](./ebi/ebi-post-structured-walk.mp4)
+
 ## 12 Nov
 
 ### 7:50pm
