@@ -19,6 +19,14 @@ stays:
 
 ## 13 Nov
 
+### 9am
+
+<!-- entry-id: e227 -->
+
+Dreaming of her boyfriend: “Will I get to see him later?”
+
+![A tan-and-white dog lies stretched out on the floor, eyes closed.](./ebi/ebi-dreaming-boyfriend-will.jpg)
+
 ### 7:30am
 
 <!-- entry-id: e226 -->
