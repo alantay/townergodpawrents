@@ -6,7 +6,7 @@ bgColor: "#2F6B6B"
 showLive: true
 sex: male
 stays:
-  - checkIn: 2026-11-15
-    checkOut: 2026-11-20
+  - checkIn: 2026-11-16
+    checkOut: 2026-11-21
     dropIn: true
 ---
