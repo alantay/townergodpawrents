@@ -22,6 +22,16 @@ stays:
 
 ## 14 Nov
 
+### 4:21pm
+
+<!-- entry-id: e235 -->
+<!-- no-time -->
+<!-- credit: Music: [Carefree by Kevin MacLeod](https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1400037), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Trimmed, faded and mixed. -->
+
+Playing Find It with Ebi using just kibbles.
+
+![Ebi searching the rooms for four hidden kibbles, with a counter marking each find](./ebi/ebi-find-it-kibbles.mp4)
+
 ### 3:47pm
 
 <!-- entry-id: e234 -->
