@@ -22,6 +22,14 @@ stays:
 
 ## 14 Nov
 
+### 3:47pm
+
+<!-- entry-id: e234 -->
+
+Round two of the nose treat at home. Ebi seems to have forgotten it's there.
+
+![Ebi sitting with a treat balanced on her snout, looking elsewhere](./ebi/ebi-nose-treat-forgot.mp4)
+
 ### 1:20pm
 
 <!-- entry-id: e233 -->
