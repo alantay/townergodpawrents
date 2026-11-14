@@ -17,6 +17,16 @@ stays:
     checkOut: 2026-11-14
 ---
 
+## 14 Nov
+
+### 9:15am
+
+<!-- entry-id: e232 -->
+
+Ebi’s training session with XY. She ate a third of the treats from the container.
+
+![Ebi, 14 Nov 9:15am](./ebi/ebi-training-session-xy.mp4)
+
 ## 13 Nov
 
 ### 5:30pm
