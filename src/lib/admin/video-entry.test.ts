@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { parseDiary } from "../guests.ts";
-import { splitFrontmatter } from "./insert-entry.ts";
+import { parseDiary, splitFrontmatter } from "../diary-file.ts";
 import { buildVideoEntry, videoPayload, type VideoPayload } from "./video-entry.ts";
 
 const payload: VideoPayload = {

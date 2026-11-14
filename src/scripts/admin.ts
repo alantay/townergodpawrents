@@ -4,13 +4,13 @@ import { dogsOn, draftWhen, nowSGT, postTime, type FormGuest } from "../lib/admi
 import { BAD_VIDEO, MAX_VIDEO_BYTES, VIDEO_CONTENT_TYPES } from "../lib/admin/constants.ts";
 import { formatTime } from "../lib/admin/format.ts";
 import { NO_TIME } from "../lib/admin/types.ts";
+import { MAX_CLIPS, MAX_MEDIA } from "../lib/diary-file.ts";
 import { fmtDay } from "../lib/guests.ts";
 import { loadPhotos, savePhotos } from "./photo-draft.ts";
 import type { PhotoDescription } from "../lib/admin/photo-descriptions.ts";
 import { put } from "@vercel/blob/client";
 
 const DRAFT_KEY = "tgp-admin-draft";
-const MAX_PHOTOS = 4;
 const LONG_SIDE = 1600;
 const MAX_PHOTO_BYTES = 1_000_000;
 // Vercel gives the post function 60s; give up a bit before so retry is offered.
@@ -172,7 +172,7 @@ function render() {
   textHint.textContent = video() && !photos().length
     ? "Add a little context, or let the video do the talking."
     : "Add a little context, or let the photos do the talking.";
-  addTile.hidden = items.length >= MAX_PHOTOS;
+  addTile.hidden = items.length >= MAX_MEDIA;
   renderPreview();
 }
 
@@ -337,10 +337,10 @@ files.addEventListener("change", async () => {
   const selected = Array.from(files.files ?? []);
   files.value = "";
   const clips = selected.filter((file) => file.type.startsWith("video/"));
-  if (clips.length > (video() ? 0 : 1)) return showError("One video per post. The rest can be photos.");
+  if (clips.length > (video() ? 0 : MAX_CLIPS)) return showError("One video per post. The rest can be photos.");
   if (clips.some((clip) => !VIDEO_CONTENT_TYPES.includes(clip.type) || clip.size > MAX_VIDEO_BYTES)) return showError(BAD_VIDEO);
   // Each pick holds its place in the order while it shrinks.
-  const picked = selected.slice(0, MAX_PHOTOS - items.length).map((file) => ({
+  const picked = selected.slice(0, MAX_MEDIA - items.length).map((file) => ({
     file,
     item: (file.type.startsWith("video/") ? { kind: "video", file } : { kind: "shrinking" }) as Item,
   }));
@@ -577,7 +577,7 @@ text.value = state.text;
 render();
 void loadPhotos().then((kept) => {
   restoring = false;
-  items = kept.slice(0, MAX_PHOTOS).map((blob): Item => ({ kind: "photo", blob }));
+  items = kept.slice(0, MAX_MEDIA).map((blob): Item => ({ kind: "photo", blob }));
   renderPhotos();
   // Photos that didn't make it back (no IndexedDB, or iOS cleared it): say so.
   if ((draft.photoCount ?? 0) > items.length) {

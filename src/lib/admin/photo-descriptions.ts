@@ -1,7 +1,7 @@
 // Bind reusable descriptions to the exact photo and selected guests. Caption
 // edits do not invalidate factual descriptions of what is visible.
 import { createHash } from "node:crypto";
-import { sanitizeAlt } from "./format.ts";
+import { sanitizeAlt } from "../diary-file.ts";
 import type { AiContext, Photo } from "./types.ts";
 
 export interface PhotoDescription { key: string; alt: string }

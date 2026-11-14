@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { parseDiary } from "../guests.ts";
+import { parseDiary } from "../diary-file.ts";
 import { COOKIE } from "./auth.ts";
 import { GitHubError, type CommitFile, type GitHub } from "./github.ts";
 import { postApi } from "./post-entry.ts";

@@ -3,10 +3,10 @@
 // post key stops a double tap from posting twice.
 import { requireAuth } from "./auth.ts";
 import { POST_KEY_RE } from "./constants.ts";
-import { fallbackAlt, sanitizeAlt } from "./format.ts";
+import { fallbackAlt } from "./format.ts";
 import type { GitHub } from "./github.ts";
 import { json } from "./http.ts";
-import { insertEntry, nextId } from "./insert-entry.ts";
+import { insertEntry, nextId, sanitizeAlt } from "../diary-file.ts";
 import { photoName, slugWords } from "./photo-name.ts";
 import { cachedAlt } from "./photo-descriptions.ts";
 import type { KeyStore } from "./store.ts";

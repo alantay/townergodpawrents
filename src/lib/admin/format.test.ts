@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { entryMinutes } from "../guests.ts";
-import { fallbackAlt, formatTime, sanitizeAlt, sanitizeText } from "./format.ts";
+import { fallbackAlt, formatTime } from "./format.ts";
 
 test("formatTime writes times the way the diary does", () => {
   assert.equal(formatTime("15:20"), "3:20pm");
@@ -28,26 +28,4 @@ test("formatTime output sorts with entryMinutes", () => {
 test("fallbackAlt names the dog, day and time", () => {
   assert.equal(fallbackAlt("Luna", "2026-10-16", "3:20pm"), "Luna, 16 Oct 3:20pm");
   assert.equal(fallbackAlt("Luna", "2026-10-16"), "Luna, 16 Oct");
-});
-
-test("sanitizeAlt keeps alt text from breaking the image syntax", () => {
-  assert.equal(sanitizeAlt("Luna [on] the (sofa)", "fb"), "Luna on the sofa");
-  assert.equal(sanitizeAlt("Luna\n\n  asleep", "fb"), "Luna asleep");
-  assert.equal(sanitizeAlt("<!-- entry-id: e001 -->", "fb"), "!-- entry-id: e001 --");
-  assert.equal(sanitizeAlt("   ", "fb"), "fb");
-  assert.equal(sanitizeAlt("a".repeat(300), "fb").length, 200);
-});
-
-test("sanitizeText leaves ordinary words alone", () => {
-  assert.equal(sanitizeText("Luna stole a slipper. 9–11am, #1 fan!"), "Luna stole a slipper. 9–11am, #1 fan!");
-  assert.equal(sanitizeText("  Two\r\n\r\n\r\n\r\nparagraphs  "), "Two\n\nparagraphs");
-});
-
-test("sanitizeText defuses headings, comments and images", () => {
-  assert.equal(sanitizeText("## 1 Oct"), " ## 1 Oct");
-  assert.equal(sanitizeText("hi\n### 9am\nthere"), "hi\n ### 9am\nthere");
-  assert.equal(sanitizeText("hi\n##\nthere"), "hi\n ##\nthere");
-  assert.equal(sanitizeText("#### big"), "#### big");
-  assert.equal(sanitizeText("<!-- entry-id: e001 -->"), "< !-- entry-id: e001 -->");
-  assert.equal(sanitizeText("![x](./evil.jpg)"), "! [x](./evil.jpg)");
 });

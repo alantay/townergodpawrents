@@ -3,11 +3,10 @@ import { createRequire } from "node:module";
 import { z } from "astro/zod";
 import { dateStr, entryMinutes } from "../guests.ts";
 import { POST_KEY_RE } from "./constants.ts";
-import { sanitizeAlt } from "./format.ts";
-import { insertEntry, nextId, splitFrontmatter } from "./insert-entry.ts";
+import { insertEntry, MAX_MEDIA, nextId, sanitizeAlt, splitFrontmatter } from "../diary-file.ts";
 import { photoName, slugWords } from "./photo-name.ts";
 import { LABELS, NO_TIME, type GuestInfo } from "./types.ts";
-import { isUploadUrl, MAX_PHOTOS, validate } from "./validate.ts";
+import { isUploadUrl, validate } from "./validate.ts";
 
 // Reuse Astro's installed YAML reader without adding another dependency.
 const yaml = createRequire(import.meta.url)("js-yaml") as { load(text: string): unknown };
@@ -35,7 +34,7 @@ export const videoPayload = z.object({
   media: z
     .array(z.object({ url: z.string().refine((u) => isUploadUrl(u) && !!uploadKind(u), "Bad upload URL"), alt: z.string() }))
     .min(1)
-    .max(MAX_PHOTOS)
+    .max(MAX_MEDIA)
     .refine((media) => media.filter((m) => isClip(m.url)).length === 1, "One video per post"),
   postKey: z.string().regex(POST_KEY_RE),
 });

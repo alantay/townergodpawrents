@@ -20,6 +20,10 @@ _Avoid_: Booking, reservation, visit, session
 A stay where Alan and Weiwen look after the guest at the guest's own home instead of on their sofa. Marked `dropIn: true` on the stay. On the homepage the guest gets its own card tucked under the hero; elsewhere a small house mark sits by the dates. See ADR 0010.
 _Avoid_: Home visit, house call, sitting
 
+**Diary file**:
+One markdown file per guest: frontmatter, then diary days and entries. `src/lib/diary-file.ts` reads it for the site and writes it for `/admin`.
+_Avoid_: Guest markdown, content file
+
 **Diary day**:
 One calendar day within a stay, written as a `## 13 Sep` divider. The year is not written down — it comes from whichever stay contains the day.
 _Avoid_: Date section, day entry
