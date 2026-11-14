@@ -2,7 +2,8 @@ import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 import { Redis } from "@upstash/redis";
 import { getSecret } from "astro:env/server";
-import { dateStr, parseDiary, type Stay } from "../../lib/guests";
+import { parseDiary } from "../../lib/diary-file";
+import { dateStr, type Stay } from "../../lib/guests";
 import { reactionApi } from "../../lib/reaction-api";
 
 export const prerender = false;

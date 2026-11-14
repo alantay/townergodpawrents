@@ -1,11 +1,11 @@
 // Everything is checked before anything is written, so a bad post can't
 // reach the build. Messages follow docs/agents/voice.md.
 import { dogNames, fmtDay, stayLabel, stayOn, type Stay } from "../guests.ts";
-import { formatTime, sanitizeText } from "./format.ts";
+import { MAX_MEDIA, sanitizeText } from "../diary-file.ts";
+import { formatTime } from "./format.ts";
 import { LABELS, NO_TIME, type EntryInput, type GuestInfo, type Photo } from "./types.ts";
 
 export const MAX_TEXT = 4000;
-export const MAX_PHOTOS = 4;
 // Four of these stay under Vercel's 4.5MB request cap.
 export const MAX_PHOTO_BYTES = 1_000_000;
 export const TOO_LONG = "That's a lot of words. Trim it a bit.";
@@ -80,10 +80,10 @@ export function validate(raw: RawEntry, guests: GuestInfo[]): Checked {
   if (raw.videoUrl && (!isUploadUrl(raw.videoUrl) || !Number.isInteger(videoAt) || videoAt < 0 || videoAt > raw.photos.length)) {
     return fail("That didn't send properly. Try again.");
   }
-  if (raw.videoUrl && raw.photos.length >= MAX_PHOTOS) return fail("Four at most, counting the video.");
+  if (raw.videoUrl && raw.photos.length >= MAX_MEDIA) return fail("Four at most, counting the video.");
   if (!text && raw.photos.length === 0 && !raw.videoUrl) return fail("Add some words or a photo.");
   if (text.length > MAX_TEXT) return fail(TOO_LONG);
-  if (raw.photos.length > MAX_PHOTOS) return fail("Four photos at most.");
+  if (raw.photos.length > MAX_MEDIA) return fail("Four photos at most.");
   if (!raw.photos.every(isJpeg)) return fail("Can't read this photo. Try a JPEG or a screenshot of it.");
   if (raw.photos.some((p) => p.bytes.length >= MAX_PHOTO_BYTES)) return fail("Photos too big. Try fewer.");
 

@@ -3,9 +3,9 @@
 import { requireAuth } from "./auth.ts";
 import { json } from "./http.ts";
 import { descriptionKey } from "./photo-descriptions.ts";
-import { sanitizeAlt } from "./format.ts";
+import { MAX_MEDIA, sanitizeAlt } from "../diary-file.ts";
 import type { Ai, GuestInfo, Photo } from "./types.ts";
-import { isJpeg, MAX_PHOTOS, MAX_PHOTO_BYTES, MAX_TEXT, TOO_LONG } from "./validate.ts";
+import { isJpeg, MAX_PHOTO_BYTES, MAX_TEXT, TOO_LONG } from "./validate.ts";
 
 export function polishApi(deps: { secret: string | undefined; guests: () => Promise<GuestInfo[]>; ai: () => Ai; now?: () => number }) {
   return {
@@ -21,7 +21,7 @@ export function polishApi(deps: { secret: string | undefined; guests: () => Prom
         if (!form) return json({ error: "That didn't send properly. Try again." }, 400);
         body = { guest: form.get("guest"), text: form.get("text"), with: form.getAll("with") };
         const files = form.getAll("photos");
-        if (files.length > MAX_PHOTOS) return json({ error: "Four photos at most." }, 400);
+        if (files.length > MAX_MEDIA) return json({ error: "Four photos at most." }, 400);
         for (const file of files) {
           if (typeof file === "string") return json({ error: "Can't read this photo. Try a JPEG or a screenshot of it." }, 400);
           if (file.size >= MAX_PHOTO_BYTES) return json({ error: "Photos too big. Try fewer." }, 400);

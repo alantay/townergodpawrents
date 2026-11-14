@@ -17,24 +17,3 @@ export function formatTime(hhmm: string): string | undefined {
 export function fallbackAlt(name: string, iso: string, time12?: string): string {
   return time12 ? `${name}, ${fmtDay(iso)} ${time12}` : `${name}, ${fmtDay(iso)}`;
 }
-
-/** Alt text goes inside ![...](...), so it can't carry brackets or comments. */
-export function sanitizeAlt(alt: string, fallback: string): string {
-  const clean = alt.replace(/[[\]()<>]/g, "").replace(/\s+/g, " ").trim().slice(0, 200).trim();
-  return clean || fallback;
-}
-
-/**
- * Typed words go straight into the dog's markdown. Stop them turning into a
- * day or entry heading, an entry-id comment or an image. Trim first, so the
- * space that defuses a heading on the first line survives.
- */
-export function sanitizeText(text: string): string {
-  return text
-    .replace(/\r\n?/g, "\n")
-    .replace(/\n{3,}/g, "\n\n")
-    .trim()
-    .replace(/^(#{2,3})(?=\s|$)/gm, " $1")
-    .replace(/<!--/g, "< !--")
-    .replace(/!\[/g, "! [");
-}
