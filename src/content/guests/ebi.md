@@ -22,6 +22,15 @@ stays:
 
 ## 14 Nov
 
+### 1:20pm
+
+<!-- entry-id: e233 -->
+<!-- no-time -->
+
+We tried doing the same at home too.
+
+![Ebi sitting very still with a piece of kibble balanced on her nose](./ebi/ebi-nose-treat-home.mp4)
+
 ### 9:15am
 
 <!-- entry-id: e232 -->
