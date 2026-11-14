@@ -3,8 +3,8 @@ import { createRequire } from "node:module";
 import { z } from "astro/zod";
 import { dateStr, entryMinutes } from "../guests.ts";
 import { POST_KEY_RE } from "./constants.ts";
-import { insertEntry, MAX_MEDIA, nextId, sanitizeAlt, splitFrontmatter } from "../diary-file.ts";
-import { photoName, slugWords } from "./photo-name.ts";
+import { MAX_MEDIA, splitFrontmatter } from "../diary-file.ts";
+import { fileEntry } from "./file-entry.ts";
 import { LABELS, NO_TIME, type GuestInfo } from "./types.ts";
 import { isUploadUrl, validate } from "./validate.ts";
 
@@ -56,22 +56,14 @@ export function buildVideoEntry(payload: VideoPayload, markdowns: Record<string,
   }, guests);
   if (!checked.ok) throw new Error(checked.error);
   const { input, guest } = checked;
-  const words = slugWords(input.text, guest.name);
-  const media = payload.media.map((m) => {
-    const video = isClip(m.url);
-    return { url: m.url, video, alt: sanitizeAlt(m.alt, guest.name), file: photoName(guest.id, words, taken, video ? "mp4" : "jpg") };
-  });
-  const markdown = insertEntry(markdowns[guest.id], {
-    ...input,
-    id: nextId(Object.values(markdowns)),
-    images: media.map(({ alt, file }) => ({ alt, file })),
-  }, guest.stays, guest.id);
+  const filed = fileEntry(input, guest, payload.media.map((m) => ({ alt: m.alt, video: isClip(m.url) })), markdowns, taken);
+  const media = filed.media.map((m, i) => ({ ...m, url: payload.media[i].url }));
   const clip = media.find((m) => m.video)!;
   return {
-    markdown,
+    markdown: filed.markdown,
     media,
     /** prep-video.sh's name for the clip: the file minus "<guest>-" and ".mp4". */
     slug: clip.file.slice(guest.id.length + 1, -4),
-    message: `Add ${guest.name} ${input.time} ${words.join(" ")} entry (via admin)`,
+    message: filed.message,
   };
 }
