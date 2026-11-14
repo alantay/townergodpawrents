@@ -1,0 +1,92 @@
+---
+interface Props {
+  notes?: { left?: string; right?: string };
+  aspectRatio?: number;
+}
+
+const { notes, aspectRatio = 640 / 853 } = Astro.props;
+const hasNotes = Boolean(notes?.left || notes?.right);
+---
+
+{hasNotes ? (
+  <div class="portrait-notes" style={`--portrait-aspect:${aspectRatio}`}>
+    <svg width="0" height="0" class="chalk-filter" aria-hidden="true" focusable="false">
+      <filter id="diary-portrait-chalk" x="-5%" y="-10%" width="110%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="4" result="grain" />
+        <feDisplacementMap in="SourceGraphic" in2="grain" scale="1.1" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
+    <slot />
+    {notes?.right && (
+      <p class="chalk-note chalk-note--right">
+        {notes.right}
+        <svg viewBox="0 0 40 26" aria-hidden="true" focusable="false">
+          <path d="M30 25 C27 15 17 7.5 4 5.5" />
+          <path d="M10.5 1.8 3.6 5.4 9.6 10.4" />
+        </svg>
+      </p>
+    )}
+    {notes?.left && (
+      <p class="chalk-note chalk-note--left">
+        {notes.left}
+        <svg viewBox="0 0 64 9" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <path d="M2 5.5 C18 3 38 7.2 62 3.4" />
+        </svg>
+      </p>
+    )}
+  </div>
+) : <slot />}
+
+<style>
+  .portrait-notes { position: relative; margin-top: 18px; container-type: inline-size; }
+  .portrait-notes > *, .portrait-notes :global(.guest-cutout) {
+    --portrait-width: min(270px, max(165px, 100cqi - 76px));
+  }
+  .portrait-notes :global(.guest-cutout) {
+    width: var(--portrait-width);
+    height: auto;
+    aspect-ratio: var(--portrait-aspect);
+    margin: 0 auto;
+    padding: 0;
+  }
+  .chalk-filter { position: absolute; }
+  .chalk-note {
+    position: absolute;
+    margin: 0;
+    font-family: var(--font-script);
+    font-weight: 600;
+    font-size: clamp(1.1875rem, 5.6cqi, 1.5rem);
+    line-height: 0.98;
+    color: var(--color-cream);
+    opacity: 0.93;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+    pointer-events: none;
+    filter: url(#diary-portrait-chalk);
+  }
+  .chalk-note svg {
+    position: absolute;
+    overflow: visible;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .chalk-note--right {
+    left: calc(50% + 0.29 * var(--portrait-width) + 8px);
+    top: calc(0.50 * var(--portrait-width));
+    max-width: min(150px, calc(50% - 0.29 * var(--portrait-width) - 10px));
+    transform: rotate(-4deg);
+    transform-origin: left top;
+  }
+  .chalk-note--right svg { left: 6px; bottom: calc(100% + 2px); width: 40px; height: 26px; stroke-width: 1.7; }
+  .chalk-note--left {
+    right: calc(50% + 0.31 * var(--portrait-width) + 6px);
+    top: calc(0.62 * var(--portrait-width));
+    max-width: calc(50% - 0.31 * var(--portrait-width) - 8px);
+    text-align: right;
+    transform: rotate(3deg);
+    transform-origin: right top;
+  }
+  .chalk-note--left svg { right: 0; top: calc(100% + 1px); width: min(100%, 64px); height: 9px; stroke-width: 1.6; }
+</style>
