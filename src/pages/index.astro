@@ -8,6 +8,7 @@ import { groupHeroColor } from "../lib/group-hero-color";
 import { bubblesJs } from "../lib/dog-bubbles";
 import { Image } from "astro:assets";
 import sofaCutout from "../assets/sofa-cutout-v2.png";
+import awayBackpack from "../assets/away-backpack.png";
 import portrait from "../assets/alan-weiwen-portrait.jpg";
 import { getCollection } from "astro:content";
 import { getImage } from "astro:assets";
@@ -36,6 +37,7 @@ import {
   VIDEO_MAX_HEIGHT,
 } from "../lib/guests";
 import { parseDiary } from "../lib/diary-file";
+import { awaySpells } from "../lib/away";
 
 // The browser redraws today's cards itself, so it needs the same small rules
 // the guest pages are built with. They go over as source, the way cutoutWidth
@@ -189,6 +191,7 @@ const guestsForClient = await Promise.all(
 );
 const groupHeroJson = JSON.stringify(GROUP_HERO).replace(/</g, "\\u003c");
 const guestsJson = JSON.stringify(guestsForClient).replace(/</g, "\\u003c");
+const awayJson = JSON.stringify(awaySpells).replace(/</g, "\\u003c");
 
 const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
 
@@ -264,6 +267,11 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       </div>
     </template>
   ))}
+  <template id="photo-away">
+    <div class="h-full w-full">
+      <Image src={awayBackpack} alt="A packed hiking backpack" width={640} widths={[320, 640, 960, 1280]} sizes="(min-width: 700px) 628px, calc(100vw - 72px)" class="h-full w-full object-contain" />
+    </div>
+  </template>
   <template id="photo-sofa">
     <div class="h-full w-full">
       <Image src={sofaCutout} alt="Our sofa, no dog on it" width={640} widths={[320, 640, 960, 1280]} sizes="(min-width: 700px) 628px, calc(100vw - 72px)" class="h-full w-full object-contain" />
@@ -307,6 +315,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
   <script is:inline set:html={bubblesJs} />
   <script type="application/json" id="guests-data" is:inline set:html={guestsJson} />
   <script type="application/json" id="group-hero" is:inline set:html={groupHeroJson} />
+  <script type="application/json" id="away-data" is:inline set:html={awayJson} />
 
   <script is:inline>
     (function () {
@@ -401,6 +410,18 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         return !!s && s.checkOut === todayISO && s.checkIn !== todayISO;
       }
 
+      // Days we're away (src/data/away.json), so no dog can stay. Not to be
+      // mixed up with `away` further down, which is the drop-ins.
+      function weAreAway(spells, todayISO) {
+        return spells.filter((s) => s.checkIn <= todayISO && todayISO <= s.checkOut)[0];
+      }
+      function awaySubline(s, todayISO) {
+        return (
+          "We&#39;re away " +
+          (s.checkOut === todayISO ? "today." : "till " + fmtDay(s.checkOut) + ".") +
+          (s.note ? " " + esc(s.note) + "." : "")
+        );
+      }
       function nextArrival(guests, todayISO) {
         var todayTime = Date.parse(todayISO + "T00:00:00Z");
         var next = null;
@@ -631,14 +652,17 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       }
 
       // `away` are the drop-ins: our sofa's empty because we're at theirs.
-      function heroVacancyHTML(lastGuest, next, away) {
+      // `offNow` is a spell of ours that covers today.
+      function heroVacancyHTML(lastGuest, next, away, offNow) {
         var round = away && away.length ? "We&#39;re out at " + away.map((d) => esc(d.name)).join(" &amp; ") + "&#39;s." : "";
         var html =
           '<div id="hero-card" class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:' + SOFA_GREEN + '">' +
           '<div id="hero-badge" class="absolute top-[18px] right-[18px] status-tag animate-wiggle">Sofa&#39;s empty</div>' +
           '<div class="w-full"><h1 class="fit-headline text-[clamp(62px,19vw,120px)] max-w-full">' + (round ? "No dog here" : "No dog today") + "</h1></div>" +
-          '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">' + (round || "The vacuum gets a day off. It&#39;s weirdly quiet.") + "</div>" +
-          '<button type="button" id="vacancy-photo" aria-label="Look down the side of the sofa" class="block w-[calc(100%+16px)] h-[265px] mx-[-8px] mt-[18px] animate-drift-slow cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime"></button>' +
+          '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">' + (round || (offNow ? awaySubline(offNow, today) : "The vacuum gets a day off. It&#39;s weirdly quiet.")) + "</div>" +
+          (offNow
+            ? '<div id="vacancy-photo" class="block w-[calc(100%+16px)] h-[265px] mx-[-8px] mt-[18px] animate-drift-slow"></div>'
+            : '<button type="button" id="vacancy-photo" aria-label="Look down the side of the sofa" class="block w-[calc(100%+16px)] h-[265px] mx-[-8px] mt-[18px] animate-drift-slow cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime"></button>') +
           "</div>";
 
         if (next) {
@@ -1209,6 +1233,8 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var preview = previewDate();
         var today = preview || todaySGT();
         var result = pickToday(guests, today);
+        var spells = JSON.parse(document.getElementById("away-data").textContent);
+        var offNow = weAreAway(spells, today);
 
         var appEl = document.getElementById("home-app");
         var away = result.live.filter((d) => dropsIn(d, today));
@@ -1216,14 +1242,14 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         if (!sofa.length) {
           var next = nextArrival(guests, today);
           var lastGuest = away.length ? null : result.lastGuest;
-          appEl.innerHTML = heroVacancyHTML(lastGuest, next, away) + (away.length ? entryCardsHTML(away, today) : "");
+          appEl.innerHTML = heroVacancyHTML(lastGuest, next, away, offNow) + (away.length ? entryCardsHTML(away, today) : "");
           appEl.hidden = false;
-          insertPhoto("sofa", document.getElementById("vacancy-photo"), undefined, true, "high");
+          insertPhoto(offNow ? "away" : "sofa", document.getElementById("vacancy-photo"), undefined, true, "high");
           if (next) insertPhoto(next.guest.id, document.getElementById("next-up-photo"), "64px");
           if (lastGuest) insertPhoto(lastGuest.id, document.getElementById("last-seen-photo"), "64px");
           // Tap the sofa to see what the last dogs left behind.
           var found = Math.floor(Math.random() * FOUND.length);
-          document.getElementById("vacancy-photo").addEventListener("click", function () {
+          if (!offNow) document.getElementById("vacancy-photo").addEventListener("click", function () {
             replay(this, "sofa-rummage");
             heroNote("Found: " + FOUND[found++ % FOUND.length]);
           });
