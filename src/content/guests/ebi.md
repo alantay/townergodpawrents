@@ -26,7 +26,7 @@ stays:
 
 <!-- entry-id: e234 -->
 
-Round two of the nose treat at home. Ebi seems to have forgotten it's there.
+Round two of the nose treat at home. Either Ebi forgot her release word, or she can't see the treat on her snout.
 
 ![Ebi sitting with a treat balanced on her snout, looking elsewhere](./ebi/ebi-nose-treat-forgot.mp4)
 
