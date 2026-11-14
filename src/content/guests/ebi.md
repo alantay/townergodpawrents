@@ -20,6 +20,66 @@ stays:
     checkOut: 2026-11-14
 ---
 
+## 14 Nov
+
+### 9:15am
+
+<!-- entry-id: e232 -->
+
+Ebi’s training session with XY. She ate a third of the treats from the container.
+
+![Ebi, 14 Nov 9:15am](./ebi/ebi-training-session-xy.mp4)
+
+## 13 Nov
+
+### 5:30pm
+
+<!-- entry-id: e231 -->
+
+Ebi flew up this ledge with great precision when she saw birds on it. A great high jumper in the making, with her eye on the prize.
+
+![A tan dog on a leash leans over the edge of a white raised planter filled with grass.](./ebi/ebi-flew-ledge-great.jpg)
+
+### 3pm
+
+<!-- entry-id: e230 -->
+
+Once again, Ebi dashed to her boyfriend’s house.
+
+### 1pm
+
+<!-- entry-id: e229 -->
+<!-- no-time -->
+
+Ebi left her chew on the bed and came to curry favour for chicken.
+
+![Ebi, 13 Nov](./ebi/ebi-left-chew-bed.mp4)
+
+### 10:44am
+
+<!-- entry-id: e228 -->
+<!-- label: Throwback -->
+
+Ebi's really strange sleeping position last night.
+
+![Ebi asleep belly-up on the floor, one back paw propped against the wall and her legs splayed.](./ebi/ebi-strange-sleep-position.jpg)
+
+### 9am
+
+<!-- entry-id: e227 -->
+
+Dreaming of her boyfriend: “Will I get to see him later?”
+
+![A tan-and-white dog lies stretched out on the floor, eyes closed.](./ebi/ebi-dreaming-boyfriend-will.jpg)
+
+### 7:30am
+
+<!-- entry-id: e226 -->
+
+Post structured walk activity
+
+![Ebi, 13 Nov 7:30am](./ebi/ebi-post-structured-walk.mp4)
+
 ## 12 Nov
 
 ### 7:50pm
