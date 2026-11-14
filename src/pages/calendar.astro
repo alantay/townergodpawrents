@@ -8,6 +8,7 @@ import Cutout from "../components/Cutout.astro";
 import { atHome, dateStr, diarySkin, dogNames, stayLabel, todaySGT } from "../lib/guests";
 import { calendarMonths } from "../lib/calendar";
 import HouseIcon from "../components/HouseIcon.astro";
+import { awaySpells } from "../lib/away";
 
 const entries = await getCollection("guests");
 
@@ -26,9 +27,14 @@ const stays = entries.flatMap((e) =>
   })),
 );
 
+// Days we're away share the grid with the stays, in a lane of their own.
+const away = awaySpells.map((a) => ({ ...a, guestId: "away", away: true as const }));
+type Slot = (typeof stays)[number] | (typeof away)[number];
+const isAway = (s: Slot): s is (typeof away)[number] => "away" in s;
+
 // Built statically, so this is only the build day. The script below re-reads
 // today in Singapore time to pick which months show and circle the date.
-const months = calendarMonths(stays, todaySGT());
+const months = calendarMonths<Slot>([...stays, ...away], todaySGT());
 const WEEKDAYS = ["S", "M", "T", "W", "T", "F", "S"];
 const anyDropIn = stays.some((s) => s.dropIn);
 ---
@@ -55,8 +61,11 @@ const anyDropIn = stays.some((s) => s.dropIn);
   <div class="mt-10 flex flex-col gap-14">
     {months.map((month, mi) => {
       // One polaroid per dog, even when they come back twice in a month.
-      const visitors = [...Map.groupBy(month.stays, (s) => s.guestId).values()];
+      const guestStays = month.stays.filter((s) => !isAway(s)) as (typeof stays)[number][];
+      const visitors = [...Map.groupBy(guestStays, (s) => s.guestId).values()];
       const pups = visitors.flatMap((v) => dogNames(v[0].name)).length;
+      // An empty month we're away for isn't a free sofa.
+      const off = month.stays.some(isAway);
       return (
         <section
           class="cal-month reveal-card"
@@ -76,7 +85,7 @@ const anyDropIn = stays.some((s) => s.dropIn);
                 </h2>
                 <p class="font-script text-[22px] leading-none font-medium text-muted">
                   {pups === 0
-                    ? "sofa's free"
+                    ? off ? "we're away" : "sofa's free"
                     : <>{pups} {pups === 1 ? "pup" : "pups"} this month{pups >= 3 && <span class="text-biro">, busy sofa</span>}</>}
                 </p>
               </div>
@@ -89,7 +98,7 @@ const anyDropIn = stays.some((s) => s.dropIn);
                 <div class="cal-week" aria-hidden="true" style={`grid-template-rows:auto repeat(${week.lanes},26px)`}>
                   {week.days.map((d, col) => (
                     <span
-                      class:list={["cal-day", { "cal-day--out": !d.inMonth }]}
+                      class:list={["cal-day", { "cal-day--out": !d.inMonth, "cal-day--away": away.some((a) => a.checkIn <= d.iso && d.iso <= a.checkOut) }]}
                       style={`grid-column:${col + 1}`}
                       data-date={d.iso}
                     >
@@ -97,6 +106,23 @@ const anyDropIn = stays.some((s) => s.dropIn);
                     </span>
                   ))}
                   {week.segments.map((seg) => {
+                    if (isAway(seg.stay)) {
+                      const a = seg.stay;
+                      const startsHere = !seg.continued;
+                      const endsHere = week.days[6].iso >= a.checkOut;
+                      const span = `grid-column:${seg.startCol + 1} / span ${seg.span}`;
+                      return (
+                        <>
+                          <span
+                            class:list={["cal-away", { "cal-away--continued": !startsHere, "cal-away--carries": !endsHere, "cal-away--short": seg.span === 1 }]}
+                            style={`grid-row:${seg.lane + 2};${span}`}
+                            aria-hidden="true"
+                          >
+                            <span class="cal-away-note">{startsHere ? (a.note ?? "away") : `…${a.note ?? "away"}`}</span>
+                          </span>
+                        </>
+                      );
+                    }
                     const s = seg.stay;
                     const endsHere = week.days[6].iso >= s.checkOut;
                     // The week grid is hidden from assistive tech and the
@@ -135,10 +161,15 @@ const anyDropIn = stays.some((s) => s.dropIn);
                   <li><span class="cal-bar is-upcoming" aria-hidden="true" />Coming up</li>
                   <li><span class="cal-bar is-past" aria-hidden="true" />Gone home</li>
                   {anyDropIn && <li><HouseIcon class="cal-house" />We pop over to theirs</li>}
+                  {awaySpells.length > 0 && <li><span class="cal-away cal-away--key" aria-hidden="true" />We're away</li>}
                 </ul>
               )}
 
-              {month.stays.length > 0 && (
+              {month.stays.filter(isAway).map((a) => (
+                <p class="sr-only">We're away {stayLabel(a)}{a.note && `, ${a.note}`}.</p>
+              ))}
+
+              {visitors.length > 0 && (
                 <div class="mt-7 flex flex-wrap gap-4">
                   {visitors.map((visits, pi) => {
                     const s = visits[0];
@@ -215,7 +246,7 @@ const anyDropIn = stays.some((s) => s.dropIn);
     inset: 0;
     background: var(--color-cream);
     background-clip: padding-box;
-    border: 5px solid var(--color-slip-fibre);
+    border: 5px solid color-mix(in srgb, var(--color-card-line) 55%, var(--color-cream));
     /* SVG torn-edge filters make these sheets go blank while scrolling on iPhone. */
     filter: drop-shadow(0 6px 10px rgb(30 32 25 / 0.18));
   }
@@ -379,7 +410,7 @@ const anyDropIn = stays.some((s) => s.dropIn);
     height: 20px;
     overflow: hidden;
     border-radius: 999px;
-    box-shadow: 0 0 0 2px var(--color-slip-fibre);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-card-line) 55%, var(--color-cream));
   }
   :global(.cal-house) {
     display: inline-block;
@@ -430,10 +461,61 @@ const anyDropIn = stays.some((s) => s.dropIn);
     display: block;
     width: 108px;
     padding: 8px 8px 10px;
-    background: var(--color-slip-fibre);
+    background: color-mix(in srgb, var(--color-card-line) 55%, var(--color-cream));
     box-shadow: 0 4px 9px rgb(30 32 25 / 0.16);
     transform: rotate(var(--polaroid-tilt));
   }
   /* Opens the dog's diary. Nothing moves on hover; keyboards still get a ring. */
   .cal-polaroid:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 3px; }
+
+  /* ---- Days we're away ---- */
+  .cal-away {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    color: var(--color-biro);
+  }
+  .cal-away-note {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0 4px 3px;
+    margin-bottom: -3px;
+    font-family: var(--font-script);
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1;
+    background: var(--color-cream);
+    transform: rotate(-2deg);
+  }
+  .cal-away--short .cal-away-note { font-size: 15px; padding-inline: 1px; text-overflow: clip; }
+
+  /* A biro arrow across the days, end stops and all, the way you'd mark a
+     trip in a paper diary. The note breaks the line in the middle. */
+  .cal-away::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    top: 50%;
+    height: 12px;
+    margin-top: -6px;
+    background:
+      linear-gradient(currentColor, currentColor) 0 50% / 100% 1.6px no-repeat,
+      linear-gradient(currentColor, currentColor) 0 0 / 1.6px 100% no-repeat,
+      linear-gradient(currentColor, currentColor) 100% 0 / 1.6px 100% no-repeat;
+    filter: url("#pencil-rule");
+    transform: rotate(-0.6deg);
+  }
+  .cal-away--continued::before { left: -2px; background-size: 100% 1.6px, 0 0, 1.6px 100%; }
+  .cal-away--carries::before { right: -2px; background-size: 100% 1.6px, 1.6px 100%, 0 0; }
+  .cal-away--continued.cal-away--carries::before { background-size: 100% 1.6px, 0 0, 0 0; }
+  .cal-day--away { color: rgb(30 32 25 / 0.45); }
+
+  /* The key's swatch */
+  .cal-key .cal-away--key { width: 22px; height: 10px; }
+  .cal-key .cal-away--key::before { left: 0; right: 0; height: 8px; margin-top: -4px; }
 </style>

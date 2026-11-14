@@ -20,6 +20,10 @@ _Avoid_: Booking, reservation, visit, session
 A stay where Alan and Weiwen look after the guest at the guest's own home instead of on their sofa. Marked `dropIn: true` on the stay. On the homepage the guest gets its own card tucked under the hero; elsewhere a small house mark sits by the dates. See ADR 0010.
 _Avoid_: Home visit, house call, sitting
 
+**Away**:
+A spell when Alan and Weiwen are away from home, so no guest can stay. Listed by hand in `src/data/away.json` with both ends inclusive, like a stay. The calendar marks it with a biro arrow; on the homepage the empty-sofa hero shows a packed backpack and says when they're back.
+_Avoid_: Unavailable, closed, blackout, holiday
+
 **Diary file**:
 One markdown file per guest: frontmatter, then diary days and entries. `src/lib/diary-file.ts` reads it for the site and writes it for `/admin`.
 _Avoid_: Guest markdown, content file
