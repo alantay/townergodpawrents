@@ -1,0 +1,463 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-14T03:53:57.313Z",
+  "title": "Design System: The Towner Godpawrents",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Oatmeal Paper",
+        "canonical": "#efe7d8",
+        "tonalRamp": [
+          "#0d0b07",
+          "#2a261d",
+          "#4b4438",
+          "#6c6558",
+          "#90887b",
+          "#b5ad9f",
+          "#d9d4ca",
+          "#f0eeea"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Olive Ink",
+        "canonical": "#1e2019",
+        "tonalRamp": [
+          "#0b0c09",
+          "#262722",
+          "#44463e",
+          "#65675f",
+          "#888a82",
+          "#adafa6",
+          "#d3d5cf",
+          "#eeefec"
+        ]
+      },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Cream Card",
+        "canonical": "#f7f2e7",
+        "tonalRamp": [
+          "#0c0b08",
+          "#292620",
+          "#49453c",
+          "#6a665c",
+          "#8d897f",
+          "#b2ada3",
+          "#d7d4cd",
+          "#efeeeb"
+        ]
+      },
+      "slip-fibre": {
+        "role": "neutral",
+        "displayName": "Slip Fibre",
+        "canonical": "#fdfaf1",
+        "tonalRamp": [
+          "#0c0b09",
+          "#282621",
+          "#47453e",
+          "#69665e",
+          "#8c8981",
+          "#b1aea5",
+          "#d6d4ce",
+          "#efeeec"
+        ]
+      },
+      "lime": {
+        "role": "primary",
+        "displayName": "Highlighter Lime",
+        "canonical": "#d8f24e",
+        "tonalRamp": [
+          "#090e00",
+          "#232c00",
+          "#404e00",
+          "#5f7100",
+          "#819600",
+          "#a5bc00",
+          "#cddf82",
+          "#ebf3d1"
+        ]
+      },
+      "lime-soft": {
+        "role": "primary",
+        "displayName": "Pale Lime Wash",
+        "canonical": "#e9f7ae",
+        "tonalRamp": [
+          "#0a0d00",
+          "#242a00",
+          "#424b00",
+          "#626d27",
+          "#85914b",
+          "#a9b670",
+          "#d1daad",
+          "#edf1df"
+        ]
+      },
+      "tape": {
+        "role": "primary",
+        "displayName": "Post-it Yellow",
+        "canonical": "#f7e27a",
+        "tonalRamp": [
+          "#110a00",
+          "#342500",
+          "#584300",
+          "#7a6500",
+          "#9e890f",
+          "#c3ae44",
+          "#e2d596",
+          "#f4efd7"
+        ]
+      },
+      "biro": {
+        "role": "primary",
+        "displayName": "Red Biro",
+        "canonical": "#b3261e",
+        "tonalRamp": [
+          "#230000",
+          "#580000",
+          "#8c0000",
+          "#b62921",
+          "#e05446",
+          "#ff7b6a",
+          "#ffb7a9",
+          "#ffe4de"
+        ]
+      },
+      "moss": {
+        "role": "neutral",
+        "displayName": "Moss",
+        "canonical": "#4c6b3c",
+        "tonalRamp": [
+          "#050e02",
+          "#182d0c",
+          "#314e20",
+          "#517041",
+          "#749463",
+          "#98ba87",
+          "#c6ddbb",
+          "#e9f2e5"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Olive",
+        "canonical": "#4a4b41",
+        "tonalRamp": [
+          "#0b0b08",
+          "#262720",
+          "#45463c",
+          "#66675d",
+          "#898a7f",
+          "#aeafa4",
+          "#d4d5cd",
+          "#eeefec"
+        ]
+      },
+      "label": {
+        "role": "neutral",
+        "displayName": "Label Olive",
+        "canonical": "#55564a",
+        "tonalRamp": [
+          "#0b0b08",
+          "#27271f",
+          "#45463a",
+          "#66675b",
+          "#898a7d",
+          "#aeafa2",
+          "#d4d5cc",
+          "#eeefeb"
+        ]
+      },
+      "card-line": {
+        "role": "neutral",
+        "displayName": "Kraft Keyline",
+        "canonical": "#cdbf9e",
+        "tonalRamp": [
+          "#0f0b03",
+          "#2e2510",
+          "#504426",
+          "#716547",
+          "#958869",
+          "#bbad8c",
+          "#ddd4be",
+          "#f2eee6"
+        ]
+      },
+      "card-line-dark": {
+        "role": "neutral",
+        "displayName": "Moss Keyline",
+        "canonical": "#5b6e50",
+        "tonalRamp": [
+          "#070d05",
+          "#1e2b17",
+          "#394b2f",
+          "#5a6d4f",
+          "#7c9071",
+          "#a1b695",
+          "#cbd9c4",
+          "#ebf0e8"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Pencil Rule",
+        "canonical": "#a99b7f",
+        "tonalRamp": [
+          "#0f0b04",
+          "#2e2513",
+          "#50432a",
+          "#72644a",
+          "#95886c",
+          "#bbac90",
+          "#ddd3c0",
+          "#f2eee7"
+        ]
+      },
+      "field-line": {
+        "role": "neutral",
+        "displayName": "Field Line",
+        "canonical": "#8a7d63",
+        "tonalRamp": [
+          "#0f0b04",
+          "#2e2514",
+          "#4f432b",
+          "#71654b",
+          "#95886d",
+          "#baac91",
+          "#dcd3c1",
+          "#f2eee7"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Guest hero names."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Page section headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Diary days and card names."
+      },
+      "tagline": {
+        "displayName": "Tagline",
+        "purpose": "Guest one-liners."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Readable diary prose."
+      },
+      "chip": {
+        "displayName": "Chip",
+        "purpose": "Compact functional facts and controls."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Small factual labels."
+      },
+      "script": {
+        "displayName": "Script",
+        "purpose": "Literal handwriting and established character voices."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card-rest",
+        "value": "0 10px 20px rgb(92 76 41 / 0.1)",
+        "purpose": "Guest cards."
+      },
+      {
+        "name": "card-hover",
+        "value": "0 16px 26px rgb(70 92 56 / 0.17)",
+        "purpose": "Guest card hover."
+      },
+      {
+        "name": "diary-entry",
+        "value": "0 9px 17px rgb(92 76 41 / 0.08)",
+        "purpose": "Full diary entry."
+      },
+      {
+        "name": "print",
+        "value": "inset 0 1px 0 rgb(255 255 255 / 0.44), 0 6px 12px rgb(30 32 25 / 0.12)",
+        "purpose": "Photo mats."
+      },
+      {
+        "name": "torn-paper",
+        "value": "drop-shadow(0 4px 7px rgb(30 32 25 / 0.2))",
+        "purpose": "Filtered paper layer, not text."
+      }
+    ],
+    "motion": [
+      {
+        "name": "arrive",
+        "value": "520ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "One-shot section entrances."
+      },
+      {
+        "name": "arrive-hero",
+        "value": "620ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Hero entrance."
+      },
+      {
+        "name": "bubble-in",
+        "value": "420ms cubic-bezier(0.3, 1.5, 0.5, 1)",
+        "purpose": "Existing dog speech pop; reduced motion removes spatial movement."
+      },
+      {
+        "name": "drop-in-pull",
+        "value": "0.55s cubic-bezier(0.2, 0.9, 0.25, 1)",
+        "purpose": "Tucked homepage card expansion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "portrait-pack-tall",
+        "value": "450px"
+      },
+      {
+        "name": "photo-pairs",
+        "value": "480px"
+      },
+      {
+        "name": "desktop-step",
+        "value": "640px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Cream fact chip",
+      "kind": "chip",
+      "refersTo": "chip-cream",
+      "description": "A compact fact on the guest hero.",
+      "html": "<span class=\"ds-fact\">Pomsky</span>",
+      "css": ".ds-fact {display:inline-block;padding:7px 13px;background:var(--color-cream,#f7f2e7);color:var(--color-ink,#1e2019);border-radius:999px;font-size:.8125rem;font-weight:600;font-family:var(--font-sans, Archivo, Helvetica, sans-serif);}"
+    },
+    {
+      "name": "Nickname tape",
+      "kind": "chip",
+      "refersTo": "chip-badge",
+      "description": "A character note on yellow tape, distinct from a factual chip.",
+      "html": "<span class=\"ds-tape\">Attention seeker</span>",
+      "css": ".ds-tape {display:inline-block;padding:7px 11px;background:var(--color-tape,#f7e27a);color:var(--color-ink,#1e2019);border-radius:0;transform:rotate(-2deg);font-size:.8125rem;font-weight:600;font-family:var(--font-sans, Archivo, Helvetica, sans-serif);}"
+    },
+    {
+      "name": "Outlined navigation pill",
+      "kind": "nav",
+      "refersTo": "nav-pill",
+      "description": "Pencil border at rest, ink hover and a visible keyboard focus. The live site draws a filtered ink line; this portable sample uses the same border and colours without the global SVG filter.",
+      "html": "<a class=\"ds-nav\" href=\"#calendar\">Calendar</a>",
+      "css": ".ds-nav {display:inline-block;padding:6px 13px;border:1.5px solid var(--color-line,#a99b7f);border-radius:999px;font-size:.8125rem;font-weight:600;color:var(--color-ink,#1e2019);text-decoration:none;font-family:var(--font-sans, Archivo, Helvetica, sans-serif);} .ds-nav:hover {border-color:var(--color-ink,#1e2019);color:var(--color-ink,#1e2019)} .ds-nav:focus-visible {outline:2px solid var(--color-ink,#1e2019);outline-offset:3px} .ds-nav:active {transform:scale(.97)} .ds-nav[aria-current=page] {background:var(--color-lime,#d8f24e);border-color:var(--color-lime,#d8f24e)}"
+    },
+    {
+      "name": "Admin primary action",
+      "kind": "button",
+      "refersTo": "admin-primary",
+      "description": "Ink pill for posting and saving on the private admin surface.",
+      "html": "<button class=\"ds-primary\" type=\"button\">Save</button>",
+      "css": ".ds-primary {padding:17px 18px;border:1.5px solid var(--color-ink,#1e2019);border-radius:999px;background:var(--color-ink,#1e2019);color:var(--color-cream,#f7f2e7);font-size:16px;line-height:1;font-weight:600;cursor:pointer;font-family:var(--font-sans, Archivo, Helvetica, sans-serif);} .ds-primary:focus-visible {outline:2px solid var(--color-ink,#1e2019);outline-offset:2px} .ds-primary:disabled {opacity:.6;cursor:wait}"
+    },
+    {
+      "name": "Admin secondary action",
+      "kind": "button",
+      "description": "Outlined counterpart to the private admin primary action.",
+      "html": "<button class=\"ds-secondary\" type=\"button\">Back</button>",
+      "css": ".ds-secondary {padding:14px 18px;border:1.5px solid var(--color-ink,#1e2019);border-radius:999px;background:transparent;color:var(--color-ink,#1e2019);font-size:15px;line-height:1;font-weight:600;cursor:pointer;font-family:var(--font-sans, Archivo, Helvetica, sans-serif);} .ds-secondary:focus-visible {outline:2px solid var(--color-ink,#1e2019);outline-offset:2px} .ds-secondary:disabled {opacity:.6;cursor:wait}"
+    },
+    {
+      "name": "Admin text field",
+      "kind": "input",
+      "refersTo": "admin-field",
+      "description": "Cream input with the darker Field Line border.",
+      "html": "<label class=\"ds-label\">Note<textarea class=\"ds-input\" rows=\"2\"></textarea></label>",
+      "css": ".ds-label {display:grid;gap:8px;color:var(--color-label,#55564a);font-size:12px;font-weight:600;letter-spacing:.1em;font-family:var(--font-sans, Archivo, Helvetica, sans-serif);} .ds-input {width:100%;box-sizing:border-box;padding:11px 13px;border:1.5px solid var(--field-line,#8a7d63);border-radius:14px;background:var(--color-cream,#f7f2e7);color:var(--color-ink,#1e2019);font-size:16px;line-height:1.5;font-weight:400;font-family:var(--font-sans, Archivo, Helvetica, sans-serif);} .ds-input:focus-visible {outline:2px solid var(--color-ink,#1e2019);outline-offset:2px} .ds-input:disabled {cursor:wait}"
+    },
+    {
+      "name": "Diary entry surface",
+      "kind": "card",
+      "refersTo": "diary-entry",
+      "description": "The full diary entry spacing and soft paper shadow, demonstrated in the light skin. Guest-specific skins resolve through diarySkin().",
+      "html": "<article class=\"ds-entry\"><p>House intact.</p></article>",
+      "css": ".ds-entry {padding:18px 19px 20px;border:1.5px solid var(--color-card-line,#cdbf9e);border-radius:24px;background:var(--color-cream,#f7f2e7);color:var(--color-ink,#1e2019);box-shadow:0 9px 17px rgb(92 76 41 / .08);transform:rotate(-1deg);font-family:var(--font-sans, Archivo, Helvetica, sans-serif);} .ds-entry p {margin:0;font-size:16px;line-height:1.625}"
+    },
+    {
+      "name": "Print mat",
+      "kind": "custom",
+      "refersTo": "diary-print",
+      "description": "Cream photo mat, pale keyline and soft print shadow. Empty media well is a structural sample, not a dog-photo substitute.",
+      "html": "<figure class=\"ds-print\"><div class=\"ds-well\" aria-label=\"Photo area\"></div></figure>",
+      "css": ".ds-print {width:180px;margin:0;padding:7px;border:1.5px solid var(--color-card-line,#cdbf9e);border-radius:16px;background:var(--color-cream,#f7f2e7);box-shadow:inset 0 1px 0 rgb(255 255 255 / .44),0 6px 12px rgb(30 32 25 / .12);transform:rotate(1.5deg)} .ds-well {height:120px;border-radius:10px;background:var(--color-paper,#efe7d8)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Kitchen-Table Scrapbook",
+    "overview": "Every page is something Alan and Weiwen have just put down on the kitchen table: a warm paper ground with a few coloured cards on it, each a little crooked, photos slipped in as prints with a cream mat, notes on slips torn from a pad, and a scrap of post-it yellow tape holding something down. Nothing is aligned the way a template would align it, and nothing is decorated for its own sake either. Each tilt, tear and bit of tape copies something real you'd find in a scrapbook.\n\nPublic pages use one narrow column (700px) read on a phone. Private posting and notes pages use a tighter column (460px). Each dog is the main subject. It gets a big serif name, a colour of its own and a cutout photo standing in the hero card. Everything else stays quiet: warm neutrals, one small sans for the functional bits and a single acid-lime accent that means \"look here\" or \"this is live\".\n\nMotion is one-shot and physical. Cards arrive as if set down. Hover nudges a card up without straightening it: turning something big looks wonky, so only small things (the wordmark tag, a one-line link card) straighten. Once a card has arrived it stays put, apart from a couple of slow idle drifts on the cutout and the \"Here today\" tag. Those loops keep the page light. The shared two-dog and three-dog portrait compositions deliberately disable the portrait drift so their collages stay together. The homepage hero also wears the day's weather (see Weather).\n\nOn the homepage, a pat sends three cream outline hearts up from that dog's portrait alongside its hop and handwritten reply. Repeated pats replay the same bounded marks. Searching the empty sofa gives it a brief rocking rummage before its found-object note. Hero portraits lean closer on hover or keyboard focus; past-guest portraits tilt within their cards. The diary portrait also answers pats and has occasional thought bubbles, an explicit exception to its quieter treatment. Weather, the sofa rummage and the wordmark peel stay on the homepage. Reduced motion keeps the written replies and removes the new spatial effects. Hero CSS animations rest while offscreen or in a hidden tab and resume when visible.",
+    "keyCharacteristics": [
+      "Warm paper ground, ink-green text, one lime accent, post-it yellow tape",
+      "Instrument Serif for names and headings; Archivo for everything functional",
+      "Every dog brings its own colour; the diary derives four skins from it",
+      "Tilt everywhere (±1°–2°), kept on hover; only small things straighten",
+      "Real paper effects: torn slips (SVG turbulence), clipped tape, prints on a cream mat",
+      "Soft, warm-brown shadows; no hard elevation"
+    ],
+    "rules": [
+      {
+        "name": "The Same-Sofa Rule",
+        "body": "Two dogs whose stays overlap must have different colours, because their entries sit side by side in today's feed. Dogs staying on different dates may share a colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Highlighter Rule",
+        "body": "Lime means \"current or active\", nothing more. Hovers get inked, badges are tape strips, and tape is post-it yellow. Never use lime as a background panel, heading colour, hover fill or decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Dog Owns the Colour Rule",
+        "body": "Saturated colour on a page comes from the guest's `bgColor`. The system itself stays in warm neutrals, so each dog's page looks like that dog.",
+        "section": "colors"
+      },
+      {
+        "name": "The Pen on Paper Rule",
+        "body": "Caveat is Alan or Weiwen's own handwriting, so it only goes where one of them could have picked up a pen and written on something. Before using it, check all six:",
+        "section": "typography"
+      },
+      {
+        "name": "The Paper Not Glass Rule",
+        "body": "No blur-glow shadows, no neutral-grey elevation, no floating cards. If an object wouldn't cast that shadow lying on a table, don't give it that shadow. The day strip's backdrop blur is functional. Comic and thought bubbles intentionally have a hard ink-like offset shadow; this exception belongs to the bubbles, not ordinary cards.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Nothing Sits Square Rule",
+        "body": "Cards, prints, slips, tape and stickers each carry a small rotation. Only functional chrome stays level: nav, chips, day strip and buttons. Video cards and their mats are also level, because a filter or transform on an ancestor makes `<video>` flicker; their caption slip leans 1.5° instead to keep the crooked feel.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Real Tear Rule",
+        "body": "Torn edges come from the SVG filters on the paper layer only, never on the text. Where filters aren't supported, fall back to a 14px-radius keylined card rather than a hard rectangle.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** build new surfaces from the established paper vocabulary: cards, matted prints, torn slips, tape and stickers. Diary portrait notes are a deliberate exception, written directly beside the cut-out without an extra paper object.",
+      "**Do** give every new card or print a small tilt (±0.4°–2°) and keep it on hover. Straighten only small things, with the 200ms `cubic-bezier(0.16, 1, 0.3, 1)` ease; a big card turning looks wonky. The calendar doesn't move on hover at all, since its sheets and polaroids are taped down. A focus ring still shows. A tape strip opens that dog's diary on a tap, and the first sheet with a stay prints a key in Label type under its weeks: Here now, Coming up, Gone home.",
+      "**Do** take saturated colour from the guest's `bgColor` and derive tints with `diarySkin()` instead of inventing new colours.",
+      "**Do** keep entrances one-shot (520–620ms, same ease, 90ms stagger), and turn every animation off under `prefers-reduced-motion`.",
+      "**Do** give small controls an invisible `::before` hit area rather than enlarging them.",
+      "**Do** put hover movement inside `@media (hover: hover)`, so a lift doesn't stick after a tap on a phone.",
+      "**Do** use tabular numbers for dates, counts and stay ranges."
+    ],
+    "donts": [
+      "**Don't** use lime for anything other than current/active state. Tape is post-it yellow.",
+      "**Don't** use grey or blue-black shadows, glows or glassmorphism. Shadows are warm and low.",
+      "**Don't** put a transform or filter on an ancestor of a `<video>`; video entries stay level.",
+      "**Don't** add a fourth typeface, or use Caveat anywhere the Pen on Paper Rule doesn't allow.",
+      "**Don't** add buttons, forms or sections that look like a service site (CTA bars, pricing cards, testimonial blocks). Public interactions serve reading or the established playful touches; private posting and notes controls stay in admin.",
+      "**Don't** apply the tear filter to text; tear the paper layer only.",
+      "**Don't** make the photo credit or the empty reaction icon louder, and don't end the wiggle or the cutout drift. They're faint, and looping, on purpose."
+    ]
+  }
+}

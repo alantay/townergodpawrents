@@ -6,6 +6,9 @@ bgColor: "#A34A2E"
 showLive: true
 badge: Attention seeker
 tagline: squeaky-toy enthusiast, works only for snacks
+portraitNotes:
+  left: Can hold a stay forever
+  right: Devours her food in seconds
 whenCalled: "Got a snack? Then maybe."
 thoughts:
   - "Squeak it again."

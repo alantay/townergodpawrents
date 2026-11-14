@@ -26,6 +26,12 @@ const guests = defineCollection({
       // Character notes, not visit notes — optional.
       badge: z.string().optional(),
       tagline: z.string().optional(),
+      // Brief "by the way" asides around the diary portrait, separate
+      // from the tagline's introduction. Either side may be omitted.
+      portraitNotes: z.object({
+        left: z.string().trim().min(1).optional(),
+        right: z.string().trim().min(1).optional(),
+      }).optional(),
       // What the dog says back, now and then, when you pat it. Its own
       // voice, one short line.
       whenCalled: z.string().optional(),

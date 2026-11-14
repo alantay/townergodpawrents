@@ -7,6 +7,7 @@ import Layout from "../../layouts/Layout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
 import Cutout from "../../components/Cutout.astro";
+import PortraitNotes from "../../components/PortraitNotes.astro";
 import DiaryClip from "../../components/DiaryClip.astro";
 import {
   parseDiary,
@@ -115,6 +116,8 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { name, breed, tagline, badge, bgColor, showLive, photo, whenCalled, sounds, thoughts, sex } = entry.data;
+const portraitNotes = entry.data.portraitNotes;
+const hasPortraitNotes = Boolean(portraitNotes?.left || portraitNotes?.right);
 
 const stays = staysNewestFirst(
   entry.data.stays.map((s) => ({ checkIn: dateStr(s.checkIn), checkOut: dateStr(s.checkOut), dropIn: s.dropIn })),
@@ -204,14 +207,16 @@ let skinIndex = 0;
       {showLive && (
         <span id="stay-day" class="fact-chip" hidden></span>
       )}
-      {badge && (
+      {badge && !hasPortraitNotes && (
         <span class="badge-tape">{badge}</span>
       )}
     </div>
 
-    <button type="button" id="pat-dog" aria-label={`Pat ${name}`} class="guest-cutout block w-[calc(100%+16px)] -mx-2 mt-[18px] cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime" style={`height:${portraitHeight}px`}>
-      <Cutout photo={photo} name={name} loading="eager" height={portraitHeight} />
-    </button>
+    <PortraitNotes notes={portraitNotes} aspectRatio={photo ? photo.width / photo.height : undefined}>
+      <button type="button" id="pat-dog" aria-label={`Pat ${name}`} class="guest-cutout block w-[calc(100%+16px)] -mx-2 mt-[18px] cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime" style={hasPortraitNotes ? undefined : `height:${portraitHeight}px`}>
+        <Cutout photo={photo} name={name} loading="eager" height={portraitHeight} />
+      </button>
+    </PortraitNotes>
   </header>
 
   <script is:inline set:html={bubblesJs} />
@@ -220,7 +225,7 @@ let skinIndex = 0;
     // Left alone, it thinks out loud now and then.
     (function () {
       var dog = document.getElementById("pat-dog");
-      var card = dog.parentElement;
+      var card = dog.closest(".guest-hero");
       var bubbles = window.__tgpBubbles;
       var last;
       function replay(el, cls) {

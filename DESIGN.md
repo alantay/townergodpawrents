@@ -16,6 +16,7 @@ colors:
   card-line: "#cdbf9e"
   card-line-dark: "#5b6e50"
   line: "#a99b7f"
+  field-line: "#8a7d63"
 typography:
   display:
     fontFamily: "Instrument Serif, serif"
@@ -69,11 +70,11 @@ rounded:
 spacing:
   gutter: "20px"
   page: "700px"
+  admin-page: "460px"
   card-pad: "18px"
   print-mat: "7px"
 components:
   guest-hero:
-    backgroundColor: "{colors.ink}"
     textColor: "{colors.cream}"
     rounded: "{rounded.hero}"
     padding: "26px 24px 18px"
@@ -89,6 +90,16 @@ components:
     typography: "{typography.chip}"
     rounded: "0px"
     padding: "7px 11px"
+  admin-primary:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.cream}"
+    rounded: "{rounded.pill}"
+    padding: "17px 18px"
+  admin-field:
+    backgroundColor: "{colors.cream}"
+    textColor: "{colors.ink}"
+    rounded: "14px"
+    padding: "11px 13px"
   nav-pill:
     textColor: "{colors.ink}"
     typography: "{typography.chip}"
@@ -122,11 +133,11 @@ components:
 
 Every page is something Alan and Weiwen have just put down on the kitchen table: a warm paper ground with a few coloured cards on it, each a little crooked, photos slipped in as prints with a cream mat, notes on slips torn from a pad, and a scrap of post-it yellow tape holding something down. Nothing is aligned the way a template would align it, and nothing is decorated for its own sake either. Each tilt, tear and bit of tape copies something real you'd find in a scrapbook.
 
-The page is one narrow column (700px) read on a phone. Each dog is the main subject. It gets a big serif name, a colour of its own and a cutout photo standing in the hero card. Everything else stays quiet: warm neutrals, one small sans for the functional bits and a single acid-lime accent that means "look here" or "this is live".
+Public pages use one narrow column (700px) read on a phone. Private posting and notes pages use a tighter column (460px). Each dog is the main subject. It gets a big serif name, a colour of its own and a cutout photo standing in the hero card. Everything else stays quiet: warm neutrals, one small sans for the functional bits and a single acid-lime accent that means "look here" or "this is live".
 
-Motion is one-shot and physical. Cards arrive as if set down. Hover nudges a card up without straightening it: turning something big looks wonky, so only small things (the wordmark tag, a one-line link card) straighten. Once a card has arrived it stays put, apart from a couple of slow idle drifts on the cutout and the "Here today" tag. Those two loops are deliberate: they keep the page wacky and light, so don't stop them. The homepage hero also wears the day's weather (see Weather).
+Motion is one-shot and physical. Cards arrive as if set down. Hover nudges a card up without straightening it: turning something big looks wonky, so only small things (the wordmark tag, a one-line link card) straighten. Once a card has arrived it stays put, apart from a couple of slow idle drifts on the cutout and the "Here today" tag. Those loops keep the page light. The shared two-dog and three-dog portrait compositions deliberately disable the portrait drift so their collages stay together. The homepage hero also wears the day's weather (see Weather).
 
-On the homepage, a pat sends three cream outline hearts up from that dog's portrait alongside its hop and handwritten reply. Repeated pats replay the same bounded marks. Searching the empty sofa gives it a brief rocking rummage before its found-object note. Hero portraits lean closer on hover or keyboard focus; past-guest portraits tilt within their cards. These touches stay on the homepage. Reduced motion keeps the written replies and removes the new spatial effects. Hero CSS animations rest while offscreen or in a hidden tab and resume when visible.
+On the homepage, a pat sends three cream outline hearts up from that dog's portrait alongside its hop and handwritten reply. Repeated pats replay the same bounded marks. Searching the empty sofa gives it a brief rocking rummage before its found-object note. Hero portraits lean closer on hover or keyboard focus; past-guest portraits tilt within their cards. The diary portrait also answers pats and has occasional thought bubbles, an explicit exception to its quieter treatment. Weather, the sofa rummage and the wordmark peel stay on the homepage. Reduced motion keeps the written replies and removes the new spatial effects. Hero CSS animations rest while offscreen or in a hidden tab and resume when visible.
 
 **Key Characteristics:**
 - Warm paper ground, ink-green text, one lime accent, post-it yellow tape
@@ -173,6 +184,7 @@ Colours repeat across guests. Dates before 13 October 2026 keep the original Sof
 - **Muted Olive** (`muted`) / **Label Olive** (`label`): Secondary text, meta lines, uppercase labels and back links.
 - **Kraft Keyline** (`card-line`): The 1.5px edge on cream cards and prints. **Moss Keyline** (`card-line-dark`) is the same edge on the dark diary skins.
 - **Pencil Rule** (`line`): Section rules, nav underline, the timeline spine and outlined chips.
+- **Field Line** (`field-line`): The darker private-admin field border, distinct from the faint paper keylines. It is local to `src/styles/admin.css`.
 
 ### Named Rules
 **The One Highlighter Rule.** Lime means "current or active", nothing more. Hovers get inked, badges are tape strips, and tape is post-it yellow. Never use lime as a background panel, heading colour, hover fill or decoration.
@@ -185,10 +197,12 @@ Colours repeat across guests. Dates before 13 October 2026 keep the original Sof
 **Body Font:** Archivo (with Helvetica, sans-serif)
 **Script Font:** Caveat (with cursive)
 
+Fonts are configured in `astro.config.mjs`, fetched at build time and served from the site. Instrument Serif has normal and italic 400; Archivo has 400 and 600; Caveat has 500 and 600.
+
 **Character:** A tall, slightly literary serif carries the names and headings. A plain, sturdy grotesque handles the chips, labels and body text. The serif sets the mood and the sans does the practical work.
 
 ### Hierarchy
-- **Display** (400, clamp(62px, 19vw, 120px), 0.88, −0.02em): A dog's name in its hero. Two or more dogs stack one name per line at clamp(56px, 17vw, 96px), starting below the "Here today" tag so each line gets the full width. Homepage names use `fit-headline`, which keeps each line unbroken and shrinks with fitText() if a long name would overflow.
+- **Display** (400, clamp(62px, 19vw, 120px), 0.88, −0.02em): A dog's name in its hero. The two-dog homepage stacks names with line-height 0.95; the three-dog collage uses a balanced headline at clamp(48px, 11vw, 72px) with line-height 1. The diary uses clamp(42px, 12.5vw, 82px) and line-height 0.95 for a grouped guest. Homepage names use `fit-headline`, which keeps each line unbroken and shrinks with fitText() if a long name would overflow.
 - **Headline** (400, 32px, 1): Section heads like "The full diary", plus the wordmark at 21–26px.
 - **Title** (400, 24px, 1): Diary day labels ("13 Sep") and card names (22–27px).
 - **Tagline** (italic 400, 20–22px): A dog's one-liner under its name, in Pale Lime Wash on the hero, and the rotating joke line in the homepage footer, in ink.
@@ -209,9 +223,9 @@ Chip, Label, caption and slip sizes are written in rem, so they grow when a read
 5. **It's never the reading voice.** Diary notes, captions and intro copy are Archivo. One-liners and jokes go in Instrument Serif italic, the same voice as a dog's tagline.
 6. **It's 18px or larger, weight 500–600.** A name that runs out of room on a tape strip is cut off with "…"; that's accepted for now.
 
-The calendar is the one page that's meant to look handwritten. Everywhere else, the default is no Caveat.
+The calendar is meant to look handwritten. Private per-dog notes are another literal pen-on-paper surface: editable note lines use Caveat (23px, 1.25). Their handwritten multi-line notes and counts are deliberate exceptions to the short-scribble rule. Public diary prose remains Archivo.
 
-**Homepage exceptions.** Two homepage jokes are handwriting on purpose, even though neither is Alan or Weiwen writing on a sheet: the hero note (the dog answering a pat, or what the sofa coughed up) and the "part-time" scribble under the wordmark tape. Keep them to a few words and never below 18px. Nowhere else.
+**Portrait and homepage exceptions.** Dogs speak and think in Caveat bubbles on both the homepage and diary portrait (28px, 600; thoughts 500). The homepage sofa note and the "part-time" scribble beneath the wordmark tape also use handwriting. Diary portrait notes are another explicit exception: short chalk-like asides on the hero colour, with natural wrapping beside the photo on phones. These are bounded character voices and marginal notes, not the reading voice for the diary.
 
 ## Layout
 
@@ -232,7 +246,7 @@ Depth here is paper lying on paper. Shadows are soft and warm (a brown-olive tin
 - **Sticker** (`filter: drop-shadow(0 2px 2px rgb(30 32 25 / 0.28))`): Reaction stickers piled on a card corner.
 
 ### Named Rules
-**The Paper Not Glass Rule.** No blur-glow shadows, no neutral-grey elevation, no floating cards. If an object wouldn't cast that shadow lying on a table, don't give it that shadow. The day strip's backdrop blur is the single exception, because it's functional.
+**The Paper Not Glass Rule.** No blur-glow shadows, no neutral-grey elevation, no floating cards. If an object wouldn't cast that shadow lying on a table, don't give it that shadow. The day strip's backdrop blur is functional. Comic and thought bubbles intentionally have a hard ink-like offset shadow; this exception belongs to the bubbles, not ordinary cards.
 
 ## Shapes
 
@@ -246,7 +260,15 @@ Soft rectangles in stepped radii: 10px on a photo inside its print, 16px on the 
 ## Components
 
 ### Guest Hero
-The dog's own card. It fills with the guest's `bgColor`, has a 32px radius and cream text. It holds the display-size name, a Pale Lime Wash italic tagline, a row of chips and the cutout photo standing at the bottom edge (280px tall on the guest page). A lime "Here today" tag sits top-right; on the homepage it wiggles slowly and the hero pops in with a small rotate-and-scale.
+The dog's own card. Its background is resolved from the guest's `bgColor`. It has a 32px radius and cream text, with a display-size name, a Pale Lime Wash italic tagline, a row of chips and the cutout photo standing at the bottom edge (280px tall on the guest page). On live guest pages the title leaves 112px of right clearance for the "Here today" tag. A lime "Here today" tag sits top-right; on the homepage it wiggles slowly and the hero pops in with a small rotate-and-scale.
+
+### Shared Portraits and Drop-ins
+Two guest groups share a portrait row with matching height, bottom-aligned cutouts, opposing 3-degree tilts and soft cutout shadows. A guest may supply `sharedPhoto` when its solo portrait is a close headshot; the diary keeps its normal portrait. Three groups form an overlapping collage, with a taller composition at widths up to 450px. These arrangements keep their resting tilts and disable the usual portrait drift.
+
+A drop-in is tucked below the homepage hero as a separate card in that guest's colour. It has a dashed inset edge, an offset tilt and a small portrait. Pulling it out expands the card from 200px to 290px; reduced motion removes the transition. Calendar and diary stay ranges use a small house mark instead. This treatment describes location, not availability.
+
+### Portrait Speech and Thoughts
+Pats create a cream comic bubble with an ink border and tail. Idle thoughts use a fitted ink-cloud outline with trailing dots. Both are positioned near the dog's head, bounded to 70% of the hero or 240px. They ignore pointer events. The shared `dog-bubbles.ts` behavior is used on both homepage and diary; reduced motion removes their spatial pop while keeping the words.
 
 ### Chips
 - **Cream chip:** cream on the hero, ink text, 13px/600, 7px 13px, pill. Used for breed, stay range and stay day.
@@ -282,39 +304,31 @@ A sticky, horizontally scrolling row of outlined day chips on translucent paper.
 
 The exit chip (`day-chip--exit`) is the same pill filled with ink, paper text, a size up (14px). It's the homepage's way into a dog's full diary, sitting under today's entries, and it hovers moss.
 
+### Calendar Sheets
+Months are taped cream planner sheets with 26px / 20px / 24px padding. The paper has a pale fibre border and a soft shadow, but deliberately no SVG torn-edge filter: those filters caused iPhone scrolling blanks. Week rules keep their own filtered layer, with wobble disabled on 1x screens. Stays are washi strips tinted from the guest's colour: stripes mean here now, dots mean gone home, dashed outlines mean coming up. Today gets an off-round red biro ring. The calendar does not lift on hover.
+
+### Private Posting and Notes
+`/admin` and `/admin/notes` share the site's palette, fonts and a 460px column. Their controls prioritize phone input: cream fields with darker Field Line borders, 14px corners and 16px Archivo; labels use 12px/600 uppercase Archivo. Focus is a 2px ink outline. Primary actions are ink pills with cream type; secondary actions are outlined or plain text. Disabled controls lower their opacity and use the waiting cursor. Errors are red biro text.
+
+The post composer has selectable guest chips, photo/clip previews, a review area and an ink confirmation panel. Selected guest chips use lime for the active state. Private notes use taped cream slips and handwriting for editable note text; guests not staying today fold into plain disclosure rows. These forms belong to the private admin surface, not the public diary.
+
+### Diary Portrait Notes
+The tagline introduces the dog. Optional `portraitNotes` are the "by the way" asides: specific little habits, placed around the portrait rather than a second introduction. A dog may have a note on either side or no notes at all. Diary headers with notes omit the personality badge; their tagline, name, breed and stay dates remain. Homepage badges and taglines are unchanged, and the homepage does not render these notes.
+
+Notes are cream Caveat (600, 19–24px, line-height 0.98), with a slight chalk edge. The right note has a loose arrow with clearance from the cut-out; the left has an underline. The portrait adapts to make room for text, and notes wrap naturally on narrow phones. These marks are readable text, ignore pointer events and leave the pat interaction intact. There are no awards, laurels, dropdowns, paper backing or separate awards page. The approved examples on Ebi are "Devours her food in seconds" and "Can hold a stay forever".
+
 ### Weather
 The homepage hero wears one weather at a time, read from NEA for Kallang (which covers Towner). The diary and every other page stay dry.
 
 - **Haze** when the central 24-hour PSI is over 100: three layers of grey smog (`--smog: 192 195 198`) drift across the dogs and thin out before the chips, so the name stays clear. It thickens with the reading, from 0.4 just over 100 to full strength at about 230.
 - **Rain** when the 2-hour forecast says showers: streaks and drops drawn on a canvas over the hero, heavier when the forecast says heavy or thundery. Thundery showers add a pale double flash (`#f4f6ff`) every 7 seconds.
-- **Heat** at 33°C or more: the cutouts shimmer like a road in the sun, with a warm glow coming up from the bottom of the card.
+- **Heat** at 34°C or more: cream heat lines rise from the dogs, with a warm glow below and drifting sun glare above. This replaced the SVG-filter shimmer for iOS compatibility.
 
 Haze wins over rain, and rain over heat. A small tilted tag in the hero's bottom-right corner says which it is ("PSI 170", "Thundery Showers", "34°C"): haze grey, rain `#b9cdd6`, storm `#e4e0a6`, heat `#f3bf7e`, always ink text. These colours belong to the sky and are used nowhere else.
 
-Rain and shimmer stop while the hero is scrolled out of sight. Under `prefers-reduced-motion` the smog, rain and shimmer hold still and the lightning is off. `?psi=170`, `?sky=Thundery Showers` and `?temp=34` preview each one.
+Homepage weather effects pause offscreen or in a hidden tab. Under `prefers-reduced-motion`, the smog and sun hold still, heat lines remain static and the lightning is off. `?psi=170`, `?sky=Thundery Showers` and `?temp=34` preview each one.
 
-## Do's and Don'ts
-
-### Do:
-- **Do** build new surfaces from paper objects: a card, a print on a mat, a torn slip, a scrap of tape, a sticker.
-- **Do** give every new card or print a small tilt (±0.4°–2°) and keep it on hover. Straighten only small things, with the 200ms `cubic-bezier(0.16, 1, 0.3, 1)` ease; a big card turning looks wonky. The calendar doesn't move on hover at all, since its sheets and polaroids are taped down. A focus ring still shows. A tape strip opens that dog's diary on a tap, and the first sheet with a stay prints a key in Label type under its weeks: Here now, Coming up, Gone home.
-- **Do** take saturated colour from the guest's `bgColor` and derive tints with `diarySkin()` instead of inventing new colours.
-- **Do** keep entrances one-shot (520–620ms, same ease, 90ms stagger), and turn every animation off under `prefers-reduced-motion`.
-- **Do** give small controls an invisible `::before` hit area rather than enlarging them.
-- **Do** put hover movement inside `@media (hover: hover)`, so a lift doesn't stick after a tap on a phone.
-- **Do** use tabular numbers for dates, counts and stay ranges.
-
-### Don't:
-- **Don't** use lime for anything other than current/active state. Tape is post-it yellow.
-- **Don't** use grey or blue-black shadows, glows or glassmorphism. Shadows are warm and low.
-- **Don't** put a transform or filter on an ancestor of a `<video>`; video entries stay level.
-- **Don't** add a fourth typeface, or use Caveat anywhere the Pen on Paper Rule doesn't allow.
-- **Don't** add buttons, forms or sections that look like a service site (CTA bars, pricing cards, testimonial blocks). The only interactive pieces are navigation, day chips, prints and reactions.
-- **Don't** apply the tear filter to text; tear the paper layer only.
-- **Don't** make the photo credit or the empty reaction icon louder, and don't end the wiggle or the cutout drift. They're faint, and looping, on purpose.
-
-
-## Implementation reference
+### Implementation Reference
 
 `src/styles/global.css` owns the shared paper objects. Use these classes in Astro markup and browser-generated homepage markup alike:
 
@@ -333,4 +347,26 @@ Rain and shimmer stop while the hero is scrolled out of sight. Under `prefers-re
 
 Two and four prints use equal-width columns from 480px up and one column below it. Mixed landscape and portrait pairs stay in one column at every screen size, with each photo shown in full. Three prints remain a single column. Video cards and mats stay level. The dark diary link hovers moss, keeping lime for current state. The calendar's red biro ring around today and red busy-sofa annotation are intentional pen-on-paper accents.
 
-The unlisted, noindex `/design` page shows these shared classes using real diary photos. It is a reference for changes, not another visitor destination. This document and the implementation are the design sources; there is no generated design sidecar to keep in sync.
+The unlisted, noindex `/design` page shows these shared classes using real diary photos. It is a reference for changes, not another visitor destination. This document and the implementation are the design sources. `.impeccable/design.json` is the generated companion for component previews and metadata; token primitives remain in this file's frontmatter.
+
+Refreshed against the current working tree on 14 November 2026, including the approved diary portrait notes. Sources: `src/styles/global.css`, `src/styles/admin.css`, `src/components/`, `src/pages/`, and `astro.config.mjs`.
+
+## Do's and Don'ts
+
+### Do:
+- **Do** build new surfaces from the established paper vocabulary: cards, matted prints, torn slips, tape and stickers. Diary portrait notes are a deliberate exception, written directly beside the cut-out without an extra paper object.
+- **Do** give every new card or print a small tilt (±0.4°–2°) and keep it on hover. Straighten only small things, with the 200ms `cubic-bezier(0.16, 1, 0.3, 1)` ease; a big card turning looks wonky. The calendar doesn't move on hover at all, since its sheets and polaroids are taped down. A focus ring still shows. A tape strip opens that dog's diary on a tap, and the first sheet with a stay prints a key in Label type under its weeks: Here now, Coming up, Gone home.
+- **Do** take saturated colour from the guest's `bgColor` and derive tints with `diarySkin()` instead of inventing new colours.
+- **Do** keep entrances one-shot (520–620ms, same ease, 90ms stagger), and turn every animation off under `prefers-reduced-motion`.
+- **Do** give small controls an invisible `::before` hit area rather than enlarging them.
+- **Do** put hover movement inside `@media (hover: hover)`, so a lift doesn't stick after a tap on a phone.
+- **Do** use tabular numbers for dates, counts and stay ranges.
+
+### Don't:
+- **Don't** use lime for anything other than current/active state. Tape is post-it yellow.
+- **Don't** use grey or blue-black shadows, glows or glassmorphism. Shadows are warm and low.
+- **Don't** put a transform or filter on an ancestor of a `<video>`; video entries stay level.
+- **Don't** add a fourth typeface, or use Caveat anywhere the Pen on Paper Rule doesn't allow.
+- **Don't** add buttons, forms or sections that look like a service site (CTA bars, pricing cards, testimonial blocks). Public interactions serve reading or the established playful touches; private posting and notes controls stay in admin.
+- **Don't** apply the tear filter to text; tear the paper layer only.
+- **Don't** make the photo credit or the empty reaction icon louder, and don't end the wiggle or the cutout drift. They're faint, and looping, on purpose.
