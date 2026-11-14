@@ -6,8 +6,8 @@ import { POST_KEY_RE } from "./constants.ts";
 import { fallbackAlt } from "./format.ts";
 import type { GitHub } from "./github.ts";
 import { json } from "./http.ts";
-import { insertEntry, nextId, sanitizeAlt } from "../diary-file.ts";
-import { photoName, slugWords } from "./photo-name.ts";
+import { sanitizeAlt } from "../diary-file.ts";
+import { fileEntry } from "./file-entry.ts";
 import { cachedAlt } from "./photo-descriptions.ts";
 import type { KeyStore } from "./store.ts";
 import type { Ai, GuestInfo, Photo } from "./types.ts";
@@ -114,8 +114,6 @@ export function postApi(deps: {
         if (guarded) await deps.store().set(key, url, DONE_SECONDS).catch(() => {});
         return json({ ok: true, url, pending: true });
       }
-      const words = slugWords(input.text, guest.name);
-
       // Read everything fresh at the branch head, so a retry after the branch
       // moved files the entry against what's really there.
       async function attempt(): Promise<void> {
@@ -124,22 +122,18 @@ export function postApi(deps: {
         const files = (await gh.listDir(GUESTS_DIR, head)).filter((name) => name.endsWith(".md"));
         const own = `${guest.id}.md`;
         if (!files.includes(own)) files.push(own);
-        const markdowns = await Promise.all(files.map((name) => gh.readFile(`${GUESTS_DIR}/${name}`, head)));
+        const markdowns = Object.fromEntries(await Promise.all(
+          files.map(async (name) => [name.slice(0, -3), await gh.readFile(`${GUESTS_DIR}/${name}`, head)]),
+        ));
         const taken = new Set(await gh.listDir(`${GUESTS_DIR}/${guest.id}`, head));
-        const images = input.photos.map((_, i) => ({ alt: alts[i], file: photoName(guest.id, words, taken) }));
-        const markdown = insertEntry(
-          markdowns[files.indexOf(own)],
-          { iso: input.iso, time: input.time, label: input.label, noTime: input.noTime, with: input.with, text: input.text, images, id: nextId(markdowns) },
-          guest.stays,
-          guest.id,
-        );
+        const filed = fileEntry(input, guest, alts.map((alt) => ({ alt, video: false })), markdowns, taken);
         await gh.commit(
           head,
           [
-            { path: `${GUESTS_DIR}/${own}`, content: markdown },
-            ...images.map((img, i) => ({ path: `${GUESTS_DIR}/${guest.id}/${img.file}`, content: input.photos[i].bytes })),
+            { path: `${GUESTS_DIR}/${own}`, content: filed.markdown },
+            ...filed.media.map((m, i) => ({ path: `${GUESTS_DIR}/${guest.id}/${m.file}`, content: input.photos[i].bytes })),
           ],
-          `Add ${guest.name} ${input.time} ${words.join(" ")} entry (via admin)`,
+          filed.message,
         );
       }
 
