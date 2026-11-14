@@ -1,0 +1,479 @@
+<!doctype html><meta charset="utf-8">
+<title>The Egg Heist · Paper</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+/* A warm notebook margin around one responsive, deliberately green-grey CCTV feed. */
+:root {
+  color-scheme: light;
+  --bg:#f5efe4; --ink:#382d26; --muted:#786658; --accent:#A34A2E;
+  --line:#d4c5b2; --paper:#fffaf1; --focus:#7b351f; --selection:#eed0ad;
+  --rail:#dfd3c3; --band:#9caa79; --perfect:#e4eac2; --marker:#392c23;
+  --shadow:rgba(56,45,38,.16); --clear:transparent;
+  --camera:#7c8478; --floor:#a8afa0; --grout:#8e9787; --counter:#b0b3a7;
+  --counter-edge:#747b6e; --counter-speck:rgba(55,66,46,.1);
+  --cctv-ink:#edf0dd; --cctv-panel:rgba(26,34,25,.78); --vignette:rgba(24,33,24,.46);
+  --scan:rgba(31,44,28,.07); --grain:rgba(235,240,211,.10); --rec:#d8aa8e;
+  --carton:#9a6263; --carton-edge:#674c4b; --carton-well:#765354;
+  --egg:#e1dac0; --egg-shadow:#bab49c; --shell:#eee4c9; --yolk:#d8bb55;
+  --dog-shadow:rgba(28,34,23,.34); --paw:#c4b092; --paw-line:#8f806b;
+  --door:#75816c; --door-edge:#4b5946; --door-light:rgba(247,239,191,.39);
+  --bubble:#f2efd9; --bubble-ink:#394030;
+}
+@media (prefers-color-scheme:dark) {
+  :root:not([data-theme="light"]) {
+    --bg:#251f1b; --ink:#f0e4d3; --muted:#c0aa96; --accent:#d98c68;
+    --line:#655044; --paper:#352a23; --focus:#f1bb87; --selection:#67462f;
+    --rail:#514339; --band:#84995e; --perfect:#d9e6b6; --marker:#fff0da;
+    --shadow:rgba(10,8,6,.36); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:#251f1b; --ink:#f0e4d3; --muted:#c0aa96; --accent:#d98c68;
+  --line:#655044; --paper:#352a23; --focus:#f1bb87; --selection:#67462f;
+  --rail:#514339; --band:#84995e; --perfect:#d9e6b6; --marker:#fff0da;
+  --shadow:rgba(10,8,6,.36); color-scheme:dark;
+}
+* { box-sizing:border-box; }
+[hidden] { display:none !important; }
+body {
+  margin:0; background:var(--bg); color:var(--ink);
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:clamp(24px,6vh,60px); font-family:"Avenir Next",Avenir,"Segoe UI",sans-serif;
+  -webkit-tap-highlight-color:var(--clear); scrollbar-color:var(--muted) var(--bg);
+}
+::selection { background:var(--selection); color:var(--ink); }
+main { width:720px; max-width:100%; margin-inline:auto; }
+h1 { margin:0 0 22px; font:italic 500 clamp(2.4rem,7vw,3.8rem)/1.05 Georgia,"Times New Roman",serif; letter-spacing:-.035em; text-wrap:balance; }
+h1 span { color:var(--accent); }
+.camera {
+  position:relative; isolation:isolate; width:100%; max-width:100%; aspect-ratio:4/3;
+  overflow:hidden; background:var(--camera); border-radius:6px 6px 3px 3px;
+  box-shadow:0 12px 36px var(--shadow); touch-action:none; user-select:none;
+  -webkit-user-select:none; cursor:grab; outline-offset:6px;
+}
+.camera[data-phase="charging"] { cursor:grabbing; }
+.camera:focus-visible,button:focus-visible { outline:3px solid var(--focus); outline-offset:6px; }
+.floor { position:absolute; inset:0 0 65%; background-color:var(--floor);
+  background-image:linear-gradient(90deg,var(--grout) 1px,var(--clear) 1px),linear-gradient(var(--grout) 1px,var(--clear) 1px);
+  background-size:25% 50%; transform:scale(1.04); }
+.counter { position:absolute; z-index:3; inset:35% 0 0; border-top:5px solid var(--counter-edge);
+  background:radial-gradient(ellipse at 36% 25%,var(--counter-speck) .6px,var(--clear) .9px) 0 0/7px 6px,var(--counter); }
+.counter::after { content:""; position:absolute; inset:0; box-shadow:inset 0 12px 20px -13px var(--vignette); }
+.dog { position:absolute; z-index:2; width:24%; left:60%; top:0; transform-origin:50% 25%; will-change:transform; }
+.dog img { display:block; width:100%; height:auto; filter:saturate(.48) contrast(.91) brightness(.94) drop-shadow(0 5px 3px var(--dog-shadow)); pointer-events:none; }
+.paw { position:absolute; z-index:6; width:4.5%; height:4%; left:50%; top:35%; border-radius:46%; background:var(--paw); border:1px solid var(--paw-line); box-shadow:0 3px 3px var(--dog-shadow); transform:translate(-50%,-50%); }
+.paw::after { content:""; position:absolute; height:30%; left:33%; top:63%; width:1px; background:var(--paw-line); box-shadow:4px 0 var(--paw-line); }
+.tray { position:absolute; z-index:5; width:18%; height:15%; left:60%; top:57%; border-radius:9%; padding:1.2%;
+  background:var(--carton); border:2px solid var(--carton-edge); box-shadow:0 5px 7px var(--dog-shadow);
+  display:grid; grid-template-columns:repeat(3,1fr); gap:8%; transform-origin:center; will-change:transform; }
+.egg { display:block; border-radius:48% 48% 45% 45%; background:var(--egg); box-shadow:inset -3px -3px 0 var(--egg-shadow),0 0 0 2px var(--carton-well); }
+.door-frame { position:absolute; z-index:1; top:2%; left:-1%; width:15%; height:29%; border:3px solid var(--door-edge); border-radius:2px; perspective:200px; }
+.door { position:absolute; inset:0; background:var(--door); border:2px solid var(--door-edge); transform-origin:left center; }
+.door::after { content:""; position:absolute; right:10%; top:49%; width:7%; height:8%; border-radius:50%; background:var(--door-edge); }
+.door-light { position:absolute; z-index:1; left:0; top:0; width:68%; height:36%; background:var(--door-light); clip-path:polygon(0 5%,25% 1%,100% 100%,0 100%); pointer-events:none; }
+.mess { position:absolute; z-index:1; width:23%; height:12%; left:58%; top:21%; transform:translate(-50%,-50%); }
+.crack { position:absolute; width:42%; height:37%; border-radius:42% 64% 35% 52%; background:var(--yolk); transform:rotate(-19deg); }
+.crack:nth-child(2) { left:51%; top:32%; transform:rotate(24deg); }
+.crack:nth-child(3) { left:15%; top:55%; transform:rotate(8deg); }
+.crack::before,.crack::after { content:""; position:absolute; width:35%; height:80%; top:-14%; background:var(--shell); clip-path:polygon(10% 0,100% 0,81% 44%,100% 65%,18% 100%,0 30%); transform:rotate(-28deg); }
+.crack::after { left:80%; top:10%; transform:rotate(44deg); }
+.camera::before { content:""; position:absolute; z-index:9; inset:0; pointer-events:none;
+  background:repeating-linear-gradient(0deg,var(--scan) 0 1px,var(--clear) 1px 3px),radial-gradient(ellipse at 50% 40%,var(--clear) 35%,var(--vignette) 100%); }
+.camera::after { content:""; position:absolute; z-index:10; inset:0; pointer-events:none; opacity:.6;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath filter='url(%23n)' opacity='.12' d='M0 0h110v110H0z'/%3E%3C/svg%3E"); mix-blend-mode:soft-light; }
+.timestamp,.cam-id { position:absolute; z-index:11; top:3.5%; font:clamp(.54rem,2.15vw,.92rem)/1.3 ui-monospace,SFMono-Regular,Consolas,monospace; font-variant-numeric:tabular-nums; color:var(--cctv-ink); background:var(--cctv-panel); padding:4px 6px; }
+.timestamp { left:3%; } .cam-id { right:3%; display:flex; align-items:center; gap:6px; }
+.cam-id i { width:5px; height:5px; border-radius:50%; background:var(--rec); }
+.bubble { position:absolute; z-index:12; max-width:45%; top:20%; left:25%; margin:0; padding:9px 12px; border-radius:12px 12px 1px 12px;
+  background:var(--bubble); color:var(--bubble-ink); box-shadow:0 3px 8px var(--dog-shadow); font-size:clamp(.68rem,2.5vw,.94rem); line-height:1.25; text-wrap:balance; transform:translateX(-50%); }
+.intro { position:absolute; z-index:13; inset:0; display:grid; place-items:center; pointer-events:none; background:var(--scan); }
+.intro p { margin:0; padding:10px 16px; color:var(--cctv-ink); background:var(--cctv-panel); font:clamp(1.25rem,4vw,2rem) Georgia,serif; }
+.end-card { position:absolute; z-index:15; left:50%; top:69%; width:max-content; max-width:90%; transform:translate(-50%,-50%) rotate(-2deg);
+  padding:clamp(14px,4vw,25px) clamp(18px,5vw,32px); background:var(--paper); color:var(--ink); box-shadow:0 8px 18px var(--dog-shadow); text-align:center; }
+.end-card p { margin:0 0 12px; font:clamp(1.2rem,4vw,1.9rem)/1.15 Georgia,serif; }
+button { min-height:44px; min-width:112px; border:0; border-radius:4px; padding:10px 17px; background:var(--accent); color:var(--paper); cursor:pointer; font:600 .9rem/1.2 "Avenir Next",Avenir,"Segoe UI",sans-serif; touch-action:manipulation; }
+button:hover { text-decoration:underline; text-underline-offset:3px; } button:active { transform:translateY(1px); }
+.hud { margin-top:22px; }
+.hud-labels { display:flex; gap:10px; align-items:baseline; justify-content:space-between; margin-bottom:12px; min-height:1.3em; }
+.hint { color:var(--muted); font-size:.94rem; } .count { margin-left:auto; font-size:.88rem; font-variant-numeric:tabular-nums; }
+.bar { position:relative; height:22px; background:var(--rail); border-radius:3px; isolation:isolate; }
+.fill { position:absolute; inset:0 auto 0 0; width:0; background:var(--accent); opacity:.6; border-radius:3px 0 0 3px; }
+.band { position:absolute; inset:0 auto 0 0; width:14%; background:var(--band); box-shadow:inset 0 0 0 1px var(--bubble-ink); }
+.perfect { position:absolute; inset:0 auto 0 0; width:5%; background:var(--perfect); }
+.needle { position:absolute; top:-5px; bottom:-5px; width:3px; background:var(--marker); transform:translateX(-50%); }
+.release { position:absolute; width:10px; height:10px; top:-13px; background:var(--marker); clip-path:polygon(0 0,100% 0,50% 100%); transform:translateX(-50%); }
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
+@media (max-width:420px) { h1 { margin-bottom:18px; } .hud { margin-top:20px; } .bubble { padding:6px 8px; } .counter { border-top-width:3px; } .tray { border-width:1px; } }
+@media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; animation:none !important; transition:none !important; } .camera::after { opacity:.35; } }
+
+.dog{width:26%;top:1%;transform-origin:50% 85%}
+.dog .sprite{display:none;width:100%;height:auto;overflow:visible;filter:saturate(.8) contrast(.96);pointer-events:none}
+.dog[data-pose="crouch"] .sprite-crouch,.dog[data-pose="launch"] .sprite-launch,.dog[data-pose="reach"] .sprite-reach,.dog[data-pose="land"] .sprite-land{display:block}
+.dog .innocent{display:none}.dog[data-pose="innocent"] .innocent{display:block}
+.dog-shadow{position:absolute;z-index:1;left:60%;top:30%;width:18%;height:4%;border-radius:50%;background:rgba(40,30,20,.25);filter:blur(3px);transform:translateX(-50%);pointer-events:none}
+
+/* Side elevation: paws, counter edge and tray share one camera plane. */
+.camera{background:#ddd4c4;aspect-ratio:4/3}
+.camera::before,.camera::after{display:none}
+.floor{inset:89% 0 0;background:#c0ad91;border-top:2px solid #9b876b;transform:none}
+.counter{inset:44% 0 11% 65%;background:#9b8060;border-top:9px solid #e2dac8;border-left:3px solid #705c44;box-shadow:3px 6px 10px rgba(55,35,15,.15)}
+.counter::after{inset:15% 12% 12%;border:1px solid #735c43;box-shadow:none}
+.dog{width:40%;left:49%;top:auto;bottom:10%;transform-origin:50% 100%}
+.dog .sprite{filter:none}.dog-shadow{left:45%;top:88%;width:25%;height:3%}
+.tray{width:18%;height:7%;padding:.5%;left:78%;top:43%;border-radius:3px;gap:3%;box-shadow:0 3px 3px rgba(55,35,15,.2)}
+.egg{border-radius:50% 50% 30% 30%;box-shadow:inset -2px -2px 0 var(--egg-shadow)}
+.timestamp,.cam-id{display:none}.door-frame{top:27%;height:62%;width:18%;left:3%;background:#c4b598;border-color:#9b876b}.door{background:#c7b79b;border-color:#9b876b}
+.bubble{left:9%;top:12%;max-width:42%}.mess{left:57%;top:88%;height:6%;z-index:4}
+.end-card{top:67%}.door-light{top:30%;height:60%}
+.tray{display:flex;align-items:flex-end;gap:2%;border:0;border-bottom:5px solid var(--carton-edge);background:linear-gradient(to bottom,transparent 65%,var(--carton) 65%)}.tray .egg{width:15%;height:95%;flex-shrink:0;border-radius:48% 48% 35% 35%}
+:root{--bg:#efe7d8;--ink:#322c24;--muted:#655747;--accent:#a34a2e;--paper:#fff8ea;--rail:#d9cbb6;--band:#758452;--perfect:#dee4ad;--marker:#352b20;color-scheme:light}
+body{min-height:100vh}.camera{background:#dec9a6 url('assets/kitchen.png') center/100% 100% no-repeat;box-shadow:0 8px 28px rgba(80,49,19,.16);border-radius:5px}
+.floor,.counter,.door-frame,.door-light{display:none}
+.dog{width:46%;left:46.4%;bottom:6%;top:auto;z-index:6}
+.dog .sprite{filter:none}.dog-shadow{left:44.5%;top:93%;height:1.8%;width:27%;filter:blur(5px);background:rgba(94,56,19,.2)}
+.tray{width:24%;height:auto;aspect-ratio:470/140;background:none;border:0;padding:0;display:block;box-shadow:none;transform-origin:10% 85%}
+.tray svg,.mess svg{display:block;width:100%;height:auto;overflow:hidden}
+.mess{width:25%;height:auto;left:59%;top:92%;background:none}
+.bubble{top:16%;left:14%;color:#403321;background:#fff7e5;box-shadow:0 3px 10px rgba(88,55,20,.13)}
+.intro{background:transparent}.intro p{background:#fff7e5;color:#403321;box-shadow:0 3px 12px rgba(88,55,20,.13)}
+</style>
+<main><p style="font-size:14px"><a href="https://claude.ai/artifact/9ouwAj44h5WeZ5AcemnjFG" style="color:inherit">Art directions</a></p>
+  <h1>The <span>Egg Heist</span></h1>
+  <div id="game" class="camera" tabindex="0" role="group" aria-label="Ebi's egg heist, side view. Hold here or hold Space to charge. Release in the green band to hook the tray. Too much power pushes it back." aria-describedby="status">
+    <div class="floor" aria-hidden="true"></div>
+    <div id="light" class="door-light" hidden aria-hidden="true"></div>
+    <div class="door-frame" aria-hidden="true"><div id="door" class="door"></div></div>
+    <div id="mess" class="mess" hidden aria-hidden="true"><svg class="paint-mess" viewBox="0 0 460 135" aria-hidden="true"><defs><clipPath id="a-mess"><rect width="460" height="135"/></clipPath></defs><g clip-path="url(#a-mess)"><image id="paint-sheet" href="assets/sprites.png" x="-1050" y="-740" width="1536" height="1024"/></g></svg></div>
+    <div id="dog-shadow" class="dog-shadow" aria-hidden="true"></div><div id="dog" class="dog" aria-hidden="true"><svg class="sprite sprite-crouch" viewBox="0 0 512 512" aria-hidden="true"><defs><clipPath id="a-crouch"><rect width="512" height="512"/></clipPath></defs><g clip-path="url(#a-crouch)"><image data-sheet="true" x="0" y="0" width="1536" height="1024"/></g></svg><svg class="sprite sprite-launch" viewBox="0 0 512 512" aria-hidden="true"><defs><clipPath id="a-launch"><rect width="512" height="512"/></clipPath></defs><g clip-path="url(#a-launch)"><image data-sheet="true" x="-512" y="0" width="1536" height="1024"/></g></svg><svg class="sprite sprite-reach" viewBox="0 0 512 512" aria-hidden="true"><defs><clipPath id="a-reach"><rect width="512" height="512"/></clipPath></defs><g clip-path="url(#a-reach)"><image data-sheet="true" x="-1024" y="0" width="1536" height="1024"/></g></svg><svg class="sprite sprite-land" viewBox="0 0 512 512" aria-hidden="true"><defs><clipPath id="a-land"><rect width="512" height="512"/></clipPath></defs><g clip-path="url(#a-land)"><image data-sheet="true" x="0" y="-512" width="1536" height="1024"/></g></svg></div>
+    <div class="counter" aria-hidden="true"></div>
+    <div id="tray" class="tray" aria-hidden="true"><svg class="paint-eggs" viewBox="0 0 470 140" aria-hidden="true"><defs><clipPath id="a-eggs"><rect width="470" height="140"/></clipPath></defs><g clip-path="url(#a-eggs)"><image data-sheet="true" x="-535" y="-710" width="1536" height="1024"/></g></svg></div>
+    <i id="paw1" class="paw" hidden aria-hidden="true"></i><i id="paw2" class="paw" hidden aria-hidden="true"></i>
+    <time id="timestamp" class="timestamp">2025-09-29 11:28:49</time>
+    <span class="cam-id" aria-hidden="true"><i></i>CAM 01</span>
+    <p id="bubble" class="bubble" hidden aria-hidden="true"></p>
+    <div id="intro" class="intro" hidden><p>House empty.</p></div>
+    <div id="card" class="end-card" hidden><p id="ending"></p><button id="replay" type="button">Go again</button></div>
+  </div>
+  <div id="hud" class="hud">
+    <div class="hud-labels"><span id="hint" class="hint">Hold to jump</span><output id="count" class="count">Jumps: 0</output></div>
+    <div class="bar" aria-hidden="true"><div id="fill" class="fill"></div><div id="band" class="band"></div><div id="perfect" class="perfect"></div><div id="needle" class="needle"></div><div id="release" class="release" hidden></div></div>
+  </div>
+  <p id="status" class="sr-only" role="status" aria-live="polite" aria-atomic="true">Hold and release to jump.</p>
+</main>
+<script>
+'use strict';
+const paintedSheet = document.getElementById('paint-sheet').getAttribute('href');
+document.querySelectorAll('image[data-sheet]').forEach(image => image.setAttribute('href', paintedSheet));
+// Feel knobs. Widths are FULL widths, and time is elapsed milliseconds.
+const TARGET_UNITS = 20;
+const SWEEP_MS = 1100;
+const SWEET_WIDTH = 0.14;
+const PERFECT_WIDTH = 0.05;
+const SHIFT = 0.08;
+const CENTRE_MIN = 0.47;
+const CENTRE_MAX = 0.85;
+const INITIAL_CENTRE = 0.7;
+const MAX_TILT_DEG = 20;
+const JUMP_MS = 760;
+const REDUCED_JUMP_MS = 160;
+const RELEASE_HOLD_MS = 600;
+const BUBBLE_MS = 1200;
+const INTRO_MS = 2000;
+const REDUCED_INTRO_MS = 700;
+const TRAY_FALL_MS = 700;
+const EAT_MS = 1100;
+const DOOR_OPEN_MS = 650;
+const INNOCENT_PAUSE_MS = 550;
+const REDUCED_BEAT_MS = 180;
+const TRAY_START_Y = 57;
+const TRAY_DRAG_DISTANCE = 9;
+const CAMERA_START = Date.UTC(2025, 8, 29, 11, 28, 49);
+const CAMERA_RETURN = Date.UTC(2025, 8, 29, 18, 42, 7);
+
+function triangle(elapsedMs) {
+  const phase = ((Math.max(0, elapsedMs) % (SWEEP_MS * 2)) / SWEEP_MS);
+  return phase <= 1 ? phase : 2 - phase;
+}
+function classify(power, centre) {
+  // Epsilon makes mathematically equal decimal band edges inclusive.
+  const epsilon = 1e-10;
+  if (power < centre - SWEET_WIDTH / 2 - epsilon) return 'miss';
+  if (power > centre + SWEET_WIDTH / 2 + epsilon) return 'strong';
+  return Math.abs(power - centre) <= PERFECT_WIDTH / 2 + epsilon ? 'perfect' : 'hook';
+}
+function progressAfter(units, outcome) {
+  return Math.min(TARGET_UNITS, Math.max(0, units + ({miss:0, hook:2, perfect:3, strong:-2}[outcome])));
+}
+const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+const mix = (a, b, t) => a + (b - a) * t;
+const smooth = t => { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); };
+const trayY = units => 33;
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+const ui = Object.fromEntries(['game','light','door','mess','dog','tray','paw1','paw2','timestamp','bubble','intro','card','ending','replay','hud','hint','count','fill','band','perfect','needle','release','status'].map(id => [id, document.getElementById(id)]));
+const state = {};
+const LINES = {
+  miss:['Again.', 'Still here.', 'A little higher.', 'Nobody saw that.'],
+  hook:['Nearly mine.', 'That moved.', 'Good. Again.', 'Coming along.'],
+  strong:["That was the counter's fault.", 'Too much enthusiasm.', 'A minor setback.', 'I meant to do that.'],
+  win:['Worth it.', 'Lunch, then.', 'All accounted for.', 'I was here the whole time.']
+};
+function think(category, now) {
+  const choices = LINES[category];
+  const previous = state.previousLines[category];
+  const available = choices.map((_, index) => index).filter(index => index !== previous);
+  const index = available[Math.floor(Math.random() * available.length)];
+  state.previousLines[category] = index;
+  state.bubble = choices[index];
+  state.bubbleUntil = now + BUBBLE_MS;
+}
+
+function reset(now = performance.now()) {
+  Object.assign(state, {
+    phase:'intro', phaseStart:now, units:0, fromUnits:0, toUnits:0,
+    attempts:0, hooks:0, perfects:0, overshoots:0, startedAt:0,
+    centre:INITIAL_CENTRE, nextCentre:INITIAL_CENTRE, owner:null,
+    chargeStart:0, power:0, releasePower:0, releaseCentre:INITIAL_CENTRE,
+    releaseUntil:0, outcome:null, tilt:0, fromTilt:0, toTilt:0,
+    jumpDuration:JUMP_MS, reduced:motionPreference.matches,
+    bubble:'', bubbleUntil:0, previousLines:{}, cameraStart:Date.now(),
+    returnAt:0, winLogged:false, endingStage:'', winBeats:null,
+    introDuration:motionPreference.matches ? REDUCED_INTRO_MS : INTRO_MS
+  });
+  ui.status.textContent = 'Hold and release to jump.';
+  render(now);
+}
+function stats(now, reason = 'jump') {
+  console.log('[The Egg Heist: ' + reason + ']', {
+    attempts:state.attempts, hooks:state.hooks, perfects:state.perfects,
+    overshoots:state.overshoots, elapsed_s:Number(((now - state.startedAt) / 1000).toFixed(1))
+  });
+}
+function clearOwner() {
+  const owner = state.owner;
+  state.owner = null;
+  if (owner && owner.type === 'pointer' && ui.game.hasPointerCapture(owner.id)) ui.game.releasePointerCapture(owner.id);
+}
+function beginCharge(owner, now) {
+  if (state.phase !== 'idle' && state.phase !== 'result') return;
+  state.phase = 'charging';
+  state.owner = owner;
+  state.chargeStart = now;
+  if (!state.startedAt) state.startedAt = now;
+  state.power = 0;
+}
+function cancelCharge() {
+  if (state.phase !== 'charging') return;
+  clearOwner();
+  state.phase = 'idle';
+  state.power = 0;
+  render(performance.now());
+}
+function releaseCharge(now) {
+  if (state.phase !== 'charging') return;
+  const power = triangle(now - state.chargeStart);
+  const outcome = classify(power, state.centre);
+  clearOwner();
+  state.power = power;
+  state.releasePower = power;
+  state.releaseCentre = state.centre;
+  state.releaseUntil = now + RELEASE_HOLD_MS;
+  state.outcome = outcome;
+  state.attempts++;
+  if (outcome === 'hook' || outcome === 'perfect') state.hooks++;
+  if (outcome === 'perfect') state.perfects++;
+  if (outcome === 'strong') state.overshoots++;
+  state.fromUnits = state.units;
+  state.toUnits = progressAfter(state.units, outcome);
+  state.fromTilt = state.tilt;
+  state.toTilt = state.tilt;
+  if (outcome === 'hook' || outcome === 'perfect') {
+    const twist = (Math.random() < .5 ? -1 : 1) * (3 + Math.random() * 3);
+    state.toTilt = clamp(state.tilt + twist, -MAX_TILT_DEG, MAX_TILT_DEG);
+  }
+  state.nextCentre = clamp(state.centre + (Math.random() * 2 - 1) * SHIFT, CENTRE_MIN, CENTRE_MAX);
+  state.phase = 'jumping';
+  state.phaseStart = now;
+  state.jumpDuration = state.reduced ? REDUCED_JUMP_MS : JUMP_MS;
+  ui.status.textContent = ({miss:'Missed. Again.', hook:'Hooked the tray.', perfect:'A perfect hook.', strong:'Too much. The tray slid back.'}[outcome]) + ' Jumps: ' + state.attempts + '.';
+  stats(now);
+  render(now);
+}
+function finishJump(now) {
+  state.units = state.toUnits;
+  state.tilt = state.toTilt;
+  state.centre = state.nextCentre;
+  state.phase = state.units >= TARGET_UNITS ? 'won' : 'result';
+  state.phaseStart = now;
+  if (state.phase === 'won') {
+    state.winBeats = state.reduced
+      ? {fall:REDUCED_BEAT_MS, eat:REDUCED_BEAT_MS, door:REDUCED_BEAT_MS, pause:REDUCED_BEAT_MS}
+      : {fall:TRAY_FALL_MS, eat:EAT_MS, door:DOOR_OPEN_MS, pause:INNOCENT_PAUSE_MS};
+    think('win', now);
+    ui.status.textContent = 'The tray fell. Ebi found lunch.';
+  } else {
+    think(state.outcome === 'perfect' ? 'hook' : state.outcome, now);
+  }
+}
+function formatTime(ms) { return new Date(ms).toISOString().slice(0,19).replace('T',' '); }
+function render(now) {
+  if (state.phase === 'intro' && now - state.phaseStart >= state.introDuration) skipIntro(now);
+  if (state.phase === 'jumping' && now - state.phaseStart >= state.jumpDuration) finishJump(now);
+  ui.game.dataset.phase = state.phase;
+  ui.count.textContent = 'Jumps: ' + state.attempts;
+  ui.hint.hidden = state.attempts > 0;
+  ui.hud.hidden = state.phase === 'won';
+  ui.intro.hidden = state.phase !== 'intro';
+  ui.card.hidden = true;
+  ui.ending.textContent = state.attempts + ' jumps. Worth it.';
+  ui.timestamp.textContent = formatTime(CAMERA_START + Date.now() - state.cameraStart);
+  ui.door.style.transform = 'rotateY(0deg)';
+  ui.light.hidden = true;
+  ui.mess.hidden = true;
+  ui.bubble.hidden = !state.bubble || now >= state.bubbleUntil;
+  ui.bubble.textContent = state.bubble;
+  ui.tray.hidden = false;
+  ui.tray.style.zIndex = '5';
+  let units = state.units, tilt = state.tilt;
+  let dogX = 0, dogY = 0, dogScale = 1, dogRotate = 0;
+  let pose = 'crouch', altitude = 0, squashX = 1, squashY = 1;
+  if (state.phase === 'charging' && !state.reduced) { squashX = 1.04; squashY = .92; }
+  let pawsVisible = false, pawY = 35, pawX = 60;
+  if (state.phase === 'jumping') {
+    const t = clamp((now - state.phaseStart) / state.jumpDuration, 0, 1);
+    const contact = state.outcome === 'hook' || state.outcome === 'perfect';
+    const drag = smooth((t - .43) / .24);
+    units = mix(state.fromUnits, state.toUnits, drag);
+    tilt = mix(state.fromTilt, state.toTilt, drag);
+    const flight = clamp((t - .13) / .72, 0, 1);
+    altitude = t < .4 ? Math.sin(clamp((t-.13)/.27,0,1)*Math.PI/2) : t < .64 ? 1 : Math.cos(clamp((t-.64)/.25,0,1)*Math.PI/2);
+    const advance = smooth((t - .13) / .27) * (1 - smooth((t - .68) / .22));
+    const reachDistance = state.outcome === 'miss' ? 5 : state.outcome === 'strong' ? 19 : 13;
+    dogX = 0;
+    dogY = -altitude * (state.outcome === 'miss' ? 8 : state.outcome === 'strong' ? 22 : 18);
+    dogScale = 1;
+    pose = t < .13 ? 'crouch' : t < .38 ? 'launch' : t < .68 ? 'reach' : 'land';
+    if (t < .13) { squashX = 1 + .07 * Math.sin(t / .13 * Math.PI); squashY = 1 - .16 * Math.sin(t / .13 * Math.PI); }
+    if (t > .85) { const impact = Math.sin((t - .85) / .15 * Math.PI); squashX = 1 + .09 * impact; squashY = 1 - .14 * impact; }
+    if (state.outcome === 'strong') dogRotate = Math.sin(t * Math.PI) * 5;
+    if (state.reduced) { dogY *= .2; dogScale = 1; squashX = squashY = 1; }
+  }
+  tilt = clamp(tilt, -MAX_TILT_DEG, MAX_TILT_DEG);
+  ui.dog.dataset.pose = pose;
+  ui.dog.style.zIndex = state.phase === 'jumping' ? '6' : '2';
+  ui.dog.style.transform = 'translateX(-50%) translate(' + (dogX * ui.game.clientWidth / 100) + 'px, ' + (dogY * ui.game.clientHeight / 100) + 'px) scale(' + dogScale * squashX + ',' + dogScale * squashY + ') rotate(' + dogRotate + 'deg)';
+  const shadow = document.getElementById('dog-shadow');
+  shadow.style.transform = 'translateX(-50%) scale(' + (1 - altitude * .45) + ')';
+  shadow.style.opacity = String(1 - altitude * .6);
+  ui.tray.style.top = trayY(units) + '%';
+  ui.tray.style.left = mix(74.5, 63.5, units / TARGET_UNITS) + '%';
+  ui.tray.style.transform = 'translate(-50%,-50%) rotate(' + tilt + 'deg)';
+  ui.tray.style.opacity = '1';
+  if (state.phase === 'intro') {
+    const closing = state.reduced ? 1 : smooth((now - state.phaseStart) / DOOR_OPEN_MS);
+    ui.door.style.transform = 'rotateY(' + mix(-75, 0, closing) + 'deg)';
+    ui.light.hidden = closing >= 1;
+    ui.light.style.opacity = String(1 - closing);
+  }
+  if (state.phase === 'won') renderEnding(now);
+  ui.paw1.hidden = ui.paw2.hidden = !pawsVisible;
+  ui.paw1.style.left = (pawX - 3.2) + '%'; ui.paw2.style.left = (pawX + 3.2) + '%';
+  ui.paw1.style.top = ui.paw2.style.top = pawY + '%';
+  if (state.phase === 'charging') state.power = triangle(now - state.chargeStart);
+  const holdingResult = state.phase !== 'charging' && now < state.releaseUntil;
+  const centre = holdingResult ? state.releaseCentre : state.centre;
+  const power = state.phase === 'charging' ? state.power : holdingResult ? state.releasePower : 0;
+  ui.band.style.left = (centre - SWEET_WIDTH / 2) * 100 + '%';
+  ui.band.style.width = SWEET_WIDTH * 100 + '%';
+  ui.perfect.style.left = (centre - PERFECT_WIDTH / 2) * 100 + '%';
+  ui.perfect.style.width = PERFECT_WIDTH * 100 + '%';
+  ui.fill.style.width = power * 100 + '%';
+  ui.needle.style.left = power * 100 + '%';
+  ui.release.hidden = !holdingResult;
+  ui.release.style.left = state.releasePower * 100 + '%';
+}
+function renderEnding(now) {
+  const elapsed = Math.max(0, now - state.phaseStart);
+  const beat = state.winBeats;
+  const doorStart = beat.fall + beat.eat;
+  const cardStart = doorStart + beat.door + beat.pause;
+  state.endingStage = elapsed < beat.fall ? 'fall' : elapsed < doorStart ? 'eat' : elapsed < cardStart ? 'door' : 'card';
+  const fall = smooth(elapsed / beat.fall);
+  ui.tray.style.top = mix(33, 91, fall) + '%';
+  ui.tray.style.left = mix(65, 59, fall) + '%';
+  ui.tray.style.transform = 'translate(-50%,-50%) rotate(' + (state.tilt - fall * 105) + 'deg) scale(' + (1 - fall * .45) + ')';
+  ui.tray.style.zIndex = fall > .6 ? '2' : '5';
+  ui.tray.style.opacity = String(1 - smooth((fall - .75) / .25));
+  ui.tray.hidden = elapsed >= beat.fall;
+  ui.mess.hidden = elapsed < beat.fall * .6;
+  ui.mess.style.transform = 'translate(-50%,-50%) scale(' + (.7 + .3 * smooth((elapsed - beat.fall * .6) / (beat.fall * .4))) + ')';
+  const approach = smooth((elapsed - beat.fall * .65) / (beat.eat * .4));
+  const eating = elapsed >= beat.fall && elapsed < doorStart;
+  const innocent = smooth((elapsed - doorStart) / beat.door);
+  const nod = eating && !state.reduced ? Math.sin(elapsed / 75) * 1.3 : 0;
+  const dogY = (18 + nod) * approach * (1 - innocent);
+  const dogScale = 1 - .12 * approach * (1 - innocent);
+  const dogRotate = (10 + nod) * approach * (1 - innocent);
+  ui.dog.dataset.pose = 'crouch';
+  ui.dog.style.transform = 'translateX(-50%) rotate(' + (eating ? 8 : 0) + 'deg)';
+  if (elapsed >= doorStart) {
+    if (!state.returnAt) state.returnAt = Date.now() - (elapsed - doorStart);
+    ui.timestamp.textContent = formatTime(CAMERA_RETURN + Date.now() - state.returnAt);
+    const opening = smooth((elapsed - doorStart) / beat.door);
+    ui.door.style.transform = 'rotateY(' + (-75 * opening) + 'deg)';
+    ui.light.hidden = false;
+    ui.light.style.opacity = String(opening);
+  }
+  if (elapsed >= cardStart) {
+    ui.card.hidden = false;
+    if (!state.winLogged) {
+      state.winLogged = true;
+      ui.status.textContent = state.attempts + ' jumps. Worth it. Go again to replay.';
+      stats(now, 'end card');
+      ui.replay.focus({preventScroll:true});
+    }
+  }
+}
+// Input timestamps and rAF timestamps use the same performance time origin.
+function eventTime(event) { return event.timeStamp; }
+function skipIntro(now) { state.phase = 'idle'; state.phaseStart = now; render(now); }
+ui.game.addEventListener('pointerdown', event => {
+  if (event.target.closest('button') || (event.pointerType === 'mouse' && event.button !== 0)) return;
+  event.preventDefault();
+  ui.game.focus({preventScroll:true});
+  if (state.phase === 'intro') { skipIntro(eventTime(event)); return; }
+  if (state.owner || (state.phase !== 'idle' && state.phase !== 'result')) return;
+  beginCharge({type:'pointer', id:event.pointerId}, eventTime(event));
+  ui.game.setPointerCapture(event.pointerId);
+});
+function ownsPointer(event) { return state.owner && state.owner.type === 'pointer' && state.owner.id === event.pointerId; }
+ui.game.addEventListener('pointermove', event => {
+  if (!ownsPointer(event)) return;
+  const rect = ui.game.getBoundingClientRect();
+  if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) releaseCharge(eventTime(event));
+});
+ui.game.addEventListener('pointerup', event => { if (ownsPointer(event)) releaseCharge(eventTime(event)); });
+ui.game.addEventListener('pointercancel', event => { if (ownsPointer(event)) cancelCharge(); });
+ui.game.addEventListener('lostpointercapture', event => { if (ownsPointer(event)) cancelCharge(); });
+const isButton = target => target instanceof Element && !!target.closest('button,[role="button"],input,textarea,select,[contenteditable="true"],a[href]');
+window.addEventListener('keydown', event => {
+  if (event.code !== 'Space' || isButton(event.target)) return;
+  event.preventDefault();
+  if (event.repeat) return;
+  if (state.phase === 'intro') { skipIntro(eventTime(event)); return; }
+  if (!state.owner) beginCharge({type:'space'}, eventTime(event));
+});
+window.addEventListener('keyup', event => {
+  if (event.code !== 'Space') return;
+  if (state.owner && state.owner.type === 'space') { event.preventDefault(); releaseCharge(eventTime(event)); }
+  else if (!isButton(event.target)) event.preventDefault();
+});
+window.addEventListener('blur', cancelCharge);
+document.addEventListener('visibilitychange', () => { if (document.hidden) cancelCharge(); });
+motionPreference.addEventListener('change', event => { state.reduced = event.matches; });
+ui.replay.addEventListener('click', () => { clearOwner(); reset(); ui.game.focus({preventScroll:true}); });
+function frame(now) { render(now); requestAnimationFrame(frame); }
+reset();
+requestAnimationFrame(frame);
+</script>

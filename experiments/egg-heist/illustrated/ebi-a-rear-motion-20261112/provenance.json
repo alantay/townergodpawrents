@@ -1,0 +1,61 @@
+{
+  "tool": "built-in image_gen imagegen",
+  "use_case": "identity-preserve",
+  "status": "exploratory six-pose animation; not integrated into game",
+  "source_image": "../ebi-recognisable-20261112/ebi-a.png",
+  "generated_original": "poses-original.png",
+  "generation_source": "/Users/ge_user/.codex/generated_images/01a1ce63-4668-7b71-a731-1d493baf2db9/exec-4920091d-2b9e-4af8-9363-63fa5f30010c.png",
+  "prompt": "prompt.txt",
+  "view": "camera directly behind Ebi; no visible face in six poses",
+  "scale": 1.25,
+  "pose_anchors": [
+    [
+      269,
+      108
+    ],
+    [
+      263,
+      157
+    ],
+    [
+      246,
+      90
+    ],
+    [
+      270,
+      88
+    ],
+    [
+      261,
+      110
+    ],
+    [
+      248,
+      141
+    ]
+  ],
+  "shared_assets": {
+    "kitchen.webp": {
+      "path": "artifacts/ebi-a-motion-20261112/kitchen.webp",
+      "sha256": "64f935d9d47aa9bbf857165f8cf03c38a2a342897c1a856655f349862356bb51"
+    },
+    "tray.png": {
+      "path": "artifacts/ebi-a-motion-20261112/tray.png",
+      "sha256": "e41a1f3135c92be081236d2b9491eae04bd07b40b12f3a0879bdfe74f6303495"
+    }
+  },
+  "egg_initial_position": [
+    966,
+    145
+  ],
+  "normalization": "Six 512px cells sliced without redraw; original alpha preserved. Browser composites rear-facing dog over the reused egg tray and background.",
+  "rights": "Generated imagery subject to provider terms; no third-party open licence asserted. Original PNG retained with metadata.",
+  "validation": {
+    "alpha_and_cell_bounds": "pass",
+    "motion_assertions": "pass",
+    "visual_composite_contact_sheet": "pass: back-facing silhouette, same kitchen and egg location, six compositions reviewed",
+    "browser": "unavailable: native apps return cgWindowNotFound and browser host is unavailable",
+    "phone": "not tested",
+    "inline_assets_and_javascript": "pass"
+  }
+}
