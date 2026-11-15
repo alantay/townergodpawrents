@@ -75,11 +75,11 @@ export function startThinking(
   say: (card: HTMLElement, btn: HTMLElement, text: string, kind: "dots") => void,
 ) {
   const shared = [
-    "Was that the fridge?",
-    "Somebody said walk. I heard it.",
-    "Is that cheese? Smells like cheese.",
-    "Door opened. Must investigate.",
-    "Dog barking downstairs. Must reply.",
+    "was dat the fridge??",
+    "sumbody said walk. i heard it",
+    "is dat cheese? smell like cheese",
+    "door open. must investigate",
+    "doggo barkin downstairs. must reply",
   ];
   let last: string | undefined;
   function think() {
