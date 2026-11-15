@@ -9,10 +9,10 @@ tagline: squeaky-toy enthusiast, works only for snacks
 portraitNotes:
   left: Can hold a stay forever
   right: Devours her food in seconds
-whenCalled: "Got a snack? Then maybe."
+whenCalled: "snacc first. then maybe"
 thoughts:
-  - "Squeak it again."
-  - "Pretty sure I deserve a snack for this."
+  - "squek it again hooman"
+  - "am good girl. where is snacc"
 stays:
   - checkIn: 2026-09-12
     checkOut: 2026-09-12

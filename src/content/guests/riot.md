@@ -7,10 +7,10 @@ showLive: true
 sex: male
 badge: Grandma's boy
 tagline: marks even on empty, skittish around new faces
-whenCalled: "You're not Grandma. Pass."
+whenCalled: "u not grandma. no thx"
 thoughts:
-  - "One more for the lamp post. Even if it's just air."
-  - "Still deciding about you."
+  - "one more for da lamp post. am empty. still counts"
+  - "still decidin about u. sniff sniff"
 stays:
   - checkIn: 2026-11-05
     checkOut: 2026-11-11

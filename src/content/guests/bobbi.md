@@ -6,10 +6,10 @@ bgColor: "#8E4A5C"
 showLive: true
 badge: Sheep in disguise
 tagline: derpy by default, still working out how play works
-whenCalled: "Oh. Hello. Was I meant to do something?"
+whenCalled: "oh. hi. was i supposed to do a thing??"
 thoughts:
-  - "Wait, what are we doing?"
-  - "Am I playing? I think I'm playing."
+  - "wat r we doin"
+  - "am i playin? i think am playin"
 sounds: ["Baaaa."]
 stays:
   - checkIn: 2026-10-08

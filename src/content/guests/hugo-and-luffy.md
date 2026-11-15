@@ -6,10 +6,10 @@ bgColor: "#7A5C24"
 showLive: true
 badge: A black & white comedy
 tagline: Hugo only has eyes for the girls. Luffy thinks the whole world is playing chase with him.
-whenCalled: "Pat Hugo and Luffy wants one too."
+whenCalled: "u pat hugo?? luffy want pats too"
 thoughts:
-  - "Luffy: Chase me. Chase me. Chase me."
-  - "Hugo: Any girls coming over today?"
+  - "Luffy: chase me chase me chase meeee"
+  - "Hugo: any gurls comin today?"
 stays:
   - checkIn: 2026-10-20
     checkOut: 2026-10-25

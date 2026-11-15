@@ -6,10 +6,10 @@ bgColor: "#755A83"
 showLive: true
 badge: FOMO queen
 tagline: always has something to whine about, thinks every dog is her play buddy
-whenCalled: "You can pat. The toy stays with me."
+whenCalled: "u can pat. toy is mine"
 thoughts:
-  - "Are they playing without me?"
-  - "That toy had it coming."
+  - "r they playin without me?? rude"
+  - "toy had it comin. mlem"
 stays:
   - checkIn: 2026-10-13
     checkOut: 2026-10-20

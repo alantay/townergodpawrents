@@ -7,10 +7,10 @@ showLive: true
 sex: female
 badge: Leaf retriever
 tagline: never without a leaf in her mouth, sometimes a stick too
-whenCalled: "Can't talk. Mouth full of leaf."
+whenCalled: "cant talk. mouf full of leaf"
 thoughts:
-  - "That leaf has my name on it."
-  - "A stick would also be acceptable."
+  - "dat leaf has my name on it"
+  - "stick also acceptabol"
 stays:
   - checkIn: 2026-11-19
     checkOut: 2026-11-21
