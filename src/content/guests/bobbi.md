@@ -10,7 +10,7 @@ whenCalled: "oh. hi. was i supposed to do a thing??"
 thoughts:
   - "wat r we doin"
   - "am i playin? i think am playin"
-sounds: ["Baaaa."]
+sounds: ["baaaa"]
 stays:
   - checkIn: 2026-10-08
     checkOut: 2026-10-12
