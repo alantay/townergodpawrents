@@ -9,7 +9,7 @@ badge: Gentle soul
 tagline: fluffy security guard, off duty during thunderstorms
 whenCalled: "i hear a thing. who dat??"
 thoughts:
-  - "i tawt i heard a hooman! i did! i did!"
+  - "i tawt i heard a hooman! i did!"
 sounds: ["Grrr."]
 stays:
   - checkIn: 2026-11-16
