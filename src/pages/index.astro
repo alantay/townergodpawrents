@@ -6,6 +6,7 @@ import Cutout from "../components/Cutout.astro";
 import { cutoutWidth } from "../lib/cutout-width";
 import { groupHeroColor } from "../lib/group-hero-color";
 import { bubblesJs } from "../lib/dog-bubbles";
+import { blurPlaceholder } from "../lib/blur-placeholder";
 import { Image } from "astro:assets";
 import sofaCutout from "../assets/sofa-cutout-v2.png";
 import portrait from "../assets/alan-weiwen-portrait.jpg";
@@ -69,7 +70,7 @@ const diaryVideoDims = import.meta.glob<{ width: number; height: number }>(
   { eager: true, import: "default" },
 );
 
-function resolveDiaryPhoto(src: string, guestId: string, when: string): ImageMetadata {
+function resolveDiaryPhoto(src: string, guestId: string, when: string): { meta: ImageMetadata; key: string } {
   const file = src.split("/").pop()!;
   const key = Object.keys(diaryImages).find((k) => k.endsWith(`/${file}`));
   if (!key) {
@@ -77,14 +78,14 @@ function resolveDiaryPhoto(src: string, guestId: string, when: string): ImageMet
       `[home] ${guestId}, ${when}: no image "${file}" in src/content/guests/ (written as "${src}")`,
     );
   }
-  return diaryImages[key].default;
+  return { meta: diaryImages[key].default, key };
 }
 
 function resolveDiaryVideo(
   src: string,
   guestId: string,
   when: string,
-): { src: string; poster: string; width: number; height: number } {
+): { src: string; poster: string; posterKey: string; width: number; height: number } {
   const file = src.split("/").pop()!;
   const key = Object.keys(diaryVideos).find((k) => k.endsWith(`/${file}`));
   if (!key) {
@@ -105,7 +106,7 @@ function resolveDiaryVideo(
     );
   }
   const { width, height } = diaryVideoDims[dimsKey];
-  return { src: diaryVideos[key], poster: diaryImages[posterKey].default.src, width, height };
+  return { src: diaryVideos[key], poster: diaryImages[posterKey].default.src, posterKey, width, height };
 }
 
 const entries = await getCollection("guests");
@@ -140,6 +141,10 @@ const guests = entries.map((e) => {
 crossPost(guests);
 const nameOf = (id: string) => guests.find((g) => g.id === id)!.name;
 
+// A day already gone can never be today again, so only days from today on
+// carry blurry placeholders. They'd add a lot to the page otherwise.
+const buildDay = todaySGT();
+
 // Sent to the client so it can work out who's "here today" in the
 // Asia/Singapore timezone at load time — see the inline script below.
 // Cut-outs aren't included here; they're pre-optimized at build time into the
@@ -166,17 +171,19 @@ const guestsForClient = await Promise.all(
               text: e.text,
               credit: e.credit ?? null,
               media: await Promise.all(e.media.map(async (m) => {
+                const soon = d.iso >= buildDay;
                 if (m.kind === "video") {
-                  const video = resolveDiaryVideo(m.src, rest.id, `${d.label} ${e.time}`);
-                  return { kind: "video" as const, ...video, alt: m.alt };
+                  const { posterKey, ...video } = resolveDiaryVideo(m.src, rest.id, `${d.label} ${e.time}`);
+                  return { kind: "video" as const, ...video, blur: soon ? await blurPlaceholder(posterKey) : undefined, alt: m.alt };
                 }
-                const meta = resolveDiaryPhoto(m.src, rest.id, `${d.label} ${e.time}`);
+                const { meta, key } = resolveDiaryPhoto(m.src, rest.id, `${d.label} ${e.time}`);
                 const img = await getImage({ src: meta, width: Math.min(meta.width, 1160) });
                 return {
                   kind: "photo" as const,
                   src: img.src,
                   width: img.attributes.width,
                   height: img.attributes.height,
+                  blur: soon ? await blurPlaceholder(key) : undefined,
                   alt: m.alt,
                 };
               })),
@@ -692,9 +699,13 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       // — no cap — stacked single column so a tall photo card never sits
       // next to a short text-only one and leaves ragged whitespace.
       function entryCardsHTML(live, today) {
+        function blurStyle(photo) {
+          return photo.blur ? ' style="' + esc('background:url("' + photo.blur + '") center/cover no-repeat') + '"' : "";
+        }
         function clipHTML(video, alt) {
+          // The blur stands in as the poster until swapPosters has the real one.
           return '<video src="' + esc(video.src) +
-            '" poster="' + esc(video.poster) +
+            (video.blur ? '" poster="' + esc(video.blur) + '" data-poster="' : '" poster="') + esc(video.poster) +
             '" controls preload="metadata" aria-label="' + esc(video.alt || alt) +
             '" class="print-media" style="aspect-ratio:' + video.width + "/" + video.height + '"></video>';
         }
@@ -771,7 +782,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
                 e.media[0].width +
                 '" height="' +
                 e.media[0].height +
-                '" loading="lazy" decoding="async" class="print-media"></button>' +
+                '" loading="lazy" decoding="async" class="print-media"' + blurStyle(e.media[0]) + '></button>' +
                 (matCaption
                   ? '<p class="print-caption">' + diaryTextHtml(e.text) + "</p>"
                   : "") +
@@ -804,7 +815,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
                     photo.width +
                     '" height="' +
                     photo.height +
-                    '" loading="lazy" decoding="async" class="print-media">' +
+                    '" loading="lazy" decoding="async" class="print-media"' + blurStyle(photo) + '>' +
                     "</button>"
                   );
                 }).join("") +
@@ -1286,6 +1297,12 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
 
         window.__tgpFitHeadlines();
         window.addEventListener("resize", window.__tgpFitHeadlines);
+        // Swap each clip's blurry poster for the real still once it's here.
+        appEl.querySelectorAll("video[data-poster]").forEach(function (v) {
+          var still = new Image();
+          still.onload = function () { v.poster = still.src; };
+          still.src = v.dataset.poster;
+        });
         window.addEventListener("resize", function () {
           document.querySelectorAll("#hero-photos img, #vacancy-photo img").forEach(function (img) {
             sizeHero(img, img.parentElement.parentElement);

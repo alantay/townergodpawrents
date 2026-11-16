@@ -8,6 +8,7 @@ import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
 import Cutout from "../../components/Cutout.astro";
 import DiaryClip from "../../components/DiaryClip.astro";
+import { blurBackground, blurPlaceholder } from "../../lib/blur-placeholder";
 import {
   parseDiary,
   crossPost,
@@ -58,14 +59,14 @@ const diaryVideoDims = import.meta.glob<{ width: number; height: number }>(
 );
 
 type ResolvedMedia =
-  | { kind: "photo"; img: ImageMetadata; alt: string }
-  | { kind: "video"; url: string; poster: string; alt: string; width: number; height: number };
+  | { kind: "photo"; img: ImageMetadata; blur: string; alt: string }
+  | { kind: "video"; url: string; poster: string; blur: string; alt: string; width: number; height: number };
 
 function dims(media: ResolvedMedia) {
   return media.kind === "photo" ? media.img : media;
 }
 
-function resolveDiaryMedia(media: DiaryMedia, guestId: string, when: string): ResolvedMedia {
+async function resolveDiaryMedia(media: DiaryMedia, guestId: string, when: string): Promise<ResolvedMedia> {
   const file = media.src.split("/").pop()!;
   if (media.kind === "video") {
     const key = Object.keys(diaryVideos).find((k) => k.endsWith(`/${file}`));
@@ -91,6 +92,7 @@ function resolveDiaryMedia(media: DiaryMedia, guestId: string, when: string): Re
       kind: "video",
       url: diaryVideos[key],
       poster: diaryImages[posterKey].default.src,
+      blur: await blurPlaceholder(posterKey),
       alt: media.alt,
       width,
       height,
@@ -102,7 +104,7 @@ function resolveDiaryMedia(media: DiaryMedia, guestId: string, when: string): Re
       `[guests] ${guestId}, ${when}: no image "${file}" in src/content/guests/ (written as "${media.src}")`,
     );
   }
-  return { kind: "photo", img: diaryImages[key].default, alt: media.alt };
+  return { kind: "photo", img: diaryImages[key].default, blur: await blurPlaceholder(key), alt: media.alt };
 }
 
 export async function getStaticPaths() {
@@ -151,6 +153,14 @@ const everyone = (await getCollection("guests")).map((g) => {
 crossPost(everyone);
 const nameOf = (id: string) => everyone.find((g) => g.id === id)!.name;
 const days = everyone.find((g) => g.id === entry.id)!.days;
+// Resolved up front, since each print's blurry placeholder is made async.
+const printsOf = new Map(
+  await Promise.all(
+    days.flatMap((day) =>
+      day.entries.map(async (e) => [e, await Promise.all(e.media.map((m) => resolveDiaryMedia(m, entry.id, `${day.label} ${e.time}`)))] as const),
+    ),
+  ),
+);
 const recordedStay = days[0] ? stayOn({ stays }, days[0].iso) : undefined;
 const diaryStay = recordedStay ?? shownStay;
 const entryCount = days.reduce((total, day) => total + day.entries.length, 0);
@@ -283,7 +293,7 @@ let skinIndex = 0;
               const i = skinIndex++;
               const sk = diarySkin(bgColor, i);
               const darkSkin = luma(sk.bg) < 110;
-              const prints = e.media.map((m) => resolveDiaryMedia(m, entry.id, `${day.label} ${e.time}`));
+              const prints = printsOf.get(e)!;
               const video = prints.find((p) => p.kind === "video");
               // A label stands in for the time, and a no-time entry shows neither.
               const shown = e.label ?? (e.noTime ? "" : e.time);
@@ -347,6 +357,7 @@ let skinIndex = 0;
                           loading="lazy"
                           decoding="async"
                           class="print-media"
+                          style={blurBackground(prints[0].blur)}
                         />
                       </button>
                       {matCaption && (
@@ -376,6 +387,7 @@ let skinIndex = 0;
                             loading="lazy"
                             decoding="async"
                             class="print-media"
+                            style={blurBackground(p.blur)}
                           />
                         </button>
                       ))}
