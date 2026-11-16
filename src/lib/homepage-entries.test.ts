@@ -126,6 +126,7 @@ test("homepage mixed entries keep every item, with only photos opening zoom", ()
     const clip = tags.find((tag) => tag.startsWith("<video "))!;
     assert.match(clip, /controls preload="metadata"/);
     assert.ok(clip.includes('poster="/poster&quot;.jpg"'));
+    assert.ok(!html.includes("data-poster") && !html.includes("background:url"), "no blur, no placeholder");
     assert.ok(clip.includes('aria-label="Tiny &amp; friends, 7am"'));
     assert.ok(html.includes('alt="Tiny &quot;resting&quot; &amp; watching"'));
     const buttons = [...html.matchAll(/<button\b[^>]*>([\s\S]*?)<\/button>/g)];
@@ -167,4 +168,7 @@ test("homepage single clips and photo entries keep their caption layouts", () =>
   assert.ok(!photoPair.includes("diary-prints--mixed"));
   assert.equal((photoPair.match(/class="diary-slip /g) ?? []).length, 1);
   assert.ok(!photoPair.includes("<video"));
+  const blurred = entryHTML([{ ...clip, blur: "data:blur-clip" }, { ...photo, blur: "data:blur-photo" }]);
+  assert.ok(blurred.includes('poster="data:blur-clip" data-poster="/clip.jpg"'));
+  assert.ok(blurred.includes('class="print-media" style="background:url(&quot;data:blur-photo&quot;) center/cover no-repeat">'));
 });

@@ -2,20 +2,32 @@
 interface Props {
   url: string;
   poster: string;
+  blur: string;
   alt: string;
   width: number;
   height: number;
 }
 
-const { url, poster, alt, width, height } = Astro.props;
+const { url, poster, blur, alt, width, height } = Astro.props;
 ---
 
+<!-- The blur stands in as the poster (a CSS background would hide behind
+     the browser's own grey controls panel) until the real still has loaded. -->
 <video
   src={url}
-  poster={poster}
+  poster={blur}
+  data-poster={poster}
   controls
   preload="metadata"
   aria-label={alt}
   class="print-media"
   style={`aspect-ratio:${width}/${height}`}
 />
+
+<script>
+  document.querySelectorAll<HTMLVideoElement>("video[data-poster]").forEach((v) => {
+    const still = new Image();
+    still.onload = () => (v.poster = still.src);
+    still.src = v.dataset.poster!;
+  });
+</script>
