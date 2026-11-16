@@ -7,10 +7,10 @@ showLive: true
 sex: male
 badge: Gentle soul
 tagline: fluffy security guard, off duty during thunderstorms
-whenCalled: "i hear a thing. who dat??"
+whenCalled: "I hear a thing. Who dat??"
 thoughts:
-  - "i tawt i heard a hooman! i did!"
-sounds: ["grrr"]
+  - "I tawt i heard a hooman! I did!"
+sounds: ["Grrr"]
 stays:
   - checkIn: 2026-11-16
     checkOut: 2026-11-21

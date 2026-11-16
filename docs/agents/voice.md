@@ -17,7 +17,7 @@ The voice is Alan's. Personal, warm, a bit dry. Like telling a neighbour what th
 - Let the action set up the joke, then give it a short closing beat: "Luna came charging in, cute skirt and all, and went straight for the blue squirrel plushies. So unladylike."
 - References should work without explanation. Alan's "Lord Tyrion" and "Lady Luna" titles work without knowing Game of Thrones.
 - Headings, badges and sublines should add something to each other. Avoid repeating the same words or idea.
-- Speech and thought bubbles are the dog talking, not us. Write them in doggo meme style: lowercase, playful misspellings ("snacc", "hooman", "u"), short.
+- Speech and thought bubbles are the dog talking, not us. Write them in doggo meme style: playful misspellings ("snacc", "hooman", "u"), short. Start each sentence with a capital, like a normal sentence, but keep "i", "u" and the misspellings as they are, with no full stop at the end.
 
 ## Diary entries
 

@@ -35,7 +35,7 @@ const guests = defineCollection({
       // What the dog says back, now and then, when you pat it. Its own
       // voice, one short line.
       whenCalled: z.string().optional(),
-      // Extra noises mixed in with "woof" when you pat it. Lowercase, no full stop.
+      // Extra noises mixed in with "Woof" when you pat it. Capital first letter, no full stop.
       sounds: z.array(z.string()).default([]),
       // What the dog is thinking, floated up in a thought bubble now and
       // then on the homepage without anyone patting it.

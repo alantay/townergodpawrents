@@ -6,11 +6,11 @@ bgColor: "#3F6655"
 showLive: true
 badge: Cat in a dog's body
 tagline: recall sold separately, million-dollar smile included
-whenCalled: "heard u. am choose not to"
+whenCalled: "Heard u. Am choose not to"
 thoughts:
-  - "heard my name. chose peace. zzz"
-  - "big smile. works every time"
-sounds: ["grrr", "zzzzzzz"]
+  - "Heard my name. Chose peace. Zzz"
+  - "Big smile. Works every time"
+sounds: ["Grrr", "Zzzzzzz"]
 stays:
   - checkIn: 2026-09-30
     checkOut: 2026-10-13

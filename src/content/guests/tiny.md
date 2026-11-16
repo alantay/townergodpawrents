@@ -6,11 +6,11 @@ bgColor: "#39617E"
 showLive: true
 badge: Obsessive ball fetcher
 tagline: loves rolling on her back, barks at 120 decibels
-whenCalled: "u has ball? no? then no"
+whenCalled: "U has ball? No? Then no"
 thoughts:
-  - "ball. ball. ball. BALL."
-  - "i can see da ball from here u kno"
-  - "nobody throwed anythin in 4 minits. am suffer"
+  - "Ball. Ball. Ball. BALL."
+  - "I can see da ball from here u kno"
+  - "Nobody throwed anythin in 4 minits. Am suffer"
 stays:
   - checkIn: 2026-09-13
     checkOut: 2026-09-23

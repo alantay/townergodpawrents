@@ -7,11 +7,11 @@ bgColor: "#A34A2E"
 showLive: true
 badge: Keeper of the Ball
 tagline: loves a game of fetch, skips the returning part
-whenCalled: "throw a thing. then we tok"
+whenCalled: "Throw a thing. Then we tok"
 thoughts:
-  - "ball is safe wif me. forevr"
-  - "fetch is a two way thing?? since wen"
-  - "oops dropped it. come closer. closer. gotcha"
+  - "Ball is safe wif me. Forevr"
+  - "Fetch is a two way thing?? Since wen"
+  - "Oops dropped it. Come closer. Closer. Gotcha"
 stays:
   - checkIn: 2026-10-14
     checkOut: 2026-10-14
