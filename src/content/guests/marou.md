@@ -21,6 +21,14 @@ stays:
 
 ### 7:40am
 
+<!-- entry-id: e237 -->
+
+Good morning, Marou, the gentlest of souls.
+
+![Marou, 16 Nov 7:40am](./marou/marou-good-morning-gentlest.mp4)
+
+### 7:40am
+
 <!-- entry-id: e236 -->
 
 Good morning, Marou, the gentlest of souls.
