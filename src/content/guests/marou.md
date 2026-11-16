@@ -16,3 +16,11 @@ stays:
     checkOut: 2026-11-21
     dropIn: true
 ---
+
+## 16 Nov
+
+### 7:40am
+
+<!-- entry-id: e236 -->
+
+Good morning, Marou, the gentlest of souls.
