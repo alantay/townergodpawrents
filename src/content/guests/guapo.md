@@ -10,7 +10,7 @@ whenCalled: "heard u. am choose not to"
 thoughts:
   - "heard my name. chose peace. zzz"
   - "big smile. works every time"
-sounds: ["Grrr.", "Zzzzzzz."]
+sounds: ["grrr", "zzzzzzz"]
 stays:
   - checkIn: 2026-09-30
     checkOut: 2026-10-13

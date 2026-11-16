@@ -219,8 +219,8 @@ let skinIndex = 0;
   </header>
 
   <script is:inline set:html={bubblesJs} />
-  <script is:inline define:vars={{ lines: ["Woof!", ...sounds, whenCalled || "Heard you. Busy."], thoughts }}>
-    // Pat the dog and it hops and woofs. After that it's anyone's guess, never the same twice in a row.
+  <script is:inline define:vars={{ lines: ["woof", ...sounds, whenCalled || "heard u. am busy"], thoughts }}>
+    // Pat the dog and it hops and says something, never the same thing twice in a row.
     // Left alone, it thinks out loud now and then.
     (function () {
       var dog = document.getElementById("pat-dog");
@@ -236,7 +236,7 @@ let skinIndex = 0;
         var img = dog.querySelector("img");
         if (img) replay(img, "dog-hop");
         var fresh = lines.filter(function (l) { return l !== last; });
-        last = last ? fresh[Math.floor(Math.random() * fresh.length)] : "Woof!";
+        last = fresh[Math.floor(Math.random() * fresh.length)];
         bubbles.dogSays(card, dog, last, "comic");
       });
       bubbles.startThinking(card, [{ thoughts: thoughts }], [dog], bubbles.dogSays);

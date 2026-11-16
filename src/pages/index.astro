@@ -1258,21 +1258,21 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           appEl.innerHTML = hero.html + entryCardsHTML(result.live, today);
           var photosEl = document.getElementById("hero-photos");
           appEl.hidden = false;
-          // Pat a dog and it hops and woofs. After that it's anyone's guess, never the same twice in a row.
+          // Pat a dog and it hops and says something, never the same thing twice in a row.
           var dogBtns = hero.live.map((d) => {
             var b = document.createElement("button");
             b.type = "button";
             b.ariaLabel = "Pat " + d.name;
             b.className = "pat-dog relative block flex-1 min-w-0 h-full animate-drift cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime";
             b.innerHTML = '<span class="pat-marks" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 27C12 23 4 18 4 11a7 7 0 0 1 12-4 7 7 0 0 1 12 4c0 7-8 12-12 16Z"/></svg><svg viewBox="0 0 32 32"><path d="M16 27C12 23 4 18 4 11a7 7 0 0 1 12-4 7 7 0 0 1 12 4c0 7-8 12-12 16Z"/></svg><svg viewBox="0 0 32 32"><path d="M16 27C12 23 4 18 4 11a7 7 0 0 1 12-4 7 7 0 0 1 12 4c0 7-8 12-12 16Z"/></svg></span>';
-            var lines = ["Woof!"].concat(d.sounds, d.whenCalled || "Heard you. Busy.");
+            var lines = ["woof"].concat(d.sounds, d.whenCalled || "heard u. am busy");
             var last;
             b.addEventListener("click", function () {
               var img = b.querySelector("img, .undeveloped");
               if (img) replay(img, "dog-hop");
               replay(b.querySelector(".pat-marks"), "pat-marks--playing");
               var fresh = lines.filter((l) => l !== last);
-              last = last ? fresh[Math.floor(Math.random() * fresh.length)] : "Woof!";
+              last = fresh[Math.floor(Math.random() * fresh.length)];
               window.__tgpBubbles.dogSays(document.getElementById("hero-card"), b, last, "comic");
             });
             photosEl.appendChild(b);
