@@ -19,6 +19,15 @@ stays:
 
 ## 16 Nov
 
+### 6:04pm
+
+<!-- entry-id: e238 -->
+<!-- no-time -->
+
+Marou is terrified of thunder, so Alan built him a plushie fortress to keep it out.
+
+![Marou peeking out from under a reindeer plushie, a rope carrot and a green pillow](./marou/marou-plushie-fortress.jpg)
+
 ### 7:40am
 
 <!-- entry-id: e237 -->
