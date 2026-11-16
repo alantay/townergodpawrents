@@ -22,7 +22,21 @@ export function dogSays(card: HTMLElement, btn: HTMLElement, text: string, kind:
   const half = bubble.offsetWidth / 2;
   const left = Math.min(Math.max(x, half + 12), c.width - half - 12);
   bubble.style.left = left + "px";
-  bubble.style.top = Math.max(y, bubble.offsetHeight + 16) + "px";
+  // Over the head, unless that lands on the name, tagline or a badge: then
+  // it slides down onto the dog, which minds less than the words do.
+  const h = bubble.offsetHeight;
+  const m = parseFloat(getComputedStyle(bubble).marginTop) || 0;
+  let top = Math.max(y, h + 16);
+  const floor = dog.top + dog.height * 0.55 - c.top;
+  card.querySelectorAll("h1, .badge-tape, .fact-chip, .status-tag, .font-serif").forEach((el) => {
+    if (bubble.contains(el) || btn.contains(el)) return;
+    const r = el.getBoundingClientRect();
+    const hit =
+      r.right - c.left > left - half && r.left - c.left < left + half &&
+      r.bottom - c.top > top + m - h && r.top - c.top < top + m;
+    if (hit) top = Math.min(Math.max(top, r.bottom - c.top + h + 8 - m), floor);
+  });
+  bubble.style.top = top + "px";
   const tailX = Math.min(Math.max(x - left, -half + 22), half - 22);
   bubble.style.setProperty("--tail-x", tailX + "px");
   if (kind === "dots") {

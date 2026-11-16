@@ -424,7 +424,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       }
       function awaySubline(s, todayISO) {
         return (
-          "We&#39;re away " +
+          "We&rsquo;re away " +
           (s.checkOut === todayISO ? "today." : "till " + fmtDay(s.checkOut) + ".") +
           (s.note ? " " + esc(s.note) + "." : "")
         );
@@ -528,7 +528,17 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           // A headline that starts below the pill has the full width to itself.
           var clear = el.classList.contains("fit-headline--clear");
           var reserve = !clear && badge && badge.offsetParent ? badge.offsetWidth + 12 : 0;
+          el.style.marginTop = "";
+          el.style.fontSize = "";
           fitText(el, reserve);
+          // Squeezed beside the pill on a phone, the name shrinks to a
+          // whisper. Drop it below the pill and give it the full width.
+          // Dog names only: the vacancy line reads fine small beside the pill.
+          if (reserve && !el.classList.contains("fit-headline--beside") && parseFloat(el.style.fontSize) < 52) {
+            el.style.fontSize = "";
+            el.style.marginTop = badge.offsetHeight + 8 + "px";
+            fitText(el, 0);
+          }
         });
       };
 
@@ -549,8 +559,8 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               '<span class="behind-name" aria-hidden="true">' + esc(d.name) + "</span>" +
               '<span class="behind-line" aria-hidden="true">' + place + " We pop over.</span>" +
               '<span class="behind-dog" id="behind-photo-' + i + '" aria-hidden="true"></span>' +
-              '<span class="behind-info">' + (goingHome(d, today) ? "Last day today." : stayDay(stayOn(d, today), today) + ".") +
-              '<br><a href="/guests/' + esc(d.id) + '">' + esc(d.name) + "&#39;s diary</a></span>" +
+              // The full-diary pill under the cards already links each drop-in.
+              '<span class="behind-info">' + (goingHome(d, today) ? "Last day today" : stayDay(stayOn(d, today), today)) + "</span>" +
               "</div>";
           })
           .join("");
@@ -661,12 +671,12 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
       // `away` are the drop-ins: our sofa's empty because we're at theirs.
       // `offNow` is a spell of ours that covers today.
       function heroVacancyHTML(lastGuest, next, away, offNow) {
-        var round = away && away.length ? "We&#39;re out at " + away.map((d) => esc(d.name)).join(" &amp; ") + "&#39;s." : "";
+        var round = away && away.length ? "We&rsquo;re out at " + away.map((d) => esc(d.name)).join(" &amp; ") + "&rsquo;s." : "";
         var html =
           '<div id="hero-card" class="relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:' + SOFA_GREEN + '">' +
-          '<div id="hero-badge" class="absolute top-[18px] right-[18px] status-tag animate-wiggle">Sofa&#39;s empty</div>' +
-          '<div class="w-full"><h1 class="fit-headline text-[clamp(62px,19vw,120px)] max-w-full">' + (round ? "No dog here" : "No dog today") + "</h1></div>" +
-          '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">' + (round || (offNow ? awaySubline(offNow, today) : "The vacuum gets a day off. It&#39;s weirdly quiet.")) + "</div>" +
+          '<div id="hero-badge" class="absolute top-[18px] right-[18px] status-tag animate-wiggle">' + (round ? "Out visiting" : "Sofa&rsquo;s empty") + "</div>" +
+          '<div class="w-full"><h1 class="fit-headline fit-headline--beside text-[clamp(62px,19vw,120px)] max-w-full">' + (round ? "No dog here" : "No dog today") + "</h1></div>" +
+          '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">' + (round || (offNow ? awaySubline(offNow, today) : "The vacuum gets a day off. It&rsquo;s weirdly quiet.")) + "</div>" +
           (offNow
             ? '<div id="vacancy-photo" class="block w-[calc(100%+16px)] h-[265px] mx-[-8px] mt-[18px] animate-drift-slow"></div>'
             : '<button type="button" id="vacancy-photo" aria-label="Look down the side of the sofa" class="block w-[calc(100%+16px)] h-[265px] mx-[-8px] mt-[18px] animate-drift-slow cursor-pointer rounded-[24px] focus-visible:outline-2 focus-visible:outline-lime"></button>') +
@@ -690,7 +700,8 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
             "</div>" +
             '<div class="text-sm">' +
             esc(next.guest.breed) +
-            " · arriving " +
+            // A drop-in never arrives here: we go to them.
+            (next.stay.dropIn ? " · we pop over from " : " · arriving ") +
             fmtDay(next.stay.checkIn) +
             "</div></div></a>";
         }
@@ -1266,7 +1277,8 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
           });
         } else {
           var hero = heroLiveHTML(sofa, today, away);
-          appEl.innerHTML = hero.html + entryCardsHTML(result.live, today);
+          // Sofa dogs first, drop-ins after, so the diary pills follow the hero.
+          appEl.innerHTML = hero.html + entryCardsHTML(sofa.concat(away), today);
           var photosEl = document.getElementById("hero-photos");
           appEl.hidden = false;
           // Pat a dog and it hops and says something, never the same thing twice in a row.
