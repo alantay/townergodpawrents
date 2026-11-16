@@ -19,6 +19,17 @@ stays:
 
 ## 16 Nov
 
+### 6:11pm
+
+<!-- entry-id: e239 -->
+<!-- no-time -->
+
+The thunderstorm is easing, and Marou is getting slightly more active, weathering the storm one spot at a time.
+
+![Marou flat on the sofa with his chin on his paws, next to a gingerbread plushie](./marou/marou-sofa-chin-down.jpg)
+
+![Marou smiling on a white floral pillow](./marou/marou-pillow-smile.jpg)
+
 ### 6:04pm
 
 <!-- entry-id: e238 -->
