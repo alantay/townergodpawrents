@@ -17,6 +17,16 @@ stays:
     dropIn: true
 ---
 
+## 17 Nov
+
+### 8:40am
+
+<!-- entry-id: e240 -->
+
+The loudest sound Marou has ever made while playing.
+
+![Marou, 17 Nov 8:40am](./marou/marou-loudest-sound-ever.mp4)
+
 ## 16 Nov
 
 ### 6:11pm
