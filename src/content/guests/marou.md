@@ -19,6 +19,14 @@ stays:
 
 ## 17 Nov
 
+### 1:30pm
+
+<!-- entry-id: e242 -->
+
+Is the thunder coming back? Marou would like to know how long this storm is planning to stay.
+
+![A fluffy tan dog lies on a light grey sofa, looking up with its mouth open.](./marou/marou-thunder-coming-back.jpg)
+
 ### 9:40am
 
 <!-- entry-id: e241 -->
