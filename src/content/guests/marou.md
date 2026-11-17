@@ -19,6 +19,14 @@ stays:
 
 ## 17 Nov
 
+### 7:40pm
+
+<!-- entry-id: e243 -->
+
+Thunder came, back to his safe place.
+
+![A fluffy brown dog lies curled on a beige cushion inside a black mesh playpen.](./marou/marou-thunder-came-back.jpg)
+
 ### 1:30pm
 
 <!-- entry-id: e242 -->
