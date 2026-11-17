@@ -19,6 +19,14 @@ stays:
 
 ## 17 Nov
 
+### 8:43pm
+
+<!-- entry-id: e244 -->
+
+The thunder passed. Marou went back to his snuffle toy, which had lasted since lunch. It had weathered the storm too.
+
+![Marou, 17 Nov 8:43pm](./marou/marou-thunder-passed-went.mp4)
+
 ### 7:40pm
 
 <!-- entry-id: e243 -->
