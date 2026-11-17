@@ -19,6 +19,14 @@ stays:
 
 ## 17 Nov
 
+### 9:40am
+
+<!-- entry-id: e241 -->
+
+Marou runs away and flips himself over whenever I want to put him back in the playpen.
+
+![Marou, 17 Nov 9:40am](./marou/marou-runs-away-flips.mp4)
+
 ### 8:40am
 
 <!-- entry-id: e240 -->
