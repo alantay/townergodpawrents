@@ -17,6 +17,17 @@ stays:
     dropIn: true
 ---
 
+## 18 Nov
+
+### 1:14pm
+
+<!-- entry-id: e245 -->
+<!-- no-time -->
+
+Marou taken aback when Alan copied his growling.
+
+![A fluffy Pomeranian tugs on a braided green rope toy on a cream rug, then scampers off.](./marou/marou-copied-growling.mp4)
+
 ## 17 Nov
 
 ### 8:43pm
