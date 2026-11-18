@@ -19,6 +19,15 @@ stays:
 
 ## 18 Nov
 
+### 1:19pm
+
+<!-- entry-id: e246 -->
+<!-- no-time -->
+
+Found a feather duster on the sofa. It had legs.
+
+![Marou leans head-down over the sofa arm, so only his huge fluffy rear and tail show.](./marou/marou-feather-duster.jpg)
+
 ### 1:14pm
 
 <!-- entry-id: e245 -->
