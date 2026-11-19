@@ -15,3 +15,14 @@ stays:
   - checkIn: 2026-11-19
     checkOut: 2026-11-21
 ---
+
+## 19 Nov
+
+### 11:01am
+
+<!-- entry-id: e001 -->
+<!-- no-time -->
+
+Poor Milk is whining after her owners left. 😢
+
+![Milk whining after her owners left](./milk/milk-after-they-left.mp4)
