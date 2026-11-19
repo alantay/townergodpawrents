@@ -19,6 +19,15 @@ stays:
 
 ## 19 Nov
 
+### 8:12am
+
+<!-- entry-id: e248 -->
+<!-- no-time -->
+
+Marou baits Alan into reaching for the ball. As soon as Alan reaches for it, Marou blocks him and takes it himself.
+
+![Marou blocks Alan’s reach and grabs the ball.](./marou/marou-ball-bait.mp4)
+
 ### 8:06am
 
 <!-- entry-id: e247 -->
