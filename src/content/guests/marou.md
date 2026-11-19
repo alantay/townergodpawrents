@@ -17,6 +17,17 @@ stays:
     dropIn: true
 ---
 
+## 19 Nov
+
+### 8:06am
+
+<!-- entry-id: e247 -->
+<!-- no-time -->
+
+Operation Slope. Marou went down belly first, commando style, and came out grinning.
+
+![Marou trots along the sofa, down the carpeted ramp, then drags himself across the rug on his belly with his back legs splayed out.](./marou/marou-commando-crawl.mp4)
+
 ## 18 Nov
 
 ### 1:19pm
