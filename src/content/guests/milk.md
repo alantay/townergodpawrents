@@ -23,6 +23,8 @@ stays:
 <!-- entry-id: e002 -->
 <!-- no-time -->
 
+Milk is too busy whining to eat her meal, so Alan ends up hand-feeding her as she whines. Whined and dined.
+
 ![Milk being hand-fed from a steel bowl, wandering off between handfuls and coming back for more](./milk/milk-hand-fed.mp4)
 
 ### 11:01am
