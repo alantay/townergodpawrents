@@ -18,6 +18,14 @@ stays:
 
 ## 19 Nov
 
+### 5:45pm
+
+<!-- entry-id: e249 -->
+
+Same same, but different.
+
+![A white curly-haired dog lies beside a plush sheep toy on a wooden floor. A black sofa and low table are behind them.](./milk/milk-same-same-but.jpg)
+
 ### 3:39pm
 
 <!-- entry-id: e005 -->
