@@ -18,6 +18,14 @@ stays:
 
 ## 19 Nov
 
+### 7:45pm
+
+<!-- entry-id: e250 -->
+
+Milk helping herself to the toys.
+
+![Milk, 19 Nov 7:45pm](./milk/milk-helping-herself-toys.mp4)
+
 ### 5:45pm
 
 <!-- entry-id: e249 -->
