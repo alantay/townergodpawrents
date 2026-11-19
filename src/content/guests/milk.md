@@ -34,6 +34,14 @@ How many dogs are there?
 
 ![Milk, 19 Nov 7pm](./milk/milk-how-many-dogs.mp4)
 
+### 6:15pm
+
+<!-- entry-id: e253 -->
+
+Peach and Milk are going after the same ball.
+
+![Milk, 19 Nov 6:15pm](./milk/milk-peach-are-going.mp4)
+
 ### 5:45pm
 
 <!-- entry-id: e249 -->
