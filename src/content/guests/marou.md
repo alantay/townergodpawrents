@@ -19,6 +19,14 @@ stays:
 
 ## 19 Nov
 
+### 9:20pm
+
+<!-- entry-id: e252 -->
+
+Marou pretends to let the toy fall. Sneaky him
+
+![Marou, 19 Nov 9:20pm](./marou/marou-pretends-let-toy.mp4)
+
 ### 8:12am
 
 <!-- entry-id: e248 -->
