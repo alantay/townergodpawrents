@@ -18,6 +18,13 @@ stays:
 
 ## 19 Nov
 
+### 1:41pm
+
+<!-- entry-id: e002 -->
+<!-- no-time -->
+
+![Milk being hand-fed from a steel bowl, wandering off between handfuls and coming back for more](./milk/milk-hand-fed.mp4)
+
 ### 11:01am
 
 <!-- entry-id: e001 -->
