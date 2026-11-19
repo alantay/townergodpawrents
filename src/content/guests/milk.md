@@ -18,6 +18,15 @@ stays:
 
 ## 19 Nov
 
+### 3:39pm
+
+<!-- entry-id: e005 -->
+<!-- no-time -->
+
+Milk finally steps up to fight the pink dragon. No more whining.
+
+![Milk playing with a pink dragon toy](./milk/milk-pink-dragon.mp4)
+
 ### 2:37pm
 
 <!-- entry-id: e004 -->
