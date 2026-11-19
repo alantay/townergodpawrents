@@ -18,6 +18,15 @@ stays:
 
 ## 19 Nov
 
+### 2:37pm
+
+<!-- entry-id: e004 -->
+<!-- no-time -->
+
+Milk doing what she does best. Picking up leaves.
+
+![Milk picks up leaves.](./milk/milk-picking-up-leaves.mp4)
+
 ### 1:57pm
 
 <!-- entry-id: e003 -->
