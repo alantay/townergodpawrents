@@ -26,6 +26,14 @@ Milk helping herself to the toys.
 
 ![Milk, 19 Nov 7:45pm](./milk/milk-helping-herself-toys.mp4)
 
+### 7pm
+
+<!-- entry-id: e251 -->
+
+How many dogs are there?
+
+![Milk, 19 Nov 7pm](./milk/milk-how-many-dogs.mp4)
+
 ### 5:45pm
 
 <!-- entry-id: e249 -->
