@@ -18,6 +18,15 @@ stays:
 
 ## 19 Nov
 
+### 1:57pm
+
+<!-- entry-id: e003 -->
+<!-- no-time -->
+
+Whining much less now.
+
+![Milk lying on a grey dog bed, taking a treat from a hand and licking her lips](./milk/milk-whining-less.mp4)
+
 ### 1:41pm
 
 <!-- entry-id: e002 -->
