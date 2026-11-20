@@ -1,0 +1,13 @@
+Use case: identity-preserve.
+Asset: rear-view sprite family for the SAME Ebi jump animation in the reference illustration.
+Reference role: supplied image is the approved drawing style and character design. Keep ginger-orange coat, cream-white socks, fluffy cream-tipped curled tail, pointed ears, dark slim collar, grouped fur tufts, clean warm cel shading, thin brown linework and gentle paper texture.
+Change ONLY the viewing direction: the camera is directly BEHIND Ebi. We see the back of her head, both ears, back, rump, tail and backs of her legs. Her head and body face AWAY from the viewer toward the counter in front of her. Absolutely NO visible eye, NO nose, NO muzzle, NO side profile, NO looking back, in ANY pose. The face is hidden on the far side of her head. The top of the head can tilt up but never turn to the viewer.
+Technical output: one landscape 1536x1024 transparent PNG sprite sheet, EXACTLY six full dog drawings in 3 columns by 2 rows, generous 40px transparent gutters at all cell boundaries and outer edges. One complete dog in each 512x512 cell. Same physical scale and identity throughout. No scenery or ground shadows. True alpha outside silhouettes.
+Read left-to-right then next row:
+1 rear view standing on all four feet, looking up at unseen counter;
+2 rear view crouching, body lowered and hind legs bent to load a jump;
+3 rear view takeoff, body extends upward, both forepaws reach toward unseen counter, both hindpaws leaving ground;
+4 rear view jump apex, body stretched upward, both forepaws lifted either side of head, head slightly tipped forward toward unseen egg tray; NO face;
+5 rear view descending, both hind legs down and forepaws lowering, head still away;
+6 rear view landed on all four feet, head raised slightly, still entirely back-facing.
+Natural adult Pomsky body, not a human pose or puppy. Keep the same amount of body fur and the same tail and ears. No eggs, no tray, no kitchen, no text, no labels, no borders, no extra limbs, no cropped paws or ears.

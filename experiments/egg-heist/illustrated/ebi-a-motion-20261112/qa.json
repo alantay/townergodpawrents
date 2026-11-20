@@ -1,0 +1,102 @@
+{
+  "poses": [
+    {
+      "pose": 0,
+      "crop": [
+        0,
+        0,
+        512,
+        448
+      ],
+      "solid_bbox": [
+        72,
+        36,
+        441,
+        428
+      ]
+    },
+    {
+      "pose": 1,
+      "crop": [
+        512,
+        0,
+        1024,
+        448
+      ],
+      "solid_bbox": [
+        57,
+        96,
+        447,
+        426
+      ]
+    },
+    {
+      "pose": 2,
+      "crop": [
+        1024,
+        0,
+        1536,
+        448
+      ],
+      "solid_bbox": [
+        50,
+        11,
+        420,
+        422
+      ]
+    },
+    {
+      "pose": 3,
+      "crop": [
+        0,
+        448,
+        512,
+        1024
+      ],
+      "solid_bbox": [
+        77,
+        12,
+        422,
+        486
+      ]
+    },
+    {
+      "pose": 4,
+      "crop": [
+        512,
+        448,
+        1024,
+        1024
+      ],
+      "solid_bbox": [
+        48,
+        72,
+        422,
+        467
+      ]
+    },
+    {
+      "pose": 5,
+      "crop": [
+        1024,
+        448,
+        1536,
+        1024
+      ],
+      "solid_bbox": [
+        57,
+        106,
+        436,
+        499
+      ]
+    }
+  ],
+  "tray_crop": [
+    147,
+    245,
+    1386,
+    789
+  ],
+  "source_sizes": "1536x1024",
+  "normalization": "Shared pixel scale; measured mouth anchors per frame; no per-frame stretching."
+}

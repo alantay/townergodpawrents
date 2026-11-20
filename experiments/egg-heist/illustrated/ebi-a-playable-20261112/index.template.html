@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ebi and the eggs</title>
+<style>
+:root{color-scheme:light dark;--bg:#f5f0e8;--ink:#332c26;--muted:#75695e;--panel:#fffcf7;--line:#d5c9b8;--accent:#9c4c22}
+@media(prefers-color-scheme:dark){:root{--bg:#211f1b;--ink:#f5ebdf;--muted:#c0b3a3;--panel:#2d2923;--line:#554a3d;--accent:#f1aa70}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,sans-serif}
+main{max-width:940px;margin:24px auto;padding:0 16px}header{display:flex;align-items:baseline;justify-content:space-between;gap:12px}h1{font:600 clamp(26px,4vw,34px)/1.15 Georgia,serif;margin:0}header span{font-size:13px;color:var(--muted)}p{color:var(--muted);margin:10px 0 16px}
+button{font:inherit;border:1px solid var(--line);border-radius:8px;padding:10px 18px;min-height:46px;cursor:pointer;color:var(--ink);background:var(--panel)}button:focus-visible{outline:3px solid var(--accent);outline-offset:4px}button:disabled{cursor:default}#scene{display:block;width:100%;padding:0;border:0;border-radius:12px;overflow:hidden;touch-action:manipulation}canvas{display:block;width:100%;height:auto;aspect-ratio:3/2}#jump{min-width:144px;background:var(--accent);color:var(--bg);font-weight:600}#jump:disabled{background:var(--panel);color:var(--ink)}.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}#status{min-height:24px;margin:12px 0}aside{border-top:1px solid var(--line);padding-top:12px;color:var(--muted);font-size:13px}
+</style>
+<main>
+<header><h1>Ebi and the eggs</h1><span>One playable jump</span></header>
+<p>Press Space, tap the kitchen, or use the button.</p>
+<button id="scene" aria-label="Make Ebi jump for the eggs" disabled><canvas width="1536" height="1024" role="img" aria-label="Ebi faces the kitchen counter with her back to us."></canvas></button>
+<div class="controls"><button id="jump" disabled>Jump</button><button id="reset" disabled>Reset</button></div>
+<p id="status" role="status" aria-live="polite">Loading Ebi…</p>
+<aside>A small test of the jump. The next press puts the eggs back for another go.</aside>
+<noscript>JavaScript is needed to make Ebi jump.</noscript>
+</main>
+<script>
+__MOTION__
+const urls=__ASSETS__, background='__BACKGROUND__', trayUrl='__TRAY__';
+__GAME__
+</script>
+</html>
