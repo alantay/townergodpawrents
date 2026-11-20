@@ -7,6 +7,8 @@ showLive: true
 sex: female
 badge: Leaf retriever
 tagline: never without a leaf in her mouth, sometimes a stick too
+portraitNotes:
+  right: Mama's dog
 whenCalled: "Cant talk. Mouf full of leaf"
 thoughts:
   - "Dat leaf has my name on it"
