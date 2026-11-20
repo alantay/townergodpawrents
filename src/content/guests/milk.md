@@ -16,6 +16,17 @@ stays:
     checkOut: 2026-11-21
 ---
 
+## 20 Nov
+
+### 9:27am
+
+<!-- entry-id: e254 -->
+<!-- no-time -->
+
+Milk is keeping an eye on the kids downstairs.
+
+![A fluffy white dog stands by a window, looking outside through partially lowered blinds. A leafy plant sits beside the dog.](./milk/milk-keeping-eye-kids.jpg)
+
 ## 19 Nov
 
 ### 7:45pm
