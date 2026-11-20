@@ -22,6 +22,16 @@ stays:
 
 ## 20 Nov
 
+### 9:12pm
+
+<!-- entry-id: e261 -->
+<!-- with: milk -->
+<!-- no-time -->
+
+Panting after another round of play. The ladies play well together.
+
+![Milk and Luna lying on the floor with their tongues out after playing](./luna/luna-panting-after-play.jpg)
+
 ### 7:45pm
 
 <!-- entry-id: e260 -->
