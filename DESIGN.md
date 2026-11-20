@@ -272,6 +272,7 @@ Pats create a cream comic bubble with an ink border and tail. Idle thoughts use 
 
 ### Chips
 - **Cream chip:** cream on the hero, ink text, 13px/600, 7px 13px, pill. Used for breed, stay range and stay day.
+- **Diary link chip:** homepage cream chips that open a diary include a small ink right-arrow after the existing wording, with a 6px gap and 11px right padding. The arrow is always visible and nudges 2px on hover with a mouse. Fact-only chips have no arrow.
 - **Badge tape:** the dog's badge (and the "N dogs, one sofa" chip) is a nickname stuck on the dog, not a fact, so it's a strip of Post-it Yellow tape rather than a chip: square corners, tilted −2°, same Chip type in ink. It sits last in the row, after the cream fact chips.
 - **Outlined chip:** 1.5px Pencil Rule, pill, no fill. On hover it gets inked: an ink line is drawn round it by hand (the `inked` class, wobbled by the calendar's `#pencil-rule` filter), a little off the pencil. Text stays ink, never moss. A press pushes it in, and a tap inks it for a moment. Used for the nav links, "See all" and day chips.
 - **NEW tag:** lime pill, 11px uppercase, 0.06em tracking.
