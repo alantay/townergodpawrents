@@ -79,7 +79,7 @@ const hasNotes = Boolean(notes?.left || notes?.right);
     transform: rotate(-4deg);
     transform-origin: left top;
   }
-  .chalk-note--right svg { left: 6px; bottom: calc(100% + 2px); width: 40px; height: 26px; stroke-width: 1.7; }
+  .chalk-note--right svg { left: -32px; bottom: calc(100% + 2px); width: 40px; height: 26px; stroke-width: 1.7; }
   .chalk-note--left {
     right: calc(50% + 0.31 * var(--portrait-width) + 6px);
     top: calc(0.62 * var(--portrait-width));
@@ -89,6 +89,10 @@ const hasNotes = Boolean(notes?.left || notes?.right);
     transform-origin: right top;
   }
   .chalk-note--left svg { right: 0; top: calc(100% + 1px); width: min(100%, 64px); height: 9px; stroke-width: 1.6; }
+
+  @media (max-width: 639px) {
+    .chalk-note--right svg { display: none; }
+  }
 
   @container (max-width: 420px) {
     .chalk-note--right {
