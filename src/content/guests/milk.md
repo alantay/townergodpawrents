@@ -18,6 +18,15 @@ stays:
 
 ## 20 Nov
 
+### 5:21pm
+
+<!-- entry-id: e258 -->
+<!-- no-time -->
+
+Milk makes surprise inspections of the room, checking whether the hoomans have sneakily disappeared without her knowing.
+
+![Milk, 20 Nov](./milk/milk-makes-surprise-inspections.mp4)
+
 ### 2:22pm
 
 <!-- entry-id: e256 -->
