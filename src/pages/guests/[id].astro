@@ -116,7 +116,8 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { name, breed, tagline, badge, bgColor, showLive, photo, whenCalled, sounds, thoughts, sex } = entry.data;
+const { name, breed, tagline, badge, bgColor, showLive, whenCalled, sounds, thoughts, sex } = entry.data;
+const photo = entry.data.photo ?? entry.data.headshot;
 const portraitNotes = entry.data.portraitNotes;
 const hasPortraitNotes = Boolean(portraitNotes?.left || portraitNotes?.right);
 

@@ -17,7 +17,7 @@ const stays = entries.flatMap((e) =>
   e.data.stays.map((s) => ({
     guestId: e.id,
     name: e.data.name,
-    photo: e.data.photo,
+    photo: e.data.photo ?? e.data.headshot,
     bgColor: e.data.bgColor,
     tint: diarySkin(e.data.bgColor, 0).bg,
     checkIn: dateStr(s.checkIn),

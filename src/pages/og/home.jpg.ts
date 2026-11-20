@@ -19,7 +19,7 @@ export const GET: APIRoute = async () => {
   const today = todaySGT();
   const guests = (await getCollection("guests"))
     .map((g) => ({
-      fsPath: (g.data.photo as { fsPath?: string } | undefined)?.fsPath,
+      fsPath: ((g.data.photo ?? g.data.headshot) as { fsPath?: string } | undefined)?.fsPath,
       bgColor: g.data.bgColor,
       firstIn: g.data.stays.map((s) => dateStr(s.checkIn)).sort()[0],
     }))

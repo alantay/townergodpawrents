@@ -2,6 +2,7 @@
 name: Luna
 breed: Golden Retriever
 photo: ./luna/luna-collage-no-outline-v1.png
+headshot: ./luna/luna-headshot.png
 bgColor: "#755A83"
 showLive: true
 badge: FOMO queen
