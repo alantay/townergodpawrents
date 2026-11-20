@@ -19,6 +19,18 @@ stays:
     checkOut: 2026-12-03
 ---
 
+## 20 Nov
+
+### 7:17pm
+
+<!-- entry-id: e259 -->
+<!-- with: milk -->
+<!-- no-time -->
+
+The two girls making a mess of our house.
+
+![Luna and Milk playing together on the sofa](./luna/luna-two-girls-mess.mp4)
+
 ## 20 Oct
 
 ### 9:53pm
