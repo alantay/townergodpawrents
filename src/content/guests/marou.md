@@ -17,6 +17,14 @@ stays:
     dropIn: true
 ---
 
+## 20 Nov
+
+### 7:30am
+
+<!-- entry-id: e257 -->
+
+![Marou, 20 Nov 7:30am](./marou/marou-photo.mp4)
+
 ## 19 Nov
 
 ### 9:20pm
