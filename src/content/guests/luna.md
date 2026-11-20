@@ -8,6 +8,7 @@ showLive: true
 badge: FOMO queen
 tagline: always has something to whine about, thinks every dog is her play buddy
 portraitNotes:
+  left: Has no chill
   right: Destroys toys in seconds
 whenCalled: "U can pat. Toy is mine"
 thoughts:
