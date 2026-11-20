@@ -21,8 +21,8 @@ const hasNotes = Boolean(notes?.left || notes?.right);
       <p class="chalk-note chalk-note--right">
         {notes.right}
         <svg viewBox="0 0 40 26" aria-hidden="true" focusable="false">
-          <path d="M30 25 C27 15 17 7.5 4 5.5" />
-          <path d="M10.5 1.8 3.6 5.4 9.6 10.4" />
+          <path d="M32 6 C22 0 11 5 3 20" />
+          <path d="M2 12 3 20 11 17" />
         </svg>
       </p>
     )}
@@ -73,17 +73,17 @@ const hasNotes = Boolean(notes?.left || notes?.right);
     stroke-linejoin: round;
   }
   .chalk-note--right {
-    left: calc(50% + 0.5 * var(--portrait-width) + 4px);
-    top: calc(0.50 * var(--portrait-width));
-    max-width: min(150px, calc(50% - 0.5 * var(--portrait-width) - 8px));
+    left: calc(50% + 0.5 * var(--portrait-width) + 8px);
+    top: calc(0.65 * var(--portrait-width));
+    max-width: min(150px, calc(50% - 0.5 * var(--portrait-width) - 12px));
     transform: rotate(-4deg);
     transform-origin: left top;
   }
-  .chalk-note--right svg { left: -32px; bottom: calc(100% + 2px); width: 40px; height: 26px; stroke-width: 1.7; }
+  .chalk-note--right svg { left: -4px; bottom: calc(100% + 2px); width: 40px; height: 26px; stroke-width: 1.7; }
   .chalk-note--left {
-    right: calc(50% + 0.31 * var(--portrait-width) + 6px);
+    right: calc(50% + 0.5 * var(--portrait-width) + 8px);
     top: calc(0.62 * var(--portrait-width));
-    max-width: calc(50% - 0.31 * var(--portrait-width) - 8px);
+    max-width: min(150px, calc(50% - 0.5 * var(--portrait-width) - 12px));
     text-align: right;
     transform: rotate(3deg);
     transform-origin: right top;
