@@ -21,6 +21,14 @@ stays:
 
 ## 20 Nov
 
+### 7:45pm
+
+<!-- entry-id: e260 -->
+
+Retrieving a toy. Then nearly emptying the toy bag, one toy at a time.
+
+![Luna, 20 Nov 7:45pm](./luna/luna-retrieving-toy-nearly.mp4)
+
 ### 7:17pm
 
 <!-- entry-id: e259 -->
