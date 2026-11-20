@@ -10,7 +10,7 @@ tagline: always has something to whine about, thinks every dog is her play buddy
 portraitNotes:
   left: Has no chill
   right: Destroys toys in seconds
-whenCalled: "U can pat. Toy is mine"
+whenCalled: "Me first. No hooman overtakin"
 thoughts:
   - "R they playin without me?? Rude"
   - "Toy had it comin. Mlem"
