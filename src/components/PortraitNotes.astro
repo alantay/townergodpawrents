@@ -9,7 +9,7 @@ const hasNotes = Boolean(notes?.left || notes?.right);
 ---
 
 {hasNotes ? (
-  <div class:list={["portrait-notes", { "portrait-notes--single-right": notes?.right && !notes?.left }]} style={`--portrait-aspect:${aspectRatio}`}>
+  <div class="portrait-notes" style={`--portrait-aspect:${aspectRatio}`}>
     <svg width="0" height="0" class="chalk-filter" aria-hidden="true" focusable="false">
       <filter id="diary-portrait-chalk" x="-5%" y="-10%" width="110%" height="120%">
         <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="4" result="grain" />
@@ -91,31 +91,10 @@ const hasNotes = Boolean(notes?.left || notes?.right);
   .chalk-note--left svg { right: 0; top: calc(100% + 1px); width: min(100%, 64px); height: 9px; stroke-width: 1.6; }
 
   @media (max-width: 639px) {
-    .chalk-note--right svg { display: none; }
-  }
+    .chalk-note { display: none; }
 
-  @container (max-width: 420px) {
-    .chalk-note--right {
-      position: relative;
-      left: auto;
-      top: auto;
-      width: fit-content;
-      max-width: 150px;
-      margin: 12px 4px 4px auto;
-    }
-
-    .portrait-notes--single-right :global(.guest-cutout) {
-      width: min(210px, 100cqi - 112px);
-      margin-left: 0;
-      margin-right: 0;
-    }
-
-    .portrait-notes--single-right .chalk-note--right {
-      position: absolute;
-      top: calc(0.4 * min(210px, 100cqi - 112px));
-      right: 0;
-      max-width: 100px;
-      margin: 0;
+    .portrait-notes :global(.guest-cutout) {
+      width: min(270px, 100%);
     }
   }
 </style>
