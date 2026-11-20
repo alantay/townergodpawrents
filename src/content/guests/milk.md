@@ -18,6 +18,14 @@ stays:
 
 ## 20 Nov
 
+### 12pm
+
+<!-- entry-id: e255 -->
+
+Reclaiming her toy.
+
+![Milk, 20 Nov 12pm](./milk/milk-reclaiming-toy.mp4)
+
 ### 9:27am
 
 <!-- entry-id: e254 -->
