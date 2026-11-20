@@ -18,6 +18,14 @@ stays:
 
 ## 20 Nov
 
+### 2:22pm
+
+<!-- entry-id: e256 -->
+
+Milk can hold a long stay with food in sight, sometimes with drool. But can she hold a stay with food on her nose? Stay tuned.
+
+![Milk, 20 Nov 2:22pm](./milk/milk-can-hold-long.mp4)
+
 ### 12pm
 
 <!-- entry-id: e255 -->
