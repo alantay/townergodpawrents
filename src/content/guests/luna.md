@@ -7,6 +7,8 @@ bgColor: "#755A83"
 showLive: true
 badge: FOMO queen
 tagline: always has something to whine about, thinks every dog is her play buddy
+portraitNotes:
+  right: Destroys toys in seconds
 whenCalled: "U can pat. Toy is mine"
 thoughts:
   - "R they playin without me?? Rude"
