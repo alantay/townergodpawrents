@@ -134,7 +134,7 @@ const guests = entries.map((e) => {
     bgColor: e.data.bgColor,
     showLive: e.data.showLive,
     sex: e.data.sex ?? null,
-    photo: e.data.photo,
+    photo: e.data.headshot ?? e.data.photo,
     sharedPhoto: e.data.sharedPhoto,
     stays,
     days: parseDiary(e.body ?? "", stays, e.id),

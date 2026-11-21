@@ -22,7 +22,7 @@ const all = entries.map((e) => {
     name: e.data.name,
     breed: e.data.breed,
     bgColor: e.data.bgColor,
-    photo: e.data.photo,
+    photo: e.data.photo ?? e.data.headshot,
     showLive: e.data.showLive,
     stays,
   };

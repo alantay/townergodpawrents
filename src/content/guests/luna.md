@@ -2,11 +2,15 @@
 name: Luna
 breed: Golden Retriever
 photo: ./luna/luna-collage-no-outline-v1.png
+headshot: ./luna/luna-headshot.png
 bgColor: "#755A83"
 showLive: true
 badge: FOMO queen
 tagline: always has something to whine about, thinks every dog is her play buddy
-whenCalled: "U can pat. Toy is mine"
+portraitNotes:
+  left: Has no chill
+  right: Destroys toys in seconds
+whenCalled: "Me first. No hooman overtakin"
 thoughts:
   - "R they playin without me?? Rude"
   - "Toy had it comin. Mlem"
@@ -18,6 +22,36 @@ stays:
   - checkIn: 2026-11-26
     checkOut: 2026-12-03
 ---
+
+## 20 Nov
+
+### 9:12pm
+
+<!-- entry-id: e261 -->
+<!-- with: milk -->
+<!-- no-time -->
+
+Panting after another round of play. The ladies play well together.
+
+![Milk and Luna lying on the floor with their tongues out after playing](./luna/luna-panting-after-play.jpg)
+
+### 7:45pm
+
+<!-- entry-id: e260 -->
+
+Retrieving a toy. Then nearly emptying the toy bag, one toy at a time.
+
+![Luna, 20 Nov 7:45pm](./luna/luna-retrieving-toy-nearly.mp4)
+
+### 7:17pm
+
+<!-- entry-id: e259 -->
+<!-- with: milk -->
+<!-- no-time -->
+
+The two girls making a mess of our house.
+
+![Luna and Milk playing together on the sofa](./luna/luna-two-girls-mess.mp4)
 
 ## 20 Oct
 
