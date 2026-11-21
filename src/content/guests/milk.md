@@ -21,6 +21,15 @@ stays:
 
 ## 21 Nov
 
+### 3:15pm
+
+<!-- entry-id: e267 -->
+<!-- with: luna -->
+
+Milk kept whining, briefly convinced that jumping was a skill she had never learned.
+
+![Milk, 21 Nov 3:15pm](./milk/milk-kept-whining-briefly.mp4)
+
 ### 2:38pm
 
 <!-- entry-id: e266 -->
