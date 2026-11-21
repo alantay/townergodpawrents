@@ -2,6 +2,7 @@
 name: Milk
 breed: Golden Doodle
 photo: ./milk/milk-collage-v4.png
+headshot: ./milk/milk-collage-v3.png
 bgColor: "#8E4A5C"
 showLive: true
 sex: female
