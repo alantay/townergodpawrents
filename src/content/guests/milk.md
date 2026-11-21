@@ -28,7 +28,7 @@ stays:
 
 We brought them to Whampoa to buy our breakfast.
 
-![A person stands between two dogs on a paved area beside a metal railing, with apartment buildings and trees behind them.](./milk/milk-brought-them-whampoa.jpg)
+![Milk and Luna sit on either side of a person holding their leashes by a metal railing.](./milk/milk-brought-them-whampoa.jpg)
 
 ## 20 Nov
 
