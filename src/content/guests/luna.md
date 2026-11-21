@@ -25,6 +25,18 @@ stays:
 
 ## 21 Nov
 
+### 9:55pm
+
+<!-- entry-id: e270 -->
+<!-- with: milk -->
+<!-- no-time -->
+
+Lamp Chop’s play-along. Then Lamp Chop’s rest-along.
+
+![Luna, 21 Nov](./luna/luna-lamp-chop-play.mp4)
+
+![A golden dog lies on the floor beside a cream-colored dog and a plush toy.](./luna/luna-lamp-chop-play.jpg)
+
 ### 5:44pm
 
 <!-- entry-id: e269 -->
