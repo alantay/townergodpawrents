@@ -21,6 +21,15 @@ stays:
 
 ## 21 Nov
 
+### 3:33pm
+
+<!-- entry-id: e268 -->
+<!-- no-time -->
+
+Milk’s prized possession.
+
+![Milk, 21 Nov](./milk/milk-prized-possession.mp4)
+
 ### 3:15pm
 
 <!-- entry-id: e267 -->
