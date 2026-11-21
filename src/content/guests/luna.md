@@ -25,6 +25,15 @@ stays:
 
 ## 21 Nov
 
+### 5:44pm
+
+<!-- entry-id: e269 -->
+<!-- no-time -->
+
+Luna squeezing between the bed and wall during our afternoon nap.
+
+![Luna lying in the narrow gap between the bed and wall](./luna/luna-bed-wall-nap.jpg)
+
 ### 12:55pm
 
 <!-- entry-id: e265 -->
