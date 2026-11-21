@@ -25,6 +25,14 @@ stays:
 
 ## 21 Nov
 
+### 12pm
+
+<!-- entry-id: e264 -->
+
+Being a serious model student, she actually caught the treat!
+
+![Luna, 21 Nov 12pm](./luna/luna-being-serious-model.mp4)
+
 ### 10:33am
 
 <!-- entry-id: e263 -->
