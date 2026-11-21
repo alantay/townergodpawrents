@@ -31,7 +31,7 @@ stays:
 <!-- with: milk -->
 <!-- no-time -->
 
-Luna seems to want Milk to play tug with her with the pink dragon
+Luna seems to be inviting Milk to a game of tug with the pink dragon.
 
 ![Luna carrying the pink dragon toy while playing with Milk](./luna/luna-pink-dragon-tug.mp4)
 
