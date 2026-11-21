@@ -1,6 +1,6 @@
 ---
 interface Props {
-  notes?: { left?: string; right?: string };
+  notes?: { left?: string; right?: string; inset?: { left?: number; right?: number } };
   aspectRatio?: number;
 }
 
@@ -9,7 +9,7 @@ const hasNotes = Boolean(notes?.left || notes?.right);
 ---
 
 {hasNotes ? (
-  <div class="portrait-notes" style={`--portrait-aspect:${aspectRatio}`}>
+  <div class="portrait-notes" style={`--portrait-aspect:${aspectRatio};--note-inset-left:${notes?.inset?.left ?? 0};--note-inset-right:${notes?.inset?.right ?? 0}`}>
     <svg width="0" height="0" class="chalk-filter" aria-hidden="true" focusable="false">
       <filter id="diary-portrait-chalk" x="-5%" y="-10%" width="110%" height="120%">
         <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="4" result="grain" />
@@ -29,8 +29,9 @@ const hasNotes = Boolean(notes?.left || notes?.right);
     {notes?.left && (
       <p class="chalk-note chalk-note--left">
         {notes.left}
-        <svg viewBox="0 0 64 9" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-          <path d="M2 5.5 C18 3 38 7.2 62 3.4" />
+        <svg viewBox="0 0 40 26" aria-hidden="true" focusable="false">
+          <path d="M3 22 C10 17 21 14 37 16" />
+          <path d="M30 11 37 16 29 21" />
         </svg>
       </p>
     )}
@@ -73,22 +74,22 @@ const hasNotes = Boolean(notes?.left || notes?.right);
     stroke-linejoin: round;
   }
   .chalk-note--right {
-    left: calc(50% + 0.5 * var(--portrait-width) + 8px);
+    left: calc(50% + (0.5 - var(--note-inset-right)) * var(--portrait-width) + 8px);
     top: calc(0.65 * var(--portrait-width));
-    max-width: min(150px, calc(50% - 0.5 * var(--portrait-width) - 12px));
+    max-width: min(150px, calc(50% - (0.5 - var(--note-inset-right)) * var(--portrait-width) - 12px));
     transform: rotate(-4deg);
     transform-origin: left top;
   }
-  .chalk-note--right svg { left: -4px; bottom: calc(100% + 2px); width: 40px; height: 26px; stroke-width: 1.7; }
+  .chalk-note--right svg { left: -22px; bottom: calc(100% + 2px); width: 40px; height: 26px; stroke-width: 1.7; }
   .chalk-note--left {
-    right: calc(50% + 0.5 * var(--portrait-width) + 8px);
+    right: calc(50% + (0.5 - var(--note-inset-left)) * var(--portrait-width) + 8px);
     top: calc(0.62 * var(--portrait-width));
-    max-width: min(150px, calc(50% - 0.5 * var(--portrait-width) - 12px));
+    max-width: min(150px, calc(50% - (0.5 - var(--note-inset-left)) * var(--portrait-width) - 12px));
     text-align: right;
     transform: rotate(3deg);
     transform-origin: right top;
   }
-  .chalk-note--left svg { right: 0; top: calc(100% + 1px); width: min(100%, 64px); height: 9px; stroke-width: 1.6; }
+  .chalk-note--left svg { right: -22px; top: calc(100% + 2px); width: 40px; height: 26px; stroke-width: 1.7; }
 
   @media (max-width: 639px) {
     .chalk-note { display: none; }

@@ -39,7 +39,7 @@ Single-context layout (`GLOSSARY.md` + `docs/adr/` at the repo root). See `docs/
 
 Whenever you create an image, preview or artifact for Alan to review, open it in the appropriate app or browser and verify it is visible. Open all variations together when comparing options; file links alone are not enough.
 
-When adding or changing chalk notes, inspect the rendered diary portrait: the text and marks must sit close to the dog's outline with a clear gap, and the arrow tip must clearly point at the dog. Check every affected dog when changing the shared component. Chalk notes stay hidden on mobile. A passing build or geometry check alone does not establish visual approval; report any missing visual verification.
+For chalk note wording, placement, arrows, or a replacement portrait that has notes, follow `.agents/skills/chalk-notes/SKILL.md`.
 
 ### Pushing changes
 
