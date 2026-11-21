@@ -13,6 +13,8 @@ thoughts:
 stays:
   - checkIn: 2026-10-20
     checkOut: 2026-10-25
+  - checkIn: 2026-12-31
+    checkOut: 2027-01-06
 ---
 
 ## 25 Oct
