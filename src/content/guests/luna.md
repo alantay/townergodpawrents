@@ -37,6 +37,15 @@ Lamp Chop’s play-along. Then Lamp Chop’s rest-along.
 
 ![A golden dog lies on the floor beside a cream-colored dog and a plush toy.](./luna/luna-lamp-chop-play.jpg)
 
+### 6pm
+
+<!-- entry-id: e271 -->
+<!-- with: milk -->
+
+Luna scolding Charlie for not respecting her boundary, while Milk just wants Charlie’s ball that’s between them as they fight.
+
+![Luna, 21 Nov 6pm](./luna/luna-scolding-charlie-not.mp4)
+
 ### 5:44pm
 
 <!-- entry-id: e269 -->
