@@ -25,6 +25,16 @@ stays:
 
 ## 21 Nov
 
+### 12:55pm
+
+<!-- entry-id: e265 -->
+<!-- with: milk -->
+<!-- no-time -->
+
+Luna seems to want Milk to play tug with her with the pink dragon
+
+![Luna carrying the pink dragon toy while playing with Milk](./luna/luna-pink-dragon-tug.mp4)
+
 ### 12pm
 
 <!-- entry-id: e264 -->
