@@ -23,6 +23,18 @@ stays:
     checkOut: 2026-12-03
 ---
 
+## 21 Nov
+
+### 10:33am
+
+<!-- entry-id: e263 -->
+<!-- with: milk -->
+<!-- no-time -->
+
+Luna being trained by Milk’s endless energy. Recharging for the next round.
+
+![Luna, 21 Nov](./luna/luna-being-trained-milk.mp4)
+
 ## 20 Nov
 
 ### 9:12pm
