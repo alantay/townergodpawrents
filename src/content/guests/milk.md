@@ -18,7 +18,7 @@ thoughts:
   - "Stick also acceptabol"
 stays:
   - checkIn: 2026-11-19
-    checkOut: 2026-11-21
+    checkOut: 2026-11-22
 ---
 
 ## 21 Nov
