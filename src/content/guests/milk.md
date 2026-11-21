@@ -21,6 +21,15 @@ stays:
 
 ## 21 Nov
 
+### 2:38pm
+
+<!-- entry-id: e263 -->
+<!-- no-time -->
+
+Milk failed the treat balancing act
+
+![Milk trying to balance a treat on her nose](./milk/milk-treat-balancing-act.mp4)
+
 ### 8:22am
 
 <!-- entry-id: e262 -->
