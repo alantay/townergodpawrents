@@ -25,7 +25,27 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      # Ubuntu's mirror can crawl (10+ min on 19 Nov), so keep ffmpeg's .debs
+      # in the Actions cache. A stale or missing cache falls back to apt and
+      # saves a fresh copy. Unused caches expire after 7 days.
+      - uses: actions/cache/restore@v4
+        with:
+          path: ~/ffmpeg-debs
+          key: ffmpeg-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: ffmpeg-${{ runner.os }}-
+      - id: ffmpeg
+        run: |
+          if ls ~/ffmpeg-debs/*.deb >/dev/null 2>&1 && sudo apt-get install -y --no-download ~/ffmpeg-debs/*.deb; then
+            exit 0
+          fi
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+          rm -rf ~/ffmpeg-debs && mkdir -p ~/ffmpeg-debs && cp /var/cache/apt/archives/*.deb ~/ffmpeg-debs/
+          echo "fresh=true" >> "$GITHUB_OUTPUT"
+      - if: steps.ffmpeg.outputs.fresh == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/ffmpeg-debs
+          key: ffmpeg-${{ runner.os }}-${{ github.run_id }}
       - run: node --experimental-strip-types scripts/admin-video.ts
         env:
           PAYLOAD: ${{ toJSON(github.event.client_payload) }}
