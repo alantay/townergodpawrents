@@ -21,6 +21,17 @@ stays:
     checkOut: 2026-11-22
 ---
 
+## 22 Nov
+
+### 7:30am
+
+<!-- entry-id: e272 -->
+<!-- with: luna -->
+
+Presenting you the whiny, FOMO girls.
+
+![Milk, 22 Nov 7:30am](./milk/milk-presenting-you-whiny.mp4)
+
 ## 21 Nov
 
 ### 3:33pm
