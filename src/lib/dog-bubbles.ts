@@ -6,25 +6,20 @@
 // a pat, "dots" when it's thinking out loud. A thought gets a cloud drawn
 // to fit its words, then two dots trailing down to the dog.
 export function dogSays(card: HTMLElement, btn: HTMLElement, text: string, kind: "comic" | "dots") {
-  card.querySelector(".dog-bubble-space")?.remove();
+  card.querySelectorAll(".dog-bubble").forEach((old) => old.remove());
   const portrait = btn.closest<HTMLElement>("#hero-photos, .portrait-notes") || btn;
   const header = portrait.previousElementSibling as HTMLElement;
-  const space = document.createElement("div");
-  space.className = "dog-bubble-space";
   const bubble = document.createElement("div");
   bubble.className = "dog-bubble dog-bubble--" + kind;
   bubble.setAttribute("role", "status");
   bubble.innerHTML = "<p></p>";
-  bubble.querySelector("p")!.textContent = text;
-  portrait.before(space);
-  space.appendChild(bubble);
+  const words = bubble.querySelector("p")!;
+  words.textContent = text;
+  card.appendChild(bubble);
   const c = card.getBoundingClientRect();
   const scale = c.width / card.offsetWidth;
   const dog = (btn.querySelector("img, .undeveloped") || btn).getBoundingClientRect();
   const x = (dog.left + dog.width / 2 - c.left) / scale;
-  const half = bubble.offsetWidth / 2;
-  const left = Math.min(Math.max(x, half + 12), card.offsetWidth - half - 12);
-  bubble.style.left = left + "px";
   // A fitted cutout can have empty space above it, especially in a pair on a phone.
   const heads = Array.from(portrait.querySelectorAll<HTMLElement>("img, .undeveloped"), (photo) => {
     const box = photo.getBoundingClientRect();
@@ -35,10 +30,18 @@ export function dogSays(card: HTMLElement, btn: HTMLElement, text: string, kind:
   });
   // Leave room for the tail and the portrait's hop below the bubble.
   const gap = kind === "dots" ? 46 : 32;
-  const head = heads.length ? Math.min(...heads) : portrait.offsetTop;
-  const top = Math.max(head - gap, header.offsetTop + header.offsetHeight + 14 + bubble.offsetHeight);
-  space.style.height = Math.max(0, top + gap - head) + "px";
+  const head = heads.length ? Math.min(...heads) : (portrait.getBoundingClientRect().top - c.top) / scale;
+  // Nothing moves to make room. A long line fits the gap between the pills
+  // and the head: wider first, then smaller words. Still too tall, it covers
+  // the pills before it covers the face.
+  const pills = (header.getBoundingClientRect().bottom - c.top) / scale + 14;
+  if (bubble.offsetHeight > head - gap - pills) bubble.style.maxWidth = Math.min(card.offsetWidth * 0.9 - 24, 340) + "px";
+  for (let size = 26; size >= 22 && bubble.offsetHeight > head - gap - pills; size -= 2) words.style.fontSize = size + "px";
+  const top = Math.max(head - gap, 12 + bubble.offsetHeight);
   bubble.style.top = top + "px";
+  const half = bubble.offsetWidth / 2;
+  const left = Math.min(Math.max(x, half + 12), card.offsetWidth - half - 12);
+  bubble.style.left = left + "px";
   const tailX = Math.min(Math.max(x - left, -half + 22), half - 22);
   bubble.style.setProperty("--tail-x", tailX + "px");
   if (kind === "dots") {
@@ -78,7 +81,7 @@ export function dogSays(card: HTMLElement, btn: HTMLElement, text: string, kind:
   bubble.style.setProperty("--note-hold", 2200 + text.length * 40 + "ms");
   bubble.classList.add("dog-bubble-pop");
   bubble.addEventListener("animationend", (e) => {
-    if (e.animationName === "note-out") space.remove();
+    if (e.animationName === "note-out") bubble.remove();
   });
 }
 
