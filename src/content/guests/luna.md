@@ -25,6 +25,16 @@ stays:
 
 ## 22 Nov
 
+### 11:38am
+
+<!-- entry-id: e277 -->
+
+Luna’s new talent: keeping things in balance.
+
+![A golden dog lies on the floor with a red patterned fabric item and a small blue-and-yellow ball balanced on its head.](./luna/luna-new-talent-keeping.jpg)
+
+![A golden dog sits with a pink plush toy balanced on its head.](./luna/luna-new-talent-keeping-2.jpg)
+
 ### 10:15am
 
 <!-- entry-id: e275 -->
