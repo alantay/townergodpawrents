@@ -25,6 +25,14 @@ stays:
 
 ## 22 Nov
 
+### 10:15am
+
+<!-- entry-id: e275 -->
+
+Prime spot to recharge. The morning was too intense.
+
+![A golden-brown dog lies stretched out under a desk, beside a power strip and cables.](./luna/luna-prime-spot-recharge.jpg)
+
 ### 9am
 
 <!-- entry-id: e274 -->
