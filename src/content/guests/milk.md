@@ -23,6 +23,16 @@ stays:
 
 ## 22 Nov
 
+### 8:57am
+
+<!-- entry-id: e273 -->
+<!-- with: luna -->
+<!-- no-time -->
+
+Exploring the garden at the new BTO
+
+![Milk, 22 Nov](./milk/milk-exploring-garden-new.mp4)
+
 ### 7:30am
 
 <!-- entry-id: e272 -->
