@@ -42,6 +42,16 @@ A post-breakfast play session before crashing again. Play hard, nap harder.
 
 ![Luna, 22 Nov 9am](./luna/luna-post-breakfast-play.mp4)
 
+### 7:18am
+
+<!-- entry-id: e276 -->
+<!-- with: milk -->
+<!-- no-time -->
+
+Nice colours and shadows during this morning’s sunrise.
+
+![Luna and Milk on the rooftop terrace in warm sunrise light, with long shadows across the floor](./luna/luna-sunrise-shadows.mp4)
+
 ## 21 Nov
 
 ### 9:55pm
