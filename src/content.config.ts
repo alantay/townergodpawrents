@@ -15,10 +15,10 @@ const guests = defineCollection({
       // can go live before a photo is on hand — the UI falls back to a
       // colour-block placeholder in that case.
       photo: image().optional(),
-      // Optional tight head-and-chest cut-out. The homepage uses it over
-      // `photo`, so a few dogs side by side are easy to tell apart. Each
-      // falls back to the other: homepage `headshot ?? photo`, everywhere
-      // else `photo ?? headshot`.
+      // Optional tight head-and-chest cut-out. The homepage and calendar
+      // use it over `photo`, so small portraits are easy to tell apart.
+      // Each falls back to the other: homepage/calendar `headshot ?? photo`,
+      // everywhere else `photo ?? headshot`.
       headshot: image().optional(),
       // Optional cut-out for when the dog shares the hero. For a dog whose
       // `photo` is a tight headshot, so it doesn't dwarf a full-body buddy.
@@ -36,6 +36,11 @@ const guests = defineCollection({
       portraitNotes: z.object({
         left: z.string().trim().min(1).optional(),
         right: z.string().trim().min(1).optional(),
+        // Fractions of the image width, accounting for transparent margins.
+        inset: z.object({
+          left: z.number().min(0).max(0.3).optional(),
+          right: z.number().min(0).max(0.3).optional(),
+        }).optional(),
       }).optional(),
       // What the dog says back, now and then, when you pat it. Its own
       // voice, one short line.

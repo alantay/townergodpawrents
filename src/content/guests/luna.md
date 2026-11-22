@@ -23,6 +23,115 @@ stays:
     checkOut: 2026-12-03
 ---
 
+## 22 Nov
+
+### 11:38am
+
+<!-- entry-id: e277 -->
+
+Luna’s new talent: keeping things in balance.
+
+![A golden dog lies on the floor with a red patterned fabric item and a small blue-and-yellow ball balanced on its head.](./luna/luna-new-talent-keeping.jpg)
+
+![A golden dog sits with a pink plush toy balanced on its head.](./luna/luna-new-talent-keeping-2.jpg)
+
+### 11:26am
+
+<!-- entry-id: e278 -->
+<!-- with: milk -->
+<!-- no-time -->
+
+Three cups, two noses, one kibble.
+
+![Luna and Milk nosing at three paper cups while Alan shuffles them](./luna/luna-shell-game-cups.mp4)
+
+### 10:15am
+
+<!-- entry-id: e275 -->
+
+Prime spot to recharge. The morning was too intense.
+
+![A golden-brown dog lies stretched out under a desk, beside a power strip and cables.](./luna/luna-prime-spot-recharge.jpg)
+
+### 9am
+
+<!-- entry-id: e274 -->
+<!-- with: milk -->
+
+A post-breakfast play session before crashing again. Play hard, nap harder.
+
+![Luna, 22 Nov 9am](./luna/luna-post-breakfast-play.mp4)
+
+### 7:18am
+
+<!-- entry-id: e276 -->
+<!-- with: milk -->
+<!-- no-time -->
+
+Nice colours and shadows during this morning’s sunrise.
+
+![Luna and Milk on the rooftop terrace in warm sunrise light, with long shadows across the floor](./luna/luna-sunrise-shadows.mp4)
+
+## 21 Nov
+
+### 9:55pm
+
+<!-- entry-id: e270 -->
+<!-- with: milk -->
+<!-- no-time -->
+
+Lamp Chop’s play-along. Then Lamp Chop’s rest-along.
+
+![Luna, 21 Nov](./luna/luna-lamp-chop-play.mp4)
+
+![A golden dog lies on the floor beside a cream-colored dog and a plush toy.](./luna/luna-lamp-chop-play.jpg)
+
+### 6pm
+
+<!-- entry-id: e271 -->
+<!-- with: milk -->
+
+Luna scolding Charlie for not respecting her boundary, while Milk just wants Charlie’s ball that’s between them as they fight.
+
+![Luna, 21 Nov 6pm](./luna/luna-scolding-charlie-not.mp4)
+
+### 5:44pm
+
+<!-- entry-id: e269 -->
+<!-- no-time -->
+
+Luna squeezing between the bed and wall during our afternoon nap.
+
+![Luna lying in the narrow gap between the bed and wall](./luna/luna-bed-wall-nap.jpg)
+
+### 12:55pm
+
+<!-- entry-id: e265 -->
+<!-- with: milk -->
+<!-- no-time -->
+
+Luna seems to be inviting Milk to a game of tug with the pink dragon.
+
+![Luna carrying the pink dragon toy while playing with Milk](./luna/luna-pink-dragon-tug.mp4)
+
+### 12pm
+
+<!-- entry-id: e264 -->
+
+Being a serious model student, she actually caught the treat!
+
+![Luna, 21 Nov 12pm](./luna/luna-being-serious-model.mp4)
+
+### 10:33am
+
+<!-- entry-id: e263 -->
+<!-- with: milk -->
+<!-- no-time -->
+
+Luna being trained by Milk’s endless energy. Recharging for the next round.
+
+![Luna, 21 Nov](./luna/luna-being-trained-milk.mp4)
+
 ## 20 Nov
 
 ### 9:12pm

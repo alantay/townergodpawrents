@@ -635,7 +635,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
               // The cut-outs are pat buttons now, so the dog's own pills
               // are the way into its diary.
               (c.href
-                ? '<a href="' + esc(c.href) + '" class="fact-chip transition-transform duration-250 hover:scale-[1.04]">' + esc(c.label) + "</a>"
+                ? '<a href="' + esc(c.href) + '" class="fact-chip diary-link-chip transition-transform duration-250 hover:scale-[1.04]">' + esc(c.label) + '<svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></a>'
                 : (c.tape ? '<span class="badge-tape">' : '<span class="fact-chip">') + esc(c.label) + "</span>")
           )
           .join("");

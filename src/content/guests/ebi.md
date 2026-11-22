@@ -9,6 +9,9 @@ tagline: squeaky-toy enthusiast, works only for snacks
 portraitNotes:
   left: Can hold a stay forever
   right: Devours her food in seconds
+  inset:
+    left: 0.12
+    right: 0.10
 whenCalled: "Snacc first. Then maybe"
 thoughts:
   - "Squek it again hooman"

@@ -112,6 +112,21 @@ a.fact-chip::before {
   position: absolute;
   inset: -6px 0;
 }
+.diary-link-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-right: 11px;
+}
+.diary-link-chip svg {
+  flex: none;
+  transition: translate 150ms;
+}
+@media (hover: hover) {
+  .diary-link-chip:hover svg {
+    translate: 2px 0;
+  }
+}
 .status-tag {
   padding: 8px 13px;
   background: var(--color-lime);

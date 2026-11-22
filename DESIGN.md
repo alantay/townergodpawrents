@@ -225,7 +225,7 @@ Chip, Label, caption and slip sizes are written in rem, so they grow when a read
 
 The calendar is meant to look handwritten. Private per-dog notes are another literal pen-on-paper surface: editable note lines use Caveat (23px, 1.25). Their handwritten multi-line notes and counts are deliberate exceptions to the short-scribble rule. Public diary prose remains Archivo.
 
-**Portrait and homepage exceptions.** Dogs speak and think in Caveat bubbles on both the homepage and diary portrait (28px, 600; thoughts 500). The homepage sofa note and the "part-time" scribble beneath the wordmark tape also use handwriting. Diary portrait notes are another explicit exception: short chalk-like asides on the hero colour, with natural wrapping beside the photo on phones. These are bounded character voices and marginal notes, not the reading voice for the diary.
+**Portrait and homepage exceptions.** Dogs speak and think in Caveat bubbles on both the homepage and diary portrait (28px, 600; thoughts 500). The homepage sofa note and the "part-time" scribble beneath the wordmark tape also use handwriting. Diary portrait notes are another explicit exception: short chalk-like asides on the hero colour, with natural wrapping beside the photo on screens at least 640px wide. They stay hidden on smaller screens. These are bounded character voices and marginal notes, not the reading voice for the diary.
 
 ## Layout
 
@@ -272,6 +272,7 @@ Pats create a cream comic bubble with an ink border and tail. Idle thoughts use 
 
 ### Chips
 - **Cream chip:** cream on the hero, ink text, 13px/600, 7px 13px, pill. Used for breed, stay range and stay day.
+- **Diary link chip:** homepage cream chips that open a diary include a small ink right-arrow after the existing wording, with a 6px gap and 11px right padding. The arrow is always visible and nudges 2px on hover with a mouse. Fact-only chips have no arrow.
 - **Badge tape:** the dog's badge (and the "N dogs, one sofa" chip) is a nickname stuck on the dog, not a fact, so it's a strip of Post-it Yellow tape rather than a chip: square corners, tilted −2°, same Chip type in ink. It sits last in the row, after the cream fact chips.
 - **Outlined chip:** 1.5px Pencil Rule, pill, no fill. On hover it gets inked: an ink line is drawn round it by hand (the `inked` class, wobbled by the calendar's `#pencil-rule` filter), a little off the pencil. Text stays ink, never moss. A press pushes it in, and a tap inks it for a moment. Used for the nav links, "See all" and day chips.
 - **NEW tag:** lime pill, 11px uppercase, 0.06em tracking.
@@ -315,7 +316,7 @@ The post composer has selectable guest chips, photo/clip previews, a review area
 ### Diary Portrait Notes
 The tagline introduces the dog. Optional `portraitNotes` are the "by the way" asides: specific little habits, placed around the portrait rather than a second introduction. A dog may have a note on either side or no notes at all. Diary headers with notes omit the personality badge; their tagline, name, breed and stay dates remain. Homepage badges and taglines are unchanged, and the homepage does not render these notes.
 
-Notes are cream Caveat (600, 19–24px, line-height 0.98), with a slight chalk edge. The right note has a loose arrow with clearance from the cut-out; the left has an underline. The portrait adapts to make room for text, and notes wrap naturally on narrow phones. These marks are readable text, ignore pointer events and leave the pat interaction intact. There are no awards, laurels, dropdowns, paper backing or separate awards page. The approved examples on Ebi are "Devours her food in seconds" and "Can hold a stay forever".
+Notes are cream Caveat (600, 19–24px, line-height 0.98), with a slight chalk edge. Each note has a loose arrow pointing toward the visible dog, with a clear gap from its torn-paper outline. Per-portrait insets compensate for transparent image margins so notes sit near the silhouette. Notes wrap naturally beside the portrait from 640px up and stay hidden on smaller screens. These marks are readable text, ignore pointer events and leave the pat interaction intact. There are no awards, laurels, dropdowns, paper backing or separate awards page. The approved examples on Ebi are "Devours her food in seconds" and "Can hold a stay forever".
 
 ### Weather
 The homepage hero wears one weather at a time, read from NEA for Kallang (which covers Towner). The diary and every other page stay dry.

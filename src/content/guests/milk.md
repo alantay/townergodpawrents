@@ -1,24 +1,75 @@
 ---
 name: Milk
 breed: Golden Doodle
-photo: ./milk/milk-collage-v3.png
+photo: ./milk/milk-collage-v4.png
+headshot: ./milk/milk-collage-v3.png
 bgColor: "#8E4A5C"
 showLive: true
 sex: female
 badge: Leaf retriever
 tagline: never without a leaf in her mouth, sometimes a stick too
 portraitNotes:
-  right: Mama's dog
+  right: Mama's girl
+  inset:
+    right: 0.16
 whenCalled: "Cant talk. Mouf full of leaf"
 thoughts:
   - "Dat leaf has my name on it"
   - "Stick also acceptabol"
 stays:
   - checkIn: 2026-11-19
-    checkOut: 2026-11-21
+    checkOut: 2026-11-22
 ---
 
+## 22 Nov
+
+### 8:57am
+
+<!-- entry-id: e273 -->
+<!-- with: luna -->
+<!-- no-time -->
+
+Exploring the garden at the new BTO
+
+![Milk, 22 Nov](./milk/milk-exploring-garden-new.mp4)
+
+### 7:30am
+
+<!-- entry-id: e272 -->
+<!-- with: luna -->
+
+Presenting you the whiny, FOMO girls.
+
+![Milk, 22 Nov 7:30am](./milk/milk-presenting-you-whiny.mp4)
+
 ## 21 Nov
+
+### 3:33pm
+
+<!-- entry-id: e268 -->
+<!-- no-time -->
+
+Milk’s prized possession.
+
+![Milk, 21 Nov](./milk/milk-prized-possession.mp4)
+
+### 3:15pm
+
+<!-- entry-id: e267 -->
+<!-- with: luna -->
+
+Milk kept whining, briefly convinced that jumping was a skill she had never learned.
+
+![Milk, 21 Nov 3:15pm](./milk/milk-kept-whining-briefly.mp4)
+
+### 2:38pm
+
+<!-- entry-id: e266 -->
+<!-- no-time -->
+
+Milk failed the treat balancing act
+
+![Milk trying to balance a treat on her nose](./milk/milk-treat-balancing-act.mp4)
 
 ### 8:22am
 
