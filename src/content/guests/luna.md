@@ -23,6 +23,17 @@ stays:
     checkOut: 2026-12-03
 ---
 
+## 22 Nov
+
+### 9am
+
+<!-- entry-id: e274 -->
+<!-- with: milk -->
+
+A post-breakfast play session before crashing again. Play hard, nap harder.
+
+![Luna, 22 Nov 9am](./luna/luna-post-breakfast-play.mp4)
+
 ## 21 Nov
 
 ### 9:55pm
