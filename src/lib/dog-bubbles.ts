@@ -3,39 +3,41 @@
 // over as source (fn.toString()) and must lean on nothing outside themselves.
 
 // A bubble over the dog, tail pointing at its head: "comic" when it answers
-// a pat, "dots" when it's thinking out loud. Lives on the card, not the
-// button, so the card's edge can't clip it. A thought gets a cloud drawn to
-// fit its words: puffs spaced evenly round an ellipse so they stay round at
-// any size, then two dots trailing down to the dog.
+// a pat, "dots" when it's thinking out loud. A thought gets a cloud drawn
+// to fit its words, then two dots trailing down to the dog.
 export function dogSays(card: HTMLElement, btn: HTMLElement, text: string, kind: "comic" | "dots") {
-  card.querySelectorAll(".dog-bubble").forEach((old) => old.remove());
+  card.querySelector(".dog-bubble-space")?.remove();
+  const portrait = btn.closest<HTMLElement>("#hero-photos, .portrait-notes") || btn;
+  const header = portrait.previousElementSibling as HTMLElement;
+  const space = document.createElement("div");
+  space.className = "dog-bubble-space";
   const bubble = document.createElement("div");
   bubble.className = "dog-bubble dog-bubble--" + kind;
   bubble.setAttribute("role", "status");
   bubble.innerHTML = "<p></p>";
   bubble.querySelector("p")!.textContent = text;
-  card.appendChild(bubble);
+  portrait.before(space);
+  space.appendChild(bubble);
   const c = card.getBoundingClientRect();
+  const scale = c.width / card.offsetWidth;
   const dog = (btn.querySelector("img, .undeveloped") || btn).getBoundingClientRect();
-  const x = dog.left + dog.width / 2 - c.left;
-  const y = dog.top + dog.height * 0.06 - c.top;
+  const x = (dog.left + dog.width / 2 - c.left) / scale;
   const half = bubble.offsetWidth / 2;
-  const left = Math.min(Math.max(x, half + 12), c.width - half - 12);
+  const left = Math.min(Math.max(x, half + 12), card.offsetWidth - half - 12);
   bubble.style.left = left + "px";
-  // Over the head, unless that lands on the name, tagline or a badge: then
-  // it slides down onto the dog, which minds less than the words do.
-  const h = bubble.offsetHeight;
-  const m = parseFloat(getComputedStyle(bubble).marginTop) || 0;
-  let top = Math.max(y, h + 16);
-  const floor = dog.top + dog.height * 0.55 - c.top;
-  card.querySelectorAll("h1, .badge-tape, .fact-chip, .status-tag, .font-serif").forEach((el) => {
-    if (bubble.contains(el) || btn.contains(el)) return;
-    const r = el.getBoundingClientRect();
-    const hit =
-      r.right - c.left > left - half && r.left - c.left < left + half &&
-      r.bottom - c.top > top + m - h && r.top - c.top < top + m;
-    if (hit) top = Math.min(Math.max(top, r.bottom - c.top + h + 8 - m), floor);
+  // A fitted cutout can have empty space above it, especially in a pair on a phone.
+  const heads = Array.from(portrait.querySelectorAll<HTMLElement>("img, .undeveloped"), (photo) => {
+    const box = photo.getBoundingClientRect();
+    const ratio = Number(photo.getAttribute("width")) / Number(photo.getAttribute("height"));
+    const empty = Math.max(0, photo.offsetHeight - photo.offsetWidth / ratio) || 0;
+    const bottomAligned = portrait.classList.contains("scrapbook-buddies");
+    return (box.top - c.top) / scale + empty * (bottomAligned ? 1 : 0.5);
   });
+  // Leave room for the tail and the portrait's hop below the bubble.
+  const gap = kind === "dots" ? 46 : 32;
+  const head = heads.length ? Math.min(...heads) : portrait.offsetTop;
+  const top = Math.max(head - gap, header.offsetTop + header.offsetHeight + 14 + bubble.offsetHeight);
+  space.style.height = Math.max(0, top + gap - head) + "px";
   bubble.style.top = top + "px";
   const tailX = Math.min(Math.max(x - left, -half + 22), half - 22);
   bubble.style.setProperty("--tail-x", tailX + "px");
@@ -76,7 +78,7 @@ export function dogSays(card: HTMLElement, btn: HTMLElement, text: string, kind:
   bubble.style.setProperty("--note-hold", 2200 + text.length * 40 + "ms");
   bubble.classList.add("dog-bubble-pop");
   bubble.addEventListener("animationend", (e) => {
-    if (e.animationName === "note-out") bubble.remove();
+    if (e.animationName === "note-out") space.remove();
   });
 }
 

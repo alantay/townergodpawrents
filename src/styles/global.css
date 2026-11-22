@@ -1065,6 +1065,7 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   z-index: 3;
   max-width: min(70%, 240px);
   width: max-content;
+  overflow-wrap: anywhere;
   translate: -50% -100%;
   pointer-events: none;
   transform-origin: calc(50% + var(--tail-x, 0px)) 100%;
@@ -1125,7 +1126,6 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 .dog-bubble--dots p { font-weight: 500; }
 .dog-bubble--dots {
   padding: 16px 26px 14px;
-  margin-top: -26px;
 }
 .dog-bubble--dots svg {
   position: absolute;
