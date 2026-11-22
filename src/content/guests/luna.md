@@ -35,6 +35,16 @@ Luna’s new talent: keeping things in balance.
 
 ![A golden dog sits with a pink plush toy balanced on its head.](./luna/luna-new-talent-keeping-2.jpg)
 
+### 11:26am
+
+<!-- entry-id: e278 -->
+<!-- with: milk -->
+<!-- no-time -->
+
+Three cups, two noses, one kibble.
+
+![Luna and Milk nosing at three paper cups while Alan shuffles them](./luna/luna-shell-game-cups.mp4)
+
 ### 10:15am
 
 <!-- entry-id: e275 -->
