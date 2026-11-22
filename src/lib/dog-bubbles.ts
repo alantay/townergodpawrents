@@ -3,40 +3,45 @@
 // over as source (fn.toString()) and must lean on nothing outside themselves.
 
 // A bubble over the dog, tail pointing at its head: "comic" when it answers
-// a pat, "dots" when it's thinking out loud. Lives on the card, not the
-// button, so the card's edge can't clip it. A thought gets a cloud drawn to
-// fit its words: puffs spaced evenly round an ellipse so they stay round at
-// any size, then two dots trailing down to the dog.
+// a pat, "dots" when it's thinking out loud. A thought gets a cloud drawn
+// to fit its words, then two dots trailing down to the dog.
 export function dogSays(card: HTMLElement, btn: HTMLElement, text: string, kind: "comic" | "dots") {
   card.querySelectorAll(".dog-bubble").forEach((old) => old.remove());
+  const portrait = btn.closest<HTMLElement>("#hero-photos, .portrait-notes") || btn;
+  const header = portrait.previousElementSibling as HTMLElement;
   const bubble = document.createElement("div");
   bubble.className = "dog-bubble dog-bubble--" + kind;
   bubble.setAttribute("role", "status");
   bubble.innerHTML = "<p></p>";
-  bubble.querySelector("p")!.textContent = text;
+  const words = bubble.querySelector("p")!;
+  words.textContent = text;
   card.appendChild(bubble);
   const c = card.getBoundingClientRect();
+  const scale = c.width / card.offsetWidth;
   const dog = (btn.querySelector("img, .undeveloped") || btn).getBoundingClientRect();
-  const x = dog.left + dog.width / 2 - c.left;
-  const y = dog.top + dog.height * 0.06 - c.top;
-  const half = bubble.offsetWidth / 2;
-  const left = Math.min(Math.max(x, half + 12), c.width - half - 12);
-  bubble.style.left = left + "px";
-  // Over the head, unless that lands on the name, tagline or a badge: then
-  // it slides down onto the dog, which minds less than the words do.
-  const h = bubble.offsetHeight;
-  const m = parseFloat(getComputedStyle(bubble).marginTop) || 0;
-  let top = Math.max(y, h + 16);
-  const floor = dog.top + dog.height * 0.55 - c.top;
-  card.querySelectorAll("h1, .badge-tape, .fact-chip, .status-tag, .font-serif").forEach((el) => {
-    if (bubble.contains(el) || btn.contains(el)) return;
-    const r = el.getBoundingClientRect();
-    const hit =
-      r.right - c.left > left - half && r.left - c.left < left + half &&
-      r.bottom - c.top > top + m - h && r.top - c.top < top + m;
-    if (hit) top = Math.min(Math.max(top, r.bottom - c.top + h + 8 - m), floor);
+  const x = (dog.left + dog.width / 2 - c.left) / scale;
+  // A fitted cutout can have empty space above it, especially in a pair on a phone.
+  const heads = Array.from(portrait.querySelectorAll<HTMLElement>("img, .undeveloped"), (photo) => {
+    const box = photo.getBoundingClientRect();
+    const ratio = Number(photo.getAttribute("width")) / Number(photo.getAttribute("height"));
+    const empty = Math.max(0, photo.offsetHeight - photo.offsetWidth / ratio) || 0;
+    const bottomAligned = portrait.classList.contains("scrapbook-buddies");
+    return (box.top - c.top) / scale + empty * (bottomAligned ? 1 : 0.5);
   });
+  // Snug on the head: the tail or dots reach down onto the dog a little.
+  const gap = kind === "dots" ? 8 : -14;
+  const head = heads.length ? Math.min(...heads) : (portrait.getBoundingClientRect().top - c.top) / scale;
+  // Nothing moves to make room. A long line fits the gap between the pills
+  // and the head: wider first, then smaller words. Still too tall, it covers
+  // the pills before it covers the face.
+  const pills = (header.getBoundingClientRect().bottom - c.top) / scale + 14;
+  if (bubble.offsetHeight > head - gap - pills) bubble.style.maxWidth = Math.min(card.offsetWidth * 0.9 - 24, 340) + "px";
+  for (let size = 26; size >= 22 && bubble.offsetHeight > head - gap - pills; size -= 2) words.style.fontSize = size + "px";
+  const top = Math.max(head - gap, 12 + bubble.offsetHeight);
   bubble.style.top = top + "px";
+  const half = bubble.offsetWidth / 2;
+  const left = Math.min(Math.max(x, half + 12), card.offsetWidth - half - 12);
+  bubble.style.left = left + "px";
   const tailX = Math.min(Math.max(x - left, -half + 22), half - 22);
   bubble.style.setProperty("--tail-x", tailX + "px");
   if (kind === "dots") {
