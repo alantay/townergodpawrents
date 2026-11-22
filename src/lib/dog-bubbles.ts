@@ -28,8 +28,8 @@ export function dogSays(card: HTMLElement, btn: HTMLElement, text: string, kind:
     const bottomAligned = portrait.classList.contains("scrapbook-buddies");
     return (box.top - c.top) / scale + empty * (bottomAligned ? 1 : 0.5);
   });
-  // Leave room for the tail and the portrait's hop below the bubble.
-  const gap = kind === "dots" ? 46 : 32;
+  // Snug on the head: the tail or dots reach down onto the dog a little.
+  const gap = kind === "dots" ? 8 : -14;
   const head = heads.length ? Math.min(...heads) : (portrait.getBoundingClientRect().top - c.top) / scale;
   // Nothing moves to make room. A long line fits the gap between the pills
   // and the head: wider first, then smaller words. Still too tall, it covers
