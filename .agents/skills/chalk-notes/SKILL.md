@@ -5,6 +5,8 @@ description: Add or adjust the handwritten chalk notes and arrows beside a Towne
 
 Keep the dog as the main subject, with short cream handwritten asides nearby.
 
+Vary the marks across notes. When a phrase suits underlining, use `portraitNotes.leftUnderline` or `rightUnderline` and omit that note’s arrow. Keep arrows on other notes so the portrait does not give every aside the same treatment. Luna’s “Has no chill” underlines only “no chill”.
+
 1. Inspect the current diary portrait in the configured Playwright browser. Read `docs/agents/voice.md` before changing wording. Preserve approved copy unless the user requests a change.
 2. Place text and marks close to the visible dog's outline, with a clear gap. Judge the photographic silhouette, including its torn-paper edge, rather than the rectangular image bounds or transparent padding. The dog must not overlap any letters or marks.
 3. Draw each arrow from its note toward the dog. Its arrowhead should clearly aim at a nearby part of the dog and stop just short of the outline. Follow the tangent into the arrowhead when judging direction; an arrow aimed into empty space fails even if it is nearby.
