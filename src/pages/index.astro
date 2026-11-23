@@ -672,7 +672,7 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
         var html =
           '<div id="hero-card" class="hero-vacancy relative rounded-[32px] pt-[26px] px-6 pb-0 overflow-hidden text-cream animate-pop" style="background:' + SOFA_GREEN + '">' +
           '<div id="hero-badge" class="absolute top-[18px] right-[18px] status-tag animate-wiggle">' + (round ? "Out visiting" : "Sofa&rsquo;s empty") + "</div>" +
-          '<div class="w-full"><h1 class="fit-headline text-[clamp(62px,19vw,120px)] max-w-full">' + (round ? "No dog here" : "No dog today") + "</h1></div>" +
+          '<div class="w-full"><h1 class="vacancy-headline">' + (round ? "No dog here" : "No dog today") + "</h1></div>" +
           '<div class="font-serif italic text-[22px] mt-2 text-lime-soft">' + (round || (offNow ? awaySubline(offNow, today) : "The vacuum gets a day off. It&rsquo;s weirdly quiet.")) + "</div>" +
           (offNow
             ? '<div id="vacancy-photo" class="block w-[calc(100%+16px)] h-[265px] mx-[-8px] mt-[18px] animate-drift-slow"></div>'
@@ -1361,6 +1361,17 @@ const hasPastGuests = pastGuests(guests, todaySGT()).length > 0;
   </script>
 
   <style is:global>
+    .vacancy-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(80px, 14vw, 104px);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+    @media (max-width: 639px) {
+      .vacancy-headline { font-size: clamp(42px, 15vw, 88px); margin-top: 32px; }
+    }
+
     .home-hosts {
       display: grid;
       grid-template-columns: 88px minmax(0, 1fr);
