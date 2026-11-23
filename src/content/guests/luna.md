@@ -9,6 +9,7 @@ badge: FOMO queen
 tagline: always has something to whine about, thinks every dog is her play buddy
 portraitNotes:
   left: Has no chill
+  leftUnderline: no chill
   right: Destroys toys in seconds
 whenCalled: "Me first. No hooman overtakin"
 thoughts:

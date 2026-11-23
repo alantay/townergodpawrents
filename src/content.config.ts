@@ -36,6 +36,9 @@ const guests = defineCollection({
       portraitNotes: z.object({
         left: z.string().trim().min(1).optional(),
         right: z.string().trim().min(1).optional(),
+        // Underline a phrase instead of drawing that note's arrow.
+        leftUnderline: z.string().trim().min(1).optional(),
+        rightUnderline: z.string().trim().min(1).optional(),
         // Fractions of the image width, accounting for transparent margins.
         inset: z.object({
           left: z.number().min(0).max(0.3).optional(),
