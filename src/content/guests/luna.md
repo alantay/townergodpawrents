@@ -21,6 +21,8 @@ stays:
     checkOut: 2026-11-22
   - checkIn: 2026-11-26
     checkOut: 2026-12-03
+  - checkIn: 2027-02-09
+    checkOut: 2027-02-20
 ---
 
 ## 22 Nov
