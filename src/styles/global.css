@@ -29,6 +29,15 @@ body {
   scroll-behavior: smooth;
 }
 
+/* Keep the paper column still when the photo viewer locks page scrolling. */
+html {
+  scrollbar-gutter: stable;
+}
+
+html:has(.print-viewer[open]) {
+  overflow: hidden;
+}
+
 .page-shell {
   position: relative;
 }
@@ -678,6 +687,21 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
 }
 
 .print-media { display: block; height: auto; width: 100%; border-radius: 10px; }
+
+.diary-print-tap:not(.diary-print) {
+  border-radius: 10px;
+}
+
+.diary-print-tap:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+/* A multi-photo button includes its mat, so draw its ring on the cream. */
+.diary-print.diary-print-tap:focus-visible {
+  outline-offset: -4px;
+}
+
 .print-caption {
   margin-top: 9px;
   padding-inline: 4px;
@@ -1428,4 +1452,16 @@ entry-reactions:not(.has-reactions) .reaction-toggle[aria-expanded="true"] { opa
   border-radius: 999px;
   background: var(--color-cream);
   color: var(--color-ink);
+  cursor: pointer;
+}
+
+.print-viewer-close:focus-visible {
+  outline: 2px solid var(--color-cream);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .print-viewer-close:hover {
+    background: var(--color-tape);
+  }
 }

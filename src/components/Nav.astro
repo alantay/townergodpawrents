@@ -7,11 +7,11 @@ const isCalendar = path === "/calendar";
 const isHome = path === "";
 ---
 
-<nav aria-label="Main navigation" class="entrance flex items-center justify-between gap-2 sm:gap-3 py-5 border-b-[1.5px] border-line">
+<nav aria-label="Main navigation" class="entrance flex flex-wrap items-center justify-between gap-x-2 gap-y-4 sm:gap-x-3 py-5 border-b-[1.5px] border-line">
   <a
     href="/"
     data-peel={isHome ? "" : undefined}
-    class="group font-serif text-[21px] sm:text-[26px] leading-none flex items-baseline flex-wrap gap-x-1.5 gap-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 focus-visible:ring-offset-paper rounded-[10px]"
+    class="group flex-1 min-w-28 max-w-fit font-serif text-[21px] sm:text-[26px] leading-none flex items-baseline flex-wrap gap-x-1.5 gap-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 focus-visible:ring-offset-paper rounded-[10px]"
   >
     <span>The Towner</span>
     <span class="relative inline-block">
@@ -26,14 +26,14 @@ const isHome = path === "";
     <a
       href="/calendar"
       aria-current={isCalendar ? "page" : undefined}
-      class="inked font-sans font-semibold text-[0.8125rem] border-[1.5px] border-line px-[11px] sm:px-[13px] py-1.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-3 focus-visible:ring-offset-paper flex-none before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:inset-x-0"
+      class="inked font-sans font-semibold text-[0.8125rem] border-[1.5px] border-line px-[9px] min-[360px]:px-[11px] sm:px-[13px] py-1.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-3 focus-visible:ring-offset-paper flex-none before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:inset-x-0"
     >
       Calendar
     </a>
     <a
       href="/guests"
       aria-current={isGuests ? "page" : undefined}
-      class="inked font-sans font-semibold text-[0.8125rem] border-[1.5px] border-line px-[11px] sm:px-[13px] py-1.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-3 focus-visible:ring-offset-paper flex-none before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:inset-x-0"
+      class="inked font-sans font-semibold text-[0.8125rem] border-[1.5px] border-line px-[9px] min-[360px]:px-[11px] sm:px-[13px] py-1.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-3 focus-visible:ring-offset-paper flex-none before:content-[''] before:absolute before:-top-[5px] before:-bottom-[5px] before:inset-x-0"
     >
       Guests
     </a>
