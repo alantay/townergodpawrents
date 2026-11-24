@@ -1,0 +1,22 @@
+{
+  "tool": "image_gen.imagegen",
+  "generation_wall_seconds_approx": 50,
+  "outputs": [
+    {
+      "id": "a",
+      "path": "artifacts/ebi-recognisable-20261112/ebi-a.png",
+      "original": "/Users/ge_user/.codex/generated_images/01a1ce63-4668-7b71-a731-1d493baf2db9/exec-1c885768-60ad-4d96-8e32-bc2259f5e692.png",
+      "sha256": "18bae93520a4b0bf8a9b583f74d1efee5accf98d0682e4e9875cabb8f88903b9",
+      "edits": "None; original generated PNG copied intact",
+      "status": "Preview only; awaiting Alan; pose and alpha QA not applicable yet"
+    },
+    {
+      "id": "b",
+      "path": "artifacts/ebi-recognisable-20261112/ebi-b.png",
+      "original": "/Users/ge_user/.codex/generated_images/01a1ce63-4668-7b71-a731-1d493baf2db9/exec-99c8e38d-9015-4c78-ab45-d52a26e64dd5.png",
+      "sha256": "821b0150d90c4e4a6ef7b078994f79be1831e079051d4001ade16236a8fb01cc",
+      "edits": "None; original generated PNG copied intact",
+      "status": "Preview only; awaiting Alan; pose and alpha QA not applicable yet"
+    }
+  ]
+}

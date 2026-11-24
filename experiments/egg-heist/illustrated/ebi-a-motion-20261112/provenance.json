@@ -1,0 +1,44 @@
+{
+  "created": "2026-11-12",
+  "purpose": "Disposable Style A animation feasibility study; not integrated",
+  "tool": "Built-in image_gen imagegen",
+  "reference": "/Users/ge_user/Developer/alan/townergodpawrents/work/ebi-adventure/artifacts/ebi-recognisable-20261112/ebi-a.png",
+  "prompts": [
+    {
+      "id": "poses",
+      "alpha": true,
+      "prompt": "Use case: identity-preserve. Asset: transparent sprite sheet for a 2-second 2D jump test. Reference image is the approved character and illustration style. Make ONE 3 columns by 2 rows sheet, landscape 1536x1024, six separate complete poses of this EXACT ginger and white Pomsky Ebi, all facing RIGHT, same camera, same physical scale and proportions, thin dark collar, pale blue eye, white forehead blaze, cream chest and socks, curled fluffy cream-tipped tail. Preserve approved face, body volume, linework, grouped fur shapes, flat warm cel shading and subtle paper texture. Each 512x512 cell contains one entire dog with generous transparent padding, no overlap.\nRead left to right top then bottom:\n1 standing alert, head looking up-right;\n2 crouching before jump, hind legs loaded, front paws lowered, head up-right;\n3 rising jump, body diagonally upright, front paws reaching forward, hind legs trailing, mouth slightly open;\n4 apex of jump, upright reaching toward right with open mouth aimed right, bent forelegs;\n5 descending jump, forepaws stretching down, mouth gently closed as if gripping a thin tray lip, NO tray drawn;\n6 landed on floor, four paws, holding head proudly upward right, mouth gently closed as if gripping a thin tray lip, NO tray drawn.\nNo environment, no ground, no shadows, no eggs, no tray, no labels, no text, no borders, no extra dogs, no cropped paws. Genuinely transparent alpha outside the six dog silhouettes. This is an animation family not six redesigns. Keep body size consistent despite pose changes."
+    },
+    {
+      "id": "kitchen",
+      "alpha": false,
+      "prompt": "Use case: precise-object-edit. Edit target: supplied approved kitchen illustration. Remove ONLY Ebi the dog, her ground shadow, and the egg tray with eggs and its counter shadow. Reconstruct the kitchen and floor naturally behind them. Keep exact canvas 1536x1024, camera, counter location and grey stone edges, wood cabinets, black oven with green towel, wall tiles, floor tiles, sunlight shadows, palette, drawing style and paper texture unchanged. Empty kitchen background layer for animation. No new objects, no dog, no tray, no eggs, no text."
+    },
+    {
+      "id": "tray",
+      "alpha": true,
+      "prompt": "Use case: background-extraction. Reference is the approved illustration. Extract/recreate ONLY its six brown eggs in their beige pulp tray, matching the exact drawing style, warm flat cel shading, linework, paper texture and viewing angle. One whole egg tray centered with generous transparent padding, in landscape 3:2 canvas. Keep the six eggs and tray proportions from reference; no dog, no kitchen, no ground shadow, no extra objects, no text. Genuinely transparent alpha outside the silhouette."
+    }
+  ],
+  "sourceOutputs": {
+    "poses": "/Users/ge_user/.codex/generated_images/01a1ce63-4668-7b71-a731-1d493baf2db9/exec-978bdc52-601a-4c7b-8c2e-3b61bb60a34c.png",
+    "kitchen": "/Users/ge_user/.codex/generated_images/01a1ce63-4668-7b71-a731-1d493baf2db9/exec-76188943-2c12-49c2-8fd2-11e7d48f98d4.png",
+    "tray": "/Users/ge_user/.codex/generated_images/01a1ce63-4668-7b71-a731-1d493baf2db9/exec-d875606b-4cea-4c8e-82b8-9471784c5697.png"
+  },
+  "terms": "AI-generated using the built-in tool with user-supplied Ebi references via the approved illustration. Not asserted to be open-licensed. Original PNG metadata retained.",
+  "technical": {
+    "displayCanvas": [
+      1536,
+      1024
+    ],
+    "view": "side / slight three-quarter, facing right",
+    "durationSeconds": 2,
+    "frames": 6,
+    "filter": "browser smooth sampling",
+    "scale": 1.8,
+    "collision": "none; visual study",
+    "runtime": "standalone HTML canvas, no dependencies",
+    "tests": "True alpha and measured slice bounds, 201 motion samples, catch attachment, floor alignment, loop fade reset",
+    "limits": "Six held drawings, visible changes at takeoff/landing; no skeletal rig or in-betweens. Phone not tested."
+  }
+}
