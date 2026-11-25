@@ -383,22 +383,28 @@ const anyDropIn = stays.some((s) => s.dropIn);
     opacity: 0.7;
   }
 
-  /* Upcoming, not arrived yet: a dashed box in the dog's colour, not taped down
-     yet. The box stays open where the stay runs on into another week. */
+  /* Upcoming stays have a roller-pen wave after the name and visit icon. */
+  .cal-bar.is-upcoming { padding-inline: 2px; gap: 4px; }
   .cal-bar.is-upcoming::before {
-    background: color-mix(in srgb, var(--bar-colour) 8%, transparent);
-    border: 1.5px dashed color-mix(in srgb, var(--bar-colour) 85%, var(--color-ink));
+    position: static;
+    z-index: auto;
+    order: 1;
+    flex: 1 0 8px;
+    height: 8px;
+    background: color-mix(in srgb, var(--bar-colour) 75%, var(--color-ink));
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='8'%3E%3Cpath d='M-8 4C-5.3 7.6-2.7 7.6 0 4S5.3 .4 8 4 13.3 7.6 16 4 21.3 .4 24 4' fill='none' stroke='black' stroke-width='1.25'/%3E%3C/svg%3E") left center / 16px 8px repeat-x;
     clip-path: none;
     box-shadow: none;
-    opacity: 1;
   }
-  .cal-bar--continued.is-upcoming::before { border-left: 0; }
-  .cal-bar--carries.is-upcoming::before { border-right: 0; }
+  .cal-bar.is-upcoming :global(.cal-house) { margin-left: 0; }
 
   /* On a phone a one-day strip only has room for the photo; the polaroid
      below names the dog. A wider sheet has room for the name too. */
   .cal-bar--short { justify-content: center; padding: 0 6px; }
   .cal-bar--short .cal-bar-name { display: none; }
+  .cal-bar--short.is-upcoming .cal-bar-avatar { width: 16px; height: 16px; }
+  .cal-bar--short.is-upcoming:has(:global(.cal-house)) { gap: 2px; }
+  .cal-bar--short.is-upcoming:has(:global(.cal-house))::before { flex-basis: 4px; }
   @container (min-width: 500px) {
     .cal-bar--short { justify-content: flex-start; }
     .cal-bar--short:not(.cal-bar--continued) .cal-bar-name { display: block; }
