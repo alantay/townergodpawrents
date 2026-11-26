@@ -26,6 +26,14 @@ stays:
 
 ## 26 Nov
 
+### 11:30am
+
+<!-- entry-id: e281 -->
+
+Playing hot potato with Tiny, making sure the ball stays hot potato and not my potato. I’m sure she doesn’t think it’s a fun game.
+
+![Tiny, 26 Nov 11:30am](./tiny/tiny-playing-hot-potato.mp4)
+
 ### 9:50am
 
 <!-- entry-id: e280 -->
