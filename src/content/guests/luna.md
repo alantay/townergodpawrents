@@ -26,6 +26,17 @@ stays:
     checkOut: 2027-02-20
 ---
 
+## 26 Nov
+
+### 3pm
+
+<!-- entry-id: e283 -->
+<!-- with: tiny -->
+
+Luna brought a peace offering to Tiny.
+
+![A tan dog lies on the floor at left, with another tan dog resting behind it. A black-and-white dog in a green shirt lies at right.](./luna/luna-brought-peace-offering.jpg)
+
 ## 22 Nov
 
 ### 11:38am
