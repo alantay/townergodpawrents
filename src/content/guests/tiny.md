@@ -26,6 +26,14 @@ stays:
 
 ## 26 Nov
 
+### 2:59pm
+
+<!-- entry-id: e284 -->
+<!-- with: luna -->
+<!-- no-time -->
+
+Tiny bared her teeth and growled at poor Luna when she came near Tiny’s resting spot. Luna ran away. She’s non-confrontational.
+
 ### 1:16pm
 
 <!-- entry-id: e282 -->
