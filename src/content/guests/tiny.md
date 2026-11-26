@@ -34,7 +34,7 @@ stays:
 
 Have fun!
 
-![A golden dog lies in the foreground, with a black-and-white dog lying behind it on a wooden floor.](./tiny/tiny-fun.jpg)
+![Tiny in colourful leg sleeves and Luna lying side by side on the floor, both with tongues out.](./tiny/tiny-fun.jpg)
 
 ### 11:30am
 
