@@ -38,6 +38,7 @@ They got along well after Tiny realised that Luna was chill and not a threat. Ti
 ### 7:09pm
 
 <!-- entry-id: e285 -->
+<!-- no-time -->
 <!-- with: tiny -->
 
 Luna likes walking on thin ice, stealing Tiny’s favourite spot.
