@@ -26,6 +26,16 @@ stays:
 
 ## 26 Nov
 
+### 1:16pm
+
+<!-- entry-id: e282 -->
+<!-- with: luna -->
+<!-- no-time -->
+
+Have fun!
+
+![A golden dog lies in the foreground, with a black-and-white dog lying behind it on a wooden floor.](./tiny/tiny-fun.jpg)
+
 ### 11:30am
 
 <!-- entry-id: e281 -->
