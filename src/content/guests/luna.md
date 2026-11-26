@@ -28,6 +28,15 @@ stays:
 
 ## 26 Nov
 
+### 8:18pm
+
+<!-- entry-id: e287 -->
+<!-- no-time -->
+
+Who is Luna missing here?
+
+![A golden dog lies stretched out on a tiled floor, resting her head on the ground.](./luna/luna-who-missing-here.jpg)
+
 ### 7:13pm
 
 <!-- entry-id: e286 -->
