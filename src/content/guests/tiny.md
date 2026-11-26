@@ -24,6 +24,16 @@ stays:
     checkOut: 2026-12-13
 ---
 
+## 26 Nov
+
+### 9:30am
+
+<!-- entry-id: e279 -->
+
+Tiny is here and demands to play!
+
+![Black-and-white dog wearing a purple and green outfit, lying beside a black bag on a wooden floor.](./tiny/tiny-here-demands-play.jpg)
+
 ## 31 Oct
 
 ### 10:55pm
