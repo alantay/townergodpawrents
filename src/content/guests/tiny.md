@@ -1,7 +1,8 @@
 ---
 name: Tiny
 breed: Border Collie
-photo: ./tiny/tiny-collage.png
+photo: ./tiny/tiny-collage-v2.png
+headshot: ./tiny/tiny-collage.png
 bgColor: "#39617E"
 showLive: true
 badge: Obsessive ball fetcher
