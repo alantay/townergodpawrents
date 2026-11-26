@@ -26,6 +26,14 @@ stays:
 
 ## 26 Nov
 
+### 9:50am
+
+<!-- entry-id: e280 -->
+
+Tiny’s such a good girl. I told her to keep the toys, and she left with the ball.
+
+![Tiny, 26 Nov 9:50am](./tiny/tiny-such-good-girl.mp4)
+
 ### 9:30am
 
 <!-- entry-id: e279 -->
