@@ -28,6 +28,13 @@ stays:
 
 ## 26 Nov
 
+### 7:13pm
+
+<!-- entry-id: e286 -->
+<!-- no-time -->
+
+They got along well after Tiny realised that Luna was chill and not a threat. Tiny has approved the peace treaty.
+
 ### 7:09pm
 
 <!-- entry-id: e285 -->
