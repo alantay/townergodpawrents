@@ -32,7 +32,7 @@ stays:
 <!-- with: luna -->
 <!-- no-time -->
 
-Have fun!
+We have with us two of the supposedly brainiest dogs.
 
 ![Tiny in colourful leg sleeves and Luna lying side by side on the floor, both with tongues out.](./tiny/tiny-fun.jpg)
 
