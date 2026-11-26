@@ -28,6 +28,15 @@ stays:
 
 ## 26 Nov
 
+### 7:09pm
+
+<!-- entry-id: e285 -->
+<!-- with: tiny -->
+
+Luna likes walking on thin ice, stealing Tiny’s favourite spot.
+
+![Luna, 26 Nov 7:09pm](./luna/luna-likes-walking-thin.mp4)
+
 ### 3pm
 
 <!-- entry-id: e283 -->
