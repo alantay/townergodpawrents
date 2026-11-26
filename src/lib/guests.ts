@@ -39,6 +39,7 @@ export const GROUP_HERO: Record<string, { badge?: string; tagline?: string }> = 
   "guapo+tiny": { badge: "Work-life balance", tagline: "one clocks out early, the other never clocks out" },
   "hugo-and-luffy+luna": { badge: "Love triangle", tagline: "Hugo chases Luna. Luna chases Luffy. Luffy follows Hugo." },
   "luna+milk": { badge: "Whine duet", tagline: "treat every walk like a race. Humans finish last." },
+  "luna+tiny": { badge: "Search and destroy", tagline: "Tiny finds the toy. Luna finishes it off." },
   "luna+tiny+tyrion": { badge: "Fur is coming", tagline: "the Breaker of Toys, the Queen of Fetch and the Small Lord of Big Opinions" },
 };
 
