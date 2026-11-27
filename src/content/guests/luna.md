@@ -37,6 +37,15 @@ Out with one, back with two.
 
 ![Luna, 27 Nov 8am](./luna/luna-one-back-two.mp4)
 
+### 7:28am
+
+<!-- entry-id: e289 -->
+<!-- no-time -->
+
+Luna loves this ball. She seldom fetches the ball, but for this one, she always does.
+
+![Luna fetching her favourite ball](./luna/luna-loves-ball-fetch.mp4)
+
 ## 26 Nov
 
 ### 8:18pm
