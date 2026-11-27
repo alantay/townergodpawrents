@@ -26,6 +26,17 @@ stays:
     checkOut: 2027-02-20
 ---
 
+## 27 Nov
+
+### 8am
+
+<!-- entry-id: e288 -->
+<!-- with: tiny -->
+
+Out with one, back with two.
+
+![Luna, 27 Nov 8am](./luna/luna-one-back-two.mp4)
+
 ## 26 Nov
 
 ### 8:18pm
