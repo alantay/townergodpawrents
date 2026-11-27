@@ -25,6 +25,17 @@ stays:
     checkOut: 2026-12-13
 ---
 
+## 27 Nov
+
+### 8:29am
+
+<!-- entry-id: e290 -->
+<!-- no-time -->
+
+Tiny enjoying the Pink Dragon.
+
+![Tiny playing with the Pink Dragon](./tiny/tiny-pink-dragon.mp4)
+
 ## 26 Nov
 
 ### 2:59pm
