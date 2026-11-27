@@ -27,6 +27,16 @@ stays:
 
 ## 27 Nov
 
+### 4:14pm
+
+<!-- entry-id: e294 -->
+<!-- with: luna -->
+<!-- no-time -->
+
+Coexisting well. Tiny has realised Luna is all size and no threat.
+
+![A black-and-white dog lies on the floor beside a person, with a golden dog lying nearby.](./tiny/tiny-coexisting-well-realised.jpg)
+
 ### 11:12am
 
 <!-- entry-id: e292 -->
