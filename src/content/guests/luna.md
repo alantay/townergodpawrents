@@ -28,6 +28,15 @@ stays:
 
 ## 27 Nov
 
+### 1:22pm
+
+<!-- entry-id: e293 -->
+<!-- no-time -->
+
+Luna's enlistment letter has arrived. Obese batch. She reported in her singlet and gave us one last look over her shoulder.
+
+![A golden dog in a grey ARMY singlet sits on a wooden floor, looking back over her shoulder with her tongue out.](./luna/luna-bmt-obese-batch.jpg)
+
 ### 8am
 
 <!-- entry-id: e288 -->
