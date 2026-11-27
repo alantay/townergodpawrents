@@ -27,6 +27,17 @@ stays:
 
 ## 27 Nov
 
+### 10:40am
+
+<!-- entry-id: e291 -->
+<!-- with: luna -->
+
+Same same but different.
+
+![A black-and-white dog lies with its head on a dark cushion, with another dog behind it.](./tiny/tiny-same-same-but.jpg)
+
+![A golden dog lies on the floor beside a blue bag, resting its head near a strap.](./tiny/tiny-same-same-but-2.jpg)
+
 ### 8:29am
 
 <!-- entry-id: e290 -->
