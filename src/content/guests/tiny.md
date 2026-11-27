@@ -27,6 +27,17 @@ stays:
 
 ## 27 Nov
 
+### 11:12am
+
+<!-- entry-id: e292 -->
+<!-- with: luna -->
+
+Yesterday, Luna offered a peace treaty. Today, Tiny is praying to Luna.
+
+![A black-and-white dog and a golden dog lie facing each other on the floor.](./tiny/tiny-yesterday-luna-offered.jpg)
+
+![A black-and-white dog lies opposite a golden dog, with a laptop and bag nearby.](./tiny/tiny-yesterday-luna-offered-2.jpg)
+
 ### 10:40am
 
 <!-- entry-id: e291 -->
