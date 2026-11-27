@@ -26,6 +26,16 @@ stays:
     checkOut: 2027-02-20
 ---
 
+## 28 Nov
+
+### 7:15am
+
+<!-- entry-id: e295 -->
+
+Luna malfunctioning in a rain jacket
+
+![A dog wearing a black hood, clear face cover and bright green rain pants stands indoors.](./luna/luna-malfunctioning-rain-jacket.jpg)
+
 ## 27 Nov
 
 ### 1:22pm
