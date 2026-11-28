@@ -28,6 +28,16 @@ stays:
 
 ## 28 Nov
 
+### 11:26am
+
+<!-- entry-id: e298 -->
+<!-- with: rosie -->
+<!-- no-time -->
+
+Joint custody of the plushie lasted about ten seconds.
+
+![Luna and Rosie trotting down the hallway carrying the same plushie before breaking into tug-of-war](./luna/luna-joint-custody.mp4)
+
 ### 9:25am
 
 <!-- entry-id: e296 -->
