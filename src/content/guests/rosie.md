@@ -2,8 +2,8 @@
 name: Rosie
 breed: Corgi
 bgColor: "#A34A2E"
-photo: ./rosie/rosie-collage.png
-headshot: ./rosie/rosie-headshot.png
+photo: ./rosie/rosie-collage-v2.png
+headshot: ./rosie/rosie-headshot-v2.png
 showLive: true
 badge: Professional ball baiter
 tagline: brings the ball back, just not to you
