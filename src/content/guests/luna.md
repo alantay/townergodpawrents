@@ -39,6 +39,14 @@ Luna's nose was off duty from tiredness. No amount of Greek yogurt could move he
 
 ![Luna, 28 Nov](./luna/luna-nose-off-duty.mp4)
 
+### 9:30pm
+
+<!-- entry-id: e306 -->
+
+Her ears are on duty. Her head sprang up when we whispered “Luna.”
+
+![Luna, 28 Nov 9:30pm](./luna/luna-ears-are-duty.mp4)
+
 ### 8:35pm
 
 <!-- entry-id: e304 -->
