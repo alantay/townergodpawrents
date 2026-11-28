@@ -28,6 +28,15 @@ stays:
 
 ## 28 Nov
 
+### 1pm
+
+<!-- entry-id: e299 -->
+<!-- with: rosie -->
+
+Recharging. Please do not unplug either unit.
+
+![A golden dog sleeps beside a cushion in the foreground. A second dog sleeps farther back, near a plush toy.](./luna/luna-recharging-please-do.jpg)
+
 ### 11:26am
 
 <!-- entry-id: e298 -->
