@@ -7,7 +7,7 @@ headshot: ./rosie/rosie-headshot-v2.png
 showLive: true
 badge: Professional ball baiter
 tagline: brings the ball back, just not to you
-whenCalled: "U want ball? Come get. Psych"
+whenCalled: "U want ball? Come get. Jk"
 thoughts:
   - "Ball is here. Ball is not here. Hehe"
   - "Is not drool. Is enthusiasm"
