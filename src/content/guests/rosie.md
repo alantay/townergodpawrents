@@ -21,6 +21,15 @@ stays:
 
 ## 28 Nov
 
+### 2:15pm
+
+<!-- entry-id: e302 -->
+<!-- with: luna -->
+
+Rosie herding Luna.
+
+![Rosie, 28 Nov 2:15pm](./rosie/rosie-herding-luna.mp4)
+
 ### 10am
 
 <!-- entry-id: e297 -->
