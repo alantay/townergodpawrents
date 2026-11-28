@@ -28,6 +28,15 @@ stays:
 
 ## 28 Nov
 
+### 3:45pm
+
+<!-- entry-id: e303 -->
+<!-- no-time -->
+
+Luna is recharging and grooming before meeting Lord Tyrion tomorrow for a play date.
+
+![Luna, 28 Nov](./luna/luna-recharging-grooming-before.mp4)
+
 ### 1:38pm
 
 <!-- entry-id: e301 -->
