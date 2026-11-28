@@ -28,6 +28,16 @@ stays:
 
 ## 28 Nov
 
+### 1:38pm
+
+<!-- entry-id: e301 -->
+<!-- with: rosie -->
+<!-- no-time -->
+
+Joint custody didn't hold. There's a legal battle going on for the plushie now.
+
+![Luna and Rosie trotting down the hallway carrying the same plushie together, then playing tug-of-war until Luna pulls it away](./luna/luna-custody-battle.mp4)
+
 ### 1:30pm
 
 <!-- entry-id: e300 -->
