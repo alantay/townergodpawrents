@@ -28,6 +28,14 @@ stays:
 
 ## 28 Nov
 
+### 8:35pm
+
+<!-- entry-id: e304 -->
+
+Still recovering.
+
+![A golden dog lies asleep on a wooden floor beside a blue table.](./luna/luna-still-recovering.jpg)
+
 ### 3:45pm
 
 <!-- entry-id: e303 -->
