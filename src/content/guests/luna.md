@@ -28,6 +28,16 @@ stays:
 
 ## 28 Nov
 
+### 9:25am
+
+<!-- entry-id: e296 -->
+<!-- with: rosie -->
+<!-- no-time -->
+
+These two play so well together. Luna has so many friends here ❤️
+
+![Luna and Rosie chasing each other around the living room](./luna/luna-rosie-play.mp4)
+
 ### 7:15am
 
 <!-- entry-id: e295 -->
