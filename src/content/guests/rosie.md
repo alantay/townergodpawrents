@@ -18,3 +18,13 @@ stays:
   - checkIn: 2026-11-28
     checkOut: 2026-11-28
 ---
+
+## 28 Nov
+
+### 10am
+
+<!-- entry-id: e297 -->
+
+Commercial break while Luna recharges. Presenting: Rosie and the Pink Dragon.
+
+![Rosie, 28 Nov 10am](./rosie/rosie-commercial-break-while.mp4)
