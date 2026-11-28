@@ -37,6 +37,14 @@ Recharging. Please do not unplug either unit.
 
 ![A golden dog sleeps beside a cushion in the foreground. A second dog sleeps farther back, near a plush toy.](./luna/luna-recharging-please-do.jpg)
 
+### 11:50am
+
+<!-- entry-id: e300 -->
+<!-- with: rosie -->
+<!-- no-time -->
+
+![Rosie lying on the floor panting with a thought bubble saying Can we play now, before the camera pans to Luna flat on her side with a speech bubble saying Sorrie im dead](./luna/luna-sorrie-im-dead.mp4)
+
 ### 11:26am
 
 <!-- entry-id: e298 -->
