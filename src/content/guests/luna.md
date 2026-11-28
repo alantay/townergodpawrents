@@ -28,6 +28,17 @@ stays:
 
 ## 28 Nov
 
+### 9:38pm
+
+<!-- entry-id: e305 -->
+<!-- no-time -->
+
+Luna's nose was off duty from tiredness. No amount of Greek yogurt could move her.
+
+![A golden dog lies on a wooden floor with its nose against a clear container held near its face.](./luna/luna-nose-off-duty.jpg)
+
+![Luna, 28 Nov](./luna/luna-nose-off-duty.mp4)
+
 ### 8:35pm
 
 <!-- entry-id: e304 -->
